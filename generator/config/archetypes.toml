@@ -1,0 +1,185 @@
+# Arketip parametreleri.
+# Kaynak: docs/01_firma_profili.md. Sayısal değerler [ÖNERİ]; kalibrasyon değişiklikleri
+# docs/00_karar_kaydi.md'ye işlenir.
+#
+# quotas:     % Gesamtleistung, yıllık ortalama (docs/01, 3.1)
+# season:     satış endeksi Ocak..Aralık, ortalama 1,00 (docs/01, 3.3)
+# production_shift: üretim − satış (endeks puanı), toplam 0. Bestandsveränderung bundan türetilir.
+# practices:  varyant başına olasılıklar (docs/01, 4.1); v00_practices: vitrin varyantı (docs/01, 4.2)
+
+[A1]
+name = "Muster GmbH"
+branche = "Metallverarbeitung / Zulieferer für Maschinenbau"
+kind = "producer"
+employees = 55
+revenue_2024 = 8_400_000
+tariff_month = 4
+herstell_factor = 0.7
+bv_noise_pct = 1.5
+season = [0.92, 0.98, 1.08, 1.02, 1.04, 1.06, 1.00, 0.78, 1.08, 1.08, 1.06, 0.90]
+production_shift = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12, -0.12, 0.0, 0.0, 0.0, 0.0]
+trend_v00_pct = 3.0
+trend_v00_2026_pct = 2.0
+events_excluded = []
+fair_annual = false
+name_words = ["Präzisionsteile", "Metalltechnik", "Zerspanung", "Drehteile"]
+
+[A1.quotas]
+material_wareneinkauf = 42.0
+sonstige_betriebliche_erloese = 0.3
+personalkosten = 33.0
+raumkosten = 3.0
+betriebliche_steuern = 0.2
+versicherungen_beitraege = 0.8
+besondere_kosten = 0.3
+fahrzeugkosten = 1.0
+werbe_reisekosten = 0.6
+kosten_warenabgabe = 1.2
+abschreibungen = 5.0
+reparatur_instandhaltung = 2.2
+sonstige_kosten = 4.5
+zinsaufwand = 0.4
+
+[A1.practices]
+p1_sonderzahlungen = 0.6
+p2_jahrespraemien = 0.6
+p3_bestand = 0.5
+p3_mode = "quartal"
+p4_afa_jahresende = 0.3
+p5_per_year = [2, 4]
+episodic_bv_per_year = [0, 1]
+
+[A1.v00_practices]
+p1_sonderzahlungen = true
+p2_jahrespraemien = true
+p3_bestand = true
+p4_afa_jahresende = false
+p5_per_year = 3
+episodic_bv_per_year = 0
+
+[A1.vocab]
+bereiche = ["CNC-Fertigung", "Montage", "Arbeitsvorbereitung", "Qualitätssicherung"]
+material = ["Stahl", "Vormaterial", "Rundstahl"]
+kunden = ["einem Maschinenbaukunden", "einem Hersteller von Landmaschinen", "einem Anlagenbauer"]
+anlagen = ["CNC-Bearbeitungszentrum", "Laserschneidanlage", "Drehautomat"]
+altanlagen = ["Drehmaschine", "Gabelstapler", "Stanze"]
+reparatur = ["Laserschneidanlage", "Hallenkran", "Härteofen"]
+
+
+[A2]
+name = "Beispiel Haustechnik GmbH"
+branche = "Sanitär- und Heizungsgroßhandel"
+kind = "trader"
+employees = 40
+revenue_2024 = 14_000_000
+tariff_month = 5
+herstell_factor = 0.0
+bv_noise_pct = 0.0
+season = [0.80, 0.85, 1.00, 1.02, 1.02, 1.00, 0.98, 0.92, 1.08, 1.15, 1.15, 1.03]
+production_shift = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+trend_v00_pct = 3.0
+trend_v00_2026_pct = 2.0
+events_excluded = ["E11"]
+fair_annual = false
+name_words = ["Haustechnik Handel", "Sanitärgroßhandel", "Heizungsbedarf"]
+
+[A2.quotas]
+material_wareneinkauf = 72.0
+sonstige_betriebliche_erloese = 0.3
+personalkosten = 14.0
+raumkosten = 2.5
+betriebliche_steuern = 0.1
+versicherungen_beitraege = 0.4
+besondere_kosten = 0.1
+fahrzeugkosten = 1.8
+werbe_reisekosten = 0.6
+kosten_warenabgabe = 1.5
+abschreibungen = 0.8
+reparatur_instandhaltung = 0.4
+sonstige_kosten = 2.8
+zinsaufwand = 0.3
+
+[A2.practices]
+p1_sonderzahlungen = 0.9
+p2_jahrespraemien = 0.9
+p3_bestand = 0.8
+p3_mode = "inventur"
+p4_afa_jahresende = 0.7
+p5_per_year = [4, 6]
+episodic_bv_per_year = [0, 0]
+
+[A2.v00_practices]
+p1_sonderzahlungen = true
+p2_jahrespraemien = true
+p3_bestand = true
+p4_afa_jahresende = true
+p5_per_year = 5
+episodic_bv_per_year = 0
+
+[A2.vocab]
+bereiche = ["Lager", "Vertriebsinnendienst", "Auslieferung", "Ausstellung"]
+material = ["Heizungstechnik", "Sanitärkeramik", "Kupferrohr"]
+kunden = ["einer Wohnungsbaugesellschaft", "einem Installationsbetrieb", "einem Bauträger"]
+anlagen = ["Regalanlage im Lager", "Auslieferungs-LKW", "Lagerverwaltungssystem"]
+altanlagen = ["Auslieferungs-LKW", "Gabelstapler", "Transporter"]
+reparatur = ["Hochregalanlage", "Toranlage im Lager", "Lagerlift"]
+
+
+[A3]
+name = "Exempel Outdoor GmbH"
+branche = "Hersteller von Gartenmöbeln"
+kind = "producer"
+employees = 110
+revenue_2024 = 15_000_000
+tariff_month = 3
+herstell_factor = 0.7
+bv_noise_pct = 0.0
+season = [0.45, 0.70, 1.30, 1.70, 1.75, 1.50, 1.10, 0.85, 0.65, 0.55, 0.70, 0.75]
+# Üretim endeksi (docs/01, 3.3) − satış endeksi
+production_shift = [0.60, 0.40, -0.15, -0.60, -0.75, -0.55, -0.25, -0.15, 0.25, 0.50, 0.35, 0.35]
+trend_v00_pct = 3.0
+trend_v00_2026_pct = 2.0
+events_excluded = []
+fair_annual = true
+name_words = ["Gartenmöbel", "Outdoor Living", "Freiraummöbel"]
+
+[A3.quotas]
+material_wareneinkauf = 45.0
+sonstige_betriebliche_erloese = 0.3
+personalkosten = 30.0
+raumkosten = 3.0
+betriebliche_steuern = 0.2
+versicherungen_beitraege = 0.7
+besondere_kosten = 0.2
+fahrzeugkosten = 0.8
+werbe_reisekosten = 3.0
+kosten_warenabgabe = 3.0
+abschreibungen = 3.5
+reparatur_instandhaltung = 1.2
+sonstige_kosten = 4.0
+zinsaufwand = 0.5
+
+[A3.practices]
+p1_sonderzahlungen = 0.1
+p2_jahrespraemien = 0.1
+p3_bestand = 0.0
+p3_mode = "quartal"
+p4_afa_jahresende = 0.0
+p5_per_year = [0, 2]
+episodic_bv_per_year = [1, 2]
+
+[A3.v00_practices]
+p1_sonderzahlungen = false
+p2_jahrespraemien = false
+p3_bestand = false
+p4_afa_jahresende = false
+p5_per_year = 1
+episodic_bv_per_year = 1
+
+[A3.vocab]
+bereiche = ["Produktion", "Lackiererei", "Versand", "Holzbearbeitung"]
+material = ["Aluminium", "Teakholz", "Polyrattan"]
+kunden = ["einer Baumarktkette", "einem Gartencenter-Verbund", "einem Möbelhändler"]
+anlagen = ["Pulverbeschichtungsanlage", "CNC-Holzbearbeitungsanlage", "Schweißroboter"]
+altanlagen = ["Lackieranlage", "Gabelstapler", "Kantenschleifmaschine"]
+reparatur = ["Pulverbeschichtungsanlage", "Trockenofen", "Absauganlage"]

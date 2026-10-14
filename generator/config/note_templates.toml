@@ -1,0 +1,203 @@
+# Bağlam notu şablonları (K-C). Her olay türü için 5 kalıp: 3'ü rakamlı, 2'si rakamsız.
+# Kalıp seçimi seed'e bağlıdır (docs/03, Bölüm 5).
+# Yer tutucular: {monat} {n} {p} {betrag} {bereich} {material} {kunde} {anlage} {altanlage} {reparatur} {zusatz}
+# Kalıplarda yer tutucular dışında rakam bulunmaz; böylece notta geçen her rakam kayıt altındadır.
+
+[E01]
+with_number = [
+  "Im {monat} haben {n} neue Mitarbeiter im Bereich {bereich} angefangen.",
+  "Personal: {n} Neueinstellungen im Bereich {bereich} ab {monat}.",
+  "Wir haben das Team im Bereich {bereich} ab {monat} um {n} Personen verstärkt, um die höhere Auslastung abzudecken.",
+]
+without_number = [
+  "Neueinstellungen im Bereich {bereich} ab {monat}, um die gestiegene Auslastung abzudecken.",
+  "Verstärkung im Bereich {bereich}: Seit Anfang {monat} sind neue Kolleginnen und Kollegen an Bord.",
+]
+
+[E02]
+with_number = [
+  "{n} Mitarbeiter haben das Unternehmen im {monat} verlassen; die Stellen werden vorerst nicht nachbesetzt.",
+  "Personalabgang: {n} Austritte im Bereich {bereich} ab {monat}.",
+  "Im Bereich {bereich} sind ab {monat} {n} Stellen durch Ruhestand und Kündigung weggefallen.",
+]
+without_number = [
+  "Mehrere Austritte im Bereich {bereich}; eine Nachbesetzung ist derzeit nicht geplant.",
+  "Der besprochene Personalabbau im Bereich {bereich} ist ab {monat} umgesetzt.",
+]
+
+[E03]
+with_number = [
+  "Tariferhöhung von {p} ab {monat} wirksam.",
+  "Lohnrunde: Löhne und Gehälter steigen ab {monat} um {p}.",
+  "Ab {monat} gilt die neue Entgelttabelle (plus {p}).",
+]
+without_number = [
+  "Die vereinbarte Lohnerhöhung greift ab {monat}.",
+  "Neue Gehaltsrunde ab {monat} umgesetzt.",
+]
+
+[E04]
+with_number = [
+  "Unser Hauptlieferant hat die Preise für {material} ab {monat} um rund {p} erhöht.{zusatz}",
+  "Einkauf: Preiserhöhung bei {material} von ca. {p} ab {monat}.{zusatz}",
+  "{material} wird ab {monat} etwa {p} teurer.{zusatz}",
+]
+without_number = [
+  "Deutliche Preissteigerungen bei {material} ab {monat}; eine Weitergabe an die Kunden wird geprüft.{zusatz}",
+  "Der Lieferant hat höhere Preise für {material} angekündigt und ab {monat} umgesetzt.{zusatz}",
+]
+zusatz_temporaer = " Der Zuschlag gilt voraussichtlich nur für einige Monate."
+
+[E05]
+with_number = [
+  "Preiserhöhung gegenüber unseren Kunden um durchschnittlich {p} ab {monat}.",
+  "Neue Preisliste ab {monat}: im Schnitt plus {p}.",
+  "Die Verkaufspreise wurden ab {monat} um rund {p} angehoben.",
+]
+without_number = [
+  "Neue Preisliste ab {monat} in Kraft.",
+  "Preisanpassung bei den wichtigsten Kunden ab {monat} durchgesetzt.",
+]
+
+[E06]
+with_number = [
+  "Großauftrag von {kunde} mit einem Volumen von ca. {betrag}; Auslieferung ab {monat}.",
+  "Sonderauftrag von {kunde}: rund {betrag}, Lieferung ab {monat}.",
+  "Zusätzlicher Auftrag von {kunde} über etwa {betrag} wird ab {monat} ausgeliefert.",
+]
+without_number = [
+  "Großauftrag von {kunde} eingegangen, Auslieferung ab {monat}.",
+  "Ein Sonderauftrag von {kunde} sorgt ab {monat} vorübergehend für zusätzliche Auslastung.",
+]
+
+[E07]
+with_number = [
+  "Ein Kunde mit rund {p} unseres Umsatzes hat die Zusammenarbeit ab {monat} beendet.",
+  "Auftragsrückgang: Wegfall eines Rahmenvertrags ab {monat} (ca. {p} des Umsatzes).",
+  "Ab {monat} fehlen uns rund {p} Umsatz, weil ein Stammkunde seine Abrufe eingestellt hat.",
+]
+without_number = [
+  "Ein wichtiger Kunde hat seine Abrufe ab {monat} deutlich reduziert.",
+  "Der Rahmenvertrag mit einem Großkunden ist im {monat} ausgelaufen und wurde nicht verlängert.",
+]
+
+[E08]
+with_number = [
+  "Investition: {anlage} im {monat} in Betrieb genommen, ca. {betrag}, finanziert über ein Darlehen der Hausbank.",
+  "Inbetriebnahme im {monat}: {anlage}. Investitionsvolumen rund {betrag}, Finanzierung über ein Investitionsdarlehen.",
+  "Neuanschaffung {anlage} für etwa {betrag}; seit {monat} im Einsatz, über die Hausbank finanziert.",
+]
+without_number = [
+  "Neuanschaffung {anlage}, seit {monat} im Einsatz und über ein Investitionsdarlehen finanziert.",
+  "Investition abgeschlossen: {anlage} läuft seit {monat}, das Darlehen wurde ausgezahlt.",
+]
+
+[E09]
+with_number = [
+  "Zusätzliche Fläche angemietet, Mehrkosten ca. {betrag} pro Monat ab {monat}.",
+  "Mieterhöhung für das Betriebsgebäude um {p} ab {monat}.",
+  "Neuer Mietvertrag ab {monat}: Die Miete steigt um rund {p}.",
+]
+without_number = [
+  "Neuer Mietvertrag für die Halle ab {monat}.",
+  "Ab {monat} nutzen wir eine zusätzliche Lagerfläche zur Miete.",
+]
+
+[E10]
+with_number = [
+  "Gebrauchte Anlage verkauft ({altanlage}), Erlös ca. {betrag}.",
+  "Einmaliger Ertrag im {monat}: Verkauf {altanlage}, rund {betrag}.",
+  "Altanlage ({altanlage}) im {monat} für etwa {betrag} veräußert.",
+]
+without_number = [
+  "Ausrangierte Anlage ({altanlage}) im {monat} verkauft.",
+  "Verkauf von nicht mehr benötigtem Anlagevermögen ({altanlage}) im {monat}.",
+]
+
+[E11]
+with_number = [
+  "Teilnahme an der Fachmesse im {monat}, Kosten ca. {betrag}.",
+  "Messeauftritt im {monat}: Standmiete, Standbau und Reisekosten rund {betrag}.",
+  "Fachmesse im {monat} – Gesamtkosten etwa {betrag}.",
+]
+without_number = [
+  "Messeteilnahme im {monat}.",
+  "Unser Stand auf der Fachmesse im {monat}; die Kosten fallen in diesem Zeitraum an.",
+]
+
+[E12]
+with_number = [
+  "Größere Reparatur an der Anlage ({reparatur}) im {monat}, Kosten ca. {betrag}.",
+  "Instandsetzung im {monat}: {reparatur}, rund {betrag}.",
+  "Ungeplanter Ausfall ({reparatur}), Reparatur durch eine Fremdfirma für etwa {betrag}.",
+]
+without_number = [
+  "Ungeplanter Ausfall ({reparatur}) im {monat}, Reparatur durch eine Fremdfirma.",
+  "Generalüberholung im {monat}: {reparatur}.",
+]
+
+# Dönemsiz firma notu (Firmenprofil), arketip başına 4 kalıp, rakamsız.
+[E19]
+A1 = [
+  "Firmenprofil: Zulieferer für den Maschinenbau (CNC-Dreh- und Frästeile, Baugruppen). Im August sind Betriebsferien, im Dezember ruht die Produktion zwischen den Feiertagen; der Januar startet meist verhalten.",
+  "Wir fertigen Dreh- und Frästeile für Maschinenbaukunden. Saisonal typisch: Betriebsferien im August, ruhiger Dezember und verhaltener Jahresstart.",
+  "Saisonverlauf: Umsatzdelle im August wegen der Betriebsferien sowie im Dezember und Januar; vor den Betriebsferien wird im Juli auf Lager produziert.",
+  "Hinweis zur Saison: August (Betriebsferien) und Dezember sind regelmäßig umsatzschwache Monate, März sowie September und Oktober eher stark.",
+]
+A2 = [
+  "Firmenprofil: Großhandel für Sanitär- und Heizungstechnik. Saisonhoch im Herbst (Heizungssaison), Januar und Februar witterungsbedingt schwach.",
+  "Saisonverlauf: schwacher Jahresbeginn wegen ruhender Baustellen, Spitze von September bis November im Heizungsgeschäft.",
+  "Wir beliefern Installationsbetriebe mit Sanitär- und Heizungstechnik; vor der Heizsaison wird im Spätsommer eingekauft, Oktober und November sind umsatzstark.",
+  "Hinweis zur Saison: Januar und Februar sind regelmäßig umsatzschwach, Oktober und November die stärksten Monate des Jahres.",
+]
+A3 = [
+  "Firmenprofil: Hersteller von Gartenmöbeln. Absatzspitze von März bis Juni; im Winter wird auf Lager produziert, im August sind Betriebsferien.",
+  "Saisonverlauf: Der Umsatz konzentriert sich auf das Frühjahr, Herbst und Winter sind absatzschwach. Die Produktion läuft gleichmäßiger und baut im Winter Lagerbestand auf.",
+  "Wir produzieren Gartenmöbel für Handelsketten und Gartencenter; Hauptsaison ist das Frühjahr, die Vorproduktion beginnt im Oktober.",
+  "Hinweis zur Saison: Januar und Oktober sind regelmäßig die umsatzschwächsten Monate, April und Mai die stärksten; der Lagerbestand ist im Spätwinter am höchsten.",
+]
+
+# Çeldirici notlar: BWA'da görünür etkisi yok (docs/03, Bölüm 5.3).
+[[distractor]]
+text = "Ein neuer Auszubildender hat im Bereich {bereich} begonnen."
+duration = "dauerhaft"
+
+[[distractor]]
+text = "Update des ERP-Systems im {monat} durchgeführt; es gab keine Ausfälle."
+duration = "temporär"
+
+[[distractor]]
+text = "Jahresgespräch mit der Hausbank im {monat}, keine Änderungen an den Kreditlinien."
+duration = "temporär"
+
+[[distractor]]
+text = "Wechsel des Telefon- und Internetanbieters ab {monat}; die Kosten bleiben unverändert."
+duration = "dauerhaft"
+
+[[distractor]]
+text = "Betriebsausflug im {monat}."
+duration = "temporär"
+
+[[distractor]]
+text = "Unterweisung zur Arbeitssicherheit für alle Mitarbeitenden im {monat}."
+duration = "temporär"
+
+[[distractor]]
+text = "Die neue Website ist online gegangen; die Pflege erfolgt intern."
+duration = "dauerhaft"
+
+[[distractor]]
+text = "Besuch einer Kundendelegation im {monat}, Gespräche über mögliche Folgeaufträge."
+duration = "temporär"
+
+[[distractor]]
+text = "Neuer Ansprechpartner beim Steuerberater ab {monat}."
+duration = "dauerhaft"
+
+[[distractor]]
+text = "Interne Umorganisation im Bereich {bereich}, ohne personelle Veränderungen."
+duration = "dauerhaft"
+
+[[distractor]]
+text = "Erfolgreiches Überwachungsaudit zum Qualitätsmanagement im {monat}."
+duration = "temporär"

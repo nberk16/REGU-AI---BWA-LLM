@@ -1,0 +1,400 @@
+# BWA Yorumlayıcısı — Proje Özeti (Brief)
+
+> **Amaç:** Bu belge, bir önceki sohbette yapılan problem/çözüm çalışmasının özetidir. Bir yapay zekâ asistanının (Claude Code) projeye kaldığı yerden devam edebilmesi için yazılmıştır.
+>
+> **Etiketler:**
+> - **[KARAR]** = kullanıcıyla netleşti, değiştirmeden önce kullanıcıya sor
+> - **[ÖNERİ]** = önerildi, henüz onaylanmadı
+> - **[AÇIK]** = karar verilmedi
+>
+> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı; detaylı plan ve uygulama henüz başlamadı.
+
+---
+
+## 0. Asistan için çalışma talimatları
+
+1. Kullanıcıyla **Türkçe** konuş. Ürünün ürettiği yorum metni **Almanca** olacak. Almanca muhasebe terimleri olduğu gibi kullanılır (bkz. Bölüm 13, Sözlük).
+2. Proje **eğitim ve portfolyo** amaçlı. Öncelik model performansı değil, **problem–çözüm ilişkisinin net ve ölçülebilir şekilde gösterilmesi**.
+3. **[AÇIK]** maddelerde kendi başına karar verme. Seçenekleri gerekçeleriyle sun ve kullanıcıya sor.
+4. Gerçek müşteri verisi yok ve kullanılmayacak. **Tüm veri sentetik.**
+5. Bu belge hukuki veya vergi danışmanlığı değildir. Sektör bilgileri genel çerçevedir.
+6. Kaynak sektör belgesindeki "rakipler", "REGU AI", satış stratejisi ve donanım paketi gibi kısımlar başka bir projeye aittir. **Bu projede kullanılmaz.**
+
+---
+
+## 1. Tek cümlede proje
+
+Bir Mittelstand işletmesinin aylık **BWA** raporunu alan bir sistem: rakamları **kodla** hesaplar, firmanın bağlam bilgisini **RAG** ile getirir ve **LoRA ile ince ayar yapılmış küçük bir LLM** kullanarak kaynak gösteren, Almanca bir **yönetim yorumu taslağı** üretir.
+
+---
+
+## 2. Kullanıcının koyduğu gereksinimler [KARAR]
+
+| # | Gereksinim |
+|---|---|
+| G1 | Sektör: Almanya muhasebe sektörü, Mittelstand ağırlıklı |
+| G2 | Problem **işletme** (şirket içi finans) tarafından gelmeli; vergi danışmanlığı bürosu (Steuerkanzlei) tarafından değil |
+| G3 | Çözüm **küçük bir LLM**; **RAG + fine-tuning** ile |
+| G4 | Amaç eğitim ve portfolyo, piyasa ürünü değil |
+| G5 | Performanstan çok problem–çözüm ilişkisi ön planda |
+| G6 | Kaynak belgeden yalnızca sektör bilgisi kullanılır (bkz. talimat 6) |
+
+---
+
+## 3. Seçim süreci (bağlam)
+
+Değerlendirilen üç fikir:
+
+| Fikir | Özet | Durum |
+|---|---|---|
+| Kontierung asistanı | Gelen faturaya hesap (SKR03/04), vergi anahtarı ve maliyet merkezi önerisi | Asistanın ilk önerisiydi; seçilmedi |
+| E-fatura hata açıklayıcısı | XRechnung/ZUGFeRD doğrulama hatalarını açıklama + tedarikçiye düzeltme e-postası taslağı | Seçilmedi (problem dar) |
+| **BWA yorumlayıcısı** | Aylık BWA'dan Almanca yönetim yorumu taslağı | **[KARAR] Kullanıcı bunu seçti** |
+
+**BWA fikrinde baştan belirlenen risk:** Küçük LLM'ler sayısal akıl yürütmede zayıf.
+**Tasarım cevabı:** Hesaplamayı kod yapar, model yalnızca yorumlar (bkz. Bölüm 6).
+
+---
+
+## 4. Sektör bağlamı (yalnızca projeyle ilgili kısım)
+
+### 4.1 Veri zinciri
+
+- Mittelstand işletmesi belgeyi üretir. Muhasebe ya şirket içinde ya da Steuerberater bürosunda tutulur. Çoğu firma karma model kullanır: günlük muhasebe şirket içinde, bilanço ve beyannameler büroda.
+- Kayıt sistemi çoğunlukla **DATEV** veya ERP'nin muhasebe modülüdür. Tüm raporlar kayıt satırlarından türetilir.
+- Zincir: **belge → kayıt → mutabakat → aylık değerlendirme (BWA) → beyan ve bilanço**.
+
+### 4.2 Hedef kullanıcı
+
+- Ayrı bir CFO'su olmayan, yaklaşık **20–200 çalışanlı** Mittelstand firması.
+- Roller: **Geschäftsführer** (genel müdür), **kaufmännischer Leiter** (ticari müdür), **Controlling** (çoğu zaman tek kişi).
+- Kaynak belgeye göre Controlling'in görevleri: bütçe ve plan-gerçekleşen analizi, maliyet merkezleri, yönetim raporları, likidite planı.
+
+### 4.3 Aylık kapanış akışı (kaynak belge, Bölüm 1.3-D)
+
+1. Tahakkuk ve dönemsellik kayıtları (Abgrenzungen), amortisman, stok değişimi.
+2. Hesap mutabakatları (banka, kasa, ara hesaplar).
+3. Raporlar: **BWA**, mizan (SuSa), açık kalem listesi (OPOS).
+4. KDV ön beyanı; ardından yönetimle **BWA görüşmesi**, çoğu zaman Excel'de ek analiz.
+
+→ **Proje, 4. adımdaki "yorum ve ek analiz" kısmını hedefler.**
+
+Not: 1. adım eksik veya geç yapılırsa BWA çarpık görünür. Bu, projenin ana konularından biridir (bkz. 5.4).
+
+### 4.4 Kaynak belgeden ilgili veri noktaları
+
+- **Bitkom (Eylül 2026):** Alman firmalarının %57'si AI kullanıyor; AI kullananların %66'sı veri korumasını en büyük engel sayıyor. → Lokal çalışabilen küçük bir model anlamlı bir tasarım argümanı.
+- **Kaynak belgedeki acılı nokta #4:** BWA ve mizan yorumu, Excel analizleri ve banka görüşmesi dosyaları. Raporlar statik; pivot ve yorum elle yapılıyor; BI araçları uzmanlık istiyor.
+- Kaynak belgedeki personel açığı istatistikleri vergi bürolarına ait. İşletme tarafı için sayısal veri yok, bu yüzden yalnızca genel ifade olarak kullanılmalı.
+
+---
+
+## 5. Problem tanımı [KARAR]
+
+### 5.1 Özet
+
+BWA her ay geliyor, ama işletmenin onu doğru okuyup karara çevirmesi için gereken **yorum katmanı** ya eksik, ya pahalı, ya da tek bir kişiye bağlı.
+
+### 5.2 Alt problemler
+
+| Kod | Alt problem | Açıklama |
+|---|---|---|
+| P1 | Bağlamsız rakamlar | BWA bir sayı tablosu. "Personel gideri %18 arttı" okunabiliyor, ama nedeni (işe alım, prim, yanlış ay) raporda yok. |
+| P2 | Çarpıklıklar | Eksik tahakkuk, girilmemiş stok değişimi, yıl sonunda kaydedilen amortisman gibi nedenlerle BWA gerçek durumu yanlış gösterebilir. Muhasebe bilgisi olmayan yönetici bunu gerçek gelişme sanar (bkz. 5.4). |
+| P3 | Kişiye bağlı manuel yorum | Rapor Excel'e aktarılır, karşılaştırılır, yorum elle yazılır. Bilgi bir kişide kalır. |
+| P4 | Banka iletişimi | Kredi kullanan firmalar BWA'yı düzenli olarak bankaya gönderir. Açıklamasız gönderilen olumsuz bir ay gereksiz sorulara yol açar. |
+| P5 | Danışmanlık maliyeti | Büroların sunduğu BWA görüşmesi ücretli ve zaman alıyor. Küçük firmalar çoğu zaman atlıyor; rapor okunmadan dosyalanıyor. |
+
+### 5.3 BWA hakkında bilinmesi gerekenler
+
+Proje, **DATEV Standard-BWA (Form 01, "Kurzfristige Erfolgsrechnung")** yapısına yakın bir satır listesi kullanır.
+**[AÇIK]** Kesin satır listesi ve sıralama doğrulanmalı. Gerçek DATEV dışa aktarım formatını birebir taklit etmek zorunlu değil; satır adları DATEV'e yakın tutulmalı.
+
+| Satır (Almanca) | Türkçe karşılık | Tür |
+|---|---|---|
+| Umsatzerlöse | Satış gelirleri | Gelir |
+| Bestandsveränderungen (FE/UE) | Mamul/yarı mamul stok değişimi | Gelir düzeltmesi |
+| Aktivierte Eigenleistungen | Aktifleştirilen kendi üretimi | Gelir düzeltmesi |
+| **Gesamtleistung** | Toplam faaliyet hasılatı | Ara toplam |
+| Material-/Wareneinkauf | Malzeme / ticari mal alımı | Gider |
+| **Rohertrag** | Brüt kâr | Ara toplam |
+| Sonstige betriebliche Erlöse | Diğer faaliyet gelirleri | Gelir |
+| **Betrieblicher Rohertrag** | Faaliyet brüt kârı | Ara toplam |
+| Personalkosten | Personel giderleri | Gider |
+| Raumkosten | Kira ve bina giderleri | Gider |
+| Betriebliche Steuern | Faaliyet vergileri | Gider |
+| Versicherungen/Beiträge | Sigortalar / aidatlar | Gider |
+| Besondere Kosten | Özel giderler | Gider |
+| Fahrzeugkosten (o. St.) | Araç giderleri (vergi hariç) | Gider |
+| Werbe-/Reisekosten | Reklam / seyahat giderleri | Gider |
+| Kosten der Warenabgabe | Mal teslim giderleri | Gider |
+| Abschreibungen | Amortisman | Gider |
+| Reparatur/Instandhaltung | Onarım / bakım | Gider |
+| Sonstige Kosten | Diğer giderler | Gider |
+| **Gesamtkosten** | Toplam giderler | Ara toplam |
+| **Betriebsergebnis** | Faaliyet sonucu | Sonuç |
+| Neutraler Aufwand / Neutraler Ertrag | Faaliyet dışı gider / gelir (faizler dahil) | Faaliyet dışı |
+| **Ergebnis vor Steuern** | Vergi öncesi sonuç | Sonuç |
+| Steuern vom Einkommen und Ertrag | Gelir üzerinden vergiler | Gider |
+| **Vorläufiges Ergebnis** | Geçici sonuç | Sonuç |
+
+**Tipik sütunlar:** cari ay değeri, Gesamtleistung'a oranı (%), kümülatif değer (Ocak–cari ay), önceki yılın aynı ayı ve kümülatifi.
+
+**Önemli:** BWA **geçicidir** (vorläufig). Yıl sonu kapanışında değerler değişebilir.
+
+### 5.4 Bilinen çarpıklıklar (sistemin tanıması gerekenler)
+
+| Kod | Çarpıklık | BWA'da nasıl görünür | Tespit ipucu (heuristic) |
+|---|---|---|---|
+| V1 | Eksik aylık tahakkuk (yıllık sigorta, yılbaşı/tatil ikramiyesi, yıllık lisans) | Bir ayda ani sıçrama, diğer aylarda düşük değer | Ödemenin geldiği ayda satır değeri aylık ortalamanın katları; önceki yıl aynı ayda da benzer sıçrama |
+| V2 | Stok değişimi (Bestandsveränderung) girilmemiş | Rohertragsquote anormal düşer veya yükselir | Bestandsveränderungen = 0 iken Materialeinkauf belirgin biçimde değişmiş |
+| V3 | Amortisman yalnızca yıl sonunda kaydediliyor | Ocak–Kasım sonuç olduğundan iyi, Aralık kötü | Abschreibungen satırı 11 ay boyunca 0 veya çok düşük |
+| V4 | Geç kaydedilen belgeler (zamanlama kayması) | Bir ayda düşük, ertesi ayda yüksek gider | Ardışık iki ayda zıt yönlü, birbirini dengeleyen sapmalar |
+| V5 | Tek seferlik etkiler (fuar, büyük onarım) | Tek satırda tek aylık sıçrama | Reparatur, Werbekosten vb. satırlarda izole sapma |
+| V6 | Sezonsallık | Önceki aya göre büyük sapma | Önceki yılın aynı ayıyla karşılaştırınca normale döner |
+
+---
+
+## 6. Çözüm tasarımı
+
+### 6.1 Ana ilkeler [KARAR]
+
+1. **Hesaplamayı kod yapar, yorumu model yapar.** Model hiçbir rakamı kendisi hesaplamaz.
+2. **Bilgi RAG'de, davranış fine-tuning'de.** Firmaya özgü ve değişebilen bilgi RAG ile gelir. Üslup, yapı ve akıl yürütme kalıbı fine-tuning ile öğretilir.
+3. **Olgu, kaynaklı neden ve tahmin birbirinden ayrı tutulur.** Ürünün değeri bu ayrımda.
+4. **Taslak üretir, insan onaylar.** Otomatik gönderim yok.
+
+### 6.2 Mimari
+
+```
+BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
+        │
+        ▼
+[1] Hesaplama katmanı (Python)  ──► facts.json
+        │
+        ▼
+[2] RAG: sorgu facts.json'dan üretilir ──► bağlam parçaları (kaynak kimlikli)
+        │
+        ▼
+[3] Fine-tuned küçük LLM (girdi: facts + bağlam) ──► Almanca yorum taslağı
+        │
+        ▼
+[4] Doğrulama: rakam kontrolü + kaynak kontrolü ──► işaretli taslak
+        │
+        ▼
+İnsan onayı
+```
+
+#### Katman 1: Hesaplama (deterministik, Python)
+
+- **Girdi:** Cari ay BWA'sı, önceki aylar, önceki yıl; opsiyonel plan değerleri.
+- **Hesaplar:**
+  - Önceki aya göre fark (mutlak ve %)
+  - Önceki yılın aynı ayına göre fark (mutlak ve %)
+  - Kümülatif karşılaştırma
+  - Opsiyonel plan-gerçekleşen farkı
+  - Oranlar: `Rohertragsquote = Rohertrag / Gesamtleistung`, `Personalkostenquote = Personalkosten / Gesamtleistung`, `Materialquote = Materialeinkauf / Gesamtleistung`, `Betriebsergebnis-Marge = Betriebsergebnis / Gesamtleistung`
+  - En büyük N sapma (mutlak ve yüzde eşikleriyle) **[AÇIK: eşik değerleri]**
+  - Çarpıklık bayrakları (Bölüm 5.4'teki heuristikler)
+- **Çıktı:** `facts.json`. Örnek (yapı açıklayıcıdır; **[AÇIK]** kesin şema):
+
+```json
+{
+  "company": "Muster GmbH",
+  "period": "2026-06",
+  "comparisons": ["previous_month", "previous_year_month"],
+  "positions": [
+    {
+      "position": "Personalkosten",
+      "actual": 236000,
+      "previous_year_month": 200000,
+      "delta_abs": 36000,
+      "delta_pct": 18.0,
+      "significant": true
+    },
+    {
+      "position": "Betriebsergebnis",
+      "actual": 18000,
+      "previous_year_month": 60000,
+      "delta_abs": -42000,
+      "delta_pct": -70.0,
+      "significant": true
+    }
+  ],
+  "ratios": {
+    "Rohertragsquote": {"actual": 31.0, "previous_year_month": 38.0}
+  },
+  "flags": [
+    {
+      "code": "V2",
+      "type": "bestandsveraenderung_fehlt",
+      "position": "Bestandsveränderungen",
+      "evidence": "Wert 0, Materialeinkauf +22 % ggü. Vorjahresmonat"
+    }
+  ]
+}
+```
+
+#### Katman 2: RAG bilgi tabanı
+
+| Kod | Belge türü | Kapsam | Değişkenlik |
+|---|---|---|---|
+| K-A | BWA satır açıklamaları + hangi SKR03 hesaplarının hangi BWA satırına aktığı | Genel | Düşük |
+| K-B | Çarpıklık ve uyarı rehberi (Bölüm 5.4'ün genişletilmiş hali) | Genel | Düşük |
+| K-C | Firma bağlam notları (aylık olaylar: işe alımlar, fuarlar, fiyat değişiklikleri, sezon bilgisi) | Firmaya özgü | Yüksek |
+| K-D | Önceki ayların onaylanmış yorumları | Firmaya özgü | Yüksek |
+| K-E **[ÖNERİ]** | Sektör karşılaştırma oranları | Genel | Orta |
+
+- K-E yalnızca güvenilir bir kaynak bulunursa eklenmeli. Bulunmazsa dahil edilmez.
+- **Sorgu:** Anlamlı sapma gösteren satır adları + dönem + bayraklar facts.json'dan otomatik üretilir.
+- K-C ve K-D için tarih/dönem metadata filtresi kullanılmalı.
+- Her parça bir **kaynak kimliği** taşımalı (ör. `Kontextnotiz 2026-06`), çünkü model yorumda bu kimliğe atıf yapar.
+
+#### Katman 3: Fine-tuning (LoRA)
+
+**Öğretilecek davranışlar:**
+- Sabit çıktı yapısı (Bölüm 6.3)
+- Önceliklendirme: en önemli üç mesaj başta
+- Yalnızca facts.json'daki rakamları kullanma, yeni rakam üretmeme
+- Her nedeni ya kaynağıyla birlikte verme ya da açıkça tahmin olarak işaretleme ("vermutlich", "Hypothese")
+- Çarpıklık bayrağında olgu yerine uyarı dili kullanma
+- Açık soruları listeleme
+- Kısa, sade, yöneticiye uygun Almanca
+
+**Öğretilmeyecekler:** Rakam hesaplama, firmaya özgü bilginin ezberlenmesi (bunlar RAG'in işi).
+
+#### Katman 4: Doğrulama
+
+- Metindeki tüm rakamları Almanca biçimde ayıkla (`1.234,5`, `42 T€`, `18 %`) ve facts.json ile tolerans dahilinde karşılaştır. Tabloda olmayan rakamı işaretle.
+- Her neden cümlesinde bir kaynak atfı veya tahmin işareti olup olmadığını kontrol et.
+- Sonuç: taslak + uyarı listesi. Uyarılar insana gösterilir.
+
+### 6.3 Çıktı yapısı [ÖNERİ]
+
+```
+**Kernaussagen <Monat Jahr>**                       (en fazla 3 madde)
+**Abweichungen im Detail**                          (Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese)
+**Hinweise auf mögliche Verzerrungen**              (bayraklı satırlar)
+**Offene Fragen an Buchhaltung / Steuerberater**
+```
+
+**Örnek çıktı:**
+
+> **Kernaussagen Juni 2026**
+> 1. Betriebsergebnis 42 T€ unter Vorjahresmonat, im Wesentlichen durch Personalkosten (+18 %).
+> 2. Der Anstieg passt zu den drei Neueinstellungen im Juni [Quelle: Kontextnotiz 2026-06], ist also voraussichtlich dauerhaft.
+> 3. Rohertragsquote fällt auf 31 % (Vj. 38 %). **Hinweis:** Keine Bestandsveränderung gebucht, Wert möglicherweise verzerrt.
+>
+> **Offene Fragen an die Buchhaltung:** Wurde die Inventurveränderung für Juni erfasst?
+
+Bu örnekte rakamlar tablodan, neden firma notundan (kaynaklı) geliyor; olası çarpıklık ise olgu olarak değil uyarı olarak veriliyor.
+
+### 6.4 Kapsam dışı [KARAR]
+
+- Tahmin (forecast)
+- Yatırım veya vergi tavsiyesi
+- OCR ve PDF okuma (girdi yapılandırılmış CSV/Excel)
+- DATEV veya ERP'ye gerçek entegrasyon
+- Yorumun otomatik gönderilmesi (her zaman insan onayı)
+
+---
+
+## 7. Neden RAG + fine-tuning birlikte (portfolyonun ana argümanı)
+
+| Varyant | Beklenen davranış | Beklenen zayıflık |
+|---|---|---|
+| Çıplak küçük model | Genel, yüzeysel yorum | Nedenleri uydurur, format tutarsız, rakam hataları |
+| Yalnızca RAG | Doğru bağlama erişir | Dağınık, uzun, tutarsız format; olgu ile tahmini ayırmaz |
+| Yalnızca fine-tuning | Tutarlı ve düzgün üslup | Firma bağlamını bilmez; nedenleri uydurur |
+| **RAG + fine-tuning** | Doğru bağlam + tutarlı üslup + kaynak gösterimi | Hedeflenen varyant |
+
+Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projenin **kanıt kısmıdır**.
+
+---
+
+## 8. Değerlendirme [ÖNERİ]
+
+| Metrik | Tanım | Ölçüm |
+|---|---|---|
+| Rakam sadakati | Metindeki rakamların facts.json ile örtüşme oranı | Otomatik |
+| Kaynaklı neden oranı | Belirtilen nedenlerin bağlam notlarında karşılığı olma oranı | Otomatik / yarı otomatik |
+| Uydurma neden oranı | Notlarda olmayan bir olayın olgu gibi sunulma oranı | Otomatik (ground truth ile) |
+| Sapma yakalama | Ground truth'taki önemli sapmaların yorumda geçme oranı (recall) | Otomatik |
+| Çarpıklık uyarısı isabeti | V1–V6 uyarılarında precision ve recall | Otomatik (ground truth ile) |
+| Format uyumu | Çıktının 6.3'teki yapıya uyması | Otomatik |
+| Üslup ve okunabilirlik | Yöneticiye uygunluk, kısalık | **[AÇIK]** İnsan değerlendirmesi veya LLM-as-judge |
+
+---
+
+## 9. Sentetik veri [ÖNERİ]
+
+- **Kurgusal firma:** "Muster GmbH". **[AÇIK]** Sektörü (ör. üretim veya toptan ticaret). Üretim, stok değişimini (V2) anlamlı kıldığı için avantajlı.
+- **Seri:** 24–36 aylık BWA. **[ÖNERİ]** Genellemeyi test etmek için 2–3 kurgusal firma; test, eğitimde görülmeyen bir firmada yapılır.
+- **Olay kataloğu (ground truth):** sezonsallık, işe alım, tek seferlik giderler, eksik tahakkuk, girilmemiş stok değişimi, geç kaydedilen belgeler, fiyat artışı vb. Her olayın ayı, etkilediği satır ve büyüklüğü kayıt altına alınır.
+- **Kasıtlı boşluk:** Olayların bir kısmı bağlam notlarına (K-C) yazılır, bir kısmı yazılmaz. Böylece modelin nedeni kaynaktan mı aldığı, yoksa tahmin mi ettiği ölçülebilir.
+- **Ay bazında ground truth dosyası:** hangi olaylar var, hangi uyarılar beklenir.
+- **[AÇIK]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
+- **[AÇIK]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi.
+
+---
+
+## 10. Teknik tercihler [AÇIK]
+
+| Konu | Not |
+|---|---|
+| Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). Almanca kalitesi test edilmeli. |
+| Lisans notları (kaynak belgeden) | Mistral: Apache 2.0, AB menşeli. gpt-oss: Apache 2.0 (20b yaklaşık 16 GB'a sığıyor). Llama: 3.2'den beri çok modlu modeller AB merkezli firmalara lisanslanmıyor; metin modelleri kullanılabilir. Proje yalnızca metin kullandığı için bu kısıt doğrudan etkilemez. Qwen: Apache 2.0, ama Çin menşeli; Alman firmalarında kullanımı yaklaşık %1, algı sorunu olabilir. |
+| Fine-tuning araç seti | Açık |
+| Vektör veritabanı ve embedding modeli | Açık; embedding modeli Almanca desteklemeli |
+| Donanım | Açık. Veri sentetik olduğu için eğitimde bulut GPU kullanılabilir. "Lokal çalışabilirlik" ise çıkarım (inference) için bir tasarım argümanı olarak korunur. |
+
+---
+
+## 11. Riskler ve karşılıkları
+
+| Risk | Karşılık |
+|---|---|
+| Küçük model sayı hesaplamada hata yapar | Hesaplama tamamen Katman 1'de (kod); model yalnızca verilen rakamları kullanır; Katman 4 kontrol eder |
+| Model neden uydurur | Kaynak atfı zorunlu; kaynak yoksa tahmin işareti; "uydurma neden oranı" metriği |
+| Çarpıklık gerçek gelişme gibi sunulur | Heuristik bayraklar + uyarı dili fine-tuning ile öğretilir |
+| Sentetik veri gerçekçi olmaz | Satır yapısı DATEV Standard-BWA'ya yakın; olaylar sektörde bilinen çarpıklıklara dayanır (5.4) |
+| Değerlendirme öznel kalır | Metriklerin çoğu ground truth ile otomatik ölçülür |
+
+---
+
+## 12. Sonraki adım [ÖNERİ — kullanıcı onayı bekleniyor]
+
+Sohbet şu öneriyle bitti; kullanıcı henüz onaylamadı:
+
+1. Kurgusal firmayı tanımla (sektör, büyüklük, ciro düzeyi, sezonsallık profili).
+2. BWA satır yapısını sabitle (Bölüm 5.3'teki listeyi doğrula ve kesinleştir).
+3. Sentetik veriye yerleştirilecek olay kataloğunu çıkar (Bölüm 9).
+
+Bunlardan sonra olası sıra: veri üreteci → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu.
+
+---
+
+## 13. Sözlük
+
+| Terim | Açıklama |
+|---|---|
+| BWA (Betriebswirtschaftliche Auswertung) | Aylık kısa dönem kâr-zarar raporu; genelde DATEV'den veya Steuerberater'dan gelir |
+| SuSa (Summen- und Saldenliste) | Mizan |
+| OPOS (Offene-Posten-Liste) | Açık kalem listesi |
+| SKR03 / SKR04 | DATEV standart hesap planları |
+| Gesamtleistung | Toplam faaliyet hasılatı (satış + stok değişimi + aktifleştirilen üretim) |
+| Rohertrag | Brüt kâr (Gesamtleistung − malzeme/mal alımı) |
+| Betriebsergebnis | Faaliyet sonucu |
+| Abgrenzung | Dönemsellik / tahakkuk kaydı |
+| Bestandsveränderung | Stok değişimi |
+| Abschreibung | Amortisman |
+| Vorjahresmonat / Vormonat | Önceki yılın aynı ayı / önceki ay |
+| Plan-Ist | Plan-gerçekleşen karşılaştırması |
+| Kontierung | Belgeye hesap atama |
+| Steuerberater / Steuerkanzlei | Vergi danışmanı / vergi danışmanlığı bürosu |
+| Mittelstand | Alman orta ölçekli işletmeleri |
+| Geschäftsführer | Genel müdür |
+| kaufmännischer Leiter | Ticari / mali işler müdürü |
+| DATEV | Vergi danışmanlarının kooperatifi; Almanya'da baskın muhasebe ve büro yazılımı |
+| GoBD | Dijital defter ve belge tutma ilkeleri (izlenebilirlik, değiştirilemezlik) |
+| vorläufig | Geçici (BWA değerleri yıl sonunda değişebilir) |

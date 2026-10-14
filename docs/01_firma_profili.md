@@ -14,7 +14,8 @@
 - Veri üreteci her arketipten **çok sayıda varyant** üretir. Varyantlar büyüklük, oranlar, sezon genliği, muhasebe pratiği ve olay dizisi bakımından farklılaşır (Bölüm 5).
 - **Muster GmbH**, A1 arketipinin sabit vitrin varyantıdır (`A1-v00`). Portfolyodaki örnek çıktılar bu firmadan gelir.
 - **Test**, eğitimde hiç görülmemiş bir arketip üzerinde yapılır.
-- **[AÇIK]** Hangi arketipin test için ayrılacağı ve arketip başına kaç varyant üretileceği, Bölüm 9'daki eğitim/test ayrımı kararıyla birlikte belirlenecek.
+- **[AÇIK, ertelendi]** Hangi arketipin test için ayrılacağı ve arketip başına kaç varyant üretileceği, CLAUDE.md Bölüm 9'daki eğitim/test ayrımı kararıyla birlikte belirlenecek.
+- **[KARAR, tur 2]** Bu karar beklenirken üreteç arketip listesini ve arketip başına varyant sayısını **parametre** olarak alır. Böylece sonradan verilecek karar kod değişikliği gerektirmez.
 
 **Gerekçe:** 36 aylık bir seride önceki yıl karşılaştırması yapılabilen ay sayısı 24'tür. Tek firmayla ~24 örnek çıkar ve bu LoRA için çok az. Varyant üretimi bu hacmi yüzlerce aya çıkarır.
 
@@ -192,7 +193,7 @@ Yıllık: Betriebsergebnis ≈ 546 T€. Personalkosten düzeyi (~230 T€/ay), 
 | Olay dizisi | `03_olay_katalogu.md`'deki sıklıklarla |
 | Gürültü | `03_olay_katalogu.md`, Bölüm 6 |
 | Adlandırma | `A1-v00` = Muster GmbH; diğer varyantlar sabit bir kurgusal ad listesinden ad alır. Böylece model tek bir firma adını ezberlemez. |
-| Varyant sayısı | **[AÇIK]** Eğitim/test kararıyla birlikte. İlk fikir: arketip başına ~10 varyant → 3 × 10 × 24 = 720 yorumlanabilir ay. |
+| Varyant sayısı | Üretecin parametresi [KARAR]. Kesin değer **[AÇIK]**, eğitim/test kararıyla birlikte belirlenecek. İlk fikir: arketip başına ~10 varyant → 3 × 10 × 24 = 720 yorumlanabilir ay. |
 
 ---
 

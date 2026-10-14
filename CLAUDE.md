@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) tamamlandı; kararlar `docs/` altında. Uygulama henüz başlamadı.
+> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) ve ardından gelen karar turu 2 tamamlandı; kararlar `docs/` altında. Veri üreteci planı kullanıcı onayı bekliyor; uygulama henüz başlamadı.
 
 ---
 
@@ -153,7 +153,7 @@ Proje, **DATEV Standard-BWA (Form 01, "Kurzfristige Erfolgsrechnung")** yapısı
 | Kod | Çarpıklık | BWA'da nasıl görünür | Tespit ipucu (heuristic) |
 |---|---|---|---|
 | V1 | Eksik aylık tahakkuk (yıllık sigorta, yılbaşı/tatil ikramiyesi, yıllık lisans) | Bir ayda ani sıçrama, diğer aylarda düşük değer | Ödemenin geldiği ayda satır değeri aylık ortalamanın katları; önceki yıl aynı ayda da benzer sıçrama |
-| V2 | Stok değişimi (Bestandsveränderung) girilmemiş | Rohertragsquote anormal düşer veya yükselir | Bestandsveränderungen = 0 iken Materialeinkauf belirgin biçimde değişmiş |
+| V2 | Stok değişimi (Bestandsveränderung) girilmemiş | Rohertragsquote anormal düşer veya yükselir | **[KARAR] Arketipe göre:** Üreticide Bestandsveränderungen = 0 iken Materialeinkauf belirgin biçimde değişmiş. Ticarette (FE/UE satırı hep 0) açıklanamayan ani Rohertragsquote değişimi (bkz. `docs/03`, Bölüm 9.1) |
 | V3 | Amortisman yalnızca yıl sonunda kaydediliyor | Ocak–Kasım sonuç olduğundan iyi, Aralık kötü | Abschreibungen satırı 11 ay boyunca 0 veya çok düşük |
 | V4 | Geç kaydedilen belgeler (zamanlama kayması) | Bir ayda düşük, ertesi ayda yüksek gider | Ardışık iki ayda zıt yönlü, birbirini dengeleyen sapmalar |
 | V5 | Tek seferlik etkiler (fuar, büyük onarım) | Tek satırda tek aylık sıçrama | Reparatur, Werbekosten vb. satırlarda izole sapma |
@@ -254,6 +254,8 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - K-E yalnızca güvenilir bir kaynak bulunursa eklenmeli. Bulunmazsa dahil edilmez.
 - **Sorgu:** Anlamlı sapma gösteren satır adları + dönem + bayraklar facts.json'dan otomatik üretilir.
 - K-C ve K-D için tarih/dönem metadata filtresi kullanılmalı.
+- **[KARAR]** K-C notları `dauerhaft`/`temporär` alanı taşır. Bu alan meta veridir ve modele görünür.
+- **[KARAR — çalışma varsayımı]** K-C için RAG penceresi 12 ay: cari ay ve önceki 11 ay, artı dönemsiz `Firmenprofil` notu. Kesin değer **[AÇIK]**.
 - Her parça bir **kaynak kimliği** taşımalı (ör. `Kontextnotiz 2026-06`), çünkü model yorumda bu kimliğe atıf yapar.
 
 #### Katman 3: Fine-tuning (LoRA)
@@ -272,6 +274,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 #### Katman 4: Doğrulama
 
 - Metindeki tüm rakamları Almanca biçimde ayıkla (`1.234,5`, `42 T€`, `18 %`) ve facts.json ile tolerans dahilinde karşılaştır. Tabloda olmayan rakamı işaretle.
+- **[KARAR]** İstisna: RAG'in getirdiği bir bağlam notunda geçen rakam, aynı cümle o notun kaynak kimliğine atıf yapıyorsa kabul edilir (ör. "drei Neueinstellungen [Quelle: Kontextnotiz 2026-06]"). Bkz. `docs/03`, Bölüm 5.4.
 - Her neden cümlesinde bir kaynak atfı veya tahmin işareti olup olmadığını kontrol et.
 - Sonuç: taslak + uyarı listesi. Uyarılar insana gösterilir.
 
@@ -350,14 +353,13 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - Ayların ~%10–15'ine etkisiz "çeldirici" notlar eklenir.
   - Böylece modelin nedeni kaynaktan mı aldığı, yoksa tahmin mi ettiği ölçülebilir.
 - **[KARAR] Ground truth dosyaları:** Olay başına bir kayıt (`events.jsonl`) ve firma-ay başına bir kayıt (`ground_truth_months.jsonl`). Şema `docs/03`, Bölüm 7'de.
-- **[AÇIK]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
-- **[AÇIK]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı.
-- **[AÇIK]** Bu adımlarda ortaya çıkan üç nokta:
-  - A2'de (ticaret) V2 tespiti için heuristik
-  - Bağlam notlarında rakam olup olmayacağı ve Katman 4'ün bu rakamlara davranışı
-  - RAG'de K-C için geriye dönük dönem penceresi
-
-  Ayrıntılar `docs/03`, Bölüm 9'da.
+- **[KARAR] Üreteç kuralları (tur 2):**
+  - Arketip listesi ve arketip başına varyant sayısı **parametredir**.
+  - Her olay eksiksiz kaydedilir: ay, satır, büyüklük, kalıcı/geçici, nota yazılıp yazılmadığı.
+  - Notlar rakam içerebilir ve `dauerhaft`/`temporär` alanı taşır.
+- **[KARAR] V2 tespiti arketipe göre ayrılır** (bkz. 5.4 ve `docs/03`, Bölüm 9.1). "Açıklanamayan" kavramının Katman 1 ile model arasında nasıl bölüneceği **[ÖNERİ]** olarak onay bekliyor.
+- **[AÇIK — ertelendi]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
+- **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre).
 
 ---
 
@@ -393,7 +395,9 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
 2. ✅ BWA satır yapısını sabitle → [`docs/02_bwa_satir_yapisi.md`](docs/02_bwa_satir_yapisi.md)
 3. ✅ Olay kataloğunu çıkar → [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md)
 
-Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md).
+Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı ve RAG penceresi) aynı dosyanın 4. bölümünde.
+
+**[ÖNERİ — kullanıcı onayı bekleniyor]** Sıradaki adım: veri üreteci. Plan kullanıcıya sunuldu; onaydan sonra kod yazılacak.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: veri üreteci → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

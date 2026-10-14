@@ -1,6 +1,6 @@
 # 00 — Karar kaydı: Adım 1–3
 
-> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) · **Tarih:** 14.10.2026
+> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) ve bunlardan doğan açık noktalar (tur 2) · **Tarih:** 14.10.2026
 >
 > **Belgeler:** [`01_firma_profili.md`](01_firma_profili.md) · [`02_bwa_satir_yapisi.md`](02_bwa_satir_yapisi.md) · [`03_olay_katalogu.md`](03_olay_katalogu.md)
 
@@ -60,22 +60,33 @@ Bütün kararlar kullanıcının onayıyla asistanın önerileri doğrultusunda 
 
 ---
 
-## 4. Açık kalan noktalar [AÇIK]
+## 4. Karar turu 2 (14.10.2026) [KARAR]
 
-**Daha önceden açık olanlar (CLAUDE.md):**
-- Eğitim hedeflerinin (ideal yorumların) üretim yöntemi (Bölüm 9)
-- Eğitim/test ayrımı. Arketip düzeyinde ayırma ilkesi kararlaştırıldı; hangi arketipin test olacağı ve arketip başına varyant sayısı açık (Bölüm 9).
-- Anlamlılık eşikleri ve `facts.json` şeması (Bölüm 6.2)
-- Teknik tercihler (Bölüm 10), üslup değerlendirme yöntemi (Bölüm 8)
+İlk turda açık kalan noktalar için kullanıcının kararları:
 
-**Bu adımlarda ortaya çıkanlar (03, Bölüm 9):**
-1. A2'de (ticaret) V2 tespiti için heuristik
-2. Bağlam notlarında rakam olup olmayacağı; Katman 4'ün kaynaklı rakamlara davranışı
-3. RAG'de K-C için geriye dönük dönem penceresi
+| Kod | Konu | Karar | Ayrıntı |
+|---|---|---|---|
+| 3a | A2'de V2 tespiti | V2 kuralı arketipe göre ayrılır. Üreticide (A1, A3) mevcut kural kalır; toptancıda (A2) uyarı, açıklanamayan ani Rohertragsquote değişimine bağlanır. | 03, Bölüm 9.1 |
+| 3b | Notlardaki rakamlar | Notlarda rakam olabilir. Doğrulama katmanı, RAG'in getirdiği notlardaki rakamları kaynak gösterilmesi şartıyla kabul eder. | 03, Bölüm 5.4 |
+| 3c | Süre alanı ve RAG penceresi | Notlara `dauerhaft`/`temporär` alanı eklenir. RAG penceresi şimdilik 12 ay (çalışma varsayımı, sonra netleşecek). | 03, Bölüm 5.2 |
+| 1, 2 | Eğitim hedefleri, eğitim/test ayrımı | **Ertelendi.** Üreteç, arketip ve varyant sayısını parametre olarak alır ve her olayı eksiksiz kaydeder: ay, satır, büyüklük, kalıcı/geçici, nota yazılıp yazılmadığı. | 01, Bölüm 1; 03, Bölüm 7 |
+
+**Asistanın uygulama yorumları [ÖNERİ — onay bekliyor]:**
+- **3a:** "Açıklanamayan" kavramı iki parçaya bölündü. Sayısal kısmı Katman 1 kontrol eder: önceki aya ve önceki yılın aynı ayına göre birlikte sapma (sezon dışı). Bağlamsal kısmı model kontrol eder: o ayda açıklayan bir not var mı? Ground truth'a `acceptable_flags` alanı eklendi (03, Bölüm 7.2 ve 9.1).
+- **3b:** Notlu olayların ~%50'sinin notu rakam içerecek. Rakamlar yuvarlanacak ve BWA'daki etkiden biraz farklı olabilecek (03, Bölüm 5.4).
+- **Şema:** Olay kaydındaki `persistence` alanı `shape` olarak yeniden adlandırıldı. Kalıcı/geçici bilgisi ayrı bir `duration` alanında tutuluyor (03, Bölüm 7.1).
+
+## 5. Açık kalan noktalar [AÇIK]
+
+- Eğitim hedeflerinin (ideal yorumların) üretim yöntemi (CLAUDE.md 9). Ertelendi.
+- Eğitim/test ayrımı: hangi arketipin test olacağı ve arketip başına varyant sayısı (CLAUDE.md 9). Ertelendi; üreteç bunları parametre olarak alıyor.
+- RAG penceresinin kesin değeri (şimdilik 12 ay).
+- Anlamlılık eşikleri ve `facts.json` şeması (CLAUDE.md 6.2).
+- Teknik tercihler (CLAUDE.md 10) ve üslup değerlendirme yöntemi (CLAUDE.md 8).
 
 ---
 
-## 5. Sonraki adımlar için notlar [ÖNERİ]
+## 6. Sonraki adımlar için notlar [ÖNERİ]
 
 - CLAUDE.md 6.3'teki örnek çıktıda Rohertragsquote %31 (önceki yıl %38). Bu değer metal işleyici profiline (~%58) uymuyor. Veri üretildikten sonra örneğin Muster GmbH verisiyle yeniden yazılmasını öneriyorum.
 - Bölüm 12'deki sıradaki adım: **veri üreteci**. Üreteç, 01–03'teki parametrelerle ham BWA verisini, bağlam notlarını (K-C) ve ground truth dosyalarını üretecek.

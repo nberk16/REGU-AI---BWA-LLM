@@ -54,7 +54,7 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
 | E13 | Urlaubsgeld ohne Abgrenzung | V1 | Personalkosten | her yıl Haziran | +%30 … +60 | P1 olan varyantlar | **hayır** | V1 |
 | E14 | Weihnachtsgeld ohne Abgrenzung | V1 | Personalkosten | her yıl Kasım | +%50 … +90 | P1 olan varyantlar | **hayır** | V1 |
 | E15 | Jahresversicherungsprämie | V1 | Versicherungen/Beiträge | her yıl Ocak | yıllık ortalamanın × 5 … 8'i | P2 olan varyantlar | **hayır** | V1 |
-| E16 | Bestandsveränderung nicht gebucht | V2 | Bestandsveränd. FE/UE (A2: Material-/Wareneinkauf) → Rohertragsquote | **sistematik** (P3) veya **epizodik** (unutulur, ertesi ay telafi edilir) | gerçek stok değişiminin tamamı | hepsi (01, Bölüm 4) | **hayır** | V2; epizodik türde telafi ayında V4 |
+| E16 | Bestandsveränderung nicht gebucht | V2 | Bestandsveränd. FE/UE (A2: Material-/Wareneinkauf) → Rohertragsquote | **sistematik** (P3) veya **epizodik** (unutulur, ertesi ay telafi edilir) | gerçek stok değişiminin tamamı | hepsi (01, Bölüm 4) | **hayır** | V2; epizodik türde telafi ayında V4. A2'de V2 farklı bir kuralla tespit edilir (Bölüm 9.1). |
 | E17 | AfA nur zum Jahresende | V3 | Abschreibungen | Ocak–Kasım 0, Aralık'ta yıllık toplam | – | P4 olan varyantlar | **hayır** | V3 |
 | E18 | Verspätete Eingangsrechnungen | V4 | Material-/Wareneinkauf veya Sonstige Kosten | t ayında −X, t+1 ayında +X | X = tabanın %15 … 40'ı | P5'e göre | **hayır** | V4 (t+1 ayında tespit edilebilir) |
 | E19 | Saisonmuster (Betriebsferien dahil) | V6 | Umsatz ve oransal satırlar | yıllık desen | 01, Bölüm 3.3 | hepsi | evet (dönemsiz firma notu) | V6 (önceki aya göre sapma büyük, önceki yılın aynı ayına göre normal) |
@@ -106,18 +106,38 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
 | V6 (E19) | Varyantların ~%70'inde dönemsiz bir firma notu bulunur (sezon, Betriebsferien). |
 | V1–V4 (E13–E18) | **Hiç notlanmaz.** Bunların kaynağı muhasebe kaydıdır; yönetim bu durumdan habersizdir. |
 
-### 5.2 Notların zamanı ve kimliği [ÖNERİ]
+### 5.2 Notların zamanı, kimliği ve süresi
 
-- Not, olayın başladığı ayın tarihini taşır. Kalıcı olaylar için sonraki aylarda tekrar not yazılmaz.
-- Kaynak kimlikleri:
+- **Zaman [ÖNERİ]:** Not, olayın başladığı ayın tarihini taşır. Kalıcı olaylar için sonraki aylarda tekrar not yazılmaz.
+- **Kaynak kimlikleri [ÖNERİ]:**
   - `Kontextnotiz JJJJ-MM`
   - Aynı ayda birden fazla not varsa `Kontextnotiz JJJJ-MM #2`
   - Dönemsiz firma notu: `Firmenprofil`
+- **Süre alanı [KARAR, tur 2]:** Her not `duration` alanı taşır: `dauerhaft` veya `temporär`. Alan, bilgi tabanında notun meta verisidir ve modele görünür.
+  - Olayın biçimi `dauerhaft` ise not da `dauerhaft` olur.
+  - Biçimi `einmalig`, `temporär` veya `periodisch` olan olayların notları `temporär` olur.
+  - `Firmenprofil` notu `dauerhaft` olur.
+  - Çeldirici notlar, içeriğine uygun değeri alır.
+- **RAG penceresi [KARAR, tur 2 — çalışma varsayımı]:** Cari ay t için t−11 … t aralığındaki notlar (12 ay) ve dönemsiz `Firmenprofil` notu getirilir. Kesin pencere daha sonra netleşecek **[AÇIK]**.
+  - Gerekçe: Kalıcı bir basamak, önceki yılın aynı ayına göre karşılaştırmada tam 12 ay boyunca (t … t+11) sapma olarak görünür. 12 aylık pencere bu süreyi kapsar.
 
 ### 5.3 Çeldirici notlar
 
 - Ayların ~%10–15'inde, BWA'da görünür etkisi olmayan bir olay notlanır. Örnekler: yeni bir Azubi, ERP güncellemesi, Hausbank ziyareti, telefon operatörü değişikliği.
 - Ground truth'ta bu notlar `distractor = true` olarak işaretlenir. Beklenen davranış: model bu notu hiçbir sapmaya bağlamaz.
+
+### 5.4 Notlardaki rakamlar [KARAR, tur 2]
+
+- Notlar rakam içerebilir: kişi sayısı, yüzde, yaklaşık tutar, süre. Örnekler: "drei neue Mitarbeiter", "rund 4 % Preiserhöhung", "ca. 25.000 € Messekosten".
+- **Katman 4 kuralı:** Yorum metnindeki bir rakam iki durumda kabul edilir:
+  1. `facts.json`'daki bir değerle tolerans dahilinde eşleşiyorsa, **veya**
+  2. RAG'in getirdiği bir notta geçiyorsa **ve** aynı cümle o notun kaynak kimliğine atıf yapıyorsa.
+
+  Diğer bütün rakamlar işaretlenir.
+- **Üreteç [ÖNERİ]:**
+  - Notlu olayların ~%50'sinin notu en az bir rakam içerir.
+  - Rakamlar olay parametrelerinden türetilir ve not üslubunda yuvarlanır. Bu yüzden BWA'daki etkiden biraz farklı olabilir (ör. not "ca. 25.000 €" der, BWA'daki sapma 23.412 € olur). Model BWA rakamlarını `facts.json`'dan, not rakamlarını yalnızca atıfla kullanmalı.
+  - Notta geçen rakamlar değerlendirme için kaydedilir (Bölüm 7.4).
 
 ---
 
@@ -131,7 +151,9 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
 
 ## 7. Ground truth şeması [KARAR: D9; alan adları ÖNERİ]
 
-Alan adları, `facts.json` örneğiyle tutarlı olsun diye İngilizcedir. Satır anahtarları `02_bwa_satir_yapisi.md`'den gelir.
+- Alan adları, `facts.json` örneğiyle tutarlı olsun diye İngilizcedir. Satır anahtarları `02_bwa_satir_yapisi.md`'den gelir.
+- **[KARAR, tur 2]** Üreteç **her olayı eksiksiz kaydeder**: ay(lar), satır(lar), büyüklük (mutlak ve %), kalıcı/geçici (`duration`) ve nota yazılıp yazılmadığı (`documented`).
+- Bu kural yalnızca havuz olayları için değil; pratiklerden doğan olaylar (E13–E17, her gerçekleşme ayrı kayıt) ve sezon deseni (E19, varyant başına bir kayıt) için de geçerlidir.
 
 ### 7.1 Olay kaydı (`events.jsonl`, olay başına bir kayıt)
 
@@ -143,7 +165,8 @@ Alan adları, `facts.json` örneğiyle tutarlı olsun diye İngilizcedir. Satır
   "category": "R",
   "start": "2025-06",
   "end": null,
-  "persistence": "dauerhaft",
+  "shape": "dauerhaft",
+  "duration": "dauerhaft",
   "effects": [
     {"line": "personalkosten", "from": "2025-06", "to": null, "abs_per_month": 12600.00, "pct_of_baseline": 6.0}
   ],
@@ -156,7 +179,9 @@ Alan adları, `facts.json` örneğiyle tutarlı olsun diye İngilizcedir. Satır
 }
 ```
 
-- `persistence` değerleri: `einmalig` · `temporär` · `dauerhaft` · `periodisch`
+- `shape` (etki biçimi) değerleri: `einmalig` · `temporär` · `dauerhaft` · `periodisch`
+- `duration` (kalıcı/geçici) değerleri: `dauerhaft` · `temporär`. `shape` değerinden türetilir (Bölüm 5.2).
+- Tek ayı aşan geçici etkilerde (ör. E06, 1–3 ay) `effects` dizisi her ay için ayrı tutar içerebilir.
 - `expected_treatment` değerleri:
   - `cite`: nedeni kaynakla verir
   - `hypothesis`: tahmin olarak işaretler veya açık soru sorar
@@ -176,11 +201,37 @@ Alan adları, `facts.json` örneğiyle tutarlı olsun diye İngilizcedir. Satır
     {"code": "V1", "line": "personalkosten", "event_id": "A1-v00-E13-2026-06"},
     {"code": "V5", "line": "werbe_reisekosten", "event_id": "A1-v00-E11-2026-06"}
   ],
+  "acceptable_flags": [],
   "distractor_notes": [],
   "quiet_month": false,
   "seasonal_lines": []
 }
 ```
+
+- `expected_flags`: beklenen uyarılar. Bunların atlanması recall'ı düşürür.
+- `acceptable_flags` [ÖNERİ]: Beklenmeyen ama cezalandırılmayan uyarılar. Örnek: A2'de not bulunmayan bir fiyat olayının tetiklediği V2 uyarısı (Bölüm 9.1), ya da A3'te her yıl tekrarlanan fuarın V1'e benzeyen deseni.
+
+### 7.3 Not kaydı (`context_notes.jsonl`, modele görünür, K-C'ye yüklenir)
+
+```json
+{
+  "source_id": "Kontextnotiz 2025-06",
+  "firm_id": "A1-v00",
+  "period": "2025-06",
+  "duration": "dauerhaft",
+  "text": "Zum 1. Juni haben drei neue Mitarbeiter in der CNC-Fertigung angefangen."
+}
+```
+
+`Firmenprofil` notunda `period` alanı `null` olur.
+
+### 7.4 Not–olay eşlemesi (`notes_ground_truth.jsonl`, yalnızca değerlendirme)
+
+```json
+{"source_id": "Kontextnotiz 2025-06", "firm_id": "A1-v00", "event_id": "A1-v00-E01-2025-06", "distractor": false, "numbers": [3]}
+```
+
+**Ayrım ilkesi [ÖNERİ]:** Modelin gördüğü dosyalar (ham BWA, `context_notes.jsonl`) ile değerlendirme dosyaları (`events.jsonl`, `ground_truth_months.jsonl`, `notes_ground_truth.jsonl`, varyantların pratik profilleri) ayrı tutulur. Değerlendirme dosyaları hiçbir zaman RAG'e veya model girdisine girmez.
 
 ---
 
@@ -198,9 +249,36 @@ Bu durumlar üreteçte kasıtlı olarak oluşturulur; model farklarını en çok
 
 ---
 
-## 9. Bu belgeden doğan açık noktalar [AÇIK]
+## 9. Katmanlara yansıyan kararlar (tur 2, 14.10.2026)
 
-1. **A2'de (ticaret) V2'nin tespiti:** Satır 2 her zaman 0 olduğu için CLAUDE.md 5.4'teki heuristik ("Bestandsveränderungen = 0 iken Materialeinkauf değişmiş") sürekli yanlış alarm verir. Katman 1 için ticarete uyarlanmış bir heuristik gerekiyor. İki seçenek: (a) açıklanamayan Rohertragsquote sapmasına dayanmak, (b) üretece bir yardımcı alan eklemek.
-2. **Bağlam notlarındaki rakamlar:** Notlar rakam içerecek mi? İçerirse Katman 4 bu kaynaklı rakamlara nasıl davranacak? (6.3 örneğinde "drei Neueinstellungen" geçiyor.)
-3. **RAG'de K-C için geriye dönük dönem penceresi:** Kalıcı olayların notu yalnızca başlangıç ayında yazılıyor; pencerenin ne kadar geriye bakacağı belirlenmeli.
-4. **Anlamlılık eşikleri** (zaten CLAUDE.md 6.2'de [AÇIK]): Eşik yakını olayların kalibrasyonu buna bağlı.
+İlk turda açık kalan üç nokta kullanıcı tarafından karara bağlandı.
+
+### 9.1 V2 tespiti arketipe göre ayrılır [KARAR]
+
+| Arketip | Kural |
+|---|---|
+| Üretici (A1, A3) | Mevcut kural: Bestandsveränderungen = 0 iken Material-/Wareneinkauf belirgin biçimde değişmiş |
+| Ticaret (A2) | Uyarı, **açıklanamayan ani Rohertragsquote değişimine** bağlanır |
+
+**"Açıklanamayan" kavramının uygulanması [ÖNERİ — kullanıcı onayı bekleniyor]:**
+
+- **Katman 1 (sayısal kısım):** Rohertragsquote hem önceki aya hem önceki yılın aynı ayına göre eşiği aşan bir sapma gösteriyorsa bir V2 adayı üretir. İki karşılaştırmanın birlikte aranması, sapmanın sezonla açıklanamadığı anlamına gelir.
+- **Model (bağlamsal kısım):** O ayda Rohertragsquote'yi açıklayan bir not varsa (ör. notlu E04 veya E05), model nedeni kaynağıyla verir ve V2 uyarısı vermez. Not yoksa uyarı dili kullanır.
+- **Ground truth:**
+  - Gerçek E16 etkisi olan aylarda V2 → `expected_flags`.
+  - Notsuz bir gerçek olayın tetiklediği V2 uyarısı → `acceptable_flags` (model o ayda bu ayrımı yapamaz).
+  - Notlu bir olayın açıkladığı aylarda V2 uyarısı yanlış alarm sayılır.
+- Gerekçe: Bu dağılım, notları dikkate alma işini modele bırakır. Katman 1 deterministik kalır, bağlamsal yargı modele (RAG + fine-tuning) geçer; bu da G7'deki odağa uyar.
+
+### 9.2 Notlardaki rakamlar [KARAR]
+
+Notlar rakam içerebilir. Doğrulama katmanı bu rakamları kaynak gösterilmesi şartıyla kabul eder. Ayrıntılar Bölüm 5.4'te.
+
+### 9.3 Süre alanı ve RAG penceresi [KARAR; pencere çalışma varsayımı]
+
+Notlar `dauerhaft`/`temporär` alanı taşır. RAG penceresi şimdilik 12 ay. Ayrıntılar Bölüm 5.2'de.
+
+### 9.4 Hâlâ açık [AÇIK]
+
+- **Anlamlılık eşikleri** (CLAUDE.md 6.2): Eşik yakını olayların kalibrasyonu ve A2'deki V2 adayı buna bağlı.
+- **RAG penceresinin kesin değeri** (şimdilik 12 ay).

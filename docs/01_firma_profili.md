@@ -122,6 +122,7 @@ Yıllık: Betriebsergebnis ≈ 546 T€. Personalkosten düzeyi (~230 T€/ay), 
 **A1:**
 - Ağustos'ta Betriebsferien, Aralık'ta tatil ve yavaş Ocak başlangıcı var.
 - Siparişe göre üretim yapıldığı için üretim ≈ satış. Bestandsveränderung küçüktür (Umsatz'ın ±%1–3'ü).
+- İstisna: Betriebsferien'den önce Temmuz'da stok için üretilir (üretim endeksi satıştan +0,12 fazla), Ağustos'ta stoktan satılır (−0,12). Bu, V2 için anlamlı bir yaz deseni oluşturur [ÖNERİ, veri üreteci].
 
 **A2:**
 - Ocak–Şubat'ta inşaat yavaş. Sonbaharda ısıtma sezonu var.
@@ -179,6 +180,10 @@ Yıllık: Betriebsergebnis ≈ 546 T€. Personalkosten düzeyi (~230 T€/ay), 
 | P4 AfA yalnızca yıl sonunda | hayır (aylık) |
 | P5 Geç gelen alış faturaları | yılda ~3 |
 
+**Diğer v00 varyantları [ÖNERİ, veri üreteci]:** `A2-v00` (Beispiel Haustechnik GmbH) ve `A3-v00` (Exempel Outdoor GmbH) arketiplerinin baskın profilini birebir alır.
+- A2-v00: P1–P4 evet, yılda 5 geç fatura.
+- A3-v00: P1–P4 hayır, yılda 1 geç fatura, yılda 1 unutulan stok değişimi.
+
 ---
 
 ## 5. Varyant üretimi [ÖNERİ]
@@ -192,7 +197,7 @@ Yıllık: Betriebsergebnis ≈ 546 T€. Personalkosten düzeyi (~230 T€/ay), 
 | Muhasebe pratiği | Bölüm 4.1'deki olasılıklarla |
 | Olay dizisi | `03_olay_katalogu.md`'deki sıklıklarla |
 | Gürültü | `03_olay_katalogu.md`, Bölüm 6 |
-| Adlandırma | `A1-v00` = Muster GmbH; diğer varyantlar sabit bir kurgusal ad listesinden ad alır. Böylece model tek bir firma adını ezberlemez. |
+| Adlandırma | v00 arketipin adını taşır (`A1-v00` = Muster GmbH). Diğer varyantlar sabit bir kurgusal ad listesinden ad alır (ör. "Modell Präzisionsteile GmbH"). Böylece model tek bir firma adını ezberlemez. |
 | Varyant sayısı | Üretecin parametresi [KARAR]. Kesin değer **[AÇIK]**, eğitim/test kararıyla birlikte belirlenecek. İlk fikir: arketip başına ~10 varyant → 3 × 10 × 24 = 720 yorumlanabilir ay. |
 
 ---

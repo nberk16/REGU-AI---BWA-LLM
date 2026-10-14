@@ -142,10 +142,10 @@ A1-v00,2025-06,personalkosten,305870.20
 | Fahrzeugkosten (ohne Steuer) | sabit | – |
 | Werbe-/Reisekosten | sabit | E11 |
 | Kosten der Warenabgabe | Umsatz'a oransal | (dolaylı: E06, E07) |
-| Abschreibungen | sabit aylık ya da yalnızca Aralık'ta (P4) | E08, E17 |
+| Abschreibungen | aylık; taban yılda %6 azalır (tamamen amorti olan varlıkların çıkışı); P4'te yalnızca Aralık'ta | E08, E17 |
 | Reparatur/Instandhaltung | sabit | E12 |
 | Sonstige Kosten | sabit | E18 |
-| Zinsaufwand | sabit | E08 |
+| Zinsaufwand | taban yılda %10 azalır (kredi geri ödemesi) | E08 |
 | Sonstiger neutraler Aufwand | 0 | – |
 | Zinserträge | 0 | – |
 | Sonstiger neutraler Ertrag | 0 | E10 |

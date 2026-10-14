@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) ve ardından gelen karar turu 2 tamamlandı; kararlar `docs/` altında. Veri üreteci planı kullanıcı onayı bekliyor; uygulama henüz başlamadı.
+> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), karar turları 2–3 ve **veri üreteci** tamamlandı. Kararlar `docs/` altında, üreteç `generator/` klasöründe, referans koşu `data/synthetic/reference_seed42/` klasöründe. Sıradaki adım: hesaplama modülü (Katman 1).
 
 ---
 
@@ -330,6 +330,7 @@ Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projen
 | Uydurma neden oranı | Notlarda olmayan bir olayın olgu gibi sunulma oranı | Otomatik (ground truth ile) |
 | Sapma yakalama | Ground truth'taki önemli sapmaların yorumda geçme oranı (recall) | Otomatik |
 | Çarpıklık uyarısı isabeti | V1–V6 uyarılarında precision ve recall | Otomatik (ground truth ile) |
+| **V2 adayı ayrımı [KARAR]** | Katman 1'in V2 adayı karşısında modelin doğru kararı verme oranı: notla açıkla (`cite`) / uyar (`warn`) / ikisi de kabul (`either`). Özellikle A2 (ticaret) için. | Otomatik (`ground_truth_months.jsonl` → `v2_candidate_decision`; bkz. `docs/03`, 9.1) |
 | Format uyumu | Çıktının 6.3'teki yapıya uyması | Otomatik |
 | Üslup ve okunabilirlik | Yöneticiye uygunluk, kısalık | **[AÇIK]** İnsan değerlendirmesi veya LLM-as-judge |
 
@@ -357,7 +358,15 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - Arketip listesi ve arketip başına varyant sayısı **parametredir**.
   - Her olay eksiksiz kaydedilir: ay, satır, büyüklük, kalıcı/geçici, nota yazılıp yazılmadığı.
   - Notlar rakam içerebilir ve `dauerhaft`/`temporär` alanı taşır.
-- **[KARAR] V2 tespiti arketipe göre ayrılır** (bkz. 5.4 ve `docs/03`, Bölüm 9.1). "Açıklanamayan" kavramının Katman 1 ile model arasında nasıl bölüneceği **[ÖNERİ]** olarak onay bekliyor.
+- **[KARAR] V2 tespiti arketipe göre ayrılır** (bkz. 5.4 ve `docs/03`, Bölüm 9.1). Katman 1 yalnızca sayısal adayı işaretler; notla açıklanıp açıklanmadığına model karar verir. Bu ayrım değerlendirmede ayrıca ölçülür (Bölüm 8).
+- **[KARAR] Veri üreteci (tur 3)** — bkz. [`docs/04_veri_ureteci.md`](docs/04_veri_ureteci.md):
+  - Referans koşu (seed 42, 3 arketip × 10 varyant) repoda; diğer koşular `.gitignore`'da.
+  - Notlar şablonla üretilir: olay türü başına 5 kalıp, seçimi seed yapar. LLM ile çeşitlendirme ileride eklenebilecek bir seçenek ([ÖNERİ]).
+  - Modelin gördüğü dosyalar (`model_input/`) ve değerlendirme dosyaları (`evaluation/`) ayrı klasörlerde.
+- **[AÇIK]** Tur 3'ten doğan sorular (`docs/00`, Bölüm 7.3):
+  - A2'de "notla açıkla" vakasının azlığı
+  - Muster GmbH'nin olay profili
+  - Olay yoğunluğu (~1,5/ay, ilk tahmin ~2)
 - **[AÇIK — ertelendi]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
 - **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre).
 
@@ -394,12 +403,13 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
 1. ✅ Kurgusal firmayı tanımla → [`docs/01_firma_profili.md`](docs/01_firma_profili.md)
 2. ✅ BWA satır yapısını sabitle → [`docs/02_bwa_satir_yapisi.md`](docs/02_bwa_satir_yapisi.md)
 3. ✅ Olay kataloğunu çıkar → [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md)
+4. ✅ Veri üreteci → [`docs/04_veri_ureteci.md`](docs/04_veri_ureteci.md), `generator/`, `tests/`, `data/synthetic/reference_seed42/` (tur 3)
 
-Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı ve RAG penceresi) aynı dosyanın 4. bölümünde.
+Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 
-**[ÖNERİ — kullanıcı onayı bekleniyor]** Sıradaki adım: veri üreteci. Plan kullanıcıya sunuldu; onaydan sonra kod yazılacak.
+**[ÖNERİ]** Sıradaki adım: hesaplama modülü (Katman 1, `facts.json`). Önkoşul: anlamlılık eşikleri ve `facts.json` şeması (6.2, [AÇIK]).
 
-**[ÖNERİ]** Bundan sonraki olası sıra: veri üreteci → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
+**[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 
 ---
 

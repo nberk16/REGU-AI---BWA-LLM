@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı; detaylı plan ve uygulama henüz başlamadı.
+> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu) tamamlandı; kararlar `docs/` altında. Uygulama henüz başlamadı.
 
 ---
 
@@ -38,6 +38,7 @@ Bir Mittelstand işletmesinin aylık **BWA** raporunu alan bir sistem: rakamlar�
 | G4 | Amaç eğitim ve portfolyo, piyasa ürünü değil |
 | G5 | Performanstan çok problem–çözüm ilişkisi ön planda |
 | G6 | Kaynak belgeden yalnızca sektör bilgisi kullanılır (bkz. talimat 6) |
+| G7 | Projenin odak noktası **fine-tuning ve RAG uygulanan LLM'dir**. Veri üreteci ve hesaplama katmanı bu modeli eğitmek ve ölçmek için gereken destek bileşenleridir; yeterli gerçekçilikte ve olabildiğince basit tutulur (14.10.2026) |
 
 ---
 
@@ -108,7 +109,7 @@ BWA her ay geliyor, ama işletmenin onu doğru okuyup karara çevirmesi için ge
 ### 5.3 BWA hakkında bilinmesi gerekenler
 
 Proje, **DATEV Standard-BWA (Form 01, "Kurzfristige Erfolgsrechnung")** yapısına yakın bir satır listesi kullanır.
-**[AÇIK]** Kesin satır listesi ve sıralama doğrulanmalı. Gerçek DATEV dışa aktarım formatını birebir taklit etmek zorunlu değil; satır adları DATEV'e yakın tutulmalı.
+**[KARAR]** Satır listesi gerçek bir DATEV-BWA örneğiyle doğrulandı ve kesinleştirildi (30 satır; nötr kalemler alt satırlara ayrıldı; `Verrechnete kalk. Kosten` ve `Kontenklasse unbesetzt` çıkarıldı). Ayrıntılar, makine anahtarları ve hesaplama kuralları: [`docs/02_bwa_satir_yapisi.md`](docs/02_bwa_satir_yapisi.md).
 
 | Satır (Almanca) | Türkçe karşılık | Tür |
 |---|---|---|
@@ -125,7 +126,7 @@ Proje, **DATEV Standard-BWA (Form 01, "Kurzfristige Erfolgsrechnung")** yapısı
 | Betriebliche Steuern | Faaliyet vergileri | Gider |
 | Versicherungen/Beiträge | Sigortalar / aidatlar | Gider |
 | Besondere Kosten | Özel giderler | Gider |
-| Fahrzeugkosten (o. St.) | Araç giderleri (vergi hariç) | Gider |
+| Fahrzeugkosten (ohne Steuer) | Araç giderleri (vergi hariç) | Gider |
 | Werbe-/Reisekosten | Reklam / seyahat giderleri | Gider |
 | Kosten der Warenabgabe | Mal teslim giderleri | Gider |
 | Abschreibungen | Amortisman | Gider |
@@ -133,12 +134,17 @@ Proje, **DATEV Standard-BWA (Form 01, "Kurzfristige Erfolgsrechnung")** yapısı
 | Sonstige Kosten | Diğer giderler | Gider |
 | **Gesamtkosten** | Toplam giderler | Ara toplam |
 | **Betriebsergebnis** | Faaliyet sonucu | Sonuç |
-| Neutraler Aufwand / Neutraler Ertrag | Faaliyet dışı gider / gelir (faizler dahil) | Faaliyet dışı |
+| Zinsaufwand | Faiz gideri | Faaliyet dışı |
+| Sonstiger neutraler Aufwand | Diğer faaliyet dışı gider | Faaliyet dışı |
+| **Neutraler Aufwand** | Faaliyet dışı gider toplamı | Ara toplam |
+| Zinserträge | Faiz geliri | Faaliyet dışı |
+| Sonstiger neutraler Ertrag | Diğer faaliyet dışı gelir | Faaliyet dışı |
+| **Neutraler Ertrag** | Faaliyet dışı gelir toplamı | Ara toplam |
 | **Ergebnis vor Steuern** | Vergi öncesi sonuç | Sonuç |
 | Steuern vom Einkommen und Ertrag | Gelir üzerinden vergiler | Gider |
 | **Vorläufiges Ergebnis** | Geçici sonuç | Sonuç |
 
-**Tipik sütunlar:** cari ay değeri, Gesamtleistung'a oranı (%), kümülatif değer (Ocak–cari ay), önceki yılın aynı ayı ve kümülatifi.
+**Sütunlar:** DATEV Form 01'de cari ay değeri, Gesamtleistung / Gesamtkosten / Personalkosten'a oranları (%) ve bunların kümülatif (Ocak–cari ay) karşılıkları bulunur. Önceki yıl karşılaştırması DATEV'de ayrı bir "Vorjahresvergleich" sayfasındadır. Projede ham veri yalnızca aylık değerlerden oluşur; bütün sütunlar ve karşılaştırmalar Katman 1'de hesaplanır (bkz. `docs/02_bwa_satir_yapisi.md`).
 
 **Önemli:** BWA **geçicidir** (vorläufig). Yıl sonu kapanışında değerler değişebilir.
 
@@ -326,15 +332,32 @@ Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projen
 
 ---
 
-## 9. Sentetik veri [ÖNERİ]
+## 9. Sentetik veri
 
-- **Kurgusal firma:** "Muster GmbH". **[AÇIK]** Sektörü (ör. üretim veya toptan ticaret). Üretim, stok değişimini (V2) anlamlı kıldığı için avantajlı.
-- **Seri:** 24–36 aylık BWA. **[ÖNERİ]** Genellemeyi test etmek için 2–3 kurgusal firma; test, eğitimde görülmeyen bir firmada yapılır.
-- **Olay kataloğu (ground truth):** sezonsallık, işe alım, tek seferlik giderler, eksik tahakkuk, girilmemiş stok değişimi, geç kaydedilen belgeler, fiyat artışı vb. Her olayın ayı, etkilediği satır ve büyüklüğü kayıt altına alınır.
-- **Kasıtlı boşluk:** Olayların bir kısmı bağlam notlarına (K-C) yazılır, bir kısmı yazılmaz. Böylece modelin nedeni kaynaktan mı aldığı, yoksa tahmin mi ettiği ölçülebilir.
-- **Ay bazında ground truth dosyası:** hangi olaylar var, hangi uyarılar beklenir.
+Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Bu belgelerdeki sayısal parametreler **[ÖNERİ]** etiketini taşır ve veri üreteci yazılırken kalibre edilecek.
+
+- **[KARAR] Firmalar:** Üç arketip var:
+  - **A1 Muster GmbH:** Metallverarbeitung / Zulieferer, ~55 çalışan, ~8,4 Mio €. Vitrin firması.
+  - **A2:** Sanitär-/Heizungsgroßhandel.
+  - **A3:** Gartenmöbel-Hersteller (güçlü sezon).
+
+  Üreteç her arketipten çok sayıda varyant üretir. Her arketipin baskın bir muhasebe pratiği profili var (karma / tipik KOBİ / disiplinli). Bkz. [`docs/01_firma_profili.md`](docs/01_firma_profili.md).
+- **[KARAR] Seri:** 36 ay (01/2024–12/2026). 2024 yalnızca karşılaştırma tabanıdır; varyant başına 24 ay yorumlanabilir. Plan verisi ilk sürümde yok.
+- **[KARAR] Olay kataloğu (ground truth):** 19 olay türü (E01–E19): gerçek gelişmeler (R) ve V1–V6 çarpıklıkları. Her olayın ayı, satırı, büyüklüğü, kalıcılığı ve beklenen bayrağı kaydedilir. Bkz. [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md).
+- **[KARAR] Kasıtlı boşluk:**
+  - Gerçek olayların ~%70'i bağlam notlarına (K-C) yazılır, ~%30'u yazılmaz.
+  - Muhasebe kaynaklı çarpıklıklar (V1–V4) hiç notlanmaz.
+  - Ayların ~%10–15'ine etkisiz "çeldirici" notlar eklenir.
+  - Böylece modelin nedeni kaynaktan mı aldığı, yoksa tahmin mi ettiği ölçülebilir.
+- **[KARAR] Ground truth dosyaları:** Olay başına bir kayıt (`events.jsonl`) ve firma-ay başına bir kayıt (`ground_truth_months.jsonl`). Şema `docs/03`, Bölüm 7'de.
 - **[AÇIK]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
-- **[AÇIK]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi.
+- **[AÇIK]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı.
+- **[AÇIK]** Bu adımlarda ortaya çıkan üç nokta:
+  - A2'de (ticaret) V2 tespiti için heuristik
+  - Bağlam notlarında rakam olup olmayacağı ve Katman 4'ün bu rakamlara davranışı
+  - RAG'de K-C için geriye dönük dönem penceresi
+
+  Ayrıntılar `docs/03`, Bölüm 9'da.
 
 ---
 
@@ -362,15 +385,17 @@ Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projen
 
 ---
 
-## 12. Sonraki adım [ÖNERİ — kullanıcı onayı bekleniyor]
+## 12. Sonraki adım
 
-Sohbet şu öneriyle bitti; kullanıcı henüz onaylamadı:
+**[KARAR] Tamamlandı (14.10.2026):**
 
-1. Kurgusal firmayı tanımla (sektör, büyüklük, ciro düzeyi, sezonsallık profili).
-2. BWA satır yapısını sabitle (Bölüm 5.3'teki listeyi doğrula ve kesinleştir).
-3. Sentetik veriye yerleştirilecek olay kataloğunu çıkar (Bölüm 9).
+1. ✅ Kurgusal firmayı tanımla → [`docs/01_firma_profili.md`](docs/01_firma_profili.md)
+2. ✅ BWA satır yapısını sabitle → [`docs/02_bwa_satir_yapisi.md`](docs/02_bwa_satir_yapisi.md)
+3. ✅ Olay kataloğunu çıkar → [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md)
 
-Bunlardan sonra olası sıra: veri üreteci → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu.
+Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md).
+
+**[ÖNERİ]** Bundan sonraki olası sıra: veri üreteci → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 
 ---
 

@@ -1,0 +1,126 @@
+{
+  "generator_version": "0.1.0",
+  "config_fingerprint": "0a4260362459638a",
+  "seed": 42,
+  "archetypes": [
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "variants_per_archetype": 10,
+  "periods": {
+    "start": "2024-01",
+    "end": "2026-12",
+    "commentable_from": "2025-01"
+  },
+  "files": {
+    "model_input": [
+      "model_input/bwa_raw.csv",
+      "model_input/context_notes.jsonl",
+      "model_input/firms.json"
+    ],
+    "evaluation": [
+      "evaluation/bwa_true.csv",
+      "evaluation/effects.csv",
+      "evaluation/events.jsonl",
+      "evaluation/ground_truth_months.jsonl",
+      "evaluation/notes_ground_truth.jsonl",
+      "evaluation/variants.json"
+    ]
+  },
+  "statistics": {
+    "variants": 30,
+    "events_total": 1896,
+    "events_by_type": {
+      "E01": {
+        "count": 195,
+        "documented": 141
+      },
+      "E02": {
+        "count": 135,
+        "documented": 97
+      },
+      "E03": {
+        "count": 90,
+        "documented": 65
+      },
+      "E04": {
+        "count": 132,
+        "documented": 96
+      },
+      "E05": {
+        "count": 43,
+        "documented": 31
+      },
+      "E06": {
+        "count": 269,
+        "documented": 187
+      },
+      "E07": {
+        "count": 18,
+        "documented": 11
+      },
+      "E08": {
+        "count": 49,
+        "documented": 32
+      },
+      "E09": {
+        "count": 15,
+        "documented": 11
+      },
+      "E10": {
+        "count": 51,
+        "documented": 31
+      },
+      "E11": {
+        "count": 75,
+        "documented": 53
+      },
+      "E12": {
+        "count": 225,
+        "documented": 162
+      },
+      "E13": {
+        "count": 39,
+        "documented": 0
+      },
+      "E14": {
+        "count": 39,
+        "documented": 0
+      },
+      "E15": {
+        "count": 63,
+        "documented": 0
+      },
+      "E16": {
+        "count": 112,
+        "documented": 0
+      },
+      "E17": {
+        "count": 42,
+        "documented": 0
+      },
+      "E18": {
+        "count": 274,
+        "documented": 0
+      },
+      "E19": {
+        "count": 30,
+        "documented": 21
+      }
+    },
+    "documented_share_real_v5": 0.707,
+    "pool_events_per_month": 1.51,
+    "quiet_month_share_commentable": 0.154,
+    "distractor_month_share": 0.106,
+    "event_notes_with_numbers_share": 0.493,
+    "near_threshold_share_pool": 0.177,
+    "overlap_share_pool": 0.13,
+    "season_note_share": 0.7,
+    "a2_v2_candidate_decisions": {
+      "warn": 217,
+      "cite": 2,
+      "either": 2
+    }
+  }
+}

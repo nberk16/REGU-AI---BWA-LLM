@@ -1,6 +1,6 @@
 {
   "generator_version": "0.1.0",
-  "config_fingerprint": "72dc78e45b68504e",
+  "config_fingerprint": "9b69482dfb2c53a7",
   "seed": 42,
   "profile": null,
   "archetypes": [
@@ -129,10 +129,10 @@
           "None": 79
         },
         "candidates": {
-          "cite": 10,
-          "warn": 98,
+          "cite": 6,
+          "warn": 88,
           "either": 7,
-          "None": 20
+          "None": 14
         }
       },
       "A2": {
@@ -144,9 +144,9 @@
         },
         "candidates": {
           "cite": 0,
-          "warn": 193,
+          "warn": 177,
           "either": 1,
-          "None": 9
+          "None": 8
         }
       },
       "A3": {
@@ -157,9 +157,9 @@
           "None": 114
         },
         "candidates": {
-          "cite": 14,
+          "cite": 13,
           "warn": 85,
-          "either": 8,
+          "either": 7,
           "None": 33
         }
       }

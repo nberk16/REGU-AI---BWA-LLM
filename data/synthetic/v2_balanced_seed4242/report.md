@@ -3,7 +3,7 @@
 - Seed: `4242` · Arketipler: A1, A2, A3 · Arketip başına varyant: 10 (ilk varyant: v50)
 - Profil: `v2_balanced` (ana parametrelerden farklı; docs/04, Bölüm 8)
 - Dönem: 2024-01 – 2026-12 (yorumlanabilir: 2025-01 itibarıyla)
-- Üreteç sürümü: 0.1.0 · Parametre özeti: `3465380a9cfdbd7a`
+- Üreteç sürümü: 0.1.0 · Parametre özeti: `a00f119bd7dc38f4`
 
 ## Hedef oranlar (docs/03) ve gerçekleşen
 
@@ -25,11 +25,11 @@ Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayın
 | Arketip | Kapsam | cite | warn | either | None |
 |---|---|---:|---:|---:|---:|
 | A1 | bütün yorumlanabilir aylar | 28 | 154 | 17 | 41 |
-| A1 | Rohertrag adayı aylar | 10 | 108 | 7 | 10 |
+| A1 | Rohertrag adayı aylar | 12 | 83 | 6 | 9 |
 | A2 | bütün yorumlanabilir aylar | 38 | 136 | 17 | 49 |
-| A2 | Rohertrag adayı aylar | 27 | 122 | 12 | 19 |
+| A2 | Rohertrag adayı aylar | 26 | 115 | 12 | 18 |
 | A3 | bütün yorumlanabilir aylar | 45 | 85 | 24 | 86 |
-| A3 | Rohertrag adayı aylar | 21 | 72 | 13 | 30 |
+| A3 | Rohertrag adayı aylar | 20 | 72 | 13 | 29 |
 
 ### Dengelenmiş V2 kümesi
 
@@ -37,9 +37,9 @@ Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayın
 
 | Arketip | cite | warn | either |
 |---|---:|---:|---:|
-| A1 | 10 | 10 | 7 |
-| A2 | 27 | 27 | 12 |
-| A3 | 21 | 21 | 13 |
+| A1 | 12 | 12 | 6 |
+| A2 | 26 | 26 | 12 |
+| A3 | 20 | 20 | 13 |
 
 ## Olay türleri
 

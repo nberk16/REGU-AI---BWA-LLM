@@ -86,5 +86,8 @@ E12_extra_multiple = [2.0, 7.0]
 E13_pct = [30.0, 60.0]
 E14_pct = [50.0, 90.0]
 E15_jan_multiple = [5.0, 8.0]
-E18_pct = [15.0, 40.0]
+# Kalibrasyon (tur 5): malzeme satırında %15–40 kayma, A2'de Rohertragsquote'yi ayların %11'inde
+# negatife düşürüyordu; malzeme için %5–20'ye indirildi.
+E18_pct_material = [5.0, 20.0]
+E18_pct_other = [15.0, 40.0]
 E18_material_share = 0.7

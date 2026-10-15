@@ -23,7 +23,7 @@ A1-v00,2024-01,steuern_einkommen_ertrag,0.00
 A1-v00,2024-02,umsatzerloese,758553.70
 A1-v00,2024-02,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2024-02,aktivierte_eigenleistungen,0.00
-A1-v00,2024-02,material_wareneinkauf,241419.32
+A1-v00,2024-02,material_wareneinkauf,304912.91
 A1-v00,2024-02,sonstige_betriebliche_erloese,2051.58
 A1-v00,2024-02,personalkosten,201072.37
 A1-v00,2024-02,raumkosten,20927.71
@@ -44,7 +44,7 @@ A1-v00,2024-02,steuern_einkommen_ertrag,0.00
 A1-v00,2024-03,umsatzerloese,699403.92
 A1-v00,2024-03,bestandsveraenderungen_fe_ue,8626.33
 A1-v00,2024-03,aktivierte_eigenleistungen,0.00
-A1-v00,2024-03,material_wareneinkauf,451185.57
+A1-v00,2024-03,material_wareneinkauf,387691.98
 A1-v00,2024-03,sonstige_betriebliche_erloese,2070.90
 A1-v00,2024-03,personalkosten,200336.47
 A1-v00,2024-03,raumkosten,21110.60
@@ -86,7 +86,7 @@ A1-v00,2024-04,steuern_einkommen_ertrag,0.00
 A1-v00,2024-05,umsatzerloese,681042.78
 A1-v00,2024-05,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2024-05,aktivierte_eigenleistungen,0.00
-A1-v00,2024-05,material_wareneinkauf,265747.85
+A1-v00,2024-05,material_wareneinkauf,298888.48
 A1-v00,2024-05,sonstige_betriebliche_erloese,2094.88
 A1-v00,2024-05,personalkosten,216762.05
 A1-v00,2024-05,raumkosten,20618.70
@@ -107,7 +107,7 @@ A1-v00,2024-05,steuern_einkommen_ertrag,0.00
 A1-v00,2024-06,umsatzerloese,744725.44
 A1-v00,2024-06,bestandsveraenderungen_fe_ue,1583.26
 A1-v00,2024-06,aktivierte_eigenleistungen,0.00
-A1-v00,2024-06,material_wareneinkauf,414211.38
+A1-v00,2024-06,material_wareneinkauf,381070.74
 A1-v00,2024-06,sonstige_betriebliche_erloese,2055.29
 A1-v00,2024-06,personalkosten,335872.78
 A1-v00,2024-06,raumkosten,21098.63
@@ -422,7 +422,7 @@ A1-v00,2025-08,steuern_einkommen_ertrag,0.00
 A1-v00,2025-09,umsatzerloese,947812.01
 A1-v00,2025-09,bestandsveraenderungen_fe_ue,15829.42
 A1-v00,2025-09,aktivierte_eigenleistungen,0.00
-A1-v00,2025-09,material_wareneinkauf,366859.00
+A1-v00,2025-09,material_wareneinkauf,415518.30
 A1-v00,2025-09,sonstige_betriebliche_erloese,2149.21
 A1-v00,2025-09,personalkosten,223946.08
 A1-v00,2025-09,raumkosten,21182.63
@@ -443,7 +443,7 @@ A1-v00,2025-09,steuern_einkommen_ertrag,0.00
 A1-v00,2025-10,umsatzerloese,763833.03
 A1-v00,2025-10,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2025-10,aktivierte_eigenleistungen,0.00
-A1-v00,2025-10,material_wareneinkauf,413942.02
+A1-v00,2025-10,material_wareneinkauf,365282.72
 A1-v00,2025-10,sonstige_betriebliche_erloese,2169.05
 A1-v00,2025-10,personalkosten,231237.67
 A1-v00,2025-10,raumkosten,21841.18
@@ -485,7 +485,7 @@ A1-v00,2025-11,steuern_einkommen_ertrag,0.00
 A1-v00,2025-12,umsatzerloese,640256.32
 A1-v00,2025-12,bestandsveraenderungen_fe_ue,833.91
 A1-v00,2025-12,aktivierte_eigenleistungen,0.00
-A1-v00,2025-12,material_wareneinkauf,195101.24
+A1-v00,2025-12,material_wareneinkauf,245707.84
 A1-v00,2025-12,sonstige_betriebliche_erloese,2160.36
 A1-v00,2025-12,personalkosten,220811.47
 A1-v00,2025-12,raumkosten,21680.78
@@ -506,7 +506,7 @@ A1-v00,2025-12,steuern_einkommen_ertrag,0.00
 A1-v00,2026-01,umsatzerloese,668422.15
 A1-v00,2026-01,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2026-01,aktivierte_eigenleistungen,0.00
-A1-v00,2026-01,material_wareneinkauf,395570.79
+A1-v00,2026-01,material_wareneinkauf,344964.19
 A1-v00,2026-01,sonstige_betriebliche_erloese,2130.62
 A1-v00,2026-01,personalkosten,227140.42
 A1-v00,2026-01,raumkosten,21319.83
@@ -527,7 +527,7 @@ A1-v00,2026-01,steuern_einkommen_ertrag,0.00
 A1-v00,2026-02,umsatzerloese,697569.44
 A1-v00,2026-02,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2026-02,aktivierte_eigenleistungen,0.00
-A1-v00,2026-02,material_wareneinkauf,268387.35
+A1-v00,2026-02,material_wareneinkauf,300193.43
 A1-v00,2026-02,sonstige_betriebliche_erloese,2219.15
 A1-v00,2026-02,personalkosten,222023.58
 A1-v00,2026-02,raumkosten,21795.20
@@ -548,7 +548,7 @@ A1-v00,2026-02,steuern_einkommen_ertrag,0.00
 A1-v00,2026-03,umsatzerloese,769830.00
 A1-v00,2026-03,bestandsveraenderungen_fe_ue,-285.65
 A1-v00,2026-03,aktivierte_eigenleistungen,0.00
-A1-v00,2026-03,material_wareneinkauf,312058.56
+A1-v00,2026-03,material_wareneinkauf,328362.06
 A1-v00,2026-03,sonstige_betriebliche_erloese,2146.10
 A1-v00,2026-03,personalkosten,235984.88
 A1-v00,2026-03,raumkosten,22024.67
@@ -569,7 +569,7 @@ A1-v00,2026-03,steuern_einkommen_ertrag,0.00
 A1-v00,2026-04,umsatzerloese,896063.26
 A1-v00,2026-04,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2026-04,aktivierte_eigenleistungen,0.00
-A1-v00,2026-04,material_wareneinkauf,487364.09
+A1-v00,2026-04,material_wareneinkauf,439254.51
 A1-v00,2026-04,sonstige_betriebliche_erloese,2189.56
 A1-v00,2026-04,personalkosten,241752.05
 A1-v00,2026-04,raumkosten,21501.67
@@ -695,7 +695,7 @@ A1-v00,2026-09,steuern_einkommen_ertrag,0.00
 A1-v00,2026-10,umsatzerloese,801935.92
 A1-v00,2026-10,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2026-10,aktivierte_eigenleistungen,0.00
-A1-v00,2026-10,material_wareneinkauf,285655.20
+A1-v00,2026-10,material_wareneinkauf,338499.85
 A1-v00,2026-10,sonstige_betriebliche_erloese,2209.39
 A1-v00,2026-10,personalkosten,241191.72
 A1-v00,2026-10,raumkosten,22066.95
@@ -716,7 +716,7 @@ A1-v00,2026-10,steuern_einkommen_ertrag,0.00
 A1-v00,2026-11,umsatzerloese,790724.03
 A1-v00,2026-11,bestandsveraenderungen_fe_ue,0.00
 A1-v00,2026-11,aktivierte_eigenleistungen,0.00
-A1-v00,2026-11,material_wareneinkauf,473832.07
+A1-v00,2026-11,material_wareneinkauf,420987.42
 A1-v00,2026-11,sonstige_betriebliche_erloese,2158.32
 A1-v00,2026-11,personalkosten,388568.22
 A1-v00,2026-11,raumkosten,21622.15
@@ -758,7 +758,7 @@ A1-v00,2026-12,steuern_einkommen_ertrag,0.00
 A1-v01,2024-01,umsatzerloese,754203.94
 A1-v01,2024-01,bestandsveraenderungen_fe_ue,16570.72
 A1-v01,2024-01,aktivierte_eigenleistungen,0.00
-A1-v01,2024-01,material_wareneinkauf,267643.67
+A1-v01,2024-01,material_wareneinkauf,302827.70
 A1-v01,2024-01,sonstige_betriebliche_erloese,2689.61
 A1-v01,2024-01,personalkosten,242466.07
 A1-v01,2024-01,raumkosten,26086.94
@@ -779,7 +779,7 @@ A1-v01,2024-01,steuern_einkommen_ertrag,0.00
 A1-v01,2024-02,umsatzerloese,812252.87
 A1-v01,2024-02,bestandsveraenderungen_fe_ue,2850.42
 A1-v01,2024-02,aktivierte_eigenleistungen,0.00
-A1-v01,2024-02,material_wareneinkauf,275368.41
+A1-v01,2024-02,material_wareneinkauf,306838.74
 A1-v01,2024-02,sonstige_betriebliche_erloese,2582.53
 A1-v01,2024-02,personalkosten,238017.35
 A1-v01,2024-02,raumkosten,26299.65
@@ -800,7 +800,7 @@ A1-v01,2024-02,steuern_einkommen_ertrag,0.00
 A1-v01,2024-03,umsatzerloese,892463.78
 A1-v01,2024-03,bestandsveraenderungen_fe_ue,-3176.91
 A1-v01,2024-03,aktivierte_eigenleistungen,0.00
-A1-v01,2024-03,material_wareneinkauf,491449.67
+A1-v01,2024-03,material_wareneinkauf,424795.31
 A1-v01,2024-03,sonstige_betriebliche_erloese,2614.80
 A1-v01,2024-03,personalkosten,255081.03
 A1-v01,2024-03,raumkosten,26202.76
@@ -947,7 +947,7 @@ A1-v01,2024-09,steuern_einkommen_ertrag,0.00
 A1-v01,2024-10,umsatzerloese,1006369.29
 A1-v01,2024-10,bestandsveraenderungen_fe_ue,-17320.43
 A1-v01,2024-10,aktivierte_eigenleistungen,0.00
-A1-v01,2024-10,material_wareneinkauf,248405.07
+A1-v01,2024-10,material_wareneinkauf,330022.42
 A1-v01,2024-10,sonstige_betriebliche_erloese,2634.35
 A1-v01,2024-10,personalkosten,260281.68
 A1-v01,2024-10,raumkosten,25738.43
@@ -968,7 +968,7 @@ A1-v01,2024-10,steuern_einkommen_ertrag,0.00
 A1-v01,2024-11,umsatzerloese,910541.02
 A1-v01,2024-11,bestandsveraenderungen_fe_ue,-836.79
 A1-v01,2024-11,aktivierte_eigenleistungen,0.00
-A1-v01,2024-11,material_wareneinkauf,547270.33
+A1-v01,2024-11,material_wareneinkauf,465652.97
 A1-v01,2024-11,sonstige_betriebliche_erloese,2641.97
 A1-v01,2024-11,personalkosten,510313.57
 A1-v01,2024-11,raumkosten,26720.65
@@ -1010,7 +1010,7 @@ A1-v01,2024-12,steuern_einkommen_ertrag,0.00
 A1-v01,2025-01,umsatzerloese,843417.26
 A1-v01,2025-01,bestandsveraenderungen_fe_ue,-23434.95
 A1-v01,2025-01,aktivierte_eigenleistungen,0.00
-A1-v01,2025-01,material_wareneinkauf,283963.29
+A1-v01,2025-01,material_wareneinkauf,325521.68
 A1-v01,2025-01,sonstige_betriebliche_erloese,2714.31
 A1-v01,2025-01,personalkosten,260634.27
 A1-v01,2025-01,raumkosten,26468.43
@@ -1031,7 +1031,7 @@ A1-v01,2025-01,steuern_einkommen_ertrag,0.00
 A1-v01,2025-02,umsatzerloese,916620.27
 A1-v01,2025-02,bestandsveraenderungen_fe_ue,-178.37
 A1-v01,2025-02,aktivierte_eigenleistungen,0.00
-A1-v01,2025-02,material_wareneinkauf,466197.90
+A1-v01,2025-02,material_wareneinkauf,424639.51
 A1-v01,2025-02,sonstige_betriebliche_erloese,2696.42
 A1-v01,2025-02,personalkosten,262268.13
 A1-v01,2025-02,raumkosten,26516.56
@@ -1094,7 +1094,7 @@ A1-v01,2025-04,steuern_einkommen_ertrag,0.00
 A1-v01,2025-05,umsatzerloese,964162.55
 A1-v01,2025-05,bestandsveraenderungen_fe_ue,-15410.89
 A1-v01,2025-05,aktivierte_eigenleistungen,0.00
-A1-v01,2025-05,material_wareneinkauf,326258.27
+A1-v01,2025-05,material_wareneinkauf,374545.88
 A1-v01,2025-05,sonstige_betriebliche_erloese,2657.67
 A1-v01,2025-05,personalkosten,264537.45
 A1-v01,2025-05,raumkosten,27529.20
@@ -1115,7 +1115,7 @@ A1-v01,2025-05,steuern_einkommen_ertrag,0.00
 A1-v01,2025-06,umsatzerloese,1033617.69
 A1-v01,2025-06,bestandsveraenderungen_fe_ue,17800.97
 A1-v01,2025-06,aktivierte_eigenleistungen,0.00
-A1-v01,2025-06,material_wareneinkauf,502436.07
+A1-v01,2025-06,material_wareneinkauf,454148.46
 A1-v01,2025-06,sonstige_betriebliche_erloese,2672.22
 A1-v01,2025-06,personalkosten,375623.07
 A1-v01,2025-06,raumkosten,26971.31
@@ -1157,7 +1157,7 @@ A1-v01,2025-07,steuern_einkommen_ertrag,0.00
 A1-v01,2025-08,umsatzerloese,796993.93
 A1-v01,2025-08,bestandsveraenderungen_fe_ue,-109060.80
 A1-v01,2025-08,aktivierte_eigenleistungen,0.00
-A1-v01,2025-08,material_wareneinkauf,234197.84
+A1-v01,2025-08,material_wareneinkauf,265161.06
 A1-v01,2025-08,sonstige_betriebliche_erloese,2716.67
 A1-v01,2025-08,personalkosten,283855.17
 A1-v01,2025-08,raumkosten,29785.77
@@ -1178,7 +1178,7 @@ A1-v01,2025-08,steuern_einkommen_ertrag,0.00
 A1-v01,2025-09,umsatzerloese,1185801.83
 A1-v01,2025-09,bestandsveraenderungen_fe_ue,-625.66
 A1-v01,2025-09,aktivierte_eigenleistungen,0.00
-A1-v01,2025-09,material_wareneinkauf,539397.28
+A1-v01,2025-09,material_wareneinkauf,508434.06
 A1-v01,2025-09,sonstige_betriebliche_erloese,2619.63
 A1-v01,2025-09,personalkosten,275295.62
 A1-v01,2025-09,raumkosten,29401.35
@@ -1283,7 +1283,7 @@ A1-v01,2026-01,steuern_einkommen_ertrag,0.00
 A1-v01,2026-02,umsatzerloese,866199.20
 A1-v01,2026-02,bestandsveraenderungen_fe_ue,-2342.47
 A1-v01,2026-02,aktivierte_eigenleistungen,0.00
-A1-v01,2026-02,material_wareneinkauf,276297.29
+A1-v01,2026-02,material_wareneinkauf,325614.96
 A1-v01,2026-02,sonstige_betriebliche_erloese,2730.33
 A1-v01,2026-02,personalkosten,288307.45
 A1-v01,2026-02,raumkosten,30242.78
@@ -1304,7 +1304,7 @@ A1-v01,2026-02,steuern_einkommen_ertrag,0.00
 A1-v01,2026-03,umsatzerloese,989378.55
 A1-v01,2026-03,bestandsveraenderungen_fe_ue,-2318.42
 A1-v01,2026-03,aktivierte_eigenleistungen,0.00
-A1-v01,2026-03,material_wareneinkauf,521222.44
+A1-v01,2026-03,material_wareneinkauf,471904.77
 A1-v01,2026-03,sonstige_betriebliche_erloese,2725.73
 A1-v01,2026-03,personalkosten,291976.96
 A1-v01,2026-03,raumkosten,30441.33
@@ -1325,7 +1325,7 @@ A1-v01,2026-03,steuern_einkommen_ertrag,0.00
 A1-v01,2026-04,umsatzerloese,931195.48
 A1-v01,2026-04,bestandsveraenderungen_fe_ue,-21449.18
 A1-v01,2026-04,aktivierte_eigenleistungen,0.00
-A1-v01,2026-04,material_wareneinkauf,261125.52
+A1-v01,2026-04,material_wareneinkauf,327522.85
 A1-v01,2026-04,sonstige_betriebliche_erloese,2751.70
 A1-v01,2026-04,personalkosten,301881.98
 A1-v01,2026-04,raumkosten,30381.41
@@ -1346,7 +1346,7 @@ A1-v01,2026-04,steuern_einkommen_ertrag,0.00
 A1-v01,2026-05,umsatzerloese,932138.12
 A1-v01,2026-05,bestandsveraenderungen_fe_ue,13697.61
 A1-v01,2026-05,aktivierte_eigenleistungen,0.00
-A1-v01,2026-05,material_wareneinkauf,554797.31
+A1-v01,2026-05,material_wareneinkauf,488399.98
 A1-v01,2026-05,sonstige_betriebliche_erloese,2734.83
 A1-v01,2026-05,personalkosten,305256.20
 A1-v01,2026-05,raumkosten,30457.54
@@ -1724,7 +1724,7 @@ A1-v02,2024-10,steuern_einkommen_ertrag,0.00
 A1-v02,2024-11,umsatzerloese,868966.19
 A1-v02,2024-11,bestandsveraenderungen_fe_ue,20575.49
 A1-v02,2024-11,aktivierte_eigenleistungen,0.00
-A1-v02,2024-11,material_wareneinkauf,301668.99
+A1-v02,2024-11,material_wareneinkauf,353038.88
 A1-v02,2024-11,sonstige_betriebliche_erloese,2554.10
 A1-v02,2024-11,personalkosten,430184.72
 A1-v02,2024-11,raumkosten,25732.17
@@ -1745,7 +1745,7 @@ A1-v02,2024-11,steuern_einkommen_ertrag,0.00
 A1-v02,2024-12,umsatzerloese,695638.35
 A1-v02,2024-12,bestandsveraenderungen_fe_ue,10441.14
 A1-v02,2024-12,aktivierte_eigenleistungen,0.00
-A1-v02,2024-12,material_wareneinkauf,407315.13
+A1-v02,2024-12,material_wareneinkauf,355945.24
 A1-v02,2024-12,sonstige_betriebliche_erloese,2427.93
 A1-v02,2024-12,personalkosten,266143.34
 A1-v02,2024-12,raumkosten,24955.04
@@ -1850,7 +1850,7 @@ A1-v02,2025-04,steuern_einkommen_ertrag,0.00
 A1-v02,2025-05,umsatzerloese,888772.88
 A1-v02,2025-05,bestandsveraenderungen_fe_ue,9976.71
 A1-v02,2025-05,aktivierte_eigenleistungen,0.00
-A1-v02,2025-05,material_wareneinkauf,289756.58
+A1-v02,2025-05,material_wareneinkauf,325978.24
 A1-v02,2025-05,sonstige_betriebliche_erloese,2545.32
 A1-v02,2025-05,personalkosten,254994.00
 A1-v02,2025-05,raumkosten,25213.50
@@ -1871,7 +1871,7 @@ A1-v02,2025-05,steuern_einkommen_ertrag,0.00
 A1-v02,2025-06,umsatzerloese,1027067.04
 A1-v02,2025-06,bestandsveraenderungen_fe_ue,5500.24
 A1-v02,2025-06,aktivierte_eigenleistungen,0.00
-A1-v02,2025-06,material_wareneinkauf,455557.77
+A1-v02,2025-06,material_wareneinkauf,419336.11
 A1-v02,2025-06,sonstige_betriebliche_erloese,2515.54
 A1-v02,2025-06,personalkosten,364013.40
 A1-v02,2025-06,raumkosten,25168.29
@@ -1892,7 +1892,7 @@ A1-v02,2025-06,steuern_einkommen_ertrag,0.00
 A1-v02,2025-07,umsatzerloese,993660.83
 A1-v02,2025-07,bestandsveraenderungen_fe_ue,70653.19
 A1-v02,2025-07,aktivierte_eigenleistungen,0.00
-A1-v02,2025-07,material_wareneinkauf,321717.66
+A1-v02,2025-07,material_wareneinkauf,373154.67
 A1-v02,2025-07,sonstige_betriebliche_erloese,2546.53
 A1-v02,2025-07,personalkosten,274079.45
 A1-v02,2025-07,raumkosten,25913.44
@@ -1913,7 +1913,7 @@ A1-v02,2025-07,steuern_einkommen_ertrag,0.00
 A1-v02,2025-08,umsatzerloese,616276.94
 A1-v02,2025-08,bestandsveraenderungen_fe_ue,-44115.10
 A1-v02,2025-08,aktivierte_eigenleistungen,0.00
-A1-v02,2025-08,material_wareneinkauf,332549.19
+A1-v02,2025-08,material_wareneinkauf,281112.18
 A1-v02,2025-08,sonstige_betriebliche_erloese,2512.98
 A1-v02,2025-08,personalkosten,258031.03
 A1-v02,2025-08,raumkosten,25852.21
@@ -1934,7 +1934,7 @@ A1-v02,2025-08,steuern_einkommen_ertrag,0.00
 A1-v02,2025-09,umsatzerloese,910738.38
 A1-v02,2025-09,bestandsveraenderungen_fe_ue,-1369.53
 A1-v02,2025-09,aktivierte_eigenleistungen,0.00
-A1-v02,2025-09,material_wareneinkauf,259646.39
+A1-v02,2025-09,material_wareneinkauf,326983.42
 A1-v02,2025-09,sonstige_betriebliche_erloese,2567.88
 A1-v02,2025-09,personalkosten,255063.69
 A1-v02,2025-09,raumkosten,25591.30
@@ -1955,7 +1955,7 @@ A1-v02,2025-09,steuern_einkommen_ertrag,0.00
 A1-v02,2025-10,umsatzerloese,956662.40
 A1-v02,2025-10,bestandsveraenderungen_fe_ue,-8156.60
 A1-v02,2025-10,aktivierte_eigenleistungen,0.00
-A1-v02,2025-10,material_wareneinkauf,536556.64
+A1-v02,2025-10,material_wareneinkauf,469219.61
 A1-v02,2025-10,sonstige_betriebliche_erloese,2546.45
 A1-v02,2025-10,personalkosten,255781.94
 A1-v02,2025-10,raumkosten,26335.88
@@ -1997,7 +1997,7 @@ A1-v02,2025-11,steuern_einkommen_ertrag,0.00
 A1-v02,2025-12,umsatzerloese,743862.55
 A1-v02,2025-12,bestandsveraenderungen_fe_ue,2872.98
 A1-v02,2025-12,aktivierte_eigenleistungen,0.00
-A1-v02,2025-12,material_wareneinkauf,254439.66
+A1-v02,2025-12,material_wareneinkauf,293381.47
 A1-v02,2025-12,sonstige_betriebliche_erloese,2655.68
 A1-v02,2025-12,personalkosten,264449.28
 A1-v02,2025-12,raumkosten,25872.04
@@ -2018,7 +2018,7 @@ A1-v02,2025-12,steuern_einkommen_ertrag,0.00
 A1-v02,2026-01,umsatzerloese,759013.39
 A1-v02,2026-01,bestandsveraenderungen_fe_ue,2474.47
 A1-v02,2026-01,aktivierte_eigenleistungen,0.00
-A1-v02,2026-01,material_wareneinkauf,394740.54
+A1-v02,2026-01,material_wareneinkauf,355798.73
 A1-v02,2026-01,sonstige_betriebliche_erloese,2553.24
 A1-v02,2026-01,personalkosten,268233.76
 A1-v02,2026-01,raumkosten,29846.86
@@ -2186,7 +2186,7 @@ A1-v02,2026-08,steuern_einkommen_ertrag,0.00
 A1-v02,2026-09,umsatzerloese,920565.44
 A1-v02,2026-09,bestandsveraenderungen_fe_ue,-16083.38
 A1-v02,2026-09,aktivierte_eigenleistungen,0.00
-A1-v02,2026-09,material_wareneinkauf,212575.36
+A1-v02,2026-09,material_wareneinkauf,282553.69
 A1-v02,2026-09,sonstige_betriebliche_erloese,2602.20
 A1-v02,2026-09,personalkosten,268565.69
 A1-v02,2026-09,raumkosten,30600.81
@@ -2207,7 +2207,7 @@ A1-v02,2026-09,steuern_einkommen_ertrag,0.00
 A1-v02,2026-10,umsatzerloese,943465.81
 A1-v02,2026-10,bestandsveraenderungen_fe_ue,-2745.19
 A1-v02,2026-10,aktivierte_eigenleistungen,0.00
-A1-v02,2026-10,material_wareneinkauf,497534.99
+A1-v02,2026-10,material_wareneinkauf,427556.66
 A1-v02,2026-10,sonstige_betriebliche_erloese,2588.37
 A1-v02,2026-10,personalkosten,269815.10
 A1-v02,2026-10,raumkosten,30147.01
@@ -2291,7 +2291,7 @@ A1-v03,2024-01,steuern_einkommen_ertrag,0.00
 A1-v03,2024-02,umsatzerloese,730983.86
 A1-v03,2024-02,bestandsveraenderungen_fe_ue,5760.71
 A1-v03,2024-02,aktivierte_eigenleistungen,0.00
-A1-v03,2024-02,material_wareneinkauf,248626.74
+A1-v03,2024-02,material_wareneinkauf,289478.90
 A1-v03,2024-02,sonstige_betriebliche_erloese,2134.67
 A1-v03,2024-02,personalkosten,232496.60
 A1-v03,2024-02,raumkosten,21654.59
@@ -2312,7 +2312,7 @@ A1-v03,2024-02,steuern_einkommen_ertrag,0.00
 A1-v03,2024-03,umsatzerloese,843565.12
 A1-v03,2024-03,bestandsveraenderungen_fe_ue,-18157.98
 A1-v03,2024-03,aktivierte_eigenleistungen,0.00
-A1-v03,2024-03,material_wareneinkauf,297808.61
+A1-v03,2024-03,material_wareneinkauf,317449.66
 A1-v03,2024-03,sonstige_betriebliche_erloese,2139.90
 A1-v03,2024-03,personalkosten,231662.23
 A1-v03,2024-03,raumkosten,21806.20
@@ -2333,7 +2333,7 @@ A1-v03,2024-03,steuern_einkommen_ertrag,0.00
 A1-v03,2024-04,umsatzerloese,779727.86
 A1-v03,2024-04,bestandsveraenderungen_fe_ue,-4734.53
 A1-v03,2024-04,aktivierte_eigenleistungen,0.00
-A1-v03,2024-04,material_wareneinkauf,441691.53
+A1-v03,2024-04,material_wareneinkauf,381198.31
 A1-v03,2024-04,sonstige_betriebliche_erloese,2121.83
 A1-v03,2024-04,personalkosten,245268.60
 A1-v03,2024-04,raumkosten,21985.90
@@ -2375,7 +2375,7 @@ A1-v03,2024-05,steuern_einkommen_ertrag,0.00
 A1-v03,2024-06,umsatzerloese,797035.93
 A1-v03,2024-06,bestandsveraenderungen_fe_ue,12099.46
 A1-v03,2024-06,aktivierte_eigenleistungen,0.00
-A1-v03,2024-06,material_wareneinkauf,286891.70
+A1-v03,2024-06,material_wareneinkauf,345812.98
 A1-v03,2024-06,sonstige_betriebliche_erloese,2180.70
 A1-v03,2024-06,personalkosten,247326.04
 A1-v03,2024-06,raumkosten,22164.74
@@ -2396,7 +2396,7 @@ A1-v03,2024-06,steuern_einkommen_ertrag,0.00
 A1-v03,2024-07,umsatzerloese,771634.20
 A1-v03,2024-07,bestandsveraenderungen_fe_ue,77679.37
 A1-v03,2024-07,aktivierte_eigenleistungen,0.00
-A1-v03,2024-07,material_wareneinkauf,510604.32
+A1-v03,2024-07,material_wareneinkauf,451683.05
 A1-v03,2024-07,sonstige_betriebliche_erloese,2127.74
 A1-v03,2024-07,personalkosten,242824.81
 A1-v03,2024-07,raumkosten,22053.95
@@ -2585,7 +2585,7 @@ A1-v03,2025-03,steuern_einkommen_ertrag,0.00
 A1-v03,2025-04,umsatzerloese,757586.82
 A1-v03,2025-04,bestandsveraenderungen_fe_ue,-1904.24
 A1-v03,2025-04,aktivierte_eigenleistungen,0.00
-A1-v03,2025-04,material_wareneinkauf,279901.30
+A1-v03,2025-04,material_wareneinkauf,323660.64
 A1-v03,2025-04,sonstige_betriebliche_erloese,2168.80
 A1-v03,2025-04,personalkosten,257941.66
 A1-v03,2025-04,raumkosten,22606.74
@@ -2606,7 +2606,7 @@ A1-v03,2025-04,steuern_einkommen_ertrag,0.00
 A1-v03,2025-05,umsatzerloese,765703.07
 A1-v03,2025-05,bestandsveraenderungen_fe_ue,-6094.89
 A1-v03,2025-05,aktivierte_eigenleistungen,0.00
-A1-v03,2025-05,material_wareneinkauf,420155.73
+A1-v03,2025-05,material_wareneinkauf,376396.39
 A1-v03,2025-05,sonstige_betriebliche_erloese,2200.26
 A1-v03,2025-05,personalkosten,264547.70
 A1-v03,2025-05,raumkosten,22248.95
@@ -2648,7 +2648,7 @@ A1-v03,2025-06,steuern_einkommen_ertrag,0.00
 A1-v03,2025-07,umsatzerloese,724058.55
 A1-v03,2025-07,bestandsveraenderungen_fe_ue,55011.93
 A1-v03,2025-07,aktivierte_eigenleistungen,0.00
-A1-v03,2025-07,material_wareneinkauf,274424.97
+A1-v03,2025-07,material_wareneinkauf,323881.62
 A1-v03,2025-07,sonstige_betriebliche_erloese,2196.73
 A1-v03,2025-07,personalkosten,269170.11
 A1-v03,2025-07,raumkosten,22720.79
@@ -2669,7 +2669,7 @@ A1-v03,2025-07,steuern_einkommen_ertrag,0.00
 A1-v03,2025-08,umsatzerloese,651429.54
 A1-v03,2025-08,bestandsveraenderungen_fe_ue,-58540.99
 A1-v03,2025-08,aktivierte_eigenleistungen,0.00
-A1-v03,2025-08,material_wareneinkauf,354023.24
+A1-v03,2025-08,material_wareneinkauf,304566.59
 A1-v03,2025-08,sonstige_betriebliche_erloese,2192.64
 A1-v03,2025-08,personalkosten,269979.60
 A1-v03,2025-08,raumkosten,22505.48
@@ -2690,7 +2690,7 @@ A1-v03,2025-08,steuern_einkommen_ertrag,0.00
 A1-v03,2025-09,umsatzerloese,801215.24
 A1-v03,2025-09,bestandsveraenderungen_fe_ue,-10986.77
 A1-v03,2025-09,aktivierte_eigenleistungen,0.00
-A1-v03,2025-09,material_wareneinkauf,242051.73
+A1-v03,2025-09,material_wareneinkauf,307537.84
 A1-v03,2025-09,sonstige_betriebliche_erloese,2156.23
 A1-v03,2025-09,personalkosten,256024.27
 A1-v03,2025-09,raumkosten,23235.39
@@ -2711,7 +2711,7 @@ A1-v03,2025-09,steuern_einkommen_ertrag,0.00
 A1-v03,2025-10,umsatzerloese,804568.78
 A1-v03,2025-10,bestandsveraenderungen_fe_ue,-11749.77
 A1-v03,2025-10,aktivierte_eigenleistungen,0.00
-A1-v03,2025-10,material_wareneinkauf,488995.89
+A1-v03,2025-10,material_wareneinkauf,423509.77
 A1-v03,2025-10,sonstige_betriebliche_erloese,2145.92
 A1-v03,2025-10,personalkosten,254540.57
 A1-v03,2025-10,raumkosten,22936.81
@@ -2732,7 +2732,7 @@ A1-v03,2025-10,steuern_einkommen_ertrag,0.00
 A1-v03,2025-11,umsatzerloese,871318.73
 A1-v03,2025-11,bestandsveraenderungen_fe_ue,2928.52
 A1-v03,2025-11,aktivierte_eigenleistungen,0.00
-A1-v03,2025-11,material_wareneinkauf,322841.08
+A1-v03,2025-11,material_wareneinkauf,371614.14
 A1-v03,2025-11,sonstige_betriebliche_erloese,2216.42
 A1-v03,2025-11,personalkosten,263440.99
 A1-v03,2025-11,raumkosten,22588.83
@@ -2753,7 +2753,7 @@ A1-v03,2025-11,steuern_einkommen_ertrag,0.00
 A1-v03,2025-12,umsatzerloese,705414.22
 A1-v03,2025-12,bestandsveraenderungen_fe_ue,4777.98
 A1-v03,2025-12,aktivierte_eigenleistungen,0.00
-A1-v03,2025-12,material_wareneinkauf,401522.33
+A1-v03,2025-12,material_wareneinkauf,352749.28
 A1-v03,2025-12,sonstige_betriebliche_erloese,2204.15
 A1-v03,2025-12,personalkosten,265407.41
 A1-v03,2025-12,raumkosten,22997.15
@@ -2795,7 +2795,7 @@ A1-v03,2026-01,steuern_einkommen_ertrag,0.00
 A1-v03,2026-02,umsatzerloese,716627.19
 A1-v03,2026-02,bestandsveraenderungen_fe_ue,0.00
 A1-v03,2026-02,aktivierte_eigenleistungen,0.00
-A1-v03,2026-02,material_wareneinkauf,263871.92
+A1-v03,2026-02,material_wareneinkauf,304258.29
 A1-v03,2026-02,sonstige_betriebliche_erloese,2188.68
 A1-v03,2026-02,personalkosten,258842.17
 A1-v03,2026-02,raumkosten,22955.15
@@ -2816,7 +2816,7 @@ A1-v03,2026-02,steuern_einkommen_ertrag,0.00
 A1-v03,2026-03,umsatzerloese,833062.43
 A1-v03,2026-03,bestandsveraenderungen_fe_ue,-790.76
 A1-v03,2026-03,aktivierte_eigenleistungen,0.00
-A1-v03,2026-03,material_wareneinkauf,442564.53
+A1-v03,2026-03,material_wareneinkauf,402178.16
 A1-v03,2026-03,sonstige_betriebliche_erloese,2208.16
 A1-v03,2026-03,personalkosten,276083.79
 A1-v03,2026-03,raumkosten,22769.64
@@ -2879,7 +2879,7 @@ A1-v03,2026-05,steuern_einkommen_ertrag,0.00
 A1-v03,2026-06,umsatzerloese,821119.66
 A1-v03,2026-06,bestandsveraenderungen_fe_ue,6438.44
 A1-v03,2026-06,aktivierte_eigenleistungen,0.00
-A1-v03,2026-06,material_wareneinkauf,253712.71
+A1-v03,2026-06,material_wareneinkauf,312144.46
 A1-v03,2026-06,sonstige_betriebliche_erloese,2290.46
 A1-v03,2026-06,personalkosten,291844.49
 A1-v03,2026-06,raumkosten,23015.90
@@ -2900,7 +2900,7 @@ A1-v03,2026-06,steuern_einkommen_ertrag,0.00
 A1-v03,2026-07,umsatzerloese,750411.09
 A1-v03,2026-07,bestandsveraenderungen_fe_ue,55266.90
 A1-v03,2026-07,aktivierte_eigenleistungen,0.00
-A1-v03,2026-07,material_wareneinkauf,464245.45
+A1-v03,2026-07,material_wareneinkauf,405813.70
 A1-v03,2026-07,sonstige_betriebliche_erloese,2251.43
 A1-v03,2026-07,personalkosten,285168.85
 A1-v03,2026-07,raumkosten,22696.89
@@ -3047,7 +3047,7 @@ A1-v04,2024-01,steuern_einkommen_ertrag,0.00
 A1-v04,2024-02,umsatzerloese,874411.65
 A1-v04,2024-02,bestandsveraenderungen_fe_ue,-2194.73
 A1-v04,2024-02,aktivierte_eigenleistungen,0.00
-A1-v04,2024-02,material_wareneinkauf,314351.29
+A1-v04,2024-02,material_wareneinkauf,355440.10
 A1-v04,2024-02,sonstige_betriebliche_erloese,2665.43
 A1-v04,2024-02,personalkosten,318814.80
 A1-v04,2024-02,raumkosten,27497.17
@@ -3068,7 +3068,7 @@ A1-v04,2024-02,steuern_einkommen_ertrag,0.00
 A1-v04,2024-03,umsatzerloese,1187260.97
 A1-v04,2024-03,bestandsveraenderungen_fe_ue,-14195.94
 A1-v04,2024-03,aktivierte_eigenleistungen,0.00
-A1-v04,2024-03,material_wareneinkauf,563256.20
+A1-v04,2024-03,material_wareneinkauf,522167.39
 A1-v04,2024-03,sonstige_betriebliche_erloese,2622.96
 A1-v04,2024-03,personalkosten,320648.16
 A1-v04,2024-03,raumkosten,27336.79
@@ -3257,7 +3257,7 @@ A1-v04,2024-11,steuern_einkommen_ertrag,0.00
 A1-v04,2024-12,umsatzerloese,823296.92
 A1-v04,2024-12,bestandsveraenderungen_fe_ue,17035.94
 A1-v04,2024-12,aktivierte_eigenleistungen,0.00
-A1-v04,2024-12,material_wareneinkauf,305441.95
+A1-v04,2024-12,material_wareneinkauf,346302.43
 A1-v04,2024-12,sonstige_betriebliche_erloese,2687.70
 A1-v04,2024-12,personalkosten,312556.93
 A1-v04,2024-12,raumkosten,27884.13
@@ -3278,7 +3278,7 @@ A1-v04,2024-12,steuern_einkommen_ertrag,0.00
 A1-v04,2025-01,umsatzerloese,845970.63
 A1-v04,2025-01,bestandsveraenderungen_fe_ue,0.00
 A1-v04,2025-01,aktivierte_eigenleistungen,0.00
-A1-v04,2025-01,material_wareneinkauf,429081.39
+A1-v04,2025-01,material_wareneinkauf,388220.91
 A1-v04,2025-01,sonstige_betriebliche_erloese,2745.54
 A1-v04,2025-01,personalkosten,324613.82
 A1-v04,2025-01,raumkosten,27266.85
@@ -3299,7 +3299,7 @@ A1-v04,2025-01,steuern_einkommen_ertrag,0.00
 A1-v04,2025-02,umsatzerloese,920379.34
 A1-v04,2025-02,bestandsveraenderungen_fe_ue,3096.44
 A1-v04,2025-02,aktivierte_eigenleistungen,0.00
-A1-v04,2025-02,material_wareneinkauf,297493.82
+A1-v04,2025-02,material_wareneinkauf,354287.88
 A1-v04,2025-02,sonstige_betriebliche_erloese,2640.03
 A1-v04,2025-02,personalkosten,313745.20
 A1-v04,2025-02,raumkosten,27838.18
@@ -3320,7 +3320,7 @@ A1-v04,2025-02,steuern_einkommen_ertrag,0.00
 A1-v04,2025-03,umsatzerloese,1037627.06
 A1-v04,2025-03,bestandsveraenderungen_fe_ue,-13335.39
 A1-v04,2025-03,aktivierte_eigenleistungen,0.00
-A1-v04,2025-03,material_wareneinkauf,378608.79
+A1-v04,2025-03,material_wareneinkauf,412487.81
 A1-v04,2025-03,sonstige_betriebliche_erloese,2696.68
 A1-v04,2025-03,personalkosten,331243.06
 A1-v04,2025-03,raumkosten,27307.50
@@ -3341,7 +3341,7 @@ A1-v04,2025-03,steuern_einkommen_ertrag,0.00
 A1-v04,2025-04,umsatzerloese,1184551.00
 A1-v04,2025-04,bestandsveraenderungen_fe_ue,-7026.72
 A1-v04,2025-04,aktivierte_eigenleistungen,0.00
-A1-v04,2025-04,material_wareneinkauf,638320.16
+A1-v04,2025-04,material_wareneinkauf,547647.08
 A1-v04,2025-04,sonstige_betriebliche_erloese,2713.78
 A1-v04,2025-04,personalkosten,330069.79
 A1-v04,2025-04,raumkosten,27407.20
@@ -3635,7 +3635,7 @@ A1-v04,2026-05,steuern_einkommen_ertrag,0.00
 A1-v04,2026-06,umsatzerloese,1164960.35
 A1-v04,2026-06,bestandsveraenderungen_fe_ue,14070.50
 A1-v04,2026-06,aktivierte_eigenleistungen,0.00
-A1-v04,2026-06,material_wareneinkauf,329458.03
+A1-v04,2026-06,material_wareneinkauf,416788.65
 A1-v04,2026-06,sonstige_betriebliche_erloese,2766.66
 A1-v04,2026-06,personalkosten,334251.69
 A1-v04,2026-06,raumkosten,28299.25
@@ -3656,7 +3656,7 @@ A1-v04,2026-06,steuern_einkommen_ertrag,0.00
 A1-v04,2026-07,umsatzerloese,982702.37
 A1-v04,2026-07,bestandsveraenderungen_fe_ue,67991.74
 A1-v04,2026-07,aktivierte_eigenleistungen,0.00
-A1-v04,2026-07,material_wareneinkauf,687094.00
+A1-v04,2026-07,material_wareneinkauf,599763.39
 A1-v04,2026-07,sonstige_betriebliche_erloese,2842.70
 A1-v04,2026-07,personalkosten,326615.42
 A1-v04,2026-07,raumkosten,28550.87
@@ -3782,7 +3782,7 @@ A1-v04,2026-12,steuern_einkommen_ertrag,0.00
 A1-v05,2024-01,umsatzerloese,1001780.35
 A1-v05,2024-01,bestandsveraenderungen_fe_ue,3005.78
 A1-v05,2024-01,aktivierte_eigenleistungen,0.00
-A1-v05,2024-01,material_wareneinkauf,359581.38
+A1-v05,2024-01,material_wareneinkauf,402033.89
 A1-v05,2024-01,sonstige_betriebliche_erloese,2866.76
 A1-v05,2024-01,personalkosten,364199.88
 A1-v05,2024-01,raumkosten,28995.88
@@ -3803,7 +3803,7 @@ A1-v05,2024-01,steuern_einkommen_ertrag,0.00
 A1-v05,2024-02,umsatzerloese,1068919.84
 A1-v05,2024-02,bestandsveraenderungen_fe_ue,655.87
 A1-v05,2024-02,aktivierte_eigenleistungen,0.00
-A1-v05,2024-02,material_wareneinkauf,491724.73
+A1-v05,2024-02,material_wareneinkauf,449272.22
 A1-v05,2024-02,sonstige_betriebliche_erloese,2962.39
 A1-v05,2024-02,personalkosten,360605.49
 A1-v05,2024-02,raumkosten,29234.49
@@ -3950,7 +3950,7 @@ A1-v05,2024-08,steuern_einkommen_ertrag,0.00
 A1-v05,2024-09,umsatzerloese,1121535.02
 A1-v05,2024-09,bestandsveraenderungen_fe_ue,-17447.10
 A1-v05,2024-09,aktivierte_eigenleistungen,0.00
-A1-v05,2024-09,material_wareneinkauf,427404.90
+A1-v05,2024-09,material_wareneinkauf,496886.17
 A1-v05,2024-09,sonstige_betriebliche_erloese,3036.47
 A1-v05,2024-09,personalkosten,354349.41
 A1-v05,2024-09,raumkosten,29744.72
@@ -3971,7 +3971,7 @@ A1-v05,2024-09,steuern_einkommen_ertrag,0.00
 A1-v05,2024-10,umsatzerloese,1265130.87
 A1-v05,2024-10,bestandsveraenderungen_fe_ue,3693.41
 A1-v05,2024-10,aktivierte_eigenleistungen,0.00
-A1-v05,2024-10,material_wareneinkauf,741938.66
+A1-v05,2024-10,material_wareneinkauf,672457.39
 A1-v05,2024-10,sonstige_betriebliche_erloese,2992.52
 A1-v05,2024-10,personalkosten,352163.63
 A1-v05,2024-10,raumkosten,29024.03
@@ -4013,7 +4013,7 @@ A1-v05,2024-11,steuern_einkommen_ertrag,0.00
 A1-v05,2024-12,umsatzerloese,1266273.71
 A1-v05,2024-12,bestandsveraenderungen_fe_ue,19611.41
 A1-v05,2024-12,aktivierte_eigenleistungen,0.00
-A1-v05,2024-12,material_wareneinkauf,399629.14
+A1-v05,2024-12,material_wareneinkauf,505088.88
 A1-v05,2024-12,sonstige_betriebliche_erloese,3024.50
 A1-v05,2024-12,personalkosten,384555.60
 A1-v05,2024-12,raumkosten,29823.86
@@ -4034,7 +4034,7 @@ A1-v05,2024-12,steuern_einkommen_ertrag,0.00
 A1-v05,2025-01,umsatzerloese,1036847.23
 A1-v05,2025-01,bestandsveraenderungen_fe_ue,7097.11
 A1-v05,2025-01,aktivierte_eigenleistungen,0.00
-A1-v05,2025-01,material_wareneinkauf,686379.18
+A1-v05,2025-01,material_wareneinkauf,580919.44
 A1-v05,2025-01,sonstige_betriebliche_erloese,2939.98
 A1-v05,2025-01,personalkosten,369072.85
 A1-v05,2025-01,raumkosten,29573.10
@@ -4097,7 +4097,7 @@ A1-v05,2025-03,steuern_einkommen_ertrag,0.00
 A1-v05,2025-04,umsatzerloese,1121455.67
 A1-v05,2025-04,bestandsveraenderungen_fe_ue,-17965.30
 A1-v05,2025-04,aktivierte_eigenleistungen,0.00
-A1-v05,2025-04,material_wareneinkauf,484318.67
+A1-v05,2025-04,material_wareneinkauf,551472.19
 A1-v05,2025-04,sonstige_betriebliche_erloese,2948.54
 A1-v05,2025-04,personalkosten,379625.92
 A1-v05,2025-04,raumkosten,30196.25
@@ -4118,7 +4118,7 @@ A1-v05,2025-04,steuern_einkommen_ertrag,0.00
 A1-v05,2025-05,umsatzerloese,1136540.18
 A1-v05,2025-05,bestandsveraenderungen_fe_ue,-9085.47
 A1-v05,2025-05,aktivierte_eigenleistungen,0.00
-A1-v05,2025-05,material_wareneinkauf,719065.33
+A1-v05,2025-05,material_wareneinkauf,651911.82
 A1-v05,2025-05,sonstige_betriebliche_erloese,2995.94
 A1-v05,2025-05,personalkosten,384572.20
 A1-v05,2025-05,raumkosten,30321.63
@@ -4139,7 +4139,7 @@ A1-v05,2025-05,steuern_einkommen_ertrag,0.00
 A1-v05,2025-06,umsatzerloese,1432912.78
 A1-v05,2025-06,bestandsveraenderungen_fe_ue,20421.82
 A1-v05,2025-06,aktivierte_eigenleistungen,0.00
-A1-v05,2025-06,material_wareneinkauf,471429.05
+A1-v05,2025-06,material_wareneinkauf,614831.38
 A1-v05,2025-06,sonstige_betriebliche_erloese,2970.21
 A1-v05,2025-06,personalkosten,398539.44
 A1-v05,2025-06,raumkosten,30283.75
@@ -4160,7 +4160,7 @@ A1-v05,2025-06,steuern_einkommen_ertrag,0.00
 A1-v05,2025-07,umsatzerloese,1220883.53
 A1-v05,2025-07,bestandsveraenderungen_fe_ue,82765.71
 A1-v05,2025-07,aktivierte_eigenleistungen,0.00
-A1-v05,2025-07,material_wareneinkauf,977549.71
+A1-v05,2025-07,material_wareneinkauf,834147.38
 A1-v05,2025-07,sonstige_betriebliche_erloese,3068.00
 A1-v05,2025-07,personalkosten,395230.89
 A1-v05,2025-07,raumkosten,28830.74
@@ -4265,7 +4265,7 @@ A1-v05,2025-11,steuern_einkommen_ertrag,0.00
 A1-v05,2025-12,umsatzerloese,1111582.78
 A1-v05,2025-12,bestandsveraenderungen_fe_ue,759.73
 A1-v05,2025-12,aktivierte_eigenleistungen,0.00
-A1-v05,2025-12,material_wareneinkauf,369446.28
+A1-v05,2025-12,material_wareneinkauf,475292.67
 A1-v05,2025-12,sonstige_betriebliche_erloese,2990.61
 A1-v05,2025-12,personalkosten,389598.21
 A1-v05,2025-12,raumkosten,30402.38
@@ -4286,7 +4286,7 @@ A1-v05,2025-12,steuern_einkommen_ertrag,0.00
 A1-v05,2026-01,umsatzerloese,1026787.61
 A1-v05,2026-01,bestandsveraenderungen_fe_ue,-22558.09
 A1-v05,2026-01,aktivierte_eigenleistungen,0.00
-A1-v05,2026-01,material_wareneinkauf,762070.25
+A1-v05,2026-01,material_wareneinkauf,656223.87
 A1-v05,2026-01,sonstige_betriebliche_erloese,3001.70
 A1-v05,2026-01,personalkosten,393319.81
 A1-v05,2026-01,raumkosten,29962.84
@@ -4412,7 +4412,7 @@ A1-v05,2026-06,steuern_einkommen_ertrag,0.00
 A1-v05,2026-07,umsatzerloese,1086824.49
 A1-v05,2026-07,bestandsveraenderungen_fe_ue,93482.63
 A1-v05,2026-07,aktivierte_eigenleistungen,0.00
-A1-v05,2026-07,material_wareneinkauf,568122.01
+A1-v05,2026-07,material_wareneinkauf,641314.30
 A1-v05,2026-07,sonstige_betriebliche_erloese,2996.34
 A1-v05,2026-07,personalkosten,390508.43
 A1-v05,2026-07,raumkosten,31184.70
@@ -4433,7 +4433,7 @@ A1-v05,2026-07,steuern_einkommen_ertrag,0.00
 A1-v05,2026-08,umsatzerloese,928382.77
 A1-v05,2026-08,bestandsveraenderungen_fe_ue,-98132.77
 A1-v05,2026-08,aktivierte_eigenleistungen,0.00
-A1-v05,2026-08,material_wareneinkauf,565333.10
+A1-v05,2026-08,material_wareneinkauf,492140.80
 A1-v05,2026-08,sonstige_betriebliche_erloese,3016.77
 A1-v05,2026-08,personalkosten,393920.52
 A1-v05,2026-08,raumkosten,30412.38
@@ -4454,7 +4454,7 @@ A1-v05,2026-08,steuern_einkommen_ertrag,0.00
 A1-v05,2026-09,umsatzerloese,1179137.45
 A1-v05,2026-09,bestandsveraenderungen_fe_ue,-20044.36
 A1-v05,2026-09,aktivierte_eigenleistungen,0.00
-A1-v05,2026-09,material_wareneinkauf,546285.88
+A1-v05,2026-09,material_wareneinkauf,611754.94
 A1-v05,2026-09,sonstige_betriebliche_erloese,3066.44
 A1-v05,2026-09,personalkosten,388429.55
 A1-v05,2026-09,raumkosten,31246.65
@@ -4475,7 +4475,7 @@ A1-v05,2026-09,steuern_einkommen_ertrag,0.00
 A1-v05,2026-10,umsatzerloese,1240255.51
 A1-v05,2026-10,bestandsveraenderungen_fe_ue,10002.61
 A1-v05,2026-10,aktivierte_eigenleistungen,0.00
-A1-v05,2026-10,material_wareneinkauf,782805.29
+A1-v05,2026-10,material_wareneinkauf,717336.23
 A1-v05,2026-10,sonstige_betriebliche_erloese,3069.88
 A1-v05,2026-10,personalkosten,390455.55
 A1-v05,2026-10,raumkosten,31057.11
@@ -4496,7 +4496,7 @@ A1-v05,2026-10,steuern_einkommen_ertrag,0.00
 A1-v05,2026-11,umsatzerloese,1400502.67
 A1-v05,2026-11,bestandsveraenderungen_fe_ue,401.72
 A1-v05,2026-11,aktivierte_eigenleistungen,0.00
-A1-v05,2026-11,material_wareneinkauf,661871.85
+A1-v05,2026-11,material_wareneinkauf,742304.73
 A1-v05,2026-11,sonstige_betriebliche_erloese,3066.32
 A1-v05,2026-11,personalkosten,384314.93
 A1-v05,2026-11,raumkosten,29857.30
@@ -4517,7 +4517,7 @@ A1-v05,2026-11,steuern_einkommen_ertrag,0.00
 A1-v05,2026-12,umsatzerloese,1235916.90
 A1-v05,2026-12,bestandsveraenderungen_fe_ue,-9166.29
 A1-v05,2026-12,aktivierte_eigenleistungen,0.00
-A1-v05,2026-12,material_wareneinkauf,783355.68
+A1-v05,2026-12,material_wareneinkauf,702922.80
 A1-v05,2026-12,sonstige_betriebliche_erloese,3123.77
 A1-v05,2026-12,personalkosten,397512.72
 A1-v05,2026-12,raumkosten,31168.28
@@ -4727,7 +4727,7 @@ A1-v06,2024-09,steuern_einkommen_ertrag,0.00
 A1-v06,2024-10,umsatzerloese,855847.40
 A1-v06,2024-10,bestandsveraenderungen_fe_ue,15298.61
 A1-v06,2024-10,aktivierte_eigenleistungen,0.00
-A1-v06,2024-10,material_wareneinkauf,283069.57
+A1-v06,2024-10,material_wareneinkauf,324472.63
 A1-v06,2024-10,sonstige_betriebliche_erloese,2624.36
 A1-v06,2024-10,personalkosten,274121.64
 A1-v06,2024-10,raumkosten,21595.43
@@ -4748,7 +4748,7 @@ A1-v06,2024-10,steuern_einkommen_ertrag,0.00
 A1-v06,2024-11,umsatzerloese,828781.82
 A1-v06,2024-11,bestandsveraenderungen_fe_ue,11735.66
 A1-v06,2024-11,aktivierte_eigenleistungen,0.00
-A1-v06,2024-11,material_wareneinkauf,416129.67
+A1-v06,2024-11,material_wareneinkauf,374726.61
 A1-v06,2024-11,sonstige_betriebliche_erloese,2556.94
 A1-v06,2024-11,personalkosten,263926.53
 A1-v06,2024-11,raumkosten,21628.38
@@ -4769,7 +4769,7 @@ A1-v06,2024-11,steuern_einkommen_ertrag,0.00
 A1-v06,2024-12,umsatzerloese,749592.31
 A1-v06,2024-12,bestandsveraenderungen_fe_ue,2115.75
 A1-v06,2024-12,aktivierte_eigenleistungen,0.00
-A1-v06,2024-12,material_wareneinkauf,185893.32
+A1-v06,2024-12,material_wareneinkauf,243288.85
 A1-v06,2024-12,sonstige_betriebliche_erloese,2527.60
 A1-v06,2024-12,personalkosten,275749.30
 A1-v06,2024-12,raumkosten,22005.90
@@ -4790,7 +4790,7 @@ A1-v06,2024-12,steuern_einkommen_ertrag,0.00
 A1-v06,2025-01,umsatzerloese,644951.04
 A1-v06,2025-01,bestandsveraenderungen_fe_ue,0.00
 A1-v06,2025-01,aktivierte_eigenleistungen,0.00
-A1-v06,2025-01,material_wareneinkauf,359311.99
+A1-v06,2025-01,material_wareneinkauf,301916.45
 A1-v06,2025-01,sonstige_betriebliche_erloese,2609.16
 A1-v06,2025-01,personalkosten,276636.42
 A1-v06,2025-01,raumkosten,20957.09
@@ -4853,7 +4853,7 @@ A1-v06,2025-03,steuern_einkommen_ertrag,0.00
 A1-v06,2025-04,umsatzerloese,855626.49
 A1-v06,2025-04,bestandsveraenderungen_fe_ue,-7170.31
 A1-v06,2025-04,aktivierte_eigenleistungen,0.00
-A1-v06,2025-04,material_wareneinkauf,204463.78
+A1-v06,2025-04,material_wareneinkauf,270375.07
 A1-v06,2025-04,sonstige_betriebliche_erloese,2575.47
 A1-v06,2025-04,personalkosten,266589.86
 A1-v06,2025-04,raumkosten,22107.25
@@ -4874,7 +4874,7 @@ A1-v06,2025-04,steuern_einkommen_ertrag,0.00
 A1-v06,2025-05,umsatzerloese,696594.60
 A1-v06,2025-05,bestandsveraenderungen_fe_ue,7281.91
 A1-v06,2025-05,aktivierte_eigenleistungen,0.00
-A1-v06,2025-05,material_wareneinkauf,415364.27
+A1-v06,2025-05,material_wareneinkauf,349452.98
 A1-v06,2025-05,sonstige_betriebliche_erloese,2622.74
 A1-v06,2025-05,personalkosten,267410.88
 A1-v06,2025-05,raumkosten,21916.75
@@ -4895,7 +4895,7 @@ A1-v06,2025-05,steuern_einkommen_ertrag,0.00
 A1-v06,2025-06,umsatzerloese,701721.14
 A1-v06,2025-06,bestandsveraenderungen_fe_ue,24568.64
 A1-v06,2025-06,aktivierte_eigenleistungen,0.00
-A1-v06,2025-06,material_wareneinkauf,196845.62
+A1-v06,2025-06,material_wareneinkauf,249304.88
 A1-v06,2025-06,sonstige_betriebliche_erloese,2569.91
 A1-v06,2025-06,personalkosten,275330.24
 A1-v06,2025-06,raumkosten,21804.00
@@ -4916,7 +4916,7 @@ A1-v06,2025-06,steuern_einkommen_ertrag,0.00
 A1-v06,2025-07,umsatzerloese,773477.06
 A1-v06,2025-07,bestandsveraenderungen_fe_ue,57085.86
 A1-v06,2025-07,aktivierte_eigenleistungen,0.00
-A1-v06,2025-07,material_wareneinkauf,426920.72
+A1-v06,2025-07,material_wareneinkauf,374461.46
 A1-v06,2025-07,sonstige_betriebliche_erloese,2609.71
 A1-v06,2025-07,personalkosten,270961.53
 A1-v06,2025-07,raumkosten,21697.39
@@ -4958,7 +4958,7 @@ A1-v06,2025-08,steuern_einkommen_ertrag,0.00
 A1-v06,2025-09,umsatzerloese,727654.88
 A1-v06,2025-09,bestandsveraenderungen_fe_ue,-3883.93
 A1-v06,2025-09,aktivierte_eigenleistungen,0.00
-A1-v06,2025-09,material_wareneinkauf,217699.86
+A1-v06,2025-09,material_wareneinkauf,269331.68
 A1-v06,2025-09,sonstige_betriebliche_erloese,2576.30
 A1-v06,2025-09,personalkosten,259384.30
 A1-v06,2025-09,raumkosten,21699.89
@@ -4979,7 +4979,7 @@ A1-v06,2025-09,steuern_einkommen_ertrag,0.00
 A1-v06,2025-10,umsatzerloese,728971.11
 A1-v06,2025-10,bestandsveraenderungen_fe_ue,1523.50
 A1-v06,2025-10,aktivierte_eigenleistungen,0.00
-A1-v06,2025-10,material_wareneinkauf,410565.54
+A1-v06,2025-10,material_wareneinkauf,358933.73
 A1-v06,2025-10,sonstige_betriebliche_erloese,2649.14
 A1-v06,2025-10,personalkosten,265403.97
 A1-v06,2025-10,raumkosten,21616.14
@@ -5105,7 +5105,7 @@ A1-v06,2026-03,steuern_einkommen_ertrag,0.00
 A1-v06,2026-04,umsatzerloese,716787.03
 A1-v06,2026-04,bestandsveraenderungen_fe_ue,1016.88
 A1-v06,2026-04,aktivierte_eigenleistungen,0.00
-A1-v06,2026-04,material_wareneinkauf,171563.32
+A1-v06,2026-04,material_wareneinkauf,223542.79
 A1-v06,2026-04,sonstige_betriebliche_erloese,2685.86
 A1-v06,2026-04,personalkosten,316864.20
 A1-v06,2026-04,raumkosten,21590.05
@@ -5126,7 +5126,7 @@ A1-v06,2026-04,steuern_einkommen_ertrag,0.00
 A1-v06,2026-05,umsatzerloese,911189.86
 A1-v06,2026-05,bestandsveraenderungen_fe_ue,7834.27
 A1-v06,2026-05,aktivierte_eigenleistungen,0.00
-A1-v06,2026-05,material_wareneinkauf,444590.14
+A1-v06,2026-05,material_wareneinkauf,392610.68
 A1-v06,2026-05,sonstige_betriebliche_erloese,2578.39
 A1-v06,2026-05,personalkosten,312325.98
 A1-v06,2026-05,raumkosten,22729.33
@@ -5147,7 +5147,7 @@ A1-v06,2026-05,steuern_einkommen_ertrag,0.00
 A1-v06,2026-06,umsatzerloese,933852.02
 A1-v06,2026-06,bestandsveraenderungen_fe_ue,2738.72
 A1-v06,2026-06,aktivierte_eigenleistungen,0.00
-A1-v06,2026-06,material_wareneinkauf,212283.17
+A1-v06,2026-06,material_wareneinkauf,279216.87
 A1-v06,2026-06,sonstige_betriebliche_erloese,2693.22
 A1-v06,2026-06,personalkosten,310215.06
 A1-v06,2026-06,raumkosten,21907.89
@@ -5168,7 +5168,7 @@ A1-v06,2026-06,steuern_einkommen_ertrag,0.00
 A1-v06,2026-07,umsatzerloese,714674.46
 A1-v06,2026-07,bestandsveraenderungen_fe_ue,49181.91
 A1-v06,2026-07,aktivierte_eigenleistungen,0.00
-A1-v06,2026-07,material_wareneinkauf,457933.15
+A1-v06,2026-07,material_wareneinkauf,390999.45
 A1-v06,2026-07,sonstige_betriebliche_erloese,2695.55
 A1-v06,2026-07,personalkosten,315553.42
 A1-v06,2026-07,raumkosten,22350.43
@@ -5546,7 +5546,7 @@ A1-v07,2024-12,steuern_einkommen_ertrag,0.00
 A1-v07,2025-01,umsatzerloese,642971.91
 A1-v07,2025-01,bestandsveraenderungen_fe_ue,-6743.65
 A1-v07,2025-01,aktivierte_eigenleistungen,0.00
-A1-v07,2025-01,material_wareneinkauf,178234.60
+A1-v07,2025-01,material_wareneinkauf,228644.23
 A1-v07,2025-01,sonstige_betriebliche_erloese,2070.25
 A1-v07,2025-01,personalkosten,211025.15
 A1-v07,2025-01,raumkosten,20538.87
@@ -5567,7 +5567,7 @@ A1-v07,2025-01,steuern_einkommen_ertrag,0.00
 A1-v07,2025-02,umsatzerloese,740155.67
 A1-v07,2025-02,bestandsveraenderungen_fe_ue,3618.19
 A1-v07,2025-02,aktivierte_eigenleistungen,0.00
-A1-v07,2025-02,material_wareneinkauf,246976.86
+A1-v07,2025-02,material_wareneinkauf,283948.98
 A1-v07,2025-02,sonstige_betriebliche_erloese,2036.56
 A1-v07,2025-02,personalkosten,215609.47
 A1-v07,2025-02,raumkosten,20580.70
@@ -5588,7 +5588,7 @@ A1-v07,2025-02,steuern_einkommen_ertrag,0.00
 A1-v07,2025-03,umsatzerloese,790927.37
 A1-v07,2025-03,bestandsveraenderungen_fe_ue,8919.49
 A1-v07,2025-03,aktivierte_eigenleistungen,0.00
-A1-v07,2025-03,material_wareneinkauf,500793.68
+A1-v07,2025-03,material_wareneinkauf,413411.93
 A1-v07,2025-03,sonstige_betriebliche_erloese,2089.07
 A1-v07,2025-03,personalkosten,213633.25
 A1-v07,2025-03,raumkosten,20903.18
@@ -5651,7 +5651,7 @@ A1-v07,2025-05,steuern_einkommen_ertrag,0.00
 A1-v07,2025-06,umsatzerloese,807749.28
 A1-v07,2025-06,bestandsveraenderungen_fe_ue,23799.49
 A1-v07,2025-06,aktivierte_eigenleistungen,0.00
-A1-v07,2025-06,material_wareneinkauf,278550.44
+A1-v07,2025-06,material_wareneinkauf,324599.21
 A1-v07,2025-06,sonstige_betriebliche_erloese,2139.27
 A1-v07,2025-06,personalkosten,224555.98
 A1-v07,2025-06,raumkosten,20783.41
@@ -5672,7 +5672,7 @@ A1-v07,2025-06,steuern_einkommen_ertrag,0.00
 A1-v07,2025-07,umsatzerloese,752213.07
 A1-v07,2025-07,bestandsveraenderungen_fe_ue,37460.47
 A1-v07,2025-07,aktivierte_eigenleistungen,0.00
-A1-v07,2025-07,material_wareneinkauf,421279.28
+A1-v07,2025-07,material_wareneinkauf,375230.51
 A1-v07,2025-07,sonstige_betriebliche_erloese,2024.85
 A1-v07,2025-07,personalkosten,231397.73
 A1-v07,2025-07,raumkosten,20956.59
@@ -5798,7 +5798,7 @@ A1-v07,2025-12,steuern_einkommen_ertrag,0.00
 A1-v07,2026-01,umsatzerloese,699134.30
 A1-v07,2026-01,bestandsveraenderungen_fe_ue,3340.90
 A1-v07,2026-01,aktivierte_eigenleistungen,0.00
-A1-v07,2026-01,material_wareneinkauf,206717.52
+A1-v07,2026-01,material_wareneinkauf,267929.82
 A1-v07,2026-01,sonstige_betriebliche_erloese,2118.03
 A1-v07,2026-01,personalkosten,244957.98
 A1-v07,2026-01,raumkosten,21669.99
@@ -5819,7 +5819,7 @@ A1-v07,2026-01,steuern_einkommen_ertrag,0.00
 A1-v07,2026-02,umsatzerloese,754287.60
 A1-v07,2026-02,bestandsveraenderungen_fe_ue,0.00
 A1-v07,2026-02,aktivierte_eigenleistungen,0.00
-A1-v07,2026-02,material_wareneinkauf,475835.00
+A1-v07,2026-02,material_wareneinkauf,414622.70
 A1-v07,2026-02,sonstige_betriebliche_erloese,2134.20
 A1-v07,2026-02,personalkosten,234656.63
 A1-v07,2026-02,raumkosten,24935.49
@@ -6218,7 +6218,7 @@ A1-v08,2024-08,steuern_einkommen_ertrag,0.00
 A1-v08,2024-09,umsatzerloese,738557.10
 A1-v08,2024-09,bestandsveraenderungen_fe_ue,-3089.39
 A1-v08,2024-09,aktivierte_eigenleistungen,0.00
-A1-v08,2024-09,material_wareneinkauf,209177.65
+A1-v08,2024-09,material_wareneinkauf,259658.14
 A1-v08,2024-09,sonstige_betriebliche_erloese,2116.75
 A1-v08,2024-09,personalkosten,250699.16
 A1-v08,2024-09,raumkosten,20442.45
@@ -6239,7 +6239,7 @@ A1-v08,2024-09,steuern_einkommen_ertrag,0.00
 A1-v08,2024-10,umsatzerloese,748672.71
 A1-v08,2024-10,bestandsveraenderungen_fe_ue,0.00
 A1-v08,2024-10,aktivierte_eigenleistungen,0.00
-A1-v08,2024-10,material_wareneinkauf,396824.11
+A1-v08,2024-10,material_wareneinkauf,346343.61
 A1-v08,2024-10,sonstige_betriebliche_erloese,2102.31
 A1-v08,2024-10,personalkosten,241230.27
 A1-v08,2024-10,raumkosten,21056.78
@@ -6407,7 +6407,7 @@ A1-v08,2025-05,steuern_einkommen_ertrag,0.00
 A1-v08,2025-06,umsatzerloese,729867.67
 A1-v08,2025-06,bestandsveraenderungen_fe_ue,-21746.77
 A1-v08,2025-06,aktivierte_eigenleistungen,0.00
-A1-v08,2025-06,material_wareneinkauf,253442.17
+A1-v08,2025-06,material_wareneinkauf,293396.62
 A1-v08,2025-06,sonstige_betriebliche_erloese,2196.15
 A1-v08,2025-06,personalkosten,385613.99
 A1-v08,2025-06,raumkosten,20887.01
@@ -6428,7 +6428,7 @@ A1-v08,2025-06,steuern_einkommen_ertrag,0.00
 A1-v08,2025-07,umsatzerloese,718798.14
 A1-v08,2025-07,bestandsveraenderungen_fe_ue,0.00
 A1-v08,2025-07,aktivierte_eigenleistungen,0.00
-A1-v08,2025-07,material_wareneinkauf,423287.18
+A1-v08,2025-07,material_wareneinkauf,383332.73
 A1-v08,2025-07,sonstige_betriebliche_erloese,2124.26
 A1-v08,2025-07,personalkosten,262259.72
 A1-v08,2025-07,raumkosten,21062.56
@@ -6512,7 +6512,7 @@ A1-v08,2025-10,steuern_einkommen_ertrag,0.00
 A1-v08,2025-11,umsatzerloese,761330.49
 A1-v08,2025-11,bestandsveraenderungen_fe_ue,0.00
 A1-v08,2025-11,aktivierte_eigenleistungen,0.00
-A1-v08,2025-11,material_wareneinkauf,248492.09
+A1-v08,2025-11,material_wareneinkauf,287081.07
 A1-v08,2025-11,sonstige_betriebliche_erloese,2128.87
 A1-v08,2025-11,personalkosten,358388.74
 A1-v08,2025-11,raumkosten,20369.75
@@ -6533,7 +6533,7 @@ A1-v08,2025-11,steuern_einkommen_ertrag,0.00
 A1-v08,2025-12,umsatzerloese,867658.92
 A1-v08,2025-12,bestandsveraenderungen_fe_ue,21905.92
 A1-v08,2025-12,aktivierte_eigenleistungen,0.00
-A1-v08,2025-12,material_wareneinkauf,421661.74
+A1-v08,2025-12,material_wareneinkauf,383072.76
 A1-v08,2025-12,sonstige_betriebliche_erloese,2146.23
 A1-v08,2025-12,personalkosten,240816.07
 A1-v08,2025-12,raumkosten,20689.93
@@ -6827,7 +6827,7 @@ A1-v09,2024-01,steuern_einkommen_ertrag,0.00
 A1-v09,2024-02,umsatzerloese,954417.74
 A1-v09,2024-02,bestandsveraenderungen_fe_ue,8483.76
 A1-v09,2024-02,aktivierte_eigenleistungen,0.00
-A1-v09,2024-02,material_wareneinkauf,290370.84
+A1-v09,2024-02,material_wareneinkauf,352418.34
 A1-v09,2024-02,sonstige_betriebliche_erloese,2989.76
 A1-v09,2024-02,personalkosten,329964.65
 A1-v09,2024-02,raumkosten,31534.92
@@ -6848,7 +6848,7 @@ A1-v09,2024-02,steuern_einkommen_ertrag,0.00
 A1-v09,2024-03,umsatzerloese,1048489.99
 A1-v09,2024-03,bestandsveraenderungen_fe_ue,-1936.31
 A1-v09,2024-03,aktivierte_eigenleistungen,0.00
-A1-v09,2024-03,material_wareneinkauf,558757.06
+A1-v09,2024-03,material_wareneinkauf,496709.57
 A1-v09,2024-03,sonstige_betriebliche_erloese,2950.16
 A1-v09,2024-03,personalkosten,352193.04
 A1-v09,2024-03,raumkosten,33144.89
@@ -6953,7 +6953,7 @@ A1-v09,2024-07,steuern_einkommen_ertrag,0.00
 A1-v09,2024-08,umsatzerloese,734925.65
 A1-v09,2024-08,bestandsveraenderungen_fe_ue,-79313.87
 A1-v09,2024-08,aktivierte_eigenleistungen,0.00
-A1-v09,2024-08,material_wareneinkauf,153698.24
+A1-v09,2024-08,material_wareneinkauf,203035.96
 A1-v09,2024-08,sonstige_betriebliche_erloese,3025.13
 A1-v09,2024-08,personalkosten,347547.55
 A1-v09,2024-08,raumkosten,32964.27
@@ -6974,7 +6974,7 @@ A1-v09,2024-08,steuern_einkommen_ertrag,0.00
 A1-v09,2024-09,umsatzerloese,1177749.57
 A1-v09,2024-09,bestandsveraenderungen_fe_ue,-6709.24
 A1-v09,2024-09,aktivierte_eigenleistungen,0.00
-A1-v09,2024-09,material_wareneinkauf,558778.81
+A1-v09,2024-09,material_wareneinkauf,509441.08
 A1-v09,2024-09,sonstige_betriebliche_erloese,2978.73
 A1-v09,2024-09,personalkosten,364580.40
 A1-v09,2024-09,raumkosten,33229.76
@@ -7100,7 +7100,7 @@ A1-v09,2025-02,steuern_einkommen_ertrag,0.00
 A1-v09,2025-03,umsatzerloese,1072079.48
 A1-v09,2025-03,bestandsveraenderungen_fe_ue,-17.41
 A1-v09,2025-03,aktivierte_eigenleistungen,0.00
-A1-v09,2025-03,material_wareneinkauf,328006.24
+A1-v09,2025-03,material_wareneinkauf,406231.19
 A1-v09,2025-03,sonstige_betriebliche_erloese,3031.07
 A1-v09,2025-03,personalkosten,337784.25
 A1-v09,2025-03,raumkosten,33482.99
@@ -7121,7 +7121,7 @@ A1-v09,2025-03,steuern_einkommen_ertrag,0.00
 A1-v09,2025-04,umsatzerloese,1008285.85
 A1-v09,2025-04,bestandsveraenderungen_fe_ue,-17148.26
 A1-v09,2025-04,aktivierte_eigenleistungen,0.00
-A1-v09,2025-04,material_wareneinkauf,597422.70
+A1-v09,2025-04,material_wareneinkauf,519197.74
 A1-v09,2025-04,sonstige_betriebliche_erloese,3060.89
 A1-v09,2025-04,personalkosten,362945.13
 A1-v09,2025-04,raumkosten,33643.93
@@ -7373,7 +7373,7 @@ A1-v09,2026-03,steuern_einkommen_ertrag,0.00
 A1-v09,2026-04,umsatzerloese,1103977.85
 A1-v09,2026-04,bestandsveraenderungen_fe_ue,16088.63
 A1-v09,2026-04,aktivierte_eigenleistungen,0.00
-A1-v09,2026-04,material_wareneinkauf,333067.52
+A1-v09,2026-04,material_wareneinkauf,392436.37
 A1-v09,2026-04,sonstige_betriebliche_erloese,3053.80
 A1-v09,2026-04,personalkosten,348415.24
 A1-v09,2026-04,raumkosten,33790.08
@@ -7394,7 +7394,7 @@ A1-v09,2026-04,steuern_einkommen_ertrag,0.00
 A1-v09,2026-05,umsatzerloese,1113771.15
 A1-v09,2026-05,bestandsveraenderungen_fe_ue,3627.50
 A1-v09,2026-05,aktivierte_eigenleistungen,0.00
-A1-v09,2026-05,material_wareneinkauf,400880.52
+A1-v09,2026-05,material_wareneinkauf,419828.17
 A1-v09,2026-05,sonstige_betriebliche_erloese,3122.48
 A1-v09,2026-05,personalkosten,357816.60
 A1-v09,2026-05,raumkosten,34300.83
@@ -7415,7 +7415,7 @@ A1-v09,2026-05,steuern_einkommen_ertrag,0.00
 A1-v09,2026-06,umsatzerloese,1167073.57
 A1-v09,2026-06,bestandsveraenderungen_fe_ue,14519.91
 A1-v09,2026-06,aktivierte_eigenleistungen,0.00
-A1-v09,2026-06,material_wareneinkauf,642694.56
+A1-v09,2026-06,material_wareneinkauf,564378.07
 A1-v09,2026-06,sonstige_betriebliche_erloese,3127.58
 A1-v09,2026-06,personalkosten,360695.57
 A1-v09,2026-06,raumkosten,35037.12
@@ -7562,7 +7562,7 @@ A1-v09,2026-12,steuern_einkommen_ertrag,0.00
 A2-v00,2024-01,umsatzerloese,954452.26
 A2-v00,2024-01,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2024-01,aktivierte_eigenleistungen,0.00
-A2-v00,2024-01,material_wareneinkauf,639889.31
+A2-v00,2024-01,material_wareneinkauf,718570.92
 A2-v00,2024-01,sonstige_betriebliche_erloese,3467.08
 A2-v00,2024-01,personalkosten,140727.03
 A2-v00,2024-01,raumkosten,29130.83
@@ -7583,7 +7583,7 @@ A2-v00,2024-01,steuern_einkommen_ertrag,0.00
 A2-v00,2024-02,umsatzerloese,976160.06
 A2-v00,2024-02,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2024-02,aktivierte_eigenleistungen,0.00
-A2-v00,2024-02,material_wareneinkauf,1140007.69
+A2-v00,2024-02,material_wareneinkauf,1061326.08
 A2-v00,2024-02,sonstige_betriebliche_erloese,3440.60
 A2-v00,2024-02,personalkosten,146737.35
 A2-v00,2024-02,raumkosten,28666.94
@@ -7646,7 +7646,7 @@ A2-v00,2024-04,steuern_einkommen_ertrag,0.00
 A2-v00,2024-05,umsatzerloese,1340495.65
 A2-v00,2024-05,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2024-05,aktivierte_eigenleistungen,0.00
-A2-v00,2024-05,material_wareneinkauf,680031.76
+A2-v00,2024-05,material_wareneinkauf,780776.66
 A2-v00,2024-05,sonstige_betriebliche_erloese,3547.20
 A2-v00,2024-05,personalkosten,153492.09
 A2-v00,2024-05,raumkosten,29774.17
@@ -7667,7 +7667,7 @@ A2-v00,2024-05,steuern_einkommen_ertrag,0.00
 A2-v00,2024-06,umsatzerloese,1179840.52
 A2-v00,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2024-06,aktivierte_eigenleistungen,0.00
-A2-v00,2024-06,material_wareneinkauf,977648.06
+A2-v00,2024-06,material_wareneinkauf,876903.16
 A2-v00,2024-06,sonstige_betriebliche_erloese,3548.44
 A2-v00,2024-06,personalkosten,213178.63
 A2-v00,2024-06,raumkosten,29734.83
@@ -7793,7 +7793,7 @@ A2-v00,2024-11,steuern_einkommen_ertrag,0.00
 A2-v00,2024-12,umsatzerloese,1310797.37
 A2-v00,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2024-12,aktivierte_eigenleistungen,0.00
-A2-v00,2024-12,material_wareneinkauf,588283.81
+A2-v00,2024-12,material_wareneinkauf,664711.51
 A2-v00,2024-12,sonstige_betriebliche_erloese,3461.83
 A2-v00,2024-12,personalkosten,156677.40
 A2-v00,2024-12,raumkosten,32813.77
@@ -7814,7 +7814,7 @@ A2-v00,2024-12,steuern_einkommen_ertrag,0.00
 A2-v00,2025-01,umsatzerloese,909842.76
 A2-v00,2025-01,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2025-01,aktivierte_eigenleistungen,0.00
-A2-v00,2025-01,material_wareneinkauf,774492.18
+A2-v00,2025-01,material_wareneinkauf,698064.48
 A2-v00,2025-01,sonstige_betriebliche_erloese,3564.45
 A2-v00,2025-01,personalkosten,147936.22
 A2-v00,2025-01,raumkosten,32476.82
@@ -7835,7 +7835,7 @@ A2-v00,2025-01,steuern_einkommen_ertrag,0.00
 A2-v00,2025-02,umsatzerloese,969357.71
 A2-v00,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2025-02,aktivierte_eigenleistungen,0.00
-A2-v00,2025-02,material_wareneinkauf,652885.92
+A2-v00,2025-02,material_wareneinkauf,749781.54
 A2-v00,2025-02,sonstige_betriebliche_erloese,3478.00
 A2-v00,2025-02,personalkosten,151046.30
 A2-v00,2025-02,raumkosten,31879.72
@@ -7856,7 +7856,7 @@ A2-v00,2025-02,steuern_einkommen_ertrag,0.00
 A2-v00,2025-03,umsatzerloese,1131760.21
 A2-v00,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2025-03,aktivierte_eigenleistungen,0.00
-A2-v00,2025-03,material_wareneinkauf,977015.45
+A2-v00,2025-03,material_wareneinkauf,1034769.45
 A2-v00,2025-03,sonstige_betriebliche_erloese,3458.66
 A2-v00,2025-03,personalkosten,151103.02
 A2-v00,2025-03,raumkosten,32981.22
@@ -7877,7 +7877,7 @@ A2-v00,2025-03,steuern_einkommen_ertrag,0.00
 A2-v00,2025-04,umsatzerloese,1532163.50
 A2-v00,2025-04,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2025-04,aktivierte_eigenleistungen,0.00
-A2-v00,2025-04,material_wareneinkauf,1096917.19
+A2-v00,2025-04,material_wareneinkauf,942267.58
 A2-v00,2025-04,sonstige_betriebliche_erloese,3548.01
 A2-v00,2025-04,personalkosten,142524.16
 A2-v00,2025-04,raumkosten,32023.91
@@ -8045,7 +8045,7 @@ A2-v00,2025-11,steuern_einkommen_ertrag,0.00
 A2-v00,2025-12,umsatzerloese,1185254.65
 A2-v00,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2025-12,aktivierte_eigenleistungen,0.00
-A2-v00,2025-12,material_wareneinkauf,458345.16
+A2-v00,2025-12,material_wareneinkauf,554084.88
 A2-v00,2025-12,sonstige_betriebliche_erloese,3637.66
 A2-v00,2025-12,personalkosten,167400.14
 A2-v00,2025-12,raumkosten,32437.71
@@ -8066,7 +8066,7 @@ A2-v00,2025-12,steuern_einkommen_ertrag,0.00
 A2-v00,2026-01,umsatzerloese,947182.98
 A2-v00,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-01,aktivierte_eigenleistungen,0.00
-A2-v00,2026-01,material_wareneinkauf,871760.10
+A2-v00,2026-01,material_wareneinkauf,776020.38
 A2-v00,2026-01,sonstige_betriebliche_erloese,3566.03
 A2-v00,2026-01,personalkosten,154695.16
 A2-v00,2026-01,raumkosten,33832.04
@@ -8087,7 +8087,7 @@ A2-v00,2026-01,steuern_einkommen_ertrag,0.00
 A2-v00,2026-02,umsatzerloese,1002365.49
 A2-v00,2026-02,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-02,aktivierte_eigenleistungen,0.00
-A2-v00,2026-02,material_wareneinkauf,657384.45
+A2-v00,2026-02,material_wareneinkauf,760652.10
 A2-v00,2026-02,sonstige_betriebliche_erloese,3600.04
 A2-v00,2026-02,personalkosten,152082.73
 A2-v00,2026-02,raumkosten,33411.89
@@ -8108,7 +8108,7 @@ A2-v00,2026-02,steuern_einkommen_ertrag,0.00
 A2-v00,2026-03,umsatzerloese,1184791.68
 A2-v00,2026-03,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-03,aktivierte_eigenleistungen,0.00
-A2-v00,2026-03,material_wareneinkauf,1025370.72
+A2-v00,2026-03,material_wareneinkauf,922103.07
 A2-v00,2026-03,sonstige_betriebliche_erloese,3572.74
 A2-v00,2026-03,personalkosten,154721.55
 A2-v00,2026-03,raumkosten,32232.99
@@ -8129,7 +8129,7 @@ A2-v00,2026-03,steuern_einkommen_ertrag,0.00
 A2-v00,2026-04,umsatzerloese,1201640.81
 A2-v00,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-04,aktivierte_eigenleistungen,0.00
-A2-v00,2026-04,material_wareneinkauf,508314.45
+A2-v00,2026-04,material_wareneinkauf,676497.20
 A2-v00,2026-04,sonstige_betriebliche_erloese,3604.09
 A2-v00,2026-04,personalkosten,152452.37
 A2-v00,2026-04,raumkosten,33333.07
@@ -8150,7 +8150,7 @@ A2-v00,2026-04,steuern_einkommen_ertrag,0.00
 A2-v00,2026-05,umsatzerloese,1197973.11
 A2-v00,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-05,aktivierte_eigenleistungen,0.00
-A2-v00,2026-05,material_wareneinkauf,1259117.34
+A2-v00,2026-05,material_wareneinkauf,1090934.59
 A2-v00,2026-05,sonstige_betriebliche_erloese,3622.21
 A2-v00,2026-05,personalkosten,162286.88
 A2-v00,2026-05,raumkosten,32738.17
@@ -8171,7 +8171,7 @@ A2-v00,2026-05,steuern_einkommen_ertrag,0.00
 A2-v00,2026-06,umsatzerloese,1279446.80
 A2-v00,2026-06,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-06,aktivierte_eigenleistungen,0.00
-A2-v00,2026-06,material_wareneinkauf,599863.41
+A2-v00,2026-06,material_wareneinkauf,758415.57
 A2-v00,2026-06,sonstige_betriebliche_erloese,3551.33
 A2-v00,2026-06,personalkosten,231060.20
 A2-v00,2026-06,raumkosten,33576.46
@@ -8192,7 +8192,7 @@ A2-v00,2026-06,steuern_einkommen_ertrag,0.00
 A2-v00,2026-07,umsatzerloese,1275348.64
 A2-v00,2026-07,bestandsveraenderungen_fe_ue,0.00
 A2-v00,2026-07,aktivierte_eigenleistungen,0.00
-A2-v00,2026-07,material_wareneinkauf,1375587.23
+A2-v00,2026-07,material_wareneinkauf,1217035.07
 A2-v00,2026-07,sonstige_betriebliche_erloese,3712.25
 A2-v00,2026-07,personalkosten,174806.68
 A2-v00,2026-07,raumkosten,32471.55
@@ -8318,7 +8318,7 @@ A2-v00,2026-12,steuern_einkommen_ertrag,0.00
 A2-v01,2024-01,umsatzerloese,1126342.82
 A2-v01,2024-01,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2024-01,aktivierte_eigenleistungen,0.00
-A2-v01,2024-01,material_wareneinkauf,512286.56
+A2-v01,2024-01,material_wareneinkauf,620818.49
 A2-v01,2024-01,sonstige_betriebliche_erloese,3814.98
 A2-v01,2024-01,personalkosten,166604.35
 A2-v01,2024-01,raumkosten,33534.00
@@ -8339,7 +8339,7 @@ A2-v01,2024-01,steuern_einkommen_ertrag,0.00
 A2-v01,2024-02,umsatzerloese,1000169.06
 A2-v01,2024-02,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2024-02,aktivierte_eigenleistungen,0.00
-A2-v01,2024-02,material_wareneinkauf,1021873.64
+A2-v01,2024-02,material_wareneinkauf,1035916.83
 A2-v01,2024-02,sonstige_betriebliche_erloese,3953.43
 A2-v01,2024-02,personalkosten,170441.33
 A2-v01,2024-02,raumkosten,31731.55
@@ -8360,7 +8360,7 @@ A2-v01,2024-02,steuern_einkommen_ertrag,0.00
 A2-v01,2024-03,umsatzerloese,1432025.19
 A2-v01,2024-03,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2024-03,aktivierte_eigenleistungen,0.00
-A2-v01,2024-03,material_wareneinkauf,1131516.57
+A2-v01,2024-03,material_wareneinkauf,1008941.45
 A2-v01,2024-03,sonstige_betriebliche_erloese,4014.22
 A2-v01,2024-03,personalkosten,169200.14
 A2-v01,2024-03,raumkosten,33195.97
@@ -8486,7 +8486,7 @@ A2-v01,2024-08,steuern_einkommen_ertrag,0.00
 A2-v01,2024-09,umsatzerloese,1343427.49
 A2-v01,2024-09,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2024-09,aktivierte_eigenleistungen,0.00
-A2-v01,2024-09,material_wareneinkauf,851355.64
+A2-v01,2024-09,material_wareneinkauf,1017498.01
 A2-v01,2024-09,sonstige_betriebliche_erloese,3993.81
 A2-v01,2024-09,personalkosten,182998.37
 A2-v01,2024-09,raumkosten,32612.92
@@ -8507,7 +8507,7 @@ A2-v01,2024-09,steuern_einkommen_ertrag,0.00
 A2-v01,2024-10,umsatzerloese,1606738.25
 A2-v01,2024-10,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2024-10,aktivierte_eigenleistungen,0.00
-A2-v01,2024-10,material_wareneinkauf,1730963.49
+A2-v01,2024-10,material_wareneinkauf,1564821.11
 A2-v01,2024-10,sonstige_betriebliche_erloese,3987.45
 A2-v01,2024-10,personalkosten,184796.20
 A2-v01,2024-10,raumkosten,32806.68
@@ -8633,7 +8633,7 @@ A2-v01,2025-03,steuern_einkommen_ertrag,0.00
 A2-v01,2025-04,umsatzerloese,1666236.81
 A2-v01,2025-04,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-04,aktivierte_eigenleistungen,0.00
-A2-v01,2025-04,material_wareneinkauf,934199.68
+A2-v01,2025-04,material_wareneinkauf,1118466.54
 A2-v01,2025-04,sonstige_betriebliche_erloese,3937.23
 A2-v01,2025-04,personalkosten,155319.20
 A2-v01,2025-04,raumkosten,32255.67
@@ -8654,7 +8654,7 @@ A2-v01,2025-04,steuern_einkommen_ertrag,0.00
 A2-v01,2025-05,umsatzerloese,1713533.64
 A2-v01,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-05,aktivierte_eigenleistungen,0.00
-A2-v01,2025-05,material_wareneinkauf,1341805.54
+A2-v01,2025-05,material_wareneinkauf,1157538.67
 A2-v01,2025-05,sonstige_betriebliche_erloese,3977.65
 A2-v01,2025-05,personalkosten,163444.75
 A2-v01,2025-05,raumkosten,33356.76
@@ -8738,7 +8738,7 @@ A2-v01,2025-08,steuern_einkommen_ertrag,0.00
 A2-v01,2025-09,umsatzerloese,1564860.19
 A2-v01,2025-09,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-09,aktivierte_eigenleistungen,0.00
-A2-v01,2025-09,material_wareneinkauf,909737.78
+A2-v01,2025-09,material_wareneinkauf,1098727.02
 A2-v01,2025-09,sonstige_betriebliche_erloese,3971.32
 A2-v01,2025-09,personalkosten,166068.80
 A2-v01,2025-09,raumkosten,33774.74
@@ -8759,7 +8759,7 @@ A2-v01,2025-09,steuern_einkommen_ertrag,0.00
 A2-v01,2025-10,umsatzerloese,1641791.41
 A2-v01,2025-10,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-10,aktivierte_eigenleistungen,0.00
-A2-v01,2025-10,material_wareneinkauf,1574652.55
+A2-v01,2025-10,material_wareneinkauf,1385663.31
 A2-v01,2025-10,sonstige_betriebliche_erloese,4055.81
 A2-v01,2025-10,personalkosten,171305.37
 A2-v01,2025-10,raumkosten,33181.24
@@ -8780,7 +8780,7 @@ A2-v01,2025-10,steuern_einkommen_ertrag,0.00
 A2-v01,2025-11,umsatzerloese,1658783.93
 A2-v01,2025-11,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-11,aktivierte_eigenleistungen,0.00
-A2-v01,2025-11,material_wareneinkauf,859420.17
+A2-v01,2025-11,material_wareneinkauf,981041.03
 A2-v01,2025-11,sonstige_betriebliche_erloese,4081.59
 A2-v01,2025-11,personalkosten,296877.33
 A2-v01,2025-11,raumkosten,32423.23
@@ -8801,7 +8801,7 @@ A2-v01,2025-11,steuern_einkommen_ertrag,0.00
 A2-v01,2025-12,umsatzerloese,1423398.15
 A2-v01,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2025-12,aktivierte_eigenleistungen,0.00
-A2-v01,2025-12,material_wareneinkauf,1056859.73
+A2-v01,2025-12,material_wareneinkauf,935238.87
 A2-v01,2025-12,sonstige_betriebliche_erloese,4121.55
 A2-v01,2025-12,personalkosten,180705.73
 A2-v01,2025-12,raumkosten,33126.93
@@ -8822,7 +8822,7 @@ A2-v01,2025-12,steuern_einkommen_ertrag,0.00
 A2-v01,2026-01,umsatzerloese,1345365.27
 A2-v01,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-01,aktivierte_eigenleistungen,0.00
-A2-v01,2026-01,material_wareneinkauf,689025.15
+A2-v01,2026-01,material_wareneinkauf,880700.00
 A2-v01,2026-01,sonstige_betriebliche_erloese,4159.10
 A2-v01,2026-01,personalkosten,187645.27
 A2-v01,2026-01,raumkosten,33807.03
@@ -8843,7 +8843,7 @@ A2-v01,2026-01,steuern_einkommen_ertrag,0.00
 A2-v01,2026-02,umsatzerloese,1432751.48
 A2-v01,2026-02,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-02,aktivierte_eigenleistungen,0.00
-A2-v01,2026-02,material_wareneinkauf,1743766.68
+A2-v01,2026-02,material_wareneinkauf,1552091.83
 A2-v01,2026-02,sonstige_betriebliche_erloese,4040.40
 A2-v01,2026-02,personalkosten,177515.62
 A2-v01,2026-02,raumkosten,33521.41
@@ -8990,7 +8990,7 @@ A2-v01,2026-08,steuern_einkommen_ertrag,0.00
 A2-v01,2026-09,umsatzerloese,1429579.78
 A2-v01,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-09,aktivierte_eigenleistungen,0.00
-A2-v01,2026-09,material_wareneinkauf,876815.92
+A2-v01,2026-09,material_wareneinkauf,1073873.14
 A2-v01,2026-09,sonstige_betriebliche_erloese,4071.01
 A2-v01,2026-09,personalkosten,173528.74
 A2-v01,2026-09,raumkosten,33973.94
@@ -9011,7 +9011,7 @@ A2-v01,2026-09,steuern_einkommen_ertrag,0.00
 A2-v01,2026-10,umsatzerloese,1708832.16
 A2-v01,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-10,aktivierte_eigenleistungen,0.00
-A2-v01,2026-10,material_wareneinkauf,1464597.94
+A2-v01,2026-10,material_wareneinkauf,1267540.72
 A2-v01,2026-10,sonstige_betriebliche_erloese,4117.36
 A2-v01,2026-10,personalkosten,175008.10
 A2-v01,2026-10,raumkosten,33852.97
@@ -9032,7 +9032,7 @@ A2-v01,2026-10,steuern_einkommen_ertrag,0.00
 A2-v01,2026-11,umsatzerloese,1543739.58
 A2-v01,2026-11,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-11,aktivierte_eigenleistungen,0.00
-A2-v01,2026-11,material_wareneinkauf,624514.30
+A2-v01,2026-11,material_wareneinkauf,800388.08
 A2-v01,2026-11,sonstige_betriebliche_erloese,4042.54
 A2-v01,2026-11,personalkosten,322338.95
 A2-v01,2026-11,raumkosten,33678.56
@@ -9053,7 +9053,7 @@ A2-v01,2026-11,steuern_einkommen_ertrag,0.00
 A2-v01,2026-12,umsatzerloese,1402533.04
 A2-v01,2026-12,bestandsveraenderungen_fe_ue,0.00
 A2-v01,2026-12,aktivierte_eigenleistungen,0.00
-A2-v01,2026-12,material_wareneinkauf,1325591.07
+A2-v01,2026-12,material_wareneinkauf,1149717.29
 A2-v01,2026-12,sonstige_betriebliche_erloese,4136.50
 A2-v01,2026-12,personalkosten,198860.37
 A2-v01,2026-12,raumkosten,34835.95
@@ -9116,7 +9116,7 @@ A2-v02,2024-02,steuern_einkommen_ertrag,0.00
 A2-v02,2024-03,umsatzerloese,1064159.29
 A2-v02,2024-03,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2024-03,aktivierte_eigenleistungen,0.00
-A2-v02,2024-03,material_wareneinkauf,559108.23
+A2-v02,2024-03,material_wareneinkauf,690563.17
 A2-v02,2024-03,sonstige_betriebliche_erloese,3638.94
 A2-v02,2024-03,personalkosten,154589.86
 A2-v02,2024-03,raumkosten,30333.82
@@ -9137,7 +9137,7 @@ A2-v02,2024-03,steuern_einkommen_ertrag,0.00
 A2-v02,2024-04,umsatzerloese,1115908.96
 A2-v02,2024-04,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2024-04,aktivierte_eigenleistungen,0.00
-A2-v02,2024-04,material_wareneinkauf,1071448.85
+A2-v02,2024-04,material_wareneinkauf,939993.91
 A2-v02,2024-04,sonstige_betriebliche_erloese,3680.46
 A2-v02,2024-04,personalkosten,159892.51
 A2-v02,2024-04,raumkosten,29989.41
@@ -9179,7 +9179,7 @@ A2-v02,2024-05,steuern_einkommen_ertrag,0.00
 A2-v02,2024-06,umsatzerloese,1071418.77
 A2-v02,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2024-06,aktivierte_eigenleistungen,0.00
-A2-v02,2024-06,material_wareneinkauf,514252.35
+A2-v02,2024-06,material_wareneinkauf,659596.28
 A2-v02,2024-06,sonstige_betriebliche_erloese,3678.68
 A2-v02,2024-06,personalkosten,228878.24
 A2-v02,2024-06,raumkosten,30553.69
@@ -9200,7 +9200,7 @@ A2-v02,2024-06,steuern_einkommen_ertrag,0.00
 A2-v02,2024-07,umsatzerloese,1068354.60
 A2-v02,2024-07,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2024-07,aktivierte_eigenleistungen,0.00
-A2-v02,2024-07,material_wareneinkauf,1047911.53
+A2-v02,2024-07,material_wareneinkauf,902567.60
 A2-v02,2024-07,sonstige_betriebliche_erloese,3713.91
 A2-v02,2024-07,personalkosten,146652.53
 A2-v02,2024-07,raumkosten,30863.86
@@ -9347,7 +9347,7 @@ A2-v02,2025-01,steuern_einkommen_ertrag,0.00
 A2-v02,2025-02,umsatzerloese,964579.50
 A2-v02,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-02,aktivierte_eigenleistungen,0.00
-A2-v02,2025-02,material_wareneinkauf,546938.26
+A2-v02,2025-02,material_wareneinkauf,687429.79
 A2-v02,2025-02,sonstige_betriebliche_erloese,3715.30
 A2-v02,2025-02,personalkosten,157947.62
 A2-v02,2025-02,raumkosten,30464.71
@@ -9368,7 +9368,7 @@ A2-v02,2025-02,steuern_einkommen_ertrag,0.00
 A2-v02,2025-03,umsatzerloese,1137774.74
 A2-v02,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-03,aktivierte_eigenleistungen,0.00
-A2-v02,2025-03,material_wareneinkauf,1199734.36
+A2-v02,2025-03,material_wareneinkauf,1059242.83
 A2-v02,2025-03,sonstige_betriebliche_erloese,3760.41
 A2-v02,2025-03,personalkosten,155737.20
 A2-v02,2025-03,raumkosten,30729.99
@@ -9410,7 +9410,7 @@ A2-v02,2025-04,steuern_einkommen_ertrag,0.00
 A2-v02,2025-05,umsatzerloese,1277638.04
 A2-v02,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-05,aktivierte_eigenleistungen,0.00
-A2-v02,2025-05,material_wareneinkauf,675954.51
+A2-v02,2025-05,material_wareneinkauf,809381.52
 A2-v02,2025-05,sonstige_betriebliche_erloese,3876.21
 A2-v02,2025-05,personalkosten,158527.97
 A2-v02,2025-05,raumkosten,31193.82
@@ -9431,7 +9431,7 @@ A2-v02,2025-05,steuern_einkommen_ertrag,0.00
 A2-v02,2025-06,umsatzerloese,1297102.33
 A2-v02,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-06,aktivierte_eigenleistungen,0.00
-A2-v02,2025-06,material_wareneinkauf,1121414.68
+A2-v02,2025-06,material_wareneinkauf,987987.66
 A2-v02,2025-06,sonstige_betriebliche_erloese,3801.27
 A2-v02,2025-06,personalkosten,257541.02
 A2-v02,2025-06,raumkosten,31392.91
@@ -9452,7 +9452,7 @@ A2-v02,2025-06,steuern_einkommen_ertrag,0.00
 A2-v02,2025-07,umsatzerloese,1161243.82
 A2-v02,2025-07,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-07,aktivierte_eigenleistungen,0.00
-A2-v02,2025-07,material_wareneinkauf,698580.63
+A2-v02,2025-07,material_wareneinkauf,791949.19
 A2-v02,2025-07,sonstige_betriebliche_erloese,3743.82
 A2-v02,2025-07,personalkosten,169230.01
 A2-v02,2025-07,raumkosten,31008.69
@@ -9473,7 +9473,7 @@ A2-v02,2025-07,steuern_einkommen_ertrag,0.00
 A2-v02,2025-08,umsatzerloese,1047615.21
 A2-v02,2025-08,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2025-08,aktivierte_eigenleistungen,0.00
-A2-v02,2025-08,material_wareneinkauf,1234651.46
+A2-v02,2025-08,material_wareneinkauf,1141282.90
 A2-v02,2025-08,sonstige_betriebliche_erloese,3788.85
 A2-v02,2025-08,personalkosten,169616.94
 A2-v02,2025-08,raumkosten,30922.12
@@ -9578,7 +9578,7 @@ A2-v02,2025-12,steuern_einkommen_ertrag,0.00
 A2-v02,2026-01,umsatzerloese,944575.64
 A2-v02,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-01,aktivierte_eigenleistungen,0.00
-A2-v02,2026-01,material_wareneinkauf,553363.74
+A2-v02,2026-01,material_wareneinkauf,674132.68
 A2-v02,2026-01,sonstige_betriebliche_erloese,3801.87
 A2-v02,2026-01,personalkosten,165255.17
 A2-v02,2026-01,raumkosten,31797.45
@@ -9599,7 +9599,7 @@ A2-v02,2026-01,steuern_einkommen_ertrag,0.00
 A2-v02,2026-02,umsatzerloese,974185.47
 A2-v02,2026-02,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-02,aktivierte_eigenleistungen,0.00
-A2-v02,2026-02,material_wareneinkauf,835594.49
+A2-v02,2026-02,material_wareneinkauf,871451.60
 A2-v02,2026-02,sonstige_betriebliche_erloese,3821.94
 A2-v02,2026-02,personalkosten,175048.49
 A2-v02,2026-02,raumkosten,31836.12
@@ -9620,7 +9620,7 @@ A2-v02,2026-02,steuern_einkommen_ertrag,0.00
 A2-v02,2026-03,umsatzerloese,1174136.58
 A2-v02,2026-03,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-03,aktivierte_eigenleistungen,0.00
-A2-v02,2026-03,material_wareneinkauf,1422989.68
+A2-v02,2026-03,material_wareneinkauf,1266363.63
 A2-v02,2026-03,sonstige_betriebliche_erloese,3801.78
 A2-v02,2026-03,personalkosten,170383.86
 A2-v02,2026-03,raumkosten,32450.33
@@ -9641,7 +9641,7 @@ A2-v02,2026-03,steuern_einkommen_ertrag,0.00
 A2-v02,2026-04,umsatzerloese,1438289.85
 A2-v02,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-04,aktivierte_eigenleistungen,0.00
-A2-v02,2026-04,material_wareneinkauf,641745.24
+A2-v02,2026-04,material_wareneinkauf,795213.06
 A2-v02,2026-04,sonstige_betriebliche_erloese,3781.80
 A2-v02,2026-04,personalkosten,178872.11
 A2-v02,2026-04,raumkosten,31520.84
@@ -9662,7 +9662,7 @@ A2-v02,2026-04,steuern_einkommen_ertrag,0.00
 A2-v02,2026-05,umsatzerloese,1184763.22
 A2-v02,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-05,aktivierte_eigenleistungen,0.00
-A2-v02,2026-05,material_wareneinkauf,1298985.94
+A2-v02,2026-05,material_wareneinkauf,1145518.12
 A2-v02,2026-05,sonstige_betriebliche_erloese,3846.32
 A2-v02,2026-05,personalkosten,179329.90
 A2-v02,2026-05,raumkosten,32033.49
@@ -9704,7 +9704,7 @@ A2-v02,2026-06,steuern_einkommen_ertrag,0.00
 A2-v02,2026-07,umsatzerloese,1160418.77
 A2-v02,2026-07,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-07,aktivierte_eigenleistungen,0.00
-A2-v02,2026-07,material_wareneinkauf,756849.27
+A2-v02,2026-07,material_wareneinkauf,847155.96
 A2-v02,2026-07,sonstige_betriebliche_erloese,3893.25
 A2-v02,2026-07,personalkosten,185800.77
 A2-v02,2026-07,raumkosten,31994.10
@@ -9725,7 +9725,7 @@ A2-v02,2026-07,steuern_einkommen_ertrag,0.00
 A2-v02,2026-08,umsatzerloese,1101206.70
 A2-v02,2026-08,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-08,aktivierte_eigenleistungen,0.00
-A2-v02,2026-08,material_wareneinkauf,1186275.69
+A2-v02,2026-08,material_wareneinkauf,1095969.00
 A2-v02,2026-08,sonstige_betriebliche_erloese,3965.34
 A2-v02,2026-08,personalkosten,186722.08
 A2-v02,2026-08,raumkosten,31497.26
@@ -9746,7 +9746,7 @@ A2-v02,2026-08,steuern_einkommen_ertrag,0.00
 A2-v02,2026-09,umsatzerloese,1316318.15
 A2-v02,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-09,aktivierte_eigenleistungen,0.00
-A2-v02,2026-09,material_wareneinkauf,726562.14
+A2-v02,2026-09,material_wareneinkauf,943395.18
 A2-v02,2026-09,sonstige_betriebliche_erloese,3833.58
 A2-v02,2026-09,personalkosten,181995.49
 A2-v02,2026-09,raumkosten,31881.13
@@ -9767,7 +9767,7 @@ A2-v02,2026-09,steuern_einkommen_ertrag,0.00
 A2-v02,2026-10,umsatzerloese,1350500.61
 A2-v02,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v02,2026-10,aktivierte_eigenleistungen,0.00
-A2-v02,2026-10,material_wareneinkauf,1503746.71
+A2-v02,2026-10,material_wareneinkauf,1286913.67
 A2-v02,2026-10,sonstige_betriebliche_erloese,3765.90
 A2-v02,2026-10,personalkosten,185986.72
 A2-v02,2026-10,raumkosten,33336.24
@@ -9893,7 +9893,7 @@ A2-v03,2024-03,steuern_einkommen_ertrag,0.00
 A2-v03,2024-04,umsatzerloese,832491.98
 A2-v03,2024-04,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-04,aktivierte_eigenleistungen,0.00
-A2-v03,2024-04,material_wareneinkauf,475006.43
+A2-v03,2024-04,material_wareneinkauf,562607.36
 A2-v03,2024-04,sonstige_betriebliche_erloese,2206.74
 A2-v03,2024-04,personalkosten,105837.89
 A2-v03,2024-04,raumkosten,19192.89
@@ -9914,7 +9914,7 @@ A2-v03,2024-04,steuern_einkommen_ertrag,0.00
 A2-v03,2024-05,umsatzerloese,827567.08
 A2-v03,2024-05,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-05,aktivierte_eigenleistungen,0.00
-A2-v03,2024-05,material_wareneinkauf,771730.82
+A2-v03,2024-05,material_wareneinkauf,684129.89
 A2-v03,2024-05,sonstige_betriebliche_erloese,2216.41
 A2-v03,2024-05,personalkosten,108638.84
 A2-v03,2024-05,raumkosten,18795.70
@@ -9977,7 +9977,7 @@ A2-v03,2024-07,steuern_einkommen_ertrag,0.00
 A2-v03,2024-08,umsatzerloese,656972.37
 A2-v03,2024-08,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-08,aktivierte_eigenleistungen,0.00
-A2-v03,2024-08,material_wareneinkauf,327577.46
+A2-v03,2024-08,material_wareneinkauf,424719.96
 A2-v03,2024-08,sonstige_betriebliche_erloese,2197.87
 A2-v03,2024-08,personalkosten,123336.72
 A2-v03,2024-08,raumkosten,19226.44
@@ -9998,7 +9998,7 @@ A2-v03,2024-08,steuern_einkommen_ertrag,0.00
 A2-v03,2024-09,umsatzerloese,811552.30
 A2-v03,2024-09,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-09,aktivierte_eigenleistungen,0.00
-A2-v03,2024-09,material_wareneinkauf,808765.37
+A2-v03,2024-09,material_wareneinkauf,711622.87
 A2-v03,2024-09,sonstige_betriebliche_erloese,2212.57
 A2-v03,2024-09,personalkosten,109639.08
 A2-v03,2024-09,raumkosten,19080.47
@@ -10040,7 +10040,7 @@ A2-v03,2024-10,steuern_einkommen_ertrag,0.00
 A2-v03,2024-11,umsatzerloese,1062378.57
 A2-v03,2024-11,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-11,aktivierte_eigenleistungen,0.00
-A2-v03,2024-11,material_wareneinkauf,628616.22
+A2-v03,2024-11,material_wareneinkauf,735687.93
 A2-v03,2024-11,sonstige_betriebliche_erloese,2223.53
 A2-v03,2024-11,personalkosten,172594.45
 A2-v03,2024-11,raumkosten,18783.94
@@ -10061,7 +10061,7 @@ A2-v03,2024-11,steuern_einkommen_ertrag,0.00
 A2-v03,2024-12,umsatzerloese,891275.90
 A2-v03,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2024-12,aktivierte_eigenleistungen,0.00
-A2-v03,2024-12,material_wareneinkauf,854050.66
+A2-v03,2024-12,material_wareneinkauf,746978.94
 A2-v03,2024-12,sonstige_betriebliche_erloese,2273.53
 A2-v03,2024-12,personalkosten,101779.50
 A2-v03,2024-12,raumkosten,18825.35
@@ -10166,7 +10166,7 @@ A2-v03,2025-04,steuern_einkommen_ertrag,0.00
 A2-v03,2025-05,umsatzerloese,796791.48
 A2-v03,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-05,aktivierte_eigenleistungen,0.00
-A2-v03,2025-05,material_wareneinkauf,481853.58
+A2-v03,2025-05,material_wareneinkauf,559837.98
 A2-v03,2025-05,sonstige_betriebliche_erloese,2300.32
 A2-v03,2025-05,personalkosten,97493.16
 A2-v03,2025-05,raumkosten,22007.76
@@ -10187,7 +10187,7 @@ A2-v03,2025-05,steuern_einkommen_ertrag,0.00
 A2-v03,2025-06,umsatzerloese,916689.65
 A2-v03,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-06,aktivierte_eigenleistungen,0.00
-A2-v03,2025-06,material_wareneinkauf,835154.12
+A2-v03,2025-06,material_wareneinkauf,757169.72
 A2-v03,2025-06,sonstige_betriebliche_erloese,2236.50
 A2-v03,2025-06,personalkosten,152964.87
 A2-v03,2025-06,raumkosten,22121.46
@@ -10250,7 +10250,7 @@ A2-v03,2025-08,steuern_einkommen_ertrag,0.00
 A2-v03,2025-09,umsatzerloese,858896.34
 A2-v03,2025-09,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-09,aktivierte_eigenleistungen,0.00
-A2-v03,2025-09,material_wareneinkauf,547619.47
+A2-v03,2025-09,material_wareneinkauf,646597.17
 A2-v03,2025-09,sonstige_betriebliche_erloese,2242.34
 A2-v03,2025-09,personalkosten,102951.85
 A2-v03,2025-09,raumkosten,22072.75
@@ -10271,7 +10271,7 @@ A2-v03,2025-09,steuern_einkommen_ertrag,0.00
 A2-v03,2025-10,umsatzerloese,923513.72
 A2-v03,2025-10,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-10,aktivierte_eigenleistungen,0.00
-A2-v03,2025-10,material_wareneinkauf,616771.75
+A2-v03,2025-10,material_wareneinkauf,664937.60
 A2-v03,2025-10,sonstige_betriebliche_erloese,2238.85
 A2-v03,2025-10,personalkosten,99097.85
 A2-v03,2025-10,raumkosten,21765.94
@@ -10292,7 +10292,7 @@ A2-v03,2025-10,steuern_einkommen_ertrag,0.00
 A2-v03,2025-11,umsatzerloese,929840.92
 A2-v03,2025-11,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-11,aktivierte_eigenleistungen,0.00
-A2-v03,2025-11,material_wareneinkauf,1058925.42
+A2-v03,2025-11,material_wareneinkauf,911781.88
 A2-v03,2025-11,sonstige_betriebliche_erloese,2290.50
 A2-v03,2025-11,personalkosten,152001.81
 A2-v03,2025-11,raumkosten,22272.44
@@ -10313,7 +10313,7 @@ A2-v03,2025-11,steuern_einkommen_ertrag,0.00
 A2-v03,2025-12,umsatzerloese,923879.67
 A2-v03,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2025-12,aktivierte_eigenleistungen,0.00
-A2-v03,2025-12,material_wareneinkauf,594161.20
+A2-v03,2025-12,material_wareneinkauf,691854.88
 A2-v03,2025-12,sonstige_betriebliche_erloese,2215.70
 A2-v03,2025-12,personalkosten,96275.75
 A2-v03,2025-12,raumkosten,22306.00
@@ -10334,7 +10334,7 @@ A2-v03,2025-12,steuern_einkommen_ertrag,0.00
 A2-v03,2026-01,umsatzerloese,651004.38
 A2-v03,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-01,aktivierte_eigenleistungen,0.00
-A2-v03,2026-01,material_wareneinkauf,693060.18
+A2-v03,2026-01,material_wareneinkauf,595366.50
 A2-v03,2026-01,sonstige_betriebliche_erloese,2296.05
 A2-v03,2026-01,personalkosten,105237.51
 A2-v03,2026-01,raumkosten,21646.32
@@ -10376,7 +10376,7 @@ A2-v03,2026-02,steuern_einkommen_ertrag,0.00
 A2-v03,2026-03,umsatzerloese,781031.82
 A2-v03,2026-03,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-03,aktivierte_eigenleistungen,0.00
-A2-v03,2026-03,material_wareneinkauf,464060.37
+A2-v03,2026-03,material_wareneinkauf,565040.81
 A2-v03,2026-03,sonstige_betriebliche_erloese,2302.73
 A2-v03,2026-03,personalkosten,106887.16
 A2-v03,2026-03,raumkosten,22140.46
@@ -10397,7 +10397,7 @@ A2-v03,2026-03,steuern_einkommen_ertrag,0.00
 A2-v03,2026-04,umsatzerloese,1023601.82
 A2-v03,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-04,aktivierte_eigenleistungen,0.00
-A2-v03,2026-04,material_wareneinkauf,1061602.75
+A2-v03,2026-04,material_wareneinkauf,960622.31
 A2-v03,2026-04,sonstige_betriebliche_erloese,2312.89
 A2-v03,2026-04,personalkosten,112429.36
 A2-v03,2026-04,raumkosten,22726.34
@@ -10418,7 +10418,7 @@ A2-v03,2026-04,steuern_einkommen_ertrag,0.00
 A2-v03,2026-05,umsatzerloese,924464.19
 A2-v03,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-05,aktivierte_eigenleistungen,0.00
-A2-v03,2026-05,material_wareneinkauf,607250.07
+A2-v03,2026-05,material_wareneinkauf,693853.18
 A2-v03,2026-05,sonstige_betriebliche_erloese,2275.18
 A2-v03,2026-05,personalkosten,121639.57
 A2-v03,2026-05,raumkosten,22087.33
@@ -10439,7 +10439,7 @@ A2-v03,2026-05,steuern_einkommen_ertrag,0.00
 A2-v03,2026-06,umsatzerloese,843288.03
 A2-v03,2026-06,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-06,aktivierte_eigenleistungen,0.00
-A2-v03,2026-06,material_wareneinkauf,696484.73
+A2-v03,2026-06,material_wareneinkauf,678656.64
 A2-v03,2026-06,sonstige_betriebliche_erloese,2364.09
 A2-v03,2026-06,personalkosten,183388.52
 A2-v03,2026-06,raumkosten,22327.60
@@ -10460,7 +10460,7 @@ A2-v03,2026-06,steuern_einkommen_ertrag,0.00
 A2-v03,2026-07,umsatzerloese,848328.16
 A2-v03,2026-07,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-07,aktivierte_eigenleistungen,0.00
-A2-v03,2026-07,material_wareneinkauf,765551.77
+A2-v03,2026-07,material_wareneinkauf,696776.75
 A2-v03,2026-07,sonstige_betriebliche_erloese,2266.84
 A2-v03,2026-07,personalkosten,120867.68
 A2-v03,2026-07,raumkosten,22334.48
@@ -10481,7 +10481,7 @@ A2-v03,2026-07,steuern_einkommen_ertrag,0.00
 A2-v03,2026-08,umsatzerloese,751087.03
 A2-v03,2026-08,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-08,aktivierte_eigenleistungen,0.00
-A2-v03,2026-08,material_wareneinkauf,511471.24
+A2-v03,2026-08,material_wareneinkauf,576945.34
 A2-v03,2026-08,sonstige_betriebliche_erloese,2352.95
 A2-v03,2026-08,personalkosten,107058.99
 A2-v03,2026-08,raumkosten,22034.61
@@ -10502,7 +10502,7 @@ A2-v03,2026-08,steuern_einkommen_ertrag,0.00
 A2-v03,2026-09,umsatzerloese,958660.37
 A2-v03,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v03,2026-09,aktivierte_eigenleistungen,0.00
-A2-v03,2026-09,material_wareneinkauf,847382.32
+A2-v03,2026-09,material_wareneinkauf,781908.22
 A2-v03,2026-09,sonstige_betriebliche_erloese,2268.78
 A2-v03,2026-09,personalkosten,118922.25
 A2-v03,2026-09,raumkosten,22223.29
@@ -10586,7 +10586,7 @@ A2-v03,2026-12,steuern_einkommen_ertrag,0.00
 A2-v04,2024-01,umsatzerloese,826433.00
 A2-v04,2024-01,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-01,aktivierte_eigenleistungen,0.00
-A2-v04,2024-01,material_wareneinkauf,513906.89
+A2-v04,2024-01,material_wareneinkauf,592252.59
 A2-v04,2024-01,sonstige_betriebliche_erloese,3267.08
 A2-v04,2024-01,personalkosten,146892.32
 A2-v04,2024-01,raumkosten,24448.96
@@ -10607,7 +10607,7 @@ A2-v04,2024-01,steuern_einkommen_ertrag,0.00
 A2-v04,2024-02,umsatzerloese,879162.77
 A2-v04,2024-02,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-02,aktivierte_eigenleistungen,0.00
-A2-v04,2024-02,material_wareneinkauf,927690.87
+A2-v04,2024-02,material_wareneinkauf,849345.18
 A2-v04,2024-02,sonstige_betriebliche_erloese,3268.29
 A2-v04,2024-02,personalkosten,144376.29
 A2-v04,2024-02,raumkosten,24344.70
@@ -10628,7 +10628,7 @@ A2-v04,2024-02,steuern_einkommen_ertrag,0.00
 A2-v04,2024-03,umsatzerloese,1077210.44
 A2-v04,2024-03,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-03,aktivierte_eigenleistungen,0.00
-A2-v04,2024-03,material_wareneinkauf,553646.65
+A2-v04,2024-03,material_wareneinkauf,698075.62
 A2-v04,2024-03,sonstige_betriebliche_erloese,3280.27
 A2-v04,2024-03,personalkosten,145842.93
 A2-v04,2024-03,raumkosten,24284.19
@@ -10649,7 +10649,7 @@ A2-v04,2024-03,steuern_einkommen_ertrag,0.00
 A2-v04,2024-04,umsatzerloese,1143779.53
 A2-v04,2024-04,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-04,aktivierte_eigenleistungen,0.00
-A2-v04,2024-04,material_wareneinkauf,1343783.21
+A2-v04,2024-04,material_wareneinkauf,1199354.23
 A2-v04,2024-04,sonstige_betriebliche_erloese,3276.17
 A2-v04,2024-04,personalkosten,147455.97
 A2-v04,2024-04,raumkosten,24552.90
@@ -10691,7 +10691,7 @@ A2-v04,2024-05,steuern_einkommen_ertrag,0.00
 A2-v04,2024-06,umsatzerloese,1348576.34
 A2-v04,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-06,aktivierte_eigenleistungen,0.00
-A2-v04,2024-06,material_wareneinkauf,669371.56
+A2-v04,2024-06,material_wareneinkauf,795593.38
 A2-v04,2024-06,sonstige_betriebliche_erloese,3344.25
 A2-v04,2024-06,personalkosten,199328.61
 A2-v04,2024-06,raumkosten,24079.78
@@ -10712,7 +10712,7 @@ A2-v04,2024-06,steuern_einkommen_ertrag,0.00
 A2-v04,2024-07,umsatzerloese,1314850.10
 A2-v04,2024-07,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-07,aktivierte_eigenleistungen,0.00
-A2-v04,2024-07,material_wareneinkauf,1047960.91
+A2-v04,2024-07,material_wareneinkauf,921739.09
 A2-v04,2024-07,sonstige_betriebliche_erloese,3231.20
 A2-v04,2024-07,personalkosten,145851.05
 A2-v04,2024-07,raumkosten,24896.63
@@ -10754,7 +10754,7 @@ A2-v04,2024-08,steuern_einkommen_ertrag,0.00
 A2-v04,2024-09,umsatzerloese,1235569.26
 A2-v04,2024-09,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-09,aktivierte_eigenleistungen,0.00
-A2-v04,2024-09,material_wareneinkauf,668748.88
+A2-v04,2024-09,material_wareneinkauf,835601.91
 A2-v04,2024-09,sonstige_betriebliche_erloese,3385.24
 A2-v04,2024-09,personalkosten,155267.19
 A2-v04,2024-09,raumkosten,24702.52
@@ -10775,7 +10775,7 @@ A2-v04,2024-09,steuern_einkommen_ertrag,0.00
 A2-v04,2024-10,umsatzerloese,1375509.68
 A2-v04,2024-10,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-10,aktivierte_eigenleistungen,0.00
-A2-v04,2024-10,material_wareneinkauf,1271047.87
+A2-v04,2024-10,material_wareneinkauf,1104194.83
 A2-v04,2024-10,sonstige_betriebliche_erloese,3427.01
 A2-v04,2024-10,personalkosten,155589.29
 A2-v04,2024-10,raumkosten,24228.70
@@ -10796,7 +10796,7 @@ A2-v04,2024-10,steuern_einkommen_ertrag,0.00
 A2-v04,2024-11,umsatzerloese,1339945.57
 A2-v04,2024-11,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-11,aktivierte_eigenleistungen,0.00
-A2-v04,2024-11,material_wareneinkauf,688816.71
+A2-v04,2024-11,material_wareneinkauf,779911.44
 A2-v04,2024-11,sonstige_betriebliche_erloese,3272.94
 A2-v04,2024-11,personalkosten,273777.16
 A2-v04,2024-11,raumkosten,24771.91
@@ -10817,7 +10817,7 @@ A2-v04,2024-11,steuern_einkommen_ertrag,0.00
 A2-v04,2024-12,umsatzerloese,1202816.52
 A2-v04,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2024-12,aktivierte_eigenleistungen,0.00
-A2-v04,2024-12,material_wareneinkauf,735781.58
+A2-v04,2024-12,material_wareneinkauf,644686.85
 A2-v04,2024-12,sonstige_betriebliche_erloese,3454.55
 A2-v04,2024-12,personalkosten,162115.54
 A2-v04,2024-12,raumkosten,25292.96
@@ -10880,7 +10880,7 @@ A2-v04,2025-02,steuern_einkommen_ertrag,0.00
 A2-v04,2025-03,umsatzerloese,1141075.10
 A2-v04,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2025-03,aktivierte_eigenleistungen,0.00
-A2-v04,2025-03,material_wareneinkauf,805979.83
+A2-v04,2025-03,material_wareneinkauf,926446.04
 A2-v04,2025-03,sonstige_betriebliche_erloese,3224.80
 A2-v04,2025-03,personalkosten,160122.25
 A2-v04,2025-03,raumkosten,25484.86
@@ -10901,7 +10901,7 @@ A2-v04,2025-03,steuern_einkommen_ertrag,0.00
 A2-v04,2025-04,umsatzerloese,1493760.74
 A2-v04,2025-04,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2025-04,aktivierte_eigenleistungen,0.00
-A2-v04,2025-04,material_wareneinkauf,1225042.47
+A2-v04,2025-04,material_wareneinkauf,1104576.26
 A2-v04,2025-04,sonstige_betriebliche_erloese,3298.54
 A2-v04,2025-04,personalkosten,165100.03
 A2-v04,2025-04,raumkosten,24482.97
@@ -11069,7 +11069,7 @@ A2-v04,2025-11,steuern_einkommen_ertrag,0.00
 A2-v04,2025-12,umsatzerloese,1508684.79
 A2-v04,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2025-12,aktivierte_eigenleistungen,0.00
-A2-v04,2025-12,material_wareneinkauf,490894.85
+A2-v04,2025-12,material_wareneinkauf,559007.36
 A2-v04,2025-12,sonstige_betriebliche_erloese,3385.23
 A2-v04,2025-12,personalkosten,173850.95
 A2-v04,2025-12,raumkosten,25352.07
@@ -11090,7 +11090,7 @@ A2-v04,2025-12,steuern_einkommen_ertrag,0.00
 A2-v04,2026-01,umsatzerloese,911644.31
 A2-v04,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-01,aktivierte_eigenleistungen,0.00
-A2-v04,2026-01,material_wareneinkauf,605534.37
+A2-v04,2026-01,material_wareneinkauf,632157.20
 A2-v04,2026-01,sonstige_betriebliche_erloese,3403.63
 A2-v04,2026-01,personalkosten,163558.64
 A2-v04,2026-01,raumkosten,25925.83
@@ -11111,7 +11111,7 @@ A2-v04,2026-01,steuern_einkommen_ertrag,0.00
 A2-v04,2026-02,umsatzerloese,1013338.96
 A2-v04,2026-02,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-02,aktivierte_eigenleistungen,0.00
-A2-v04,2026-02,material_wareneinkauf,613374.45
+A2-v04,2026-02,material_wareneinkauf,702927.24
 A2-v04,2026-02,sonstige_betriebliche_erloese,3400.58
 A2-v04,2026-02,personalkosten,167326.13
 A2-v04,2026-02,raumkosten,26054.38
@@ -11132,7 +11132,7 @@ A2-v04,2026-02,steuern_einkommen_ertrag,0.00
 A2-v04,2026-03,umsatzerloese,1241963.73
 A2-v04,2026-03,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-03,aktivierte_eigenleistungen,0.00
-A2-v04,2026-03,material_wareneinkauf,966580.98
+A2-v04,2026-03,material_wareneinkauf,880411.84
 A2-v04,2026-03,sonstige_betriebliche_erloese,3376.52
 A2-v04,2026-03,personalkosten,172233.38
 A2-v04,2026-03,raumkosten,25658.60
@@ -11153,7 +11153,7 @@ A2-v04,2026-03,steuern_einkommen_ertrag,0.00
 A2-v04,2026-04,umsatzerloese,1266778.51
 A2-v04,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-04,aktivierte_eigenleistungen,0.00
-A2-v04,2026-04,material_wareneinkauf,778436.45
+A2-v04,2026-04,material_wareneinkauf,816755.80
 A2-v04,2026-04,sonstige_betriebliche_erloese,3470.37
 A2-v04,2026-04,personalkosten,160219.31
 A2-v04,2026-04,raumkosten,25915.69
@@ -11174,7 +11174,7 @@ A2-v04,2026-04,steuern_einkommen_ertrag,0.00
 A2-v04,2026-05,umsatzerloese,1286430.35
 A2-v04,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-05,aktivierte_eigenleistungen,0.00
-A2-v04,2026-05,material_wareneinkauf,750185.78
+A2-v04,2026-05,material_wareneinkauf,848577.17
 A2-v04,2026-05,sonstige_betriebliche_erloese,3392.28
 A2-v04,2026-05,personalkosten,167478.27
 A2-v04,2026-05,raumkosten,25716.83
@@ -11195,7 +11195,7 @@ A2-v04,2026-05,steuern_einkommen_ertrag,0.00
 A2-v04,2026-06,umsatzerloese,1445501.86
 A2-v04,2026-06,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-06,aktivierte_eigenleistungen,0.00
-A2-v04,2026-06,material_wareneinkauf,1358404.73
+A2-v04,2026-06,material_wareneinkauf,1123575.01
 A2-v04,2026-06,sonstige_betriebliche_erloese,3404.54
 A2-v04,2026-06,personalkosten,234568.18
 A2-v04,2026-06,raumkosten,25269.00
@@ -11279,7 +11279,7 @@ A2-v04,2026-09,steuern_einkommen_ertrag,0.00
 A2-v04,2026-10,umsatzerloese,1478278.09
 A2-v04,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-10,aktivierte_eigenleistungen,0.00
-A2-v04,2026-10,material_wareneinkauf,810638.50
+A2-v04,2026-10,material_wareneinkauf,927775.84
 A2-v04,2026-10,sonstige_betriebliche_erloese,3431.48
 A2-v04,2026-10,personalkosten,164103.87
 A2-v04,2026-10,raumkosten,25318.88
@@ -11300,7 +11300,7 @@ A2-v04,2026-10,steuern_einkommen_ertrag,0.00
 A2-v04,2026-11,umsatzerloese,1459066.47
 A2-v04,2026-11,bestandsveraenderungen_fe_ue,0.00
 A2-v04,2026-11,aktivierte_eigenleistungen,0.00
-A2-v04,2026-11,material_wareneinkauf,1034245.81
+A2-v04,2026-11,material_wareneinkauf,917108.47
 A2-v04,2026-11,sonstige_betriebliche_erloese,3535.36
 A2-v04,2026-11,personalkosten,290733.24
 A2-v04,2026-11,raumkosten,26003.04
@@ -11384,7 +11384,7 @@ A2-v05,2024-02,steuern_einkommen_ertrag,0.00
 A2-v05,2024-03,umsatzerloese,1736463.80
 A2-v05,2024-03,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2024-03,aktivierte_eigenleistungen,0.00
-A2-v05,2024-03,material_wareneinkauf,964621.37
+A2-v05,2024-03,material_wareneinkauf,1129471.21
 A2-v05,2024-03,sonstige_betriebliche_erloese,5459.63
 A2-v05,2024-03,personalkosten,252656.74
 A2-v05,2024-03,raumkosten,40251.87
@@ -11405,7 +11405,7 @@ A2-v05,2024-03,steuern_einkommen_ertrag,0.00
 A2-v05,2024-04,umsatzerloese,1751152.75
 A2-v05,2024-04,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2024-04,aktivierte_eigenleistungen,0.00
-A2-v05,2024-04,material_wareneinkauf,1555681.11
+A2-v05,2024-04,material_wareneinkauf,1390831.26
 A2-v05,2024-04,sonstige_betriebliche_erloese,5400.31
 A2-v05,2024-04,personalkosten,241414.90
 A2-v05,2024-04,raumkosten,40515.00
@@ -11447,7 +11447,7 @@ A2-v05,2024-05,steuern_einkommen_ertrag,0.00
 A2-v05,2024-06,umsatzerloese,1717843.22
 A2-v05,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2024-06,aktivierte_eigenleistungen,0.00
-A2-v05,2024-06,material_wareneinkauf,1032673.83
+A2-v05,2024-06,material_wareneinkauf,1177615.52
 A2-v05,2024-06,sonstige_betriebliche_erloese,5556.53
 A2-v05,2024-06,personalkosten,373223.70
 A2-v05,2024-06,raumkosten,39948.70
@@ -11468,7 +11468,7 @@ A2-v05,2024-06,steuern_einkommen_ertrag,0.00
 A2-v05,2024-07,umsatzerloese,1661216.04
 A2-v05,2024-07,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2024-07,aktivierte_eigenleistungen,0.00
-A2-v05,2024-07,material_wareneinkauf,1470055.40
+A2-v05,2024-07,material_wareneinkauf,1325113.71
 A2-v05,2024-07,sonstige_betriebliche_erloese,5343.86
 A2-v05,2024-07,personalkosten,264904.98
 A2-v05,2024-07,raumkosten,39602.90
@@ -11615,7 +11615,7 @@ A2-v05,2025-01,steuern_einkommen_ertrag,0.00
 A2-v05,2025-02,umsatzerloese,1646852.58
 A2-v05,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-02,aktivierte_eigenleistungen,0.00
-A2-v05,2025-02,material_wareneinkauf,746179.24
+A2-v05,2025-02,material_wareneinkauf,989554.08
 A2-v05,2025-02,sonstige_betriebliche_erloese,5439.34
 A2-v05,2025-02,personalkosten,246318.28
 A2-v05,2025-02,raumkosten,44059.23
@@ -11636,7 +11636,7 @@ A2-v05,2025-02,steuern_einkommen_ertrag,0.00
 A2-v05,2025-03,umsatzerloese,1717178.75
 A2-v05,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-03,aktivierte_eigenleistungen,0.00
-A2-v05,2025-03,material_wareneinkauf,1725726.63
+A2-v05,2025-03,material_wareneinkauf,1482351.79
 A2-v05,2025-03,sonstige_betriebliche_erloese,5547.73
 A2-v05,2025-03,personalkosten,257048.64
 A2-v05,2025-03,raumkosten,43999.29
@@ -11720,7 +11720,7 @@ A2-v05,2025-06,steuern_einkommen_ertrag,0.00
 A2-v05,2025-07,umsatzerloese,2070849.31
 A2-v05,2025-07,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-07,aktivierte_eigenleistungen,0.00
-A2-v05,2025-07,material_wareneinkauf,1255595.45
+A2-v05,2025-07,material_wareneinkauf,1412864.46
 A2-v05,2025-07,sonstige_betriebliche_erloese,5639.22
 A2-v05,2025-07,personalkosten,280196.14
 A2-v05,2025-07,raumkosten,45533.48
@@ -11741,7 +11741,7 @@ A2-v05,2025-07,steuern_einkommen_ertrag,0.00
 A2-v05,2025-08,umsatzerloese,1577177.42
 A2-v05,2025-08,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-08,aktivierte_eigenleistungen,0.00
-A2-v05,2025-08,material_wareneinkauf,1023553.69
+A2-v05,2025-08,material_wareneinkauf,1062459.53
 A2-v05,2025-08,sonstige_betriebliche_erloese,5609.37
 A2-v05,2025-08,personalkosten,280442.82
 A2-v05,2025-08,raumkosten,43241.89
@@ -11762,7 +11762,7 @@ A2-v05,2025-08,steuern_einkommen_ertrag,0.00
 A2-v05,2025-09,umsatzerloese,1888390.86
 A2-v05,2025-09,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-09,aktivierte_eigenleistungen,0.00
-A2-v05,2025-09,material_wareneinkauf,1673673.67
+A2-v05,2025-09,material_wareneinkauf,1477498.82
 A2-v05,2025-09,sonstige_betriebliche_erloese,5616.29
 A2-v05,2025-09,personalkosten,286125.33
 A2-v05,2025-09,raumkosten,44461.59
@@ -11825,7 +11825,7 @@ A2-v05,2025-11,steuern_einkommen_ertrag,0.00
 A2-v05,2025-12,umsatzerloese,1772468.44
 A2-v05,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2025-12,aktivierte_eigenleistungen,0.00
-A2-v05,2025-12,material_wareneinkauf,839839.18
+A2-v05,2025-12,material_wareneinkauf,1098410.16
 A2-v05,2025-12,sonstige_betriebliche_erloese,5670.29
 A2-v05,2025-12,personalkosten,283741.10
 A2-v05,2025-12,raumkosten,46709.90
@@ -11846,7 +11846,7 @@ A2-v05,2025-12,steuern_einkommen_ertrag,0.00
 A2-v05,2026-01,umsatzerloese,1755763.28
 A2-v05,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2026-01,aktivierte_eigenleistungen,0.00
-A2-v05,2026-01,material_wareneinkauf,1832505.84
+A2-v05,2026-01,material_wareneinkauf,1573934.86
 A2-v05,2026-01,sonstige_betriebliche_erloese,5625.28
 A2-v05,2026-01,personalkosten,287662.19
 A2-v05,2026-01,raumkosten,45204.79
@@ -11909,7 +11909,7 @@ A2-v05,2026-03,steuern_einkommen_ertrag,0.00
 A2-v05,2026-04,umsatzerloese,1747464.33
 A2-v05,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2026-04,aktivierte_eigenleistungen,0.00
-A2-v05,2026-04,material_wareneinkauf,899071.11
+A2-v05,2026-04,material_wareneinkauf,1141960.40
 A2-v05,2026-04,sonstige_betriebliche_erloese,5706.12
 A2-v05,2026-04,personalkosten,297584.44
 A2-v05,2026-04,raumkosten,46117.28
@@ -11930,7 +11930,7 @@ A2-v05,2026-04,steuern_einkommen_ertrag,0.00
 A2-v05,2026-05,umsatzerloese,1847342.25
 A2-v05,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2026-05,aktivierte_eigenleistungen,0.00
-A2-v05,2026-05,material_wareneinkauf,1877543.10
+A2-v05,2026-05,material_wareneinkauf,1634653.82
 A2-v05,2026-05,sonstige_betriebliche_erloese,5713.15
 A2-v05,2026-05,personalkosten,328301.31
 A2-v05,2026-05,raumkosten,45504.99
@@ -12056,7 +12056,7 @@ A2-v05,2026-10,steuern_einkommen_ertrag,0.00
 A2-v05,2026-11,umsatzerloese,1962177.72
 A2-v05,2026-11,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2026-11,aktivierte_eigenleistungen,0.00
-A2-v05,2026-11,material_wareneinkauf,1033396.41
+A2-v05,2026-11,material_wareneinkauf,1351616.01
 A2-v05,2026-11,sonstige_betriebliche_erloese,5696.16
 A2-v05,2026-11,personalkosten,457072.96
 A2-v05,2026-11,raumkosten,46604.87
@@ -12077,7 +12077,7 @@ A2-v05,2026-11,steuern_einkommen_ertrag,0.00
 A2-v05,2026-12,umsatzerloese,1848802.54
 A2-v05,2026-12,bestandsveraenderungen_fe_ue,0.00
 A2-v05,2026-12,aktivierte_eigenleistungen,0.00
-A2-v05,2026-12,material_wareneinkauf,2115851.03
+A2-v05,2026-12,material_wareneinkauf,1797631.44
 A2-v05,2026-12,sonstige_betriebliche_erloese,5846.67
 A2-v05,2026-12,personalkosten,300299.18
 A2-v05,2026-12,raumkosten,46478.32
@@ -12098,7 +12098,7 @@ A2-v05,2026-12,steuern_einkommen_ertrag,0.00
 A2-v06,2024-01,umsatzerloese,1623384.15
 A2-v06,2024-01,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-01,aktivierte_eigenleistungen,0.00
-A2-v06,2024-01,material_wareneinkauf,751527.80
+A2-v06,2024-01,material_wareneinkauf,965682.99
 A2-v06,2024-01,sonstige_betriebliche_erloese,4822.10
 A2-v06,2024-01,personalkosten,227447.51
 A2-v06,2024-01,raumkosten,43823.35
@@ -12119,7 +12119,7 @@ A2-v06,2024-01,steuern_einkommen_ertrag,0.00
 A2-v06,2024-02,umsatzerloese,1683509.65
 A2-v06,2024-02,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-02,aktivierte_eigenleistungen,0.00
-A2-v06,2024-02,material_wareneinkauf,1586972.84
+A2-v06,2024-02,material_wareneinkauf,1372817.65
 A2-v06,2024-02,sonstige_betriebliche_erloese,4743.48
 A2-v06,2024-02,personalkosten,229636.57
 A2-v06,2024-02,raumkosten,43632.65
@@ -12182,7 +12182,7 @@ A2-v06,2024-04,steuern_einkommen_ertrag,0.00
 A2-v06,2024-05,umsatzerloese,1738579.44
 A2-v06,2024-05,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-05,aktivierte_eigenleistungen,0.00
-A2-v06,2024-05,material_wareneinkauf,967630.85
+A2-v06,2024-05,material_wareneinkauf,1103801.87
 A2-v06,2024-05,sonstige_betriebliche_erloese,4683.46
 A2-v06,2024-05,personalkosten,228626.98
 A2-v06,2024-05,raumkosten,49325.04
@@ -12203,7 +12203,7 @@ A2-v06,2024-05,steuern_einkommen_ertrag,0.00
 A2-v06,2024-06,umsatzerloese,1643254.06
 A2-v06,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-06,aktivierte_eigenleistungen,0.00
-A2-v06,2024-06,material_wareneinkauf,1105959.02
+A2-v06,2024-06,material_wareneinkauf,1188637.71
 A2-v06,2024-06,sonstige_betriebliche_erloese,4743.71
 A2-v06,2024-06,personalkosten,233212.39
 A2-v06,2024-06,raumkosten,48983.45
@@ -12224,7 +12224,7 @@ A2-v06,2024-06,steuern_einkommen_ertrag,0.00
 A2-v06,2024-07,umsatzerloese,1633246.86
 A2-v06,2024-07,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-07,aktivierte_eigenleistungen,0.00
-A2-v06,2024-07,material_wareneinkauf,1555860.71
+A2-v06,2024-07,material_wareneinkauf,1337010.99
 A2-v06,2024-07,sonstige_betriebliche_erloese,4583.89
 A2-v06,2024-07,personalkosten,234376.66
 A2-v06,2024-07,raumkosten,48495.96
@@ -12287,7 +12287,7 @@ A2-v06,2024-09,steuern_einkommen_ertrag,0.00
 A2-v06,2024-10,umsatzerloese,1928350.69
 A2-v06,2024-10,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-10,aktivierte_eigenleistungen,0.00
-A2-v06,2024-10,material_wareneinkauf,1280787.23
+A2-v06,2024-10,material_wareneinkauf,1450081.88
 A2-v06,2024-10,sonstige_betriebliche_erloese,4690.32
 A2-v06,2024-10,personalkosten,219252.46
 A2-v06,2024-10,raumkosten,49878.46
@@ -12308,7 +12308,7 @@ A2-v06,2024-10,steuern_einkommen_ertrag,0.00
 A2-v06,2024-11,umsatzerloese,2223241.89
 A2-v06,2024-11,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2024-11,aktivierte_eigenleistungen,0.00
-A2-v06,2024-11,material_wareneinkauf,1576447.30
+A2-v06,2024-11,material_wareneinkauf,1407152.65
 A2-v06,2024-11,sonstige_betriebliche_erloese,4746.16
 A2-v06,2024-11,personalkosten,216542.44
 A2-v06,2024-11,raumkosten,49158.50
@@ -12434,7 +12434,7 @@ A2-v06,2025-04,steuern_einkommen_ertrag,0.00
 A2-v06,2025-05,umsatzerloese,1951168.82
 A2-v06,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-05,aktivierte_eigenleistungen,0.00
-A2-v06,2025-05,material_wareneinkauf,918424.69
+A2-v06,2025-05,material_wareneinkauf,1097946.92
 A2-v06,2025-05,sonstige_betriebliche_erloese,4857.75
 A2-v06,2025-05,personalkosten,232075.08
 A2-v06,2025-05,raumkosten,49928.67
@@ -12455,7 +12455,7 @@ A2-v06,2025-05,steuern_einkommen_ertrag,0.00
 A2-v06,2025-06,umsatzerloese,1694268.87
 A2-v06,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-06,aktivierte_eigenleistungen,0.00
-A2-v06,2025-06,material_wareneinkauf,1341939.71
+A2-v06,2025-06,material_wareneinkauf,1330271.74
 A2-v06,2025-06,sonstige_betriebliche_erloese,4741.66
 A2-v06,2025-06,personalkosten,224127.51
 A2-v06,2025-06,raumkosten,49290.77
@@ -12476,7 +12476,7 @@ A2-v06,2025-06,steuern_einkommen_ertrag,0.00
 A2-v06,2025-07,umsatzerloese,1686404.35
 A2-v06,2025-07,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-07,aktivierte_eigenleistungen,0.00
-A2-v06,2025-07,material_wareneinkauf,1429467.39
+A2-v06,2025-07,material_wareneinkauf,1261613.14
 A2-v06,2025-07,sonstige_betriebliche_erloese,4790.06
 A2-v06,2025-07,personalkosten,220154.76
 A2-v06,2025-07,raumkosten,49323.05
@@ -12497,7 +12497,7 @@ A2-v06,2025-07,steuern_einkommen_ertrag,0.00
 A2-v06,2025-08,umsatzerloese,1575952.64
 A2-v06,2025-08,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-08,aktivierte_eigenleistungen,0.00
-A2-v06,2025-08,material_wareneinkauf,1082068.13
+A2-v06,2025-08,material_wareneinkauf,1265157.36
 A2-v06,2025-08,sonstige_betriebliche_erloese,4820.23
 A2-v06,2025-08,personalkosten,222101.29
 A2-v06,2025-08,raumkosten,50321.25
@@ -12518,7 +12518,7 @@ A2-v06,2025-08,steuern_einkommen_ertrag,0.00
 A2-v06,2025-09,umsatzerloese,1856912.99
 A2-v06,2025-09,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-09,aktivierte_eigenleistungen,0.00
-A2-v06,2025-09,material_wareneinkauf,1823659.62
+A2-v06,2025-09,material_wareneinkauf,1640570.39
 A2-v06,2025-09,sonstige_betriebliche_erloese,4787.36
 A2-v06,2025-09,personalkosten,223985.30
 A2-v06,2025-09,raumkosten,50818.30
@@ -12581,7 +12581,7 @@ A2-v06,2025-11,steuern_einkommen_ertrag,0.00
 A2-v06,2025-12,umsatzerloese,2228163.81
 A2-v06,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2025-12,aktivierte_eigenleistungen,0.00
-A2-v06,2025-12,material_wareneinkauf,820779.60
+A2-v06,2025-12,material_wareneinkauf,918699.63
 A2-v06,2025-12,sonstige_betriebliche_erloese,4871.58
 A2-v06,2025-12,personalkosten,230251.86
 A2-v06,2025-12,raumkosten,50972.34
@@ -12602,7 +12602,7 @@ A2-v06,2025-12,steuern_einkommen_ertrag,0.00
 A2-v06,2026-01,umsatzerloese,1780372.25
 A2-v06,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-01,aktivierte_eigenleistungen,0.00
-A2-v06,2026-01,material_wareneinkauf,1494852.98
+A2-v06,2026-01,material_wareneinkauf,1396932.95
 A2-v06,2026-01,sonstige_betriebliche_erloese,4986.56
 A2-v06,2026-01,personalkosten,230394.04
 A2-v06,2026-01,raumkosten,51450.76
@@ -12686,7 +12686,7 @@ A2-v06,2026-04,steuern_einkommen_ertrag,0.00
 A2-v06,2026-05,umsatzerloese,1707492.01
 A2-v06,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-05,aktivierte_eigenleistungen,0.00
-A2-v06,2026-05,material_wareneinkauf,848107.97
+A2-v06,2026-05,material_wareneinkauf,1118200.19
 A2-v06,2026-05,sonstige_betriebliche_erloese,4817.91
 A2-v06,2026-05,personalkosten,254859.62
 A2-v06,2026-05,raumkosten,51977.10
@@ -12707,7 +12707,7 @@ A2-v06,2026-05,steuern_einkommen_ertrag,0.00
 A2-v06,2026-06,umsatzerloese,1767887.25
 A2-v06,2026-06,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-06,aktivierte_eigenleistungen,0.00
-A2-v06,2026-06,material_wareneinkauf,2035580.29
+A2-v06,2026-06,material_wareneinkauf,1765488.07
 A2-v06,2026-06,sonstige_betriebliche_erloese,4905.44
 A2-v06,2026-06,personalkosten,241391.14
 A2-v06,2026-06,raumkosten,52674.04
@@ -12791,7 +12791,7 @@ A2-v06,2026-09,steuern_einkommen_ertrag,0.00
 A2-v06,2026-10,umsatzerloese,1988245.51
 A2-v06,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-10,aktivierte_eigenleistungen,0.00
-A2-v06,2026-10,material_wareneinkauf,1150875.47
+A2-v06,2026-10,material_wareneinkauf,1369660.79
 A2-v06,2026-10,sonstige_betriebliche_erloese,4871.20
 A2-v06,2026-10,personalkosten,244142.62
 A2-v06,2026-10,raumkosten,51553.99
@@ -12812,7 +12812,7 @@ A2-v06,2026-10,steuern_einkommen_ertrag,0.00
 A2-v06,2026-11,umsatzerloese,2050531.31
 A2-v06,2026-11,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-11,aktivierte_eigenleistungen,0.00
-A2-v06,2026-11,material_wareneinkauf,1211325.75
+A2-v06,2026-11,material_wareneinkauf,1301816.31
 A2-v06,2026-11,sonstige_betriebliche_erloese,4907.32
 A2-v06,2026-11,personalkosten,249383.86
 A2-v06,2026-11,raumkosten,53559.55
@@ -12833,7 +12833,7 @@ A2-v06,2026-11,steuern_einkommen_ertrag,0.00
 A2-v06,2026-12,umsatzerloese,1849529.28
 A2-v06,2026-12,bestandsveraenderungen_fe_ue,0.00
 A2-v06,2026-12,aktivierte_eigenleistungen,0.00
-A2-v06,2026-12,material_wareneinkauf,1819280.04
+A2-v06,2026-12,material_wareneinkauf,1510004.17
 A2-v06,2026-12,sonstige_betriebliche_erloese,4839.23
 A2-v06,2026-12,personalkosten,253053.81
 A2-v06,2026-12,raumkosten,52550.03
@@ -12938,7 +12938,7 @@ A2-v07,2024-04,steuern_einkommen_ertrag,0.00
 A2-v07,2024-05,umsatzerloese,1947637.75
 A2-v07,2024-05,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2024-05,aktivierte_eigenleistungen,0.00
-A2-v07,2024-05,material_wareneinkauf,1125413.35
+A2-v07,2024-05,material_wareneinkauf,1272132.14
 A2-v07,2024-05,sonstige_betriebliche_erloese,4853.59
 A2-v07,2024-05,personalkosten,251459.05
 A2-v07,2024-05,raumkosten,40675.98
@@ -12959,7 +12959,7 @@ A2-v07,2024-05,steuern_einkommen_ertrag,0.00
 A2-v07,2024-06,umsatzerloese,1929865.08
 A2-v07,2024-06,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2024-06,aktivierte_eigenleistungen,0.00
-A2-v07,2024-06,material_wareneinkauf,1546981.70
+A2-v07,2024-06,material_wareneinkauf,1400262.91
 A2-v07,2024-06,sonstige_betriebliche_erloese,4807.02
 A2-v07,2024-06,personalkosten,245472.34
 A2-v07,2024-06,raumkosten,41238.84
@@ -13001,7 +13001,7 @@ A2-v07,2024-07,steuern_einkommen_ertrag,0.00
 A2-v07,2024-08,umsatzerloese,1629524.89
 A2-v07,2024-08,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2024-08,aktivierte_eigenleistungen,0.00
-A2-v07,2024-08,material_wareneinkauf,1026153.86
+A2-v07,2024-08,material_wareneinkauf,1205569.07
 A2-v07,2024-08,sonstige_betriebliche_erloese,4813.27
 A2-v07,2024-08,personalkosten,238438.36
 A2-v07,2024-08,raumkosten,40597.02
@@ -13022,7 +13022,7 @@ A2-v07,2024-08,steuern_einkommen_ertrag,0.00
 A2-v07,2024-09,umsatzerloese,1927990.99
 A2-v07,2024-09,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2024-09,aktivierte_eigenleistungen,0.00
-A2-v07,2024-09,material_wareneinkauf,2030646.24
+A2-v07,2024-09,material_wareneinkauf,1851231.04
 A2-v07,2024-09,sonstige_betriebliche_erloese,4854.44
 A2-v07,2024-09,personalkosten,236993.30
 A2-v07,2024-09,raumkosten,40247.13
@@ -13085,7 +13085,7 @@ A2-v07,2024-11,steuern_einkommen_ertrag,0.00
 A2-v07,2024-12,umsatzerloese,1837065.21
 A2-v07,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2024-12,aktivierte_eigenleistungen,0.00
-A2-v07,2024-12,material_wareneinkauf,608064.87
+A2-v07,2024-12,material_wareneinkauf,763200.26
 A2-v07,2024-12,sonstige_betriebliche_erloese,4893.31
 A2-v07,2024-12,personalkosten,245797.43
 A2-v07,2024-12,raumkosten,39396.73
@@ -13106,7 +13106,7 @@ A2-v07,2024-12,steuern_einkommen_ertrag,0.00
 A2-v07,2025-01,umsatzerloese,1386433.71
 A2-v07,2025-01,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-01,aktivierte_eigenleistungen,0.00
-A2-v07,2025-01,material_wareneinkauf,1317430.86
+A2-v07,2025-01,material_wareneinkauf,1162295.47
 A2-v07,2025-01,sonstige_betriebliche_erloese,4936.07
 A2-v07,2025-01,personalkosten,237459.03
 A2-v07,2025-01,raumkosten,41255.11
@@ -13127,7 +13127,7 @@ A2-v07,2025-01,steuern_einkommen_ertrag,0.00
 A2-v07,2025-02,umsatzerloese,1502093.98
 A2-v07,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-02,aktivierte_eigenleistungen,0.00
-A2-v07,2025-02,material_wareneinkauf,1022114.76
+A2-v07,2025-02,material_wareneinkauf,1158528.41
 A2-v07,2025-02,sonstige_betriebliche_erloese,5032.65
 A2-v07,2025-02,personalkosten,233977.32
 A2-v07,2025-02,raumkosten,41207.48
@@ -13148,7 +13148,7 @@ A2-v07,2025-02,steuern_einkommen_ertrag,0.00
 A2-v07,2025-03,umsatzerloese,1818812.48
 A2-v07,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-03,aktivierte_eigenleistungen,0.00
-A2-v07,2025-03,material_wareneinkauf,1531706.68
+A2-v07,2025-03,material_wareneinkauf,1395293.03
 A2-v07,2025-03,sonstige_betriebliche_erloese,5010.12
 A2-v07,2025-03,personalkosten,239679.85
 A2-v07,2025-03,raumkosten,39762.49
@@ -13211,7 +13211,7 @@ A2-v07,2025-05,steuern_einkommen_ertrag,0.00
 A2-v07,2025-06,umsatzerloese,2234927.53
 A2-v07,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-06,aktivierte_eigenleistungen,0.00
-A2-v07,2025-06,material_wareneinkauf,1335194.65
+A2-v07,2025-06,material_wareneinkauf,1495129.19
 A2-v07,2025-06,sonstige_betriebliche_erloese,5039.47
 A2-v07,2025-06,personalkosten,243960.21
 A2-v07,2025-06,raumkosten,40708.35
@@ -13232,7 +13232,7 @@ A2-v07,2025-06,steuern_einkommen_ertrag,0.00
 A2-v07,2025-07,umsatzerloese,2200815.83
 A2-v07,2025-07,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-07,aktivierte_eigenleistungen,0.00
-A2-v07,2025-07,material_wareneinkauf,1528720.83
+A2-v07,2025-07,material_wareneinkauf,1368786.28
 A2-v07,2025-07,sonstige_betriebliche_erloese,4993.33
 A2-v07,2025-07,personalkosten,242433.23
 A2-v07,2025-07,raumkosten,40445.64
@@ -13295,7 +13295,7 @@ A2-v07,2025-09,steuern_einkommen_ertrag,0.00
 A2-v07,2025-10,umsatzerloese,2133502.19
 A2-v07,2025-10,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-10,aktivierte_eigenleistungen,0.00
-A2-v07,2025-10,material_wareneinkauf,1049256.78
+A2-v07,2025-10,material_wareneinkauf,1359119.82
 A2-v07,2025-10,sonstige_betriebliche_erloese,5148.08
 A2-v07,2025-10,personalkosten,242819.40
 A2-v07,2025-10,raumkosten,41289.49
@@ -13316,7 +13316,7 @@ A2-v07,2025-10,steuern_einkommen_ertrag,0.00
 A2-v07,2025-11,umsatzerloese,2155149.62
 A2-v07,2025-11,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-11,aktivierte_eigenleistungen,0.00
-A2-v07,2025-11,material_wareneinkauf,2251681.79
+A2-v07,2025-11,material_wareneinkauf,1941818.75
 A2-v07,2025-11,sonstige_betriebliche_erloese,5115.06
 A2-v07,2025-11,personalkosten,246865.37
 A2-v07,2025-11,raumkosten,40263.01
@@ -13337,7 +13337,7 @@ A2-v07,2025-11,steuern_einkommen_ertrag,0.00
 A2-v07,2025-12,umsatzerloese,2172231.53
 A2-v07,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2025-12,aktivierte_eigenleistungen,0.00
-A2-v07,2025-12,material_wareneinkauf,569067.89
+A2-v07,2025-12,material_wareneinkauf,757089.71
 A2-v07,2025-12,sonstige_betriebliche_erloese,5053.77
 A2-v07,2025-12,personalkosten,238843.06
 A2-v07,2025-12,raumkosten,40964.95
@@ -13358,7 +13358,7 @@ A2-v07,2025-12,steuern_einkommen_ertrag,0.00
 A2-v07,2026-01,umsatzerloese,1646620.78
 A2-v07,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-01,aktivierte_eigenleistungen,0.00
-A2-v07,2026-01,material_wareneinkauf,1574549.05
+A2-v07,2026-01,material_wareneinkauf,1386527.23
 A2-v07,2026-01,sonstige_betriebliche_erloese,5002.05
 A2-v07,2026-01,personalkosten,233614.11
 A2-v07,2026-01,raumkosten,46766.85
@@ -13379,7 +13379,7 @@ A2-v07,2026-01,steuern_einkommen_ertrag,0.00
 A2-v07,2026-02,umsatzerloese,1498467.08
 A2-v07,2026-02,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-02,aktivierte_eigenleistungen,0.00
-A2-v07,2026-02,material_wareneinkauf,889846.72
+A2-v07,2026-02,material_wareneinkauf,1158719.01
 A2-v07,2026-02,sonstige_betriebliche_erloese,4941.18
 A2-v07,2026-02,personalkosten,228758.76
 A2-v07,2026-02,raumkosten,46660.74
@@ -13400,7 +13400,7 @@ A2-v07,2026-02,steuern_einkommen_ertrag,0.00
 A2-v07,2026-03,umsatzerloese,1851821.92
 A2-v07,2026-03,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-03,aktivierte_eigenleistungen,0.00
-A2-v07,2026-03,material_wareneinkauf,1337504.14
+A2-v07,2026-03,material_wareneinkauf,1402359.27
 A2-v07,2026-03,sonstige_betriebliche_erloese,4955.12
 A2-v07,2026-03,personalkosten,232391.17
 A2-v07,2026-03,raumkosten,46297.39
@@ -13421,7 +13421,7 @@ A2-v07,2026-03,steuern_einkommen_ertrag,0.00
 A2-v07,2026-04,umsatzerloese,1763502.60
 A2-v07,2026-04,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-04,aktivierte_eigenleistungen,0.00
-A2-v07,2026-04,material_wareneinkauf,2020117.47
+A2-v07,2026-04,material_wareneinkauf,1686390.05
 A2-v07,2026-04,sonstige_betriebliche_erloese,5099.69
 A2-v07,2026-04,personalkosten,234477.95
 A2-v07,2026-04,raumkosten,46970.09
@@ -13505,7 +13505,7 @@ A2-v07,2026-07,steuern_einkommen_ertrag,0.00
 A2-v07,2026-08,umsatzerloese,1771640.74
 A2-v07,2026-08,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-08,aktivierte_eigenleistungen,0.00
-A2-v07,2026-08,material_wareneinkauf,1241462.93
+A2-v07,2026-08,material_wareneinkauf,1509574.58
 A2-v07,2026-08,sonstige_betriebliche_erloese,5145.56
 A2-v07,2026-08,personalkosten,244033.55
 A2-v07,2026-08,raumkosten,46544.77
@@ -13526,7 +13526,7 @@ A2-v07,2026-08,steuern_einkommen_ertrag,0.00
 A2-v07,2026-09,umsatzerloese,2093101.70
 A2-v07,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-09,aktivierte_eigenleistungen,0.00
-A2-v07,2026-09,material_wareneinkauf,2184399.11
+A2-v07,2026-09,material_wareneinkauf,1916287.46
 A2-v07,2026-09,sonstige_betriebliche_erloese,5262.88
 A2-v07,2026-09,personalkosten,259082.12
 A2-v07,2026-09,raumkosten,46387.22
@@ -13547,7 +13547,7 @@ A2-v07,2026-09,steuern_einkommen_ertrag,0.00
 A2-v07,2026-10,umsatzerloese,2052393.82
 A2-v07,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-10,aktivierte_eigenleistungen,0.00
-A2-v07,2026-10,material_wareneinkauf,1336758.36
+A2-v07,2026-10,material_wareneinkauf,1539706.24
 A2-v07,2026-10,sonstige_betriebliche_erloese,5311.23
 A2-v07,2026-10,personalkosten,258050.92
 A2-v07,2026-10,raumkosten,46972.15
@@ -13568,7 +13568,7 @@ A2-v07,2026-10,steuern_einkommen_ertrag,0.00
 A2-v07,2026-11,umsatzerloese,2067618.93
 A2-v07,2026-11,bestandsveraenderungen_fe_ue,0.00
 A2-v07,2026-11,aktivierte_eigenleistungen,0.00
-A2-v07,2026-11,material_wareneinkauf,1941148.81
+A2-v07,2026-11,material_wareneinkauf,1738200.93
 A2-v07,2026-11,sonstige_betriebliche_erloese,5065.47
 A2-v07,2026-11,personalkosten,255196.09
 A2-v07,2026-11,raumkosten,47008.40
@@ -13757,7 +13757,7 @@ A2-v08,2024-07,steuern_einkommen_ertrag,0.00
 A2-v08,2024-08,umsatzerloese,1602529.09
 A2-v08,2024-08,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2024-08,aktivierte_eigenleistungen,0.00
-A2-v08,2024-08,material_wareneinkauf,1013272.45
+A2-v08,2024-08,material_wareneinkauf,1138418.09
 A2-v08,2024-08,sonstige_betriebliche_erloese,4581.89
 A2-v08,2024-08,personalkosten,212636.72
 A2-v08,2024-08,raumkosten,37324.59
@@ -13778,7 +13778,7 @@ A2-v08,2024-08,steuern_einkommen_ertrag,0.00
 A2-v08,2024-09,umsatzerloese,1703932.81
 A2-v08,2024-09,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2024-09,aktivierte_eigenleistungen,0.00
-A2-v08,2024-09,material_wareneinkauf,1087074.44
+A2-v08,2024-09,material_wareneinkauf,1187166.46
 A2-v08,2024-09,sonstige_betriebliche_erloese,4605.59
 A2-v08,2024-09,personalkosten,193798.79
 A2-v08,2024-09,raumkosten,37863.39
@@ -13799,7 +13799,7 @@ A2-v08,2024-09,steuern_einkommen_ertrag,0.00
 A2-v08,2024-10,umsatzerloese,1777837.65
 A2-v08,2024-10,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2024-10,aktivierte_eigenleistungen,0.00
-A2-v08,2024-10,material_wareneinkauf,1989893.68
+A2-v08,2024-10,material_wareneinkauf,1764656.01
 A2-v08,2024-10,sonstige_betriebliche_erloese,4605.14
 A2-v08,2024-10,personalkosten,197439.66
 A2-v08,2024-10,raumkosten,37766.78
@@ -13841,7 +13841,7 @@ A2-v08,2024-11,steuern_einkommen_ertrag,0.00
 A2-v08,2024-12,umsatzerloese,1581187.17
 A2-v08,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2024-12,aktivierte_eigenleistungen,0.00
-A2-v08,2024-12,material_wareneinkauf,738946.70
+A2-v08,2024-12,material_wareneinkauf,848350.04
 A2-v08,2024-12,sonstige_betriebliche_erloese,4509.12
 A2-v08,2024-12,personalkosten,199097.81
 A2-v08,2024-12,raumkosten,36250.27
@@ -13862,7 +13862,7 @@ A2-v08,2024-12,steuern_einkommen_ertrag,0.00
 A2-v08,2025-01,umsatzerloese,1223705.42
 A2-v08,2025-01,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-01,aktivierte_eigenleistungen,0.00
-A2-v08,2025-01,material_wareneinkauf,1090055.64
+A2-v08,2025-01,material_wareneinkauf,980652.30
 A2-v08,2025-01,sonstige_betriebliche_erloese,4450.41
 A2-v08,2025-01,personalkosten,211396.43
 A2-v08,2025-01,raumkosten,37145.74
@@ -13883,7 +13883,7 @@ A2-v08,2025-01,steuern_einkommen_ertrag,0.00
 A2-v08,2025-02,umsatzerloese,1335673.54
 A2-v08,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-02,aktivierte_eigenleistungen,0.00
-A2-v08,2025-02,material_wareneinkauf,729417.48
+A2-v08,2025-02,material_wareneinkauf,899971.07
 A2-v08,2025-02,sonstige_betriebliche_erloese,4525.38
 A2-v08,2025-02,personalkosten,209990.17
 A2-v08,2025-02,raumkosten,38126.41
@@ -13904,7 +13904,7 @@ A2-v08,2025-02,steuern_einkommen_ertrag,0.00
 A2-v08,2025-03,umsatzerloese,1645628.02
 A2-v08,2025-03,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-03,aktivierte_eigenleistungen,0.00
-A2-v08,2025-03,material_wareneinkauf,1139372.74
+A2-v08,2025-03,material_wareneinkauf,1138634.32
 A2-v08,2025-03,sonstige_betriebliche_erloese,4436.30
 A2-v08,2025-03,personalkosten,212797.45
 A2-v08,2025-03,raumkosten,37806.73
@@ -13925,7 +13925,7 @@ A2-v08,2025-03,steuern_einkommen_ertrag,0.00
 A2-v08,2025-04,umsatzerloese,1618888.21
 A2-v08,2025-04,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-04,aktivierte_eigenleistungen,0.00
-A2-v08,2025-04,material_wareneinkauf,1572690.34
+A2-v08,2025-04,material_wareneinkauf,1402875.17
 A2-v08,2025-04,sonstige_betriebliche_erloese,4572.90
 A2-v08,2025-04,personalkosten,208880.36
 A2-v08,2025-04,raumkosten,38235.57
@@ -13946,7 +13946,7 @@ A2-v08,2025-04,steuern_einkommen_ertrag,0.00
 A2-v08,2025-05,umsatzerloese,1932739.11
 A2-v08,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-05,aktivierte_eigenleistungen,0.00
-A2-v08,2025-05,material_wareneinkauf,757950.42
+A2-v08,2025-05,material_wareneinkauf,919717.29
 A2-v08,2025-05,sonstige_betriebliche_erloese,4523.40
 A2-v08,2025-05,personalkosten,218397.05
 A2-v08,2025-05,raumkosten,37942.88
@@ -13967,7 +13967,7 @@ A2-v08,2025-05,steuern_einkommen_ertrag,0.00
 A2-v08,2025-06,umsatzerloese,1574807.24
 A2-v08,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-06,aktivierte_eigenleistungen,0.00
-A2-v08,2025-06,material_wareneinkauf,1367105.23
+A2-v08,2025-06,material_wareneinkauf,1205338.35
 A2-v08,2025-06,sonstige_betriebliche_erloese,4472.55
 A2-v08,2025-06,personalkosten,339919.49
 A2-v08,2025-06,raumkosten,38209.36
@@ -14009,7 +14009,7 @@ A2-v08,2025-07,steuern_einkommen_ertrag,0.00
 A2-v08,2025-08,umsatzerloese,1418025.50
 A2-v08,2025-08,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-08,aktivierte_eigenleistungen,0.00
-A2-v08,2025-08,material_wareneinkauf,937749.60
+A2-v08,2025-08,material_wareneinkauf,1104901.53
 A2-v08,2025-08,sonstige_betriebliche_erloese,4541.71
 A2-v08,2025-08,personalkosten,217590.17
 A2-v08,2025-08,raumkosten,37655.93
@@ -14030,7 +14030,7 @@ A2-v08,2025-08,steuern_einkommen_ertrag,0.00
 A2-v08,2025-09,umsatzerloese,1655602.03
 A2-v08,2025-09,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2025-09,aktivierte_eigenleistungen,0.00
-A2-v08,2025-09,material_wareneinkauf,1601502.29
+A2-v08,2025-09,material_wareneinkauf,1434350.36
 A2-v08,2025-09,sonstige_betriebliche_erloese,4526.80
 A2-v08,2025-09,personalkosten,219824.85
 A2-v08,2025-09,raumkosten,38102.00
@@ -14240,7 +14240,7 @@ A2-v08,2026-06,steuern_einkommen_ertrag,0.00
 A2-v08,2026-07,umsatzerloese,1822291.16
 A2-v08,2026-07,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2026-07,aktivierte_eigenleistungen,0.00
-A2-v08,2026-07,material_wareneinkauf,709365.82
+A2-v08,2026-07,material_wareneinkauf,848573.98
 A2-v08,2026-07,sonstige_betriebliche_erloese,4611.52
 A2-v08,2026-07,personalkosten,233421.95
 A2-v08,2026-07,raumkosten,37972.96
@@ -14261,7 +14261,7 @@ A2-v08,2026-07,steuern_einkommen_ertrag,0.00
 A2-v08,2026-08,umsatzerloese,1417416.34
 A2-v08,2026-08,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2026-08,aktivierte_eigenleistungen,0.00
-A2-v08,2026-08,material_wareneinkauf,1493926.57
+A2-v08,2026-08,material_wareneinkauf,1354718.41
 A2-v08,2026-08,sonstige_betriebliche_erloese,4655.19
 A2-v08,2026-08,personalkosten,237741.80
 A2-v08,2026-08,raumkosten,38919.62
@@ -14282,7 +14282,7 @@ A2-v08,2026-08,steuern_einkommen_ertrag,0.00
 A2-v08,2026-09,umsatzerloese,1837799.33
 A2-v08,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2026-09,aktivierte_eigenleistungen,0.00
-A2-v08,2026-09,material_wareneinkauf,914703.62
+A2-v08,2026-09,material_wareneinkauf,1128208.72
 A2-v08,2026-09,sonstige_betriebliche_erloese,4436.29
 A2-v08,2026-09,personalkosten,234726.67
 A2-v08,2026-09,raumkosten,39553.87
@@ -14303,7 +14303,7 @@ A2-v08,2026-09,steuern_einkommen_ertrag,0.00
 A2-v08,2026-10,umsatzerloese,1952852.23
 A2-v08,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v08,2026-10,aktivierte_eigenleistungen,0.00
-A2-v08,2026-10,material_wareneinkauf,1796240.93
+A2-v08,2026-10,material_wareneinkauf,1582735.83
 A2-v08,2026-10,sonstige_betriebliche_erloese,4697.65
 A2-v08,2026-10,personalkosten,228288.24
 A2-v08,2026-10,raumkosten,39295.04
@@ -14366,7 +14366,7 @@ A2-v08,2026-12,steuern_einkommen_ertrag,0.00
 A2-v09,2024-01,umsatzerloese,1373638.99
 A2-v09,2024-01,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2024-01,aktivierte_eigenleistungen,0.00
-A2-v09,2024-01,material_wareneinkauf,816202.41
+A2-v09,2024-01,material_wareneinkauf,972894.68
 A2-v09,2024-01,sonstige_betriebliche_erloese,5265.13
 A2-v09,2024-01,personalkosten,252234.68
 A2-v09,2024-01,raumkosten,43102.89
@@ -14387,7 +14387,7 @@ A2-v09,2024-01,steuern_einkommen_ertrag,0.00
 A2-v09,2024-02,umsatzerloese,1515330.80
 A2-v09,2024-02,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2024-02,aktivierte_eigenleistungen,0.00
-A2-v09,2024-02,material_wareneinkauf,1629948.01
+A2-v09,2024-02,material_wareneinkauf,1473255.75
 A2-v09,2024-02,sonstige_betriebliche_erloese,5351.52
 A2-v09,2024-02,personalkosten,253141.19
 A2-v09,2024-02,raumkosten,43708.59
@@ -14408,7 +14408,7 @@ A2-v09,2024-02,steuern_einkommen_ertrag,0.00
 A2-v09,2024-03,umsatzerloese,1718036.61
 A2-v09,2024-03,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2024-03,aktivierte_eigenleistungen,0.00
-A2-v09,2024-03,material_wareneinkauf,920925.35
+A2-v09,2024-03,material_wareneinkauf,1131862.43
 A2-v09,2024-03,sonstige_betriebliche_erloese,5159.88
 A2-v09,2024-03,personalkosten,247061.10
 A2-v09,2024-03,raumkosten,43770.26
@@ -14429,7 +14429,7 @@ A2-v09,2024-03,steuern_einkommen_ertrag,0.00
 A2-v09,2024-04,umsatzerloese,1833261.35
 A2-v09,2024-04,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2024-04,aktivierte_eigenleistungen,0.00
-A2-v09,2024-04,material_wareneinkauf,2140679.72
+A2-v09,2024-04,material_wareneinkauf,1929742.65
 A2-v09,2024-04,sonstige_betriebliche_erloese,5342.54
 A2-v09,2024-04,personalkosten,251517.18
 A2-v09,2024-04,raumkosten,42901.92
@@ -14597,7 +14597,7 @@ A2-v09,2024-11,steuern_einkommen_ertrag,0.00
 A2-v09,2024-12,umsatzerloese,1884827.43
 A2-v09,2024-12,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2024-12,aktivierte_eigenleistungen,0.00
-A2-v09,2024-12,material_wareneinkauf,615832.85
+A2-v09,2024-12,material_wareneinkauf,811615.42
 A2-v09,2024-12,sonstige_betriebliche_erloese,5386.28
 A2-v09,2024-12,personalkosten,268902.07
 A2-v09,2024-12,raumkosten,44225.41
@@ -14618,7 +14618,7 @@ A2-v09,2024-12,steuern_einkommen_ertrag,0.00
 A2-v09,2025-01,umsatzerloese,1416938.30
 A2-v09,2025-01,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-01,aktivierte_eigenleistungen,0.00
-A2-v09,2025-01,material_wareneinkauf,1185481.50
+A2-v09,2025-01,material_wareneinkauf,1342416.53
 A2-v09,2025-01,sonstige_betriebliche_erloese,5420.84
 A2-v09,2025-01,personalkosten,274498.96
 A2-v09,2025-01,raumkosten,43621.72
@@ -14639,7 +14639,7 @@ A2-v09,2025-01,steuern_einkommen_ertrag,0.00
 A2-v09,2025-02,umsatzerloese,1910863.55
 A2-v09,2025-02,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-02,aktivierte_eigenleistungen,0.00
-A2-v09,2025-02,material_wareneinkauf,2367504.94
+A2-v09,2025-02,material_wareneinkauf,2014787.35
 A2-v09,2025-02,sonstige_betriebliche_erloese,5384.54
 A2-v09,2025-02,personalkosten,270347.92
 A2-v09,2025-02,raumkosten,45896.24
@@ -14702,7 +14702,7 @@ A2-v09,2025-04,steuern_einkommen_ertrag,0.00
 A2-v09,2025-05,umsatzerloese,1926685.08
 A2-v09,2025-05,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-05,aktivierte_eigenleistungen,0.00
-A2-v09,2025-05,material_wareneinkauf,1227046.11
+A2-v09,2025-05,material_wareneinkauf,1372032.05
 A2-v09,2025-05,sonstige_betriebliche_erloese,5343.70
 A2-v09,2025-05,personalkosten,268238.23
 A2-v09,2025-05,raumkosten,44063.32
@@ -14723,7 +14723,7 @@ A2-v09,2025-05,steuern_einkommen_ertrag,0.00
 A2-v09,2025-06,umsatzerloese,1852569.81
 A2-v09,2025-06,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-06,aktivierte_eigenleistungen,0.00
-A2-v09,2025-06,material_wareneinkauf,1830208.26
+A2-v09,2025-06,material_wareneinkauf,1685222.32
 A2-v09,2025-06,sonstige_betriebliche_erloese,5366.13
 A2-v09,2025-06,personalkosten,362131.32
 A2-v09,2025-06,raumkosten,45250.46
@@ -14807,7 +14807,7 @@ A2-v09,2025-09,steuern_einkommen_ertrag,0.00
 A2-v09,2025-10,umsatzerloese,2886302.16
 A2-v09,2025-10,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-10,aktivierte_eigenleistungen,0.00
-A2-v09,2025-10,material_wareneinkauf,1615653.60
+A2-v09,2025-10,material_wareneinkauf,1859324.88
 A2-v09,2025-10,sonstige_betriebliche_erloese,5350.87
 A2-v09,2025-10,personalkosten,285865.44
 A2-v09,2025-10,raumkosten,45426.33
@@ -14828,7 +14828,7 @@ A2-v09,2025-10,steuern_einkommen_ertrag,0.00
 A2-v09,2025-11,umsatzerloese,2843961.44
 A2-v09,2025-11,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-11,aktivierte_eigenleistungen,0.00
-A2-v09,2025-11,material_wareneinkauf,2266369.35
+A2-v09,2025-11,material_wareneinkauf,2022698.07
 A2-v09,2025-11,sonstige_betriebliche_erloese,5462.48
 A2-v09,2025-11,personalkosten,537571.93
 A2-v09,2025-11,raumkosten,44741.85
@@ -14849,7 +14849,7 @@ A2-v09,2025-11,steuern_einkommen_ertrag,0.00
 A2-v09,2025-12,umsatzerloese,2629587.53
 A2-v09,2025-12,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2025-12,aktivierte_eigenleistungen,0.00
-A2-v09,2025-12,material_wareneinkauf,745896.37
+A2-v09,2025-12,material_wareneinkauf,923292.64
 A2-v09,2025-12,sonstige_betriebliche_erloese,5484.59
 A2-v09,2025-12,personalkosten,298674.06
 A2-v09,2025-12,raumkosten,46105.79
@@ -14870,7 +14870,7 @@ A2-v09,2025-12,steuern_einkommen_ertrag,0.00
 A2-v09,2026-01,umsatzerloese,1456438.56
 A2-v09,2026-01,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-01,aktivierte_eigenleistungen,0.00
-A2-v09,2026-01,material_wareneinkauf,1426227.85
+A2-v09,2026-01,material_wareneinkauf,1248831.59
 A2-v09,2026-01,sonstige_betriebliche_erloese,5426.09
 A2-v09,2026-01,personalkosten,303228.43
 A2-v09,2026-01,raumkosten,44702.91
@@ -14954,7 +14954,7 @@ A2-v09,2026-04,steuern_einkommen_ertrag,0.00
 A2-v09,2026-05,umsatzerloese,1911452.66
 A2-v09,2026-05,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-05,aktivierte_eigenleistungen,0.00
-A2-v09,2026-05,material_wareneinkauf,1091027.51
+A2-v09,2026-05,material_wareneinkauf,1269063.06
 A2-v09,2026-05,sonstige_betriebliche_erloese,5513.64
 A2-v09,2026-05,personalkosten,296801.35
 A2-v09,2026-05,raumkosten,56739.79
@@ -14975,7 +14975,7 @@ A2-v09,2026-05,steuern_einkommen_ertrag,0.00
 A2-v09,2026-06,umsatzerloese,1936590.24
 A2-v09,2026-06,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-06,aktivierte_eigenleistungen,0.00
-A2-v09,2026-06,material_wareneinkauf,1695230.06
+A2-v09,2026-06,material_wareneinkauf,1517194.51
 A2-v09,2026-06,sonstige_betriebliche_erloese,5440.91
 A2-v09,2026-06,personalkosten,417621.70
 A2-v09,2026-06,raumkosten,56401.94
@@ -15017,7 +15017,7 @@ A2-v09,2026-07,steuern_einkommen_ertrag,0.00
 A2-v09,2026-08,umsatzerloese,2129431.44
 A2-v09,2026-08,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-08,aktivierte_eigenleistungen,0.00
-A2-v09,2026-08,material_wareneinkauf,1248338.07
+A2-v09,2026-08,material_wareneinkauf,1410790.90
 A2-v09,2026-08,sonstige_betriebliche_erloese,5634.33
 A2-v09,2026-08,personalkosten,316137.69
 A2-v09,2026-08,raumkosten,56670.98
@@ -15038,7 +15038,7 @@ A2-v09,2026-08,steuern_einkommen_ertrag,0.00
 A2-v09,2026-09,umsatzerloese,2116898.97
 A2-v09,2026-09,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-09,aktivierte_eigenleistungen,0.00
-A2-v09,2026-09,material_wareneinkauf,1466995.20
+A2-v09,2026-09,material_wareneinkauf,1606977.20
 A2-v09,2026-09,sonstige_betriebliche_erloese,5691.50
 A2-v09,2026-09,personalkosten,333825.87
 A2-v09,2026-09,raumkosten,55799.28
@@ -15059,7 +15059,7 @@ A2-v09,2026-09,steuern_einkommen_ertrag,0.00
 A2-v09,2026-10,umsatzerloese,2246075.83
 A2-v09,2026-10,bestandsveraenderungen_fe_ue,0.00
 A2-v09,2026-10,aktivierte_eigenleistungen,0.00
-A2-v09,2026-10,material_wareneinkauf,2196517.46
+A2-v09,2026-10,material_wareneinkauf,1894082.63
 A2-v09,2026-10,sonstige_betriebliche_erloese,5598.75
 A2-v09,2026-10,personalkosten,316620.86
 A2-v09,2026-10,raumkosten,55850.43
@@ -15206,7 +15206,7 @@ A3-v00,2024-04,steuern_einkommen_ertrag,0.00
 A3-v00,2024-05,umsatzerloese,2599947.26
 A3-v00,2024-05,bestandsveraenderungen_fe_ue,-788009.14
 A3-v00,2024-05,aktivierte_eigenleistungen,0.00
-A3-v00,2024-05,material_wareneinkauf,483734.81
+A3-v00,2024-05,material_wareneinkauf,641951.66
 A3-v00,2024-05,sonstige_betriebliche_erloese,3818.12
 A3-v00,2024-05,personalkosten,412577.45
 A3-v00,2024-05,raumkosten,35969.17
@@ -15227,7 +15227,7 @@ A3-v00,2024-05,steuern_einkommen_ertrag,0.00
 A3-v00,2024-06,umsatzerloese,2205172.88
 A3-v00,2024-06,bestandsveraenderungen_fe_ue,-564890.18
 A3-v00,2024-06,aktivierte_eigenleistungen,0.00
-A3-v00,2024-06,material_wareneinkauf,1050454.80
+A3-v00,2024-06,material_wareneinkauf,892237.95
 A3-v00,2024-06,sonstige_betriebliche_erloese,3697.53
 A3-v00,2024-06,personalkosten,403447.92
 A3-v00,2024-06,raumkosten,37030.01
@@ -15374,7 +15374,7 @@ A3-v00,2024-12,steuern_einkommen_ertrag,0.00
 A3-v00,2025-01,umsatzerloese,574181.33
 A3-v00,2025-01,bestandsveraenderungen_fe_ue,535549.99
 A3-v00,2025-01,aktivierte_eigenleistungen,0.00
-A3-v00,2025-01,material_wareneinkauf,407710.85
+A3-v00,2025-01,material_wareneinkauf,463536.12
 A3-v00,2025-01,sonstige_betriebliche_erloese,3841.22
 A3-v00,2025-01,personalkosten,373949.24
 A3-v00,2025-01,raumkosten,37766.01
@@ -15395,7 +15395,7 @@ A3-v00,2025-01,steuern_einkommen_ertrag,0.00
 A3-v00,2025-02,umsatzerloese,864139.82
 A3-v00,2025-02,bestandsveraenderungen_fe_ue,0.00
 A3-v00,2025-02,aktivierte_eigenleistungen,0.00
-A3-v00,2025-02,material_wareneinkauf,653516.14
+A3-v00,2025-02,material_wareneinkauf,597690.88
 A3-v00,2025-02,sonstige_betriebliche_erloese,3731.32
 A3-v00,2025-02,personalkosten,375766.11
 A3-v00,2025-02,raumkosten,38234.60
@@ -15689,7 +15689,7 @@ A3-v00,2026-03,steuern_einkommen_ertrag,0.00
 A3-v00,2026-04,umsatzerloese,2371403.07
 A3-v00,2026-04,bestandsveraenderungen_fe_ue,-554999.65
 A3-v00,2026-04,aktivierte_eigenleistungen,0.00
-A3-v00,2026-04,material_wareneinkauf,578516.30
+A3-v00,2026-04,material_wareneinkauf,735864.31
 A3-v00,2026-04,sonstige_betriebliche_erloese,3906.64
 A3-v00,2026-04,personalkosten,399339.98
 A3-v00,2026-04,raumkosten,38854.78
@@ -15710,7 +15710,7 @@ A3-v00,2026-04,steuern_einkommen_ertrag,0.00
 A3-v00,2026-05,umsatzerloese,2385342.63
 A3-v00,2026-05,bestandsveraenderungen_fe_ue,-689351.02
 A3-v00,2026-05,aktivierte_eigenleistungen,0.00
-A3-v00,2026-05,material_wareneinkauf,1171925.18
+A3-v00,2026-05,material_wareneinkauf,1014577.17
 A3-v00,2026-05,sonstige_betriebliche_erloese,3780.27
 A3-v00,2026-05,personalkosten,392225.76
 A3-v00,2026-05,raumkosten,38724.07
@@ -16130,7 +16130,7 @@ A3-v01,2024-12,steuern_einkommen_ertrag,0.00
 A3-v01,2025-01,umsatzerloese,708770.79
 A3-v01,2025-01,bestandsveraenderungen_fe_ue,0.00
 A3-v01,2025-01,aktivierte_eigenleistungen,0.00
-A3-v01,2025-01,material_wareneinkauf,425165.23
+A3-v01,2025-01,material_wareneinkauf,550333.19
 A3-v01,2025-01,sonstige_betriebliche_erloese,4367.62
 A3-v01,2025-01,personalkosten,493349.46
 A3-v01,2025-01,raumkosten,51748.76
@@ -16151,7 +16151,7 @@ A3-v01,2025-01,steuern_einkommen_ertrag,0.00
 A3-v01,2025-02,umsatzerloese,1127181.76
 A3-v01,2025-02,bestandsveraenderungen_fe_ue,1132501.82
 A3-v01,2025-02,aktivierte_eigenleistungen,0.00
-A3-v01,2025-02,material_wareneinkauf,1011354.63
+A3-v01,2025-02,material_wareneinkauf,886186.67
 A3-v01,2025-02,sonstige_betriebliche_erloese,4455.11
 A3-v01,2025-02,personalkosten,499384.20
 A3-v01,2025-02,raumkosten,51869.04
@@ -16214,7 +16214,7 @@ A3-v01,2025-04,steuern_einkommen_ertrag,0.00
 A3-v01,2025-05,umsatzerloese,2659487.81
 A3-v01,2025-05,bestandsveraenderungen_fe_ue,-774089.70
 A3-v01,2025-05,aktivierte_eigenleistungen,0.00
-A3-v01,2025-05,material_wareneinkauf,585109.30
+A3-v01,2025-05,material_wareneinkauf,727011.29
 A3-v01,2025-05,sonstige_betriebliche_erloese,4667.84
 A3-v01,2025-05,personalkosten,523736.72
 A3-v01,2025-05,raumkosten,52089.44
@@ -16235,7 +16235,7 @@ A3-v01,2025-05,steuern_einkommen_ertrag,0.00
 A3-v01,2025-06,umsatzerloese,2921648.68
 A3-v01,2025-06,bestandsveraenderungen_fe_ue,-738831.66
 A3-v01,2025-06,aktivierte_eigenleistungen,0.00
-A3-v01,2025-06,material_wareneinkauf,1237400.90
+A3-v01,2025-06,material_wareneinkauf,1095498.91
 A3-v01,2025-06,sonstige_betriebliche_erloese,4497.00
 A3-v01,2025-06,personalkosten,521412.16
 A3-v01,2025-06,raumkosten,51480.10
@@ -16592,7 +16592,7 @@ A3-v01,2026-10,steuern_einkommen_ertrag,0.00
 A3-v01,2026-11,umsatzerloese,1103463.42
 A3-v01,2026-11,bestandsveraenderungen_fe_ue,941554.39
 A3-v01,2026-11,aktivierte_eigenleistungen,0.00
-A3-v01,2026-11,material_wareneinkauf,518434.24
+A3-v01,2026-11,material_wareneinkauf,624654.89
 A3-v01,2026-11,sonstige_betriebliche_erloese,4668.19
 A3-v01,2026-11,personalkosten,590508.94
 A3-v01,2026-11,raumkosten,52182.69
@@ -16613,7 +16613,7 @@ A3-v01,2026-11,steuern_einkommen_ertrag,0.00
 A3-v01,2026-12,umsatzerloese,1356610.13
 A3-v01,2026-12,bestandsveraenderungen_fe_ue,433564.05
 A3-v01,2026-12,aktivierte_eigenleistungen,0.00
-A3-v01,2026-12,material_wareneinkauf,1033700.01
+A3-v01,2026-12,material_wareneinkauf,927479.36
 A3-v01,2026-12,sonstige_betriebliche_erloese,4721.87
 A3-v01,2026-12,personalkosten,578267.98
 A3-v01,2026-12,raumkosten,53221.80
@@ -16655,7 +16655,7 @@ A3-v02,2024-01,steuern_einkommen_ertrag,0.00
 A3-v02,2024-02,umsatzerloese,1087062.23
 A3-v02,2024-02,bestandsveraenderungen_fe_ue,0.00
 A3-v02,2024-02,aktivierte_eigenleistungen,0.00
-A3-v02,2024-02,material_wareneinkauf,424248.67
+A3-v02,2024-02,material_wareneinkauf,564388.28
 A3-v02,2024-02,sonstige_betriebliche_erloese,4738.82
 A3-v02,2024-02,personalkosten,437819.11
 A3-v02,2024-02,raumkosten,51608.54
@@ -16676,7 +16676,7 @@ A3-v02,2024-02,steuern_einkommen_ertrag,0.00
 A3-v02,2024-03,umsatzerloese,2060856.30
 A3-v02,2024-03,bestandsveraenderungen_fe_ue,278631.61
 A3-v02,2024-03,aktivierte_eigenleistungen,0.00
-A3-v02,2024-03,material_wareneinkauf,1165017.40
+A3-v02,2024-03,material_wareneinkauf,1024877.79
 A3-v02,2024-03,sonstige_betriebliche_erloese,4807.44
 A3-v02,2024-03,personalkosten,437225.30
 A3-v02,2024-03,raumkosten,51432.33
@@ -17075,7 +17075,7 @@ A3-v02,2025-09,steuern_einkommen_ertrag,0.00
 A3-v02,2025-10,umsatzerloese,863413.93
 A3-v02,2025-10,bestandsveraenderungen_fe_ue,560021.20
 A3-v02,2025-10,aktivierte_eigenleistungen,0.00
-A3-v02,2025-10,material_wareneinkauf,442830.99
+A3-v02,2025-10,material_wareneinkauf,543796.27
 A3-v02,2025-10,sonstige_betriebliche_erloese,4877.73
 A3-v02,2025-10,personalkosten,516541.44
 A3-v02,2025-10,raumkosten,59351.51
@@ -17096,7 +17096,7 @@ A3-v02,2025-10,steuern_einkommen_ertrag,0.00
 A3-v02,2025-11,umsatzerloese,1105416.48
 A3-v02,2025-11,bestandsveraenderungen_fe_ue,401349.17
 A3-v02,2025-11,aktivierte_eigenleistungen,0.00
-A3-v02,2025-11,material_wareneinkauf,857993.43
+A3-v02,2025-11,material_wareneinkauf,757028.15
 A3-v02,2025-11,sonstige_betriebliche_erloese,4867.88
 A3-v02,2025-11,personalkosten,536683.02
 A3-v02,2025-11,raumkosten,58909.63
@@ -17159,7 +17159,7 @@ A3-v02,2026-01,steuern_einkommen_ertrag,0.00
 A3-v02,2026-02,umsatzerloese,1256257.14
 A3-v02,2026-02,bestandsveraenderungen_fe_ue,505093.01
 A3-v02,2026-02,aktivierte_eigenleistungen,0.00
-A3-v02,2026-02,material_wareneinkauf,574438.31
+A3-v02,2026-02,material_wareneinkauf,709569.43
 A3-v02,2026-02,sonstige_betriebliche_erloese,4878.80
 A3-v02,2026-02,personalkosten,523375.94
 A3-v02,2026-02,raumkosten,59906.50
@@ -17180,7 +17180,7 @@ A3-v02,2026-02,steuern_einkommen_ertrag,0.00
 A3-v02,2026-03,umsatzerloese,2181457.61
 A3-v02,2026-03,bestandsveraenderungen_fe_ue,-168671.74
 A3-v02,2026-03,aktivierte_eigenleistungen,0.00
-A3-v02,2026-03,material_wareneinkauf,1291852.78
+A3-v02,2026-03,material_wareneinkauf,1156721.65
 A3-v02,2026-03,sonstige_betriebliche_erloese,4993.47
 A3-v02,2026-03,personalkosten,538924.71
 A3-v02,2026-03,raumkosten,59403.07
@@ -17642,7 +17642,7 @@ A3-v03,2024-12,steuern_einkommen_ertrag,0.00
 A3-v03,2025-01,umsatzerloese,381681.00
 A3-v03,2025-01,bestandsveraenderungen_fe_ue,312422.62
 A3-v03,2025-01,aktivierte_eigenleistungen,0.00
-A3-v03,2025-01,material_wareneinkauf,198366.59
+A3-v03,2025-01,material_wareneinkauf,253214.47
 A3-v03,2025-01,sonstige_betriebliche_erloese,2516.65
 A3-v03,2025-01,personalkosten,263045.48
 A3-v03,2025-01,raumkosten,26695.36
@@ -17663,7 +17663,7 @@ A3-v03,2025-01,steuern_einkommen_ertrag,0.00
 A3-v03,2025-02,umsatzerloese,556463.81
 A3-v03,2025-02,bestandsveraenderungen_fe_ue,208377.35
 A3-v03,2025-02,aktivierte_eigenleistungen,0.00
-A3-v03,2025-02,material_wareneinkauf,438494.94
+A3-v03,2025-02,material_wareneinkauf,383647.07
 A3-v03,2025-02,sonstige_betriebliche_erloese,2412.23
 A3-v03,2025-02,personalkosten,263703.37
 A3-v03,2025-02,raumkosten,27254.05
@@ -17810,7 +17810,7 @@ A3-v03,2025-08,steuern_einkommen_ertrag,0.00
 A3-v03,2025-09,umsatzerloese,588972.44
 A3-v03,2025-09,bestandsveraenderungen_fe_ue,61185.28
 A3-v03,2025-09,aktivierte_eigenleistungen,0.00
-A3-v03,2025-09,material_wareneinkauf,210257.79
+A3-v03,2025-09,material_wareneinkauf,267356.64
 A3-v03,2025-09,sonstige_betriebliche_erloese,2495.35
 A3-v03,2025-09,personalkosten,263340.71
 A3-v03,2025-09,raumkosten,26678.10
@@ -17831,7 +17831,7 @@ A3-v03,2025-09,steuern_einkommen_ertrag,0.00
 A3-v03,2025-10,umsatzerloese,519524.12
 A3-v03,2025-10,bestandsveraenderungen_fe_ue,310916.22
 A3-v03,2025-10,aktivierte_eigenleistungen,0.00
-A3-v03,2025-10,material_wareneinkauf,470316.26
+A3-v03,2025-10,material_wareneinkauf,413217.41
 A3-v03,2025-10,sonstige_betriebliche_erloese,2486.97
 A3-v03,2025-10,personalkosten,261475.54
 A3-v03,2025-10,raumkosten,27739.09
@@ -18041,7 +18041,7 @@ A3-v03,2026-07,steuern_einkommen_ertrag,0.00
 A3-v03,2026-08,umsatzerloese,806899.00
 A3-v03,2026-08,bestandsveraenderungen_fe_ue,-93408.36
 A3-v03,2026-08,aktivierte_eigenleistungen,0.00
-A3-v03,2026-08,material_wareneinkauf,223696.64
+A3-v03,2026-08,material_wareneinkauf,262633.05
 A3-v03,2026-08,sonstige_betriebliche_erloese,2477.51
 A3-v03,2026-08,personalkosten,260505.76
 A3-v03,2026-08,raumkosten,27972.75
@@ -18062,7 +18062,7 @@ A3-v03,2026-08,steuern_einkommen_ertrag,0.00
 A3-v03,2026-09,umsatzerloese,623318.80
 A3-v03,2026-09,bestandsveraenderungen_fe_ue,0.00
 A3-v03,2026-09,aktivierte_eigenleistungen,0.00
-A3-v03,2026-09,material_wareneinkauf,407408.68
+A3-v03,2026-09,material_wareneinkauf,368472.27
 A3-v03,2026-09,sonstige_betriebliche_erloese,2532.07
 A3-v03,2026-09,personalkosten,254272.25
 A3-v03,2026-09,raumkosten,27920.84
@@ -18230,7 +18230,7 @@ A3-v04,2024-04,steuern_einkommen_ertrag,0.00
 A3-v04,2024-05,umsatzerloese,2636151.84
 A3-v04,2024-05,bestandsveraenderungen_fe_ue,-1341121.69
 A3-v04,2024-05,aktivierte_eigenleistungen,0.00
-A3-v04,2024-05,material_wareneinkauf,567399.59
+A3-v04,2024-05,material_wareneinkauf,731357.64
 A3-v04,2024-05,sonstige_betriebliche_erloese,4413.62
 A3-v04,2024-05,personalkosten,435192.73
 A3-v04,2024-05,raumkosten,39172.31
@@ -18251,7 +18251,7 @@ A3-v04,2024-05,steuern_einkommen_ertrag,0.00
 A3-v04,2024-06,umsatzerloese,2193109.27
 A3-v04,2024-06,bestandsveraenderungen_fe_ue,-549811.03
 A3-v04,2024-06,aktivierte_eigenleistungen,0.00
-A3-v04,2024-06,material_wareneinkauf,1149437.12
+A3-v04,2024-06,material_wareneinkauf,985479.06
 A3-v04,2024-06,sonstige_betriebliche_erloese,4468.47
 A3-v04,2024-06,personalkosten,431515.65
 A3-v04,2024-06,raumkosten,39457.93
@@ -18923,7 +18923,7 @@ A3-v05,2024-01,steuern_einkommen_ertrag,0.00
 A3-v05,2024-02,umsatzerloese,1278112.91
 A3-v05,2024-02,bestandsveraenderungen_fe_ue,488951.18
 A3-v05,2024-02,aktivierte_eigenleistungen,0.00
-A3-v05,2024-02,material_wareneinkauf,526995.36
+A3-v05,2024-02,material_wareneinkauf,669148.05
 A3-v05,2024-02,sonstige_betriebliche_erloese,5434.02
 A3-v05,2024-02,personalkosten,512548.06
 A3-v05,2024-02,raumkosten,47749.52
@@ -18944,7 +18944,7 @@ A3-v05,2024-02,steuern_einkommen_ertrag,0.00
 A3-v05,2024-03,umsatzerloese,2222543.67
 A3-v05,2024-03,bestandsveraenderungen_fe_ue,-186274.08
 A3-v05,2024-03,aktivierte_eigenleistungen,0.00
-A3-v05,2024-03,material_wareneinkauf,1210611.46
+A3-v05,2024-03,material_wareneinkauf,1068458.76
 A3-v05,2024-03,sonstige_betriebliche_erloese,5450.62
 A3-v05,2024-03,personalkosten,522045.88
 A3-v05,2024-03,raumkosten,48160.10
@@ -19427,7 +19427,7 @@ A3-v05,2026-01,steuern_einkommen_ertrag,0.00
 A3-v05,2026-02,umsatzerloese,1622383.76
 A3-v05,2026-02,bestandsveraenderungen_fe_ue,588608.18
 A3-v05,2026-02,aktivierte_eigenleistungen,0.00
-A3-v05,2026-02,material_wareneinkauf,711920.61
+A3-v05,2026-02,material_wareneinkauf,871222.01
 A3-v05,2026-02,sonstige_betriebliche_erloese,5525.57
 A3-v05,2026-02,personalkosten,571584.54
 A3-v05,2026-02,raumkosten,50034.74
@@ -19448,7 +19448,7 @@ A3-v05,2026-02,steuern_einkommen_ertrag,0.00
 A3-v05,2026-03,umsatzerloese,2572156.80
 A3-v05,2026-03,bestandsveraenderungen_fe_ue,-201076.40
 A3-v05,2026-03,aktivierte_eigenleistungen,0.00
-A3-v05,2026-03,material_wareneinkauf,1397016.47
+A3-v05,2026-03,material_wareneinkauf,1237715.07
 A3-v05,2026-03,sonstige_betriebliche_erloese,5552.35
 A3-v05,2026-03,personalkosten,578360.38
 A3-v05,2026-03,raumkosten,50108.60
@@ -19511,7 +19511,7 @@ A3-v05,2026-05,steuern_einkommen_ertrag,0.00
 A3-v05,2026-06,umsatzerloese,2903754.50
 A3-v05,2026-06,bestandsveraenderungen_fe_ue,-1705523.64
 A3-v05,2026-06,aktivierte_eigenleistungen,0.00
-A3-v05,2026-06,material_wareneinkauf,698551.78
+A3-v05,2026-06,material_wareneinkauf,843150.93
 A3-v05,2026-06,sonstige_betriebliche_erloese,5665.58
 A3-v05,2026-06,personalkosten,856651.95
 A3-v05,2026-06,raumkosten,49432.14
@@ -19532,7 +19532,7 @@ A3-v05,2026-06,steuern_einkommen_ertrag,0.00
 A3-v05,2026-07,umsatzerloese,2168659.94
 A3-v05,2026-07,bestandsveraenderungen_fe_ue,-338336.16
 A3-v05,2026-07,aktivierte_eigenleistungen,0.00
-A3-v05,2026-07,material_wareneinkauf,1099021.93
+A3-v05,2026-07,material_wareneinkauf,954422.77
 A3-v05,2026-07,sonstige_betriebliche_erloese,5653.05
 A3-v05,2026-07,personalkosten,602538.54
 A3-v05,2026-07,raumkosten,49755.28
@@ -19658,7 +19658,7 @@ A3-v05,2026-12,steuern_einkommen_ertrag,0.00
 A3-v06,2024-01,umsatzerloese,539070.73
 A3-v06,2024-01,bestandsveraenderungen_fe_ue,423650.09
 A3-v06,2024-01,aktivierte_eigenleistungen,0.00
-A3-v06,2024-01,material_wareneinkauf,341376.57
+A3-v06,2024-01,material_wareneinkauf,414013.34
 A3-v06,2024-01,sonstige_betriebliche_erloese,3196.20
 A3-v06,2024-01,personalkosten,297706.25
 A3-v06,2024-01,raumkosten,30982.09
@@ -19679,7 +19679,7 @@ A3-v06,2024-01,steuern_einkommen_ertrag,0.00
 A3-v06,2024-02,umsatzerloese,758724.25
 A3-v06,2024-02,bestandsveraenderungen_fe_ue,284324.49
 A3-v06,2024-02,aktivierte_eigenleistungen,0.00
-A3-v06,2024-02,material_wareneinkauf,638419.98
+A3-v06,2024-02,material_wareneinkauf,565783.22
 A3-v06,2024-02,sonstige_betriebliche_erloese,3122.36
 A3-v06,2024-02,personalkosten,295515.84
 A3-v06,2024-02,raumkosten,31037.72
@@ -19763,7 +19763,7 @@ A3-v06,2024-05,steuern_einkommen_ertrag,0.00
 A3-v06,2024-06,umsatzerloese,1424180.36
 A3-v06,2024-06,bestandsveraenderungen_fe_ue,-386946.23
 A3-v06,2024-06,aktivierte_eigenleistungen,0.00
-A3-v06,2024-06,material_wareneinkauf,382104.94
+A3-v06,2024-06,material_wareneinkauf,435234.00
 A3-v06,2024-06,sonstige_betriebliche_erloese,3137.18
 A3-v06,2024-06,personalkosten,291694.96
 A3-v06,2024-06,raumkosten,31008.88
@@ -19784,7 +19784,7 @@ A3-v06,2024-06,steuern_einkommen_ertrag,0.00
 A3-v06,2024-07,umsatzerloese,1080942.99
 A3-v06,2024-07,bestandsveraenderungen_fe_ue,-176104.36
 A3-v06,2024-07,aktivierte_eigenleistungen,0.00
-A3-v06,2024-07,material_wareneinkauf,503529.84
+A3-v06,2024-07,material_wareneinkauf,450400.78
 A3-v06,2024-07,sonstige_betriebliche_erloese,3195.13
 A3-v06,2024-07,personalkosten,302867.56
 A3-v06,2024-07,raumkosten,32317.56
@@ -20267,7 +20267,7 @@ A3-v06,2026-05,steuern_einkommen_ertrag,0.00
 A3-v06,2026-06,umsatzerloese,1280438.84
 A3-v06,2026-06,bestandsveraenderungen_fe_ue,-338393.69
 A3-v06,2026-06,aktivierte_eigenleistungen,0.00
-A3-v06,2026-06,material_wareneinkauf,308316.15
+A3-v06,2026-06,material_wareneinkauf,376185.25
 A3-v06,2026-06,sonstige_betriebliche_erloese,3258.53
 A3-v06,2026-06,personalkosten,321840.65
 A3-v06,2026-06,raumkosten,33422.90
@@ -20288,7 +20288,7 @@ A3-v06,2026-06,steuern_einkommen_ertrag,0.00
 A3-v06,2026-07,umsatzerloese,994106.74
 A3-v06,2026-07,bestandsveraenderungen_fe_ue,-149086.26
 A3-v06,2026-07,aktivierte_eigenleistungen,0.00
-A3-v06,2026-07,material_wareneinkauf,512139.20
+A3-v06,2026-07,material_wareneinkauf,444270.10
 A3-v06,2026-07,sonstige_betriebliche_erloese,3236.00
 A3-v06,2026-07,personalkosten,323429.37
 A3-v06,2026-07,raumkosten,32240.37
@@ -20918,7 +20918,7 @@ A3-v07,2025-12,steuern_einkommen_ertrag,0.00
 A3-v07,2026-01,umsatzerloese,389189.24
 A3-v07,2026-01,bestandsveraenderungen_fe_ue,303164.86
 A3-v07,2026-01,aktivierte_eigenleistungen,0.00
-A3-v07,2026-01,material_wareneinkauf,261215.48
+A3-v07,2026-01,material_wareneinkauf,291961.79
 A3-v07,2026-01,sonstige_betriebliche_erloese,2211.53
 A3-v07,2026-01,personalkosten,295028.47
 A3-v07,2026-01,raumkosten,24078.32
@@ -20939,7 +20939,7 @@ A3-v07,2026-01,steuern_einkommen_ertrag,0.00
 A3-v07,2026-02,umsatzerloese,568576.40
 A3-v07,2026-02,bestandsveraenderungen_fe_ue,205286.36
 A3-v07,2026-02,aktivierte_eigenleistungen,0.00
-A3-v07,2026-02,material_wareneinkauf,390861.49
+A3-v07,2026-02,material_wareneinkauf,360115.18
 A3-v07,2026-02,sonstige_betriebliche_erloese,2203.92
 A3-v07,2026-02,personalkosten,283680.07
 A3-v07,2026-02,raumkosten,24446.22
@@ -21170,7 +21170,7 @@ A3-v07,2026-12,steuern_einkommen_ertrag,0.00
 A3-v08,2024-01,umsatzerloese,342893.65
 A3-v08,2024-01,bestandsveraenderungen_fe_ue,444529.48
 A3-v08,2024-01,aktivierte_eigenleistungen,0.00
-A3-v08,2024-01,material_wareneinkauf,294102.21
+A3-v08,2024-01,material_wareneinkauf,338037.61
 A3-v08,2024-01,sonstige_betriebliche_erloese,3406.41
 A3-v08,2024-01,personalkosten,328530.99
 A3-v08,2024-01,raumkosten,34351.06
@@ -21191,7 +21191,7 @@ A3-v08,2024-01,steuern_einkommen_ertrag,0.00
 A3-v08,2024-02,umsatzerloese,680231.28
 A3-v08,2024-02,bestandsveraenderungen_fe_ue,299755.31
 A3-v08,2024-02,aktivierte_eigenleistungen,0.00
-A3-v08,2024-02,material_wareneinkauf,510235.40
+A3-v08,2024-02,material_wareneinkauf,466300.00
 A3-v08,2024-02,sonstige_betriebliche_erloese,3397.09
 A3-v08,2024-02,personalkosten,317413.27
 A3-v08,2024-02,raumkosten,34410.44
@@ -21212,7 +21212,7 @@ A3-v08,2024-02,steuern_einkommen_ertrag,0.00
 A3-v08,2024-03,umsatzerloese,1211547.08
 A3-v08,2024-03,bestandsveraenderungen_fe_ue,-94822.21
 A3-v08,2024-03,aktivierte_eigenleistungen,0.00
-A3-v08,2024-03,material_wareneinkauf,402315.56
+A3-v08,2024-03,material_wareneinkauf,465557.00
 A3-v08,2024-03,sonstige_betriebliche_erloese,3471.97
 A3-v08,2024-03,personalkosten,334100.18
 A3-v08,2024-03,raumkosten,34702.42
@@ -21233,7 +21233,7 @@ A3-v08,2024-03,steuern_einkommen_ertrag,0.00
 A3-v08,2024-04,umsatzerloese,1688358.21
 A3-v08,2024-04,bestandsveraenderungen_fe_ue,-382152.51
 A3-v08,2024-04,aktivierte_eigenleistungen,0.00
-A3-v08,2024-04,material_wareneinkauf,691516.75
+A3-v08,2024-04,material_wareneinkauf,628275.30
 A3-v08,2024-04,sonstige_betriebliche_erloese,3433.00
 A3-v08,2024-04,personalkosten,340051.28
 A3-v08,2024-04,raumkosten,33731.87
@@ -21422,7 +21422,7 @@ A3-v08,2024-12,steuern_einkommen_ertrag,0.00
 A3-v08,2025-01,umsatzerloese,302133.98
 A3-v08,2025-01,bestandsveraenderungen_fe_ue,620532.65
 A3-v08,2025-01,aktivierte_eigenleistungen,0.00
-A3-v08,2025-01,material_wareneinkauf,258987.61
+A3-v08,2025-01,material_wareneinkauf,293014.37
 A3-v08,2025-01,sonstige_betriebliche_erloese,3499.36
 A3-v08,2025-01,personalkosten,337526.97
 A3-v08,2025-01,raumkosten,35603.10
@@ -21443,7 +21443,7 @@ A3-v08,2025-01,steuern_einkommen_ertrag,0.00
 A3-v08,2025-02,umsatzerloese,597820.72
 A3-v08,2025-02,bestandsveraenderungen_fe_ue,0.00
 A3-v08,2025-02,aktivierte_eigenleistungen,0.00
-A3-v08,2025-02,material_wareneinkauf,442846.14
+A3-v08,2025-02,material_wareneinkauf,408819.38
 A3-v08,2025-02,sonstige_betriebliche_erloese,3445.41
 A3-v08,2025-02,personalkosten,341554.09
 A3-v08,2025-02,raumkosten,36067.96
@@ -22304,7 +22304,7 @@ A3-v09,2025-06,steuern_einkommen_ertrag,0.00
 A3-v09,2025-07,umsatzerloese,2001571.93
 A3-v09,2025-07,bestandsveraenderungen_fe_ue,0.00
 A3-v09,2025-07,aktivierte_eigenleistungen,0.00
-A3-v09,2025-07,material_wareneinkauf,627466.15
+A3-v09,2025-07,material_wareneinkauf,702287.56
 A3-v09,2025-07,sonstige_betriebliche_erloese,4327.18
 A3-v09,2025-07,personalkosten,485787.14
 A3-v09,2025-07,raumkosten,39890.08
@@ -22325,7 +22325,7 @@ A3-v09,2025-07,steuern_einkommen_ertrag,0.00
 A3-v09,2025-08,umsatzerloese,1107770.72
 A3-v09,2025-08,bestandsveraenderungen_fe_ue,-439876.00
 A3-v09,2025-08,aktivierte_eigenleistungen,0.00
-A3-v09,2025-08,material_wareneinkauf,528307.95
+A3-v09,2025-08,material_wareneinkauf,453486.53
 A3-v09,2025-08,sonstige_betriebliche_erloese,4416.04
 A3-v09,2025-08,personalkosten,491923.37
 A3-v09,2025-08,raumkosten,39990.70

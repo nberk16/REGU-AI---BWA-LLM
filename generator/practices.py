@@ -182,7 +182,7 @@ def _spaete_rechnungen(book: _Book, variant: Variant, timeline: Timeline, gen: d
             if t is None:
                 continue
             near = bool(rng.random() < share_near)
-            lo, hi = mag["E18_pct"]
+            lo, hi = mag["E18_pct_material" if line == "material_wareneinkauf" else "E18_pct_other"]
             pct = lo + (hi - lo) * (rng.uniform(0, 0.25) if near else rng.uniform(0, 1))
             row = book.booked[row_idx].copy()
             shifted = pct / 100.0 * row[t]

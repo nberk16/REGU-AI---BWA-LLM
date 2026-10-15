@@ -3,7 +3,7 @@
 - Seed: `42` · Arketipler: A1, A2, A3 · Arketip başına varyant: 10 (ilk varyant: v00)
 - Profil: yok (ana parametreler)
 - Dönem: 2024-01 – 2026-12 (yorumlanabilir: 2025-01 itibarıyla)
-- Üreteç sürümü: 0.1.0 · Parametre özeti: `72dc78e45b68504e`
+- Üreteç sürümü: 0.1.0 · Parametre özeti: `9b69482dfb2c53a7`
 
 ## Hedef oranlar (docs/03) ve gerçekleşen
 
@@ -25,11 +25,11 @@ Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayın
 | Arketip | Kapsam | cite | warn | either | None |
 |---|---|---:|---:|---:|---:|
 | A1 | bütün yorumlanabilir aylar | 14 | 136 | 11 | 79 |
-| A1 | Rohertrag adayı aylar | 10 | 98 | 7 | 20 |
+| A1 | Rohertrag adayı aylar | 6 | 88 | 7 | 14 |
 | A2 | bütün yorumlanabilir aylar | 2 | 217 | 2 | 19 |
-| A2 | Rohertrag adayı aylar | 0 | 193 | 1 | 9 |
+| A2 | Rohertrag adayı aylar | 0 | 177 | 1 | 8 |
 | A3 | bütün yorumlanabilir aylar | 22 | 92 | 12 | 114 |
-| A3 | Rohertrag adayı aylar | 14 | 85 | 8 | 33 |
+| A3 | Rohertrag adayı aylar | 13 | 85 | 7 | 33 |
 
 ## Olay türleri
 
@@ -110,10 +110,10 @@ Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayın
 | 2025-06 | -56.003 | 63.142 | -119.145 |
 | 2025-07 | -73.231 | -36.799 | -36.433 |
 | 2025-08 | -62.876 | -158.848 | 95.972 |
-| 2025-09 | 236.457 | 145.510 | 90.947 |
-| 2025-10 | 2.978 | 36.097 | -33.119 |
+| 2025-09 | 187.798 | 145.510 | 42.288 |
+| 2025-10 | 51.637 | 36.097 | 15.540 |
 | 2025-11 | -124.380 | 4.941 | -129.321 |
-| 2025-12 | 92.938 | -25.822 | 118.760 |
+| 2025-12 | 42.332 | -25.822 | 68.154 |
 
 ## Dosyalar
 

@@ -1,6 +1,6 @@
 {
   "generator_version": "0.1.0",
-  "config_fingerprint": "3465380a9cfdbd7a",
+  "config_fingerprint": "a00f119bd7dc38f4",
   "seed": 4242,
   "profile": "v2_balanced",
   "archetypes": [
@@ -130,10 +130,10 @@
           "None": 41
         },
         "candidates": {
-          "cite": 10,
-          "warn": 108,
-          "either": 7,
-          "None": 10
+          "cite": 12,
+          "warn": 83,
+          "either": 6,
+          "None": 9
         }
       },
       "A2": {
@@ -144,10 +144,10 @@
           "None": 49
         },
         "candidates": {
-          "cite": 27,
-          "warn": 122,
+          "cite": 26,
+          "warn": 115,
           "either": 12,
-          "None": 19
+          "None": 18
         }
       },
       "A3": {
@@ -158,27 +158,27 @@
           "None": 86
         },
         "candidates": {
-          "cite": 21,
+          "cite": 20,
           "warn": 72,
           "either": 13,
-          "None": 30
+          "None": 29
         }
       }
     },
     "v2_balanced_set": {
       "A1": {
-        "cite": 10,
-        "warn": 10,
-        "either": 7
+        "cite": 12,
+        "warn": 12,
+        "either": 6
       },
       "A2": {
-        "cite": 27,
-        "warn": 27,
+        "cite": 26,
+        "warn": 26,
         "either": 12
       },
       "A3": {
-        "cite": 21,
-        "warn": 21,
+        "cite": 20,
+        "warn": 20,
         "either": 13
       }
     }

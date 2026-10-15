@@ -105,7 +105,7 @@ data/synthetic/<koşu>/
 
 ## 5. Testler
 
-`python -m pytest`: 35 test. Neyi kontrol ettikleri:
+`python -m pytest`: 50 test. Bunların 35'i üreteç testleri (`tests/test_generator.py`); Katman 1 testleri için bkz. `docs/05`. Üreteç testlerinin kontrol ettikleri:
 
 | Grup | Kontrol |
 |---|---|
@@ -150,10 +150,10 @@ data/synthetic/<koşu>/
    - Portfolyoda banka iletişimi (P4) örneği olarak kullanılabilir.
 3. **`expected_flags` eşiksiz.** Çok küçük çarpıklıklar da beklenen uyarı olarak listeleniyor. Anlamlılık eşikleri [AÇIK]; belirlendiğinde değerlendirme `effects.csv`'deki büyüklüklerle süzecek.
 4. **Notlar şablonla üretiliyor.** Dil çeşitliliği sınırlı. LLM ile yeniden ifade etme ileride eklenebilecek bir seçenek ([ÖNERİ], `docs/03`, 5.5).
-5. **A2'de Rohertragsquote çok oynak** (yeni gözlem, karar bekliyor).
-   - Kaydedilen Rohertragsquote ayların %5'inde −%7'nin altında, %5'inde %53'ün üstünde; 26 ayda negatif. Ekonomik gerçek %17–34 aralığında.
-   - Nedenler: geç gelen faturaların (E18) malzeme alışının %15–40'ını sonraki aya kaydırması ve envanter pratiğinde alışların büyük siparişlerden bir ay önce gelmesi.
-   - E18'in malzeme satırındaki aralığını %5–20'ye indirmek negatif ayları 26'dan 8'e düşürür (A2 p5/p95: %2 / %48).
+5. **A2'de Rohertragsquote oynak** [KARAR, tur 5: E18 kalibre edildi].
+   - Geç gelen faturaların (E18) malzeme satırındaki kayması %15–40'tan %5–20'ye indirildi.
+   - A2'de kaydedilen Rohertragsquote: p5 / p95 = %1,9 / %48,3; negatif ay sayısı 26'dan 8'e indi. Ekonomik gerçek %17–34 aralığında.
+   - Kalan oynaklığın nedeni envanter pratiği: alışlar büyük siparişlerden bir ay önce geliyor. Bu, envanteri yıl sonunda yapan bir toptancı için gerçekçi.
 6. **Olaylar birbirinden bağımsız çekiliyor.** Örneğin işe alımla sipariş artışı arasında nedensel bir bağ yok. Kalibrasyon (`00_karar_kaydi.md`, Bölüm 7) beklenen etkileri dengeliyor, ama tek tek varyantlarda marjlar belirgin biçimde dalgalanabiliyor.
 7. **Ertelenmiş kararlara bağımlılık:** Hangi arketipin test olacağı, varyant sayısı ve eğitim hedeflerinin üretim yöntemi [AÇIK]. Üreteç bunları parametre olarak kabul ediyor.
 
@@ -185,9 +185,9 @@ data/synthetic/<koşu>/
 
 | Arketip | cite | warn | either | Toplam |
 |---|---:|---:|---:|---:|
-| A1 | 10 | 10 | 7 | 27 |
-| A2 | 27 | 27 | 12 | 66 |
-| A3 | 21 | 21 | 13 | 55 |
+| A1 | 12 | 12 | 6 | 30 |
+| A2 | 26 | 26 | 12 | 64 |
+| A3 | 20 | 20 | 13 | 53 |
 
 ### 8.4 Eğitim verisindeki `cite` örnekleri
 
@@ -195,12 +195,14 @@ Rohertrag adayı aylarda beklenen kararlar, 10 varyant / arketip, yorumlanabilir
 
 | Arketip | Ana veri (referans koşu): cite / warn / either | `train_price_boost` ile: cite / warn / either |
 |---|---|---|
-| A1 | 10 / 98 / 7 | 16 / 86 / 9 |
-| A2 | 0 / 193 / 1 | 3 / 178 / 0 |
-| A3 | 14 / 85 / 8 | 23 / 80 / 11 |
+| A1 | 6 / 88 / 7 | 15 / 73 / 10 |
+| A2 | 0 / 177 / 1 | 3 / 172 / 1 |
+| A3 | 13 / 85 / 7 | 24 / 79 / 11 |
 
-- Ana veride bir `cite` örneğine ~7–10 `warn` düşüyor. Bu, modelin "notla açıklanan aday" durumunu öğrenmesi için az.
-- `train_price_boost` `cite` sayısını ~%60 artırıyor; A2'de etkisi küçük, çünkü orada P3 baskın.
+(E18 kalibrasyonundan sonraki değerler, tur 5.)
+
+- Ana veride bir `cite` örneğine ~7–15 `warn` düşüyor. Bu, modelin "notla açıklanan aday" durumunu öğrenmesi için az.
+- `train_price_boost` `cite` sayısını yaklaşık iki katına çıkarıyor; A2'de etkisi küçük, çünkü orada P3 baskın.
 - Eğitim verisindeki toplam örnek sayısını asıl belirleyecek olan, arketip başına varyant sayısı ([AÇIK], eğitim/test kararıyla birlikte). Örneğin 30 varyant ve `train_price_boost` ile, A2 test için ayrılırsa eğitimde (A1 + A3) ~120 `cite` adayı ay olur.
 - Her koşunun `report.md` dosyasında arketip başına bu tablo otomatik olarak yer alır.
 

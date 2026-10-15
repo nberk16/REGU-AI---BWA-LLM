@@ -1,6 +1,6 @@
 # 00 — Karar kaydı
 
-> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), bunlardan doğan açık noktalar (tur 2), veri üreteci (tur 3), Katman 1 eşikleri ve yol haritası (tur 4) · **Tarih:** 14–15.10.2026
+> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), bunlardan doğan açık noktalar (tur 2), veri üreteci (tur 3), Katman 1 eşikleri ve yol haritası (tur 4), `facts.json` şeması ve Katman 1 (tur 5) · **Tarih:** 14–15.10.2026
 >
 > **Belgeler:** [`01_firma_profili.md`](01_firma_profili.md) · [`02_bwa_satir_yapisi.md`](02_bwa_satir_yapisi.md) · [`03_olay_katalogu.md`](03_olay_katalogu.md) · [`04_veri_ureteci.md`](04_veri_ureteci.md) · [`05_facts_semasi.md`](05_facts_semasi.md) · [`yol_haritasi.md`](yol_haritasi.md)
 
@@ -82,8 +82,6 @@ Güncel liste ve iş paketlerine göre dağılımı: [`yol_haritasi.md`](yol_har
 
 - Eğitim hedeflerinin (ideal yorumların) üretim yöntemi (CLAUDE.md 9). Ertelendi.
 - Eğitim/test ayrımı: hangi arketipin test olacağı ve arketip başına varyant sayısı (CLAUDE.md 9). Ertelendi; üreteç bunları parametre olarak alıyor.
-- `facts.json` şeması ve anlamlılığın hangi karşılaştırmaya uygulanacağı (`05_facts_semasi.md`, Bölüm 6).
-- E18 kalibrasyonu (Bölüm 8.3).
 - Teknik tercihler (CLAUDE.md 10) ve üslup değerlendirme yöntemi (CLAUDE.md 8).
 
 ---
@@ -123,6 +121,7 @@ Güncel liste ve iş paketlerine göre dağılımı: [`yol_haritasi.md`](yol_har
 | E07 sıklığı | 0–1/yıl (en fazla 2) | Seri boyunca 0–1 | Kalıcı ciro kaybı birikiyordu |
 | AfA / faiz tabanı | Sabit | Yılda −%6 / −%10 | Yeni yatırımlar (E08), eski varlıkların ve kredilerin bitişi olmadan birikiyordu |
 | Çakışma kabulü | Yalnızca üst sınır (2) | Dolu satır-aya ikinci olay %30 olasılıkla; aynı tür aynı ayda başlayamaz | Çakışma oranı %23'tü (hedef ~%10) |
+| E18 (malzeme satırı, tur 5) | %15–40 | %5–20 | A2'de kaydedilen Rohertragsquote ayların %11'inde negatifti |
 
 ### 7.3 Kullanıcıya sorulan noktalar (tur 4'te cevaplandı, Bölüm 8.1)
 
@@ -165,11 +164,38 @@ Güncel liste ve iş paketlerine göre dağılımı: [`yol_haritasi.md`](yol_har
 - **`facts.json` şeması** önerildi (`05_facts_semasi.md`): Muster GmbH, Haziran 2025 örneğiyle. Onay bekliyor.
 - **Yol haritası:** `yol_haritasi.md`. Durum ~%21; hesap yöntemi dosyada.
 
-### 8.3 Bu turda ortaya çıkan sorular [AÇIK]
+### 8.3 Bu turda ortaya çıkan sorular (tur 5'te cevaplandı, Bölüm 9.1)
 
 1. **Anlamlılık hangi karşılaştırmaya göre?** Kararın harfiyen uygulanmasıyla (önceki ay VEYA önceki yılın aynı ayı) referans veride hiçbir ayda 0 kalem çıkmıyor, ayların %22'sinde 5'ten fazla kalem var. Yalnızca önceki yılın aynı ayına göre: %3,2 / %3,6 (`05`, Bölüm 2.1).
 2. **`facts.json` şema soruları:** Rohertrag adayının kapsamı, `normal_level` / `base_unusual`, `delta_pct = null` kuralları, kümülatifin rolü (`05`, Bölüm 6).
 3. **E18 kalibrasyonu.** Malzeme satırındaki geç fatura kayması %15–40. A2'de kaydedilen Rohertragsquote 26 ayda negatif; ekonomik gerçek %17–34. %5–20'ye indirmek negatif ayları 8'e düşürür. Kabul edilirse referans koşu ve dengelenmiş küme yeniden üretilir.
+
+---
+
+## 9. Karar turu 5 (15.10.2026)
+
+### 9.1 Kararlar [KARAR]
+
+| Kod | Konu | Karar |
+|---|---|---|
+| 1 | Anlamlılık hangi karşılaştırmaya göre? | **Yalnızca önceki yılın aynı ayına göre.** Önceki ay ve kümülatif bilgi amaçlı. |
+| 2 | Rohertrag adayı kapsamı | **Bütün arketiplerde, nötr.** Üreticilerde mevcut stok kuralı (`bestand_fehlt`) ayrıca kalır. Böylece hangi arketip test için ayrılırsa ayrılsın ayrım metriği ölçülebilir. |
+| 3 | `normal_level` ve `base_unusual` | Eklenir. |
+| 4 | `delta_pct = null` | Sonuç satırlarında ve küçük ya da işaret değiştiren tabanlarda `null`. |
+| 5 | Kümülatif | Bilgi amaçlı; sıralamaya girmez. |
+| 6 | E18 kalibrasyonu | Malzeme satırında %5–20 (Sonstige Kosten'te %15–40 kalır). Referans koşu ve dengelenmiş V2 kümesi yeniden üretildi. |
+
+Bu cevaplarla `facts.json` şeması 1.0 onaylandı (`05_facts_semasi.md`).
+
+### 9.2 Uygulama (asistan)
+
+- **E18:** `E18_pct_material = [5, 20]`, `E18_pct_other = [15, 40]`.
+  - A2'de negatif Rohertragsquote ayları 26 → 8.
+  - Dengelenmiş küme: A1 12/12/6, A2 26/26/12, A3 20/20/13 (`cite`/`warn`/`either`).
+  - Muster GmbH'nin ekonomik gerçek serisi ve toparlanma hikâyesi değişmedi; E18 yalnızca kaydedilen seriyi etkiler.
+- **Katman 1 kodlandı** (`facts/`, 15 test). Referans veride medyan 3 anlamlı kalem; ayların %4,3'ünde 0, %3,6'sında 5'ten fazla kalem.
+- **Bayrak isabeti** ölçüldü (`tools/flag_quality.py`, `05`, Bölüm 7). Tek parametre değişikliği: V6'da önceki yıl sınırı %10 → %15 (precision %75 → %72, recall %49 → %63).
+- **Tam örnek:** `docs/examples/facts_A1-v00_2025-06.json`. Bir test, dosyanın referans veriyle güncel olduğunu kontrol eder.
 
 ## Kaynak
 

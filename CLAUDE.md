@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım ve **veri üreteci** tamamlandı (karar turları 1–4). Proje durumu ~%21, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Katman 1 için `facts.json` şeması önerildi ve onay bekliyor (`docs/05_facts_semasi.md`).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Proje durumu ~%28, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Sıradaki adım: bilgi tabanı ve ideal yorumlar için yöntem kararları.
 
 ---
 
@@ -205,52 +205,19 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
     - Kalem anlamlı: \|Δ\| ≥ %10 **ve** \|Δ\| ≥ aylık Gesamtleistung'un %0,5'i.
     - Oran anlamlı: ≥ 2 yüzde puanı.
     - Yorumda en fazla 5 kalem, büyüklüğe göre sıralı.
-    - Eşiğin hangi karşılaştırmaya uygulanacağı **[AÇIK]** (`docs/05`, 2.1).
+    - **[KARAR, tur 5]** Anlamlılık yalnızca **önceki yılın aynı ayına** göre; önceki ay ve kümülatif bilgi amaçlı, sıralamaya girmez.
   - Çarpıklık bayrakları (Bölüm 5.4'teki heuristikler)
 - **Çıktı:** `facts.json`.
   - **[KARAR, tur 4] Gereksinimler:**
     - Her kalemde bütün karşılaştırmalar (önceki ay, önceki yılın aynı ayı, kümülatif) ve anlamlılık gerekçesi.
     - Rohertrag adayları `warn` değil nötr "aday"; doğru cevap yalnızca ground truth'ta.
     - Tutarlar tam sayı €, yüzdeler 1 ondalık, `schema_version` alanı.
-  - **[ÖNERİ — onay bekliyor]** Şema, gerçek bir ay üzerinde: [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md).
-  - Aşağıdaki örnek ilk taslaktır; yapı açıklayıcıdır:
-
-```json
-{
-  "company": "Muster GmbH",
-  "period": "2026-06",
-  "comparisons": ["previous_month", "previous_year_month"],
-  "positions": [
-    {
-      "position": "Personalkosten",
-      "actual": 236000,
-      "previous_year_month": 200000,
-      "delta_abs": 36000,
-      "delta_pct": 18.0,
-      "significant": true
-    },
-    {
-      "position": "Betriebsergebnis",
-      "actual": 18000,
-      "previous_year_month": 60000,
-      "delta_abs": -42000,
-      "delta_pct": -70.0,
-      "significant": true
-    }
-  ],
-  "ratios": {
-    "Rohertragsquote": {"actual": 31.0, "previous_year_month": 38.0}
-  },
-  "flags": [
-    {
-      "code": "V2",
-      "type": "bestandsveraenderung_fehlt",
-      "position": "Bestandsveränderungen",
-      "evidence": "Wert 0, Materialeinkauf +22 % ggü. Vorjahresmonat"
-    }
-  ]
-}
-```
+  - **[KARAR, tur 5]** Şema 1.0 ve kodu: [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md), `facts/` (`python -m facts`). Tam örnek: [`docs/examples/facts_A1-v00_2025-06.json`](docs/examples/facts_A1-v00_2025-06.json).
+    - Her kalemde `normal_level` (önceki 12 ayın medyanı) ve tabanların `base_unusual` işareti var.
+    - `delta_pct` sonuç satırlarında ve küçük ya da işaret değiştiren tabanlarda `null`.
+    - Rohertrag adayı bütün arketiplerde nötr (`kandidat`); üreticilerde stok kuralı ayrıca kalır.
+    - Bayrak kuralları ve parametreleri **[ÖNERİ]** (`facts/config.toml`); isabetleri `docs/05`, Bölüm 7'de.
+  - İlk taslaktaki örnek JSON, şema 1.0 ile değiştirildi.
 
 #### Katman 2: RAG bilgi tabanı
 
@@ -379,7 +346,7 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - **Eğitim profili.** Eğitim verisindeki `cite` sayısı düşük olduğu için, yalnızca eğitim verisinde kullanılacak `train_price_boost` profili hazırlandı (`docs/04`, Bölüm 8).
   - **Muster GmbH** toparlanma hikâyesi olarak kalıyor.
   - **Olay yoğunluğu** ayda ~1,5 olarak kabul edildi.
-- **[AÇIK]** E18 kalibrasyonu: A2'de kaydedilen Rohertragsquote çok oynak (`docs/00`, 8.3).
+- **[KARAR, tur 5]** E18 kalibrasyonu: Malzeme satırındaki geç fatura kayması %5–20'ye indirildi; iki veri kümesi yeniden üretildi (`docs/00`, Bölüm 9).
 - **[AÇIK — ertelendi]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
 - **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre).
 
@@ -417,14 +384,15 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
 2. ✅ BWA satır yapısını sabitle → [`docs/02_bwa_satir_yapisi.md`](docs/02_bwa_satir_yapisi.md)
 3. ✅ Olay kataloğunu çıkar → [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md)
 4. ✅ Veri üreteci → [`docs/04_veri_ureteci.md`](docs/04_veri_ureteci.md), `generator/`, `tests/`, `data/synthetic/reference_seed42/` (tur 3)
+5. ✅ Hesaplama modülü (Katman 1) → [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md), `facts/`, `tests/test_facts.py` (tur 5)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adım: hesaplama modülü (Katman 1). Önkoşul: `facts.json` şemasının onayı (`docs/05`, Bölüm 6).
+**[ÖNERİ]** Sıradaki adım: bilgi tabanı (Katman 2) ve ideal yorumların üretimi için yöntem kararları. İkisi birbirine bağlı; temel model seçimi de ideal yorumların biçimini etkiliyor. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
-**[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
+**[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 
 ---
 

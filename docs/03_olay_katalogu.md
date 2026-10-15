@@ -56,7 +56,7 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
 | E15 | Jahresversicherungsprämie | V1 | Versicherungen/Beiträge | her yıl Ocak | yıllık ortalamanın × 5 … 8'i | P2 olan varyantlar | **hayır** | V1 |
 | E16 | Bestandsveränderung nicht gebucht | V2 | Bestandsveränd. FE/UE (A2: Material-/Wareneinkauf) → Rohertragsquote | **sistematik** (P3) veya **epizodik** (unutulur, ertesi ay telafi edilir) | gerçek stok değişiminin tamamı | hepsi (01, Bölüm 4) | **hayır** | V2; epizodik türde telafi ayında V4. A2'de V2 farklı bir kuralla tespit edilir (Bölüm 9.1). |
 | E17 | AfA nur zum Jahresende | V3 | Abschreibungen | Ocak–Kasım 0, Aralık'ta yıllık toplam | – | P4 olan varyantlar | **hayır** | V3 |
-| E18 | Verspätete Eingangsrechnungen | V4 | Material-/Wareneinkauf veya Sonstige Kosten | t ayında −X, t+1 ayında +X | X = tabanın %15 … 40'ı | P5'e göre | **hayır** | V4 (t+1 ayında tespit edilebilir) |
+| E18 | Verspätete Eingangsrechnungen | V4 | Material-/Wareneinkauf veya Sonstige Kosten | t ayında −X, t+1 ayında +X | X = tabanın %5 … 20'si (Material), %15 … 40'ı (Sonstige Kosten; tur 5) | P5'e göre | **hayır** | V4 (t+1 ayında tespit edilebilir) |
 | E19 | Saisonmuster (Betriebsferien dahil) | V6 | Umsatz ve oransal satırlar | yıllık desen | 01, Bölüm 3.3 | hepsi | evet (dönemsiz firma notu) | V6 (önceki aya göre sapma büyük, önceki yılın aynı ayına göre normal) |
 
 **Kapsam dışı bırakılanlar** (ileride eklenebilir):
@@ -349,4 +349,4 @@ Notlar `dauerhaft`/`temporär` alanı taşır. RAG penceresi 13 ay (t−12 … t
 
 ### 9.4 Hâlâ açık [AÇIK]
 
-- **Anlamlılık eşikleri:** Başlangıç değerleri tur 4'te kararlaştırıldı (CLAUDE.md 6.2, `docs/05`). Hangi karşılaştırmaya uygulanacağı henüz açık. `expected_flags`'in süzülmesi buna bağlı.
+- **`expected_flags`'in süzülmesi:** Anlamlılık eşikleri tur 4–5'te kararlaştırıldı (`docs/05`, Bölüm 2). Değerlendirme kodlanırken beklenen uyarılar `effects.csv`'deki büyüklüklere göre süzülecek; `tools/flag_quality.py` bunun ilk örneği ("eşik üstü recall").

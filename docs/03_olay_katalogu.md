@@ -86,7 +86,7 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
 | E07 | seri boyunca 0–1 | E18 | 0–6 (P5'e göre) |
 
 - **Kalibrasyon (tur 3):** İlk taslakta E01 (2–4/yıl, +%2–8), E07 (0–1/yıl), E03 (+%2,5–5,5) ve E04'ün kalıcı payı (%50) maliyet yönünde birikiyordu. Sonuç olarak firmaların faaliyet sonucu 2026'ya kadar ortalama −%15'e düşüyordu. Yukarıdaki değerlerle yıllık ortalama marjlar %0–5 aralığında kalıyor ve hafif bir marj baskısı var. Ayrıntılar `00_karar_kaydi.md`, Bölüm 7'de.
-- **Referans koşu (seed 42, 3 × 10):** ayda **~1,5 havuz olayı**, yorumlanabilir ayların **%15,4'ü olaysız**. İlk taslaktaki "~2/ay" tahmini, olaysız ay hedefiyle (~%15) birlikte tutmuyordu; olaysız ay hedefi öncelikli tutuldu.
+- **Referans koşu (seed 42, 3 × 10):** ayda **~1,5 havuz olayı**, yorumlanabilir ayların **%15,4'ü olaysız**. İlk taslaktaki "~2/ay" tahmini, olaysız ay hedefiyle (~%15) birlikte tutmuyordu; olaysız ay hedefi öncelikli tutuldu. **[KARAR, tur 4]** Ayda ~1,5 olay kabul edildi.
 - Pratiklerden doğan desenler (E13–E15, sistematik E16, E17) ve sezon (E19) bu sayıya dahil değildir.
 - "Olaysız ay" yeni olay olmadığı anlamına gelir. Önceki aylardaki olayların etkisi sürebilir; ground truth bunları `active_events` olarak listeler (Bölüm 7.2).
 
@@ -119,8 +119,10 @@ Büyüklükler, ilgili satırın aylık taban değerine göredir [ÖNERİ].
   - Biçimi `einmalig`, `temporär` veya `periodisch` olan olayların notları `temporär` olur.
   - `Firmenprofil` notu `dauerhaft` olur.
   - Çeldirici notlar, içeriğine uygun değeri alır.
-- **RAG penceresi [KARAR, tur 2 — çalışma varsayımı]:** Cari ay t için t−11 … t aralığındaki notlar (12 ay) ve dönemsiz `Firmenprofil` notu getirilir. Kesin pencere daha sonra netleşecek **[AÇIK]**.
-  - Gerekçe: Kalıcı bir basamak, önceki yılın aynı ayına göre karşılaştırmada tam 12 ay boyunca (t … t+11) sapma olarak görünür. 12 aylık pencere bu süreyi kapsar.
+- **RAG penceresi [KARAR, tur 4]:** Cari ay t için **t−12 … t** aralığındaki notlar (**13 ay**) ve dönemsiz `Firmenprofil` notu getirilir.
+  - Kalıcı bir basamak, önceki yılın aynı ayına göre karşılaştırmada tam 12 ay boyunca (t … t+11) sapma olarak görünür; bu süre pencere içinde kalır.
+  - Önceki yılın aynı ayındaki geçici bir olayın notu (t−12) da pencereye girer. Bu not, önceki yıla göre farkı açıklar (ör. geçen Haziran'daki fuar; ay kaydında `vorjahr_events`).
+  - Tur 2'deki 12 aylık çalışma varsayımı bu kararla değişti.
 
 ### 5.3 Çeldirici notlar
 
@@ -332,20 +334,19 @@ Bu durumlar üreteçte kasıtlı olarak oluşturulur; model farklarını en çok
 
 Değerlendirmede bu karar ayrı bir metrik olarak raporlanacak (CLAUDE.md Bölüm 8: "V2 adayı ayrımı").
 
-**Referans koşudaki dağılım ve bir sınırlama:** A2'nin yorumlanabilir aylarında 217 `warn`, 2 `cite`, 2 `either` var. Nedeni şu: A2 varyantlarının %80'i stok değişimini yalnızca envanterde kaydediyor (P3) ve bu, hemen her ayı bir çarpıklık ayı yapıyor. Bu dağılımla "notla açıkla" vakası ölçmek için çok az. Çözüm seçenekleri kullanıcıya sunuldu (`00_karar_kaydi.md`, Bölüm 7).
+**Referans koşudaki dağılım ve çözüm [KARAR, tur 4]:**
+- A2'nin Rohertrag adayı aylarında 193 `warn`, 0 `cite`, 1 `either` var. Nedeni, A2 varyantlarının %80'inin stok değişimini yalnızca envanterde kaydetmesi (P3): hemen her ay bir çarpıklık ayı.
+- **Ana veri gerçekçi kalır.** Ayrım metriği için ayrı bir **dengelenmiş V2 kümesi** üretildi: her arketipte `cite` ve `warn` aylarından eşit sayıda. Raporlarda "dengelenmiş set" olarak belirtilir. Ayrıntılar `docs/04`, Bölüm 8.
+- Eğitim verisindeki `cite` örnekleri az. Bunun için yalnızca eğitim verisinde kullanılacak, fiyat olaylarını ölçülü artıran bir profil (`train_price_boost`) hazırlandı.
 
 ### 9.2 Notlardaki rakamlar [KARAR]
 
 Notlar rakam içerebilir. Doğrulama katmanı bu rakamları kaynak gösterilmesi şartıyla kabul eder. Ayrıntılar Bölüm 5.4'te.
 
-### 9.3 Süre alanı ve RAG penceresi [KARAR; pencere çalışma varsayımı]
+### 9.3 Süre alanı ve RAG penceresi [KARAR]
 
-Notlar `dauerhaft`/`temporär` alanı taşır. RAG penceresi şimdilik 12 ay. Ayrıntılar Bölüm 5.2'de.
+Notlar `dauerhaft`/`temporär` alanı taşır. RAG penceresi 13 ay (t−12 … t; tur 4). Ayrıntılar Bölüm 5.2'de.
 
 ### 9.4 Hâlâ açık [AÇIK]
 
-- **Anlamlılık eşikleri** (CLAUDE.md 6.2): Eşik yakını olayların kalibrasyonu, A2'deki V2 adayı ve `expected_flags`'in süzülmesi buna bağlı.
-- **RAG penceresinin kesin değeri** (şimdilik 12 ay). Üreteçten çıkan bir gözlem bu karara girdi olacak:
-  - Önceki yılın aynı ayına göre farkı, önceki yıldaki geçici bir olay da açıklayabilir (ör. geçen Haziran'daki fuar). Ay kaydında bunlar `vorjahr_events` olarak listeleniyor.
-  - Bu olayın notu t−12 ayındadır ve 12 aylık pencerenin (t−11 … t) hemen dışında kalır.
-  - Seçenekler: pencereyi 13 ay yapmak; t−12 ayını ayrıca getirmek; ya da bu bilgiyi önceki ayların onaylanmış yorumlarına (K-D) bırakmak.
+- **Anlamlılık eşikleri:** Başlangıç değerleri tur 4'te kararlaştırıldı (CLAUDE.md 6.2, `docs/05`). Hangi karşılaştırmaya uygulanacağı henüz açık. `expected_flags`'in süzülmesi buna bağlı.

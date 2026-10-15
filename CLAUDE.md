@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 14.10.2026 · **Aşama:** Problem ve çözüm tanımlandı. Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), karar turları 2–3 ve **veri üreteci** tamamlandı. Kararlar `docs/` altında, üreteç `generator/` klasöründe, referans koşu `data/synthetic/reference_seed42/` klasöründe. Sıradaki adım: hesaplama modülü (Katman 1).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım ve **veri üreteci** tamamlandı (karar turları 1–4). Proje durumu ~%21, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Katman 1 için `facts.json` şeması önerildi ve onay bekliyor (`docs/05_facts_semasi.md`).
 
 ---
 
@@ -19,6 +19,7 @@
 4. Gerçek müşteri verisi yok ve kullanılmayacak. **Tüm veri sentetik.**
 5. Bu belge hukuki veya vergi danışmanlığı değildir. Sektör bilgileri genel çerçevedir.
 6. Kaynak sektör belgesindeki "rakipler", "REGU AI", satış stratejisi ve donanım paketi gibi kısımlar başka bir projeye aittir. **Bu projede kullanılmaz.**
+7. **[KARAR]** Her adımdan sonra [`docs/yol_haritasi.md`](docs/yol_haritasi.md) güncellenir: iş paketlerinin durumu, iş yüküne göre tamamlanma yüzdesi ve açık kararlar. Kararlar ayrıca [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md)'ye işlenir.
 
 ---
 
@@ -200,9 +201,19 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
   - Kümülatif karşılaştırma
   - Opsiyonel plan-gerçekleşen farkı
   - Oranlar: `Rohertragsquote = Rohertrag / Gesamtleistung`, `Personalkostenquote = Personalkosten / Gesamtleistung`, `Materialquote = Materialeinkauf / Gesamtleistung`, `Betriebsergebnis-Marge = Betriebsergebnis / Gesamtleistung`
-  - En büyük N sapma (mutlak ve yüzde eşikleriyle) **[AÇIK: eşik değerleri]**
+  - En büyük N sapma. **[KARAR, tur 4 — başlangıç değerleri]**
+    - Kalem anlamlı: \|Δ\| ≥ %10 **ve** \|Δ\| ≥ aylık Gesamtleistung'un %0,5'i.
+    - Oran anlamlı: ≥ 2 yüzde puanı.
+    - Yorumda en fazla 5 kalem, büyüklüğe göre sıralı.
+    - Eşiğin hangi karşılaştırmaya uygulanacağı **[AÇIK]** (`docs/05`, 2.1).
   - Çarpıklık bayrakları (Bölüm 5.4'teki heuristikler)
-- **Çıktı:** `facts.json`. Örnek (yapı açıklayıcıdır; **[AÇIK]** kesin şema):
+- **Çıktı:** `facts.json`.
+  - **[KARAR, tur 4] Gereksinimler:**
+    - Her kalemde bütün karşılaştırmalar (önceki ay, önceki yılın aynı ayı, kümülatif) ve anlamlılık gerekçesi.
+    - Rohertrag adayları `warn` değil nötr "aday"; doğru cevap yalnızca ground truth'ta.
+    - Tutarlar tam sayı €, yüzdeler 1 ondalık, `schema_version` alanı.
+  - **[ÖNERİ — onay bekliyor]** Şema, gerçek bir ay üzerinde: [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md).
+  - Aşağıdaki örnek ilk taslaktır; yapı açıklayıcıdır:
 
 ```json
 {
@@ -255,7 +266,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - **Sorgu:** Anlamlı sapma gösteren satır adları + dönem + bayraklar facts.json'dan otomatik üretilir.
 - K-C ve K-D için tarih/dönem metadata filtresi kullanılmalı.
 - **[KARAR]** K-C notları `dauerhaft`/`temporär` alanı taşır. Bu alan meta veridir ve modele görünür.
-- **[KARAR — çalışma varsayımı]** K-C için RAG penceresi 12 ay: cari ay ve önceki 11 ay, artı dönemsiz `Firmenprofil` notu. Kesin değer **[AÇIK]**.
+- **[KARAR, tur 4]** K-C için RAG penceresi **13 ay** (t−12 … t), artı dönemsiz `Firmenprofil` notu. Önceki yılın aynı ayındaki geçici olayların notu da böylece pencereye girer (`docs/03`, 5.2).
 - Her parça bir **kaynak kimliği** taşımalı (ör. `Kontextnotiz 2026-06`), çünkü model yorumda bu kimliğe atıf yapar.
 
 #### Katman 3: Fine-tuning (LoRA)
@@ -363,10 +374,12 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - Referans koşu (seed 42, 3 arketip × 10 varyant) repoda; diğer koşular `.gitignore`'da.
   - Notlar şablonla üretilir: olay türü başına 5 kalıp, seçimi seed yapar. LLM ile çeşitlendirme ileride eklenebilecek bir seçenek ([ÖNERİ]).
   - Modelin gördüğü dosyalar (`model_input/`) ve değerlendirme dosyaları (`evaluation/`) ayrı klasörlerde.
-- **[AÇIK]** Tur 3'ten doğan sorular (`docs/00`, Bölüm 7.3):
-  - A2'de "notla açıkla" vakasının azlığı
-  - Muster GmbH'nin olay profili
-  - Olay yoğunluğu (~1,5/ay, ilk tahmin ~2)
+- **[KARAR, tur 4]** (`docs/00`, Bölüm 8):
+  - **Dengelenmiş V2 kümesi.** Ana veri gerçekçi kalır. "V2 adayı ayrımı" metriği için `cite`/`warn` dengeli ayrı bir küme üretildi: `data/synthetic/v2_balanced_seed4242/`, raporlarda "dengelenmiş set".
+  - **Eğitim profili.** Eğitim verisindeki `cite` sayısı düşük olduğu için, yalnızca eğitim verisinde kullanılacak `train_price_boost` profili hazırlandı (`docs/04`, Bölüm 8).
+  - **Muster GmbH** toparlanma hikâyesi olarak kalıyor.
+  - **Olay yoğunluğu** ayda ~1,5 olarak kabul edildi.
+- **[AÇIK]** E18 kalibrasyonu: A2'de kaydedilen Rohertragsquote çok oynak (`docs/00`, 8.3).
 - **[AÇIK — ertelendi]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
 - **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre).
 
@@ -407,7 +420,9 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 
-**[ÖNERİ]** Sıradaki adım: hesaplama modülü (Katman 1, `facts.json`). Önkoşul: anlamlılık eşikleri ve `facts.json` şeması (6.2, [AÇIK]).
+**Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
+
+**[ÖNERİ]** Sıradaki adım: hesaplama modülü (Katman 1). Önkoşul: `facts.json` şemasının onayı (`docs/05`, Bölüm 6).
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → hesaplama modülü → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

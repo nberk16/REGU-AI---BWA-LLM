@@ -1,8 +1,8 @@
 # 00 — Karar kaydı
 
-> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), bunlardan doğan açık noktalar (tur 2) ve veri üreteci (tur 3) · **Tarih:** 14.10.2026
+> **Kapsam:** CLAUDE.md Bölüm 12'deki ilk üç adım (firma, BWA satır yapısı, olay kataloğu), bunlardan doğan açık noktalar (tur 2), veri üreteci (tur 3), Katman 1 eşikleri ve yol haritası (tur 4) · **Tarih:** 14–15.10.2026
 >
-> **Belgeler:** [`01_firma_profili.md`](01_firma_profili.md) · [`02_bwa_satir_yapisi.md`](02_bwa_satir_yapisi.md) · [`03_olay_katalogu.md`](03_olay_katalogu.md) · [`04_veri_ureteci.md`](04_veri_ureteci.md)
+> **Belgeler:** [`01_firma_profili.md`](01_firma_profili.md) · [`02_bwa_satir_yapisi.md`](02_bwa_satir_yapisi.md) · [`03_olay_katalogu.md`](03_olay_katalogu.md) · [`04_veri_ureteci.md`](04_veri_ureteci.md) · [`05_facts_semasi.md`](05_facts_semasi.md) · [`yol_haritasi.md`](yol_haritasi.md)
 
 ---
 
@@ -78,12 +78,13 @@ Bütün kararlar kullanıcının onayıyla asistanın önerileri doğrultusunda 
 
 ## 5. Açık kalan noktalar [AÇIK]
 
+Güncel liste ve iş paketlerine göre dağılımı: [`yol_haritasi.md`](yol_haritasi.md), Bölüm 3.
+
 - Eğitim hedeflerinin (ideal yorumların) üretim yöntemi (CLAUDE.md 9). Ertelendi.
 - Eğitim/test ayrımı: hangi arketipin test olacağı ve arketip başına varyant sayısı (CLAUDE.md 9). Ertelendi; üreteç bunları parametre olarak alıyor.
-- RAG penceresinin kesin değeri (şimdilik 12 ay). Üreteçten gelen bir gözlem bu karara girdi olacak (03, Bölüm 9.4).
-- Anlamlılık eşikleri ve `facts.json` şeması (CLAUDE.md 6.2). `expected_flags`'in süzülmesi de buna bağlı.
+- `facts.json` şeması ve anlamlılığın hangi karşılaştırmaya uygulanacağı (`05_facts_semasi.md`, Bölüm 6).
+- E18 kalibrasyonu (Bölüm 8.3).
 - Teknik tercihler (CLAUDE.md 10) ve üslup değerlendirme yöntemi (CLAUDE.md 8).
-- Tur 3'ten doğan iki soru (Bölüm 7.3): A2'de "notla açıkla" vakasının azlığı ve Muster GmbH'nin olay profili.
 
 ---
 
@@ -123,7 +124,7 @@ Bütün kararlar kullanıcının onayıyla asistanın önerileri doğrultusunda 
 | AfA / faiz tabanı | Sabit | Yılda −%6 / −%10 | Yeni yatırımlar (E08), eski varlıkların ve kredilerin bitişi olmadan birikiyordu |
 | Çakışma kabulü | Yalnızca üst sınır (2) | Dolu satır-aya ikinci olay %30 olasılıkla; aynı tür aynı ayda başlayamaz | Çakışma oranı %23'tü (hedef ~%10) |
 
-### 7.3 Kullanıcıya sorulan noktalar [AÇIK]
+### 7.3 Kullanıcıya sorulan noktalar (tur 4'te cevaplandı, Bölüm 8.1)
 
 1. **A2'de "notla açıkla" vakası az** (referans koşuda 2 `cite`, 2 `either`, 217 `warn`). Nedeni, A2 varyantlarının %80'inin stok değişimini yalnızca envanterde kaydetmesi. Seçenekler:
    - (a) Olduğu gibi bırakmak.
@@ -134,6 +135,41 @@ Bütün kararlar kullanıcının onayıyla asistanın önerileri doğrultusunda 
    - (a) Toparlanma hikâyesi olarak bırakmak.
    - (b) v00'a kalıcı büyük olay içermeyen "sakin" bir profil vermek.
 3. **Olay yoğunluğu:** Ayda ~1,5 havuz olayı (ilk tahmin ~2). Olaysız ay hedefi (~%15) tutuluyor; yoğunluğu artırmak olaysız ay oranını düşürür.
+
+---
+
+## 8. Karar turu 4 (15.10.2026)
+
+### 8.1 Kararlar [KARAR]
+
+| Kod | Konu | Karar | Ayrıntı |
+|---|---|---|---|
+| 1 | A2'de "notla açıkla" vakasının azlığı | **(d):** Ana veri gerçekçi kalır. Ayrım metriği için `cite`/`warn` dengeli ayrı bir test kümesi üretilir; raporda "dengelenmiş set" olarak belirtilir. Bütün arketiplerde eğitim verisindeki `cite` sayısı gösterilir; çok düşükse yalnızca eğitim verisinde fiyat olayları ölçülü artırılır. | 04, Bölüm 8 |
+| 2 | Muster GmbH'nin olay profili | **(a):** Toparlanma hikâyesi olarak kalır. | 04, Bölüm 7 |
+| 3 | Olay yoğunluğu | Ayda ~1,5 olay kabul edildi. | 03, Bölüm 4 |
+| 4 | RAG penceresi | **13 ay** (t−12 … t) + `Firmenprofil`. | 03, Bölüm 5.2 |
+| 5 | Katman 1 eşikleri (başlangıç değerleri) | Kalem anlamlı: \|Δ\| ≥ %10 **ve** \|Δ\| ≥ aylık Gesamtleistung'un %0,5'i. Oran anlamlı: ≥ 2 puan. Yorumda en fazla 5 kalem, büyüklüğe göre sıralı. Referans veride sonuçlar gösterilir; gerekirse kalibre edilir. | 05, Bölüm 2 |
+| 6 | `facts.json` gereksinimleri | Özetteki yapı temel alınır. Her kalemde bütün karşılaştırmalar (önceki ay, önceki yılın aynı ayı, kümülatif) ve anlamlılık gerekçesi bulunur. Rohertrag adayları `warn` değil nötr "aday" olarak işaretlenir; doğru cevap yalnızca ground truth'ta kalır. Tutarlar tam sayı €, yüzdeler 1 ondalık, şema sürüm alanı var. **Şema kodlamadan önce örnek bir ay üzerinde onaya sunulur.** | 05 |
+| 7 | Yol haritası | Proje durumu iş yüküne göre yüzdeyle hesaplanır. Yol haritası ayrı bir dosyada tutulur ve **her adımdan sonra güncellenir**. | `yol_haritasi.md` |
+
+### 8.2 Uygulama (asistan)
+
+- **Profil mekanizması:** `--profile`, `generator/config/profiles/*.toml`. Ana parametre dosyaları değişmez.
+- **`--first-variant`:** Ayrı kümelerin referans koşuyla aynı firmaları paylaşmasını önler.
+- **Dengelenmiş V2 kümesi:**
+  - `data/synthetic/v2_balanced_seed4242/` (seed 4242, v50–v59). Repoda tutulur; `.gitignore` istisnası eklendi.
+  - 148 ay: A1 10/10/7, A2 27/27/12, A3 21/21/13 (`cite`/`warn`/`either`).
+  - A2'de yeterli `cite` için profilde E04 2–4/yıl ve E05 1–3/yıl kullanıldı. İlk denemede (E04 2–3, E05 1–2) A2'de 14 `cite` vardı.
+- **Eğitim verisindeki `cite` sayısı:** Ana veride Rohertrag adayı aylarda A1 10, A2 0, A3 14 (10 varyant/arketip). Bu düşük bulundu ve `train_price_boost` profili hazırlandı (A1 16, A2 3, A3 23). Profil, eğitim verisi üretildiğinde kullanılacak; referans koşu değişmedi.
+- **Raporlar:** Her `report.md`'de arketip başına V2 karar tablosu var (bütün aylar ve Rohertrag adayı aylar).
+- **`facts.json` şeması** önerildi (`05_facts_semasi.md`): Muster GmbH, Haziran 2025 örneğiyle. Onay bekliyor.
+- **Yol haritası:** `yol_haritasi.md`. Durum ~%21; hesap yöntemi dosyada.
+
+### 8.3 Bu turda ortaya çıkan sorular [AÇIK]
+
+1. **Anlamlılık hangi karşılaştırmaya göre?** Kararın harfiyen uygulanmasıyla (önceki ay VEYA önceki yılın aynı ayı) referans veride hiçbir ayda 0 kalem çıkmıyor, ayların %22'sinde 5'ten fazla kalem var. Yalnızca önceki yılın aynı ayına göre: %3,2 / %3,6 (`05`, Bölüm 2.1).
+2. **`facts.json` şema soruları:** Rohertrag adayının kapsamı, `normal_level` / `base_unusual`, `delta_pct = null` kuralları, kümülatifin rolü (`05`, Bölüm 6).
+3. **E18 kalibrasyonu.** Malzeme satırındaki geç fatura kayması %15–40. A2'de kaydedilen Rohertragsquote 26 ayda negatif; ekonomik gerçek %17–34. %5–20'ye indirmek negatif ayları 8'e düşürür. Kabul edilirse referans koşu ve dengelenmiş küme yeniden üretilir.
 
 ## Kaynak
 

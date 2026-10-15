@@ -2,7 +2,7 @@
 
 > **Kapsam:** CLAUDE.md Bölüm 12'deki veri üreteci adımı · **Tarih:** 14.10.2026
 >
-> **Kod:** `generator/` · **Testler:** `tests/test_generator.py` · **Referans koşu:** `data/synthetic/reference_seed42/`
+> **Kod:** `generator/` · **Testler:** `tests/test_generator.py` · **Referans koşu:** `data/synthetic/reference_seed42/` · **Dengelenmiş V2 kümesi:** `data/synthetic/v2_balanced_seed4242/`
 >
 > **Odak (G7):** Üreteç bir destek bileşenidir. Amacı, LLM'i eğitmek ve ölçmek için gereken BWA serilerini, bağlam notlarını ve ground truth'u üretmektir. Bu yüzden gerçekçilik "yeterli" düzeyde, kod olabildiğince basit tutuldu.
 
@@ -16,8 +16,12 @@ pip install -e ".[dev]"     # numpy + pytest
 # Referans koşu (repoda tutulur)
 python -m generator --archetypes A1,A2,A3 --variants 10 --seed 42 --out data/synthetic/reference_seed42
 
-# Başka koşular (varsayılan: data/synthetic/run_seed<seed>_<arketip>x<varyant>, .gitignore'da)
+# Dengelenmiş V2 kümesi (repoda tutulur; Bölüm 8)
+python -m generator --profile v2_balanced --variants 10 --first-variant 50 --seed 4242 --out data/synthetic/v2_balanced_seed4242
+
+# Başka koşular (varsayılan: data/synthetic/run_seed<seed>_<arketip>x<varyant>[_<profil>], .gitignore'da)
 python -m generator --variants 50 --seed 7
+python -m generator --profile train_price_boost --variants 30 --seed 7   # yalnızca eğitim verisi için
 
 python -m pytest
 ```
@@ -25,6 +29,8 @@ python -m pytest
 - **[KARAR, tur 2]** Arketip listesi (`--archetypes`) ve arketip başına varyant sayısı (`--variants`) parametredir. Eğitim/test ayrımı kararı verildiğinde kod değiştirmek gerekmez.
 - Aynı seed ve parametrelerle üretilen dosyalar byte düzeyinde aynıdır.
 - Her varyantın kendi rastgele sayı akışı vardır: `[seed, arketip, varyant, aşama]`. Bu yüzden varyant sayısını artırmak mevcut varyantları değiştirmez (test: `test_more_variants_do_not_change_existing_ones`).
+- `--first-variant` varyant numaralarını kaydırır (ör. v50–v59). Ayrı kümeler böylece referans koşuyla aynı firmaları ve adları paylaşmaz.
+- `--profile` ana parametrelerin üzerine küçük bir TOML dosyası yazar (`generator/config/profiles/`). Ana parametre dosyaları değişmez.
 
 ---
 
@@ -99,7 +105,7 @@ data/synthetic/<koşu>/
 
 ## 5. Testler
 
-`python -m pytest`: 29 test. Neyi kontrol ettikleri:
+`python -m pytest`: 35 test. Neyi kontrol ettikleri:
 
 | Grup | Kontrol |
 |---|---|
@@ -110,6 +116,7 @@ data/synthetic/<koşu>/
 | Oranlar | Notlama, firma notu, olaysız ay, çeldirici, rakamlı not, eşik yakını oranları hedef aralıkta |
 | Ay kayıtları | 36 ay; V2 adayı karar kuralı; notsuz E04/E05 → kabul edilebilir V2 |
 | Dosyalar | `model_input/` ile `evaluation/` ayrımı; CSV başlığı ve satır sayısı |
+| Profiller ve V2 kümesi | Profilin parametreleri değiştirmesi (diğer alanlar korunur); bilinmeyen profilin reddi; varyant numarası kaydırma; Rohertrag adayı kuralı; dengelenmiş kümede `cite` = `warn`; arketip başına V2 karar sayıları |
 
 ---
 
@@ -136,12 +143,64 @@ data/synthetic/<koşu>/
 
 ## 7. Bilinen sınırlamalar
 
-1. **A2'de "notla açıkla" vakası az.** A2 varyantlarının %80'i stok değişimini yalnızca envanterde kaydediyor (P3). Bu yüzden A2'nin neredeyse her ayında bir çarpıklık nedeni var. V2 adayı ayrımını ölçmek için `cite` vakası referans koşuda yalnızca 2 (`docs/03`, 9.1). Çözüm seçenekleri `00_karar_kaydi.md`, Bölüm 7'de.
-2. **Muster GmbH (v00) bu seed'de zor bir dönemden geçiyor.**
-   - 2024'te kalıcı +6 puanlık bir malzeme zammı (E04) ve %8'lik bir müşteri kaybı (E07) var. v00'ın olayları da diğer varyantlar gibi rastgele.
+1. **A2'de "notla açıkla" vakası az** (ana veride). Bu durum bilinçli olarak korunuyor: ana veri gerçekçi kalıyor; ayrım metriği dengelenmiş V2 kümesiyle ölçülüyor (Bölüm 8, karar turu 4).
+2. **Muster GmbH (v00) bu seed'de bir toparlanma hikâyesi çiziyor** [KARAR, tur 4: böyle kalıyor].
+   - 2024'te kalıcı +6 puanlık bir malzeme zammı (E04) ve %8'lik bir müşteri kaybı (E07) var.
    - Faaliyet sonucu (ekonomik gerçek): 2024'te −%5,1, 2025'te −%2,3, 2026'da +%2,7.
-   - Bu bir toparlanma hikâyesi olarak kullanılabilir (P4 banka iletişimi). Ama `docs/01`'deki "tipik ay" tablosundan (%6,5) belirgin biçimde farklı.
+   - Portfolyoda banka iletişimi (P4) örneği olarak kullanılabilir.
 3. **`expected_flags` eşiksiz.** Çok küçük çarpıklıklar da beklenen uyarı olarak listeleniyor. Anlamlılık eşikleri [AÇIK]; belirlendiğinde değerlendirme `effects.csv`'deki büyüklüklerle süzecek.
 4. **Notlar şablonla üretiliyor.** Dil çeşitliliği sınırlı. LLM ile yeniden ifade etme ileride eklenebilecek bir seçenek ([ÖNERİ], `docs/03`, 5.5).
-5. **Olaylar birbirinden bağımsız çekiliyor.** Örneğin işe alımla sipariş artışı arasında nedensel bir bağ yok. Kalibrasyon (`00_karar_kaydi.md`, Bölüm 7) beklenen etkileri dengeliyor, ama tek tek varyantlarda marjlar belirgin biçimde dalgalanabiliyor.
-6. **Ertelenmiş kararlara bağımlılık:** Hangi arketipin test olacağı, varyant sayısı ve eğitim hedeflerinin üretim yöntemi [AÇIK]. Üreteç bunları parametre olarak kabul ediyor.
+5. **A2'de Rohertragsquote çok oynak** (yeni gözlem, karar bekliyor).
+   - Kaydedilen Rohertragsquote ayların %5'inde −%7'nin altında, %5'inde %53'ün üstünde; 26 ayda negatif. Ekonomik gerçek %17–34 aralığında.
+   - Nedenler: geç gelen faturaların (E18) malzeme alışının %15–40'ını sonraki aya kaydırması ve envanter pratiğinde alışların büyük siparişlerden bir ay önce gelmesi.
+   - E18'in malzeme satırındaki aralığını %5–20'ye indirmek negatif ayları 26'dan 8'e düşürür (A2 p5/p95: %2 / %48).
+6. **Olaylar birbirinden bağımsız çekiliyor.** Örneğin işe alımla sipariş artışı arasında nedensel bir bağ yok. Kalibrasyon (`00_karar_kaydi.md`, Bölüm 7) beklenen etkileri dengeliyor, ama tek tek varyantlarda marjlar belirgin biçimde dalgalanabiliyor.
+7. **Ertelenmiş kararlara bağımlılık:** Hangi arketipin test olacağı, varyant sayısı ve eğitim hedeflerinin üretim yöntemi [AÇIK]. Üreteç bunları parametre olarak kabul ediyor.
+
+---
+
+## 8. Profiller ve dengelenmiş V2 kümesi [KARAR, tur 4]
+
+### 8.1 Neden?
+
+- "V2 adayı ayrımı" metriği (CLAUDE.md 8), Rohertrag adayı aylarda modelin doğru kararı verip vermediğini ölçer: `cite` (notla açıkla) / `warn` (uyar) / `either`.
+- Ana veride bu kararlar çok dengesiz. Özellikle A2'de hemen her ay `warn`.
+- Karar: **Ana veri gerçekçi kalır.** Metrik için ayrı ve dengeli bir test kümesi üretilir.
+
+### 8.2 Profiller (`generator/config/profiles/`)
+
+| Profil | Ne değiştirir | Kullanım |
+|---|---|---|
+| `v2_balanced` | A2'de P3 olasılığı 0,8 → 0,2; E04 2–4/yıl, E05 1–3/yıl | Yalnızca dengelenmiş V2 kümesi |
+| `train_price_boost` | E04 1–3/yıl, E05 1–2/yıl ("ölçülü" artış) | Yalnızca eğitim verisi; referans koşu ve test kümeleri kullanmaz |
+
+### 8.3 Dengelenmiş V2 kümesi (`data/synthetic/v2_balanced_seed4242/`)
+
+- **Komut:** `--profile v2_balanced --variants 10 --first-variant 50 --seed 4242`.
+  - Farklı seed ve v50–v59 varyant numaraları, referans koşuyla firma paylaşımını önler.
+- **Seçim** (`evaluation/v2_balanced_set.jsonl`):
+  - Yalnızca Rohertrag adayı aylar: Rohertragsquote önceki aya **ve** önceki yılın aynı ayına göre ≥ 2 puan değişmiş (Katman 1 kuralı).
+  - Her arketipte `cite` ve `warn` aylarından eşit sayıda; `either` aylarından en fazla aynı sayıda.
+- Raporda ve dosyada **"dengelenmiş set"** olarak işaretli; gerçek dağılımı yansıtmaz.
+
+| Arketip | cite | warn | either | Toplam |
+|---|---:|---:|---:|---:|
+| A1 | 10 | 10 | 7 | 27 |
+| A2 | 27 | 27 | 12 | 66 |
+| A3 | 21 | 21 | 13 | 55 |
+
+### 8.4 Eğitim verisindeki `cite` örnekleri
+
+Rohertrag adayı aylarda beklenen kararlar, 10 varyant / arketip, yorumlanabilir aylar:
+
+| Arketip | Ana veri (referans koşu): cite / warn / either | `train_price_boost` ile: cite / warn / either |
+|---|---|---|
+| A1 | 10 / 98 / 7 | 16 / 86 / 9 |
+| A2 | 0 / 193 / 1 | 3 / 178 / 0 |
+| A3 | 14 / 85 / 8 | 23 / 80 / 11 |
+
+- Ana veride bir `cite` örneğine ~7–10 `warn` düşüyor. Bu, modelin "notla açıklanan aday" durumunu öğrenmesi için az.
+- `train_price_boost` `cite` sayısını ~%60 artırıyor; A2'de etkisi küçük, çünkü orada P3 baskın.
+- Eğitim verisindeki toplam örnek sayısını asıl belirleyecek olan, arketip başına varyant sayısı ([AÇIK], eğitim/test kararıyla birlikte). Örneğin 30 varyant ve `train_price_boost` ile, A2 test için ayrılırsa eğitimde (A1 + A3) ~120 `cite` adayı ay olur.
+- Her koşunun `report.md` dosyasında arketip başına bu tablo otomatik olarak yer alır.
+

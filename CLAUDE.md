@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%32, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%36, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -261,6 +261,10 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - **[KARAR]** İstisna: RAG'in getirdiği bir bağlam notunda geçen rakam, aynı cümle o notun kaynak kimliğine atıf yapıyorsa kabul edilir (ör. "drei Neueinstellungen [Quelle: Kontextnotiz 2026-06]"). Bkz. `docs/03`, Bölüm 5.4.
 - Her neden cümlesinde bir kaynak atfı veya tahmin işareti olup olmadığını kontrol et.
 - Sonuç: taslak + uyarı listesi. Uyarılar insana gösterilir.
+- **[KARAR, tur 8]** Yuvarlama kuralı (a): metindeki rakam, değerin gösterilen hassasiyete doğru yuvarlanmış hâliyse eşleşir. Örnek: 41.712 € → „42 T€“ ✓, „41 T€“ ✗.
+- **v1 kodlandı:** [`docs/07_dogrulama_katmani.md`](docs/07_dogrulama_katmani.md), `validation/` (`python -m validation`).
+  - Rakamlar, kaynak/hipotez işaretleri, format ve kapsam denetlenir.
+  - Örnek: [`docs/examples/kommentar_A1-v00_2025-06.md`](docs/examples/kommentar_A1-v00_2025-06.md).
 
 ### 6.3 Çıktı yapısı [KARAR, tur 6]
 
@@ -409,12 +413,14 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 3. ✅ Olay kataloğunu çıkar → [`docs/03_olay_katalogu.md`](docs/03_olay_katalogu.md)
 4. ✅ Veri üreteci → [`docs/04_veri_ureteci.md`](docs/04_veri_ureteci.md), `generator/`, `tests/`, `data/synthetic/reference_seed42/` (tur 3)
 5. ✅ Hesaplama modülü (Katman 1) → [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md), `facts/`, `tests/test_facts.py` (tur 5)
+6. ✅ Model tarafının yöntem kararları → [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md) (turlar 6–7)
+7. ✅ Doğrulama katmanı v1 (Katman 4) → [`docs/07_dogrulama_katmani.md`](docs/07_dogrulama_katmani.md), `validation/`, `tests/test_validation.py` (tur 8)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adımlar: doğrulama katmanı (Katman 4) → Almanca deneme turu (kullanıcının dizüstünde) → bilgi tabanı (Katman 2) → ideal yorumlar. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
+**[ÖNERİ]** Sıradaki adımlar: Almanca deneme turu (istem + doğrulama varyantlarından örnekler + Ollama betiği; kullanıcının dizüstünde) → bilgi tabanı (Katman 2) → ideal yorumlar. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

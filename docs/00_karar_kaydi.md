@@ -257,6 +257,37 @@ A1'i kullanıcı onayladı. B3, B4 ve D1–D4'ü kullanıcı asistana bıraktı;
   - Resmî fiyat listesi API anahtarı alınırken kontrol edilecek.
 - **Kullanım koşulları:** Üçüncü taraf bir özete göre Mistral'ın ticari koşullarındaki çıktı kısıtı görsel çıktılarla ilgili. Metin çıktıları için bir kısıt bulunamadı; resmî metin kontrol edilecek. Bu not hukuki görüş değildir.
 
+## 12. Karar turu 8 (15.10.2026): doğrulama katmanı
+
+### 12.1 Karar [KARAR]
+
+| Konu | Karar |
+|---|---|
+| Yuvarlama toleransı (Katman 4) | **(a) Yuvarlamaya uygunluk.** Metindeki rakam, değerin gösterilen hassasiyete doğru yuvarlanmış hâliyse eşleşir (yarım yukarı). 41.712 € → „42 T€“ ✓, „41,7 T€“ ✓, „41 T€“ ✗; 18,4 % → „18 %“ ✓, „19 %“ ✗. |
+
+Reddedilen seçenekler:
+- (b) Göreli tolerans: yanlış yuvarlamayı yakalamaz.
+- (c) Tam eşleşme: „T€“ kullanılamaz, metin hantallaşır.
+
+### 12.2 Uygulama (asistan)
+
+- **`validation/`** (Katman 4 v1) ve 46 test. Kurallar: `07_dogrulama_katmani.md`.
+  - B4'ün uygulama ayrıntıları:
+    - numaralı Kernaussagen,
+    - sabit tablo başlığı,
+    - „- “ maddeleri,
+    - boş bölümde „Keine.“,
+    - `[Quelle: A; B]` biçimi,
+    - `(Hypothese)` işareti.
+  - [ÖNERİ] parametreler (`validation/config.toml`):
+    - neden ve tahmin kelime listeleri,
+    - kısa ad listesi,
+    - uzunluk toleransı ±50.
+  - [ÖNERİ] **Rakam hangi satıra ait?** Madde veya tablo satırı bir satır adı içeriyorsa rakam yalnızca o satırın değerleriyle karşılaştırılır.
+    - Gerekçe: yüzdeler dar bir aralıkta yoğun olduğu için kapsam olmadan uydurma rakamlar tesadüfen eşleşiyordu. Örnek yorumdaki notlu „rund 5 %“ önce `facts.json`'daki 4,9 %'e eşleşiyordu.
+- **Örnek yorum:** `examples/kommentar_A1-v00_2025-06.md` (Muster GmbH, Juni 2025). Hatasız geçer, rakam sadakati 1,0. Format örneğidir; altın kümenin ilk adayı olabilir.
+- **Yanlış alarm testi:** Referans koşunun 720 ayında, `facts.json`'dan doğru yazılmış rakamlar için hiç `fehler` çıkmıyor.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

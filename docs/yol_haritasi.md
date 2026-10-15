@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (karar turu 7: eğitim/test, Kaggle, ideal yorum yöntemi, öğretmen model)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (karar turu 8: doğrulama katmanı v1 kodlandı)
 
 ---
 
-## 1. Genel durum: ~%32 tamamlandı
+## 1. Genel durum: ~%36 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 15,8 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 17,8 gün
 toplam iş     = 50 gün
-durum         = 15,8 / 50 ≈ %32
+durum         = 17,8 / 50 ≈ %36
 ```
 
 **Belirsizlik:**
@@ -37,10 +37,10 @@ durum         = 15,8 / 50 ≈ %32
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %5 | 0,25 | ⏳ başlamadı (aday listesi kararlaştırıldı) |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %5 | 0,15 | ⏳ başlamadı |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %70 | 2,1 | 🔄 v1 tamamlandı |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **15,8** | **≈ %32** |
+| | **Toplam** | **50** | | **17,8** | **≈ %36** |
 
 ---
 
@@ -117,14 +117,22 @@ durum         = 15,8 / 50 ≈ %32
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:** Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
 
-### 8. Doğrulama katmanı (Katman 4) — ⏳ başlamadı
-- **Hazır olan:** Kural kararlaştırıldı: rakam ya `facts.json`'la eşleşir ya da atıf yapılan nottan gelir. Notlardaki rakamlar ground truth'ta kayıtlı.
-- **Kalan:**
-  - Almanca rakam ayıklama (`1.234,5`, `42 T€`, `18 %`).
-  - Toleranslı eşleştirme.
-  - Kaynak atfı ve tahmin işareti kontrolü.
-  - Uyarı listesi.
-- **Açık kararlar:** Yuvarlama toleransları (ör. `42 T€` ile 41.712 € eşleşir mi?). Tur 7'de seçenekleriyle soruldu.
+### 8. Doğrulama katmanı (Katman 4) — 🔄 v1 tamamlandı
+- **Yapılan:**
+  - `validation/` ve 46 test; kurallar `docs/07`.
+  - Almanca rakam ayıklama ve yuvarlama kuralı (a).
+  - Birim uyumu, işaret, "rakam hangi satıra ait".
+  - Not istisnası (kaynak şartı).
+  - Neden cümlelerinde kaynak/hipotez işareti.
+  - Format (6.3), kapsam ipuçları, JSON raporu, CLI.
+  - Örnek yorum: `docs/examples/kommentar_A1-v00_2025-06.md`.
+  - Referans verinin 720 ayında yanlış alarm yok.
+- **Kalan (%30):**
+  - K-A/K-B kaynak kimlikleri (paket 4'ten sonra).
+  - Deneme turundaki gerçek model çıktılarına göre kelime listelerinin ve kuralların ayarı.
+  - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
+- **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
+- **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
 
 ### 9. Değerlendirme ve ablation — ⏳ başlamadı (altyapı hazır)
 - **Hazır olan:**
@@ -155,16 +163,15 @@ durum         = 15,8 / 50 ≈ %32
 
 ## 4. Sıradaki adımlar
 
-Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md)). Önerilen sıra:
+Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md)); doğrulama katmanı v1 hazır (tur 8). Önerilen sıra:
 
-1. **Doğrulama katmanı v1 (paket 8):** Almanca rakam ayıklama, `facts.json` ve notlarla eşleştirme, kaynak/hipotez kontrolü, format kontrolü. Deneme turunu puanlamak ve ideal yorumları denetlemek için gerekli. Önkoşul: yuvarlama toleransı kararı.
-2. **Almanca deneme turu (paket 6):**
+1. **Almanca deneme turu (paket 6):**
    - Asistan hazırlar: istem, doğrulama varyantlarından ~10 örnek, Ollama betiği.
    - Kullanıcı dizüstünde çalıştırır.
    - Sonuçlar doğrulama katmanıyla puanlanır ve temel model seçilir.
-3. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, Chroma indeksi, 13 ay + top-k getirme, recall@k.
-4. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
-5. **Kaggle defterleri (paket 6, 7, 9):** Fine-tuning, baseline'lar, değerlendirme.
+2. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, Chroma indeksi, 13 ay + top-k getirme, recall@k.
+3. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
+4. **Kaggle defterleri (paket 6, 7, 9):** Fine-tuning, baseline'lar, değerlendirme.
 
 ## 5. Değişiklik geçmişi
 
@@ -175,3 +182,4 @@ Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_s
 | 15.10.2026 | Model tarafı seçenekleri sunuldu (`06_model_tarafi_secenekler.md`); durum değişmedi: %28 |
 | 15.10.2026 | Karar turu 6: deneme turu adayları, çıktı yapısı, notsuz neden kuralı, bilgi tabanı (BGE-M3, Chroma, top-k, K-D kapalı). Paket 4 → %10, 5 → %5, 6 → %5: %30 |
 | 15.10.2026 | Karar turu 7: test tasarımı (A1 + görülmemiş varyantlar), 20 + 3 varyant, Kaggle, karma yöntem, açık ağırlıklı öğretmen. Paket 5 → %10, 9 → %20: %32 |
+| 15.10.2026 | Karar turu 8: yuvarlama kuralı (a); doğrulama katmanı v1 kodlandı (`validation/`, 46 test). Paket 8 → %70: %36 |

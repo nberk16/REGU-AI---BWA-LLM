@@ -354,6 +354,8 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
 
 ## 10. Teknik tercihler [AÇIK]
 
+Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md). Tur 6'da sunuldu; kullanıcı kararı bekleniyor.
+
 | Konu | Not |
 |---|---|
 | Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). Almanca kalitesi test edilmeli. |

@@ -143,7 +143,7 @@ durum         = 14,2 / 50 ≈ %28
 
 ## 4. Sıradaki adımlar
 
-1. **Model tarafının yöntem kararları.** Birbirine bağlı oldukları için birlikte ele alınmalı:
+1. **Model tarafının yöntem kararları.** Birbirine bağlı oldukları için birlikte ele alınmalı. Seçenekler ve öneriler [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md) dosyasında; tur 6'da sunuldu, kullanıcı kararı bekleniyor:
    - Temel model ve çıkarım altyapısı (paket 6). Almanca kalite testi için birkaç aday.
    - İdeal yorumların üretim yöntemi ve çıktı yapısı (paket 5, CLAUDE.md 6.3).
    - Eğitim/test ayrımı: test arketipi ve varyant sayısı (paket 5).
@@ -157,3 +157,4 @@ durum         = 14,2 / 50 ≈ %28
 |---|---|
 | 15.10.2026 | İlk sürüm (karar turu 4 sonrası): %21 |
 | 15.10.2026 | Karar turu 5: E18 kalibrasyonu, Katman 1 (şema 1.0) kodlandı, bayrak isabeti ölçüldü: %28 |
+| 15.10.2026 | Model tarafı seçenekleri sunuldu (`06_model_tarafi_secenekler.md`); durum değişmedi: %28 |

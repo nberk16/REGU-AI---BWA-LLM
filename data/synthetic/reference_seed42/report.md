@@ -1,8 +1,9 @@
 # Sentetik veri koşusu — sağlama raporu
 
-- Seed: `42` · Arketipler: A1, A2, A3 · Arketip başına varyant: 10
+- Seed: `42` · Arketipler: A1, A2, A3 · Arketip başına varyant: 10 (ilk varyant: v00)
+- Profil: yok (ana parametreler)
 - Dönem: 2024-01 – 2026-12 (yorumlanabilir: 2025-01 itibarıyla)
-- Üreteç sürümü: 0.1.0 · Parametre özeti: `0a4260362459638a`
+- Üreteç sürümü: 0.1.0 · Parametre özeti: `72dc78e45b68504e`
 
 ## Hedef oranlar (docs/03) ve gerçekleşen
 
@@ -17,7 +18,18 @@
 | Eşik yakını havuz olayları | ~%20 | 17.7% |
 | Çakışan havuz olayları | ~%10 | 13.0% |
 
-A2'de V2 adayı olan yorumlanabilir aylarda beklenen karar dağılımı (cite = notla açıkla, warn = uyar, either = ikisi de kabul): cite: 2, either: 2, warn: 217
+## V2 kararları (Rohertrag adayları)
+
+Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayına göre ≥ 2.0 puan değişmiş (Katman 1 kuralı). Doğru karar yalnızca ground truth'ta: cite = notla açıkla, warn = uyar, either = ikisi de kabul, None = Rohertragsquote'yi değiştiren olay yok.
+
+| Arketip | Kapsam | cite | warn | either | None |
+|---|---|---:|---:|---:|---:|
+| A1 | bütün yorumlanabilir aylar | 14 | 136 | 11 | 79 |
+| A1 | Rohertrag adayı aylar | 10 | 98 | 7 | 20 |
+| A2 | bütün yorumlanabilir aylar | 2 | 217 | 2 | 19 |
+| A2 | Rohertrag adayı aylar | 0 | 193 | 1 | 9 |
+| A3 | bütün yorumlanabilir aylar | 22 | 92 | 12 | 114 |
+| A3 | Rohertrag adayı aylar | 14 | 85 | 8 | 33 |
 
 ## Olay türleri
 

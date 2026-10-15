@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (karar turu 8: doğrulama katmanı v1 kodlandı)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (deneme turu kiti hazırlandı)
 
 ---
 
-## 1. Genel durum: ~%36 tamamlandı
+## 1. Genel durum: ~%38 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 17,8 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 18,8 gün
 toplam iş     = 50 gün
-durum         = 17,8 / 50 ≈ %36
+durum         = 18,8 / 50 ≈ %38
 ```
 
 **Belirsizlik:**
@@ -35,12 +35,12 @@ durum         = 17,8 / 50 ≈ %36
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %10 | 0,6 | ⏳ başlamadı (tasarım kararları alındı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %5 | 0,25 | ⏳ başlamadı (aday listesi kararlaştırıldı) |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %25 | 1,25 | 🔄 deneme turu kiti hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %70 | 2,1 | 🔄 v1 tamamlandı |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **17,8** | **≈ %36** |
+| | **Toplam** | **50** | | **18,8** | **≈ %38** |
 
 ---
 
@@ -100,10 +100,14 @@ durum         = 17,8 / 50 ≈ %36
 - **Açık kararlar:**
   - Somut öğretmen model ve sağlayıcı [ÖNERİ: Mistral Large 3, Mistral API]. Kullanıcının API anahtarı alması gerekir.
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — ⏳ başlamadı
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 deneme turu kiti hazır
+- **Yapılan:**
+  - Ortak istem modülü `prompting/` (sürüm 1.0).
+  - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
+  - Ayrıntılar `docs/08`.
 - **Kalan:**
-  - Aday modellerin Almanca kalitesinin denenmesi.
-  - Çıkarım altyapısı ve istem (prompt).
+  - Deneme turunun kullanıcının bilgisayarında çalıştırılması, puanlama ve okuma; temel model seçimi.
+  - Çıkarım altyapısı (Kaggle + vLLM).
   - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
@@ -166,9 +170,9 @@ durum         = 17,8 / 50 ≈ %36
 Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md)); doğrulama katmanı v1 hazır (tur 8). Önerilen sıra:
 
 1. **Almanca deneme turu (paket 6):**
-   - Asistan hazırlar: istem, doğrulama varyantlarından ~10 örnek, Ollama betiği.
-   - Kullanıcı dizüstünde çalıştırır.
-   - Sonuçlar doğrulama katmanıyla puanlanır ve temel model seçilir.
+   - Kit hazır (`trial/README.md`).
+   - Kullanıcı Ollama ile dizüstünde çalıştırır ve çıktıları dala yükler.
+   - Asistan puanlar (`trial/score.py`) ve okur; kullanıcı temel modeli seçer.
 2. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, Chroma indeksi, 13 ay + top-k getirme, recall@k.
 3. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
 4. **Kaggle defterleri (paket 6, 7, 9):** Fine-tuning, baseline'lar, değerlendirme.
@@ -183,3 +187,4 @@ Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_s
 | 15.10.2026 | Karar turu 6: deneme turu adayları, çıktı yapısı, notsuz neden kuralı, bilgi tabanı (BGE-M3, Chroma, top-k, K-D kapalı). Paket 4 → %10, 5 → %5, 6 → %5: %30 |
 | 15.10.2026 | Karar turu 7: test tasarımı (A1 + görülmemiş varyantlar), 20 + 3 varyant, Kaggle, karma yöntem, açık ağırlıklı öğretmen. Paket 5 → %10, 9 → %20: %32 |
 | 15.10.2026 | Karar turu 8: yuvarlama kuralı (a); doğrulama katmanı v1 kodlandı (`validation/`, 46 test). Paket 8 → %70: %36 |
+| 15.10.2026 | Deneme turu kiti: `prompting/` (istem 1.0), `trial/` (10 örnek, Ollama betiği, puanlama, kılavuz), `docs/08`. Paket 6 → %25: %38 |

@@ -288,6 +288,25 @@ Reddedilen seçenekler:
 - **Örnek yorum:** `examples/kommentar_A1-v00_2025-06.md` (Muster GmbH, Juni 2025). Hatasız geçer, rakam sadakati 1,0. Format örneğidir; altın kümenin ilk adayı olabilir.
 - **Yanlış alarm testi:** Referans koşunun 720 ayında, `facts.json`'dan doğru yazılmış rakamlar için hiç `fehler` çıkmıyor.
 
+## 13. Almanca deneme turu: kit (15.10.2026)
+
+Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrıntılar: `08_deneme_turu.md`.
+
+### 13.1 Uygulama (asistan) [ÖNERİ]
+
+- **Ollama etiketleri** (ollama.com'da doğrulandı), hepsi q4_K_M:
+  - `ministral-3:8b-instruct-2512-q4_K_M` (6,0 GB),
+  - `gemma4:e4b-it-q4_K_M` (6,6 GB),
+  - `qwen3.5:9b-q4_K_M` (6,6 GB).
+- **Düşünme modu kapalı.**
+- **Üretim ayarları:** `temperature 0.2`, `seed 42`, `num_ctx 8192`, `num_predict 1500`.
+- **İstem:** `prompting/` (sürüm 1.0). Almanca sistem mesajı (7 kural ve 6.3 şablonu), sıkıştırılmış `facts.json` ve 13 aylık notlar. Baseline'lar ve fine-tuning da aynı biçimi kullanacak.
+- **Örnekler:** Doğrulama varyantlarından 10 ay. Seçimde ground truth yalnızca çeşitlilik için kullanılır: V1–V6, V2 `cite`/`either`/`warn`, sakin ay, çeldirici not.
+- **Betikler:**
+  - `trial/run_ollama.py`: yalnızca standart kütüphane; kullanıcının bilgisayarında çalışır.
+  - `trial/score.py`: doğrulama katmanıyla puanlar.
+  - 4 test.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

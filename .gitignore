@@ -10,3 +10,5 @@ dist/
 data/synthetic/*
 !data/synthetic/reference_seed42/
 !data/synthetic/v2_balanced_seed4242/
+# Katman 1 çıktısı (python -m facts) her zaman yeniden üretilebilir; repoda tutulmaz
+data/synthetic/*/facts/

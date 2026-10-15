@@ -13,10 +13,11 @@ dependencies = ["numpy>=1.26"]
 dev = ["pytest>=8"]
 
 [tool.setuptools.packages.find]
-include = ["generator*"]
+include = ["generator*", "facts*"]
 
 [tool.setuptools.package-data]
-generator = ["config/*.toml"]
+generator = ["config/*.toml", "config/profiles/*.toml"]
+facts = ["config.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

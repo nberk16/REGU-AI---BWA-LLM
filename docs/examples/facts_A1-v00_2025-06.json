@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "company": {
+    "firm_id": "A1-v00",
+    "name": "Muster GmbH"
+  },
+  "period": "2025-06",
+  "period_label": "Juni 2025",
+  "comparisons": {
+    "previous_month": "2025-05",
+    "previous_year_month": "2024-06",
+    "cumulative": "2025-01 – 2025-06",
+    "cumulative_previous_year": "2024-01 – 2024-06"
+  },
+  "thresholds": {
+    "significance_basis": "previous_year_month",
+    "position_rel_pct": 10.0,
+    "position_abs_eur": 4355,
+    "cumulative_abs_eur": 22537,
+    "ratio_pp": 2.0,
+    "max_positions": 5
+  },
+  "summary": [
+    {
+      "key": "gesamtleistung",
+      "position": "Gesamtleistung",
+      "actual": 870947,
+      "normal_level": 702126,
+      "previous_month": {
+        "value": 682843,
+        "delta_abs": 188104,
+        "delta_pct": 27.5,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 746309,
+        "delta_abs": 124638,
+        "delta_pct": 16.7,
+        "significant": true,
+        "base_unusual": false
+      },
+      "cumulative": {
+        "actual": 4507355,
+        "previous_year": 4222203,
+        "delta_abs": 285152,
+        "delta_pct": 6.8,
+        "significant": false
+      }
+    },
+    {
+      "key": "rohertrag",
+      "position": "Rohertrag",
+      "actual": 425964,
+      "normal_level": 354426,
+      "previous_month": {
+        "value": 335986,
+        "delta_abs": 89978,
+        "delta_pct": 26.8,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 365238,
+        "delta_abs": 60726,
+        "delta_pct": 16.6,
+        "significant": true,
+        "base_unusual": false
+      },
+      "cumulative": {
+        "actual": 2189621,
+        "previous_year": 2211956,
+        "delta_abs": -22335,
+        "delta_pct": -1.0,
+        "significant": false
+      }
+    },
+    {
+      "key": "gesamtkosten",
+      "position": "Gesamtkosten",
+      "actual": 484147,
+      "normal_level": 379644,
+      "previous_month": {
+        "value": 417873,
+        "delta_abs": 66274,
+        "delta_pct": 15.9,
+        "base_unusual": true
+      },
+      "previous_year_month": {
+        "value": 471659,
+        "delta_abs": 12488,
+        "delta_pct": 2.6,
+        "significant": false,
+        "base_unusual": true
+      },
+      "cumulative": {
+        "actual": 2378483,
+        "previous_year": 2266942,
+        "delta_abs": 111541,
+        "delta_pct": 4.9,
+        "significant": false
+      }
+    },
+    {
+      "key": "betriebsergebnis",
+      "position": "Betriebsergebnis",
+      "actual": -56003,
+      "normal_level": -67878,
+      "previous_month": {
+        "value": -79756,
+        "delta_abs": 23753,
+        "delta_pct": null,
+        "base_unusual": true
+      },
+      "previous_year_month": {
+        "value": -104366,
+        "delta_abs": 48363,
+        "delta_pct": null,
+        "significant": true,
+        "base_unusual": true
+      },
+      "cumulative": {
+        "actual": -176065,
+        "previous_year": -42537,
+        "delta_abs": -133528,
+        "delta_pct": null,
+        "significant": true
+      }
+    },
+    {
+      "key": "ergebnis_vor_steuern",
+      "position": "Ergebnis vor Steuern",
+      "actual": -58475,
+      "normal_level": -70566,
+      "previous_month": {
+        "value": -82408,
+        "delta_abs": 23932,
+        "delta_pct": null,
+        "base_unusual": true
+      },
+      "previous_year_month": {
+        "value": -107104,
+        "delta_abs": 48629,
+        "delta_pct": null,
+        "significant": true,
+        "base_unusual": true
+      },
+      "cumulative": {
+        "actual": -174240,
+        "previous_year": -59860,
+        "delta_abs": -114380,
+        "delta_pct": null,
+        "significant": true
+      }
+    },
+    {
+      "key": "vorlaeufiges_ergebnis",
+      "position": "Vorläufiges Ergebnis",
+      "actual": -58475,
+      "normal_level": -70566,
+      "previous_month": {
+        "value": -82408,
+        "delta_abs": 23932,
+        "delta_pct": null,
+        "base_unusual": true
+      },
+      "previous_year_month": {
+        "value": -107104,
+        "delta_abs": 48629,
+        "delta_pct": null,
+        "significant": true,
+        "base_unusual": true
+      },
+      "cumulative": {
+        "actual": -174240,
+        "previous_year": -59860,
+        "delta_abs": -114380,
+        "delta_pct": null,
+        "significant": true
+      }
+    }
+  ],
+  "positions": [
+    {
+      "rank": 1,
+      "key": "umsatzerloese",
+      "position": "Umsatzerlöse",
+      "actual": 886365,
+      "normal_level": 702446,
+      "previous_month": {
+        "value": 682843,
+        "delta_abs": 203523,
+        "delta_pct": 29.8,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 744725,
+        "delta_abs": 141640,
+        "delta_pct": 19.0,
+        "significant": true,
+        "base_unusual": false
+      },
+      "cumulative": {
+        "actual": 4510044,
+        "previous_year": 4211994,
+        "delta_abs": 298050,
+        "delta_pct": 7.1,
+        "significant": false
+      },
+      "significance": {
+        "basis": "previous_year_month",
+        "reason": "Vorjahresmonat +141.640 € (+19,0 %); Schwelle: ≥ 10,0 % und ≥ 4.355 € (0,5 % der Gesamtleistung)"
+      }
+    },
+    {
+      "rank": 2,
+      "key": "material_wareneinkauf",
+      "position": "Material-/Wareneinkauf",
+      "actual": 444983,
+      "normal_level": 349846,
+      "previous_month": {
+        "value": 346857,
+        "delta_abs": 98126,
+        "delta_pct": 28.3,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 381071,
+        "delta_abs": 63912,
+        "delta_pct": 16.8,
+        "significant": true,
+        "base_unusual": false
+      },
+      "cumulative": {
+        "actual": 2317734,
+        "previous_year": 2010247,
+        "delta_abs": 307487,
+        "delta_pct": 15.3,
+        "significant": true
+      },
+      "significance": {
+        "basis": "previous_year_month",
+        "reason": "Vorjahresmonat +63.912 € (+16,8 %); Schwelle: ≥ 10,0 % und ≥ 4.355 € (0,5 % der Gesamtleistung)"
+      }
+    },
+    {
+      "rank": 3,
+      "key": "bestandsveraenderungen_fe_ue",
+      "position": "Bestandsveränderungen FE/UE",
+      "actual": -15419,
+      "normal_level": 0,
+      "previous_month": {
+        "value": 0,
+        "delta_abs": -15419,
+        "delta_pct": null,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 1583,
+        "delta_abs": -17002,
+        "delta_pct": null,
+        "significant": true,
+        "base_unusual": false
+      },
+      "cumulative": {
+        "actual": -2688,
+        "previous_year": 10210,
+        "delta_abs": -12898,
+        "delta_pct": null,
+        "significant": false
+      },
+      "significance": {
+        "basis": "previous_year_month",
+        "reason": "Vorjahresmonat -17.002 € (n. a.); Schwelle: ≥ 10,0 % und ≥ 4.355 € (0,5 % der Gesamtleistung)"
+      }
+    },
+    {
+      "rank": 4,
+      "key": "werbe_reisekosten",
+      "position": "Werbe-/Reisekosten",
+      "actual": 4303,
+      "normal_level": 4211,
+      "previous_month": {
+        "value": 4185,
+        "delta_abs": 117,
+        "delta_pct": null,
+        "base_unusual": false
+      },
+      "previous_year_month": {
+        "value": 10942,
+        "delta_abs": -6640,
+        "delta_pct": -60.7,
+        "significant": true,
+        "base_unusual": true
+      },
+      "cumulative": {
+        "actual": 25411,
+        "previous_year": 41401,
+        "delta_abs": -15990,
+        "delta_pct": -38.6,
+        "significant": false
+      },
+      "significance": {
+        "basis": "previous_year_month",
+        "reason": "Vorjahresmonat -6.640 € (-60,7 %); Schwelle: ≥ 10,0 % und ≥ 4.355 € (0,5 % der Gesamtleistung)"
+      }
+    }
+  ],
+  "further_significant": [],
+  "ratios": [
+    {
+      "ratio": "Rohertragsquote",
+      "actual": 48.9,
+      "previous_month": {
+        "value": 49.2,
+        "delta_pp": -0.3
+      },
+      "previous_year_month": {
+        "value": 48.9,
+        "delta_pp": 0.0,
+        "significant": false
+      },
+      "cumulative": {
+        "actual": 48.6,
+        "previous_year": 52.4,
+        "delta_pp": -3.8,
+        "significant": true
+      }
+    },
+    {
+      "ratio": "Materialquote",
+      "actual": 51.1,
+      "previous_month": {
+        "value": 50.8,
+        "delta_pp": 0.3
+      },
+      "previous_year_month": {
+        "value": 51.1,
+        "delta_pp": 0.0,
+        "significant": false
+      },
+      "cumulative": {
+        "actual": 51.4,
+        "previous_year": 47.6,
+        "delta_pp": 3.8,
+        "significant": true
+      }
+    },
+    {
+      "ratio": "Personalkostenquote",
+      "actual": 40.6,
+      "previous_month": {
+        "value": 35.0,
+        "delta_pp": 5.5
+      },
+      "previous_year_month": {
+        "value": 45.0,
+        "delta_pp": -4.4,
+        "significant": true
+      },
+      "cumulative": {
+        "actual": 33.7,
+        "previous_year": 32.5,
+        "delta_pp": 1.3,
+        "significant": false
+      }
+    },
+    {
+      "ratio": "Betriebsergebnis-Marge",
+      "actual": -6.4,
+      "previous_month": {
+        "value": -11.7,
+        "delta_pp": 5.2
+      },
+      "previous_year_month": {
+        "value": -14.0,
+        "delta_pp": 7.6,
+        "significant": true
+      },
+      "cumulative": {
+        "actual": -3.9,
+        "previous_year": -1.0,
+        "delta_pp": -2.9,
+        "significant": true
+      }
+    }
+  ],
+  "flags": [
+    {
+      "code": "V1",
+      "status": "hinweis",
+      "rule": "wiederkehrende_spitze",
+      "position": "Personalkosten",
+      "evidence": "Personalkosten 353.499 € = 1,5-faches des Normalniveaus (228.780 €); Vorjahresmonat ebenfalls erhöht (335.873 €)"
+    },
+    {
+      "code": "V4",
+      "status": "hinweis",
+      "rule": "bestand_nachbuchung",
+      "position": "Bestandsveränderungen FE/UE",
+      "evidence": "Bestandsveränderungen April und Mai je 0 €, Juni -15.419 €: möglicherweise Buchung für mehrere Monate"
+    }
+  ]
+}

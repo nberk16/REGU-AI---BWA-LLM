@@ -1,0 +1,26 @@
+# Katman 1 parametreleri (docs/05_facts_semasi.md).
+
+schema_version = "1.0"
+
+# [KARAR, tur 4–5] Başlangıç değerleri; anlamlılık yalnızca önceki yılın aynı ayına göre.
+[thresholds]
+position_rel_pct = 10.0
+position_abs_share_of_gl_pct = 0.5
+ratio_pp = 2.0
+max_positions = 5
+
+# [ÖNERİ] Bayrak kuralları (docs/05, Bölüm 4). Referans veriyle kalibre edilir (docs/05, Bölüm 7).
+[flags]
+# V1 / V5: satır normal düzeyin bu katı veya üstünde mi?
+v1_factor = 1.25
+v5_factor = 2.0
+# V3: AfA son 12 ayın aylık ortalamasının bu payının altında ise "eksik"; bu katının üstünde ise "yıllık kayıt".
+v3_low_share = 0.10
+v3_booking_factor = 3.0
+# V4: önceki ay normal düzeyin altında, bu ay üstünde (göreli sapma).
+v4_rel = 0.10
+# V6: önceki yılın aynı ayına göre Umsatz değişimi bu yüzdenin altındaysa "mevsimsel".
+v6_max_previous_year_pct = 15.0
+# Normal düzey için geçmiş ay sayısı.
+normal_months = 12
+min_history_months = 6

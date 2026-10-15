@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Proje durumu ~%28, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Sıradaki adım: bilgi tabanı ve ideal yorumlar için yöntem kararları.
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Model tarafı kararlarının bir kısmı alındı (tur 6, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%30, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -235,6 +235,11 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - **[KARAR]** K-C notları `dauerhaft`/`temporär` alanı taşır. Bu alan meta veridir ve modele görünür.
 - **[KARAR, tur 4]** K-C için RAG penceresi **13 ay** (t−12 … t), artı dönemsiz `Firmenprofil` notu. Önceki yılın aynı ayındaki geçici olayların notu da böylece pencereye girer (`docs/03`, 5.2).
 - Her parça bir **kaynak kimliği** taşımalı (ör. `Kontextnotiz 2026-06`), çünkü model yorumda bu kimliğe atıf yapar.
+- **[KARAR, tur 6]** (`docs/06`, Bölüm D):
+  - Embedding modeli **BGE-M3**, vektör deposu **Chroma** (gömülü).
+  - K-C: firma + 13 aylık pencere filtresi, ardından anlamsal top-k (başlangıç k = 8). "Penceredeki bütün notlar" ablation'da karşılaştırma olarak çalıştırılır.
+  - Retrieval isabeti (recall@k) ölçülür (Bölüm 8).
+  - K-D ilk sürümde kapalı; sonra ayrı deney.
 
 #### Katman 3: Fine-tuning (LoRA)
 
@@ -243,6 +248,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - Önceliklendirme: en önemli üç mesaj başta
 - Yalnızca facts.json'daki rakamları kullanma, yeni rakam üretmeme
 - Her nedeni ya kaynağıyla birlikte verme ya da açıkça tahmin olarak işaretleme ("vermutlich", "Hypothese")
+  - **[KARAR, tur 6]** Notta karşılığı olmayan nedende hedef metin açık soru sorar ya da işaretli genel bir hipotez verir. Hipotez yalnızca modelin görebildiği bilgiden (facts, bayraklar, K-B) türetilir. Ground truth'taki gerçek neden hedef metne hiçbir zaman yazılmaz (`docs/06`, B3).
 - Çarpıklık bayrağında olgu yerine uyarı dili kullanma
 - Açık soruları listeleme
 - Kısa, sade, yöneticiye uygun Almanca
@@ -256,7 +262,14 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - Her neden cümlesinde bir kaynak atfı veya tahmin işareti olup olmadığını kontrol et.
 - Sonuç: taslak + uyarı listesi. Uyarılar insana gösterilir.
 
-### 6.3 Çıktı yapısı [ÖNERİ]
+### 6.3 Çıktı yapısı [KARAR, tur 6]
+
+- Dört bölüm sabit; Kernaussagen en fazla 3 madde.
+- Tablo sütunları sabit.
+- Uzunluk ~250–350 kelime (tablo hariç).
+- Her neden cümlesinde `[Quelle: …]` veya `(Hypothese)`.
+- Boş bölüm kalır ve „Keine.“ yazılır.
+- Ayrıntılar: `docs/06`, B4.
 
 ```
 **Kernaussagen <Monat Jahr>**                       (en fazla 3 madde)
@@ -274,7 +287,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 >
 > **Offene Fragen an die Buchhaltung:** Wurde die Inventurveränderung für Juni erfasst?
 
-Bu örnekte rakamlar tablodan, neden firma notundan (kaynaklı) geliyor; olası çarpıklık ise olgu olarak değil uyarı olarak veriliyor.
+Bu örnekte rakamlar tablodan, neden firma notundan (kaynaklı) geliyor; olası çarpıklık ise olgu olarak değil uyarı olarak veriliyor. Örnek açıklayıcıdır; ideal yorumlar üretilirken Muster GmbH'nin gerçek verisiyle yeniden yazılacak.
 
 ### 6.4 Kapsam dışı [KARAR]
 
@@ -311,6 +324,7 @@ Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projen
 | **V2 adayı ayrımı [KARAR]** | Katman 1'in V2 adayı karşısında modelin doğru kararı verme oranı: notla açıkla (`cite`) / uyar (`warn`) / ikisi de kabul (`either`). Özellikle A2 (ticaret) için. | Otomatik (`ground_truth_months.jsonl` → `v2_candidate_decision`; bkz. `docs/03`, 9.1) |
 | Format uyumu | Çıktının 6.3'teki yapıya uyması | Otomatik |
 | Üslup ve okunabilirlik | Yöneticiye uygunluk, kısalık | **[AÇIK]** İnsan değerlendirmesi veya LLM-as-judge |
+| **Retrieval isabeti [KARAR, tur 6]** | İlgili bağlam notunun getirilen ilk k parçada olma oranı (recall@k) | Otomatik (ground truth: hangi not hangi olayı açıklıyor) |
 
 ---
 
@@ -347,22 +361,22 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - **Muster GmbH** toparlanma hikâyesi olarak kalıyor.
   - **Olay yoğunluğu** ayda ~1,5 olarak kabul edildi.
 - **[KARAR, tur 5]** E18 kalibrasyonu: Malzeme satırındaki geç fatura kayması %5–20'ye indirildi; iki veri kümesi yeniden üretildi (`docs/00`, Bölüm 9).
-- **[AÇIK — ertelendi]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı.
-- **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre).
+- **[AÇIK]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi ve öğretmen model. Seçenekler: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı. Tur 6'da sunuldu (`docs/06`, B1–B2).
+- **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre). Tur 6'da sunuldu (`docs/06`, C).
 
 ---
 
 ## 10. Teknik tercihler [AÇIK]
 
-Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md). Tur 6'da sunuldu; kullanıcı kararı bekleniyor.
+Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md). Tur 6'da kısmen karara bağlandı.
 
 | Konu | Not |
 |---|---|
-| Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). Almanca kalitesi test edilmeli. |
+| Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). **[KARAR, tur 6]** Almanca deneme turu: Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Eşitlikte Ministral 3 8B [ÖNERİ]. |
 | Lisans notları (kaynak belgeden) | Mistral: Apache 2.0, AB menşeli. gpt-oss: Apache 2.0 (20b yaklaşık 16 GB'a sığıyor). Llama: 3.2'den beri çok modlu modeller AB merkezli firmalara lisanslanmıyor; metin modelleri kullanılabilir. Proje yalnızca metin kullandığı için bu kısıt doğrudan etkilemez. Qwen: Apache 2.0, ama Çin menşeli; Alman firmalarında kullanımı yaklaşık %1, algı sorunu olabilir. |
-| Fine-tuning araç seti | Açık |
-| Vektör veritabanı ve embedding modeli | Açık; embedding modeli Almanca desteklemeli |
-| Donanım | Açık. Veri sentetik olduğu için eğitimde bulut GPU kullanılabilir. "Lokal çalışabilirlik" ise çıkarım (inference) için bir tasarım argümanı olarak korunur. |
+| Fine-tuning araç seti | [ÖNERİ] Unsloth + TRL (QLoRA) |
+| Vektör veritabanı ve embedding modeli | **[KARAR, tur 6]** BGE-M3 + Chroma |
+| Donanım | **[AÇIK]** Veri sentetik olduğu için eğitimde bulut GPU kullanılabilir. "Lokal çalışabilirlik" ise çıkarım (inference) için bir tasarım argümanı olarak korunur. Kullanıcının dizüstü bilgisayarında GTX 1650 4 GB var. [ÖNERİ] Geliştirme, deneme turu ve demo bu makinede; fine-tuning ve değerlendirme Kaggle'da (ücretsiz) ya da kiralık GPU'da (`docs/06`, A2). |
 
 ---
 
@@ -392,7 +406,7 @@ Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adım: bilgi tabanı (Katman 2) ve ideal yorumların üretimi için yöntem kararları. İkisi birbirine bağlı; temel model seçimi de ideal yorumların biçimini etkiliyor. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
+**[ÖNERİ]** Sıradaki adım: model tarafında açık kalan kararlar (test arketipi, varyant sayısı, donanım ve bütçe, ideal yorum yöntemi, öğretmen model; `docs/06`). Ardından doğrulama katmanı (Katman 4) ve bilgi tabanı (Katman 2). Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

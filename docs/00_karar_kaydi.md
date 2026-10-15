@@ -197,6 +197,42 @@ Bu cevaplarla `facts.json` şeması 1.0 onaylandı (`05_facts_semasi.md`).
 - **Bayrak isabeti** ölçüldü (`tools/flag_quality.py`, `05`, Bölüm 7). Tek parametre değişikliği: V6'da önceki yıl sınırı %10 → %15 (precision %75 → %72, recall %49 → %63).
 - **Tam örnek:** `docs/examples/facts_A1-v00_2025-06.json`. Bir test, dosyanın referans veriyle güncel olduğunu kontrol eder.
 
+## 10. Karar turu 6 (15.10.2026): model tarafı
+
+Seçenekler, gerekçeler ve kullanıcının istediği ek açıklamalar: `06_model_tarafi_secenekler.md`.
+
+### 10.1 Kararlar [KARAR]
+
+| Kod | Konu | Karar |
+|---|---|---|
+| A1 | Temel model | **Almanca deneme turu** üç adayla: Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. ~10 `facts.json` örneği, aynı istem, sıfır atış. Ölçütler: akıcılık, format, rakam sadakati, bellek ve hız. Eşitlikte Ministral 3 8B [ÖNERİ]. |
+| B3 | Notta geçmeyen nedenler | Hedef metin açık soru sorar ya da `(Hypothese)` işaretli genel bir hipotez verir. Hipotez yalnızca modelin görebildiği bilgiden (facts, bayraklar, K-B) türetilir. Ground truth'taki gerçek neden hedef metne hiçbir zaman yazılmaz. |
+| B4 | Çıktı yapısı (CLAUDE.md 6.3) | Dört bölüm; Kernaussagen en fazla 3; sabit tablo sütunları; ~250–350 kelime (tablo hariç); her neden cümlesinde `[Quelle: …]` veya `(Hypothese)`; boş bölümde „Keine.“ |
+| D1 | Embedding | BGE-M3 |
+| D2 | Vektör deposu | Chroma (gömülü) |
+| D3 | K-C getirme | Firma + 13 aylık pencere filtresi, ardından anlamsal top-k (başlangıç k = 8). "Penceredeki bütün notlar" ablation'da karşılaştırma. Yeni metrik: retrieval isabeti (recall@k). |
+| D4 | K-D | İlk sürümde kapalı; sonra ayrı deney. |
+
+A1'i kullanıcı onayladı. B3, B4 ve D1–D4'ü kullanıcı asistana bıraktı; asistanın önerisi olduğu gibi karar olarak kaydedildi.
+
+### 10.2 Donanım bilgisi
+
+- Kullanıcının bilgisayarı: Monster Abra V15.2 (~2019), Intel i7-9750H, 16 GB RAM, NVIDIA GTX 1650 4 GB.
+- Asistanın değerlendirmesi (`06`, A2.1) [ÖNERİ]:
+  - Geliştirme, embedding, deneme turu ve demo bu makinede yapılabilir.
+  - Fine-tuning ve toplu değerlendirme bulutta yapılmalı: Kaggle (ücretsiz) veya kiralık GPU.
+- Bu oturumun bulut ortamında GPU yok. Asistan defterleri hazırlar, kullanıcı çalıştırır.
+
+### 10.3 Açık kalanlar (ek açıklamayla yeniden soruldu)
+
+| Kod | Konu | Asistanın önerisi |
+|---|---|---|
+| C1 | Test arketipi | A1 (Muster GmbH) ve iki test düzeyi: yeni sektör + yeni firma |
+| C2 | Varyant sayısı | Kullanıcı 20'yi sordu. Öneri: 20 eğitim + 3 doğrulama varyantı / arketip → 960 eğitim ayı. Deneme koşusunda (seed 7) `cite` / `warn` / `either`: 47 / 509 / 19 |
+| A2 | Donanım ve bütçe | Dizüstü + Kaggle; kota yetmezse birkaç saatlik kiralık GPU |
+| B1 | İdeal yorum yöntemi | Karma (kural tabanlı içerik planı + öğretmen modelin dili + otomatik kontrol) + 20–30 örneklik altın küme |
+| B2 | Öğretmen model | Açık ağırlıklı model (ör. Mistral Large 3, Apache 2.0), API üzerinden |
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (karar turu 5: E18 kalibrasyonu, Katman 1 kodlandı)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 15.10.2026 (karar turu 6: model tarafı kararlarının bir kısmı)
 
 ---
 
-## 1. Genel durum: ~%28 tamamlandı
+## 1. Genel durum: ~%30 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,14 +13,15 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 14,2 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 15,1 gün
 toplam iş     = 50 gün
-durum         = 14,2 / 50 ≈ %28
+durum         = 15,1 / 50 ≈ %30
 ```
 
 **Belirsizlik:**
 - Tahminler en çok model tarafındaki paketlerde belirsiz: ideal yorumların üretimi, baseline'lar, fine-tuning, değerlendirme. Bu paketler GPU erişimine, temel modelin Almanca kalitesine ve deneme–yanılma döngülerine bağlı.
-- Gerçekçi aralık %22–33.
+- Kullanıcının dizüstünde 4 GB GPU var; eğitim ve değerlendirme bulutta (Kaggle) yapılacak. Defterlerin kullanıcı tarafından çalıştırılması turları uzatabilir.
+- Gerçekçi aralık %24–35.
 - Kalan işin ~%70'i model tarafında. Bu, G7'deki odakla uyumlu.
 
 ---
@@ -32,14 +33,14 @@ durum         = 14,2 / 50 ≈ %28
 | 1 | Problem tanımı, tasarım ve kararlar | 3 | %100 | 3,0 | ✅ tamamlandı |
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
-| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %5 | 0,3 | ⏳ başlamadı |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %0 | 0,0 | ⏳ başlamadı |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %0 | 0,0 | ⏳ başlamadı |
+| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %10 | 0,6 | ⏳ başlamadı (tasarım kararları alındı) |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %5 | 0,4 | ⏳ başlamadı (çıktı yapısı kararlaştırıldı) |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %5 | 0,25 | ⏳ başlamadı (aday listesi kararlaştırıldı) |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %5 | 0,15 | ⏳ başlamadı |
 | 9 | Değerlendirme ve ablation | 6 | %15 | 0,9 | ⏳ başlamadı (altyapı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **14,2** | **≈ %28** |
+| | **Toplam** | **50** | | **15,1** | **≈ %30** |
 
 ---
 
@@ -76,8 +77,12 @@ durum         = 14,2 / 50 ≈ %28
   - K-C'nin yüklenmesi.
   - K-D: önceki ayların onaylı yorumları; paket 5'e bağlı.
   - Sorgu üretimi (`facts.json`'dan), meta veri filtresi, retrieval'ın ölçülmesi.
+- **Kararlaştırılan (tur 6):**
+  - BGE-M3 + Chroma.
+  - K-C: 13 ay filtre + top-k (k = 8); "bütün notlar" ablation'da.
+  - recall@k metriği.
+  - K-D ilk sürümde kapalı.
 - **Açık kararlar:**
-  - Embedding modeli ve vektör veritabanı (CLAUDE.md 10).
   - K-E (sektör oranları) dahil edilecek mi? Şu an [ÖNERİ]; güvenilir kaynak bulunursa.
   - SKR03 eşlemesinin kaynağı ve doğrulanması.
 
@@ -86,10 +91,13 @@ durum         = 14,2 / 50 ≈ %28
   - Eğitim hedeflerinin üretimi ve kalite kontrolü.
   - Doğrulama katmanıyla (paket 8) otomatik kontrol.
   - Eğitim formatı.
-- **Açık kararlar:**
-  - **Üretim yöntemi** [AÇIK, ertelendi]: büyük modelle üretip elle gözden geçirme / şablon / elle yazma / karışım.
-  - **Çıktı yapısı** (CLAUDE.md 6.3, [ÖNERİ]).
-  - **Eğitim/test ayrımı** [AÇIK, ertelendi]: hangi arketip test, arketip başına kaç varyant.
+- **Kararlaştırılan (tur 6):**
+  - Çıktı yapısı (CLAUDE.md 6.3).
+  - Notta geçmeyen nedenlerde açık soru veya işaretli hipotez; ground truth nedeni hedef metne yazılmaz.
+- **Açık kararlar** (`docs/06`, B ve C; ek açıklamayla yeniden soruldu):
+  - **Üretim yöntemi** [AÇIK]. Öneri: karma + altın küme.
+  - **Öğretmen model** [AÇIK]. Öneri: açık ağırlıklı, API üzerinden.
+  - **Eğitim/test ayrımı** [AÇIK]. Öneri: test arketipi A1; 20 eğitim + 3 doğrulama varyantı / arketip.
   - `train_price_boost` profilinin eğitim verisinde kullanılması.
 
 ### 6. Model seçimi, çıkarım altyapısı, baseline'lar — ⏳ başlamadı
@@ -97,14 +105,15 @@ durum         = 14,2 / 50 ≈ %28
   - Aday modellerin Almanca kalitesinin denenmesi.
   - Çıkarım altyapısı ve istem (prompt).
   - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
-- **Açık kararlar:** Temel model (3–8B sınıfı, lisans notları CLAUDE.md 10), donanım, çıkarım altyapısı.
+- **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
+- **Açık kararlar:** Donanım ve bütçe (Kaggle / kiralık GPU); çıkarım altyapısı [ÖNERİ: değerlendirme vLLM, demo Ollama].
 
 ### 7. Fine-tuning (LoRA) — ⏳ başlamadı
 - **Kalan:**
   - Eğitim verisinin hazırlanması (paket 5).
   - LoRA eğitimi: yalnızca FT ve RAG + FT varyantları.
   - Hiperparametreler, eğitim kayıtları.
-- **Açık kararlar:** Fine-tuning araç seti, donanım (bulut GPU), eğitim verisi hacmi.
+- **Açık kararlar:** Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA], donanım (Kaggle / kiralık GPU; dizüstünün 4 GB GPU'su eğitime yetmiyor), eğitim verisi hacmi [ÖNERİ: 960 ay].
 
 ### 8. Doğrulama katmanı (Katman 4) — ⏳ başlamadı
 - **Hazır olan:** Kural kararlaştırıldı: rakam ya `facts.json`'la eşleşir ya da atıf yapılan nottan gelir. Notlardaki rakamlar ground truth'ta kayıtlı.
@@ -127,7 +136,8 @@ durum         = 14,2 / 50 ≈ %28
   - Sonuçların analizi.
 - **Açık kararlar:**
   - Üslup değerlendirmesi: insan mı, LLM-as-judge mı? (CLAUDE.md 8)
-  - Test arketipi.
+  - Test arketipi [ÖNERİ: A1 + iki test düzeyi].
+  - Retrieval isabeti (recall@k) metriği eklendi (tur 6).
   - `expected_flags`'in anlamlılık eşiğine göre süzülmesi.
 
 ### 10. Portfolyo dokümantasyonu — ⏳ başlamadı
@@ -143,11 +153,10 @@ durum         = 14,2 / 50 ≈ %28
 
 ## 4. Sıradaki adımlar
 
-1. **Model tarafının yöntem kararları.** Birbirine bağlı oldukları için birlikte ele alınmalı. Seçenekler ve öneriler [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md) dosyasında; tur 6'da sunuldu, kullanıcı kararı bekleniyor:
-   - Temel model ve çıkarım altyapısı (paket 6). Almanca kalite testi için birkaç aday.
-   - İdeal yorumların üretim yöntemi ve çıktı yapısı (paket 5, CLAUDE.md 6.3).
-   - Eğitim/test ayrımı: test arketipi ve varyant sayısı (paket 5).
-   - Embedding modeli ve vektör veritabanı (paket 4).
+1. **Model tarafında açık kalan kararlar** ([`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md)). Tur 6'da kısmen karara bağlandı; açık olanlar:
+   - Test arketipi ve varyant sayısı (paket 5).
+   - Donanım ve bütçe (paket 6–7).
+   - İdeal yorum yöntemi ve öğretmen model (paket 5).
 2. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, K-C yükleme, 13 aylık pencereyle retrieval.
 3. **Doğrulama katmanı (paket 8):** Ideal yorumların otomatik kontrolünde de kullanılacağı için paket 5'ten önce yazılması önerilir.
 
@@ -158,3 +167,4 @@ durum         = 14,2 / 50 ≈ %28
 | 15.10.2026 | İlk sürüm (karar turu 4 sonrası): %21 |
 | 15.10.2026 | Karar turu 5: E18 kalibrasyonu, Katman 1 (şema 1.0) kodlandı, bayrak isabeti ölçüldü: %28 |
 | 15.10.2026 | Model tarafı seçenekleri sunuldu (`06_model_tarafi_secenekler.md`); durum değişmedi: %28 |
+| 15.10.2026 | Karar turu 6: deneme turu adayları, çıktı yapısı, notsuz neden kuralı, bilgi tabanı (BGE-M3, Chroma, top-k, K-D kapalı). Paket 4 → %10, 5 → %5, 6 → %5: %30 |

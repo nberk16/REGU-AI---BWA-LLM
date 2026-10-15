@@ -6,6 +6,7 @@ build/
 dist/
 .venv/
 
-# Sentetik veri: yalnızca referans koşu repoda tutulur (docs/00, karar turu 3)
+# Sentetik veri: yalnızca referans koşu ve dengelenmiş V2 kümesi repoda tutulur (docs/00, turlar 3–4)
 data/synthetic/*
 !data/synthetic/reference_seed42/
+!data/synthetic/v2_balanced_seed4242/

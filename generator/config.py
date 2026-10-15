@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 CONFIG_DIR = Path(__file__).parent / "config"
+PROFILE_DIR = CONFIG_DIR / "profiles"
 
 
 @dataclass(frozen=True)
@@ -41,8 +42,35 @@ def _read(name: str, path: Path | None) -> dict:
         return tomllib.load(f)
 
 
-def load_archetypes(path: Path | None = None) -> dict[str, Archetype]:
-    raw = _read("archetypes.toml", path)
+def deep_merge(base: dict, override: dict) -> dict:
+    """override'daki değerleri base'e iç içe yazar (profil dosyaları için)."""
+    merged = dict(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = deep_merge(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def load_profile(name: str | None) -> dict:
+    """Profil: ana parametrelerin üzerine yazılan küçük bir TOML dosyası (generator/config/profiles/).
+
+    Bölümler: [archetypes] → archetypes.toml, [generation] → generation.toml,
+    [balanced_v2] → dengelenmiş V2 test kümesi seçimi (v2_set.py).
+    """
+    if not name:
+        return {}
+    path = PROFILE_DIR / f"{name}.toml"
+    if not path.exists():
+        available = ", ".join(sorted(p.stem for p in PROFILE_DIR.glob("*.toml")))
+        raise ValueError(f"Bilinmeyen profil: {name} (mevcut: {available})")
+    with open(path, "rb") as f:
+        return tomllib.load(f)
+
+
+def load_archetypes(path: Path | None = None, overrides: dict | None = None) -> dict[str, Archetype]:
+    raw = deep_merge(_read("archetypes.toml", path), overrides or {})
     archetypes = {}
     for code, a in raw.items():
         archetypes[code] = Archetype(
@@ -70,17 +98,19 @@ def load_archetypes(path: Path | None = None) -> dict[str, Archetype]:
     return archetypes
 
 
-def load_generation(path: Path | None = None) -> dict:
-    return _read("generation.toml", path)
+def load_generation(path: Path | None = None, overrides: dict | None = None) -> dict:
+    return deep_merge(_read("generation.toml", path), overrides or {})
 
 
 def load_templates(path: Path | None = None) -> dict:
     return _read("note_templates.toml", path)
 
 
-def config_fingerprint() -> str:
-    """Parametre dosyalarının özeti; manifest'e yazılır."""
+def config_fingerprint(profile: str | None = None) -> str:
+    """Parametre dosyalarının (ve varsa profilin) özeti; manifest'e yazılır."""
     h = hashlib.sha256()
     for name in ("archetypes.toml", "generation.toml", "note_templates.toml"):
         h.update((CONFIG_DIR / name).read_bytes())
+    if profile:
+        h.update((PROFILE_DIR / f"{profile}.toml").read_bytes())
     return h.hexdigest()[:16]

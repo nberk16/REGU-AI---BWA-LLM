@@ -1,0 +1,6 @@
+# Yalnızca eğitim verisi için (docs/00, karar turu 4): fiyat olayları (E04, E05) ölçülü artırılır.
+# Böylece model "Rohertrag adayı + notlu fiyat olayı → kaynakla açıkla" durumunu yeterince görür.
+# Ana veri (referans koşu) ve test kümeleri bu profili kullanmaz.
+[generation.events.per_year]
+E04 = [1, 3]
+E05 = [1, 2]

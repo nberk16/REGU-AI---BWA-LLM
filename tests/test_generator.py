@@ -24,18 +24,18 @@ def run():
 
 @pytest.fixture(scope="module")
 def timeline(run):
-    return run[0]
+    return run.timeline
 
 
 @pytest.fixture(scope="module")
 def results(run):
-    return run[1]
+    return run.results
 
 
 # --- Belirlenimcilik ---------------------------------------------------------------------------
 
 def test_same_seed_same_output(results):
-    _, again = generate_run(["A1", "A2", "A3"], 10, SEED)
+    again = generate_run(["A1", "A2", "A3"], 10, SEED).results
     for a, b in zip(results, again):
         assert np.array_equal(a.booked, b.booked)
         assert a.notes == b.notes
@@ -43,7 +43,7 @@ def test_same_seed_same_output(results):
 
 
 def test_more_variants_do_not_change_existing_ones(results):
-    _, small = generate_run(["A1"], 3, SEED)
+    small = generate_run(["A1"], 3, SEED).results
     for a, b in zip(results[:3], small):
         assert a.variant.firm_id == b.variant.firm_id
         assert np.array_equal(a.booked, b.booked)
@@ -51,7 +51,7 @@ def test_more_variants_do_not_change_existing_ones(results):
 
 
 def test_different_seed_differs(results):
-    _, other = generate_run(["A1"], 2, SEED + 1)
+    other = generate_run(["A1"], 2, SEED + 1).results
     assert not np.array_equal(results[1].booked, other[1].booked)
 
 
@@ -247,8 +247,8 @@ def test_number_formatting():
 
 # --- Oranlar (docs/03) -------------------------------------------------------------------------
 
-def test_rates_close_to_targets(results, timeline):
-    s = run_statistics(results, timeline)
+def test_rates_close_to_targets(run):
+    s = run_statistics(run.results, run.timeline, run.gen)
     assert 0.60 <= s["documented_share_real_v5"] <= 0.80
     assert 0.60 <= s["season_note_share"] <= 0.80
     assert 0.08 <= s["quiet_month_share_commentable"] <= 0.25
@@ -289,8 +289,8 @@ def test_undocumented_price_events_make_v2_acceptable(results):
 
 # --- Yazılan dosyalar ---------------------------------------------------------------------------
 
-def test_written_files_separate_model_input_and_evaluation(results, timeline, tmp_path):
-    write_run(results[:2], timeline, tmp_path, SEED, ["A1"], 2)
+def test_written_files_separate_model_input_and_evaluation(timeline, tmp_path):
+    write_run(generate_run(["A1"], 2, SEED), tmp_path)
     model_files = {p.name for p in (tmp_path / "model_input").iterdir()}
     assert model_files == {"bwa_raw.csv", "context_notes.jsonl", "firms.json"}
     raw = (tmp_path / "model_input" / "bwa_raw.csv").read_text(encoding="utf-8")
@@ -303,3 +303,64 @@ def test_written_files_separate_model_input_and_evaluation(results, timeline, tm
     manifest = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["seed"] == SEED
     assert set(CATEGORY) >= set(manifest["statistics"]["events_by_type"])
+
+
+# --- Profiller ve dengelenmiş V2 kümesi (karar turu 4) -----------------------------------------
+
+def test_profile_overrides_apply():
+    from generator.config import load_archetypes, load_profile
+    base = load_archetypes()
+    over = load_archetypes(overrides=load_profile("v2_balanced")["archetypes"])
+    assert base["A2"].practices["p3_bestand"] == 0.8
+    assert over["A2"].practices["p3_bestand"] == 0.2
+    assert over["A2"].practices["p3_mode"] == base["A2"].practices["p3_mode"]  # diğer alanlar korunur
+
+
+def test_unknown_profile_is_rejected():
+    with pytest.raises(ValueError):
+        generate_run(["A1"], 1, SEED, profile="yok_boyle_profil")
+
+
+def test_first_variant_offset_creates_new_firms(results):
+    shifted = generate_run(["A1"], 2, SEED, first_variant=50).results
+    assert [r.variant.firm_id for r in shifted] == ["A1-v50", "A1-v51"]
+    reference_names = {r.variant.name for r in results}
+    assert not reference_names & {r.variant.name for r in shifted}
+
+
+def test_rohertrag_candidate_rule(results, timeline):
+    from generator.v2_set import rohertrag_candidates, rohertragsquote
+    pp = load_generation()["v2_candidates"]["ratio_pp"]
+    for r in results[:5]:
+        rq = rohertragsquote(r.booked)
+        candidates = rohertrag_candidates(r.booked, timeline, pp)
+        for i in range(12, timeline.n):
+            both = abs(rq[i] - rq[i - 1]) >= pp and abs(rq[i] - rq[i - 12]) >= pp
+            assert (i in candidates) == both
+
+
+def test_balanced_set_is_balanced():
+    from generator.v2_set import balanced_v2_set, rohertrag_candidates
+    run = generate_run(["A2", "A3"], 4, SEED, profile="v2_balanced", first_variant=50)
+    pp = run.gen["v2_candidates"]["ratio_pp"]
+    selected = balanced_v2_set(run.results, run.timeline, pp, SEED)
+    by_firm = {r.variant.firm_id: r for r in run.results}
+    for code in ("A2", "A3"):
+        items = [x for x in selected if x["archetype"] == code]
+        cite = sum(x["decision"] == "cite" for x in items)
+        warn = sum(x["decision"] == "warn" for x in items)
+        either = sum(x["decision"] == "either" for x in items)
+        assert cite == warn and either <= cite
+    for x in selected:
+        r = by_firm[x["firm_id"]]
+        i = run.timeline.index(x["period"])
+        assert i in rohertrag_candidates(r.booked, run.timeline, pp)
+        assert r.months[i]["v2_candidate_decision"] == x["decision"]
+
+
+def test_reference_report_shows_v2_decisions_per_archetype(run):
+    s = run_statistics(run.results, run.timeline, run.gen)
+    assert set(s["v2_decisions_by_archetype"]) == {"A1", "A2", "A3"}
+    for entry in s["v2_decisions_by_archetype"].values():
+        assert sum(entry["all"].values()) == 10 * (run.timeline.n - run.timeline.commentable_from)
+        assert all(entry["candidates"][k] <= entry["all"][k] for k in entry["all"])

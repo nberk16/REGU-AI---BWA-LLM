@@ -15,12 +15,14 @@ from .config import config_fingerprint
 from .events import REAL_AND_V5
 from .ground_truth import event_record
 from .lines import BASE_LINES, EPS, LINE_INDEX
-from .pipeline import VariantResult
+from .pipeline import Run, VariantResult
 from .timeline import Timeline
+from .v2_set import balanced_v2_set, decision_counts
 
 MODEL_INPUT_FILES = ("bwa_raw.csv", "context_notes.jsonl", "firms.json")
 EVALUATION_FILES = ("bwa_true.csv", "effects.csv", "events.jsonl", "ground_truth_months.jsonl",
                     "notes_ground_truth.jsonl", "variants.json")
+BALANCED_FILE = "v2_balanced_set.jsonl"
 
 
 def _json_default(obj):
@@ -103,8 +105,8 @@ def _variant_record(r: VariantResult) -> dict:
     }
 
 
-def write_run(results: list[VariantResult], timeline: Timeline, out_dir: Path, seed: int,
-              archetype_codes: list[str], variants_per_archetype: int) -> dict:
+def write_run(run: Run, out_dir: Path) -> dict:
+    results, timeline = run.results, run.timeline
     model_dir, eval_dir = out_dir / "model_input", out_dir / "evaluation"
     model_dir.mkdir(parents=True, exist_ok=True)
     eval_dir.mkdir(parents=True, exist_ok=True)
@@ -124,18 +126,32 @@ def write_run(results: list[VariantResult], timeline: Timeline, out_dir: Path, s
         json.dumps([_variant_record(r) for r in results], ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8")
 
-    stats = run_statistics(results, timeline)
+    evaluation_files = [f"evaluation/{f}" for f in EVALUATION_FILES]
+    balanced = None
+    if "balanced_v2" in run.profile_config:
+        cfg = run.profile_config["balanced_v2"]
+        balanced = balanced_v2_set(results, timeline, run.gen["v2_candidates"]["ratio_pp"], run.seed,
+                                   cfg.get("include_either", True))
+        _write_jsonl(eval_dir / BALANCED_FILE, balanced)
+        evaluation_files.append(f"evaluation/{BALANCED_FILE}")
+
+    stats = run_statistics(results, timeline, run.gen)
+    if balanced is not None:
+        stats["v2_balanced_set"] = _balanced_counts(balanced)
     manifest = {
         "generator_version": __version__,
-        "config_fingerprint": config_fingerprint(),
-        "seed": seed,
-        "archetypes": archetype_codes,
-        "variants_per_archetype": variants_per_archetype,
+        "config_fingerprint": config_fingerprint(run.profile),
+        "seed": run.seed,
+        "profile": run.profile,
+        "archetypes": run.archetype_codes,
+        "variants_per_archetype": run.variants_per_archetype,
+        "first_variant": run.first_variant,
         "periods": {"start": timeline.period(0), "end": timeline.period(timeline.n - 1),
                     "commentable_from": timeline.period(timeline.commentable_from)},
+        "v2_candidate_ratio_pp": run.gen["v2_candidates"]["ratio_pp"],
         "files": {
             "model_input": [f"model_input/{f}" for f in MODEL_INPUT_FILES],
-            "evaluation": [f"evaluation/{f}" for f in EVALUATION_FILES],
+            "evaluation": evaluation_files,
         },
         "statistics": stats,
     }
@@ -151,7 +167,15 @@ def _share(num: int, den: int) -> float | None:
     return round(num / den, 3) if den else None
 
 
-def run_statistics(results: list[VariantResult], timeline: Timeline) -> dict:
+def _balanced_counts(balanced: list[dict]) -> dict:
+    counts: dict[str, dict[str, int]] = {}
+    for item in balanced:
+        entry = counts.setdefault(item["archetype"], {"cite": 0, "warn": 0, "either": 0})
+        entry[item["decision"]] += 1
+    return counts
+
+
+def run_statistics(results: list[VariantResult], timeline: Timeline, gen: dict) -> dict:
     events = [e for r in results for e in r.events]
     real = [e for e in events if e.type in REAL_AND_V5]
     pool = [e for e in events if e.is_pool]
@@ -167,13 +191,6 @@ def run_statistics(results: list[VariantResult], timeline: Timeline) -> dict:
         same = [e for e in events if e.type == etype]
         by_type[etype] = {"count": len(same), "documented": sum(e.documented for e in same)}
 
-    a2_decisions = {}
-    for r in results:
-        if r.variant.kind != "trader":
-            continue
-        for m in r.months:
-            if m["commentable"] and m["v2_candidate_decision"]:
-                a2_decisions[m["v2_candidate_decision"]] = a2_decisions.get(m["v2_candidate_decision"], 0) + 1
 
     return {
         "variants": len(results),
@@ -187,7 +204,7 @@ def run_statistics(results: list[VariantResult], timeline: Timeline) -> dict:
         "near_threshold_share_pool": _share(sum(e.near_threshold for e in pool), len(pool)),
         "overlap_share_pool": _share(sum(bool(e.overlaps_with) for e in pool), len(pool)),
         "season_note_share": _share(sum(1 for e in events if e.type == "E19" and e.documented), len(results)),
-        "a2_v2_candidate_decisions": a2_decisions,
+        "v2_decisions_by_archetype": decision_counts(results, timeline, gen["v2_candidates"]["ratio_pp"]),
     }
 
 
@@ -205,13 +222,39 @@ def _eur(x: float) -> str:
     return f"{x:,.0f}".replace(",", ".")
 
 
+def _v2_section(s: dict, manifest: dict) -> list[str]:
+    """V2 kararları: arketip başına, bütün yorumlanabilir aylarda ve Rohertrag adayı aylarda."""
+    pp = manifest["v2_candidate_ratio_pp"]
+    out = ["", "## V2 kararları (Rohertrag adayları)", "",
+           f"Rohertrag adayı: Rohertragsquote önceki aya **ve** önceki yılın aynı ayına göre ≥ {pp} puan "
+           "değişmiş (Katman 1 kuralı). Doğru karar yalnızca ground truth'ta: cite = notla açıkla, "
+           "warn = uyar, either = ikisi de kabul, None = Rohertragsquote'yi değiştiren olay yok.", "",
+           "| Arketip | Kapsam | cite | warn | either | None |", "|---|---|---:|---:|---:|---:|"]
+    for code, entry in s["v2_decisions_by_archetype"].items():
+        for scope, label in (("all", "bütün yorumlanabilir aylar"), ("candidates", "Rohertrag adayı aylar")):
+            c = entry[scope]
+            out.append(f"| {code} | {label} | {c['cite']} | {c['warn']} | {c['either']} | {c['None']} |")
+    if "v2_balanced_set" in s:
+        out += ["", "### Dengelenmiş V2 kümesi", "",
+                "**Bu küme dengelenmiştir; gerçek dağılımı yansıtmaz.** Yalnızca \"V2 adayı ayrımı\" metriği "
+                f"için kullanılır (`evaluation/{BALANCED_FILE}`). Her arketipte cite ve warn aylarından eşit sayıda, "
+                "either aylarından en fazla aynı sayıda Rohertrag adayı ay seçildi.", "",
+                "| Arketip | cite | warn | either |", "|---|---:|---:|---:|"]
+        for code, c in s["v2_balanced_set"].items():
+            out.append(f"| {code} | {c['cite']} | {c['warn']} | {c['either']} |")
+    return out + [""]
+
+
 def build_report(results: list[VariantResult], timeline: Timeline, manifest: dict) -> str:
     s = manifest["statistics"]
+    profile = manifest["profile"]
     out = [
         "# Sentetik veri koşusu — sağlama raporu",
         "",
         f"- Seed: `{manifest['seed']}` · Arketipler: {', '.join(manifest['archetypes'])} · "
-        f"Arketip başına varyant: {manifest['variants_per_archetype']}",
+        f"Arketip başına varyant: {manifest['variants_per_archetype']} "
+        f"(ilk varyant: v{manifest['first_variant']:02d})",
+        f"- Profil: {'`' + profile + '` (ana parametrelerden farklı; docs/04, Bölüm 8)' if profile else 'yok (ana parametreler)'}",
         f"- Dönem: {manifest['periods']['start']} – {manifest['periods']['end']} "
         f"(yorumlanabilir: {manifest['periods']['commentable_from']} itibarıyla)",
         f"- Üreteç sürümü: {manifest['generator_version']} · Parametre özeti: `{manifest['config_fingerprint']}`",
@@ -228,11 +271,9 @@ def build_report(results: list[VariantResult], timeline: Timeline, manifest: dic
         f"| Rakamlı olay notları | ~%50 | {s['event_notes_with_numbers_share']:.1%} |",
         f"| Eşik yakını havuz olayları | ~%20 | {s['near_threshold_share_pool']:.1%} |",
         f"| Çakışan havuz olayları | ~%10 | {s['overlap_share_pool']:.1%} |",
-        "",
-        "A2'de V2 adayı olan yorumlanabilir aylarda beklenen karar dağılımı "
-        "(cite = notla açıkla, warn = uyar, either = ikisi de kabul): "
-        + ", ".join(f"{k}: {v}" for k, v in sorted(s["a2_v2_candidate_decisions"].items())),
-        "",
+    ]
+    out += _v2_section(s, manifest)
+    out += [
         "## Olay türleri",
         "",
         "| Tür | Adet | Notlu |",

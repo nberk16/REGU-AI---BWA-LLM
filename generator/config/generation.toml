@@ -22,6 +22,12 @@ season_amplitude = [0.7, 1.3]
 trend_pct = [-2.0, 6.0]
 name_stems = ["Modell", "Vorlage", "Schema", "Demo", "Probe", "Typus", "Exemplar", "Prototyp", "Musterbau", "Beispielwerk", "Vorbild", "Entwurf"]
 
+# Rohertrag adayı: Rohertragsquote önceki aya VE önceki yılın aynı ayına göre en az bu kadar puan
+# değişmiş. Katman 1'in oran eşiğiyle aynıdır (CLAUDE.md 6.2, karar turu 4). Raporlarda ve
+# dengelenmiş V2 kümesinde kullanılır.
+[v2_candidates]
+ratio_pp = 2.0
+
 [notes]
 documented_share = 0.70
 season_note_share = 0.70

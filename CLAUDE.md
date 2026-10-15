@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Model tarafı kararlarının bir kısmı alındı (tur 6, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%30, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci** ve **hesaplama modülü (Katman 1)** tamamlandı (karar turları 1–5). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%32, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -361,14 +361,22 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - **Muster GmbH** toparlanma hikâyesi olarak kalıyor.
   - **Olay yoğunluğu** ayda ~1,5 olarak kabul edildi.
 - **[KARAR, tur 5]** E18 kalibrasyonu: Malzeme satırındaki geç fatura kayması %5–20'ye indirildi; iki veri kümesi yeniden üretildi (`docs/00`, Bölüm 9).
-- **[AÇIK]** Eğitim hedeflerinin (ideal yorumların) üretim yöntemi ve öğretmen model. Seçenekler: büyük bir modelle üretip elle gözden geçirme, şablon tabanlı üretim, elle yazma veya bunların karışımı. Tur 6'da sunuldu (`docs/06`, B1–B2).
-- **[AÇIK — ertelendi]** Eğitim/test ayrımı ve veri sızıntısını önleme yöntemi. Kararlaştırılan ilke: test, eğitimde hiç görülmemiş bir **arketip** üzerinde yapılır. Açık olanlar: hangi arketipin test olacağı ve arketip başına varyant sayısı (üreteçte parametre). Tur 6'da sunuldu (`docs/06`, C).
+- **[KARAR, tur 7] İdeal yorumlar (eğitim hedefleri)** (`docs/06`, B1–B2):
+  - Karma yöntem: kural tabanlı içerik planı (ne söylenecek) + öğretmen modelin Almancası (nasıl söylenecek) + otomatik kontrol.
+  - Ek olarak 20–30 örneklik, elle kontrol edilmiş altın küme.
+  - Öğretmen: açık ağırlıklı bir model, API üzerinden. Somut model [ÖNERİ]: Mistral Large 3.
+- **[KARAR, tur 7] Eğitim/test ayrımı** (`docs/04`, Bölüm 9; `docs/06`, C):
+  - Testte hem öğretilmemiş hem öğretilmiş türden örnekler var:
+    - **Yeni sektör:** test arketipi **A1** (Muster GmbH), eğitimde hiç görülmez.
+    - **Yeni firma:** A2 ve A3'ün görülmemiş varyantları (`reference_seed42`).
+  - Eğitim: A2 + A3 × 20 varyant (`train_price_boost`, seed 7, v100–v119) → 960 ay.
+  - Doğrulama: v120–v122 → 144 ay. Deneme turu örnekleri de buradan seçilir.
 
 ---
 
-## 10. Teknik tercihler [AÇIK]
+## 10. Teknik tercihler
 
-Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md). Tur 6'da kısmen karara bağlandı.
+Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md). Turlar 6–7'de karara bağlandı.
 
 | Konu | Not |
 |---|---|
@@ -376,7 +384,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 | Lisans notları (kaynak belgeden) | Mistral: Apache 2.0, AB menşeli. gpt-oss: Apache 2.0 (20b yaklaşık 16 GB'a sığıyor). Llama: 3.2'den beri çok modlu modeller AB merkezli firmalara lisanslanmıyor; metin modelleri kullanılabilir. Proje yalnızca metin kullandığı için bu kısıt doğrudan etkilemez. Qwen: Apache 2.0, ama Çin menşeli; Alman firmalarında kullanımı yaklaşık %1, algı sorunu olabilir. |
 | Fine-tuning araç seti | [ÖNERİ] Unsloth + TRL (QLoRA) |
 | Vektör veritabanı ve embedding modeli | **[KARAR, tur 6]** BGE-M3 + Chroma |
-| Donanım | **[AÇIK]** Veri sentetik olduğu için eğitimde bulut GPU kullanılabilir. "Lokal çalışabilirlik" ise çıkarım (inference) için bir tasarım argümanı olarak korunur. Kullanıcının dizüstü bilgisayarında GTX 1650 4 GB var. [ÖNERİ] Geliştirme, deneme turu ve demo bu makinede; fine-tuning ve değerlendirme Kaggle'da (ücretsiz) ya da kiralık GPU'da (`docs/06`, A2). |
+| Donanım | **[KARAR, tur 7]** Fine-tuning ve değerlendirme **Kaggle**'da (ücretsiz T4). Geliştirme, deneme turu ve demo kullanıcının dizüstünde (GTX 1650, 4 GB). Kiralık GPU şimdilik yok. "Lokal çalışabilirlik", son modelin bu dizüstünde çalışmasıyla gösterilir (`docs/06`, A2). |
 
 ---
 
@@ -406,7 +414,7 @@ Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adım: model tarafında açık kalan kararlar (test arketipi, varyant sayısı, donanım ve bütçe, ideal yorum yöntemi, öğretmen model; `docs/06`). Ardından doğrulama katmanı (Katman 4) ve bilgi tabanı (Katman 2). Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
+**[ÖNERİ]** Sıradaki adımlar: doğrulama katmanı (Katman 4) → Almanca deneme turu (kullanıcının dizüstünde) → bilgi tabanı (Katman 2) → ideal yorumlar. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

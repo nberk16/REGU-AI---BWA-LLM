@@ -1,10 +1,11 @@
 # 06 — Model tarafı: kararlar ve seçenekler
 
-> **Durum (tur 6, 15.10.2026):**
-> - **[KARAR]:** A1 deneme turu, B3, B4, D1–D4. B3, B4 ve D maddelerini kullanıcı asistana bıraktı; asistanın önerisi olduğu gibi karar olarak kaydedildi.
-> - **[AÇIK]:** C1 test arketipi, C2 varyant sayısı, A2 donanım ve bütçe, B1 ideal yorum yöntemi, B2 öğretmen model. Kullanıcının istediği ek açıklamalar ilgili bölümlerde.
+> **Durum (tur 7, 15.10.2026):** Bu belgedeki ana kararların hepsi alındı.
+> - **Tur 6:** A1 deneme turu, B3, B4, D1–D4. B3, B4 ve D maddelerini kullanıcı asistana bıraktı; asistanın önerisi olduğu gibi karar olarak kaydedildi.
+> - **Tur 7:** C1, C2, A2 (Kaggle), B1, B2.
+> - **[ÖNERİ] olarak kalanlar:** eşitlikte Ministral 3 8B; araç seti (Unsloth + TRL); çıkarım altyapısı; somut öğretmen model ve sağlayıcı (Mistral Large 3, Mistral API).
 >
-> **İlgili:** CLAUDE.md 6.2–6.3, 7, 8, 10 · `docs/yol_haritasi.md` paketleri 4–9 · Karar kaydı: `00_karar_kaydi.md`, Bölüm 10
+> **İlgili:** CLAUDE.md 6.2–6.3, 7, 8, 10 · `docs/yol_haritasi.md` paketleri 4–9 · Karar kaydı: `00_karar_kaydi.md`, Bölüm 10–11 · Kümeler: `04_veri_ureteci.md`, Bölüm 9
 >
 > Model bilgileri Ekim 2026 itibarıyla web aramasıyla doğrulandı; kaynaklar dosyanın sonunda. Lisanslar, kullanmadan önce model kartında bir kez daha kontrol edilmeli. Bu belge hukuki danışmanlık değildir (CLAUDE.md, talimat 5).
 
@@ -82,11 +83,10 @@ Ek not: 7 yıllık bir dizüstünün saatlerce tam yükte çalışması ısınma
 - Kullanıcı bunları Kaggle'da ya da dizüstünde çalıştırır.
 - Sonuç dosyaları repoya eklenir.
 
-**[ÖNERİ]** Dizüstü + Kaggle (ücretsiz):
+**[KARAR, tur 7]** Dizüstü + Kaggle (ücretsiz):
 - Dizüstü: geliştirme, embedding, deneme turu, demo.
 - Kaggle: fine-tuning ve değerlendirme.
-- Kota yetmezse birkaç saatlik kiralık GPU.
-- Kararı kullanıcı verir: donanım ve küçük bir bütçe kabul edilebilir mi?
+- Kiralık GPU şimdilik yok; kota yetmezse kullanıcıya sorulur.
 
 ### A3. Çıkarım (inference)
 
@@ -106,7 +106,7 @@ Ek not: 7 yıllık bir dizüstünün saatlerce tam yükte çalışması ısınma
 - **Öğretmen model:** İdeal yorumları yazan büyük model. Yalnızca veri hazırlığında kullanılır, üründe yer almaz. Büyük modelden küçük modele bu tür aktarıma *damıtma (distillation)* denir.
 - **Altın küme:** Metni insanın satır satır kontrol edip kusursuz hâle getirdiği küçük bir örnek kümesi; bir "cevap anahtarı".
 
-### B1. Üretim yöntemi — CLAUDE.md 9, [AÇIK]
+### B1. Üretim yöntemi — CLAUDE.md 9, **[KARAR, tur 7]**
 
 | Seçenek | Nasıl | Artı | Eksi |
 |---|---|---|---|
@@ -143,14 +143,14 @@ Kontrol:
 - 5 % atıf yapılan notta geçiyor ✓
 - İki neden de planda var ✓
 
-**[ÖNERİ]**
+**[KARAR, tur 7]**
 - **(c) karma.** Ek olarak 20–30 örneklik bir **altın küme**. Kullanım alanları:
   - otomatik metinlerin kalitesini ölçmek,
   - üslup değerlendirmesinde referans olmak,
   - öğretmen modelin istemine örnek vermek.
 - Doğrulama katmanı (paket 8), adım 3'te kullanılacağı için ideal yorumlardan **önce** yazılmalı.
 
-### B2. Öğretmen model — [AÇIK]
+### B2. Öğretmen model — **[KARAR, tur 7]**
 
 | Seçenek | Ne demek | Artı | Eksi |
 |---|---|---|---|
@@ -162,7 +162,11 @@ Kontrol:
 
 **Hacim:** ~1.000 metin; metin başına ~3–4K girdi ve ~0,6K çıktı token'ı, toplam ~4M girdi ve ~0,6M çıktı token'ı. Maliyet, sağlayıcı seçilince güncel fiyatla hesaplanır.
 
-**[ÖNERİ]** (a) Açık ağırlıklı model, API üzerinden. Kullanıcı küçük bir ücreti istemezse (c).
+**[KARAR, tur 7]** (a) Açık ağırlıklı model, API üzerinden.
+
+**[ÖNERİ] Somut model ve sağlayıcı:** Mistral Large 3, Mistral API.
+- **Fiyat:** Kaynaklar farklı fiyatlar veriyor: 1M token başına 0,50 $ / 1,50 $ ile 2 $ / 5–6 $ arası. Yukarıdaki hacimle ~3–12 $, tekrarlarla ~5–20 $. Resmî fiyat listesi API anahtarı alınırken kontrol edilir.
+- **Koşullar:** Üçüncü taraf bir özete göre Mistral'ın ticari koşullarındaki çıktı kısıtı görsel çıktılarla ilgili; metin çıktıları için kısıt bulunamadı. Resmî metin kontrol edilecek; bu not hukuki görüş değildir.
 
 ### B3. Notta geçmeyen nedenlerde hedef metin — **[KARAR, tur 6]**
 
@@ -187,7 +191,7 @@ Kontrol:
 
 ---
 
-## C. Eğitim/test ayrımı — CLAUDE.md 9, [AÇIK]
+## C. Eğitim/test ayrımı — CLAUDE.md 9, **[KARAR, tur 7]**
 
 ### C1. Test arketipi
 
@@ -216,7 +220,7 @@ Kontrol:
 | A2 (toptancı) test | V2 ayrımı en zor arketipte ölçülür; eğitimde `cite` örneği en çok | Muster GmbH eğitimde kalır; vitrin örnekleri "görülmüş" firmadan |
 | A3 (sezonlu üretici) test | Mevsimselliğe genelleme ölçülür | Güçlü sezon eğitimde hiç görülmez; çok zor bir test |
 
-**[ÖNERİ]** A1 ve iki test düzeyi.
+**[KARAR, tur 7]** A1 ve iki test düzeyi. Kullanıcının isteği, testte hem öğretilmiş hem öğretilmemiş türden örnekler olmasıydı: "yeni firma" öğretilmiş türü, "yeni sektör" öğretilmemiş türü karşılıyor.
 
 ### C2. Kümeler ve varyant sayısı (A1 test seçilirse)
 
@@ -248,7 +252,7 @@ Deneme koşusunun (seed 7) sayıları:
 | Test — yeni sektör | Referans koşu, A1, v00–v09 (Muster GmbH dahil) | 240 |
 | V2 ayrımı | Dengelenmiş küme. A1 kısmı yeni sektör, A2/A3 kısmı yeni firma olarak raporlanır | 147 |
 
-**[ÖNERİ]** 20 eğitim + 3 doğrulama varyantı / arketip.
+**[KARAR, tur 7]** 20 eğitim + 3 doğrulama varyantı / arketip. Koşu komutu ve kesin sayılar: `04_veri_ureteci.md`, Bölüm 9. Deneme turu örnekleri doğrulama varyantlarından seçilir; test kümesi model seçiminde kullanılmaz.
 
 ---
 
@@ -288,14 +292,14 @@ Deneme koşusunun (seed 7) sayıları:
 | Karar | Durum | İçerik |
 |---|---|---|
 | A1 Temel model | **[KARAR]** deneme turu | Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B; eşitlikte Ministral 3 8B [ÖNERİ] |
-| A2 Araç seti / donanım | [ÖNERİ] / **[AÇIK]** | Unsloth + TRL (QLoRA). Dizüstü: geliştirme ve demo; Kaggle: eğitim ve değerlendirme |
+| A2 Araç seti / donanım | [ÖNERİ] / **[KARAR]** | Unsloth + TRL (QLoRA) / Dizüstü: geliştirme, deneme turu, demo; Kaggle: eğitim ve değerlendirme |
 | A3 Çıkarım | [ÖNERİ] | Değerlendirme vLLM, demo Ollama |
-| B1 İdeal yorum | **[AÇIK]** | Öneri: karma + 20–30 örneklik altın küme |
-| B2 Öğretmen | **[AÇIK]** | Öneri: açık ağırlıklı model (ör. Mistral Large 3), API üzerinden |
+| B1 İdeal yorum | **[KARAR]** | Karma + 20–30 örneklik altın küme |
+| B2 Öğretmen | **[KARAR]** | Açık ağırlıklı model, API üzerinden; somut model [ÖNERİ]: Mistral Large 3 |
 | B3 Notsuz nedenler | **[KARAR]** | Açık soru veya görülebilir bilgiden türetilmiş işaretli hipotez; ground truth nedeni asla |
 | B4 Çıktı yapısı | **[KARAR]** | 6.3'teki dört bölüm, ~250–350 kelime, sabit tablo, boş bölümde „Keine.“ |
-| C1 Test arketipi | **[AÇIK]** | Öneri: A1 + iki test düzeyi |
-| C2 Hacim | **[AÇIK]** | Öneri: 20 eğitim + 3 doğrulama varyantı / arketip (960 eğitim ayı) |
+| C1 Test arketipi | **[KARAR]** | A1 (öğretilmemiş tür) + görülmemiş A2/A3 varyantları (öğretilmiş tür) |
+| C2 Hacim | **[KARAR]** | 20 eğitim + 3 doğrulama varyantı / arketip (960 eğitim ayı) |
 | D1 Embedding | **[KARAR]** | BGE-M3 |
 | D2 Vektör deposu | **[KARAR]** | Chroma |
 | D3 K-C | **[KARAR]** | 13 ay filtre + top-k (k = 8), recall@k metriği, "bütün notlar" ablation'da |
@@ -313,5 +317,6 @@ Deneme koşusunun (seed 7) sayıları:
 - Almanca embedding karşılaştırması: [WZ-IT](https://wz-it.com/en/blog/best-embedding-models-german/), [Boldt-Embed-DE-350M](https://huggingface.co/mayflowergmbh/Boldt-Embed-DE-350M)
 - Unsloth bellek gereksinimleri: [docs.unsloth.ai](https://docs.unsloth.ai/get-started/beginner-start-here/unsloth-requirements)
 - 4 GB GPU'da 8B model (tahminî değerler): [willitrunai.com](https://willitrunai.com/can-run/hf-maziyarpanahi--llama-3-8b-instruct-32k-v0-1-gguf-on-gtx-1650-4gb), [bestllmfor.com](https://bestllmfor.com/guide/llm-gtx-1650-1660/), [P1000 ölçümü (databasemart)](https://www.databasemart.com/blog/ollama-gpu-benchmark-P1000)
+- Mistral Large 3 fiyatları (üçüncü taraf): [CloudZero](https://www.cloudzero.com/blog/mistral-api-pricing), [anotherwrapper](https://anotherwrapper.com/tools/llm-pricing/mistral-large-latest); koşullar: [Mistral terms](https://mistral.ai/en/terms), [ConductAtlas özeti](https://conductatlas.com/platform/mistral-ai/mistral-ai-commercial-terms/)
 - Ücretsiz GPU (Kaggle kotası): [gpuperhour.com](https://gpuperhour.com/blog/free-cloud-gpus-and-credits)
 - Kiralık GPU fiyatları: [Spheron, RunPod vs Vast.ai 2026](https://www.spheron.network/blog/gpu-cloud-pricing-comparison-runpod-vs-vastai-2026/), [hackceleration, RunPod fiyatları](https://www.hackceleration.com/labs/runpod-pricing)

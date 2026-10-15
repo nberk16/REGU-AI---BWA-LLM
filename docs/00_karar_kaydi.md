@@ -223,7 +223,7 @@ A1'i kullanıcı onayladı. B3, B4 ve D1–D4'ü kullanıcı asistana bıraktı;
   - Fine-tuning ve toplu değerlendirme bulutta yapılmalı: Kaggle (ücretsiz) veya kiralık GPU.
 - Bu oturumun bulut ortamında GPU yok. Asistan defterleri hazırlar, kullanıcı çalıştırır.
 
-### 10.3 Açık kalanlar (ek açıklamayla yeniden soruldu)
+### 10.3 Açık kalanlar (tur 7'de cevaplandı, Bölüm 11)
 
 | Kod | Konu | Asistanın önerisi |
 |---|---|---|
@@ -232,6 +232,30 @@ A1'i kullanıcı onayladı. B3, B4 ve D1–D4'ü kullanıcı asistana bıraktı;
 | A2 | Donanım ve bütçe | Dizüstü + Kaggle; kota yetmezse birkaç saatlik kiralık GPU |
 | B1 | İdeal yorum yöntemi | Karma (kural tabanlı içerik planı + öğretmen modelin dili + otomatik kontrol) + 20–30 örneklik altın küme |
 | B2 | Öğretmen model | Açık ağırlıklı model (ör. Mistral Large 3, Apache 2.0), API üzerinden |
+
+## 11. Karar turu 7 (15.10.2026): eğitim/test, donanım, ideal yorumlar
+
+### 11.1 Kararlar [KARAR]
+
+| Kod | Konu | Karar |
+|---|---|---|
+| C1 | Test tasarımı | Kullanıcının isteği: testte hem **öğretilmiş** hem **öğretilmemiş** türden örnekler olsun. Buna göre iki test düzeyi var: (1) **Yeni sektör (öğretilmemiş tür):** test arketipi **A1** (Muster GmbH), eğitimde hiç görülmez. (2) **Yeni firma (öğretilmiş tür):** A2 ve A3'ün eğitimde görülmemiş varyantları. Eğitim örneklerinin kendisi teste girmez. |
+| C2 | Hacim | A2 + A3, arketip başına 20 eğitim + 3 doğrulama varyantı; profil `train_price_boost` → 960 eğitim ayı, 144 doğrulama ayı. |
+| A2 | Donanım | Fine-tuning ve değerlendirme **Kaggle**'da (ücretsiz). Geliştirme, deneme turu ve demo kullanıcının dizüstünde. Kiralık GPU şimdilik yok; gerekirse kullanıcıya sorulur. |
+| B1 | İdeal yorum yöntemi | **Karma:** kural tabanlı içerik planı + öğretmen modelin dili + otomatik kontrol. Ek olarak 20–30 örneklik altın küme. |
+| B2 | Öğretmen model | **Açık ağırlıklı bir model, API üzerinden.** Somut model ve sağlayıcı [ÖNERİ]: Mistral Large 3, Mistral API (Bölüm 11.2). |
+
+### 11.2 Uygulama ve notlar (asistan)
+
+- **Kümeler tanımlandı** (`04`, Bölüm 9):
+  - Eğitim + doğrulama koşusu: seed 7, A2 + A3, v100–v122.
+  - Eğitim kümesi (v100–v119) varyant sayısından bağımsız olarak aynı kalıyor; kontrol edildi.
+- **Deneme turu örnekleri doğrulama varyantlarından seçilir.** Test kümesi model seçiminde kullanılmaz; aksi hâlde test sonuçları iyimser olur.
+- **Öğretmen maliyeti** (tahmini):
+  - ~1.000 metin: ~4M girdi ve ~0,6M çıktı token'ı.
+  - Kaynaklar Mistral Large 3 için farklı fiyatlar veriyor: 1M token başına 0,50 $ / 1,50 $ ile 2 $ / 5–6 $ arası. Bu da ~3–12 $, tekrarlarla ~5–20 $ demek.
+  - Resmî fiyat listesi API anahtarı alınırken kontrol edilecek.
+- **Kullanım koşulları:** Üçüncü taraf bir özete göre Mistral'ın ticari koşullarındaki çıktı kısıtı görsel çıktılarla ilgili. Metin çıktıları için bir kısıt bulunamadı; resmî metin kontrol edilecek. Bu not hukuki görüş değildir.
 
 ## Kaynak
 

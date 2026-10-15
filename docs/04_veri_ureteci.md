@@ -203,6 +203,33 @@ Rohertrag adayı aylarda beklenen kararlar, 10 varyant / arketip, yorumlanabilir
 
 - Ana veride bir `cite` örneğine ~7–15 `warn` düşüyor. Bu, modelin "notla açıklanan aday" durumunu öğrenmesi için az.
 - `train_price_boost` `cite` sayısını yaklaşık iki katına çıkarıyor; A2'de etkisi küçük, çünkü orada P3 baskın.
-- Eğitim verisindeki toplam örnek sayısını asıl belirleyecek olan, arketip başına varyant sayısı ([AÇIK], eğitim/test kararıyla birlikte). Örneğin 30 varyant ve `train_price_boost` ile, A2 test için ayrılırsa eğitimde (A1 + A3) ~120 `cite` adayı ay olur.
+- Eğitim verisindeki toplam örnek sayısı tur 7'de kararlaştırıldı: arketip başına 20 eğitim varyantı (Bölüm 9).
 - Her koşunun `report.md` dosyasında arketip başına bu tablo otomatik olarak yer alır.
 
+## 9. Eğitim, doğrulama ve test kümeleri [KARAR, tur 7]
+
+Ayrıntı ve gerekçe: `06_model_tarafi_secenekler.md`, Bölüm C; karar kaydı: `00`, Bölüm 11.
+
+### 9.1 Eğitim + doğrulama koşusu
+
+```bash
+python -m generator --archetypes A2,A3 --variants 23 --first-variant 100 \
+    --seed 7 --profile train_price_boost --out data/synthetic/train_seed7
+```
+
+- **v100–v119:** eğitim. **v120–v122:** doğrulama (erken durdurma, hiperparametre, deneme turu örnekleri).
+- Koşu repoya konmaz (`.gitignore`, tur 3 kuralı); bu komutla birebir yeniden üretilir. Kaggle defterleri de veriyi bu komutla üretir.
+- Her varyant kendi rastgele akışıyla `[seed, arketip, varyant, aşama]` üretilir. Bu yüzden v100–v119, toplam varyant sayısından bağımsız olarak aynıdır; 20 ve 23 varyantlık koşular karşılaştırılarak kontrol edildi.
+
+| Küme | Varyantlar | Yorumlanabilir ay | Rohertrag adayı aylar: cite / warn / either |
+|---|---|---:|---|
+| Eğitim | A2 + A3, v100–v119 | 960 | 47 / 509 / 19 |
+| Doğrulama | A2 + A3, v120–v122 | 144 | 14 / 65 / 7 |
+
+### 9.2 Test kümeleri (eğitimde hiç kullanılmaz)
+
+| Küme | Kaynak | Yorumlanabilir ay | Ne ölçer |
+|---|---|---:|---|
+| Yeni sektör (öğretilmemiş tür) | `reference_seed42`, A1 v00–v09 (Muster GmbH dahil) | 240 | Hiç görülmemiş arketipe genelleme |
+| Yeni firma (öğretilmiş tür) | `reference_seed42`, A2 + A3 v00–v09 | 480 | Bilinen arketipte yeni firmaya genelleme |
+| V2 ayrımı (dengelenmiş set) | `v2_balanced_seed4242`. A1 kısmı yeni sektör, A2/A3 kısmı yeni firma olarak raporlanır | 147 aday ay | `cite` / `warn` / `either` kararı |

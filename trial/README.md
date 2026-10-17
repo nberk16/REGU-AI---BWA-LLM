@@ -27,7 +27,7 @@ ollama pull qwen3.5:9b-q4_K_M
 
 ## 2. Python
 
-- Python 3.11 veya üstü gerekir. Kontrol: `python --version`.
+- Python 3.8 veya üstü yeterli (betik 3.8 ile de test edildi). Kontrol: `python --version`.
 - Yoksa: [python.org/downloads](https://www.python.org/downloads/) veya `winget install Python.Python.3.12`.
 - Kurulumda **"Add python.exe to PATH"** kutusunu işaretle.
 - Ek paket gerekmez; betik yalnızca Python'un kendi kütüphanesini kullanır.
@@ -63,7 +63,7 @@ git clone -b claude/repodaki-project-analysis-al4o1f https://github.com/nberk16/
 - **Ya da:** pencerenin üstündeki, klasör yolunu gösteren **adres çubuğuna** tıkla (sağdaki büyüteçli arama kutusuna değil), yolun yerine `powershell` yaz, Enter'a bas.
 
 Kontrol için önce şu üç komutu çalıştır:
-- `python --version`: 3.11 veya üstü görünmeli.
+- `python --version`: 3.8 veya üstü görünmeli.
 - `ollama list`: üç model görünmeli.
 - `dir`: `trial`, `docs` … klasörlerini listelemeli.
 

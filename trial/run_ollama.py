@@ -11,6 +11,8 @@ Kullanım (repo klasöründe):
 - Yarıda kalırsa aynı komutla devam eder; biten örnekler atlanır.
 """
 
+from __future__ import annotations  # Python 3.8 uyumluluğu (kullanıcının bilgisayarı)
+
 import argparse
 import json
 import platform

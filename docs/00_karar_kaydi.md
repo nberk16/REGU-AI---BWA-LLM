@@ -340,6 +340,27 @@ Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrın
 - **Veri kümeleri yeniden üretildi:** `reference_seed42` ve `v2_balanced_seed4242`. Yalnızca `context_notes.jsonl` metinleri değişti (101 satır), manifest'te de parmak izi değişti. BWA rakamları, olaylar ve ground truth değişmedi; Katman 1 çıktıları ve örnek dosyalar aynı.
 - **Deneme turu girdileri dondu:** `trial/inputs/cases.jsonl` modellerin gördüğü hâliyle kalır. Test artık ay seçiminin, facts'in ve not kimliklerinin yeniden üretilebilirliğini denetliyor.
 
+## 16. Karar turu 10 (17.10.2026): bilgi tabanının kapsamı
+
+### 16.1 Kararlar [KARAR]
+
+| Konu | Karar |
+|---|---|
+| K-A kapsamı | Yalnızca Almanca satır ve oran açıklamaları. **SKR03 hesap aralıkları hiçbir zaman eklenmez.** |
+| K-E (sektör oranları) | **Kapsam dışı.** Gerekçe: güvenilir sektör oranları herkese açık değil; doğrulanamayan değerler „kaynaksız iddia yok“ ilkesiyle çelişir. |
+
+### 16.2 Uygulama (asistan)
+
+- **`rag/` (Katman 2 v1):** Ayrıntılar `09_bilgi_tabani.md`'de.
+  - `knowledge.toml`: 34 K-A ve 10 K-B parçası, Almanca, rakamsız.
+  - BGE-M3 + Chroma.
+  - K-A/K-B `facts.json`'dan anahtarla, K-C 13 ay penceresinden anlamsal top-k ile getirilir.
+  - CLI ve dışa aktarma (`retrieval.jsonl`).
+  - Getirme isabeti aracı: `tools/retrieval_quality.py`.
+- **[ÖNERİ] Parametreler:**
+  - K-A/K-B'nin anahtarla seçilmesi.
+  - Sorgu yöntemi: `single` / `multi` / `multi_expanded`; ölçümle seçilir (`09`, Bölüm 5).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

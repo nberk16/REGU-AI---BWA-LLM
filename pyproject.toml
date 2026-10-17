@@ -11,14 +11,17 @@ dependencies = ["numpy>=1.26"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+# Katman 2: BGE-M3 (sentence-transformers) ve Chroma
+rag = ["sentence-transformers>=3", "chromadb>=1.0"]
 
 [tool.setuptools.packages.find]
-include = ["generator*", "facts*", "validation*", "prompting*"]
+include = ["generator*", "facts*", "validation*", "prompting*", "rag*"]
 
 [tool.setuptools.package-data]
 generator = ["config/*.toml", "config/profiles/*.toml"]
 facts = ["config.toml"]
 validation = ["config.toml"]
+rag = ["config.toml", "knowledge.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

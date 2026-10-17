@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%40, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%45, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -223,13 +223,14 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 
 | Kod | Belge türü | Kapsam | Değişkenlik |
 |---|---|---|---|
-| K-A | BWA satır açıklamaları + hangi SKR03 hesaplarının hangi BWA satırına aktığı | Genel | Düşük |
+| K-A | BWA satır ve oran açıklamaları (SKR03 aralıkları yok, tur 10) | Genel | Düşük |
 | K-B | Çarpıklık ve uyarı rehberi (Bölüm 5.4'ün genişletilmiş hali) | Genel | Düşük |
 | K-C | Firma bağlam notları (aylık olaylar: işe alımlar, fuarlar, fiyat değişiklikleri, sezon bilgisi) | Firmaya özgü | Yüksek |
 | K-D | Önceki ayların onaylanmış yorumları | Firmaya özgü | Yüksek |
-| K-E **[ÖNERİ]** | Sektör karşılaştırma oranları | Genel | Orta |
+| ~~K-E~~ | ~~Sektör karşılaştırma oranları~~ | — | **[KARAR, tur 10] Kapsam dışı** |
 
-- K-E yalnızca güvenilir bir kaynak bulunursa eklenmeli. Bulunmazsa dahil edilmez.
+- **[KARAR, tur 10]** K-A yalnızca Almanca satır ve oran açıklamalarından oluşur; SKR03 hesap aralıkları hiçbir zaman eklenmez.
+- **[KARAR, tur 10]** K-E kapsam dışı: güvenilir sektör oranları herkese açık değil.
 - **Sorgu:** Anlamlı sapma gösteren satır adları + dönem + bayraklar facts.json'dan otomatik üretilir.
 - K-C ve K-D için tarih/dönem metadata filtresi kullanılmalı.
 - **[KARAR]** K-C notları `dauerhaft`/`temporär` alanı taşır. Bu alan meta veridir ve modele görünür.

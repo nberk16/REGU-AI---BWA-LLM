@@ -1,0 +1,242 @@
+# Bilgi tabanının genel parçaları (docs/09_bilgi_tabani.md). Dil: Almanca (modele giden metin).
+#
+# K-A: BWA satır ve oran açıklamaları. [KARAR, tur 10] Yalnızca açıklama; SKR03 hesap aralıkları
+#      hiçbir zaman eklenmez. Kesin hesap ataması BWA'nın Kontennachweis'ında görülür.
+# K-B: Çarpıklık rehberi; Katman 1'in her bayrak kuralı için bir parça (facts/flags.py) + "Grundsätze".
+#      Notta karşılığı olmayan nedenlerdeki hipotezler bu rehberden türetilir (docs/06, B3).
+# Metinlerde rakam yoktur: modelin kullandığı her rakam facts.json'dan ya da bir bağlam notundan gelir.
+
+# --- K-A: BWA-Zeilen -------------------------------------------------------------------------------
+
+[[ka]]
+key = "umsatzerloese"
+title = "Umsatzerlöse"
+text = "Erlöse aus dem Verkauf von Waren, Erzeugnissen und Dienstleistungen, netto ohne Umsatzsteuer und nach Erlösschmälerungen wie Skonti, Rabatten und Boni. Wesentliche Treiber sind Absatzmenge, Verkaufspreise, Produkt- und Kundenmix, Großaufträge und die Saison. Der Umsatz wird im Monat der Rechnungsstellung erfasst; eine verschobene Fakturierung verlagert Umsatz zwischen Monaten. Der Vergleich mit dem Vorjahresmonat ist aussagekräftiger als der Vormonatsvergleich, weil saisonale Muster herausfallen."
+
+[[ka]]
+key = "bestandsveraenderungen_fe_ue"
+title = "Bestandsveränderungen FE/UE"
+text = "Veränderung des Bestands an fertigen und unfertigen Erzeugnissen; nur bei Herstellern relevant, bei Handelsunternehmen in der Regel null. Ein positiver Wert bedeutet Bestandsaufbau (mehr produziert als verkauft), ein negativer Wert Bestandsabbau. Viele Unternehmen buchen Bestandsveränderungen nicht monatlich, sondern nur zu Inventur- oder Quartalsstichtagen. Fehlt die Buchung, sind Gesamtleistung und Rohertrag verzerrt, weil der Materialeinkauf voll im Monat steht (siehe Leitfaden zu fehlender und nachgeholter Bestandsbuchung)."
+
+[[ka]]
+key = "aktivierte_eigenleistungen"
+title = "Aktivierte Eigenleistungen"
+text = "Selbst erstellte Vermögensgegenstände für den eigenen Betrieb, zum Beispiel selbst gebaute Vorrichtungen oder eigene Montageleistungen an Anlagen, die aktiviert werden. Sie erhöhen die Gesamtleistung, ohne Umsatz zu sein; die zugehörigen Kosten stehen in den Material- und Personalkosten. Meist selten und unregelmäßig; ein einzelner Wert ist in der Regel kein Trend."
+
+[[ka]]
+key = "gesamtleistung"
+title = "Gesamtleistung"
+text = "Summe aus Umsatzerlösen, Bestandsveränderungen und aktivierten Eigenleistungen: die Leistung des Monats, unabhängig davon, ob sie schon verkauft ist. Bezugsgröße für die Kennzahlen der BWA (Rohertragsquote, Materialquote, Personalkostenquote, Betriebsergebnis-Marge). Weicht die Gesamtleistung deutlich vom Umsatz ab, liegt das an Bestandsveränderungen oder Eigenleistungen."
+
+[[ka]]
+key = "material_wareneinkauf"
+title = "Material-/Wareneinkauf"
+text = "Aufwand für Roh-, Hilfs- und Betriebsstoffe, bezogene Waren und Fremdleistungen, die direkt in die Leistung eingehen. In der BWA steht meist der Einkauf, nicht der Verbrauch: Ohne monatliche Bestandsbuchung schwankt die Position mit dem Einkaufs- und Rechnungszeitpunkt. Treiber sind Mengen (Auslastung, Großaufträge), Einkaufspreise der Lieferanten und Lagerauf- oder -abbau. Spät gebuchte Eingangsrechnungen verschieben Aufwand in den Folgemonat (siehe Leitfaden zu zeitversetzter Buchung)."
+
+[[ka]]
+key = "rohertrag"
+title = "Rohertrag"
+text = "Gesamtleistung abzüglich Material-/Wareneinkauf; zeigt, was nach dem direkten Material- und Wareneinsatz zur Deckung der übrigen Kosten bleibt. Wächst der Rohertrag nur mit der Leistung, bleibt die Rohertragsquote gleich; Veränderungen der Quote deuten auf Preis-, Mix- oder Buchungseffekte hin."
+
+[[ka]]
+key = "sonstige_betriebliche_erloese"
+title = "Sonstige betriebliche Erlöse"
+text = "Betriebliche Erträge außerhalb der Umsatzerlöse, zum Beispiel Provisionen, Kostenerstattungen, Versicherungsentschädigungen oder Erlöse aus Nebengeschäften. Häufig unregelmäßig; einzelne größere Beträge sind meist Einmaleffekte."
+
+[[ka]]
+key = "betrieblicher_rohertrag"
+title = "Betrieblicher Rohertrag"
+text = "Rohertrag zuzüglich der sonstigen betrieblichen Erlöse; Ausgangsgröße, von der die Gesamtkosten abgezogen werden."
+
+[[ka]]
+key = "personalkosten"
+title = "Personalkosten"
+text = "Löhne und Gehälter einschließlich Sonderzahlungen wie Urlaubs- und Weihnachtsgeld oder Prämien, Aushilfslöhne sowie die Arbeitgeberanteile zur Sozialversicherung und weitere soziale Aufwendungen. Treiber sind Mitarbeiterzahl, Tarif- und Gehaltsrunden, Überstunden und Sonderzahlungen. Neueinstellungen und Abgänge wirken dauerhaft. Werden Sonderzahlungen nicht monatlich abgegrenzt, entsteht im Auszahlungsmonat eine Spitze, die sich im Vorjahresmonat wiederholt (siehe Leitfaden zu fehlender Abgrenzung)."
+
+[[ka]]
+key = "raumkosten"
+title = "Raumkosten"
+text = "Miete oder Pacht für Betriebs- und Geschäftsräume einschließlich Nebenkosten, Heizung, Reinigung und je nach Kontierung Energie für die Räume. Überwiegend Fixkosten; Sprünge entstehen durch Mietanpassungen, zusätzliche Flächen oder Nebenkostenabrechnungen."
+
+[[ka]]
+key = "betriebliche_steuern"
+title = "Betriebliche Steuern"
+text = "Steuern, die mit dem Betrieb zusammenhängen, aber nicht vom Einkommen oder Ertrag abhängen, zum Beispiel Grundsteuer und Kfz-Steuer. Oft jährlich oder quartalsweise fällig; ohne Abgrenzung erscheinen sie als Spitze im Zahlungsmonat."
+
+[[ka]]
+key = "versicherungen_beitraege"
+title = "Versicherungen/Beiträge"
+text = "Betriebliche Versicherungen wie Haftpflicht-, Sach- oder Betriebsunterbrechungsversicherung sowie Beiträge an Verbände und Kammern. Prämien und Beiträge werden häufig jährlich gezahlt; ohne monatliche Abgrenzung zeigt die BWA eine Spitze im Zahlungsmonat, die sich im Vorjahresmonat wiederholt (siehe Leitfaden zu fehlender Abgrenzung)."
+
+[[ka]]
+key = "besondere_kosten"
+title = "Besondere Kosten"
+text = "Sammelposition der DATEV-BWA für Kostenarten, die gesondert ausgewiesen werden. Die genaue Zusammensetzung hängt von der Kontenzuordnung ab und ist im Kontennachweis der BWA ersichtlich. In der Regel kleine, stabile Beträge; auffällige Veränderungen sollten mit der Buchhaltung geklärt werden."
+
+[[ka]]
+key = "fahrzeugkosten"
+title = "Fahrzeugkosten (ohne Steuer)"
+text = "Laufende Kosten der Firmenfahrzeuge ohne Kfz-Steuer: Kraftstoff, Wartung und Reparatur, Fahrzeugversicherung sowie Leasing- oder Mietraten. Treiber sind Fuhrparkgröße, Fahrleistung und Kraftstoffpreise; Versicherungsprämien können jährlich anfallen."
+
+[[ka]]
+key = "werbe_reisekosten"
+title = "Werbe-/Reisekosten"
+text = "Werbung und Marketing, Messen, Bewirtung von Geschäftspartnern sowie Reisekosten für Fahrt, Übernachtung und Verpflegung. Messen und Kampagnen fallen in einzelnen Monaten an und erzeugen einmalige Spitzen (siehe Leitfaden zu Einmaleffekten); eine Messe im Vorjahresmonat macht auch den Vergleichswert ungewöhnlich hoch."
+
+[[ka]]
+key = "kosten_warenabgabe"
+title = "Kosten der Warenabgabe"
+text = "Kosten, die beim Versand und Verkauf der Waren entstehen, zum Beispiel Verpackung, Ausgangsfrachten, Transportversicherung und Verkaufsprovisionen. Sie verhalten sich weitgehend proportional zum Umsatz."
+
+[[ka]]
+key = "abschreibungen"
+title = "Abschreibungen"
+text = "Planmäßige Abschreibungen auf das Anlagevermögen wie Maschinen, Fahrzeuge sowie Betriebs- und Geschäftsausstattung. Viele Unternehmen buchen die Abschreibungen monatlich anteilig, andere erst zum Jahresende. Dann ist die Position elf Monate lang null und im Dezember sehr hoch, und die Monatsergebnisse sind bis November zu günstig (siehe Leitfaden zu Abschreibungen). Neue Investitionen erhöhen die Abschreibungen dauerhaft."
+
+[[ka]]
+key = "reparatur_instandhaltung"
+title = "Reparatur/Instandhaltung"
+text = "Reparaturen, Wartung und Instandhaltung von Maschinen, Anlagen, Gebäuden und Ausstattung durch eigenes Personal oder Fremdfirmen. Laufende Wartung ist relativ stabil; größere Reparaturen, Generalüberholungen oder ungeplante Ausfälle erzeugen einmalige Spitzen (siehe Leitfaden zu Einmaleffekten)."
+
+[[ka]]
+key = "sonstige_kosten"
+title = "Sonstige Kosten"
+text = "Sammelposition für übrige betriebliche Kosten, zum Beispiel Bürobedarf, Telefon und IT, Beratungs- und Abschlusskosten, Gebühren und sonstige Fremdleistungen. Wegen der Vielfalt der Inhalte lohnt bei auffälligen Veränderungen ein Blick in den Kontennachweis; spät gebuchte Rechnungen verschieben Aufwand zwischen Monaten (siehe Leitfaden zu zeitversetzter Buchung)."
+
+[[ka]]
+key = "gesamtkosten"
+title = "Gesamtkosten"
+text = "Summe der Kostenpositionen von den Personalkosten bis zu den sonstigen Kosten, ohne Material-/Wareneinkauf und ohne neutrale Positionen."
+
+[[ka]]
+key = "betriebsergebnis"
+title = "Betriebsergebnis"
+text = "Betrieblicher Rohertrag abzüglich Gesamtkosten: das Ergebnis der gewöhnlichen Geschäftstätigkeit vor Zinsen, neutralen Positionen und Ertragsteuern. Weil die BWA vorläufig ist, kann es durch fehlende Abgrenzungen, Bestands- oder Abschreibungsbuchungen verzerrt sein (siehe Leitfaden, Grundsätze)."
+
+[[ka]]
+key = "zinsaufwand"
+title = "Zinsaufwand"
+text = "Zinsen für Darlehen und Kontokorrentkredite sowie ähnliche Finanzierungskosten. Hängt von Kreditvolumen und Zinssatz ab; bei planmäßiger Tilgung sinkt er allmählich."
+
+[[ka]]
+key = "sonstiger_neutraler_aufwand"
+title = "Sonstiger neutraler Aufwand"
+text = "Aufwendungen außerhalb der gewöhnlichen Geschäftstätigkeit oder aus anderen Perioden, zum Beispiel periodenfremde Aufwendungen oder Verluste aus dem Abgang von Anlagen. Meist unregelmäßig."
+
+[[ka]]
+key = "neutraler_aufwand"
+title = "Neutraler Aufwand"
+text = "Summe aus Zinsaufwand und sonstigem neutralem Aufwand; wird vom Betriebsergebnis abgezogen."
+
+[[ka]]
+key = "zinsertraege"
+title = "Zinserträge"
+text = "Zinserträge aus Bankguthaben und Finanzanlagen."
+
+[[ka]]
+key = "sonstiger_neutraler_ertrag"
+title = "Sonstiger neutraler Ertrag"
+text = "Erträge außerhalb der gewöhnlichen Geschäftstätigkeit oder aus anderen Perioden, zum Beispiel periodenfremde Erträge, Erträge aus Anlagenverkäufen oder aus der Auflösung von Rückstellungen."
+
+[[ka]]
+key = "neutraler_ertrag"
+title = "Neutraler Ertrag"
+text = "Summe aus Zinserträgen und sonstigem neutralem Ertrag; wird zum Betriebsergebnis addiert."
+
+[[ka]]
+key = "ergebnis_vor_steuern"
+title = "Ergebnis vor Steuern"
+text = "Betriebsergebnis abzüglich neutralem Aufwand und zuzüglich neutralem Ertrag: das Ergebnis vor den Steuern vom Einkommen und Ertrag."
+
+[[ka]]
+key = "steuern_einkommen_ertrag"
+title = "Steuern vom Einkommen und Ertrag"
+text = "Steuern vom Einkommen und Ertrag wie Körperschaft- und Gewerbesteuer, in der BWA meist als Vorauszahlungen. Vorauszahlungen sind quartalsweise fällig und erscheinen ohne Abgrenzung als Spitzen in den Zahlungsmonaten."
+
+[[ka]]
+key = "vorlaeufiges_ergebnis"
+title = "Vorläufiges Ergebnis"
+text = "Ergebnis vor Steuern abzüglich der Steuern vom Einkommen und Ertrag. Vorläufig, weil die BWA ein Zwischenstand ist: Abschlussbuchungen wie Abgrenzungen, Bestände und Abschreibungen können das Ergebnis zum Jahresende noch deutlich verändern."
+
+# --- K-A: Kennzahlen -------------------------------------------------------------------------------
+
+[[ka]]
+key = "Rohertragsquote"
+title = "Rohertragsquote"
+text = "Rohertrag in Prozent der Gesamtleistung. Die Quote steigt, wenn Verkaufspreise steigen, Einkaufspreise sinken oder sich der Mix zu margenstärkeren Produkten verschiebt. Sie sinkt bei höheren Einkaufspreisen ohne Weitergabe an die Kunden, bei Preisnachlässen oder bei margenschwachen Großaufträgen. Auch Buchungseffekte verändern die Quote, etwa fehlende Bestandsbuchungen oder zeitversetzt gebuchte Eingangsrechnungen. Veränderungen werden in Prozentpunkten angegeben."
+
+[[ka]]
+key = "Materialquote"
+title = "Materialquote"
+text = "Material-/Wareneinkauf in Prozent der Gesamtleistung; Gegenstück zur Rohertragsquote, beide ergänzen sich zur Gesamtleistung. Die Quote steigt bei höheren Einkaufspreisen oder Lageraufbau; Schwankungen von Monat zu Monat beruhen oft auf Buchungszeitpunkten."
+
+[[ka]]
+key = "Personalkostenquote"
+title = "Personalkostenquote"
+text = "Personalkosten in Prozent der Gesamtleistung. Die Quote steigt, wenn die Personalkosten schneller wachsen als die Leistung, etwa durch Neueinstellungen, Tariferhöhungen oder Sonderzahlungen, oder wenn die Leistung saisonal sinkt."
+
+[[ka]]
+key = "Betriebsergebnis-Marge"
+title = "Betriebsergebnis-Marge"
+text = "Betriebsergebnis in Prozent der Gesamtleistung; Maß für die operative Rentabilität. Im Monatsvergleich stark von Saison und Einmaleffekten beeinflusst; der Vergleich mit dem Vorjahresmonat und die kumulierte Marge sind aussagekräftiger."
+
+# --- K-B: Leitfaden zu möglichen Verzerrungen ------------------------------------------------------
+
+[[kb]]
+rule = "grundsaetze"
+title = "Grundsätze"
+text = "Die BWA ist vorläufig. Auffällige Werte können echte Entwicklungen oder Buchungseffekte sein. Maßstab für den Monat ist der Vorjahresmonat; der Vormonat zeigt vor allem Saison- und Zeitpunkteffekte. Hinweise auf mögliche Verzerrungen werden als Warnung formuliert, nicht als Tatsache, und mit einer Rückfrage an Buchhaltung oder Steuerberater verbunden. Ursachen werden nur genannt, wenn eine Kontextnotiz sie belegt; sonst werden sie als Hypothese gekennzeichnet oder als offene Frage gestellt."
+
+[[kb]]
+rule = "wiederkehrende_spitze"
+code = "V1"
+title = "fehlende Abgrenzung"
+text = "Jährliche oder halbjährliche Zahlungen wie Urlaubs- und Weihnachtsgeld, Versicherungsprämien, Beiträge oder Jahreslizenzen werden im Zahlungsmonat voll gebucht statt monatlich abgegrenzt. Erkennbar an einer Spitze in einem Monat, die im Vorjahresmonat ähnlich auftrat, und an niedrigeren Werten in den übrigen Monaten. Folge: Der Zahlungsmonat erscheint zu ungünstig, die übrigen Monate zu günstig; über das Jahr gleicht es sich aus. Formulierung: mögliche fehlende Abgrenzung einer wiederkehrenden Zahlung, als Hypothese. Rückfrage: Wird die Zahlung monatlich abgegrenzt?"
+
+[[kb]]
+rule = "einmalige_spitze"
+code = "V5"
+title = "Einmaleffekt"
+text = "Einmalige Aufwendungen wie größere Reparaturen, Messen, Beratungsprojekte oder Umzüge belasten einen einzelnen Monat; im Vorjahresmonat gab es keine vergleichbare Spitze. Der Effekt wiederholt sich in der Regel nicht und sollte bei der Beurteilung des laufenden Ergebnisses gesondert betrachtet werden. Liegt eine Kontextnotiz zum Ereignis vor, wird sie als Quelle genannt; sonst ist die Ursache offen und wird erfragt."
+
+[[kb]]
+rule = "bestand_fehlt"
+code = "V2"
+title = "fehlende Bestandsbuchung"
+text = "Bei Herstellern steht der Materialeinkauf voll im Monat, während Bestandsveränderungen oft nur zu Stichtagen gebucht werden. Ist die Bestandsveränderung null, obwohl sich der Materialeinkauf deutlich verändert hat, sind Rohertrag und Ergebnis verzerrt: Lageraufbau drückt das Ergebnis, Lagerabbau schönt es. Rückfrage: Wurde die Bestandsveränderung für den Monat erfasst?"
+
+[[kb]]
+rule = "rohertrag_sprung"
+code = "V2"
+title = "Sprung der Rohertragsquote"
+text = "Ändert sich die Rohertragsquote gegenüber Vormonat und Vorjahresmonat sprunghaft, gibt es zwei Arten von Erklärungen. Echte Ursachen: höhere Verkaufspreise lassen die Quote steigen, höhere Einkaufspreise ohne Weitergabe lassen sie sinken; dazu kommen Mix-Effekte oder Großaufträge mit anderer Marge. Buchungseffekte: Wareneingänge oder Eingangsrechnungen im falschen Monat gebucht oder eine fehlende Bestandsbuchung. Vorgehen: Erklärt eine Kontextnotiz die Veränderung in der richtigen Richtung, wird sie mit Quelle genannt. Sonst wird die Quote als mögliche Verzerrung gemeldet und erfragt."
+
+[[kb]]
+rule = "afa_fehlt"
+code = "V3"
+title = "fehlende Abschreibungen"
+text = "Die Abschreibungen sind null oder sehr niedrig, obwohl Anlagevermögen vorhanden ist und früher Abschreibungen anfielen. Häufig werden sie erst zum Jahresende gebucht. Folge: Die Monatsergebnisse von Januar bis November sind zu günstig, der Dezember zu ungünstig. Rückfrage: Werden die Abschreibungen monatlich anteilig gebucht?"
+
+[[kb]]
+rule = "afa_jahresbuchung"
+code = "V3"
+title = "Jahresbuchung der Abschreibungen"
+text = "Die Abschreibungen eines ganzen Jahres werden in einem Monat gebucht, meist im Dezember. Der Monat ist dadurch stark belastet; das Jahresergebnis stimmt, die Monatsbetrachtung nicht. Für den Vergleich ist der Jahreswert anteilig auf die Monate zu verteilen."
+
+[[kb]]
+rule = "zeitverschiebung"
+code = "V4"
+title = "zeitversetzte Buchung"
+text = "Belege, vor allem Eingangsrechnungen, werden später gebucht, als der Aufwand entstanden ist. Erkennbar an einem Monat unter dem Normalniveau, gefolgt von einem Monat darüber; die Abweichungen gleichen sich weitgehend aus. Beide Monate sollten gemeinsam beurteilt werden. Rückfrage: Wurden Rechnungen des Vormonats erst jetzt gebucht?"
+
+[[kb]]
+rule = "bestand_nachbuchung"
+code = "V4"
+title = "nachgeholte Bestandsbuchung"
+text = "Nach Monaten ohne Bestandsbuchung erscheint plötzlich ein hoher Wert: Die Bestandsveränderung mehrerer Monate wurde auf einmal gebucht. Die Vormonate sind dann verzerrt, je nach Richtung zu günstig oder zu ungünstig, der aktuelle Monat entsprechend in die Gegenrichtung. Rückfrage: Für welche Monate gilt die Buchung?"
+
+[[kb]]
+rule = "saisonal"
+code = "V6"
+title = "Saison"
+text = "Eine starke Veränderung gegenüber dem Vormonat bei nur geringer Veränderung gegenüber dem Vorjahresmonat ist typisch für ein saisonales Muster und keine Verzerrung. Maßgeblich ist der Vorjahresvergleich; das Saisonmuster ergibt sich aus dem Firmenprofil. Ein Hinweis darauf genügt, eine Rückfrage ist nicht nötig."

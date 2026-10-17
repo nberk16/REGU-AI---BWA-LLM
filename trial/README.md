@@ -32,10 +32,22 @@ ollama pull qwen3.5:9b-q4_K_M
 - Kurulumda **"Add python.exe to PATH"** kutusunu işaretle.
 - Ek paket gerekmez; betik yalnızca Python'un kendi kütüphanesini kullanır.
 
-## 3. Repoyu indir
+## 3. Proje dosyalarını indir
 
-- **Kolay yol:** GitHub'da repoyu aç → dal olarak `claude/repodaki-project-analysis-al4o1f`'i seç → **Code → Download ZIP** → bir klasöre aç.
-- **Git varsa:**
+**Neden ana sayfada göremiyorsun:** GitHub bir repoyu açınca varsayılan dalı (`main`) gösterir. Bu çalışma ayrı bir dalda, `claude/repodaki-project-analysis-al4o1f`'te duruyor. `trial` klasörü yalnızca orada var.
+
+**En kolay yol: doğrudan ZIP bağlantısı.** GitHub'a giriş yapmış olarak bu bağlantıyı aç; indirme hemen başlar:
+
+https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+
+1. İnen ZIP dosyasına sağ tıkla → **Tümünü ayıkla**.
+2. Çıkan klasörün adı uzun olur (ör. `REGU-AI---BWA-LLM-claude-repodaki-project-analysis-al4o1f`). İçinde `trial`, `docs`, `validation` … klasörlerini görmelisin.
+
+**Dalı tarayıcıda görmek istersen:** [github.com/nberk16/REGU-AI---BWA-LLM/tree/claude/repodaki-project-analysis-al4o1f](https://github.com/nberk16/REGU-AI---BWA-LLM/tree/claude/repodaki-project-analysis-al4o1f)
+
+Elle seçmek için: repo sayfasında dosya listesinin üstündeki **`main`** düğmesine tıkla → açılan listede `claude/repodaki-project-analysis-al4o1f`'i seç (görünmüyorsa arama kutusuna `claude` yaz) → yeşil **Code** düğmesi → **Download ZIP**.
+
+**Git kullanıyorsan:**
 
 ```
 git clone -b claude/repodaki-project-analysis-al4o1f https://github.com/nberk16/REGU-AI---BWA-LLM.git
@@ -43,7 +55,7 @@ git clone -b claude/repodaki-project-analysis-al4o1f https://github.com/nberk16/
 
 ## 4. Çalıştır
 
-PowerShell'de repo klasörüne geç (ör. `cd C:\Users\<ad>\Downloads\REGU-AI---BWA-LLM`).
+**PowerShell'i doğru klasörde açmak:** Dosya Gezgini'nde ayıkladığın klasörü aç (içinde `trial`, `docs` … klasörleri görünen klasör). Üstteki adres çubuğuna tıkla, `powershell` yaz, Enter'a bas. PowerShell bu klasörde açılır.
 
 **Önce hızlı deneme** (her modelden 1 örnek, ~15–30 dakika):
 

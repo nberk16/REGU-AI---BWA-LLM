@@ -55,7 +55,17 @@ git clone -b claude/repodaki-project-analysis-al4o1f https://github.com/nberk16/
 
 ## 4. Çalıştır
 
-**PowerShell'i doğru klasörde açmak:** Dosya Gezgini'nde ayıkladığın klasörü aç (içinde `trial`, `docs` … klasörleri görünen klasör). Üstteki adres çubuğuna tıkla, `powershell` yaz, Enter'a bas. PowerShell bu klasörde açılır.
+**Önce ZIP'i gerçekten çıkart.** ZIP'i WinRAR'da açıp içine bakmak yetmez; dosyalar ancak çıkartılınca kullanılabilir. Dosya Gezgini'nde ZIP'e sağ tıkla → **Tümünü ayıkla** (veya WinRAR menüsünden „… klasörüne çıkart“ / „Extract to …“).
+
+**PowerShell'i doğru klasörde açmak:** Dosya Gezgini'nde (sarı klasör simgesi) çıkarttığın klasöre gir. İçinde `trial`, `docs`, `validation` … klasörleri görünmeli; `trial`'ın **içine girme**. Sonra:
+- **Windows 11:** klasörde boş bir yere sağ tıkla → **Terminalde aç**.
+- **Windows 10:** Shift tuşunu basılı tutarak boş bir yere sağ tıkla → **PowerShell penceresini burada açın**.
+- **Ya da:** pencerenin üstündeki, klasör yolunu gösteren **adres çubuğuna** tıkla (sağdaki büyüteçli arama kutusuna değil), yolun yerine `powershell` yaz, Enter'a bas.
+
+Kontrol için önce şu üç komutu çalıştır:
+- `python --version`: 3.11 veya üstü görünmeli.
+- `ollama list`: üç model görünmeli.
+- `dir`: `trial`, `docs` … klasörlerini listelemeli.
 
 **Önce hızlı deneme** (her modelden 1 örnek, ~15–30 dakika):
 

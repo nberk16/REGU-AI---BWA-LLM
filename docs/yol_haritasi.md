@@ -189,3 +189,4 @@ Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_s
 | 15.10.2026 | Karar turu 8: yuvarlama kuralı (a); doğrulama katmanı v1 kodlandı (`validation/`, 46 test). Paket 8 → %70: %36 |
 | 15.10.2026 | Deneme turu kiti: `prompting/` (istem 1.0), `trial/` (10 örnek, Ollama betiği, puanlama, kılavuz), `docs/08`. Paket 6 → %25: %38 |
 | 17.10.2026 | `trial/README.md`: indirme adımları netleştirildi (doğrudan ZIP bağlantısı, dal açıklaması); durum değişmedi: %38 |
+| 17.10.2026 | `trial/README.md`: ZIP'i çıkartma ve PowerShell'i klasörde açma adımları eklendi; durum değişmedi: %38 |

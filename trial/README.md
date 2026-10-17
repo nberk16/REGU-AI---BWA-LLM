@@ -102,6 +102,7 @@ Sonra bana haber ver. `python trial/score.py` ile puanlarım, çıktıları okur
 
 | Mesaj | Ne yapmalı |
 |---|---|
+| Ekran uzun süre değişmiyor, `ollama ps` boş | Pencereye tıklandıysa Windows ekrana yazmayı durdurur (başlıkta „Seç“/„Select“). Pencereye tıkla ve **Esc**'ye bas. Çalışırken pencereye tıklama |
 | `Ollama'ya ulaşılamadı` | Ollama açık değil: Başlat menüsünden Ollama'yı çalıştır |
 | `Şu modeller kurulu değil` | Gösterilen `ollama pull …` komutunu çalıştır |
 | `UYARI: istem bağlam sınırına dayandı` | Bana haber ver (bağlam penceresini büyütürüz) |

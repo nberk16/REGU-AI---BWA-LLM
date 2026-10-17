@@ -105,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
                 resp = api(args.host, "/api/chat", body, timeout=3 * 3600)
             except (urllib.error.URLError, OSError) as e:
                 record["error"] = str(e)
-                print(f"  {i}/{len(todo)} {case['id']}: HATA {e}")
+                line = f"  {i}/{len(todo)} {case['id']}: HATA {e}"
             else:
                 wall = time.time() - started
                 content = resp["message"].get("content", "")
@@ -143,10 +143,12 @@ def main(argv: list[str] | None = None) -> int:
                     warn += " · UYARI: çıktı uzunluk sınırında kesildi"
                 if stats["thinking_chars"]:
                     warn += " · not: model düşünme metni üretti"
-                print(f"  {i}/{len(todo)} {case['id']}: {stats['output_tokens']} token, {wall:.0f} s "
-                      f"({stats.get('output_tok_per_s', '?')} token/s) · kalan ~{eta:.0f} dk{warn}")
+                line = (f"  {i}/{len(todo)} {case['id']}: {stats['output_tokens']} token, {wall:.0f} s "
+                        f"({stats.get('output_tok_per_s', '?')} token/s) · kalan ~{eta:.0f} dk{warn}")
+            # Önce dosyaya yaz: Windows konsolunda pencereye tıklanınca (QuickEdit) ekrana yazma bekler.
             with open(out_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps(record, ensure_ascii=False) + "\n")
+            print(line, flush=True)
 
     print(f"\nBitti. Sonuçlar: {args.out}")
     return 0

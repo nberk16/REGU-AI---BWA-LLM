@@ -110,3 +110,21 @@ Testler (`tests/test_trial.py`):
 - girdilerin yeniden üretilebilirliği,
 - ground truth sızıntısı olmaması,
 - betiğin sahte bir Ollama sunucusuyla uçtan uca çalışması: düşünme metninin ayıklanması, devam etme, eksik model uyarısı, puanlama.
+
+## 7. Sonuçlar (17.10.2026)
+
+Tam tur tamamlandı: 3 model × 10 örnek, hata yok, istem kesilmedi. Ayrıntılar ve okuma değerlendirmesi: [`trial/results.md`](../trial/results.md).
+
+| Model | Format uyumu | Rakam sadakati | İçerik hatası / örnek | Kaynaklı neden | V2 kararı (4 net örnek) | Süre / örnek |
+|---|---:|---:|---:|---:|---:|---:|
+| gemma4-e4b | 6/10 | 0,99 | 2,2 | 5 | ~1,5/4 | ~6,5 dk |
+| qwen3.5-9b | 7/10 | 0,96 | 3,7 | 29 | 2/4 | ~9,5 dk |
+| ministral-3-8b | 0/10 | 0,80 | 12,7 | 43 (çoğu biçimsiz) | ~0,5/4 | ~14 dk |
+
+**Özet:**
+- **Gemma:** güvenilir ama yüzeysel; notları az kullanıyor; en hızlısı.
+- **Qwen:** içerik ve Almanca açısından en iyisi; yüzdeleri kendisi hesaplıyor ve bazen yanlış nota bağlıyor.
+- **Ministral:** bu görevde açık ara en zayıfı; uydurma rakamlar ve büyüklük hataları var, biçim hiç tutmuyor.
+- Eşitlik yok, bu yüzden eşitlik kuralı (Ministral) uygulanmaz.
+
+**Karar kullanıcıda [AÇIK]** (`00_karar_kaydi.md`, Bölüm 14).

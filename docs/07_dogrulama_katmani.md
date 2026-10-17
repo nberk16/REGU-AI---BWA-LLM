@@ -272,5 +272,7 @@ Hızlı denemede üç model aynı örneği yazdı (`trial/outputs/`). v1 bulgula
 | Kalın yazı, `---`, girintili madde devamı | Tablo, liste ve Kernaussagen biçim hataları | Yok sayılır |
 | „1,91 Mio.“ (€ yok), „4,2 pp.“ | Birimsiz rakam, `zahl_unbelegt` | Mio. € ve yüzde puanı |
 | „des Ergebnisses vor Steuern“ | Satır adı tanınmadı, `zahl_falsche_position` | Kısa ad listesine eklendi |
+| „2,45 Mrd. €“ | Birimsiz rakam | Mrd. € (büyüklük hatası yine yakalanır) |
+| „Material-/Wareneinkauf … Quote von 43,4 %“ | Oran kapsam dışı, `zahl_falsche_position` | Bir satır adı geçince o satırın oranı da kapsama girer |
 
 Puanlama tablosu (`trial/score.py`) artık biçim ve içerik hatalarını ayrı gösteriyor. Ollama'nın bellek değerleri (`/api/ps`) bu sürümde güvenilir olmadığı için GPU payı sütunu kaldırıldı.

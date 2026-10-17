@@ -307,6 +307,21 @@ Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrın
   - `trial/score.py`: doğrulama katmanıyla puanlar.
   - 4 test.
 
+## 14. Almanca deneme turu: sonuçlar (17.10.2026)
+
+### 14.1 Uygulama (asistan)
+
+- **Tam tur:** 3 model × 10 örnek. Kullanıcının bilgisayarında ~5 saat; çıktılar `trial/outputs/`.
+- **Puanlama:** `trial/score.py` → `trial/results.md`. Okuma değerlendirmesi: `trial/review.md`.
+- **Doğrulama katmanı v1.1–v1.2:** Gerçek çıktılara göre biçimsel toleranslar, kaynak gösterimi ve birimler eklendi (`07`, Bölüm 11). İçerik kuralları değişmedi.
+- **Veri bulgusu [ÖNERİ]:** E04 not kalıplarından biri („{material} wird ab {monat} etwa {p} teurer.“) alış fiyatı mı satış fiyatı mı belirsiz. İki model satış fiyatı olarak okudu. Kalıbı netleştirmek veri kümelerini yeniden üretmeyi gerektirir (rakamlar değişmez, yalnızca not metinleri değişir).
+
+### 14.2 Açık karar
+
+| Konu | Seçenekler | Asistanın önerisi |
+|---|---|---|
+| Temel model (A1) | Gemma 4 E4B / Qwen3.5 9B / Ministral 3 8B | **Gemma 4 E4B.** Rakam sadakati ve uydurmazlık en iyi; en hızlı ve en küçük model. Zayıf yanı (notları az kullanması) RAG + fine-tuning'in tam hedefi. Yedek: Qwen3.5 9B. |
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

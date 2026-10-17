@@ -79,7 +79,7 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
             f"{sum(rep['metrics']['reasons']['with_source'] for rep in reps)} | "
             f"{sum(rep['metrics']['reasons']['unmarked'] for rep in reps)} | "
             f"{_fmt(statistics.mean(rep['content_errors'] for rep in reps))} | "
-            f"{hints['position_fehlt'] + hints['flag_fehlt']} | {_median([rep['metrics']['words'] for rep in reps])} | "
+            f"{hints['position_fehlt'] + hints['flag_fehlt']} | {_fmt(_median([rep['metrics']['words'] for rep in reps]))} | "
             f"{_fmt(_median([s.get('output_tok_per_s') for s in stats]))} | "
             f"{_fmt(_median([s.get('prompt_tok_per_s') for s in stats]))} | "
             f"{_fmt(_median([s.get('wall_s') for s in stats]), ' s')} |")
@@ -114,7 +114,9 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
         c = Counter(f["code"] for r in res["rows"] for f in r["report"]["findings"])
         top = ", ".join(f"`{code}` × {n}" for code, n in c.most_common(8)) or "yok"
         lines.append(f"- **{name}:** {top}")
-    lines += ["", "## Almanca kalite ve üslup (okunarak)", "", "_Çıktılar okunduktan sonra eklenecek._", ""]
+    review = HERE / "review.md"                      # elle yazılan okuma değerlendirmesi (varsa)
+    lines += ["", review.read_text(encoding="utf-8").strip() if review.exists()
+              else "## Almanca kalite ve üslup (okunarak)\n\n_Çıktılar okunduktan sonra eklenecek._", ""]
     return "\n".join(lines)
 
 

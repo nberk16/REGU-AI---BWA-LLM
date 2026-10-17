@@ -291,7 +291,8 @@ def test_facts_reference_is_not_a_source(example, facts, notes):
     assert flag_ref["ok"] and codes(flag_ref, "hinweis") == ["quelle_facts"]
 
 
-@pytest.mark.parametrize("text, unit, scale", [("1,91 Mio.", N.EUR, 1_000_000), ("4,2 pp.", N.PP, 1), ("4,2 PP", N.PP, 1)])
+@pytest.mark.parametrize("text, unit, scale", [("1,91 Mio.", N.EUR, 1_000_000), ("2,45 Mrd. €", N.EUR, 1_000_000_000),
+                                              ("4,2 pp.", N.PP, 1), ("4,2 PP", N.PP, 1)])
 def test_more_units(text, unit, scale):
     [num] = N.extract(text)
     assert (num.unit, num.scale) == (unit, scale)
@@ -300,4 +301,10 @@ def test_more_units(text, unit, scale):
 def test_genitive_alias(example, facts, notes):
     anchor = "Die Gesamtleistung liegt"
     sentence = "Der Rückgang des Ergebnisses vor Steuern im Vorjahresmonat lag bei 107.104 €. "
+    assert validate(example.replace(anchor, sentence + anchor), facts, notes)["ok"]
+
+
+def test_line_mention_includes_its_ratio(example, facts, notes):
+    anchor = "Die Gesamtleistung liegt"
+    sentence = "Der Material-/Wareneinkauf entspricht einer Quote von 51,1 %. "
     assert validate(example.replace(anchor, sentence + anchor), facts, notes)["ok"]

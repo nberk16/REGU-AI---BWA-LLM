@@ -28,7 +28,7 @@ _NUMBER = re.compile(
     r"(?P<int>\d{1,3}(?:\.\d{3})+|\d+)"
     r"(?:,(?P<dec>\d+))?"
     r"(?!\d)"
-    r"(?P<unit>\s?(?:Mio\.?(?:\s?(?:€|EUR))?|T€|TEUR|Tsd\.?\s?(?:€|EUR)|€|EUR"
+    r"(?P<unit>\s?(?:Mrd\.?(?:\s?(?:€|EUR))?|Mio\.?(?:\s?(?:€|EUR))?|T€|TEUR|Tsd\.?\s?(?:€|EUR)|€|EUR"
     r"|%-Punkte?n?|Prozentpunkte?n?|[Pp][Pp]\b\.?|%|Prozent|-?[Ff]ach\w*))?"
 )
 
@@ -68,6 +68,8 @@ def _unit(unit: str | None) -> tuple[str, int]:
     if not unit:
         return PLAIN, 1
     u = unit.strip()
+    if u.startswith("Mrd"):
+        return EUR, 1_000_000_000
     if u.startswith("Mio"):
         return EUR, 1_000_000
     if u in ("T€", "TEUR") or u.startswith("Tsd"):

@@ -14,6 +14,10 @@ CONFIG_PATH = Path(__file__).parent / "config.toml"
 KNOWN_POSITIONS = set(BASE_LINES.values()) | set(SUMMARY_LINES.values()) | set(RATIOS) | {
     "Betrieblicher Rohertrag", "Neutraler Aufwand", "Neutraler Ertrag"}
 
+# Bir satır adı geçtiğinde ona ait oran da kapsama girer (ör. "Material-/Wareneinkauf … Quote von 43,4 %").
+_LINE_NAMES = {**BASE_LINES, **SUMMARY_LINES}
+RATIO_OF_LINE = {_LINE_NAMES[key]: ratio for ratio, key in RATIOS.items()}
+
 _DASHES = {"", "-", "–", "—"}
 
 # Biçim bulguları ("Format uyumu" metriği). Geri kalan "fehler" bulguları içerikle ilgilidir.
@@ -197,7 +201,8 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
 
 def _mentions(text: str, names: set[str], aliases: dict[str, str]) -> set[str]:
     found = {n for n in names if n in text}
-    return found | {canon for alias, canon in aliases.items() if alias in text and canon in names}
+    found |= {canon for alias, canon in aliases.items() if alias in text and canon in names}
+    return found | {RATIO_OF_LINE[n] for n in found if RATIO_OF_LINE.get(n) in names}
 
 
 def _number_status(num: N.Num, seg: Segment, pool, fact_values, note_values, cited) -> tuple[str, Finding | None]:

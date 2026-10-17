@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%38, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%39, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -384,7 +384,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 
 | Konu | Not |
 |---|---|
-| Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). **[KARAR, tur 6]** Almanca deneme turu: Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Eşitlikte Ministral 3 8B [ÖNERİ]. Kit hazır, kullanıcının bilgisayarında çalıştırılmayı bekliyor: [`docs/08_deneme_turu.md`](docs/08_deneme_turu.md), `trial/`, istem `prompting/`. |
+| Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). **[KARAR, tur 6]** Almanca deneme turu: Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Eşitlikte Ministral 3 8B [ÖNERİ]. Deneme turu tamamlandı (17.10.2026): [`trial/results.md`](trial/results.md), [`docs/08_deneme_turu.md`](docs/08_deneme_turu.md). Ministral açık ara en zayıfı. **[AÇIK]** Seçim kullanıcıda; asistanın önerisi Gemma 4 E4B, yedek Qwen3.5 9B. |
 | Lisans notları (kaynak belgeden) | Mistral: Apache 2.0, AB menşeli. gpt-oss: Apache 2.0 (20b yaklaşık 16 GB'a sığıyor). Llama: 3.2'den beri çok modlu modeller AB merkezli firmalara lisanslanmıyor; metin modelleri kullanılabilir. Proje yalnızca metin kullandığı için bu kısıt doğrudan etkilemez. Qwen: Apache 2.0, ama Çin menşeli; Alman firmalarında kullanımı yaklaşık %1, algı sorunu olabilir. |
 | Fine-tuning araç seti | [ÖNERİ] Unsloth + TRL (QLoRA) |
 | Vektör veritabanı ve embedding modeli | **[KARAR, tur 6]** BGE-M3 + Chroma |
@@ -420,7 +420,7 @@ Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adımlar: Almanca deneme turu (kit hazır; kullanıcı dizüstünde çalıştırır, `trial/README.md`) → temel model seçimi → bilgi tabanı (Katman 2) → ideal yorumlar. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
+**[ÖNERİ]** Sıradaki adımlar: temel model seçimi (deneme turu sonuçları: `trial/results.md`) → bilgi tabanı (Katman 2) → ideal yorumlar. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

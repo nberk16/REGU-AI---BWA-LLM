@@ -1,6 +1,6 @@
 # 07 — Doğrulama katmanı (Katman 4)
 
-> **Durum:** v1 kodlandı (`validation/`, 46 test), 15.10.2026.
+> **Durum:** v1.1 (`validation/`, 53 test), 17.10.2026. v1.1, deneme turunun ilk gerçek model çıktılarına göre biçimsel toleranslar ekledi (Bölüm 11).
 > - **[KARAR]:** kurallar (CLAUDE.md 6.2, Katman 4; tur 6: B3–B4; tur 8: yuvarlama kuralı (a)).
 > - **[ÖNERİ]:** kelime listeleri, kısa ad listesi, uzunluk toleransı ve "rakam hangi satıra ait" kuralı (`validation/config.toml`).
 >
@@ -60,6 +60,7 @@ Kanonik yapı:
 - **Uzunluk:** Tablo dışında ~250–350 kelime. Bu aralığın ±50 kelime dışına çıkılırsa bulgu yalnızca `hinweis` olur.
 - **Kaynak gösterimi:** `[Quelle: <kimlik>]`. Birden fazla kaynak `;` ile ayrılır: `[Quelle: Kontextnotiz 2025-06 #2; Kontextnotiz 2025-06]`.
 - **Tahmin işareti:** `(Hypothese)`. Tabloda son sütuna „Hypothese“ yazılır.
+- **Biçimsel tolerans (v1.1):** Kalın yazı (`**…**`), yatay çizgiler (`---`) ve girintili devam satırları yok sayılır; içerik denetimi aynen yapılır.
 
 ## 3. Rakam kuralları
 
@@ -156,6 +157,10 @@ Bir cümle şu durumlarda neden cümlesi sayılır [ÖNERİ, `config.toml`]:
 
 **Kaynak kimliği:** `[Quelle: …]` içindeki her kimlik modele verilmiş bir notun kimliği olmalı; değilse `quelle_unbekannt`. K-A ve K-B kimlikleri, Katman 2 kurulunca eklenecek.
 
+**Kanonik olmayan kaynak gösterimi (v1.1):**
+- „Quelle:“ öneki olmadan köşeli parantez içinde verilen bilinen not kimlikleri de kaynak sayılır, ama `quellenformat` bulgusu alır. Örnekler: `[Kontextnotiz 2025-03 #3]`, kısaltılmış `[Kontextnotiz 2025-03 #3; 2024-11]`, tabloda parantezsiz kimlik.
+- `FACTS`'e veya bayraklara atıf (`[Quelle: FACTS]`, `[Flag V2]`, `[V5]`) kaynak sayılmaz; `quelle_facts` (`hinweis`) bulgusu verilir. Rakamlar zaten facts'ten gelir; neden cümlesi yine bir not ya da `(Hypothese)` ister.
+
 ## 5. Kapsam ipuçları (`hinweis`)
 
 - `facts.json`'daki sıralı bir kalem (`positions`) metinde hiç geçmiyorsa: `position_fehlt`.
@@ -171,7 +176,9 @@ Bir cümle şu durumlarda neden cümlesi sayılır [ÖNERİ, `config.toml`]:
 | `zahl_notiz_ohne_quelle` | fehler | Rakam bir nottan geliyor, kaynak gösterilmemiş |
 | `vorzeichen` | fehler | İşaret ters |
 | `einheit` | fehler | Yüzde ile yüzde puanı karışmış |
-| `zahlenformat` | fehler | Almanca olmayan ondalık yazım |
+| `zahlenformat` | fehler | Almanca olmayan ondalık yazım (biçim bulgusu) |
+| `quellenformat` | fehler | Bilinen not kimliği „[Quelle: …]“ biçiminde verilmemiş (biçim bulgusu; neden kaynaklı sayılır) |
+| `quelle_facts` | hinweis | FACTS'e veya bir bayrağa atıf; kaynak sayılmaz |
 | `begruendung_ohne_kennzeichnung` | fehler | Neden cümlesinde kaynak da tahmin işareti de yok |
 | `tabelle_ohne_quelle` | fehler | Tablodaki açıklamada kaynak da tahmin işareti de yok |
 | `quelle_unbekannt` | fehler | Gösterilen kaynak modele verilmemiş |
@@ -183,13 +190,13 @@ Bir cümle şu durumlarda neden cümlesi sayılır [ÖNERİ, `config.toml`]:
 | `laenge` | hinweis | Uzunluk hedefin dışında |
 | `position_fehlt`, `flag_fehlt` | hinweis | Kapsam |
 
-**Format uyumu** = format bulgusu (tablodaki ilk beş satır) yok.
+**Format uyumu** = biçim bulgusu yok: bölüm, başlık, tablo, liste kodları, `quellenformat` ve `zahlenformat` (`validation.check.FORMAT_CODES`). Raporun `content_errors` alanı, geri kalan `fehler` bulgularını sayar.
 
 ## 7. Rapor
 
 ```json
 {
-  "ok": true, "errors": 0, "hints": 0,
+  "ok": true, "errors": 0, "content_errors": 0, "hints": 0,
   "metrics": {
     "numbers": {"fakt": 38, "notiz": 2, "ausgenommen": 1, "unbelegt": 0, "notiz_ohne_quelle": 0,
                 "vorzeichen": 0, "einheit": 0, "checked": 40, "fidelity": 1.0},
@@ -253,3 +260,17 @@ Python'dan: `validation.check.validate(text, facts, notes) -> dict`.
 - **Anlamsal kontrol yoktur.** Gösterilen notun iddiayı gerçekten destekleyip desteklemediğine ve hipotezin görülebilir bilgiden türetilip türetilmediğine (B3) bakılmaz. İdeal yorumlarda bunu içerik planı garanti eder; model çıktılarında değerlendirme ölçer.
 - **Karşılaştırma etiketi denetlenmez.** „Vj. …“ yazılan değerin gerçekten önceki yılın aynı ayına mı, yoksa önceki aya mı ait olduğuna bakılmaz; ikisi de aynı satırın değeri. v2 için aday.
 - **Tesadüfi eşleşme:** Yanlış bir rakam, aynı satırın başka bir değerine tesadüfen eşit olabilir.
+
+## 11. Sürüm 1.1 (17.10.2026): deneme turundan öğrenilenler
+
+Hızlı denemede üç model aynı örneği yazdı (`trial/outputs/`). v1 bulgularının bir kısmı içerik hatası değil, biçimsel farklılıktı. Değişiklikler, içerik kurallarını gevşetmeden biçimsel farklılıkları ayrı saymak içindir:
+
+| Gözlem | v1 | v1.1 |
+|---|---|---|
+| Kaynak „Quelle:“ öneki olmadan verildi: `[Kontextnotiz 2025-03 #3]` | Neden işaretsiz, notun rakamı `zahl_notiz_ohne_quelle` | Kaynak sayılır; ayrıca `quellenformat` (biçim) |
+| `[Quelle: FACTS]`, `[Flag V2]` | `quelle_unbekannt` (fehler) | `quelle_facts` (hinweis); kaynak sayılmaz |
+| Kalın yazı, `---`, girintili madde devamı | Tablo, liste ve Kernaussagen biçim hataları | Yok sayılır |
+| „1,91 Mio.“ (€ yok), „4,2 pp.“ | Birimsiz rakam, `zahl_unbelegt` | Mio. € ve yüzde puanı |
+| „des Ergebnisses vor Steuern“ | Satır adı tanınmadı, `zahl_falsche_position` | Kısa ad listesine eklendi |
+
+Puanlama tablosu (`trial/score.py`) artık biçim ve içerik hatalarını ayrı gösteriyor. Ollama'nın bellek değerleri (`/api/ps`) bu sürümde güvenilir olmadığı için GPU payı sütunu kaldırıldı.

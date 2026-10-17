@@ -1,6 +1,9 @@
 # 08 — Almanca deneme turu (temel model seçimi)
 
-> **Durum:** Kit hazır (15.10.2026); kullanıcının bilgisayarında çalıştırılmayı bekliyor.
+> **Durum:** Hızlı deneme yapıldı (17.10.2026, her modelden 1 örnek); tam tur kullanıcının bilgisayarında çalışıyor.
+> - **Hız (örnek başına):** Ministral ~15 dk (2,4 token/s), Gemma ~7 dk (4,3 token/s), Qwen ~12 dk (2,8 token/s).
+> - **İstem okuma:** ~11–14 token/s; ~3.700 token'lık istem 5–6 dakika sürüyor. Model büyük ölçüde işlemcide çalışıyor.
+> - **Tam tur:** ~5 saat (tahmini).
 > - **[KARAR, tur 6]:** üç aday; ~10 örnek; aynı istem; sıfır atış.
 > - **[ÖNERİ]:** seçim ölçütleri, istem metni ve üretim ayarları (bu belge).
 >

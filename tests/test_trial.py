@@ -111,7 +111,7 @@ def test_runner_and_score(fake_ollama, tmp_path, capsys):
     score.main(["--outputs", str(out), "--report", str(report)])
     text = report.read_text(encoding="utf-8")
     assert all(m["name"] in text for m in run_ollama.MODELS)
-    assert "| 0/2 |" in text and "50%" in text                  # format bozuk; GPU payı %50
+    assert "| 0/2 |" in text                                     # format bozuk
     capsys.readouterr()
 
 

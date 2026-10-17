@@ -256,3 +256,48 @@ def test_no_false_alarms_on_reference_run():
             assert report["metrics"]["numbers"]["fidelity"] == 1.0
             checked += 1
     assert checked == len(firms) * 24
+
+
+# --- v1.1: deneme turundaki gerçek çıktılardan gelen toleranslar (docs/07, Bölüm 11) ------------------
+
+def test_cosmetic_markdown_is_ignored(example, facts, notes):
+    noisy = (example
+             .replace("| Umsatzerlöse | 886.365 € |", "| **Umsatzerlöse** | **886.365 €** |")
+             .replace("**Abweichungen im Detail**", "---\n**Abweichungen im Detail**")
+             .replace("- Bestandsveränderungen FE/UE: April und Mai je 0 €, Juni −15.419 €. ",
+                      "- **Bestandsveränderungen FE/UE:**\n  April und Mai je 0 €, Juni −15.419 €. "))
+    report, clean = validate(noisy, facts, notes), validate(example, facts, notes)
+    assert report["ok"], report["findings"]
+    assert report["metrics"]["numbers"] == clean["metrics"]["numbers"]
+
+
+def test_citation_without_prefix_counts_but_is_flagged(example, facts, notes):
+    variant = (example.replace("[Quelle: Kontextnotiz 2025-06].", "[Kontextnotiz 2025-06].")
+               .replace("[Quelle: Kontextnotiz 2025-06 #2; Kontextnotiz 2025-06]", "[Kontextnotiz 2025-06 #2; 2025-06]"))
+    report = validate(variant, facts, notes)
+    assert set(codes(report)) == {"quellenformat"} and report["content_errors"] == 0
+    assert report["metrics"]["numbers"]["notiz"] == 2             # „rund 5 %“ weiterhin der Notiz zugeordnet
+    assert not report["metrics"]["format_ok"]
+
+
+def test_facts_reference_is_not_a_source(example, facts, notes):
+    anchor = "Die Gesamtleistung liegt"
+    report = validate(example.replace(anchor, "Die Umsatzerlöse steigen wegen höherer Mengen [Quelle: FACTS]. " + anchor),
+                      facts, notes)
+    assert codes(report) == ["begruendung_ohne_kennzeichnung"]
+    assert codes(report, "hinweis") == ["quelle_facts"]
+    flag_ref = validate(example.replace("(Hypothese). Dann wäre der Juni", "(Hypothese) [Flag V1]. Dann wäre der Juni"),
+                        facts, notes)
+    assert flag_ref["ok"] and codes(flag_ref, "hinweis") == ["quelle_facts"]
+
+
+@pytest.mark.parametrize("text, unit, scale", [("1,91 Mio.", N.EUR, 1_000_000), ("4,2 pp.", N.PP, 1), ("4,2 PP", N.PP, 1)])
+def test_more_units(text, unit, scale):
+    [num] = N.extract(text)
+    assert (num.unit, num.scale) == (unit, scale)
+
+
+def test_genitive_alias(example, facts, notes):
+    anchor = "Die Gesamtleistung liegt"
+    sentence = "Der Rückgang des Ergebnisses vor Steuern im Vorjahresmonat lag bei 107.104 €. "
+    assert validate(example.replace(anchor, sentence + anchor), facts, notes)["ok"]

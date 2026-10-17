@@ -28,8 +28,8 @@ _NUMBER = re.compile(
     r"(?P<int>\d{1,3}(?:\.\d{3})+|\d+)"
     r"(?:,(?P<dec>\d+))?"
     r"(?!\d)"
-    r"(?P<unit>\s?(?:Mio\.?\s?(?:€|EUR)|T€|TEUR|Tsd\.?\s?(?:€|EUR)|€|EUR"
-    r"|%-Punkte?n?|Prozentpunkte?n?|Pp\.?|%|Prozent|-?[Ff]ach\w*))?"
+    r"(?P<unit>\s?(?:Mio\.?(?:\s?(?:€|EUR))?|T€|TEUR|Tsd\.?\s?(?:€|EUR)|€|EUR"
+    r"|%-Punkte?n?|Prozentpunkte?n?|[Pp][Pp]\b\.?|%|Prozent|-?[Ff]ach\w*))?"
 )
 
 # Almanca olmayan ondalık biçim (ör. "19.0 %"); tarihler önceden silinir.
@@ -74,7 +74,7 @@ def _unit(unit: str | None) -> tuple[str, int]:
         return EUR, 1_000
     if u in ("€", "EUR"):
         return EUR, 1
-    if u.startswith("%-Punkt") or u.startswith("Prozentpunkt") or u.startswith("Pp"):
+    if u.startswith("%-Punkt") or u.startswith("Prozentpunkt") or u.lower().startswith("pp"):
         return PP, 1
     if u in ("%", "Prozent"):
         return PCT, 1

@@ -9,13 +9,16 @@ ORDER = (KERNAUSSAGEN, ABWEICHUNGEN, HINWEISE, FRAGEN)
 _HEADING = re.compile(r"^\*\*(.+?)\*\*\s*$")
 _ITEM = re.compile(r"^(\d+)\.\s+(\S.*)$")
 _SEPARATOR = re.compile(r"^:?-{3,}:?$")
+_NEW_ITEM = re.compile(r"^(?:- |\d+\.\s|\|)")
 CITATION = re.compile(r"\[Quelle:\s*([^\]]*)\]")
+BRACKET = re.compile(r"\[([^\[\]]*)\]")              # her köşeli parantez (kaynak adayı)
+_RULE = re.compile(r"^\s*([-*_])(\s*\1){2,}\s*$")     # Markdown yatay çizgi (---)
 
 # Cümle bölmede nokta içeren kısaltmalar.
 _ABBREVIATIONS = ("z. B.", "z.B.", "d. h.", "u. a.", "Vj.", "Vm.", "ca.", "bzw.", "ggü.", "ggf.", "inkl.",
                   "evtl.", "Mio.", "Tsd.", "Pp.", "rd.", "vgl.", "Nr.", "max.", "min.")
 _SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-ZÄÖÜ„\[(])")
-_ONLY_MARKERS = re.compile(r"^(?:\s*(?:\[Quelle:[^\]]*\]|\(Hypothese\))\s*)+[.!?]?\s*$")
+_ONLY_MARKERS = re.compile(r"^(?:\s*(?:\[[^\]]*\]|\(Hypothese\))\s*)+[.!?]?\s*$")
 
 
 @dataclass
@@ -73,7 +76,7 @@ def _cells(line: str) -> list[str] | None:
 
 
 def _words(text: str) -> int:
-    return len(re.findall(r"\S+", CITATION.sub(" ", text)))
+    return len(re.findall(r"\S+", BRACKET.sub(" ", text)))
 
 
 def parse(text: str, period_label: str, cfg: dict) -> tuple[Parsed, list[Finding]]:
@@ -94,8 +97,8 @@ def parse(text: str, period_label: str, cfg: dict) -> tuple[Parsed, list[Finding
     current: str | None = None
     for no, raw in enumerate(text.splitlines(), start=1):
         line = raw.rstrip()
-        if not line.strip():
-            continue
+        if not line.strip() or _RULE.match(line):
+            continue                                  # boş satır ve yatay çizgi: biçimsel, yok sayılır
         m = _HEADING.match(line.strip())
         if m:
             title = m.group(1).strip()
@@ -121,7 +124,12 @@ def parse(text: str, period_label: str, cfg: dict) -> tuple[Parsed, list[Finding
         if current is None:
             findings.append(Finding("fehler", "text_ausserhalb", "Text außerhalb der vier Abschnitte.", None, no, line.strip()))
             continue
-        blocks[current].append((no, line.strip()))
+        content = line.strip().replace("**", "")     # kalın yazı biçimseldir, içerik değil
+        if raw[:1].isspace() and blocks[current] and not _NEW_ITEM.match(content):
+            prev_no, prev = blocks[current][-1]        # girintili devam satırı → önceki maddeye eklenir
+            blocks[current][-1] = (prev_no, prev + " " + content)
+            continue
+        blocks[current].append((no, content))
 
     for key in ORDER:
         if key not in blocks:

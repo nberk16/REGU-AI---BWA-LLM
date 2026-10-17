@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 18,8 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 18,9 gün
 toplam iş     = 50 gün
-durum         = 18,8 / 50 ≈ %38
+durum         = 18,9 / 50 ≈ %38
 ```
 
 **Belirsizlik:**
@@ -37,10 +37,10 @@ durum         = 18,8 / 50 ≈ %38
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %25 | 1,25 | 🔄 deneme turu kiti hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %70 | 2,1 | 🔄 v1 tamamlandı |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %75 | 2,25 | 🔄 v1.1 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **18,8** | **≈ %38** |
+| | **Toplam** | **50** | | **18,9** | **≈ %38** |
 
 ---
 
@@ -192,3 +192,4 @@ Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_s
 | 17.10.2026 | `trial/README.md`: ZIP'i çıkartma ve PowerShell'i klasörde açma adımları eklendi; durum değişmedi: %38 |
 | 17.10.2026 | `trial/run_ollama.py` Python 3.8 uyumlu yapıldı (kullanıcının bilgisayarı); durum değişmedi: %38 |
 | 17.10.2026 | `trial/run_ollama.py`: sonuç ekrana yazılmadan önce dosyaya kaydediliyor (Windows QuickEdit donması); kılavuza sorun giderme satırı; durum değişmedi: %38 |
+| 17.10.2026 | Deneme turu: hızlı deneme (3 model × 1 örnek) tamamlandı; doğrulama katmanı v1.1 (biçimsel toleranslar, kaynak gösterimi; 53 test); puanlama tablosu biçim/içerik ayrımıyla. Paket 8 → %75: %38 |

@@ -63,8 +63,8 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
              f"Örnek sayısı: {n_cases} (doğrulama varyantları; `trial/inputs/selection.md`). "
              "Puanlama: doğrulama katmanı (`docs/07`).", "",
              "## Özet", "",
-             "| Model | Örnek | Format uyumu | Rakam sadakati (toplam) | Beanstandete Zahlen | İşaretsiz neden | Fehler / örnek | "
-             "Eksik kalem/bayrak | Kelime (medyan) | Çıktı token/s | İstem token/s | Süre / örnek | GPU'daki pay |",
+             "| Model | Örnek | Format uyumu | Rakam sadakati (toplam) | İtiraz edilen rakam | Kaynaklı neden | İşaretsiz neden | "
+             "İçerik hatası / örnek | Eksik kalem/bayrak | Kelime (medyan) | Çıktı token/s | İstem token/s | Süre / örnek |",
              "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for name, res in results.items():
         rows = res["rows"]
@@ -73,26 +73,26 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
         checked = sum(rep["metrics"]["numbers"]["checked"] for rep in reps)
         supported = sum(rep["metrics"]["numbers"]["fakt"] + rep["metrics"]["numbers"]["notiz"] for rep in reps)
         hints = Counter(f["code"] for rep in reps for f in rep["findings"] if f["severity"] == "hinweis")
-        mem = res["memory"]
-        gpu = f"{mem['size_vram'] / mem['size']:.0%}" if mem and mem.get("size") else "–"
         lines.append(
             f"| {name} | {len(rows)} | {sum(rep['metrics']['format_ok'] for rep in reps)}/{len(rows)} | "
             f"{_fmt(supported / checked if checked else None)} | {checked - supported} | "
+            f"{sum(rep['metrics']['reasons']['with_source'] for rep in reps)} | "
             f"{sum(rep['metrics']['reasons']['unmarked'] for rep in reps)} | "
-            f"{_fmt(statistics.mean(rep['errors'] for rep in reps))} | "
+            f"{_fmt(statistics.mean(rep['content_errors'] for rep in reps))} | "
             f"{hints['position_fehlt'] + hints['flag_fehlt']} | {_median([rep['metrics']['words'] for rep in reps])} | "
             f"{_fmt(_median([s.get('output_tok_per_s') for s in stats]))} | "
             f"{_fmt(_median([s.get('prompt_tok_per_s') for s in stats]))} | "
-            f"{_fmt(_median([s.get('wall_s') for s in stats]), ' s')} | {gpu} |")
+            f"{_fmt(_median([s.get('wall_s') for s in stats]), ' s')} |")
 
     lines += ["", "**Sütunlar:**",
               "- **Format uyumu:** CLAUDE.md 6.3 yapısına uyan çıktı sayısı.",
               "- **Rakam sadakati:** `facts.json`'la ya da kaynak gösterilen notla eşleşen rakamların payı.",
-              "- **Beanstandete Zahlen:** belgelenmemiş, yanlış satıra ait, işareti ters ya da birimi karışmış rakamlar.",
-              "- **İşaretsiz neden:** ne kaynak ne `(Hypothese)` taşıyan neden cümleleri.",
+              "- **İtiraz edilen rakam:** belgelenmemiş, yanlış satıra ait, işareti ters ya da birimi karışmış rakamlar.",
+              "- **Kaynaklı / işaretsiz neden:** bir bağlam notunu gösteren ve ne not ne `(Hypothese)` taşıyan neden cümleleri.",
+              "- **İçerik hatası:** biçim dışındaki `fehler` bulguları (rakam, kaynak, neden; `docs/07`, Bölüm 6).",
               "- **Eksik kalem/bayrak:** metinde geçmeyen önemli kalemler ve bayraklar (`hinweis`).",
-              "- **GPU'daki pay:** modelin ekran kartı belleğindeki payı (Ollama `/api/ps`); kalanı RAM'de çalışır.",
-              "", "## Örnek başına bulgular (fehler sayısı · rakam sadakati)", ""]
+              "- Bellek payı gösterilmez: Ollama'nın `/api/ps` değerleri bu sürümde güvenilir değil (ör. 9B model için 26 MB).",
+              "", "## Örnek başına bulgular (içerik hatası · rakam sadakati)", ""]
     names = list(results)
     lines.append("| Örnek | " + " | ".join(names) + " |")
     lines.append("|---|" + "---|" * len(names))
@@ -106,7 +106,7 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
                 continue
             rep = row["report"]
             fid = rep["metrics"]["numbers"]["fidelity"]
-            cells.append(f"{rep['errors']} · {_fmt(fid)}" + ("" if rep["metrics"]["format_ok"] else " · Format ✗"))
+            cells.append(f"{rep['content_errors']} · {_fmt(fid)}" + ("" if rep["metrics"]["format_ok"] else " · Format ✗"))
         lines.append(f"| {cid} | " + " | ".join(cells) + " |")
 
     lines += ["", "## En sık bulgular", ""]

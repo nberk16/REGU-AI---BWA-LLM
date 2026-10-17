@@ -7,7 +7,7 @@ from pathlib import Path
 from facts.schema import BASE_LINES, RATIOS, SUMMARY_LINES
 
 from . import numbers as N
-from .structure import ABWEICHUNGEN, CITATION, HINWEISE, Finding, Segment, parse
+from .structure import ABWEICHUNGEN, BRACKET, HINWEISE, Finding, Segment, parse
 
 CONFIG_PATH = Path(__file__).parent / "config.toml"
 
@@ -15,6 +15,13 @@ KNOWN_POSITIONS = set(BASE_LINES.values()) | set(SUMMARY_LINES.values()) | set(R
     "Betrieblicher Rohertrag", "Neutraler Aufwand", "Neutraler Ertrag"}
 
 _DASHES = {"", "-", "–", "—"}
+
+# Biçim bulguları ("Format uyumu" metriği). Geri kalan "fehler" bulguları içerikle ilgilidir.
+FORMAT_CODES = frozenset({
+    "periode", "ueberschrift_unbekannt", "abschnitt_doppelt", "text_ausserhalb", "abschnitt_fehlt",
+    "abschnitt_reihenfolge", "abschnitt_leer", "kernaussagen_anzahl", "kernaussagen_format", "tabellenkopf",
+    "tabelle_leer", "tabellenzeile", "liste_format", "frage_format", "position_unbekannt", "quellenformat",
+    "zahlenformat"})
 
 
 def load_config(path: Path | None = None) -> dict:
@@ -32,11 +39,50 @@ def _word_pattern(words: list[str]) -> re.Pattern:
     return re.compile("|".join(parts), re.IGNORECASE)
 
 
-def _citations(text: str) -> list[str]:
-    ids = []
-    for m in CITATION.finditer(text):
-        ids.extend(s.strip() for s in re.split(r";", m.group(1)) if s.strip())
-    return ids
+# facts.json'a yapılan atıflar ("FACTS", "Flag V2", "V5"): kaynak sayılmaz (rakamlar zaten facts'ten gelir).
+_FACT_REF = re.compile(r"^(?:FACTS?(?:\.\w+)*|(?:Flag\s+)?V[1-6])$", re.IGNORECASE)
+_SHORT_ID = re.compile(r"^\d{4}-\d{2}(?: #\d+)?$")
+
+
+def _citations(seg: Segment, note_ids: set[str]) -> tuple[list[str], list[tuple[str, str]], str]:
+    """Bir kontrol birimindeki kaynak gösterimleri (docs/07, Bölüm 4).
+
+    Kanonik biçim `[Quelle: A; B]`. "Quelle:" öneki olmadan köşeli parantez içinde verilen bilinen kimlikler
+    ve kısaltmalar ("[Kontextnotiz 2025-03 #3; 2024-11]") de kaynak sayılır, ama biçim bulgusu alır.
+    Döner: (notlara çözülen kimlikler, [(bulgu kodu, metin)], kaynakları silinmiş metin).
+    """
+    cited: list[str] = []
+    issues: list[tuple[str, str]] = []
+    spans: list[tuple[int, int]] = []
+    candidates = [(m.start(), m.end(), m.group(1)) for m in BRACKET.finditer(seg.text)]
+    if seg.kind == "zeile" and "[" not in seg.cells[-1] and seg.cells[-1] not in _DASHES:
+        candidates.append((-1, -1, seg.cells[-1]))     # tablo: köşeli parantezsiz kaynak sütunu
+    for start, end, inner in candidates:
+        content = inner.strip()
+        canonical = content.startswith("Quelle:")
+        parts = [s.strip() for s in re.split(r"[;,]", content.removeprefix("Quelle:")) if s.strip()]
+        resolved, facts_refs, unknown = [], [], []
+        for part in parts:
+            if part in note_ids:
+                resolved.append(part)
+            elif _SHORT_ID.match(part) and f"Kontextnotiz {part}" in note_ids:
+                resolved.append(f"Kontextnotiz {part}")
+            elif _FACT_REF.match(part):
+                facts_refs.append(part)
+            else:
+                unknown.append(part)
+        if not canonical and not resolved and not facts_refs:
+            continue                                    # kaynak değil (ör. "[sic]", "Hypothese")
+        if start >= 0:
+            spans.append((start, end))
+        cited.extend(resolved)
+        issues += [("quelle_facts", r) for r in facts_refs] + [("quelle_unbekannt", u) for u in unknown]
+        if not canonical and resolved:
+            issues.append(("quellenformat", inner))
+    body = seg.text
+    for start, end in spans:
+        body = body[:start] + " " * (end - start) + body[end:]
+    return cited, issues, body
 
 
 def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None) -> dict:
@@ -58,12 +104,15 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
     reasons = {"total": 0, "with_source": 0, "with_hypothesis": 0, "unmarked": 0}
 
     for seg in parsed.segments:
-        cited = _citations(seg.text)
-        for sid in cited:
-            if sid not in note_values:
-                findings.append(Finding("fehler", "quelle_unbekannt",
-                                        f"Quelle „{sid}“ wurde nicht bereitgestellt.", seg.section, seg.line, sid))
-        body = CITATION.sub(lambda m: " " * len(m.group()), seg.text)
+        cited, issues, body = _citations(seg, set(note_values))
+        for code, ref in issues:
+            message = {
+                "quelle_unbekannt": f"Quelle „{ref}“ wurde nicht bereitgestellt.",
+                "quelle_facts": f"„{ref}“ ist keine Quelle; Zahlen aus FACTS brauchen keine Quellenangabe.",
+                "quellenformat": f"Quellenangabe „[{ref}]“ nicht im Format [Quelle: …].",
+            }[code]
+            severity = "hinweis" if code == "quelle_facts" else "fehler"
+            findings.append(Finding(severity, code, message, seg.section, seg.line, ref))
         has_hyp = marker in body or (seg.kind == "zeile" and "Hypothese" in seg.cells[-1])
 
         # Rakamlar
@@ -129,19 +178,17 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
               for s in ("fakt", "notiz", "ausgenommen", "unbelegt", "notiz_ohne_quelle", "vorzeichen", "einheit")}
     checked = sum(counts.values()) - counts["ausgenommen"]
     errors = [f for f in findings if f.severity == "fehler"]
-    format_codes = {"periode", "ueberschrift_unbekannt", "abschnitt_doppelt", "text_ausserhalb", "abschnitt_fehlt",
-                    "abschnitt_reihenfolge", "abschnitt_leer", "kernaussagen_anzahl", "kernaussagen_format",
-                    "tabellenkopf", "tabelle_leer", "tabellenzeile", "liste_format", "frage_format", "position_unbekannt"}
     return {
         "ok": not errors,
         "errors": len(errors),
+        "content_errors": sum(1 for f in errors if f.code not in FORMAT_CODES),
         "hints": len(findings) - len(errors),
         "metrics": {
             "numbers": {**counts, "checked": checked,
                         "fidelity": round((counts["fakt"] + counts["notiz"]) / checked, 3) if checked else None},
             "reasons": reasons,
             "words": parsed.words,
-            "format_ok": not any(f.code in format_codes for f in errors),
+            "format_ok": not any(f.code in FORMAT_CODES for f in errors),
         },
         "findings": [f.as_dict() for f in findings],
         "numbers": numbers_out,

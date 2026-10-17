@@ -40,7 +40,7 @@ without_number = [
 with_number = [
   "Unser Hauptlieferant hat die Preise für {material} ab {monat} um rund {p} erhöht.{zusatz}",
   "Einkauf: Preiserhöhung bei {material} von ca. {p} ab {monat}.{zusatz}",
-  "{material} wird ab {monat} etwa {p} teurer.{zusatz}",
+  "Im Einkauf wird {material} ab {monat} etwa {p} teurer.{zusatz}",
 ]
 without_number = [
   "Deutliche Preissteigerungen bei {material} ab {monat}; eine Weitergabe an die Kunden wird geprüft.{zusatz}",
@@ -51,11 +51,11 @@ zusatz_temporaer = " Der Zuschlag gilt voraussichtlich nur für einige Monate."
 [E05]
 with_number = [
   "Preiserhöhung gegenüber unseren Kunden um durchschnittlich {p} ab {monat}.",
-  "Neue Preisliste ab {monat}: im Schnitt plus {p}.",
+  "Neue Verkaufspreisliste ab {monat}: im Schnitt plus {p}.",
   "Die Verkaufspreise wurden ab {monat} um rund {p} angehoben.",
 ]
 without_number = [
-  "Neue Preisliste ab {monat} in Kraft.",
+  "Neue Verkaufspreisliste für unsere Kunden ab {monat} in Kraft.",
   "Preisanpassung bei den wichtigsten Kunden ab {monat} durchgesetzt.",
 ]
 

@@ -79,7 +79,9 @@ Deneme turu, baseline'lar ve fine-tuning aynı istem biçimini kullanır. Deği�
 | 9 | A3-v120 2025-02 | Sakin ay |
 | 10 | A3-v122 2026-09 | Çeldirici not (5 anlamlı kalem) |
 
-Ayrıntılar (bayraklar, beklenen kararlar, notlar): [`trial/inputs/selection.md`](../trial/inputs/selection.md). `cases.jsonl` yeniden üretilebilir; bir test, dosyanın üreteç ve Katman 1 ile birebir aynı çıktığını denetler.
+Ayrıntılar (bayraklar, beklenen kararlar, notlar): [`trial/inputs/selection.md`](../trial/inputs/selection.md).
+
+`cases.jsonl`, modellerin gördüğü hâliyle **dondurulmuştur**. 17.10.2026'da E04/E05 not kalıpları netleştirildi, bu yüzden bazı not metinleri bugünkü üreteç çıktısından farklıdır. Bir test, ay seçiminin, facts'in ve not kimliklerinin yeniden üretilebildiğini denetler.
 
 ## 5. Akış
 
@@ -127,4 +129,4 @@ Tam tur tamamlandı: 3 model × 10 örnek, hata yok, istem kesilmedi. Ayrıntıl
 - **Ministral:** bu görevde açık ara en zayıfı; uydurma rakamlar ve büyüklük hataları var, biçim hiç tutmuyor.
 - Eşitlik yok, bu yüzden eşitlik kuralı (Ministral) uygulanmaz.
 
-**Karar kullanıcıda [AÇIK]** (`00_karar_kaydi.md`, Bölüm 14).
+**[KARAR, tur 9]** Temel model **Gemma 4 E4B**, yedek **Qwen3.5 9B** (`00_karar_kaydi.md`, Bölüm 15).

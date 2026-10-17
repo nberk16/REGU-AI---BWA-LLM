@@ -35,9 +35,11 @@ def test_cases_are_reproducible(tmp_path):
     chosen = prepare.select(prepare.candidates(tmp_path), len(prepare.CRITERIA))
     committed = _cases()
     assert [f"{c['firm_id']}_{c['period']}" for _, c in chosen] == [c["id"] for c in committed]
-    from prompting import build_messages
+    # Girdiler, deneme turunda modellerin gördüğü hâliyle dondurulmuştur (docs/08, Bölüm 4). 17.10.2026'da
+    # E04/E05 not kalıpları netleştirildi: rakamlar, ay seçimi ve not kimlikleri aynı kalır, bazı metinler değişir.
     for (_, c), case in zip(chosen, committed):
-        assert build_messages(c["facts"], c["notes"]) == case["messages"]
+        assert c["facts"] == case["facts"]
+        assert [n["source_id"] for n in c["notes"]] == [n["source_id"] for n in case["notes"]]
 
 
 def test_cases_use_validation_variants_and_no_ground_truth():

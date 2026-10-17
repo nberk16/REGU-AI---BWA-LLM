@@ -320,7 +320,25 @@ Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrın
 
 | Konu | Seçenekler | Asistanın önerisi |
 |---|---|---|
-| Temel model (A1) | Gemma 4 E4B / Qwen3.5 9B / Ministral 3 8B | **Gemma 4 E4B.** Rakam sadakati ve uydurmazlık en iyi; en hızlı ve en küçük model. Zayıf yanı (notları az kullanması) RAG + fine-tuning'in tam hedefi. Yedek: Qwen3.5 9B. |
+| Temel model (A1) | Gemma 4 E4B / Qwen3.5 9B / Ministral 3 8B | **Gemma 4 E4B.** Rakam sadakati ve uydurmazlık en iyi; en hızlı ve en küçük model. Zayıf yanı (notları az kullanması) RAG + fine-tuning'in tam hedefi. Yedek: Qwen3.5 9B. → Tur 9'da karara bağlandı (Bölüm 15). |
+
+## 15. Karar turu 9 (17.10.2026): temel model ve not kalıpları
+
+### 15.1 Kararlar [KARAR]
+
+| Konu | Karar |
+|---|---|
+| Temel model | **Gemma 4 E4B.** Yedek: **Qwen3.5 9B**; fine-tuning sonrası sonuçlar yetersiz kalırsa kullanılır. Ministral 3 8B elendi. |
+| Fiyat notlarının kalıpları | Alış ve satış fiyatı notları netleştirilir; veri kümeleri yeniden üretilir. |
+
+### 15.2 Uygulama (asistan)
+
+- **Not kalıpları** (`generator/config/note_templates.toml`):
+  - E04: „{material} wird ab {monat} etwa {p} teurer.“ → „Im Einkauf wird {material} ab {monat} etwa {p} teurer.“
+  - E05: „Neue Preisliste …“ → „Neue Verkaufspreisliste …“ (iki kalıp).
+  - Kalıp sayısı değişmediği için seed ile kalıp seçimi aynı kalır.
+- **Veri kümeleri yeniden üretildi:** `reference_seed42` ve `v2_balanced_seed4242`. Yalnızca `context_notes.jsonl` metinleri değişti (101 satır), manifest'te de parmak izi değişti. BWA rakamları, olaylar ve ground truth değişmedi; Katman 1 çıktıları ve örnek dosyalar aynı.
+- **Deneme turu girdileri dondu:** `trial/inputs/cases.jsonl` modellerin gördüğü hâliyle kalır. Test artık ay seçiminin, facts'in ve not kimliklerinin yeniden üretilebilirliğini denetliyor.
 
 ## Kaynak
 

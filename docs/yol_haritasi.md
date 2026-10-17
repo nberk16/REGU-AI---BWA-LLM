@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 17.10.2026 (deneme turu tamamlandı; temel model kararı bekleniyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 17.10.2026 (karar turu 9: temel model Gemma 4 E4B; not kalıpları netleştirildi)
 
 ---
 
-## 1. Genel durum: ~%39 tamamlandı
+## 1. Genel durum: ~%40 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 19,7 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 19,9 gün
 toplam iş     = 50 gün
-durum         = 19,7 / 50 ≈ %39
+durum         = 19,9 / 50 ≈ %40
 ```
 
 **Belirsizlik:**
@@ -35,12 +35,12 @@ durum         = 19,7 / 50 ≈ %39
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %10 | 0,6 | ⏳ başlamadı (tasarım kararları alındı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %40 | 2,0 | 🔄 deneme turu tamamlandı |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %45 | 2,25 | 🔄 temel model seçildi |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %75 | 2,25 | 🔄 v1.1 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **19,7** | **≈ %39** |
+| | **Toplam** | **50** | | **19,9** | **≈ %40** |
 
 ---
 
@@ -108,8 +108,11 @@ durum         = 19,7 / 50 ≈ %39
 - **Deneme turu tamamlandı (17.10.2026):**
   - 3 model × 10 örnek; puanlama ve okuma: `trial/results.md`.
   - Ministral açık ara en zayıfı. Öneri Gemma 4 E4B, yedek Qwen3.5 9B.
+- **Kararlaştırılan (tur 9):** Temel model Gemma 4 E4B, yedek Qwen3.5 9B.
 - **Kalan:**
-  - Temel model seçimi (kullanıcı) [AÇIK].
+  - İstem 1.1: deneme turu dersleri. Örnekler: FACTS'e kaynak gösterilmez, yüzde hesaplanmaz, `(Hypothese)` işareti.
+  - Kaggle'da çıkarım altyapısı (Gemma 4 E4B).
+  - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
   - Çıkarım altyapısı (Kaggle + vLLM).
   - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
@@ -170,12 +173,12 @@ durum         = 19,7 / 50 ≈ %39
 
 ## 4. Sıradaki adımlar
 
-Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_secenekler.md`](06_model_tarafi_secenekler.md)); doğrulama katmanı v1 hazır (tur 8). Önerilen sıra:
+Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
-1. **Temel model seçimi (paket 6):** Deneme turu sonuçları `trial/results.md`'de; karar kullanıcıda.
-2. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, Chroma indeksi, 13 ay + top-k getirme, recall@k.
+1. **Bilgi tabanı (paket 4):** K-A ve K-B metinleri, BGE-M3 + Chroma indeksi, 13 ay + top-k getirme, recall@k.
+2. **İstem 1.1 (paket 6):** Deneme turundan çıkan dersler; baseline'lar ve fine-tuning aynı istemi kullanır.
 3. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
-4. **Kaggle defterleri (paket 6, 7, 9):** Fine-tuning, baseline'lar, değerlendirme.
+4. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar, fine-tuning, değerlendirme.
 
 ## 5. Değişiklik geçmişi
 
@@ -194,3 +197,4 @@ Model tarafının yöntem kararları alındı (turlar 6–7, [`06_model_tarafi_s
 | 17.10.2026 | `trial/run_ollama.py`: sonuç ekrana yazılmadan önce dosyaya kaydediliyor (Windows QuickEdit donması); kılavuza sorun giderme satırı; durum değişmedi: %38 |
 | 17.10.2026 | Deneme turu: hızlı deneme (3 model × 1 örnek) tamamlandı; doğrulama katmanı v1.1 (biçimsel toleranslar, kaynak gösterimi; 53 test); puanlama tablosu biçim/içerik ayrımıyla. Paket 8 → %75: %38 |
 | 17.10.2026 | Deneme turu tamamlandı (3 model × 10 örnek); puanlama + okuma (`trial/results.md`); doğrulama v1.2. Paket 6 → %40: %39 |
+| 17.10.2026 | Karar turu 9: temel model Gemma 4 E4B (yedek Qwen3.5 9B); E04/E05 not kalıpları netleştirildi, veri kümeleri yeniden üretildi (yalnızca not metinleri). Paket 6 → %45: %40 |

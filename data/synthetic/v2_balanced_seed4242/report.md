@@ -3,7 +3,7 @@
 - Seed: `4242` · Arketipler: A1, A2, A3 · Arketip başına varyant: 10 (ilk varyant: v50)
 - Profil: `v2_balanced` (ana parametrelerden farklı; docs/04, Bölüm 8)
 - Dönem: 2024-01 – 2026-12 (yorumlanabilir: 2025-01 itibarıyla)
-- Üreteç sürümü: 0.1.0 · Parametre özeti: `a00f119bd7dc38f4`
+- Üreteç sürümü: 0.1.0 · Parametre özeti: `3dcebe2f2750b413`
 
 ## Hedef oranlar (docs/03) ve gerçekleşen
 

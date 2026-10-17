@@ -58,7 +58,7 @@
 {"source_id": "Kontextnotiz 2025-08 #4", "firm_id": "A1-v01", "period": "2025-08", "duration": "dauerhaft", "text": "Wir haben das Team im Bereich Montage ab August um 3 Personen verstärkt, um die höhere Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2025-09", "firm_id": "A1-v01", "period": "2025-09", "duration": "dauerhaft", "text": "Neuer Ansprechpartner beim Steuerberater ab September."}
 {"source_id": "Kontextnotiz 2025-09 #2", "firm_id": "A1-v01", "period": "2025-09", "duration": "dauerhaft", "text": "Investition abgeschlossen: CNC-Bearbeitungszentrum läuft seit September, das Darlehen wurde ausgezahlt."}
-{"source_id": "Kontextnotiz 2025-11", "firm_id": "A1-v01", "period": "2025-11", "duration": "dauerhaft", "text": "Neue Preisliste ab November: im Schnitt plus 5 %."}
+{"source_id": "Kontextnotiz 2025-11", "firm_id": "A1-v01", "period": "2025-11", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab November: im Schnitt plus 5 %."}
 {"source_id": "Kontextnotiz 2025-11 #2", "firm_id": "A1-v01", "period": "2025-11", "duration": "dauerhaft", "text": "Wir haben das Team im Bereich Montage ab November um 2 Personen verstärkt, um die höhere Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2026-01", "firm_id": "A1-v01", "period": "2026-01", "duration": "dauerhaft", "text": "Im Bereich Arbeitsvorbereitung sind ab Januar 2 Stellen durch Ruhestand und Kündigung weggefallen."}
 {"source_id": "Kontextnotiz 2026-03", "firm_id": "A1-v01", "period": "2026-03", "duration": "temporär", "text": "Update des ERP-Systems im März durchgeführt; es gab keine Ausfälle."}
@@ -66,7 +66,7 @@
 {"source_id": "Kontextnotiz 2026-04", "firm_id": "A1-v01", "period": "2026-04", "duration": "dauerhaft", "text": "Ab April gilt die neue Entgelttabelle (plus 3 %)."}
 {"source_id": "Kontextnotiz 2026-04 #2", "firm_id": "A1-v01", "period": "2026-04", "duration": "dauerhaft", "text": "Interne Umorganisation im Bereich Montage, ohne personelle Veränderungen."}
 {"source_id": "Kontextnotiz 2026-06", "firm_id": "A1-v01", "period": "2026-06", "duration": "temporär", "text": "Update des ERP-Systems im Juni durchgeführt; es gab keine Ausfälle."}
-{"source_id": "Kontextnotiz 2026-08", "firm_id": "A1-v01", "period": "2026-08", "duration": "temporär", "text": "Vormaterial wird ab August etwa 9 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2026-08", "firm_id": "A1-v01", "period": "2026-08", "duration": "temporär", "text": "Im Einkauf wird Vormaterial ab August etwa 9 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2026-08 #2", "firm_id": "A1-v01", "period": "2026-08", "duration": "temporär", "text": "Betriebsausflug im August."}
 {"source_id": "Kontextnotiz 2026-09", "firm_id": "A1-v01", "period": "2026-09", "duration": "dauerhaft", "text": "Neuanschaffung Laserschneidanlage für etwa 1.070.000 €; seit September im Einsatz, über die Hausbank finanziert."}
 {"source_id": "Kontextnotiz 2026-09 #2", "firm_id": "A1-v01", "period": "2026-09", "duration": "dauerhaft", "text": "Mehrere Austritte im Bereich Qualitätssicherung; eine Nachbesetzung ist derzeit nicht geplant."}
@@ -113,7 +113,7 @@
 {"source_id": "Kontextnotiz 2026-08", "firm_id": "A1-v02", "period": "2026-08", "duration": "dauerhaft", "text": "Personalabgang: 2 Austritte im Bereich Montage ab August."}
 {"source_id": "Kontextnotiz 2026-09", "firm_id": "A1-v02", "period": "2026-09", "duration": "temporär", "text": "Jahresgespräch mit der Hausbank im September, keine Änderungen an den Kreditlinien."}
 {"source_id": "Kontextnotiz 2026-10", "firm_id": "A1-v02", "period": "2026-10", "duration": "temporär", "text": "Ungeplanter Ausfall (Härteofen) im Oktober, Reparatur durch eine Fremdfirma."}
-{"source_id": "Kontextnotiz 2026-10 #2", "firm_id": "A1-v02", "period": "2026-10", "duration": "dauerhaft", "text": "Neue Preisliste ab Oktober: im Schnitt plus 2 %."}
+{"source_id": "Kontextnotiz 2026-10 #2", "firm_id": "A1-v02", "period": "2026-10", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab Oktober: im Schnitt plus 2 %."}
 {"source_id": "Kontextnotiz 2026-10 #3", "firm_id": "A1-v02", "period": "2026-10", "duration": "temporär", "text": "Ausrangierte Anlage (Stanze) im Oktober verkauft."}
 {"source_id": "Kontextnotiz 2026-11", "firm_id": "A1-v02", "period": "2026-11", "duration": "temporär", "text": "Großauftrag von einem Anlagenbauer eingegangen, Auslieferung ab November."}
 {"source_id": "Kontextnotiz 2026-12", "firm_id": "A1-v02", "period": "2026-12", "duration": "dauerhaft", "text": "Interne Umorganisation im Bereich CNC-Fertigung, ohne personelle Veränderungen."}
@@ -123,7 +123,7 @@
 {"source_id": "Kontextnotiz 2024-04", "firm_id": "A1-v03", "period": "2024-04", "duration": "dauerhaft", "text": "Im April haben 2 neue Mitarbeiter im Bereich Arbeitsvorbereitung angefangen."}
 {"source_id": "Kontextnotiz 2024-04 #2", "firm_id": "A1-v03", "period": "2024-04", "duration": "dauerhaft", "text": "Die vereinbarte Lohnerhöhung greift ab April."}
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A1-v03", "period": "2024-05", "duration": "temporär", "text": "Einkauf: Preiserhöhung bei Rundstahl von ca. 13 % ab Mai. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
-{"source_id": "Kontextnotiz 2024-10", "firm_id": "A1-v03", "period": "2024-10", "duration": "dauerhaft", "text": "Stahl wird ab Oktober etwa 8 % teurer."}
+{"source_id": "Kontextnotiz 2024-10", "firm_id": "A1-v03", "period": "2024-10", "duration": "dauerhaft", "text": "Im Einkauf wird Stahl ab Oktober etwa 8 % teurer."}
 {"source_id": "Kontextnotiz 2024-10 #2", "firm_id": "A1-v03", "period": "2024-10", "duration": "temporär", "text": "Instandsetzung im Oktober: Hallenkran, rund 63.000 €."}
 {"source_id": "Kontextnotiz 2024-10 #3", "firm_id": "A1-v03", "period": "2024-10", "duration": "temporär", "text": "Zusätzlicher Auftrag von einem Maschinenbaukunden über etwa 470.000 € wird ab Oktober ausgeliefert."}
 {"source_id": "Kontextnotiz 2024-11", "firm_id": "A1-v03", "period": "2024-11", "duration": "temporär", "text": "Großauftrag von einem Hersteller von Landmaschinen eingegangen, Auslieferung ab November."}
@@ -194,7 +194,7 @@
 {"source_id": "Kontextnotiz 2024-04 #2", "firm_id": "A1-v05", "period": "2024-04", "duration": "dauerhaft", "text": "Lohnrunde: Löhne und Gehälter steigen ab April um 2 %."}
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A1-v05", "period": "2024-05", "duration": "dauerhaft", "text": "Interne Umorganisation im Bereich Qualitätssicherung, ohne personelle Veränderungen."}
 {"source_id": "Kontextnotiz 2024-06", "firm_id": "A1-v05", "period": "2024-06", "duration": "temporär", "text": "Ein Sonderauftrag von einem Maschinenbaukunden sorgt ab Juni vorübergehend für zusätzliche Auslastung."}
-{"source_id": "Kontextnotiz 2024-07", "firm_id": "A1-v05", "period": "2024-07", "duration": "dauerhaft", "text": "Vormaterial wird ab Juli etwa 5 % teurer."}
+{"source_id": "Kontextnotiz 2024-07", "firm_id": "A1-v05", "period": "2024-07", "duration": "dauerhaft", "text": "Im Einkauf wird Vormaterial ab Juli etwa 5 % teurer."}
 {"source_id": "Kontextnotiz 2024-11", "firm_id": "A1-v05", "period": "2024-11", "duration": "dauerhaft", "text": "Im November haben 4 neue Mitarbeiter im Bereich Arbeitsvorbereitung angefangen."}
 {"source_id": "Kontextnotiz 2025-01", "firm_id": "A1-v05", "period": "2025-01", "duration": "temporär", "text": "Generalüberholung im Januar: Laserschneidanlage."}
 {"source_id": "Kontextnotiz 2025-02", "firm_id": "A1-v05", "period": "2025-02", "duration": "temporär", "text": "Generalüberholung im Februar: Härteofen."}
@@ -204,7 +204,7 @@
 {"source_id": "Kontextnotiz 2025-06 #2", "firm_id": "A1-v05", "period": "2025-06", "duration": "temporär", "text": "Zusätzlicher Auftrag von einem Hersteller von Landmaschinen über etwa 265.000 € wird ab Juni ausgeliefert."}
 {"source_id": "Kontextnotiz 2025-07", "firm_id": "A1-v05", "period": "2025-07", "duration": "temporär", "text": "Zusätzlicher Auftrag von einem Maschinenbaukunden über etwa 215.000 € wird ab Juli ausgeliefert."}
 {"source_id": "Kontextnotiz 2025-08", "firm_id": "A1-v05", "period": "2025-08", "duration": "dauerhaft", "text": "Ein neuer Auszubildender hat im Bereich Montage begonnen."}
-{"source_id": "Kontextnotiz 2025-09", "firm_id": "A1-v05", "period": "2025-09", "duration": "temporär", "text": "Vormaterial wird ab September etwa 12 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2025-09", "firm_id": "A1-v05", "period": "2025-09", "duration": "temporär", "text": "Im Einkauf wird Vormaterial ab September etwa 12 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2025-10", "firm_id": "A1-v05", "period": "2025-10", "duration": "dauerhaft", "text": "Mehrere Austritte im Bereich Arbeitsvorbereitung; eine Nachbesetzung ist derzeit nicht geplant."}
 {"source_id": "Kontextnotiz 2025-10 #2", "firm_id": "A1-v05", "period": "2025-10", "duration": "temporär", "text": "Besuch einer Kundendelegation im Oktober, Gespräche über mögliche Folgeaufträge."}
 {"source_id": "Kontextnotiz 2025-12", "firm_id": "A1-v05", "period": "2025-12", "duration": "dauerhaft", "text": "Wir haben das Team im Bereich Arbeitsvorbereitung ab Dezember um 2 Personen verstärkt, um die höhere Auslastung abzudecken."}
@@ -355,10 +355,10 @@
 {"source_id": "Kontextnotiz 2026-01 #2", "firm_id": "A1-v09", "period": "2026-01", "duration": "temporär", "text": "Teilnahme an der Fachmesse im Januar, Kosten ca. 16.000 €."}
 {"source_id": "Kontextnotiz 2026-02", "firm_id": "A1-v09", "period": "2026-02", "duration": "temporär", "text": "Ein Sonderauftrag von einem Anlagenbauer sorgt ab Februar vorübergehend für zusätzliche Auslastung."}
 {"source_id": "Kontextnotiz 2026-02 #2", "firm_id": "A1-v09", "period": "2026-02", "duration": "dauerhaft", "text": "Personalabgang: 4 Austritte im Bereich Qualitätssicherung ab Februar."}
-{"source_id": "Kontextnotiz 2026-04", "firm_id": "A1-v09", "period": "2026-04", "duration": "dauerhaft", "text": "Neue Preisliste ab April: im Schnitt plus 2 %."}
+{"source_id": "Kontextnotiz 2026-04", "firm_id": "A1-v09", "period": "2026-04", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab April: im Schnitt plus 2 %."}
 {"source_id": "Kontextnotiz 2026-04 #2", "firm_id": "A1-v09", "period": "2026-04", "duration": "temporär", "text": "Ungeplanter Ausfall (Härteofen) im April, Reparatur durch eine Fremdfirma."}
 {"source_id": "Kontextnotiz 2026-04 #3", "firm_id": "A1-v09", "period": "2026-04", "duration": "dauerhaft", "text": "Tariferhöhung von 3,5 % ab April wirksam."}
-{"source_id": "Kontextnotiz 2026-06", "firm_id": "A1-v09", "period": "2026-06", "duration": "temporär", "text": "Vormaterial wird ab Juni etwa 7 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2026-06", "firm_id": "A1-v09", "period": "2026-06", "duration": "temporär", "text": "Im Einkauf wird Vormaterial ab Juni etwa 7 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2026-06 #2", "firm_id": "A1-v09", "period": "2026-06", "duration": "temporär", "text": "Teilnahme an der Fachmesse im Juni, Kosten ca. 23.000 €."}
 {"source_id": "Kontextnotiz 2026-07", "firm_id": "A1-v09", "period": "2026-07", "duration": "temporär", "text": "Generalüberholung im Juli: Härteofen."}
 {"source_id": "Kontextnotiz 2026-10", "firm_id": "A1-v09", "period": "2026-10", "duration": "temporär", "text": "Sonderauftrag von einem Anlagenbauer: rund 235.000 €, Lieferung ab Oktober."}
@@ -403,7 +403,7 @@
 {"source_id": "Kontextnotiz 2024-05 #2", "firm_id": "A2-v01", "period": "2024-05", "duration": "temporär", "text": "Sonderauftrag von einem Bauträger: rund 740.000 €, Lieferung ab Mai."}
 {"source_id": "Kontextnotiz 2024-07", "firm_id": "A2-v01", "period": "2024-07", "duration": "dauerhaft", "text": "Wir haben das Team im Bereich Vertriebsinnendienst ab Juli um 2 Personen verstärkt, um die höhere Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2024-10", "firm_id": "A2-v01", "period": "2024-10", "duration": "temporär", "text": "Unterweisung zur Arbeitssicherheit für alle Mitarbeitenden im Oktober."}
-{"source_id": "Kontextnotiz 2024-10 #2", "firm_id": "A2-v01", "period": "2024-10", "duration": "dauerhaft", "text": "Neue Preisliste ab Oktober in Kraft."}
+{"source_id": "Kontextnotiz 2024-10 #2", "firm_id": "A2-v01", "period": "2024-10", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste für unsere Kunden ab Oktober in Kraft."}
 {"source_id": "Kontextnotiz 2025-01", "firm_id": "A2-v01", "period": "2025-01", "duration": "temporär", "text": "Unterweisung zur Arbeitssicherheit für alle Mitarbeitenden im Januar."}
 {"source_id": "Kontextnotiz 2025-01 #2", "firm_id": "A2-v01", "period": "2025-01", "duration": "temporär", "text": "Ein Sonderauftrag von einem Bauträger sorgt ab Januar vorübergehend für zusätzliche Auslastung."}
 {"source_id": "Kontextnotiz 2025-01 #3", "firm_id": "A2-v01", "period": "2025-01", "duration": "dauerhaft", "text": "Personalabgang: 2 Austritte im Bereich Ausstellung ab Januar."}
@@ -447,7 +447,7 @@
 {"source_id": "Kontextnotiz 2025-05", "firm_id": "A2-v02", "period": "2025-05", "duration": "dauerhaft", "text": "Tariferhöhung von 2,5 % ab Mai wirksam."}
 {"source_id": "Kontextnotiz 2025-06", "firm_id": "A2-v02", "period": "2025-06", "duration": "dauerhaft", "text": "Wir haben das Team im Bereich Vertriebsinnendienst ab Juni um 2 Personen verstärkt, um die höhere Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2025-07", "firm_id": "A2-v02", "period": "2025-07", "duration": "temporär", "text": "Größere Reparatur an der Anlage (Hochregalanlage) im Juli, Kosten ca. 27.000 €."}
-{"source_id": "Kontextnotiz 2025-07 #2", "firm_id": "A2-v02", "period": "2025-07", "duration": "dauerhaft", "text": "Heizungstechnik wird ab Juli etwa 7 % teurer."}
+{"source_id": "Kontextnotiz 2025-07 #2", "firm_id": "A2-v02", "period": "2025-07", "duration": "dauerhaft", "text": "Im Einkauf wird Heizungstechnik ab Juli etwa 7 % teurer."}
 {"source_id": "Kontextnotiz 2025-09", "firm_id": "A2-v02", "period": "2025-09", "duration": "temporär", "text": "Zusätzlicher Auftrag von einem Bauträger über etwa 285.000 € wird ab September ausgeliefert."}
 {"source_id": "Kontextnotiz 2025-11", "firm_id": "A2-v02", "period": "2025-11", "duration": "dauerhaft", "text": "Interne Umorganisation im Bereich Lager, ohne personelle Veränderungen."}
 {"source_id": "Kontextnotiz 2025-12", "firm_id": "A2-v02", "period": "2025-12", "duration": "dauerhaft", "text": "2 Mitarbeiter haben das Unternehmen im Dezember verlassen; die Stellen werden vorerst nicht nachbesetzt."}
@@ -457,11 +457,11 @@
 {"source_id": "Kontextnotiz 2026-05", "firm_id": "A2-v02", "period": "2026-05", "duration": "temporär", "text": "Größere Reparatur an der Anlage (Toranlage im Lager) im Mai, Kosten ca. 12.000 €."}
 {"source_id": "Kontextnotiz 2026-05 #2", "firm_id": "A2-v02", "period": "2026-05", "duration": "dauerhaft", "text": "Tariferhöhung von 4 % ab Mai wirksam."}
 {"source_id": "Kontextnotiz 2026-06", "firm_id": "A2-v02", "period": "2026-06", "duration": "dauerhaft", "text": "Personal: 2 Neueinstellungen im Bereich Vertriebsinnendienst ab Juni."}
-{"source_id": "Kontextnotiz 2026-06 #2", "firm_id": "A2-v02", "period": "2026-06", "duration": "temporär", "text": "Sanitärkeramik wird ab Juni etwa 7 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2026-06 #2", "firm_id": "A2-v02", "period": "2026-06", "duration": "temporär", "text": "Im Einkauf wird Sanitärkeramik ab Juni etwa 7 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2026-06 #3", "firm_id": "A2-v02", "period": "2026-06", "duration": "dauerhaft", "text": "Die neue Website ist online gegangen; die Pflege erfolgt intern."}
 {"source_id": "Kontextnotiz 2026-11", "firm_id": "A2-v02", "period": "2026-11", "duration": "dauerhaft", "text": "Interne Umorganisation im Bereich Ausstellung, ohne personelle Veränderungen."}
 {"source_id": "Kontextnotiz 2026-12", "firm_id": "A2-v02", "period": "2026-12", "duration": "temporär", "text": "Sonderauftrag von einer Wohnungsbaugesellschaft: rund 345.000 €, Lieferung ab Dezember."}
-{"source_id": "Kontextnotiz 2024-01", "firm_id": "A2-v03", "period": "2024-01", "duration": "dauerhaft", "text": "Heizungstechnik wird ab Januar etwa 4 % teurer."}
+{"source_id": "Kontextnotiz 2024-01", "firm_id": "A2-v03", "period": "2024-01", "duration": "dauerhaft", "text": "Im Einkauf wird Heizungstechnik ab Januar etwa 4 % teurer."}
 {"source_id": "Kontextnotiz 2024-02", "firm_id": "A2-v03", "period": "2024-02", "duration": "temporär", "text": "Zusätzlicher Auftrag von einem Bauträger über etwa 185.000 € wird ab Februar ausgeliefert."}
 {"source_id": "Kontextnotiz 2024-03", "firm_id": "A2-v03", "period": "2024-03", "duration": "dauerhaft", "text": "Im März haben 2 neue Mitarbeiter im Bereich Lager angefangen."}
 {"source_id": "Kontextnotiz 2024-03 #2", "firm_id": "A2-v03", "period": "2024-03", "duration": "temporär", "text": "Sonderauftrag von einem Bauträger: rund 230.000 €, Lieferung ab März."}
@@ -530,7 +530,7 @@
 {"source_id": "Kontextnotiz 2024-03", "firm_id": "A2-v05", "period": "2024-03", "duration": "dauerhaft", "text": "Personal: 2 Neueinstellungen im Bereich Ausstellung ab März."}
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A2-v05", "period": "2024-05", "duration": "dauerhaft", "text": "Tariferhöhung von 2 % ab Mai wirksam."}
 {"source_id": "Kontextnotiz 2024-06", "firm_id": "A2-v05", "period": "2024-06", "duration": "dauerhaft", "text": "Neueinstellungen im Bereich Auslieferung ab Juni, um die gestiegene Auslastung abzudecken."}
-{"source_id": "Kontextnotiz 2024-06 #2", "firm_id": "A2-v05", "period": "2024-06", "duration": "temporär", "text": "Kupferrohr wird ab Juni etwa 4 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2024-06 #2", "firm_id": "A2-v05", "period": "2024-06", "duration": "temporär", "text": "Im Einkauf wird Kupferrohr ab Juni etwa 4 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2024-11", "firm_id": "A2-v05", "period": "2024-11", "duration": "dauerhaft", "text": "Im Bereich Ausstellung sind ab November 2 Stellen durch Ruhestand und Kündigung weggefallen."}
 {"source_id": "Kontextnotiz 2025-01", "firm_id": "A2-v05", "period": "2025-01", "duration": "dauerhaft", "text": "Die neue Website ist online gegangen; die Pflege erfolgt intern."}
 {"source_id": "Kontextnotiz 2025-04", "firm_id": "A2-v05", "period": "2025-04", "duration": "dauerhaft", "text": "Neueinstellungen im Bereich Lager ab April, um die gestiegene Auslastung abzudecken."}
@@ -592,7 +592,7 @@
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A2-v07", "period": "2024-05", "duration": "dauerhaft", "text": "Die vereinbarte Lohnerhöhung greift ab Mai."}
 {"source_id": "Kontextnotiz 2024-05 #2", "firm_id": "A2-v07", "period": "2024-05", "duration": "temporär", "text": "Großauftrag von einem Installationsbetrieb mit einem Volumen von ca. 630.000 €; Auslieferung ab Mai."}
 {"source_id": "Kontextnotiz 2024-07", "firm_id": "A2-v07", "period": "2024-07", "duration": "dauerhaft", "text": "Der besprochene Personalabbau im Bereich Lager ist ab Juli umgesetzt."}
-{"source_id": "Kontextnotiz 2024-08", "firm_id": "A2-v07", "period": "2024-08", "duration": "dauerhaft", "text": "Neue Preisliste ab August: im Schnitt plus 4 %."}
+{"source_id": "Kontextnotiz 2024-08", "firm_id": "A2-v07", "period": "2024-08", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab August: im Schnitt plus 4 %."}
 {"source_id": "Kontextnotiz 2024-10", "firm_id": "A2-v07", "period": "2024-10", "duration": "dauerhaft", "text": "Im Bereich Vertriebsinnendienst sind ab Oktober 2 Stellen durch Ruhestand und Kündigung weggefallen."}
 {"source_id": "Kontextnotiz 2024-10 #2", "firm_id": "A2-v07", "period": "2024-10", "duration": "temporär", "text": "Großauftrag von einer Wohnungsbaugesellschaft mit einem Volumen von ca. 475.000 €; Auslieferung ab Oktober."}
 {"source_id": "Kontextnotiz 2024-10 #3", "firm_id": "A2-v07", "period": "2024-10", "duration": "temporär", "text": "Generalüberholung im Oktober: Hochregalanlage."}
@@ -629,7 +629,7 @@
 {"source_id": "Kontextnotiz 2024-10 #2", "firm_id": "A2-v08", "period": "2024-10", "duration": "dauerhaft", "text": "Neueinstellungen im Bereich Lager ab Oktober, um die gestiegene Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2024-10 #3", "firm_id": "A2-v08", "period": "2024-10", "duration": "temporär", "text": "Unterweisung zur Arbeitssicherheit für alle Mitarbeitenden im Oktober."}
 {"source_id": "Kontextnotiz 2024-11", "firm_id": "A2-v08", "period": "2024-11", "duration": "temporär", "text": "Großauftrag von einer Wohnungsbaugesellschaft mit einem Volumen von ca. 340.000 €; Auslieferung ab November."}
-{"source_id": "Kontextnotiz 2025-02", "firm_id": "A2-v08", "period": "2025-02", "duration": "dauerhaft", "text": "Neue Preisliste ab Februar: im Schnitt plus 4 %."}
+{"source_id": "Kontextnotiz 2025-02", "firm_id": "A2-v08", "period": "2025-02", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab Februar: im Schnitt plus 4 %."}
 {"source_id": "Kontextnotiz 2025-04", "firm_id": "A2-v08", "period": "2025-04", "duration": "temporär", "text": "Ungeplanter Ausfall (Lagerlift) im April, Reparatur durch eine Fremdfirma."}
 {"source_id": "Kontextnotiz 2025-05", "firm_id": "A2-v08", "period": "2025-05", "duration": "temporär", "text": "Generalüberholung im Mai: Hochregalanlage."}
 {"source_id": "Kontextnotiz 2025-07", "firm_id": "A2-v08", "period": "2025-07", "duration": "temporär", "text": "Jahresgespräch mit der Hausbank im Juli, keine Änderungen an den Kreditlinien."}
@@ -652,7 +652,7 @@
 {"source_id": "Kontextnotiz 2024-02", "firm_id": "A2-v09", "period": "2024-02", "duration": "dauerhaft", "text": "Wechsel des Telefon- und Internetanbieters ab Februar; die Kosten bleiben unverändert."}
 {"source_id": "Kontextnotiz 2024-04", "firm_id": "A2-v09", "period": "2024-04", "duration": "temporär", "text": "Generalüberholung im April: Toranlage im Lager."}
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A2-v09", "period": "2024-05", "duration": "temporär", "text": "Ein Sonderauftrag von einem Bauträger sorgt ab Mai vorübergehend für zusätzliche Auslastung."}
-{"source_id": "Kontextnotiz 2024-06", "firm_id": "A2-v09", "period": "2024-06", "duration": "temporär", "text": "Sanitärkeramik wird ab Juni etwa 4 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2024-06", "firm_id": "A2-v09", "period": "2024-06", "duration": "temporär", "text": "Im Einkauf wird Sanitärkeramik ab Juni etwa 4 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2024-06 #2", "firm_id": "A2-v09", "period": "2024-06", "duration": "temporär", "text": "Instandsetzung im Juni: Toranlage im Lager, rund 40.000 €."}
 {"source_id": "Kontextnotiz 2024-07", "firm_id": "A2-v09", "period": "2024-07", "duration": "dauerhaft", "text": "Im Juli haben 2 neue Mitarbeiter im Bereich Ausstellung angefangen."}
 {"source_id": "Kontextnotiz 2024-09", "firm_id": "A2-v09", "period": "2024-09", "duration": "dauerhaft", "text": "Im September haben 3 neue Mitarbeiter im Bereich Auslieferung angefangen."}
@@ -669,7 +669,7 @@
 {"source_id": "Kontextnotiz 2025-09", "firm_id": "A2-v09", "period": "2025-09", "duration": "dauerhaft", "text": "Verstärkung im Bereich Vertriebsinnendienst: Seit Anfang September sind neue Kolleginnen und Kollegen an Bord."}
 {"source_id": "Kontextnotiz 2025-09 #2", "firm_id": "A2-v09", "period": "2025-09", "duration": "temporär", "text": "Generalüberholung im September: Lagerlift."}
 {"source_id": "Kontextnotiz 2025-10", "firm_id": "A2-v09", "period": "2025-10", "duration": "temporär", "text": "Großauftrag von einem Bauträger eingegangen, Auslieferung ab Oktober."}
-{"source_id": "Kontextnotiz 2025-12", "firm_id": "A2-v09", "period": "2025-12", "duration": "dauerhaft", "text": "Neue Preisliste ab Dezember in Kraft."}
+{"source_id": "Kontextnotiz 2025-12", "firm_id": "A2-v09", "period": "2025-12", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste für unsere Kunden ab Dezember in Kraft."}
 {"source_id": "Kontextnotiz 2025-12 #2", "firm_id": "A2-v09", "period": "2025-12", "duration": "dauerhaft", "text": "Neueinstellungen im Bereich Ausstellung ab Dezember, um die gestiegene Auslastung abzudecken."}
 {"source_id": "Kontextnotiz 2026-01", "firm_id": "A2-v09", "period": "2026-01", "duration": "temporär", "text": "Besuch einer Kundendelegation im Januar, Gespräche über mögliche Folgeaufträge."}
 {"source_id": "Kontextnotiz 2026-02", "firm_id": "A2-v09", "period": "2026-02", "duration": "temporär", "text": "Größere Reparatur an der Anlage (Hochregalanlage) im Februar, Kosten ca. 47.000 €."}
@@ -749,7 +749,7 @@
 {"source_id": "Kontextnotiz 2025-11", "firm_id": "A3-v01", "period": "2025-11", "duration": "dauerhaft", "text": "Verstärkung im Bereich Holzbearbeitung: Seit Anfang November sind neue Kolleginnen und Kollegen an Bord."}
 {"source_id": "Kontextnotiz 2025-11 #2", "firm_id": "A3-v01", "period": "2025-11", "duration": "temporär", "text": "Instandsetzung im November: Trockenofen, rund 100.000 €."}
 {"source_id": "Kontextnotiz 2025-12", "firm_id": "A3-v01", "period": "2025-12", "duration": "temporär", "text": "Ein Sonderauftrag von einem Möbelhändler sorgt ab Dezember vorübergehend für zusätzliche Auslastung."}
-{"source_id": "Kontextnotiz 2025-12 #2", "firm_id": "A3-v01", "period": "2025-12", "duration": "temporär", "text": "Polyrattan wird ab Dezember etwa 12 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2025-12 #2", "firm_id": "A3-v01", "period": "2025-12", "duration": "temporär", "text": "Im Einkauf wird Polyrattan ab Dezember etwa 12 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2025-12 #3", "firm_id": "A3-v01", "period": "2025-12", "duration": "dauerhaft", "text": "Im Dezember haben 5 neue Mitarbeiter im Bereich Holzbearbeitung angefangen."}
 {"source_id": "Kontextnotiz 2025-12 #4", "firm_id": "A3-v01", "period": "2025-12", "duration": "dauerhaft", "text": "Neuer Ansprechpartner beim Steuerberater ab Dezember."}
 {"source_id": "Kontextnotiz 2026-03", "firm_id": "A3-v01", "period": "2026-03", "duration": "dauerhaft", "text": "Deutliche Preissteigerungen bei Aluminium ab März; eine Weitergabe an die Kunden wird geprüft."}
@@ -788,7 +788,7 @@
 {"source_id": "Kontextnotiz 2026-09", "firm_id": "A3-v02", "period": "2026-09", "duration": "temporär", "text": "Deutliche Preissteigerungen bei Polyrattan ab September; eine Weitergabe an die Kunden wird geprüft. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2026-10", "firm_id": "A3-v02", "period": "2026-10", "duration": "dauerhaft", "text": "Auftragsrückgang: Wegfall eines Rahmenvertrags ab Oktober (ca. 6 % des Umsatzes)."}
 {"source_id": "Kontextnotiz 2024-01", "firm_id": "A3-v03", "period": "2024-01", "duration": "dauerhaft", "text": "Investition: CNC-Holzbearbeitungsanlage im Januar in Betrieb genommen, ca. 685.000 €, finanziert über ein Darlehen der Hausbank."}
-{"source_id": "Kontextnotiz 2024-02", "firm_id": "A3-v03", "period": "2024-02", "duration": "temporär", "text": "Aluminium wird ab Februar etwa 11 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2024-02", "firm_id": "A3-v03", "period": "2024-02", "duration": "temporär", "text": "Im Einkauf wird Aluminium ab Februar etwa 11 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2024-03", "firm_id": "A3-v03", "period": "2024-03", "duration": "dauerhaft", "text": "Neuer Ansprechpartner beim Steuerberater ab März."}
 {"source_id": "Kontextnotiz 2024-05", "firm_id": "A3-v03", "period": "2024-05", "duration": "dauerhaft", "text": "Preisanpassung bei den wichtigsten Kunden ab Mai durchgesetzt."}
 {"source_id": "Kontextnotiz 2024-07", "firm_id": "A3-v03", "period": "2024-07", "duration": "temporär", "text": "Sonderauftrag von einer Baumarktkette: rund 250.000 €, Lieferung ab Juli."}
@@ -808,7 +808,7 @@
 {"source_id": "Kontextnotiz 2025-05 #2", "firm_id": "A3-v03", "period": "2025-05", "duration": "dauerhaft", "text": "Wechsel des Telefon- und Internetanbieters ab Mai; die Kosten bleiben unverändert."}
 {"source_id": "Kontextnotiz 2025-07", "firm_id": "A3-v03", "period": "2025-07", "duration": "temporär", "text": "Großauftrag von einem Gartencenter-Verbund eingegangen, Auslieferung ab Juli."}
 {"source_id": "Kontextnotiz 2025-09", "firm_id": "A3-v03", "period": "2025-09", "duration": "temporär", "text": "Messeteilnahme im September."}
-{"source_id": "Kontextnotiz 2025-11", "firm_id": "A3-v03", "period": "2025-11", "duration": "dauerhaft", "text": "Neue Preisliste ab November: im Schnitt plus 3 %."}
+{"source_id": "Kontextnotiz 2025-11", "firm_id": "A3-v03", "period": "2025-11", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste ab November: im Schnitt plus 3 %."}
 {"source_id": "Kontextnotiz 2026-01", "firm_id": "A3-v03", "period": "2026-01", "duration": "temporär", "text": "Ein Sonderauftrag von einem Gartencenter-Verbund sorgt ab Januar vorübergehend für zusätzliche Auslastung."}
 {"source_id": "Kontextnotiz 2026-02", "firm_id": "A3-v03", "period": "2026-02", "duration": "temporär", "text": "Ungeplanter Ausfall (Pulverbeschichtungsanlage) im Februar, Reparatur durch eine Fremdfirma."}
 {"source_id": "Kontextnotiz 2026-03", "firm_id": "A3-v03", "period": "2026-03", "duration": "dauerhaft", "text": "Die vereinbarte Lohnerhöhung greift ab März."}
@@ -853,7 +853,7 @@
 {"source_id": "Kontextnotiz 2026-07 #2", "firm_id": "A3-v04", "period": "2026-07", "duration": "dauerhaft", "text": "Unser Hauptlieferant hat die Preise für Polyrattan ab Juli um rund 7 % erhöht."}
 {"source_id": "Kontextnotiz 2026-07 #3", "firm_id": "A3-v04", "period": "2026-07", "duration": "temporär", "text": "Ein Sonderauftrag von einem Möbelhändler sorgt ab Juli vorübergehend für zusätzliche Auslastung."}
 {"source_id": "Kontextnotiz 2026-08", "firm_id": "A3-v04", "period": "2026-08", "duration": "dauerhaft", "text": "Neuanschaffung Schweißroboter, seit August im Einsatz und über ein Investitionsdarlehen finanziert."}
-{"source_id": "Kontextnotiz 2026-08 #2", "firm_id": "A3-v04", "period": "2026-08", "duration": "dauerhaft", "text": "Neue Preisliste ab August in Kraft."}
+{"source_id": "Kontextnotiz 2026-08 #2", "firm_id": "A3-v04", "period": "2026-08", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste für unsere Kunden ab August in Kraft."}
 {"source_id": "Kontextnotiz 2026-09", "firm_id": "A3-v04", "period": "2026-09", "duration": "temporär", "text": "Messeauftritt im September: Standmiete, Standbau und Reisekosten rund 160.000 €."}
 {"source_id": "Kontextnotiz 2026-09 #2", "firm_id": "A3-v04", "period": "2026-09", "duration": "temporär", "text": "Großauftrag von einer Baumarktkette eingegangen, Auslieferung ab September."}
 {"source_id": "Kontextnotiz 2026-10", "firm_id": "A3-v04", "period": "2026-10", "duration": "dauerhaft", "text": "Verstärkung im Bereich Produktion: Seit Anfang Oktober sind neue Kolleginnen und Kollegen an Bord."}
@@ -877,7 +877,7 @@
 {"source_id": "Kontextnotiz 2024-09", "firm_id": "A3-v05", "period": "2024-09", "duration": "temporär", "text": "Fachmesse im September – Gesamtkosten etwa 78.000 €."}
 {"source_id": "Kontextnotiz 2024-09 #2", "firm_id": "A3-v05", "period": "2024-09", "duration": "dauerhaft", "text": "Deutliche Preissteigerungen bei Teakholz ab September; eine Weitergabe an die Kunden wird geprüft."}
 {"source_id": "Kontextnotiz 2024-09 #3", "firm_id": "A3-v05", "period": "2024-09", "duration": "temporär", "text": "Ungeplanter Ausfall (Trockenofen), Reparatur durch eine Fremdfirma für etwa 68.000 €."}
-{"source_id": "Kontextnotiz 2024-11", "firm_id": "A3-v05", "period": "2024-11", "duration": "temporär", "text": "Teakholz wird ab November etwa 5 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
+{"source_id": "Kontextnotiz 2024-11", "firm_id": "A3-v05", "period": "2024-11", "duration": "temporär", "text": "Im Einkauf wird Teakholz ab November etwa 5 % teurer. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
 {"source_id": "Kontextnotiz 2025-02", "firm_id": "A3-v05", "period": "2025-02", "duration": "temporär", "text": "Zusätzlicher Auftrag von einer Baumarktkette über etwa 680.000 € wird ab Februar ausgeliefert."}
 {"source_id": "Kontextnotiz 2025-02 #2", "firm_id": "A3-v05", "period": "2025-02", "duration": "dauerhaft", "text": "Inbetriebnahme im Februar: Schweißroboter. Investitionsvolumen rund 605.000 €, Finanzierung über ein Investitionsdarlehen."}
 {"source_id": "Kontextnotiz 2025-04", "firm_id": "A3-v05", "period": "2025-04", "duration": "temporär", "text": "Einkauf: Preiserhöhung bei Teakholz von ca. 5 % ab April. Der Zuschlag gilt voraussichtlich nur für einige Monate."}
@@ -1019,7 +1019,7 @@
 {"source_id": "Kontextnotiz 2024-03 #2", "firm_id": "A3-v09", "period": "2024-03", "duration": "temporär", "text": "Unterweisung zur Arbeitssicherheit für alle Mitarbeitenden im März."}
 {"source_id": "Kontextnotiz 2024-04", "firm_id": "A3-v09", "period": "2024-04", "duration": "temporär", "text": "Ungeplanter Ausfall (Absauganlage) im April, Reparatur durch eine Fremdfirma."}
 {"source_id": "Kontextnotiz 2024-04 #2", "firm_id": "A3-v09", "period": "2024-04", "duration": "dauerhaft", "text": "Verstärkung im Bereich Versand: Seit Anfang April sind neue Kolleginnen und Kollegen an Bord."}
-{"source_id": "Kontextnotiz 2024-06", "firm_id": "A3-v09", "period": "2024-06", "duration": "dauerhaft", "text": "Neue Preisliste ab Juni in Kraft."}
+{"source_id": "Kontextnotiz 2024-06", "firm_id": "A3-v09", "period": "2024-06", "duration": "dauerhaft", "text": "Neue Verkaufspreisliste für unsere Kunden ab Juni in Kraft."}
 {"source_id": "Kontextnotiz 2024-06 #2", "firm_id": "A3-v09", "period": "2024-06", "duration": "temporär", "text": "Jahresgespräch mit der Hausbank im Juni, keine Änderungen an den Kreditlinien."}
 {"source_id": "Kontextnotiz 2024-07", "firm_id": "A3-v09", "period": "2024-07", "duration": "temporär", "text": "Großauftrag von einem Möbelhändler mit einem Volumen von ca. 445.000 €; Auslieferung ab Juli."}
 {"source_id": "Kontextnotiz 2024-07 #2", "firm_id": "A3-v09", "period": "2024-07", "duration": "dauerhaft", "text": "Personal: 3 Neueinstellungen im Bereich Produktion ab Juli."}

@@ -291,7 +291,7 @@ Deneme koşusunun (seed 7) sayıları:
 
 | Karar | Durum | İçerik |
 |---|---|---|
-| A1 Temel model | **[KARAR]** deneme turu | Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B; eşitlikte Ministral 3 8B [ÖNERİ] |
+| A1 Temel model | **[KARAR, tur 9]** | **Gemma 4 E4B**, yedek Qwen3.5 9B. Deneme turu sonuçları: `trial/results.md`, `docs/08` |
 | A2 Araç seti / donanım | [ÖNERİ] / **[KARAR]** | Unsloth + TRL (QLoRA) / Dizüstü: geliştirme, deneme turu, demo; Kaggle: eğitim ve değerlendirme |
 | A3 Çıkarım | [ÖNERİ] | Değerlendirme vLLM, demo Ollama |
 | B1 İdeal yorum | **[KARAR]** | Karma + 20–30 örneklik altın küme |

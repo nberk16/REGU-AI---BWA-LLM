@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (istem 1.1: bilgi tabanı bağlamı ve deneme turu dersleri; doğrulama v1.3)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (ideal yorum hattı: içerik planı, öğretmen istemi, kontrol, dizüstü betiği; karar turu 11)
 
 ---
 
-## 1. Genel durum: ~%50 tamamlandı
+## 1. Genel durum: ~%54 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,15 +13,15 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 25,05 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 27,05 gün
 toplam iş     = 50 gün
-durum         = 25,05 / 50 ≈ %50
+durum         = 27,05 / 50 ≈ %54
 ```
 
 **Belirsizlik:**
 - Tahminler en çok model tarafındaki paketlerde belirsiz: ideal yorumların üretimi, baseline'lar, fine-tuning, değerlendirme. Bu paketler GPU erişimine, temel modelin Almanca kalitesine ve deneme–yanılma döngülerine bağlı.
 - Kullanıcının dizüstünde 4 GB GPU var; eğitim ve değerlendirme bulutta (Kaggle) yapılacak. Defterlerin kullanıcı tarafından çalıştırılması turları uzatabilir.
-- Gerçekçi aralık %45–55.
+- Gerçekçi aralık %50–58.
 - Kalan işin ~%70'i model tarafında. Bu, G7'deki odakla uyumlu.
 
 ---
@@ -34,13 +34,13 @@ durum         = 25,05 / 50 ≈ %50
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %35 | 2,8 | 🔄 hat hazır, pilot bekleniyor |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **25,05** | **≈ %50** |
+| | **Toplam** | **50** | | **27,05** | **≈ %54** |
 
 ---
 
@@ -83,19 +83,23 @@ durum         = 25,05 / 50 ≈ %50
   - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
 - **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
 
-### 5. İdeal yorumların üretimi — ⏳ başlamadı
-- **Kalan:**
-  - Eğitim hedeflerinin üretimi ve kalite kontrolü.
-  - Doğrulama katmanıyla (paket 8) otomatik kontrol.
-  - Eğitim formatı.
-- **Kararlaştırılan (turlar 6–7):**
-  - Çıktı yapısı (CLAUDE.md 6.3).
-  - Notta geçmeyen nedenlerde açık soru veya işaretli hipotez; ground truth nedeni hedef metne yazılmaz.
-  - Yöntem: karma (içerik planı + öğretmen modelin dili + otomatik kontrol) ve 20–30 örneklik altın küme.
-  - Öğretmen: açık ağırlıklı model, API üzerinden.
-  - Kümeler: eğitim A2 + A3 × 20 varyant (`train_price_boost`, seed 7) = 960 ay; doğrulama 3 + 3 varyant (`docs/04`, Bölüm 9).
-- **Açık kararlar:**
-  - Somut öğretmen model ve sağlayıcı [ÖNERİ: Mistral Large 3, Mistral API]. Kullanıcının API anahtarı alması gerekir.
+### 5. İdeal yorumların üretimi — 🔄 hat hazır, pilot bekleniyor
+- **Yapılan (`ideal/`, `docs/11`):**
+  - İçerik planı: `effects.csv` ile kaynaklı neden, hipotez ya da „Ursache offen“; yalnızca öğrencinin gördüğü notlar kaynak.
+  - Öğretmen istemi (Almanca, 10 kural).
+  - Kontrol: doğrulama katmanı + plana uygunluk.
+  - Dizüstü betiği (Mistral API; kontrol ve yeniden deneme dizüstünde), kullanıcı kılavuzu `ideal/README.md`.
+  - İstek dosyaları: pilot 24, eğitim 960, doğrulama 144 ay. 8 test.
+  - Kalıp metinler 1.104 ayın hepsinde kontrolü geçiyor (plan ↔ doğrulama tutarlı).
+- **Kararlaştırılan:**
+  - Turlar 6–7: karma yöntem, altın küme, B3, 6.3.
+  - Tur 11: öğretmen Mistral Large 3, anahtar yalnızca kullanıcının bilgisayarında.
+- **Kalan (%65):**
+  - Pilot (kullanıcı) → okuma ve gerekirse istem/plan düzeltmesi.
+  - Altın küme (20–30 ay, elle düzeltilmiş).
+  - Büyük koşu (1.104 ay) ve reddedilenlerin yeniden denenmesi.
+  - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8`) + kabul edilen metin.
+- **Açık kararlar:** Yok. Plan parametreleri ve üretim ayarları [ÖNERİ]. Mistral'ın resmî koşulları büyük koşudan önce kontrol edilecek.
 
 ### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 temel model seçildi, istem 1.1 hazır
 - **Yapılan:**
@@ -178,8 +182,8 @@ durum         = 25,05 / 50 ≈ %50
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
 1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
-2. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme. Öğretmen modelin girdisi istem 1.1'dir.
-3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme.
+2. **İdeal yorumlar (paket 5):** Hat hazır (`docs/11`). Sıradaki: kullanıcının dizüstünde pilot (`ideal/README.md`) → okuma, altın küme → büyük koşu.
+3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme. Repo özel olduğu için Kaggle'ın koda erişim yolu o adımda belirlenecek.
 - **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
 
 ## 5. Değişiklik geçmişi
@@ -203,3 +207,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 17.10.2026 | Karar turu 10: SKR03 yok, K-E kapsam dışı. Bilgi tabanı v1 (`rag/`: K-A/K-B metinleri, BGE-M3 + Chroma, getirme, 10 test). Paket 4 → %55: %45 |
 | 18.10.2026 | Getirme isabeti ölçüldü (BGE-M3): sorgu yöntemi doğrulama varyantlarında seçildi (`single`, k = 8); test kümesinde recall %91 / %83, çeldirici payı %11 → %5. Paket 4 → %70: %47 |
 | 18.10.2026 | İstem 1.1 (`prompting/`, `docs/10`): Katman 2 bağlamı (WISSEN + top-8), deneme turu dersleri, varyantlar, Kaggle için istem dışa aktarma; istem 1.0 donduruldu. Doğrulama v1.3 (K-A/K-B kimlikleri). Paket 4 → %85, 6 → %55, 8 → %80: %50 |
+| 18.10.2026 | Karar turu 11: öğretmen Mistral Large 3 (API), anahtar yalnızca kullanıcının bilgisayarında. İdeal yorum hattı (`ideal/`, `docs/11`): içerik planı, öğretmen istemi, kontrol, dizüstü betiği, istek dosyaları (24 + 960 + 144 ay), 8 test. Paket 5 → %35: %54 |

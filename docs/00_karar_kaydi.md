@@ -388,6 +388,31 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 
 - **„Yalnızca fine-tuning“ varyantının eğitimi (paket 7):** Aynı modeli bağlamlı eğitip bağlamsız mı çalıştırmalı, yoksa bağlamsız girdilerle ayrı bir model mi eğitmeli? İkincisi, bağlamsız girdiler için ayrı ideal yorumlar gerektirir (paket 5). Seçenekler fine-tuning'den önce kullanıcıya sunulacak.
 
+## 18. Karar turu 11 (18.10.2026): öğretmen model ve anahtar
+
+### 18.1 Kararlar [KARAR]
+
+| Konu | Karar |
+|---|---|
+| Öğretmen model | **Mistral Large 3**, Mistral API üzerinden (B2'deki öneri onaylandı). Kullanıcı hesabı ve „BWA Kommentar“ adlı API anahtarını oluşturdu. Plan: ücretsiz „Experiment“; gerekirse ücretli plana geçmeden önce sorulur. |
+| API anahtarı | **Yalnızca kullanıcının bilgisayarında** durur. Sohbete, repoya ya da bulut ortamına girmez. Öğretmen betiği kullanıcının dizüstünde çalışır. |
+
+**Kullanıcıya sunulan bilgi (18.10.2026):**
+- Mistral'ın ücretsiz planında API girdileri varsayılan olarak model eğitiminde kullanılabiliyor; veri sentetik olduğu için sorun değil.
+- Ücretli planda Mistral Large 3 için kaynakların çoğu 1 milyon token başına ~0,50 $ girdi, ~1,50 $ çıktı veriyor; resmî fiyat kontrol edilecek.
+- Bulunan tek çıktı kısıtı görsel çıktılarla ilgili; metin çıktıları için kısıt bulunamadı. Bu bilgi üçüncü taraf bir özetten geliyor; resmî koşullar öğretmen çalışmadan önce kontrol edilecek. Hukuki görüş değildir.
+- Gemma 4 Apache 2.0; ince ayarlı model Hugging Face'te yayınlanabilir. Yayın adında „REGU AI“ kullanılmaz (talimat 6); karar paket 10'da.
+
+### 18.2 Uygulama (asistan)
+
+- **`ideal/` hattı** (`11_ideal_yorumlar.md`):
+  - İçerik planı: `effects.csv`'deki yıllık farklar; yalnızca görünen notlar kaynak; bayrak/K-B hipotezi ya da „Ursache offen“.
+  - Öğretmen istemi, kontrol (doğrulama + plan), dizüstü betiği (stdlib; kontrol ve en fazla 3 deneme dizüstünde).
+  - İstek dosyaları: pilot 24, eğitim 960, doğrulama 144 ay.
+- **[ÖNERİ] Parametreler:** neden payı %25, en fazla 5 soru, `temperature 0.4`, en fazla 3 deneme, kabul aralığı 200–400 kelime.
+- **Rohertrag adayı:** Önceki ayla karşılaştırılır; nedenin yönü tutmalı. 47 `cite` ayından 10'u uyarıya döndü (`11`, 2.2).
+- **Sıradaki adım:** Kullanıcı dizüstünde pilotu çalıştırır (`ideal/README.md`).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

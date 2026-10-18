@@ -164,7 +164,7 @@ Kontrol:
 
 **[KARAR, tur 7]** (a) Açık ağırlıklı model, API üzerinden.
 
-**[ÖNERİ] Somut model ve sağlayıcı:** Mistral Large 3, Mistral API.
+**[KARAR, tur 11] Somut model ve sağlayıcı:** Mistral Large 3, Mistral API (`mistral-large-2512`). API anahtarı yalnızca kullanıcının bilgisayarında durur; öğretmen betiği orada çalışır (`11_ideal_yorumlar.md`).
 - **Fiyat:** Kaynaklar farklı fiyatlar veriyor: 1M token başına 0,50 $ / 1,50 $ ile 2 $ / 5–6 $ arası. Yukarıdaki hacimle ~3–12 $, tekrarlarla ~5–20 $. Resmî fiyat listesi API anahtarı alınırken kontrol edilir.
 - **Koşullar:** Üçüncü taraf bir özete göre Mistral'ın ticari koşullarındaki çıktı kısıtı görsel çıktılarla ilgili; metin çıktıları için kısıt bulunamadı. Resmî metin kontrol edilecek; bu not hukuki görüş değildir.
 
@@ -295,7 +295,7 @@ Deneme koşusunun (seed 7) sayıları:
 | A2 Araç seti / donanım | [ÖNERİ] / **[KARAR]** | Unsloth + TRL (QLoRA) / Dizüstü: geliştirme, deneme turu, demo; Kaggle: eğitim ve değerlendirme |
 | A3 Çıkarım | [ÖNERİ] | Değerlendirme vLLM, demo Ollama |
 | B1 İdeal yorum | **[KARAR]** | Karma + 20–30 örneklik altın küme |
-| B2 Öğretmen | **[KARAR]** | Açık ağırlıklı model, API üzerinden; somut model [ÖNERİ]: Mistral Large 3 |
+| B2 Öğretmen | **[KARAR]** | Açık ağırlıklı model, API üzerinden; **Mistral Large 3** (tur 11), anahtar yalnızca kullanıcının bilgisayarında |
 | B3 Notsuz nedenler | **[KARAR]** | Açık soru veya görülebilir bilgiden türetilmiş işaretli hipotez; ground truth nedeni asla |
 | B4 Çıktı yapısı | **[KARAR]** | 6.3'teki dört bölüm, ~250–350 kelime, sabit tablo, boş bölümde „Keine.“ |
 | C1 Test arketipi | **[KARAR]** | A1 (öğretilmemiş tür) + görülmemiş A2/A3 varyantları (öğretilmiş tür) |

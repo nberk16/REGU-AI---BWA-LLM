@@ -9,11 +9,11 @@ batch_size = 32
 [retrieval]
 window_months = 13
 top_k = 8
-# [ÖNERİ] Sorgu yöntemi; seçenekler ve ölçüm: docs/09, Bölüm 5.
+# [ÖNERİ] Sorgu yöntemi; seçenekler ve ölçüm: docs/09, Bölüm 5. Doğrulama varyantlarında en iyi sonuç: single.
 #   single         : facts.json'dan tek birleşik sorgu
 #   multi          : her anlamlı kalem ve bayrak için ayrı sorgu, sıralamalar RRF ile birleştirilir
 #   multi_expanded : multi + sorguya kalemin K-A açıklaması eklenir (not dilini yakalamak için)
-mode = "multi_expanded"
+mode = "single"
 rrf_k = 60
 
 [chroma]

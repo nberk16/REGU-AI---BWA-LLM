@@ -1,6 +1,6 @@
 # 09 — Bilgi tabanı ve getirme (Katman 2)
 
-> **Durum:** v1 kodlandı (`rag/`, 10 test), 17.10.2026.
+> **Durum:** v1 kodlandı (`rag/`, 10 test); sorgu yöntemi ölçümle seçildi (`single`, k = 8), 18.10.2026.
 > - **[KARAR]:**
 >   - BGE-M3 + Chroma; K-C için 13 ay + top-k (k = 8); K-D kapalı (tur 6).
 >   - K-A yalnızca açıklama, SKR03 aralıkları hiçbir zaman eklenmez; K-E kapsam dışı (tur 10).
@@ -70,6 +70,8 @@ K-A ve K-B anahtarla getirilir, çünkü 44 sabit parçadan hangisinin gerektiğ
 | `multi` | Öğe başına bir sorgu; sıralamalar Reciprocal Rank Fusion ile birleştirilir |
 | `multi_expanded` | `multi` + her sorguya kalemin K-A açıklaması eklenir. Böylece „Personalkosten gestiegen“ sorgusu „Neueinstellungen“, „Tariferhöhung“ gibi not kelimelerine yaklaşır |
 
+**Varsayılan: `single`**, doğrulama varyantlarındaki ölçümle seçildi (Bölüm 5).
+
 ## 4. Kullanım
 
 ```bash
@@ -83,4 +85,44 @@ python tools/retrieval_quality.py data/synthetic/reference_seed42         # geti
 
 ## 5. Getirme isabeti (recall@k)
 
-_Ölçüm sürüyor._
+Araç: `tools/retrieval_quality.py`. Ground truth'u yalnızca bu araç okur; Katman 2 okumaz.
+
+**İlgili notlar** (yalnızca 13 aylık penceredeki, notlanmış olaylar):
+- **Çekirdek:** O ay başlayan olayların notları.
+- **Geniş:** Çekirdek + sürmekte olan ya da önceki yılın aynı ayındaki olayların notları; bu olaylar ayın anlamlı kalemlerini veya bayraklı satırlarını etkiliyorsa. Rohertrag adayı varsa ground truth'taki nedenlerin notları da eklenir.
+
+**Çeldirici payı:** Getirilen notlardan hiçbir olaya ait olmayanların oranı.
+
+### 5.1 Seçim: doğrulama varyantları (A2/A3 v120–v122, 144 firma-ay)
+
+Sorgu yöntemi, deneme turundaki ilkeyle aynı şekilde **doğrulama varyantlarında** seçildi; test kümesi seçimde kullanılmadı.
+
+| Yöntem | k | Recall çekirdek | Recall geniş | Geniş: tam getirilen ay | Çeldirici payı | Ort. not |
+|---|---:|---:|---:|---:|---:|---:|
+| **single** | 8 | **94,3 %** | **86,3 %** | **64,7 %** | 7,3 % | 8,0 |
+| multi | 8 | 68,9 % | 79,8 % | 51,5 % | 8,9 % | 8,0 |
+| multi_expanded | 8 | 78,7 % | 82,1 % | 55,9 % | 7,0 % | 8,0 |
+| bütün notlar | – | 100 % | 100 % | 100 % | 16,5 % | 12,8 |
+
+### 5.2 Rapor: test kümesi (`reference_seed42`, 720 firma-ay)
+
+| Yöntem | k | Recall çekirdek | Recall geniş | Geniş: tam getirilen ay | Çeldirici payı | Ort. not |
+|---|---:|---:|---:|---:|---:|---:|
+| single | 4 | 67,2 % | 51,6 % | 23,4 % | 2,7 % | 4,0 |
+| **single** | **8** | **91,4 %** | **83,3 %** | **59,1 %** | **5,2 %** | 8,0 |
+| single | 12 | 99,0 % | 97,1 % | 91,0 % | 9,9 % | 11,2 |
+| multi | 8 | 69,1 % | 74,9 % | 42,8 % | 7,2 % | 8,0 |
+| multi_expanded | 8 | 70,6 % | 76,5 % | 45,5 % | 5,9 % | 8,0 |
+| bütün notlar | – | 100 % | 100 % | 100 % | 11,3 % | 12,2 |
+
+### 5.3 Yorum
+
+- **Pencere küçük.** 13 ayda firma başına ortalama ~12 not var; önceki tahmin 20–30'du. Top-8 pencerenin yaklaşık üçte ikisini alıyor.
+- **`single` açık ara en iyisi.**
+  - O ayın notlarının %91–94'ünü ve geniş anlamda ilgili notların %83–86'sını getiriyor.
+  - Çeldirici payını yarıya indiriyor: %11–17 yerine %5–7.
+  - Nedeni büyük olasılıkla dönem bilgisi. Tek sorgu ayın adını içeriyor; notlarda da ay adı geçiyor („ab Juni“, „im Juni“). Bu da hem o ayın hem önceki yılın aynı ayının notlarını öne çıkarıyor.
+  - Öğe başına sorgularda dönem bilgisi yok. K-A ile genişletmek biraz yardımcı oluyor ama yetmiyor.
+- **k'nın etkisi:** k = 12 neredeyse bütün pencereyi alıyor. k = 4 ilgili notların yarısını kaçırıyor. k = 8 [KARAR, tur 6] dengeli bir nokta.
+- **Ablation'a etkisi:** „Bütün notlar“ ile „top-8“ arasındaki fark küçük bir bağlam farkı (~4 not), ama çeldirici sayısını yarıya indiriyor. Retrieval'ın modele katkısı değerlendirmede bu iki varyantla ölçülecek (CLAUDE.md 7, `06` D3).
+- **Süre:** BGE-M3 işlemcide çalıştığı için 720 ayın üç yöntemle ölçümü ~53 dakika sürdü. Üretimde yalnızca bir yöntem kullanılır; `export` her ay için bir sorgu çalıştırır.

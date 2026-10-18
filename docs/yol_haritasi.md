@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 17.10.2026 (karar turu 10; bilgi tabanı v1 kodlandı, getirme ölçümü sürüyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (bilgi tabanı: getirme isabeti ölçüldü, sorgu yöntemi seçildi)
 
 ---
 
-## 1. Genel durum: ~%45 tamamlandı
+## 1. Genel durum: ~%47 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 22,6 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 23,5 gün
 toplam iş     = 50 gün
-durum         = 22,6 / 50 ≈ %45
+durum         = 23,5 / 50 ≈ %47
 ```
 
 **Belirsizlik:**
@@ -33,14 +33,14 @@ durum         = 22,6 / 50 ≈ %45
 | 1 | Problem tanımı, tasarım ve kararlar | 3 | %100 | 3,0 | ✅ tamamlandı |
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
-| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %55 | 3,3 | 🔄 v1 kodlandı |
+| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %70 | 4,2 | 🔄 v1 + ölçüm |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %45 | 2,25 | 🔄 temel model seçildi |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %75 | 2,25 | 🔄 v1.1 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **22,6** | **≈ %45** |
+| | **Toplam** | **50** | | **23,5** | **≈ %47** |
 
 ---
 
@@ -76,8 +76,8 @@ durum         = 22,6 / 50 ≈ %45
   - K-A/K-B anahtarla, K-C 13 ay + top-k ile getiriliyor; Firmenprofil hep ekleniyor.
   - CLI, `retrieval.jsonl` dışa aktarma, getirme isabeti aracı, 10 test.
 - **Kararlaştırılan (tur 10):** SKR03 aralıkları hiç eklenmez; K-E kapsam dışı.
+- **Ölçüm (18.10.2026):** Doğrulama varyantlarında `single` + top-8 seçildi. Test kümesinde recall %91,4 (çekirdek) / %83,3 (geniş); çeldirici payı %5,2, bütün notlarda %11,3 (`docs/09`, Bölüm 5).
 - **Kalan:**
-  - recall@k ölçümü (BGE-M3) ve sorgu yönteminin seçimi.
   - İstemle bütünleştirme (istem 1.1).
   - K-A/K-B kaynak kimliklerinin doğrulama katmanına eklenmesi.
 - **Açık kararlar:** Yok. Sorgu yöntemi [ÖNERİ], ölçümle seçilecek.
@@ -171,10 +171,9 @@ durum         = 22,6 / 50 ≈ %45
 
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
-1. **Bilgi tabanı (paket 4):** v1 hazır; recall@k ölçümü ve sorgu yönteminin seçimi.
-2. **İstem 1.1 (paket 6):** Deneme turundan çıkan dersler; baseline'lar ve fine-tuning aynı istemi kullanır.
-3. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
-4. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar, fine-tuning, değerlendirme.
+1. **İstem 1.1 (paket 4 + 6):** Getirilen bağlam (K-A, K-B, K-C) isteme eklenir; deneme turundan çıkan dersler; doğrulama katmanı K-A/K-B kimliklerini tanır.
+2. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
+3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar, fine-tuning, değerlendirme.
 
 ## 5. Değişiklik geçmişi
 
@@ -195,3 +194,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 17.10.2026 | Deneme turu tamamlandı (3 model × 10 örnek); puanlama + okuma (`trial/results.md`); doğrulama v1.2. Paket 6 → %40: %39 |
 | 17.10.2026 | Karar turu 9: temel model Gemma 4 E4B (yedek Qwen3.5 9B); E04/E05 not kalıpları netleştirildi, veri kümeleri yeniden üretildi (yalnızca not metinleri). Paket 6 → %45: %40 |
 | 17.10.2026 | Karar turu 10: SKR03 yok, K-E kapsam dışı. Bilgi tabanı v1 (`rag/`: K-A/K-B metinleri, BGE-M3 + Chroma, getirme, 10 test). Paket 4 → %55: %45 |
+| 18.10.2026 | Getirme isabeti ölçüldü (BGE-M3): sorgu yöntemi doğrulama varyantlarında seçildi (`single`, k = 8); test kümesinde recall %91 / %83, çeldirici payı %11 → %5. Paket 4 → %70: %47 |

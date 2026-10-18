@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%45, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%47, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -241,6 +241,9 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
   - K-C: firma + 13 aylık pencere filtresi, ardından anlamsal top-k (başlangıç k = 8). "Penceredeki bütün notlar" ablation'da karşılaştırma olarak çalıştırılır.
   - Retrieval isabeti (recall@k) ölçülür (Bölüm 8).
   - K-D ilk sürümde kapalı; sonra ayrı deney.
+- **v1 kodlandı** (`rag/`, [`docs/09_bilgi_tabani.md`](docs/09_bilgi_tabani.md)):
+  - K-A/K-B anahtarla getirilir; K-C için tek sorgu + top-8 kullanılır (doğrulama varyantlarında seçildi).
+  - Test kümesinde: recall %91 (o ayın notları) / %83 (geniş); çeldirici payı %11'den %5'e iniyor.
 
 #### Katman 3: Fine-tuning (LoRA)
 

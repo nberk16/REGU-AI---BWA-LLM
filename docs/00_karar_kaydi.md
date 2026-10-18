@@ -360,6 +360,7 @@ Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrın
 - **[ÖNERİ] Parametreler:**
   - K-A/K-B'nin anahtarla seçilmesi.
   - Sorgu yöntemi: `single` / `multi` / `multi_expanded`; ölçümle seçilir (`09`, Bölüm 5).
+- **Ölçüm (18.10.2026):** Doğrulama varyantlarında `single` en iyisi. Recall çekirdek %94,3, geniş %86,3; çeldirici payı %7,3, bütün notlarda %16,5. Varsayılan `single`, k = 8. Test kümesindeki sonuç rapor için: %91,4 / %83,3 / %5,2.
 
 ## Kaynak
 

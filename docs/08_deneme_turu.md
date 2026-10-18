@@ -44,6 +44,8 @@ Sonuçlar eşit çıkarsa Ministral 3 8B seçilir [ÖNERİ].
 
 Deneme turu, baseline'lar ve fine-tuning aynı istem biçimini kullanır. Değişiklikte `PROMPT_VERSION` artırılır.
 
+> **Güncel sürüm 1.1** (18.10.2026): Katman 2 bağlamı ve bu turun dersleri; bkz. [`10_istem.md`](10_istem.md). Deneme turu sürüm 1.0 ile yapıldı; bu sürüm `prompting/v1_0.py`'de dondurulmuştur.
+
 - **Sistem mesajı (Almanca):**
   - Rol: Mittelstand firmasında Controller; okuyucu Geschäftsführung.
   - 7 kural:

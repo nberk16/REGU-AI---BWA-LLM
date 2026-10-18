@@ -2,7 +2,7 @@
 
     python -m rag build    --run DIR [--embedder bge-m3|hashing]
     python -m rag retrieve --run DIR --firm A1-v00 --period 2025-06 [--mode …] [--k 8]
-    python -m rag export   --run DIR [--mode …] [--k 8] [--out FILE]
+    python -m rag export   --run DIR [--mode …] [--k 8] [--firms A2-v120 …] [--out FILE]
 
 Depo: <run>/rag/chroma-<embedder>/ (repoda tutulmaz). export: <run>/rag/retrieval.jsonl.
 """
@@ -39,6 +39,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--period")
     parser.add_argument("--mode", choices=MODES)
     parser.add_argument("--k", type=int, help="not sayısı; 0 = penceredeki bütün notlar")
+    parser.add_argument("--firms", nargs="*", help="export: yalnızca bu firmalar (ör. A2-v120)")
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
 
@@ -68,6 +69,8 @@ def main(argv: list[str] | None = None) -> int:
     n = 0
     with open(out, "w", encoding="utf-8") as f:
         for firm_id, fs in sorted(firms.items()):
+            if args.firms and firm_id not in args.firms:
+                continue
             for period in commentable_periods(fs):
                 rec = as_records(retrieve(build_facts(fs, period, fcfg), kb, mode, k))
                 f.write(json.dumps({"firm_id": firm_id, "period": period, "mode": mode, "k": k,

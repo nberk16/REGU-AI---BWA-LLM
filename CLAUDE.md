@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 15.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)** ve **doğrulama katmanı v1 (Katman 4)** tamamlandı (karar turları 1–8). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)). Proje durumu ~%47, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 18.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)** ve **istem 1.1** tamamlandı (karar turları 1–10). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%50, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -244,6 +244,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - **v1 kodlandı** (`rag/`, [`docs/09_bilgi_tabani.md`](docs/09_bilgi_tabani.md)):
   - K-A/K-B anahtarla getirilir; K-C için tek sorgu + top-8 kullanılır (doğrulama varyantlarında seçildi).
   - Test kümesinde: recall %91 (o ayın notları) / %83 (geniş); çeldirici payı %11'den %5'e iniyor.
+- **[ÖNERİ] İstemdeki rolü (istem 1.1, [`docs/10_istem.md`](docs/10_istem.md)):** K-A/K-B „WISSEN“ başlığı altında arka plan bilgisidir ve neden kaynağı sayılmaz; ondan türetilen neden `(Hypothese)` ister. `[Quelle: …]` yalnızca K-C notlarına yapılır.
 
 #### Katman 3: Fine-tuning (LoRA)
 
@@ -258,6 +259,12 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - Kısa, sade, yöneticiye uygun Almanca
 
 **Öğretilmeyecekler:** Rakam hesaplama, firmaya özgü bilginin ezberlenmesi (bunlar RAG'in işi).
+
+**Model girdisi — istem 1.1** (`prompting/`, [`docs/10_istem.md`](docs/10_istem.md)) [ÖNERİ]:
+- Sistem mesajı: rol, 8 kural (deneme turu dersleri dahil), 6.3 şablonu. Bütün varyantlarda aynı.
+- Kullanıcı mesajı: FACTS (model görünümü) + WISSEN (K-B, K-A) + KONTEXTNOTIZEN (Firmenprofil + top-8).
+- Varyantlar: `ohne_kontext` (çıplak model, yalnızca FT), `rag_k8` (yalnızca RAG, RAG + FT), `rag_alle` (retrieval katkısı).
+- İstem 1.0 deneme turu için dondurulmuş (`prompting/v1_0.py`).
 
 #### Katman 4: Doğrulama
 
@@ -420,12 +427,15 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 5. ✅ Hesaplama modülü (Katman 1) → [`docs/05_facts_semasi.md`](docs/05_facts_semasi.md), `facts/`, `tests/test_facts.py` (tur 5)
 6. ✅ Model tarafının yöntem kararları → [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md) (turlar 6–7)
 7. ✅ Doğrulama katmanı v1 (Katman 4) → [`docs/07_dogrulama_katmani.md`](docs/07_dogrulama_katmani.md), `validation/`, `tests/test_validation.py` (tur 8)
+8. ✅ Almanca deneme turu ve temel model → [`docs/08_deneme_turu.md`](docs/08_deneme_turu.md), `trial/` (tur 9)
+9. ✅ Bilgi tabanı v1 (Katman 2) → [`docs/09_bilgi_tabani.md`](docs/09_bilgi_tabani.md), `rag/`, `tests/test_rag.py` (tur 10)
+10. ✅ İstem 1.1 → [`docs/10_istem.md`](docs/10_istem.md), `prompting/`, `tests/test_prompting.py`
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 
 **Yol haritası ve proje durumu:** [`docs/yol_haritasi.md`](docs/yol_haritasi.md). Her adımdan sonra güncellenir.
 
-**[ÖNERİ]** Sıradaki adımlar: bilgi tabanı (Katman 2) → istem 1.1 (deneme turu dersleri) → ideal yorumlar → Kaggle'da baseline'lar ve fine-tuning. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
+**[ÖNERİ]** Sıradaki adımlar: ideal yorumlar (içerik planı + öğretmen model) → Kaggle'da baseline'lar ve fine-tuning → değerlendirme ve ablation. Açık kararlar: [`docs/yol_haritasi.md`](docs/yol_haritasi.md), Bölüm 3.
 
 **[ÖNERİ]** Bundan sonraki olası sıra: (veri üreteci ✅) → (hesaplama modülü ✅) → bilgi tabanı → baseline (çıplak model ve yalnızca RAG) → fine-tuning → değerlendirme ve ablation → portfolyo dokümantasyonu. G7 gereği emeğin ağırlığı model tarafında (bilgi tabanı, fine-tuning, ablation) olmalı; veri üreteci ve hesaplama modülü bu adımları besleyecek kadar basit tutulmalı.
 

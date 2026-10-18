@@ -2,6 +2,7 @@
 
 Üreteç koşusundan (facts ve notlar otomatik):
     python -m validation --text yorum.md --run data/synthetic/reference_seed42 --firm A1-v00 --period 2025-06
+    … --retrieval data/synthetic/reference_seed42/rag/retrieval.jsonl   # notlar: modele verilen top-k (Katman 2)
 Hazır dosyalarla:
     python -m validation --text yorum.md --facts facts.json [--notes notlar.jsonl]
 
@@ -24,6 +25,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--period", help="ay (ör. 2025-06); --run ile")
     parser.add_argument("--facts", type=Path, help="facts.json dosyası (--run yerine)")
     parser.add_argument("--notes", type=Path, help="modele verilen notlar, JSONL (--facts ile)")
+    parser.add_argument("--retrieval", type=Path,
+                        help="python -m rag export çıktısı (--run ile); yoksa 13 aylık penceredeki bütün notlar")
     parser.add_argument("--json", type=Path, help="raporu JSON olarak yaz")
     args = parser.parse_args(argv)
 
@@ -36,7 +39,14 @@ def main(argv: list[str] | None = None) -> int:
         from facts.series import load_run
 
         facts = build_facts(load_run(args.run)[args.firm], args.period, load_config())
-        notes = window_notes(load_notes(args.run), args.firm, args.period)
+        if args.retrieval:
+            records = (json.loads(line) for line in args.retrieval.read_text(encoding="utf-8").splitlines() if line.strip())
+            match = [r for r in records if (r["firm_id"], r["period"]) == (args.firm, args.period)]
+            if not match:
+                parser.error(f"{args.retrieval} içinde {args.firm} {args.period} yok")
+            notes = match[0]["notes"]
+        else:
+            notes = window_notes(load_notes(args.run), args.firm, args.period)
     else:
         parser.error("--facts veya --run/--firm/--period gerekli")
 

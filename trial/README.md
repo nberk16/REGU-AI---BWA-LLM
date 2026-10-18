@@ -98,6 +98,16 @@ python trial/run_ollama.py
 
 Sonra bana haber ver. `python trial/score.py` ile puanlarım, çıktıları okurum ve `trial/results.md`'yi yazarım.
 
+## 6. İsteğe bağlı: istem 1.1 ön kontrolü (yalnızca Gemma)
+
+Aynı 10 örnek, yeni istemle (bilgi tabanı bağlamı ve deneme turu dersleri; `docs/10_istem.md`). Süre ~1,5 saat. Önce dalın güncel hâlini yeniden indir (Bölüm 3), sonra:
+
+```
+python trial/run_ollama.py --models gemma4-e4b --cases trial/inputs/cases_1_1.jsonl --out trial/outputs_1_1
+```
+
+Çıktı: `trial/outputs_1_1/gemma4-e4b.jsonl`. Bölüm 5'teki gibi yükle (klasör yolu `trial/outputs_1_1/`).
+
 ## Sorun giderme
 
 | Mesaj | Ne yapmalı |

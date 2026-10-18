@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (bilgi tabanı: getirme isabeti ölçüldü, sorgu yöntemi seçildi)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (istem 1.1: bilgi tabanı bağlamı ve deneme turu dersleri; doğrulama v1.3)
 
 ---
 
-## 1. Genel durum: ~%47 tamamlandı
+## 1. Genel durum: ~%50 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,15 +13,15 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 23,5 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 25,05 gün
 toplam iş     = 50 gün
-durum         = 23,5 / 50 ≈ %47
+durum         = 25,05 / 50 ≈ %50
 ```
 
 **Belirsizlik:**
 - Tahminler en çok model tarafındaki paketlerde belirsiz: ideal yorumların üretimi, baseline'lar, fine-tuning, değerlendirme. Bu paketler GPU erişimine, temel modelin Almanca kalitesine ve deneme–yanılma döngülerine bağlı.
 - Kullanıcının dizüstünde 4 GB GPU var; eğitim ve değerlendirme bulutta (Kaggle) yapılacak. Defterlerin kullanıcı tarafından çalıştırılması turları uzatabilir.
-- Gerçekçi aralık %24–35.
+- Gerçekçi aralık %45–55.
 - Kalan işin ~%70'i model tarafında. Bu, G7'deki odakla uyumlu.
 
 ---
@@ -33,14 +33,14 @@ durum         = 23,5 / 50 ≈ %47
 | 1 | Problem tanımı, tasarım ve kararlar | 3 | %100 | 3,0 | ✅ tamamlandı |
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
-| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %70 | 4,2 | 🔄 v1 + ölçüm |
+| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %10 | 0,8 | ⏳ başlamadı (yöntem ve kümeler kararlaştırıldı) |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %45 | 2,25 | 🔄 temel model seçildi |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %75 | 2,25 | 🔄 v1.1 |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **23,5** | **≈ %47** |
+| | **Toplam** | **50** | | **25,05** | **≈ %50** |
 
 ---
 
@@ -69,7 +69,7 @@ durum         = 23,5 / 50 ≈ %47
 - **Kalan (%10):** Bayrak parametrelerinin ince ayarı. Gerekirse model sonuçlarına göre yapılır; ör. V4 ve V6 recall'ı (%61–63).
 - **Açık kararlar:** Bayrak parametreleri [ÖNERİ] (`facts/config.toml`).
 
-### 4. Bilgi tabanı ve retrieval (Katman 2) — 🔄 v1 kodlandı
+### 4. Bilgi tabanı ve retrieval (Katman 2) — ✅ v1 (ayar kaldı)
 - **Yapılan (`rag/`, `docs/09`):**
   - Almanca K-A (34) ve K-B (10) metinleri; rakamsız, SKR03'süz.
   - BGE-M3 + Chroma deposu.
@@ -77,10 +77,11 @@ durum         = 23,5 / 50 ≈ %47
   - CLI, `retrieval.jsonl` dışa aktarma, getirme isabeti aracı, 10 test.
 - **Kararlaştırılan (tur 10):** SKR03 aralıkları hiç eklenmez; K-E kapsam dışı.
 - **Ölçüm (18.10.2026):** Doğrulama varyantlarında `single` + top-8 seçildi. Test kümesinde recall %91,4 (çekirdek) / %83,3 (geniş); çeldirici payı %5,2, bütün notlarda %11,3 (`docs/09`, Bölüm 5).
-- **Kalan:**
-  - İstemle bütünleştirme (istem 1.1).
-  - K-A/K-B kaynak kimliklerinin doğrulama katmanına eklenmesi.
-- **Açık kararlar:** Yok. Sorgu yöntemi [ÖNERİ], ölçümle seçilecek.
+- **İstemle bütünleşme (18.10.2026):** İstem 1.1 bağlamı „WISSEN“ (K-B, K-A) ve „KONTEXTNOTIZEN“ olarak taşıyor; doğrulama K-A/K-B kimliklerini tanıyor (`docs/10`). `rag export --firms` eklendi.
+- **Kalan (%15):**
+  - Model sonuçlarına göre ayar (ör. k, K-A/K-B metinleri).
+  - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
+- **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
 
 ### 5. İdeal yorumların üretimi — ⏳ başlamadı
 - **Kalan:**
@@ -96,7 +97,7 @@ durum         = 23,5 / 50 ≈ %47
 - **Açık kararlar:**
   - Somut öğretmen model ve sağlayıcı [ÖNERİ: Mistral Large 3, Mistral API]. Kullanıcının API anahtarı alması gerekir.
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 deneme turu kiti hazır
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 temel model seçildi, istem 1.1 hazır
 - **Yapılan:**
   - Ortak istem modülü `prompting/` (sürüm 1.0).
   - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
@@ -105,12 +106,15 @@ durum         = 23,5 / 50 ≈ %47
   - 3 model × 10 örnek; puanlama ve okuma: `trial/results.md`.
   - Ministral açık ara en zayıfı. Öneri Gemma 4 E4B, yedek Qwen3.5 9B.
 - **Kararlaştırılan (tur 9):** Temel model Gemma 4 E4B, yedek Qwen3.5 9B.
+- **İstem 1.1 (18.10.2026, `docs/10`):**
+  - Katman 2 bağlamı (WISSEN + top-8 not) ve deneme turu dersleri 8 kurala işlendi.
+  - Varyantlar: `ohne_kontext`, `rag_k8`, `rag_alle`; sistem mesajı hepsinde aynı.
+  - `python -m prompting` istemleri Kaggle için JSONL olarak yazıyor; 7 test.
+  - İstem 1.0 deneme turu için donduruldu.
 - **Kalan:**
-  - İstem 1.1: deneme turu dersleri. Örnekler: FACTS'e kaynak gösterilmez, yüzde hesaplanmaz, `(Hypothese)` işareti.
-  - Kaggle'da çıkarım altyapısı (Gemma 4 E4B).
+  - Kaggle'da çıkarım altyapısı (Gemma 4 E4B, vLLM).
   - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
-  - Çıkarım altyapısı (Kaggle + vLLM).
-  - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
+  - İsteğe bağlı: aynı 10 örnekte Gemma ile istem 1.1 ön kontrolü (kullanıcının dizüstünde ~1,5 saat; `docs/10`, Bölüm 8).
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
 - **Açık kararlar:** Çıkarım altyapısı [ÖNERİ: değerlendirme vLLM, demo Ollama].
@@ -121,9 +125,11 @@ durum         = 23,5 / 50 ≈ %47
   - LoRA eğitimi: yalnızca FT ve RAG + FT varyantları.
   - Hiperparametreler, eğitim kayıtları.
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
-- **Açık kararlar:** Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
+- **Açık kararlar:**
+  - Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
+  - **[AÇIK]** „Yalnızca fine-tuning“ varyantı: bağlamla eğitilen model bağlamsız mı çalıştırılır, yoksa bağlamsız girdilerle ayrı bir model mi eğitilir? İkincisi ayrı ideal yorumlar gerektirir (paket 5). Fine-tuning'den önce kullanıcıya sunulacak (`docs/00`, 17.3).
 
-### 8. Doğrulama katmanı (Katman 4) — 🔄 v1 tamamlandı
+### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.3
 - **Yapılan:**
   - `validation/` ve 46 test; kurallar `docs/07`.
   - Almanca rakam ayıklama ve yuvarlama kuralı (a).
@@ -133,9 +139,9 @@ durum         = 23,5 / 50 ≈ %47
   - Format (6.3), kapsam ipuçları, JSON raporu, CLI.
   - Örnek yorum: `docs/examples/kommentar_A1-v00_2025-06.md`.
   - Referans verinin 720 ayında yanlış alarm yok.
-- **Kalan (%30):**
-  - K-A/K-B kaynak kimlikleri (paket 4'ten sonra).
-  - Deneme turundaki gerçek model çıktılarına göre kelime listelerinin ve kuralların ayarı.
+- **v1.3 (18.10.2026):** K-A/K-B kimlikleri tanınıyor (`quelle_wissen`, kaynak sayılmaz); CLI'de `--retrieval` (`docs/07`, Bölüm 12). 56 test.
+- **Kalan (%20):**
+  - Baseline çıktılarına göre kelime listelerinin ve kuralların ayarı.
   - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
 - **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
 - **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
@@ -171,9 +177,10 @@ durum         = 23,5 / 50 ≈ %47
 
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
-1. **İstem 1.1 (paket 4 + 6):** Getirilen bağlam (K-A, K-B, K-C) isteme eklenir; deneme turundan çıkan dersler; doğrulama katmanı K-A/K-B kimliklerini tanır.
-2. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme.
-3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar, fine-tuning, değerlendirme.
+1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
+2. **İdeal yorumlar (paket 5):** İçerik planı kodu, öğretmen modelle metin üretimi (kullanıcının API anahtarıyla), altın küme. Öğretmen modelin girdisi istem 1.1'dir.
+3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme.
+- **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
 
 ## 5. Değişiklik geçmişi
 
@@ -195,3 +202,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 17.10.2026 | Karar turu 9: temel model Gemma 4 E4B (yedek Qwen3.5 9B); E04/E05 not kalıpları netleştirildi, veri kümeleri yeniden üretildi (yalnızca not metinleri). Paket 6 → %45: %40 |
 | 17.10.2026 | Karar turu 10: SKR03 yok, K-E kapsam dışı. Bilgi tabanı v1 (`rag/`: K-A/K-B metinleri, BGE-M3 + Chroma, getirme, 10 test). Paket 4 → %55: %45 |
 | 18.10.2026 | Getirme isabeti ölçüldü (BGE-M3): sorgu yöntemi doğrulama varyantlarında seçildi (`single`, k = 8); test kümesinde recall %91 / %83, çeldirici payı %11 → %5. Paket 4 → %70: %47 |
+| 18.10.2026 | İstem 1.1 (`prompting/`, `docs/10`): Katman 2 bağlamı (WISSEN + top-8), deneme turu dersleri, varyantlar, Kaggle için istem dışa aktarma; istem 1.0 donduruldu. Doğrulama v1.3 (K-A/K-B kimlikleri). Paket 4 → %85, 6 → %55, 8 → %80: %50 |

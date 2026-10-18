@@ -1,6 +1,7 @@
 """Deneme turu çıktılarını doğrulama katmanıyla puanlar ve trial/results.md yazar (docs/08).
 
-Kullanım: python trial/score.py [--outputs trial/outputs] [--report trial/results.md]
+Kullanım: python trial/score.py [--cases trial/inputs/cases.jsonl] [--outputs trial/outputs] [--report trial/results.md]
+          [--review trial/review.md]
 
 Almanca akıcılık ve üslup otomatik ölçülmez; çıktılar okunarak değerlendirilir (results.md'nin sonuna eklenir).
 """
@@ -58,10 +59,10 @@ def score(cases: dict[str, dict], outputs_dir: Path) -> dict[str, dict]:
     return results
 
 
-def summarize(results: dict[str, dict], n_cases: int) -> str:
+def summarize(results: dict[str, dict], n_cases: int, review: Path | None = None, prompt_version: str = "1.0") -> str:
     lines = ["# Deneme turu sonuçları", "",
-             f"Örnek sayısı: {n_cases} (doğrulama varyantları; `trial/inputs/selection.md`). "
-             "Puanlama: doğrulama katmanı (`docs/07`).", "",
+             f"Örnek sayısı: {n_cases} (doğrulama varyantları; `trial/inputs/selection.md`). İstem sürümü: "
+             f"{prompt_version}. Puanlama: doğrulama katmanı (`docs/07`).", "",
              "## Özet", "",
              "| Model | Örnek | Format uyumu | Rakam sadakati (toplam) | İtiraz edilen rakam | Kaynaklı neden | İşaretsiz neden | "
              "İçerik hatası / örnek | Eksik kalem/bayrak | Kelime (medyan) | Çıktı token/s | İstem token/s | Süre / örnek |",
@@ -114,7 +115,7 @@ def summarize(results: dict[str, dict], n_cases: int) -> str:
         c = Counter(f["code"] for r in res["rows"] for f in r["report"]["findings"])
         top = ", ".join(f"`{code}` × {n}" for code, n in c.most_common(8)) or "yok"
         lines.append(f"- **{name}:** {top}")
-    review = HERE / "review.md"                      # elle yazılan okuma değerlendirmesi (varsa)
+    review = review or HERE / "review.md"            # elle yazılan okuma değerlendirmesi (varsa)
     lines += ["", review.read_text(encoding="utf-8").strip() if review.exists()
               else "## Almanca kalite ve üslup (okunarak)\n\n_Çıktılar okunduktan sonra eklenecek._", ""]
     return "\n".join(lines)
@@ -125,6 +126,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--cases", type=Path, default=HERE / "inputs" / "cases.jsonl")
     parser.add_argument("--outputs", type=Path, default=HERE / "outputs")
     parser.add_argument("--report", type=Path, default=HERE / "results.md")
+    parser.add_argument("--review", type=Path, default=HERE / "review.md", help="elle yazılan okuma değerlendirmesi")
     args = parser.parse_args(argv)
 
     cases = {c["id"]: c for c in load_jsonl(args.cases)}
@@ -132,7 +134,8 @@ def main(argv: list[str] | None = None) -> None:
     if not results:
         print(f"{args.outputs} içinde çıktı yok.")
         return
-    text = summarize(results, len(cases))
+    versions = sorted({c.get("prompt_version", "1.0") for c in cases.values()})
+    text = summarize(results, len(cases), args.review, ", ".join(versions))
     args.report.write_text(text, encoding="utf-8")
     print(text)
 

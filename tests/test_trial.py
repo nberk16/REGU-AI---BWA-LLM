@@ -51,6 +51,26 @@ def test_cases_use_validation_variants_and_no_ground_truth():
         assert case["messages"][0]["role"] == "system" and case["facts"]["period_label"] in case["messages"][0]["content"]
 
 
+def test_cases_for_current_prompt():
+    # trial/inputs/cases_1_1.jsonl: aynı aylar, istem 1.1 + Katman 2 bağlamı (docs/10, Bölüm 8).
+    import prompting
+
+    frozen = {c["id"]: c for c in _cases()}
+    path = ROOT / "trial" / "inputs" / "cases_1_1.jsonl"
+    current = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert [c["id"] for c in current] == list(frozen)
+    for case in current:
+        assert case["facts"] == frozen[case["id"]]["facts"]
+        assert case["retrieval"] == {"mode": "single", "k": 8, "embedding": "BAAI/bge-m3"}
+        assert len([n for n in case["notes"] if n["period"]]) <= 8
+        if case["prompt_version"] == prompting.PROMPT_VERSION:
+            ctx = {"knowledge": case["knowledge"], "notes": case["notes"]}
+            assert prompting.build_messages(case["facts"], ctx) == case["messages"]
+        text = json.dumps(case["messages"], ensure_ascii=False)
+        for leak in ("event_id", "expected_flags", "v2_candidate_decision", "distractor", "rohertrag_causes"):
+            assert leak not in text
+
+
 INSTALLED = [m["tag"] for m in run_ollama.MODELS]
 
 

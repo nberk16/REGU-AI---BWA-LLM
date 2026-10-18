@@ -1,11 +1,14 @@
 """Deneme turu girdileri: doğrulama varyantlarından çeşitli ~10 ay seçer ve istemleri yazar (docs/08).
 
 Kullanım: python trial/prepare.py [--run data/synthetic/train_seed7] [--n 10]
+          python trial/prepare.py --retrieval FILE   # aynı örnekler, güncel istem + Katman 2 bağlamı (docs/10, Bölüm 8)
 
 - Örnekler yalnızca doğrulama varyantlarından (v120–v122) seçilir; test kümesi model seçiminde kullanılmaz (docs/04, 9).
 - Seçim, ground truth'a bakarak çeşitlilik sağlar (V1–V6, V2 adayı cite/warn, sakin ay, çeldirici not).
   Ground truth modele gitmez; yalnızca trial/inputs/selection.md'ye yazılır.
 - Çıktı: trial/inputs/cases.jsonl (istem + facts + notlar) ve trial/inputs/selection.md.
+- `--retrieval`: seçim yapılmaz; cases.jsonl'deki aylar için güncel istem sürümüyle trial/inputs/cases_<sürüm>.jsonl
+  yazılır. Bağlam `python -m rag export` çıktısından gelir (WISSEN + top-k not).
 """
 
 import argparse
@@ -19,7 +22,8 @@ sys.path.insert(0, str(ROOT))
 from facts.build import build_facts, commentable_periods  # noqa: E402
 from facts.schema import load_config  # noqa: E402
 from facts.series import load_run  # noqa: E402
-from prompting import PROMPT_VERSION, build_messages  # noqa: E402
+# Deneme turu dondurulmuş istem 1.0'ı kullanır (docs/08, Bölüm 3); güncel istem: prompting.templates.
+from prompting.v1_0 import PROMPT_VERSION, build_messages  # noqa: E402
 from validation.context import load_notes, window_notes  # noqa: E402
 
 VALIDATION_VARIANTS = (120, 121, 122)
@@ -112,13 +116,39 @@ def select(cands: list[dict], n: int) -> list[tuple[str, dict]]:
     return chosen
 
 
+def write_current_prompt(run_dir: Path, retrieval: Path) -> Path:
+    """cases.jsonl'deki aylar, güncel istem ve Katman 2 bağlamıyla. Dondurulmuş 1.0 girdileri değişmez."""
+    import prompting
+
+    contexts = {(r["firm_id"], r["period"]): r for r in load_jsonl(retrieval)}
+    firms = load_run(run_dir)
+    cfg = load_config()
+    out = OUT_DIR / f"cases_{prompting.PROMPT_VERSION.replace('.', '_')}.jsonl"
+    with open(out, "w", encoding="utf-8") as f:
+        for case in load_jsonl(OUT_DIR / "cases.jsonl"):
+            ctx = contexts[(case["firm_id"], case["period"])]
+            facts = build_facts(firms[case["firm_id"]], case["period"], cfg)
+            f.write(json.dumps({
+                "id": case["id"], "firm_id": case["firm_id"], "period": case["period"],
+                "prompt_version": prompting.PROMPT_VERSION, "retrieval": {"mode": ctx["mode"], "k": ctx["k"],
+                                                                          "embedding": ctx["embedding"]},
+                "messages": prompting.build_messages(facts, ctx), "facts": facts,
+                "knowledge": ctx["knowledge"], "notes": ctx["notes"]}, ensure_ascii=False) + "\n")
+    print(f"İstem {prompting.PROMPT_VERSION} → {out}")
+    return out
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Deneme turu girdilerini hazırlar (docs/08).")
     parser.add_argument("--run", type=Path, default=ROOT / "data" / "synthetic" / "train_seed7")
     parser.add_argument("--n", type=int, default=len(CRITERIA))
+    parser.add_argument("--retrieval", type=Path, help="python -m rag export çıktısı (güncel istemle yeniden yazar)")
     args = parser.parse_args(argv)
 
     ensure_run(args.run)
+    if args.retrieval:
+        write_current_prompt(args.run, args.retrieval)
+        return
     chosen = select(candidates(args.run), args.n)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 

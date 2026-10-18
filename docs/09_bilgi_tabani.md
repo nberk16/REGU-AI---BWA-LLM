@@ -81,7 +81,9 @@ python -m rag export   --run data/synthetic/reference_seed42              # <run
 python tools/retrieval_quality.py data/synthetic/reference_seed42         # getirme isabeti (ground truth)
 ```
 
-`export` her firma-ay için bağlamı (kaynak kimliği, tür, metin; notlarda dönem ve süre) JSONL olarak yazar. Prompting ve Kaggle defterleri bu dosyayı kullanır; böylece GPU tarafında embedding modeli gerekmez.
+`export` her firma-ay için bağlamı (kaynak kimliği, tür, metin; notlarda dönem ve süre) JSONL olarak yazar. `--firms` ile yalnızca seçilen firmalar yazılır. İstem 1.1 bu dosyayı kullanır (`python -m prompting --retrieval …`, [`10_istem.md`](10_istem.md)); böylece GPU tarafında embedding modeli gerekmez.
+
+**İstemdeki rolü (istem 1.1):** K-A ve K-B „WISSEN“ başlığı altında arka plan bilgisi olarak verilir; neden kaynağı sayılmaz. Atıf yapılabilir kaynaklar yalnızca K-C notlarıdır (`10_istem.md`, Bölüm 3 ve 7).
 
 ## 5. Getirme isabeti (recall@k)
 

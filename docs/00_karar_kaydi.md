@@ -362,6 +362,32 @@ Kullanıcının onayıyla hazırlandı ("evet, sen hazırlamaya başla"). Ayrın
   - Sorgu yöntemi: `single` / `multi` / `multi_expanded`; ölçümle seçilir (`09`, Bölüm 5).
 - **Ölçüm (18.10.2026):** Doğrulama varyantlarında `single` en iyisi. Recall çekirdek %94,3, geniş %86,3; çeldirici payı %7,3, bütün notlarda %16,5. Varsayılan `single`, k = 8. Test kümesindeki sonuç rapor için: %91,4 / %83,3 / %5,2.
 
+## 17. İstem 1.1 (18.10.2026)
+
+Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [KARAR] alınmadı; aşağıdakiler [ÖNERİ]'dir. Ayrıntılar: `10_istem.md`.
+
+### 17.1 Uygulama (asistan)
+
+- **`prompting/` sürüm 1.1:**
+  - Katman 2'nin bağlamı isteme girdi: WISSEN (K-B rehberi + K-A açıklamaları) ve KONTEXTNOTIZEN (Firmenprofil + top-8).
+  - Deneme turu dersleri 8 kurala işlendi: FACTS/flags/WISSEN kaynak gösterilmez; kendi hesabı yok, `null` değere rakam yok; yüzde ile yüzde puanı; yön; uygun not şartı; `(Hypothese)`; totoloji yok; ek biçim yok.
+  - CLI: `python -m prompting` → `<run>/prompts/<varyant>.jsonl` (Kaggle defterleri için).
+- **İstem 1.0 donduruldu:** `prompting/v1_0.py`; deneme turu girdileri onunla birebir yeniden üretiliyor (test).
+- **Doğrulama v1.3:** K-A/K-B kimlikleri tanınıyor (`quelle_wissen`, hinweis); CLI'de `--retrieval`.
+- **`rag export --firms`**, `trial/prepare.py --retrieval` (aynı 10 örnek, istem 1.1), `trial/score.py --review`.
+
+### 17.2 Öneriler [ÖNERİ]
+
+| Konu | Öneri | Gerekçe |
+|---|---|---|
+| WISSEN'in rolü | Arka plan bilgisi; neden kaynağı sayılmaz. Ondan türetilen neden `(Hypothese)` ister. | B3: notta karşılığı olmayan neden hipotezdir. „Kaynaklı neden oranı“ yalnızca firma notlarını sayar. |
+| Varyantlar | `ohne_kontext` (çıplak model, yalnızca FT), `rag_k8` (yalnızca RAG, RAG + FT), `rag_alle` (retrieval katkısı). Sistem mesajı hepsinde aynı. | CLAUDE.md 7'deki tanımlar; fark yalnızca bağlamda kalır. |
+| facts'in model görünümü | `schema_version`, `thresholds`, `significance`, `key` modele gitmez. | Model kullanmıyor; eşik rakamları yanlışlıkla aktarılabilir; istem kısalır. |
+
+### 17.3 Açık karar [AÇIK]
+
+- **„Yalnızca fine-tuning“ varyantının eğitimi (paket 7):** Aynı modeli bağlamlı eğitip bağlamsız mı çalıştırmalı, yoksa bağlamsız girdilerle ayrı bir model mi eğitmeli? İkincisi, bağlamsız girdiler için ayrı ideal yorumlar gerektirir (paket 5). Seçenekler fine-tuning'den önce kullanıcıya sunulacak.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

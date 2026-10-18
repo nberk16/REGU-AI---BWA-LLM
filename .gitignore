@@ -13,3 +13,5 @@ data/synthetic/*
 # Katman 1 çıktısı (python -m facts) her zaman yeniden üretilebilir; repoda tutulmaz
 data/synthetic/*/facts/
 data/synthetic/*/rag/
+# İstemler (python -m prompting) her zaman yeniden üretilebilir; repoda tutulmaz
+data/synthetic/*/prompts/

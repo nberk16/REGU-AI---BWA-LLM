@@ -1,6 +1,8 @@
 # 07 — Doğrulama katmanı (Katman 4)
 
-> **Durum:** v1.1 (`validation/`, 53 test), 17.10.2026. v1.1, deneme turunun ilk gerçek model çıktılarına göre biçimsel toleranslar ekledi (Bölüm 11).
+> **Durum:** v1.3 (`validation/`, 56 test), 18.10.2026.
+> - v1.1–v1.2, deneme turunun gerçek model çıktılarına göre biçimsel toleranslar ekledi (Bölüm 11).
+> - v1.3, istem 1.1'deki bilgi tabanı kimliklerini (WISSEN) tanır (Bölüm 12).
 > - **[KARAR]:** kurallar (CLAUDE.md 6.2, Katman 4; tur 6: B3–B4; tur 8: yuvarlama kuralı (a)).
 > - **[ÖNERİ]:** kelime listeleri, kısa ad listesi, uzunluk toleransı ve "rakam hangi satıra ait" kuralı (`validation/config.toml`).
 >
@@ -155,7 +157,7 @@ Bir cümle şu durumlarda neden cümlesi sayılır [ÖNERİ, `config.toml`]:
 
 **Tablo:** „Erklärung“ hücresi doluysa ve bir neden içeriyorsa, son sütunda `[Quelle: …]` ya da „Hypothese“ olmalı. „Ursache offen“ veya „–“ yazılan satırlar muaftır.
 
-**Kaynak kimliği:** `[Quelle: …]` içindeki her kimlik modele verilmiş bir notun kimliği olmalı; değilse `quelle_unbekannt`. K-A ve K-B kimlikleri, Katman 2 kurulunca eklenecek.
+**Kaynak kimliği:** `[Quelle: …]` içindeki her kimlik modele verilmiş bir notun kimliği olmalı; değilse `quelle_unbekannt`. K-A ve K-B kimlikleri (`BWA-Erläuterung …`, `Leitfaden …`) tanınır ama kaynak sayılmaz (v1.3, Bölüm 12).
 
 **Kanonik olmayan kaynak gösterimi (v1.1):**
 - „Quelle:“ öneki olmadan köşeli parantez içinde verilen bilinen not kimlikleri de kaynak sayılır, ama `quellenformat` bulgusu alır. Örnekler: `[Kontextnotiz 2025-03 #3]`, kısaltılmış `[Kontextnotiz 2025-03 #3; 2024-11]`, tabloda parantezsiz kimlik.
@@ -179,6 +181,7 @@ Bir cümle şu durumlarda neden cümlesi sayılır [ÖNERİ, `config.toml`]:
 | `zahlenformat` | fehler | Almanca olmayan ondalık yazım (biçim bulgusu) |
 | `quellenformat` | fehler | Bilinen not kimliği „[Quelle: …]“ biçiminde verilmemiş (biçim bulgusu; neden kaynaklı sayılır) |
 | `quelle_facts` | hinweis | FACTS'e veya bir bayrağa atıf; kaynak sayılmaz |
+| `quelle_wissen` | hinweis | Bilgi tabanının genel bilgisine (K-A, K-B, „WISSEN“) atıf; kaynak sayılmaz, neden `(Hypothese)` ister |
 | `begruendung_ohne_kennzeichnung` | fehler | Neden cümlesinde kaynak da tahmin işareti de yok |
 | `tabelle_ohne_quelle` | fehler | Tablodaki açıklamada kaynak da tahmin işareti de yok |
 | `quelle_unbekannt` | fehler | Gösterilen kaynak modele verilmemiş |
@@ -216,6 +219,9 @@ Bulgu mesajları Almancadır, çünkü ürünün kullanıcısına gösterilir.
 # Üreteç koşusundan (facts ve 13 aylık notlar otomatik)
 python -m validation --text yorum.md --run data/synthetic/reference_seed42 --firm A1-v00 --period 2025-06
 
+# Modele verilen notlar Katman 2'nin getirdikleriyse (istem 1.1; docs/10)
+python -m validation --text yorum.md --run … --firm A1-v00 --period 2025-06 --retrieval …/rag/retrieval.jsonl
+
 # Hazır dosyalarla
 python -m validation --text yorum.md --facts facts.json --notes notlar.jsonl --json rapor.json
 ```
@@ -241,7 +247,7 @@ Zahlen: 40 geprüft, 36 facts, 2 Notiz, 2 beanstandet · Zahlentreue: 0.95
 
 Python'dan: `validation.check.validate(text, facts, notes) -> dict`.
 
-## 9. Testler (`tests/test_validation.py`, 46 test)
+## 9. Testler (`tests/test_validation.py`, v1'de 46, v1.3'te 56 test)
 
 - **Ayıklama:** bütün biçimler; tarihlerin ve kodların rakam sayılmaması.
 - **Yuvarlama kuralı (a):** 13 durum.
@@ -276,3 +282,17 @@ Hızlı denemede üç model aynı örneği yazdı (`trial/outputs/`). v1 bulgula
 | „Material-/Wareneinkauf … Quote von 43,4 %“ | Oran kapsam dışı, `zahl_falsche_position` | Bir satır adı geçince o satırın oranı da kapsama girer |
 
 Puanlama tablosu (`trial/score.py`) artık biçim ve içerik hatalarını ayrı gösteriyor. Ollama'nın bellek değerleri (`/api/ps`) bu sürümde güvenilir olmadığı için GPU payı sütunu kaldırıldı.
+
+## 12. Sürüm 1.3 (18.10.2026): bilgi tabanı kimlikleri
+
+İstem 1.1, Katman 2'nin genel bilgisini „WISSEN“ başlığı altında verir (`docs/10`). Bu parçaların kimlikleri (`BWA-Erläuterung Personalkosten`, `Leitfaden V1 (fehlende Abgrenzung)`) firma hakkında bilgi taşımaz.
+
+| Durum | Sonuç |
+|---|---|
+| `[Quelle: Leitfaden V1 (…)]`, `[BWA-Erläuterung …]`, `[WISSEN]` | `quelle_wissen` (hinweis). Bilinmeyen kaynak hatası verilmez. |
+| Aynı cümlede `(Hypothese)` var | Neden hipotez olarak sayılır; hata yok. |
+| `(Hypothese)` yok | Neden işaretsiz: `begruendung_ohne_kennzeichnung` ya da `tabelle_ohne_quelle`. |
+
+**Gerekçe [ÖNERİ]:** Notta karşılığı olmayan neden, B3'e göre bir hipotezdir; K-B rehberinden türetilmiş olsa da firma için kanıt değildir. „Kaynaklı neden oranı“ (CLAUDE.md 8) yalnızca bağlam notlarını sayar.
+
+CLI'de `--retrieval` seçeneği eklendi: modele verilen notlar, Katman 2'nin o ay için getirdiği notlardır (top-k + Firmenprofil).

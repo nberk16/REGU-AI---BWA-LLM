@@ -291,6 +291,20 @@ def test_facts_reference_is_not_a_source(example, facts, notes):
     assert flag_ref["ok"] and codes(flag_ref, "hinweis") == ["quelle_facts"]
 
 
+def test_knowledge_reference_is_no_source(example, facts, notes):
+    # İstem 1.1: WISSEN (K-A/K-B) arka plan bilgisidir; neden kaynağı sayılmaz, (Hypothese) gerekir (docs/10).
+    anchor = "Die Gesamtleistung liegt"
+    cited = "Die Personalkosten steigen wegen einer Sonderzahlung [Quelle: Leitfaden V1 (fehlende Abgrenzung)]. "
+    unmarked = validate(example.replace(anchor, cited + anchor), facts, notes)
+    assert codes(unmarked) == ["begruendung_ohne_kennzeichnung"]
+    assert codes(unmarked, "hinweis") == ["quelle_wissen"]
+    assert unmarked["metrics"]["reasons"]["unmarked"] == 1
+    hypothesis = ("Die Personalkosten steigen vermutlich wegen einer Sonderzahlung (Hypothese) "
+                  "[BWA-Erläuterung Personalkosten]. ")
+    marked = validate(example.replace(anchor, hypothesis + anchor), facts, notes)
+    assert marked["ok"] and codes(marked, "hinweis") == ["quelle_wissen"]
+
+
 @pytest.mark.parametrize("text, unit, scale", [("1,91 Mio.", N.EUR, 1_000_000), ("2,45 Mrd. €", N.EUR, 1_000_000_000),
                                               ("4,2 pp.", N.PP, 1), ("4,2 PP", N.PP, 1)])
 def test_more_units(text, unit, scale):

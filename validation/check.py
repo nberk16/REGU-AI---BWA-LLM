@@ -45,6 +45,9 @@ def _word_pattern(words: list[str]) -> re.Pattern:
 
 # facts.json'a yapılan atıflar ("FACTS", "Flag V2", "V5"): kaynak sayılmaz (rakamlar zaten facts'ten gelir).
 _FACT_REF = re.compile(r"^(?:FACTS?(?:\.\w+)*|(?:Flag\s+)?V[1-6])$", re.IGNORECASE)
+# Katman 2'nin genel bilgisi (K-A, K-B; istem 1.1'de WISSEN): firma hakkında bilgi değil, neden kaynağı sayılmaz.
+# Bu bilgiden türetilen neden (Hypothese) ile işaretlenir (docs/06, B3; docs/10, Bölüm 2).
+_WISSEN_REF = re.compile(r"^(?:WISSEN|BWA-Erläuterung\b.*|Leitfaden\b.*)$", re.IGNORECASE)
 _SHORT_ID = re.compile(r"^\d{4}-\d{2}(?: #\d+)?$")
 
 
@@ -65,7 +68,7 @@ def _citations(seg: Segment, note_ids: set[str]) -> tuple[list[str], list[tuple[
         content = inner.strip()
         canonical = content.startswith("Quelle:")
         parts = [s.strip() for s in re.split(r"[;,]", content.removeprefix("Quelle:")) if s.strip()]
-        resolved, facts_refs, unknown = [], [], []
+        resolved, facts_refs, wissen_refs, unknown = [], [], [], []
         for part in parts:
             if part in note_ids:
                 resolved.append(part)
@@ -73,14 +76,17 @@ def _citations(seg: Segment, note_ids: set[str]) -> tuple[list[str], list[tuple[
                 resolved.append(f"Kontextnotiz {part}")
             elif _FACT_REF.match(part):
                 facts_refs.append(part)
+            elif _WISSEN_REF.match(part):
+                wissen_refs.append(part)
             else:
                 unknown.append(part)
-        if not canonical and not resolved and not facts_refs:
+        if not canonical and not resolved and not facts_refs and not wissen_refs:
             continue                                    # kaynak değil (ör. "[sic]", "Hypothese")
         if start >= 0:
             spans.append((start, end))
         cited.extend(resolved)
-        issues += [("quelle_facts", r) for r in facts_refs] + [("quelle_unbekannt", u) for u in unknown]
+        issues += ([("quelle_facts", r) for r in facts_refs] + [("quelle_wissen", r) for r in wissen_refs]
+                   + [("quelle_unbekannt", u) for u in unknown])
         if not canonical and resolved:
             issues.append(("quellenformat", inner))
     body = seg.text
@@ -113,9 +119,11 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
             message = {
                 "quelle_unbekannt": f"Quelle „{ref}“ wurde nicht bereitgestellt.",
                 "quelle_facts": f"„{ref}“ ist keine Quelle; Zahlen aus FACTS brauchen keine Quellenangabe.",
+                "quelle_wissen": f"„{ref}“ ist allgemeines Wissen, keine Quelle für eine Ursache im Unternehmen; "
+                                 f"daraus abgeleitete Ursachen als (Hypothese) kennzeichnen.",
                 "quellenformat": f"Quellenangabe „[{ref}]“ nicht im Format [Quelle: …].",
             }[code]
-            severity = "hinweis" if code == "quelle_facts" else "fehler"
+            severity = "hinweis" if code in ("quelle_facts", "quelle_wissen") else "fehler"
             findings.append(Finding(severity, code, message, seg.section, seg.line, ref))
         has_hyp = marker in body or (seg.kind == "zeile" and "Hypothese" in seg.cells[-1])
 

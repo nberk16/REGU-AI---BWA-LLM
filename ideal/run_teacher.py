@@ -9,15 +9,18 @@ Kullanım (repo klasöründe, PowerShell):
     python ideal/run_teacher.py --set pilot        # ~24 ay
     python ideal/run_teacher.py --set train        # 960 ay (kaldığı yerden devam eder)
     python ideal/run_teacher.py --set train --retry-failed   # kabul edilmeyenleri yeniden dene
+    python ideal/run_teacher.py --set val_ohne               # bağlamsız hedefler („yalnızca FT“, tur 12)
 
 - Her metin hemen kontrol edilir (doğrulama katmanı + plan). Geçemezse sorunlar modele bildirilir ve metin yeniden
   istenir (en fazla --max-attempts deneme).
 - Sonuçlar ideal/outputs/<küme>.jsonl dosyasına, her aydan sonra eklenir. Yarıda kalırsa aynı komutla devam eder.
+- Her kayıt, öğretmene giden mesajların parmak izini (input_sha) taşır. Sürümü ya da girdisi değişen ay yeniden üretilir.
 - Yalnızca standart kütüphane ve bu repodaki paketler (validation, ideal); ek kurulum gerekmez. Python ≥ 3.11.
 """
 
 import argparse
 import gzip
+import hashlib
 import json
 import os
 import sys
@@ -86,6 +89,11 @@ def clean(text: str) -> str:
     return text.strip()
 
 
+def input_sha(req: dict) -> str:
+    """Öğretmene giden mesajların parmak izi: plan ya da bağlam değişirse eski kayıt geçersiz olur."""
+    return hashlib.sha256(json.dumps(req["messages"], ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
+
+
 def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: float, round_: int = 0) -> dict:
     """`round_`: bu ay için kaçıncı koşu (--retry-failed). Her turda farklı tohumlar: aynı ret tekrar üretilmesin."""
     messages = list(req["messages"])
@@ -102,6 +110,7 @@ def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: flo
         messages += [{"role": "assistant", "content": raw}, feedback_message(result["problems"])]
     return {"id": req["id"], "set": req["set"], "status": "ok" if result["ok"] else "failed", "attempts": attempt,
             "text": text, "problems": result["problems"], "model": model, "versions": req["versions"],
+            "input_sha": input_sha(req),
             "options": {"temperature": temperature, "random_seed": req["random_seed"] + 100 * round_, "round": round_},
             "usage": usage,
             "seconds": round(time.time() - started, 1), "finished": datetime.now(timezone.utc).isoformat()}
@@ -116,7 +125,8 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description="Öğretmen modeli çalıştırır (docs/11).")
-    parser.add_argument("--set", choices=["pilot", "train", "val"], help="hangi istek kümesi")
+    parser.add_argument("--set", choices=["pilot", "train", "val", "train_ohne", "val_ohne"],
+                        help="hangi istek kümesi")
     parser.add_argument("--check", action="store_true", help="yalnızca anahtar ve model erişimini dene")
     parser.add_argument("--limit", type=int, help="en fazla bu kadar yeni ay")
     parser.add_argument("--workers", type=int, default=2, help="aynı anda kaç istek (hız sınırına takılırsa 1)")
@@ -158,7 +168,7 @@ def main(argv: list[str] | None = None) -> int:
     requests = load_requests(args.set, args.requests)
     args.out.mkdir(parents=True, exist_ok=True)
     out_path = args.out / f"{args.set}.jsonl"
-    versions = {r["id"]: r["versions"] for r in requests}
+    current = {r["id"]: (r["versions"], input_sha(r)) for r in requests}
     last: dict[str, str] = {}                      # id → son kaydın durumu (yeniden denemede son kayıt geçerli)
     rounds: dict[str, int] = {}                    # id → aynı sürümle önceki koşu sayısı
     if out_path.exists():
@@ -166,7 +176,8 @@ def main(argv: list[str] | None = None) -> int:
             for line in f:
                 if line.strip():
                     rec = json.loads(line)
-                    if rec.get("versions") == versions.get(rec["id"]):   # eski istem/plan sürümünün kaydı sayılmaz
+                    # eski sürümün ya da değişmiş girdinin kaydı sayılmaz
+                    if (rec.get("versions"), rec.get("input_sha")) == current.get(rec["id"]):
                         last[rec["id"]] = rec["status"]
                         rounds[rec["id"]] = rounds.get(rec["id"], 0) + 1
     done = {i for i, s in last.items() if s == "ok" or not args.retry_failed}

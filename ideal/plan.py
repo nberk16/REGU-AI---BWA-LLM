@@ -65,6 +65,8 @@ RULES = {
     "saisonal": {
         "hypothese": "saisonübliches Muster, da die Veränderung gegenüber dem Vorjahresmonat deutlich kleiner ist als "
                      "gegenüber dem Vormonat",
+        "hypothese_gegenlaeufig": "saisonübliches Muster, da die Veränderung gegenüber dem Vorjahresmonat in die "
+                                  "entgegengesetzte Richtung geht",
         "folge": "Maßgeblich ist der Vorjahresvergleich; eine Verzerrung ist nicht erkennbar.",
         "frage": None},
 }
@@ -140,7 +142,7 @@ class Truth:
         """Olay başına satırdaki yıllık fark: etki(t) − etki(t−12)."""
         now = self.effects.get((firm_id, period, line), {})
         before = self.effects.get((firm_id, shift(period, -12), line), {})
-        return {e: now.get(e, 0.0) - before.get(e, 0.0) for e in set(now) | set(before)}
+        return {e: now.get(e, 0.0) - before.get(e, 0.0) for e in sorted(set(now) | set(before))}
 
     def month_effects(self, firm_id: str, period: str, line: str) -> dict[str, float]:
         return dict(self.effects.get((firm_id, period, line), {}))
@@ -151,7 +153,8 @@ class Truth:
 def _causes(truth: Truth, firm_id: str, period: str, line: str, delta: float, effects: dict[str, float]) -> list[dict]:
     """Sapmayı aynı yönde ve en az CAUSE_SHARE oranında açıklayan olaylar, büyükten küçüğe."""
     out = []
-    for event_id, d in sorted(effects.items(), key=lambda kv: -abs(kv[1])):
+    # Eşit etkide olay kimliği belirler: sıra Python'un hash tohumuna bağlı olmasın (aynı girdi → aynı plan)
+    for event_id, d in sorted(effects.items(), key=lambda kv: (-abs(kv[1]), kv[0])):
         if delta == 0 or abs(d) < CAUSE_SHARE * abs(delta) or (d > 0) != (delta > 0):
             continue
         ev = truth.events[event_id]
@@ -169,6 +172,16 @@ def _spike(evidence: str) -> float | None:
     """V1/V5 kanıtından normal düzeyin üstündeki tutar (ör. "12.345 € = 3,2-faches des Normalniveaus (3.800 €)")."""
     m = _SPIKE.search(evidence)
     return float(m.group(1).replace(".", "")) - float(m.group(2).replace(".", "")) if m else None
+
+
+_SEASON = re.compile(r"([+-]?[\d.]+,\d) % ggü\. Vormonat, aber ([+-]?[\d.]+,\d) % ggü\. Vorjahresmonat")
+
+
+def _season_text(evidence: str) -> str:
+    """V6 gerekçesi rakamlarla uyumlu: ters yönde ve benzer büyüklükte bir değişim „deutlich kleiner“ değildir."""
+    vm, vj = (float(x.replace(".", "").replace(",", ".")) for x in _SEASON.search(evidence).groups())
+    # Aynı yönde değişimler Katman 1'de en fazla yarı büyüklükte (facts/config.toml, v6_max_ratio = 0.5)
+    return RULES["saisonal"]["hypothese_gegenlaeufig" if vm * vj < 0 and abs(vj) > 0.5 * abs(vm) else "hypothese"]
 
 
 def _cite(causes: list[dict], visible: dict[str, str]) -> list[str]:
@@ -288,7 +301,7 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
                      "folge": RULES[f["rule"]]["folge"].format(monat=month_name(period))}
             used_sources += sources
         elif f["rule"] == "saisonal":              # Saison ist keine Verzerrung: Hypothese ohne Rückfrage (K-B)
-            item |= {"art": "saison", "hypothese": RULES["saisonal"]["hypothese"], "folge": RULES["saisonal"]["folge"]}
+            item |= {"art": "saison", "hypothese": _season_text(f["evidence"]), "folge": RULES["saisonal"]["folge"]}
         else:
             item |= {"art": "warnung", "hypothese": _rule_text(f["rule"], "hypothese", f["position"], period),
                      "folge": _rule_text(f["rule"], "folge", f["position"], period)}

@@ -89,6 +89,8 @@ python tools/retrieval_quality.py data/synthetic/reference_seed42         # geti
 
 Araç: `tools/retrieval_quality.py`. Ground truth'u yalnızca bu araç okur; Katman 2 okumaz.
 
+> **Not (19.10.2026):** Aşağıdaki ölçümler V6 kuralı düzeltilmeden önce yapıldı (`00`, 19.3). Sorgu bayrakları da içerdiği için V6 bayrağı kalkan aylarda (test kümesinde 720 ayın 44ü, %6) getirilen notlar değişebilir. Değerlendirme adımında (paket 9) test kümesinin bağlamı yeniden üretilirken recall da yeniden ölçülecek.
+
 **İlgili notlar** (yalnızca 13 aylık penceredeki, notlanmış olaylar):
 - **Çekirdek:** O ay başlayan olayların notları.
 - **Geniş:** Çekirdek + sürmekte olan ya da önceki yılın aynı ayındaki olayların notları; bu olaylar ayın anlamlı kalemlerini veya bayraklı satırlarını etkiliyorsa. Rohertrag adayı varsa ground truth'taki nedenlerin notları da eklenir.

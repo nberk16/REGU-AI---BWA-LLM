@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Sıradaki: altın küme ve eğitim verisinin birleştirilmesi, 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme; 96 ay yeniden üretilecek (Bölüm 15), 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -121,9 +121,12 @@ Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve me
 | `train` | A2/A3 v100–v119 (`train_seed7`) | 960 | `ideal/requests/train.jsonl.gz` (1,4 MB) |
 | `val` | A2/A3 v120–v122 | 144 | `ideal/requests/val.jsonl.gz` |
 | `pilot` | `val` içinden 24 çeşitli ay (V1–V6, V2 cite/warn, çeldirici, nedeni açık kalem, sakin ay) | 24 | `ideal/requests/pilot.jsonl.gz` |
+| `train_ohne` | `train` ile aynı aylar, bağlamsız („yalnızca FT“, Bölüm 15) | 960 | `ideal/requests/train_ohne.jsonl.gz` |
+| `val_ohne` | `val` ile aynı aylar, bağlamsız | 144 | `ideal/requests/val_ohne.jsonl.gz` |
 
 - **İstek kaydı:** `id`, küme, sürümler (plan, öğretmen, öğrenci istemi, getirme), `random_seed`, öğretmen mesajları, plan, `facts.json`, öğrencinin gördüğü notlar.
 - **Çıktılar:** `ideal/outputs/<küme>.jsonl`. Kullanıcı yükler; her ay için son kayıt geçerlidir.
+- **Girdi parmak izi (`input_sha`):** Her kayıt, öğretmene giden mesajların SHA-256 özetini (16 karakter) taşır. Sürümü ya da girdisi değişen ayın eski kaydı sayılmaz; betik o ayı yeniden üretir (Bölüm 15).
 - **Test kümesi** (A1 + `reference_seed42`) için ideal yorum üretilmez. Test, ground truth ile ölçülür.
 
 ## 6. Dizüstü betiği (`ideal/run_teacher.py`)
@@ -142,11 +145,12 @@ Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve me
 ```bash
 python -m rag export --run data/synthetic/train_seed7          # bağlam (BGE-M3, ~30 dk işlemcide)
 python -m ideal build --run data/synthetic/train_seed7         # planlar + istek dosyaları
+python -m ideal build --run data/synthetic/train_seed7 --variant ohne_kontext   # bağlamsız: {train,val}_ohne
 python ideal/run_teacher.py --set pilot                        # kullanıcının dizüstü (ideal/README.md)
 python -m ideal report --set pilot                             # özet: kabul oranı, denemeler, sorunlar, token
 ```
 
-## 8. Testler (`tests/test_ideal.py`, 8 test)
+## 8. Testler (`tests/test_ideal.py`, 10 test)
 
 - **Rakam biçimi:** Yuvarlama kuralı (a) ile uyumlu.
 - **Referans ay (Muster GmbH, 06/2025):**
@@ -157,12 +161,15 @@ python -m ideal report --set pilot                             # özet: kabul or
 - **Repodaki istek dosyaları:** Kodla uyumlu: sürümler ve öğretmen mesajları.
 - **Dizüstü betiği (sahte Mistral sunucusuyla):**
   - Düzeltme isteğiyle yeniden deneme ve kaldığı yerden devam.
+  - Girdisi değişen ay yeniden üretilir, değişmeyen ay atlanır (`input_sha`).
   - Anahtar ve model kontrolleri.
+- **Bağlamsız planlar:** Aynı aylar; kaynak yok, V2 adayı hep uyarı, kalıp metin kontrolü geçiyor.
+- **Belirlenimcilik:** Eşit etkili olaylar olay kimliğine göre sıralanır; plan Python'un hash tohumuna bağlı değil.
   - Anahtar ekrana basılmıyor.
 
 ## 9. Açık noktalar
 
-- **[AÇIK, paket 7]** „Yalnızca fine-tuning“ varyantı için bağlamsız girdilere ayrı hedefler gerekip gerekmediği (`00`, 17.3). Gerekirse aynı plan kodu, görünen not kümesi boş verilerek çalıştırılır; bu durumda bütün nedenler hipotez ya da açık soru olur.
+- ~~„Yalnızca fine-tuning“ varyantı için ayrı hedefler~~ → **[KARAR, tur 12]** B: bağlamsız hedeflerle ayrı model (Bölüm 15).
 - **Altın küme:** Doğrulama kümesinin kabul edilen metinlerinden (pilot ayları dahil) 20–30 ay seçilip elle düzeltilecek. Kullanım alanları: kalite ölçümü, üslup referansı, öğretmen istemine örnek.
 
 ## 10. Pilot 1 (öğretmen 1.0, 19.10.2026)
@@ -320,3 +327,50 @@ Cümle bazında geri bildirim ve netleştirilmiş kurallar biçim sorunlarını 
 - **İkinci yeniden deneme turu yok.** 908 örnek yeterli. Ret çarpıklığı küçük: eğitimde A2 473 · A3 435 ay, sakin ay 131. Bir tur daha ~20 ay kazandırır, ama bunlar en çok denemeyle kabul edilen, yani en gürültülü metinler olur.
 - **Eğitim verisinde biçim birliği:** Rakamdan önceki tire (`–`) ASCII eksiye (`-`) çevrilir. Metnin geri kalanı değişmez.
 - **Plan dışı yan cümleler** bilinen sınırlama olarak kalır. Altın küme ve öğrencinin değerlendirmesi, öğrencinin bunları kopyalayıp kopyalamadığını gösterir. Gerekirse 3–4. denemede kabul edilen 172 metin eğitimde ayrı bir ablation olarak çıkarılabilir.
+
+## 15. Bağlamsız hedefler ve iki düzeltme (tur 12, 19.10.2026)
+
+### 15.1 „Yalnızca fine-tuning“ hedefleri [KARAR, tur 12]
+
+- **Karar:** B. Bağlamsız girdilerle ayrı bir model eğitilir (`00`, Bölüm 19). RAG + FT modelinin bağlamsız çalıştırılması ayrıca ek satır olarak raporlanır.
+- **Kümeler:** `train_ohne` (960) ve `val_ohne` (144), `train`/`val` ile aynı aylar. `python -m ideal build --variant ohne_kontext`.
+- **Plan:** Aynı kod, görünen not kümesi boş. Kaynak yok; nedenler hipotez ya da „Ursache offen“, V2 adayı hep uyarı, sezon bayrağı hipotez.
+
+| Tablo satırı açıklaması | Bağlamlı (`train`) | Bağlamsız (`train_ohne`) |
+|---|---:|---:|
+| Kaynaklı (`quelle`) | 1.184 | 0 |
+| Hipotez | 1.573 | 2.371 |
+| Açık („Ursache offen“) | 310 | 696 |
+
+- **Öğrenci girdisi [ÖNERİ]:** İstem 1.1 `ohne_kontext`: FACTS var, WISSEN ve KONTEXTNOTIZEN „Keine.“ Hedeflerdeki genel hipotez metinleri (K-B'den türetilmiş) bu girdide yok; model bunları ince ayarla öğrenir. Bunlar firmaya özgü bilgi ya da ground truth değil, genel muhasebe bilgisi; B3 korunuyor.
+- **Kontrol:** Kalıp metin 1.104 bağlamsız planın hepsinde kontrolü geçiyor. Öğretmen istemi değişmedi.
+- **Sıra:** Önce `val_ohne`; okuma ve onaydan sonra `train_ohne` (`ideal/README.md`, Bölüm 6).
+
+### 15.2 Düzeltme 1: V6 (sezon) bayrağı
+
+- **Bulgu:** Bağlamsız planları okurken görüldü. Örnek: Umsatzerlöse önceki aya göre −%14,8, önceki yıla göre −%14,9. Eski kural bunu „mevsimsel“ sayıyordu. Plan da „Veränderung gegenüber dem Vorjahresmonat deutlich kleiner“ gerekçesini yazıyordu; bu, girdideki rakamlarla çelişen bir akıl yürütme.
+- **Ölçek:** Eğitim kümesinde 394 V6 bayrağının 103'ünde önceki yıla göre değişim, önceki aya göre değişimin yarısından büyüktü.
+- **Düzeltme:**
+  - Katman 1: Önceki yıla göre değişim ya ters yönde ya da önceki aya göre değişimin en fazla yarısı olmalı (`v6_max_ratio = 0.5`; `05_facts_semasi.md`, Bölüm 7: precision %72 → %78, recall %63 → %58).
+  - Plan: Ters yönde ve benzer büyüklükte değişimde gerekçe „…in die entgegengesetzte Richtung geht“.
+- **Bağlam:** Getirme sorgusu ve WISSEN bayraklara bağlı. Bayrağı kalkan 58 ayın bağlamı BGE-M3 ile yeniden getirildi; 21'inde not listesi değişti. Diğer 1.046 ayın bağlamı bayt bayt aynı.
+
+### 15.3 Düzeltme 2: kaynak sırası
+
+- **Bulgu:** Yeniden kurulumda, bayrağı değişmeyen bazı aylarda kaynak sırası değişti. Nedeni: eşit etkili iki olayın sırası Python'un hash tohumuna bağlıydı.
+- **Düzeltme:** Eşitlikte olay kimliği belirler. Üç farklı hash tohumuyla kurulan istek dosyaları artık bayt bayt aynı (test).
+
+### 15.4 Yeniden üretilecek aylar
+
+Betik, her kayda öğretmen girdisinin parmak izini (`input_sha`) yazar. Mevcut kayıtlara parmak izi, üretildikleri eski istek dosyalarından eklendi. Girdisi değişen aylar betik tarafından otomatik olarak yeniden üretilir:
+
+| Neden | Eğitim | Doğrulama |
+|---|---:|---:|
+| V6 bayrağı kalktı | 53 | 5 |
+| Yalnızca V6 gerekçe metni | 14 | 1 |
+| Yalnızca kaynak sırası | 20 | 3 |
+| **Toplam** | **87** | **9** |
+
+- 50 „ters yönlü“ V6 ayının yalnızca 14'ünde metin değişiyor; ötekilerde sezon bayrağı Firmenprofil notuyla açıklanıyor ve gerekçe metni kullanılmıyor.
+- Değişmeyen ayların kabul edilmiş metinleri (eğitim 821, doğrulama 129) yeni isteklerle de kontrolü geçiyor.
+- Pilot istek dosyasında 3 ay değişti; pilot çıktıları tarihî kayıttır.

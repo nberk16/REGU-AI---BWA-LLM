@@ -1,6 +1,7 @@
 """Komut satırı (docs/11_ideal_yorumlar.md, Bölüm 7).
 
     python -m ideal build  --run data/synthetic/train_seed7 [--retrieval FILE]   # istek dosyaları (repoda)
+    python -m ideal build  --run data/synthetic/train_seed7 --variant ohne_kontext   # bağlamsız: {train,val}_ohne
     python -m ideal report --set pilot                                          # öğretmen çıktılarının özeti
 
 Öğretmenin kendisi kullanıcının bilgisayarında çalışır: python ideal/run_teacher.py (anahtar yalnızca orada).
@@ -49,6 +50,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("command", choices=["build", "report"])
     parser.add_argument("--run", type=Path, default=ROOT / "data" / "synthetic" / "train_seed7")
     parser.add_argument("--retrieval", type=Path, help="python -m rag export çıktısı (varsayılan: <run>/rag/)")
+    parser.add_argument("--variant", choices=["rag_k8", "ohne_kontext"], default="rag_k8",
+                        help="öğrencinin göreceği bağlam (docs/11, Bölüm 15)")
     parser.add_argument("--set", default="pilot")
     parser.add_argument("--outputs", type=Path, default=ROOT / "ideal" / "outputs")
     args = parser.parse_args(argv)
@@ -59,7 +62,8 @@ def main(argv: list[str] | None = None) -> int:
 
     from .build import build_requests, write_requests
 
-    requests = build_requests(args.run, args.retrieval or args.run / "rag" / "retrieval.jsonl")
+    retrieval = None if args.variant == "ohne_kontext" else args.retrieval or args.run / "rag" / "retrieval.jsonl"
+    requests = build_requests(args.run, retrieval)
     for name, path in write_requests(requests).items():
         print(f"{name}: {len(requests[name])} istek → {path.relative_to(ROOT)} ({path.stat().st_size / 1e6:.1f} MB)")
     return 0

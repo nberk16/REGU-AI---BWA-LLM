@@ -384,7 +384,7 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 | Varyantlar | `ohne_kontext` (çıplak model, yalnızca FT), `rag_k8` (yalnızca RAG, RAG + FT), `rag_alle` (retrieval katkısı). Sistem mesajı hepsinde aynı. | CLAUDE.md 7'deki tanımlar; fark yalnızca bağlamda kalır. |
 | facts'in model görünümü | `schema_version`, `thresholds`, `significance`, `key` modele gitmez. | Model kullanmıyor; eşik rakamları yanlışlıkla aktarılabilir; istem kısalır. |
 
-### 17.3 Açık karar [AÇIK]
+### 17.3 Açık karar → çözüldü (tur 12)
 
 - **„Yalnızca fine-tuning“ varyantının eğitimi (paket 7):** Aynı modeli bağlamlı eğitip bağlamsız mı çalıştırmalı, yoksa bağlamsız girdilerle ayrı bir model mi eğitmeli? İkincisi, bağlamsız girdiler için ayrı ideal yorumlar gerektirir (paket 5). Seçenekler fine-tuning'den önce kullanıcıya sunulacak.
 - **Seçenekler (kullanıcıya sunuldu, 19.10.2026):**
@@ -392,6 +392,7 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - **B — Bağlamsız girdilerle ayrı model.** Plan, görünen not kümesi boş verilerek yeniden kurulur; bütün nedenler hipotez ya da açık soru olur. Ek maliyet: bir öğretmen koşusu (~960 ay, kullanıcının dizüstü), bir eğitim koşusu (Kaggle, girdiler kısa), ~0,5 gün kod. A, ek eğitim gerektirmeden ayrı satır olarak yine raporlanabilir.
   - **C — Tek karma model:** eğitim örneklerinin yarısında bağlam boş. Tek eğitim, ama ana varyant (RAG + FT) daha az bağlamlı örnek görür ve iki davranış birbirine karışabilir.
   - **Asistanın önerisi [ÖNERİ]:** B (+ A ek satır olarak). Adil karşılaştırma ve „bilgi RAG'de, davranış FT'de“ ilkesinin temiz gösterimi.
+- **→ Karar (19.10.2026): B** (tur 12, Bölüm 19).
 
 ## 18. Karar turu 11 (18.10.2026): öğretmen model ve anahtar
 
@@ -451,6 +452,39 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **[ÖNERİ]** Eğitim verisi birleştirilirken rakamdan önceki tire ASCII eksiye çevrilir (metinlerin ~%10'u).
 - **[ÖNERİ]** Plan dışı yan cümleler bilinen sınırlama; gerekirse 3–4. denemede kabul edilen 172 metin ablation olarak çıkarılır.
 - Sıradaki: altın küme (20–30 doğrulama ayı) ve eğitim verisinin birleştirilmesi (öğrenci istemi 1.1 `rag_k8` + kabul edilen metin).
+
+## 19. Karar turu 12 (19.10.2026): „yalnızca fine-tuning“ varyantı
+
+### 19.1 Karar [KARAR]
+
+| Konu | Karar |
+|---|---|
+| „Yalnızca FT“ varyantı | **B:** Bağlamsız girdilerle (istem 1.1 `ohne_kontext`) ayrı bir model eğitilir. Hedefleri aynı plan kodu, görünen not kümesi boş verilerek kurar; kaynak yoktur, bütün nedenler hipotez ya da açık soru olur. RAG + FT modelinin bağlamsız çalıştırılması (A) ek eğitim gerektirmeden ayrı satır olarak raporlanır. |
+
+### 19.2 Uygulama (asistan)
+
+- `python -m ideal build --variant ohne_kontext` → `ideal/requests/{train,val}_ohne.jsonl.gz` (960 + 144 ay; `train`/`val` ile aynı aylar). Plan kodu değişmedi.
+- **[ÖNERİ]** Öğrenci girdisi istem 1.1 `ohne_kontext`: FACTS var, WISSEN ve KONTEXTNOTIZEN „Keine.“ Hedeflerdeki genel hipotez metinleri (K-B'den) bu modelin girdisinde yok; ince ayarla öğrenilir. Bu B3'ü bozmaz: firmaya özgü bilgi ya da ground truth değil, genel muhasebe bilgisi.
+- Kalıp metin 1.104 bağlamsız planın hepsinde kontrolü geçiyor.
+- Öğretmen betiği: `--set train_ohne|val_ohne`. Kayıtlar girdinin parmak izini (`input_sha`) taşır; girdisi değişen ay yeniden üretilir. Mevcut kayıtlara, üretildikleri istek dosyalarından hesaplanan parmak izi eklendi (başka alan değişmedi).
+- Sıra: önce `val_ohne` (okuma), sonra `train_ohne` (`ideal/README.md`, Bölüm 6).
+
+### 19.3 V6 düzeltmesi (Katman 1, [ÖNERİ] parametre)
+
+- **Bulgu:** Bağlamsız planları okurken görüldü. V6 kuralı yalnızca „önceki yıla göre değişim < %15“ diye bakıyordu. Örnek: önceki aya göre −%14,8, önceki yıla göre −%14,9 olan bir ay da „mevsimsel“ sayılıyordu. Plan bu bayrağa „Veränderung gegenüber dem Vorjahresmonat deutlich kleiner“ gerekçesini yazıyordu. Eğitim kümesinde 394 V6 bayrağının 103'ünde bu gerekçe rakamlarla çelişiyordu (önceki yıla göre değişim, önceki aya göre değişimin yarısından büyük).
+- **Değişiklik:**
+  - Katman 1: V6 için ayrıca önceki yıla göre değişim ya ters yönde ya da önceki aya göre değişimin en fazla yarısı olmalı (`facts/config.toml`, `v6_max_ratio = 0.5`). Referans koşuda precision %72 → %78, recall %63 → %58 (`05_facts_semasi.md`, Bölüm 7).
+  - Plan: Ters yönde ve benzer büyüklükteki değişimde gerekçe „in die entgegengesetzte Richtung“ olur.
+- **Etki:** Bayrağı kalkan 58 ayın bağlamı (sorgu ve WISSEN bayrağa bağlı) yeniden getirildi. Öğretmen girdisi değişen aylar: eğitim 67, doğrulama 6 (`11_ideal_yorumlar.md`, Bölüm 15.4).
+- K-B metni değişmedi; yeni kuralla uyumlu.
+- Deneme turu girdileri (`trial/inputs/`) tarihî kayıt olarak eski kuralla kalır.
+- Getirme isabeti (`09`, Bölüm 5) eski kuralla ölçüldü; test kümesinde 720 ayın 44'ünde bayrak değişiyor. Paket 9'da yeniden ölçülecek.
+
+### 19.4 Kaynak sırası düzeltmesi
+
+- Eşit etkili iki olayın sırası Python'un hash tohumuna bağlıydı; aynı ay iki kurulumda farklı kaynak sırası alabiliyordu.
+- Düzeltme: eşitlikte olay kimliği belirler. İstek dosyaları artık her kurulumda bayt bayt aynı.
+- Bu yüzden ayrıca yeniden üretilecek aylar: eğitim 20, doğrulama 3. Toplam yeniden üretim: eğitim 87, doğrulama 9.
 
 ## Kaynak
 

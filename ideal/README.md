@@ -70,6 +70,35 @@ python ideal/run_teacher.py --set train --retry-failed
 
 İkinci komut, kontrolü geçemeyen ayları yeni bir rastgelelik tohumuyla bir kez daha dener. Doğrulama kümesi için de aynısı: `python ideal/run_teacher.py --set val --retry-failed`.
 
+## 6. Düzeltilen aylar ve bağlamsız hedefler (tur 12)
+
+Repoyu yeniden indir (Bölüm 1; yeni bir klasöre çıkart). İçindeki `ideal/outputs/` dosyaları güncel; kendi eski klasöründekileri kullanma.
+
+**a) Düzeltmelerden etkilenen ayları yeniden üret** (96 ay, tahminen ~20 dakika). İki düzeltme var: V6 (sezon) bayrağı ve eşit etkili kaynakların sırası (`docs/11`, Bölüm 15).
+
+```
+python ideal/run_teacher.py --set val
+python ideal/run_teacher.py --set train
+```
+
+- İlk satırda „… tamamlanmış, N çalışacak“ yazar. Doğrulama kümesinde N = 9, eğitim kümesinde N = 87 olmalı.
+- **N 144 ya da 960 çıkarsa durdur** (Ctrl+C): eski klasörü kullanıyorsun.
+- Betik yalnızca girdisi değişen ayları üretir; geri kalanlar olduğu gibi kalır.
+
+**b) Bağlamsız hedefler** („yalnızca fine-tuning“ modeli için). Önce doğrulama kümesi (144 ay, ~25 dakika):
+
+```
+python ideal/run_teacher.py --set val_ohne
+```
+
+`ideal/outputs/` klasöründeki `val.jsonl`, `train.jsonl` ve `val_ohne.jsonl` dosyalarını Bölüm 4'teki gibi yükle ve bana haber ver. Metinleri okuyup onaylayınca eğitim kümesi gelir (960 ay, ~2–3 saat):
+
+```
+python ideal/run_teacher.py --set train_ohne
+python ideal/run_teacher.py --set train_ohne --retry-failed
+python ideal/run_teacher.py --set val_ohne --retry-failed
+```
+
 ## Sorun giderme
 
 | Mesaj | Ne yapmalı |

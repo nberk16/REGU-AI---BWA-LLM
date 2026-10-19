@@ -19,7 +19,7 @@ from generator.writer import write_run
 from ideal import build as B
 from ideal.check import check
 from ideal.cli import report
-from ideal.plan import PLAN_VERSION, build_plan, eur, pct, pp, signed_eur, teur
+from ideal.plan import PLAN_VERSION, Truth, _causes, build_plan, eur, pct, pp, signed_eur, teur
 from ideal.teacher import TEACHER_VERSION, teacher_messages
 from prompting import PROMPT_VERSION
 from validation.context import load_notes, window_notes
@@ -65,6 +65,19 @@ def test_reference_month_plan():
     assert set(plan["notizen"]) <= {n["source_id"] for n in notes}
 
 
+def test_equal_effects_are_ordered_by_event_id():
+    """Eşit etkili iki olayın sırası hash tohumuna bağlı olmamalı (aynı girdi → aynı plan ve aynı input_sha)."""
+    events = [{"event_id": e, "type": "E01", "category": "R", "documented": True, "source_id": f"Kontextnotiz {e}"}
+              for e in ("ev-b", "ev-a")]
+    for order in (["ev-b", "ev-a"], ["ev-a", "ev-b"]):
+        rows = [{"firm_id": "F", "period": "2025-06", "line": "personalkosten", "event_id": e, "delta": "100"} for e in order]
+        truth = Truth(events, [], rows)
+        effects = truth.yoy_effects("F", "2025-06", "personalkosten")
+        assert list(effects) == ["ev-a", "ev-b"]
+        causes = _causes(truth, "F", "2025-06", "personalkosten", 200.0, dict(reversed(list(effects.items()))))
+        assert [c["event_id"] for c in causes] == ["ev-a", "ev-b"]
+
+
 @pytest.fixture(scope="module")
 def small_run(tmp_path_factory):
     """v118–v119 (eğitim) ve v120 (doğrulama); bağlam yerine yalnızca o ayın notları + Firmenprofil (dar görünürlük)."""
@@ -95,6 +108,24 @@ def test_plans_cite_only_visible_non_distractor_notes(small_run):
     assert any(row["erklaerung"]["art"] != "quelle" for r in requests["train"] for row in r["plan"]["tabelle"])
 
 
+def test_ohne_kontext_plans_have_no_sources(small_run):
+    """„Yalnızca fine-tuning“ hedefleri [KARAR, tur 12]: aynı aylar, not yok → kaynak yok, V2 hep uyarı."""
+    path, requests = small_run
+    ohne = B.build_requests(path, None)
+    assert set(ohne) == {"train_ohne", "val_ohne"}
+    assert [r["id"] for r in ohne["train_ohne"]] == [r["id"] for r in requests["train"]]
+    for r in ohne["train_ohne"] + ohne["val_ohne"]:
+        plan = r["plan"]
+        assert r["notes"] == [] and plan["notizen"] == {} and r["versions"]["retrieval"]["mode"] == "ohne_kontext"
+        assert all(row["erklaerung"]["art"] in ("hypothese", "offen") for row in plan["tabelle"])
+        assert all(h["art"] in ("warnung", "saison") for h in plan["hinweise"])
+        assert (plan["meta"]["v2"] or {}).get("entscheidung", "warnung") == "warnung"
+        assert "Quelle:" not in json.dumps(plan, ensure_ascii=False)
+    for r in ohne["train_ohne"][::5] + ohne["val_ohne"]:
+        res = check(render(r["plan"]), r["plan"], r["facts"], r["notes"])
+        assert [p for p in res["problems"] if not p.startswith("Länge")] == [], r["id"]
+
+
 def test_template_passes_check(small_run):
     _, requests = small_run
     for r in requests["train"][::5] + requests["val"]:
@@ -121,10 +152,15 @@ def test_check_finds_plan_deviations(small_run):
 
 def test_committed_requests_match_code():
     sets = {}
-    for name in ("pilot", "train", "val"):
+    for name in ("pilot", "train", "val", "train_ohne", "val_ohne"):
         with gzip.open(ROOT / "ideal" / "requests" / f"{name}.jsonl.gz", "rt", encoding="utf-8") as f:
             sets[name] = [json.loads(line) for line in f]
     assert (len(sets["train"]), len(sets["val"]), len(sets["pilot"])) == (960, 144, 24)
+    for name in ("train", "val"):
+        assert [r["id"] for r in sets[name + "_ohne"]] == [r["id"] for r in sets[name]]
+    for r in sets["val_ohne"][::12]:
+        assert r["versions"]["retrieval"]["mode"] == "ohne_kontext" and r["versions"]["plan"] == PLAN_VERSION
+        assert r["notes"] == [] and r["messages"] == teacher_messages(r["plan"])
     assert {r["id"] for r in sets["pilot"]} <= {r["id"] for r in sets["val"]}
     assert all(B.variant(r["firm_id"]) in B.TRAIN_VARIANTS for r in sets["train"])
     for r in sets["pilot"] + sets["val"][::12]:
@@ -207,6 +243,13 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     assert "test-key" not in capsys.readouterr().out
     summary = report("pilot", tmp_path / "out")
     assert "kabul: 2 (100%)" in summary and "1: 1, 2: 1" in summary
+    # Girdisi değişen ay (ör. plan düzeltmesi) yeniden üretilir; değişmeyen ay atlanır
+    changed = dict(requests["pilot"][0], messages=requests["pilot"][0]["messages"] + [{"role": "user", "content": "x"}])
+    B.write_requests({"pilot": [changed, requests["pilot"][1]]}, req_dir)
+    fake_api.replies = [good[0]]
+    assert runner.main(args) == 0 and len(fake_api.calls) == 5
+    last = json.loads(path.read_text(encoding="utf-8").splitlines()[-1])
+    assert last["id"] == changed["id"] and last["input_sha"] == runner.input_sha(changed)
 
 
 def test_runner_needs_key_and_known_model(fake_api, monkeypatch, capsys):

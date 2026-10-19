@@ -122,12 +122,14 @@ def compute_flags(ctx) -> list[dict]:
                            f"Bestandsveränderungen {zero_text}, {_month(fs.periods[i])} {de_int(bv[i])} €: "
                            f"möglicherweise Buchung für mehrere Monate"))
 
-    # V6: Umsatz önceki aya göre anlamlı değişmiş, önceki yılın aynı ayına göre değişmemiş
+    # V6: Umsatz önceki aya göre anlamlı değişmiş, önceki yılın aynı ayına göre değişmemiş: önceki yıla göre değişim
+    # küçük ve ya ters yönde ya da önceki aya göre değişimin en fazla v6_max_ratio katı
     u = v["umsatzerloese"]
     if u[i - 1] > 0 and u[i - 12] > 0:
         pct_vm = (u[i] - u[i - 1]) / u[i - 1] * 100.0
         pct_vj = (u[i] - u[i - 12]) / u[i - 12] * 100.0
-        if abs(u[i] - u[i - 1]) >= thr and abs(pct_vm) >= rel and abs(pct_vj) < f["v6_max_previous_year_pct"]:
+        if (abs(u[i] - u[i - 1]) >= thr and abs(pct_vm) >= rel and abs(pct_vj) < f["v6_max_previous_year_pct"]
+                and (pct_vj * pct_vm <= 0 or abs(pct_vj) <= f["v6_max_ratio"] * abs(pct_vm))):
             flags.append(_flag("V6", "saisonal", "Umsatzerlöse",
                                f"Umsatzerlöse {de_pct(pct_vm)} ggü. Vormonat, aber {de_pct(pct_vj)} "
                                f"ggü. Vorjahresmonat"))

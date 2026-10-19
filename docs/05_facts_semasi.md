@@ -98,7 +98,7 @@ Kural parametreleri **[ÖNERİ]** `facts/config.toml`'dadır.
 | V4 | `zeitverschiebung` | Materialquote önceki ay normalin ≥ 2 puan altında, bu ay ≥ 2 puan üstünde; ya da sabit gider satırı önceki ay normal düzeyin ≥ %10 altında, bu ay ≥ %10 üstünde | `hinweis` |
 | V4 | `bestand_nachbuchung` | Üretici: stok değişimi önceki ay 0, bu ay ≥ mutlak eşik | `hinweis` |
 | V5 | `einmalige_spitze` | Sabit gider satırı ≥ 2 × normal düzey, önceki yılın aynı ayında benzer sıçrama yok | `hinweis` |
-| V6 | `saisonal` | Umsatzerlöse önceki aya göre anlamlı değişmiş (≥ %10 ve ≥ mutlak eşik), önceki yılın aynı ayına göre < %15 | `hinweis` |
+| V6 | `saisonal` | Umsatzerlöse önceki aya göre anlamlı değişmiş (≥ %10 ve ≥ mutlak eşik), önceki yılın aynı ayına göre < %15 ve bu değişim ya ters yönde ya da önceki aya göre değişimin en fazla yarısı (`v6_max_ratio`, 19.10.2026) | `hinweis` |
 
 - Sabit gider satırları: Personalkosten, Raumkosten, Betriebliche Steuern, Versicherungen/Beiträge, Besondere Kosten, Fahrzeugkosten, Werbe-/Reisekosten, Reparatur/Instandhaltung, Sonstige Kosten.
 - Ciroya bağlı satırlar (Material, Kosten der Warenabgabe) V1/V5'e girmez; aksi halde sezon dalgası sıçrama sanılır.
@@ -241,7 +241,9 @@ python tools/flag_quality.py data/synthetic/reference_seed42                    
 | V3 | 336 | %100 | %100 | %100 | |
 | V4 | 174 | %91 | %61 | %64 | Küçük geç fatura kaymaları (%5–20) Materialquote'yi 2 puandan az oynatıyor |
 | V5 | 138 | %100 | %70 | %72 | İki aya bölünmüş fuarların ilk ayı ve A3'ün her yıl tekrarlanan fuarı (V1 olarak işaretleniyor; kabul edilebilir) kaçıyor |
-| V6 | 309 | %72 | %63 | %63 | Önceki yıl sınırı %10'dan %15'e çekildi (önceden precision %75, recall %49) |
+| V6 | 265 | %78 | %58 | %58 | Önceki yıl sınırı %10'dan %15'e çekildi (önceden precision %75, recall %49). 19.10.2026: önceki yıla göre aynı yönde ve benzer büyüklükte değişimde bayrak verilmiyor (önceden 309 ay, precision %72, recall %63); bkz. not |
+
+**V6 düzeltmesi (19.10.2026):** Eski kural, önceki aya göre −%14,8 ve önceki yıla göre −%14,9 olan bir ayı da „mevsimsel“ sayıyordu. Oysa düşüş önceki yılda da aynen görünüyor; mevsimsel açıklama rakamlarla çelişiyor. İdeal yorumlar bu bayrağa „Veränderung gegenüber dem Vorjahresmonat deutlich kleiner“ gerekçesini yazdığı için hedef metinlerde yanlış bir akıl yürütme oluşuyordu (`11_ideal_yorumlar.md`, Bölüm 15). Yeni kural recall'dan 5 puan veriyor, precision'a 6 puan kazandırıyor.
 
 **Rohertrag adayı** (439 firma-ay), ground truth kararına göre:
 

@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (ideal yorumlar: eğitim 908/960, doğrulama 138/144 kabul; sıradaki: altın küme ve eğitim verisi)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (karar turu 12: „yalnızca FT“ için bağlamsız hedefler; V6 ve kaynak sırası düzeltmeleri)
 
 ---
 
-## 1. Genel durum: ~%61 tamamlandı
+## 1. Genel durum: ~%61 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 30,65 gün
-toplam iş     = 50 gün
-durum         = 30,65 / 50 ≈ %61
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 31,0 gün
+toplam iş     = 51 gün
+durum         = 31,0 / 51 ≈ %61
 ```
 
 **Belirsizlik:**
@@ -34,13 +34,13 @@ durum         = 30,65 / 50 ≈ %61
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %80 | 6,4 | 🔄 öğretmen koşuları tamam; altın küme ve eğitim verisi kaldı |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %75 | 6,75 | 🔄 bağlamlı hedefler tamam; düzeltilen 96 ay, bağlamsız hedefler, altın küme ve eğitim verisi kaldı |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **30,65** | **≈ %61** |
+| | **Toplam** | **51** | | **31,0** | **≈ %61** |
 
 ---
 
@@ -66,7 +66,8 @@ durum         = 30,65 / 50 ≈ %61
   - Referans veride medyan 3 anlamlı kalem; ayların %4,3'ünde 0, %3,6'sında 5'ten fazla.
   - Bayrak isabeti ölçüldü (`tools/flag_quality.py`, `docs/05` Bölüm 7).
   - Rohertrag adayı kuralının üreteçle aynı çalıştığı testle doğrulandı.
-- **Kalan (%10):** Bayrak parametrelerinin ince ayarı. Gerekirse model sonuçlarına göre yapılır; ör. V4 ve V6 recall'ı (%61–63).
+- **V6 düzeltmesi (19.10.2026):** Önceki yıla göre değişim ters yönde ya da en fazla yarı büyüklükte olmalı; precision %72 → %78, recall %63 → %58 (`docs/05`, Bölüm 7).
+- **Kalan (%10):** Bayrak parametrelerinin ince ayarı. Gerekirse model sonuçlarına göre yapılır; ör. V4 ve V6 recall'ı (%58–61).
 - **Açık kararlar:** Bayrak parametreleri [ÖNERİ] (`facts/config.toml`).
 
 ### 4. Bilgi tabanı ve retrieval (Katman 2) — ✅ v1 (ayar kaldı)
@@ -83,7 +84,7 @@ durum         = 30,65 / 50 ≈ %61
   - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
 - **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
 
-### 5. İdeal yorumların üretimi — 🔄 öğretmen koşuları tamam; altın küme ve eğitim verisi kaldı
+### 5. İdeal yorumların üretimi — 🔄 bağlamlı hedefler tamam; bağlamsız hedefler ve düzeltmeler bekleniyor
 - **Yapılan (`ideal/`, `docs/11`):**
   - İçerik planı: `effects.csv` ile kaynaklı neden, hipotez ya da „Ursache offen“; yalnızca öğrencinin gördüğü notlar kaynak.
   - Öğretmen istemi (Almanca, 10 kural).
@@ -99,9 +100,11 @@ durum         = 30,65 / 50 ≈ %61
 - **Pilot 3 (19.10.2026):** Kabul %92, içerik büyük ölçüde temiz; Kernaussage'lerde neden eksikti → öğretmen 1.3, plan 1.3, doğrulama v1.6 (`docs/11`, Bölüm 12).
 - **Doğrulama kümesi (19.10.2026):** 144 ayın 132'si kabul (%92); okumada içerik temiz (`docs/11`, Bölüm 13).
 - **Eğitim kümesi ve yeniden deneme (19.10.2026):** eğitim 908/960 (%95), doğrulama 138/144 (%96). Metinlerin ~%5'inde bir cümlelik plan dışı yorum; rakam ve kaynak sadakati etkilenmiyor (`docs/11`, Bölüm 14).
-- **Kalan (%20):**
+- **Karar turu 12 (19.10.2026):** „Yalnızca FT“ için bağlamsız hedefler (B): `train_ohne` 960 + `val_ohne` 144 ay. Okumada iki düzeltme: V6 bayrağı (Katman 1) ve eşit etkili kaynakların sırası. Girdisi değişen 96 ay yeniden üretilecek; betik bunları parmak iziyle (`input_sha`) kendisi bulur (`docs/11`, Bölüm 15).
+- **Kalan (%25):**
+  - Kullanıcı: düzeltilen 96 ay, `val_ohne`, ardından `train_ohne` (`ideal/README.md`, Bölüm 6).
   - Altın küme (20–30 doğrulama ayı, elle düzeltilmiş).
-  - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8`) + kabul edilen metin; rakamdan önceki tire → ASCII eksi.
+  - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8` ve `ohne_kontext`) + kabul edilen metin; rakamdan önceki tire → ASCII eksi.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
 
 ### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 temel model seçildi, istem 1.1 hazır
@@ -129,12 +132,12 @@ durum         = 30,65 / 50 ≈ %61
 ### 7. Fine-tuning (LoRA) — ⏳ başlamadı
 - **Kalan:**
   - Eğitim verisinin hazırlanması (paket 5).
-  - LoRA eğitimi: yalnızca FT ve RAG + FT varyantları.
+  - LoRA eğitimi: yalnızca FT (bağlamsız girdiler ve hedefler) ve RAG + FT varyantları.
   - Hiperparametreler, eğitim kayıtları.
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
   - Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
-  - **[AÇIK]** „Yalnızca fine-tuning“ varyantı: bağlamla eğitilen model bağlamsız mı çalıştırılır, yoksa bağlamsız girdilerle ayrı bir model mi eğitilir? İkincisi ayrı ideal yorumlar gerektirir (paket 5). Seçenekler (A/B/C) kullanıcıya sunuldu, karar bekleniyor (`docs/00`, 17.3).
+- **Kararlaştırılan (tur 12):** „Yalnızca fine-tuning“ varyantı bağlamsız girdilerle ayrı bir model olarak eğitilir (B). RAG + FT modelinin bağlamsız çalıştırılması ek satır olarak raporlanır (`docs/00`, Bölüm 19).
 
 ### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.3
 - **Yapılan:**
@@ -185,7 +188,7 @@ durum         = 30,65 / 50 ≈ %61
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
 1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
-2. **İdeal yorumlar (paket 5):** Öğretmen koşuları tamam (eğitim 908, doğrulama 138 metin). Sıradaki: altın küme ve eğitim verisinin birleştirilmesi.
+2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Sıradaki: kullanıcının dizüstünde düzeltilen 96 ay ve `val_ohne` → okuma → `train_ohne`; ardından altın küme ve eğitim verisinin birleştirilmesi.
 3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme. Repo özel olduğu için Kaggle'ın koda erişim yolu o adımda belirlenecek.
 - **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
 
@@ -216,3 +219,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 19.10.2026 | Pilot 3 (öğretmen 1.2): kabul %92, içerik büyük ölçüde temiz; Kernaussage neden kontrolü → öğretmen 1.3, plan 1.3, doğrulama v1.6. Paket 5 → %40: %55 |
 | 19.10.2026 | Doğrulama kümesi (öğretmen 1.3): 144 ayın 132'si kabul; içerik temiz; `--retry-failed` yeni tohumlarla. Paket 5 → %50: %56 |
 | 19.10.2026 | Eğitim kümesi (öğretmen 1.3): 908/960 kabul; yeniden deneme sonrası doğrulama 138/144. Okuma ve tarama: ~%5 metinde plan dışı yan cümle. Paket 5 → %80: %61 |
+| 19.10.2026 | Karar turu 12: „yalnızca FT“ için bağlamsız hedefler (B), istek dosyaları `train_ohne`/`val_ohne`. V6 bayrağı ve kaynak sırası düzeltildi; girdisi değişen 96 ay yeniden üretilecek (`input_sha`). Paket 5'in işi 8 → 9 gün, %75; toplam 51 gün: %61 |

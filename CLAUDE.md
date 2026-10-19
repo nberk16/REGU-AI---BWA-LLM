@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 19.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–11). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%61, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 19.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%61, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -264,6 +264,7 @@ BWA (CSV/Excel) + önceki dönemler + [opsiyonel: plan]
 - Sistem mesajı: rol, 8 kural (deneme turu dersleri dahil), 6.3 şablonu. Bütün varyantlarda aynı.
 - Kullanıcı mesajı: FACTS (model görünümü) + WISSEN (K-B, K-A) + KONTEXTNOTIZEN (Firmenprofil + top-8).
 - Varyantlar: `ohne_kontext` (çıplak model, yalnızca FT), `rag_k8` (yalnızca RAG, RAG + FT), `rag_alle` (retrieval katkısı).
+- **[KARAR, tur 12]** „Yalnızca FT“ modeli `ohne_kontext` girdileri ve bağlamsız hedeflerle (kaynak yok; hipotez ya da açık soru) ayrı eğitilir. RAG + FT modelinin bağlamsız çalıştırılması ek satır olarak raporlanır (`docs/00`, Bölüm 19).
 - İstem 1.0 deneme turu için dondurulmuş (`prompting/v1_0.py`).
 
 #### Katman 4: Doğrulama
@@ -381,7 +382,7 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - Karma yöntem: kural tabanlı içerik planı (ne söylenecek) + öğretmen modelin Almancası (nasıl söylenecek) + otomatik kontrol.
   - Ek olarak 20–30 örneklik, elle kontrol edilmiş altın küme.
   - Öğretmen: açık ağırlıklı bir model, API üzerinden. **[KARAR, tur 11]** Mistral Large 3, Mistral API. API anahtarı **yalnızca kullanıcının bilgisayarında** durur; öğretmen betiği orada çalışır.
-  - **Hat kodlandı** (`ideal/`, [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md)): içerik planı (yalnızca öğrencinin gördüğü notlar kaynak), öğretmen istemi, kontrol + yeniden deneme, istek dosyaları (pilot 24, eğitim 960, doğrulama 144 ay). Üç pilot tamamlandı (kabul %38 → %88 → %92; öğretmen istemi 1.3). Öğretmen koşuları tamam: eğitim 908/960, doğrulama 138/144 kabul (yeniden deneme dahil). Sıradaki: altın küme ve eğitim verisinin birleştirilmesi.
+  - **Hat kodlandı** (`ideal/`, [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md)): içerik planı (yalnızca öğrencinin gördüğü notlar kaynak), öğretmen istemi, kontrol + yeniden deneme, istek dosyaları (pilot 24, eğitim 960, doğrulama 144 ay). Üç pilot tamamlandı (kabul %38 → %88 → %92; öğretmen istemi 1.3). Öğretmen koşuları tamam: eğitim 908/960, doğrulama 138/144 kabul (yeniden deneme dahil). Tur 12: bağlamsız hedefler (`train_ohne`/`val_ohne`); V6 bayrağı ve kaynak sırası düzeltildi, girdisi değişen 96 ay yeniden üretilecek (`docs/11`, Bölüm 15). Sonra: altın küme ve eğitim verisinin birleştirilmesi.
 - **[KARAR, tur 7] Eğitim/test ayrımı** (`docs/04`, Bölüm 9; `docs/06`, C):
   - Testte hem öğretilmemiş hem öğretilmiş türden örnekler var:
     - **Yeni sektör:** test arketipi **A1** (Muster GmbH), eğitimde hiç görülmez.
@@ -431,7 +432,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 8. ✅ Almanca deneme turu ve temel model → [`docs/08_deneme_turu.md`](docs/08_deneme_turu.md), `trial/` (tur 9)
 9. ✅ Bilgi tabanı v1 (Katman 2) → [`docs/09_bilgi_tabani.md`](docs/09_bilgi_tabani.md), `rag/`, `tests/test_rag.py` (tur 10)
 10. ✅ İstem 1.1 → [`docs/10_istem.md`](docs/10_istem.md), `prompting/`, `tests/test_prompting.py`
-11. 🔄 İdeal yorum hattı → [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md), `ideal/`, `tests/test_ideal.py` (tur 11; öğretmen koşuları tamam, altın küme ve eğitim verisi kaldı)
+11. 🔄 İdeal yorum hattı → [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md), `ideal/`, `tests/test_ideal.py` (turlar 11–12; bağlamlı hedefler tamam; düzeltilen aylar, bağlamsız hedefler, altın küme ve eğitim verisi kaldı)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 

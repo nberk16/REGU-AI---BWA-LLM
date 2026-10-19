@@ -1,10 +1,13 @@
 """Öğretmen istek dosyaları: plan + öğretmen istemi + kontrol girdileri (docs/11_ideal_yorumlar.md, Bölüm 5).
 
     python -m ideal build --run data/synthetic/train_seed7 [--retrieval …/rag/retrieval.jsonl]
+    python -m ideal build --run data/synthetic/train_seed7 --variant ohne_kontext
 
 Yazar: ideal/requests/{pilot,train,val}.jsonl.gz (repoda; kullanıcının dizüstündeki betik bunları okur).
 - train: v100–v119 (960 ay); val: v120–v122 (144 ay) [KARAR, tur 7; docs/04, Bölüm 9].
 - pilot: doğrulama varyantlarından çeşitli ~24 ay; altın küme adayları (B1). val dosyası pilot aylarını da içerir.
+- ohne_kontext → {train,val}_ohne: aynı aylar, öğrenci hiç not görmez; „yalnızca fine-tuning“ modelinin hedefleri
+  [KARAR, tur 12]. Plan aynı kodla kurulur; kaynak olmadığı için bütün nedenler hipotez ya da açık soru olur.
 """
 
 import csv
@@ -26,6 +29,8 @@ REQUESTS = ROOT / "ideal" / "requests"
 TRAIN_VARIANTS = range(100, 120)
 VAL_VARIANTS = range(120, 123)
 PILOT_SIZE = 24
+# Bağlamsız varyant (prompting: context=None): WISSEN ve KONTEXTNOTIZEN „Keine.“
+OHNE_KONTEXT = {"mode": "ohne_kontext", "k": 0, "embedding": None, "knowledge": [], "notes": []}
 
 # Pilot çeşitliliği: her ölçütten en fazla 3 ay, farklı firmalardan (sıra önceliktir).
 PILOT_CRITERIA = [
@@ -63,19 +68,22 @@ def variant(firm_id: str) -> int:
     return int(firm_id.split("-v")[1])
 
 
-def build_requests(run: Path, retrieval: Path) -> dict[str, list[dict]]:
+def build_requests(run: Path, retrieval: Path | None) -> dict[str, list[dict]]:
+    """`retrieval=None` → bağlamsız varyant: train_ohne ve val_ohne (pilot yok)."""
     truth = load_truth(run)
-    contexts = {(r["firm_id"], r["period"]): r for r in load_jsonl(retrieval)}
+    contexts = {(r["firm_id"], r["period"]): r for r in load_jsonl(retrieval)} if retrieval else None
+    suffix = "" if retrieval else "_ohne"
     cfg = load_config()
-    out: dict[str, list[dict]] = {"train": [], "val": []}
+    out: dict[str, list[dict]] = {"train" + suffix: [], "val" + suffix: []}
     for firm_id, fs in sorted(load_run(run).items()):
         v = variant(firm_id)
         name = "train" if v in TRAIN_VARIANTS else "val" if v in VAL_VARIANTS else None
         if name is None:
             continue
+        name += suffix
         for period in commentable_periods(fs):
             facts = build_facts(fs, period, cfg)
-            ctx = contexts[(firm_id, period)]
+            ctx = contexts[(firm_id, period)] if contexts else OHNE_KONTEXT
             plan = build_plan(facts, ctx, truth)
             out[name].append({
                 "id": plan["id"], "firm_id": firm_id, "period": period, "set": name,
@@ -83,7 +91,8 @@ def build_requests(run: Path, retrieval: Path) -> dict[str, list[dict]]:
                              "retrieval": {"mode": ctx["mode"], "k": ctx["k"], "embedding": ctx["embedding"]}},
                 "random_seed": seed_for(plan["id"]), "messages": teacher_messages(plan), "plan": plan,
                 "facts": facts, "notes": ctx["notes"]})
-    out["pilot"] = select_pilot(out["val"], truth)
+    if retrieval:
+        out["pilot"] = select_pilot(out["val"], truth)
     return out
 
 

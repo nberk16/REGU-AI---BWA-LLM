@@ -77,7 +77,7 @@ Schreibe jetzt den Kommentar für Muster GmbH, Juni 2025.
 
 - **Sistem mesajı her varyantta aynı.** Varyantlar yalnızca bağlamda ayrılır; sonuçtaki fark bağlama bağlanabilir.
 - **Bağlamsız varyant** CLAUDE.md 7'deki tanıma uyar: model firma bağlamını bilmez. „Keine.“ yazılması, modelin nedenleri kaynaktan değil, hipotez ya da soru olarak vermesi gerektiğini açıkça gösterir.
-- **Açık nokta (paket 7):** „Yalnızca fine-tuning“ modelinin hangi girdi–hedef çiftleriyle eğitileceği henüz kararlaştırılmadı (bkz. `yol_haritasi.md`, paket 7).
+- **[KARAR, tur 12] „Yalnızca fine-tuning“ modeli:** `ohne_kontext` girdileriyle ayrı eğitilir. Hedefleri bağlamsız planlardan gelir: kaynak yok, bütün nedenler hipotez ya da açık soru (`11_ideal_yorumlar.md`, Bölüm 15; `00`, Bölüm 19). RAG + FT modelinin bağlamsız çalıştırılması ayrıca ek satır olarak raporlanır.
 
 ## 5. Kullanım
 

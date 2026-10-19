@@ -21,6 +21,9 @@ v3_booking_factor = 3.0
 v4_rel = 0.10
 # V6: önceki yılın aynı ayına göre Umsatz değişimi bu yüzdenin altındaysa "mevsimsel".
 v6_max_previous_year_pct = 15.0
+# V6: ayrıca önceki aya göre değişim önceki yıl karşılaştırmasında görünmemeli: ya yön ters ya da önceki yıla göre
+# değişim, önceki aya göre değişimin en fazla bu katı (19.10.2026; docs/05, Bölüm 7).
+v6_max_ratio = 0.5
 # Normal düzey için geçmiş ay sayısı.
 normal_months = 12
 min_history_months = 6

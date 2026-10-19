@@ -4,19 +4,26 @@ Amaç plan ile kontrolün tutarlılığını sınamak: plan doğruysa bu metin u
 """
 
 
-def _cell(e: dict) -> tuple[str, str]:
+def _gist(plan: dict, sources: list[str]) -> str:
+    """Notun ilk kelimeleri, rakamsız (kalıp metinde neden olarak)."""
+    text = plan["notizen"][sources[0]].removeprefix("Firmenprofil:").split(". ")[0]
+    words = [w for w in text.split() if not any(ch.isdigit() for ch in w)]
+    return " ".join(words[:6]).rstrip(".,;:")
+
+
+def _cell(e: dict, plan: dict) -> tuple[str, str]:
     if e["art"] == "quelle":
-        return "Erläuterung laut Notiz", f"[Quelle: {'; '.join(e['quellen'])}]"
+        return _gist(plan, e["quellen"]), f"[Quelle: {'; '.join(e['quellen'])}]"
     if e["art"] == "hypothese":
         return f"Vermutlich {e['text']}", "Hypothese"
     return "Ursache offen", "–"
 
 
-def _sentence(r: dict) -> str:
+def _sentence(r: dict, plan: dict) -> str:
     e = r["erklaerung"]
     base = f"{r['position']} liegt bei {r['ist']} ({r['vergleich']}, Abweichung {r['abweichung']})."
     if e["art"] == "quelle":
-        return f"{base} Ursache laut Notiz [Quelle: {'; '.join(e['quellen'])}]."
+        return f"{base} Ursache: {_gist(plan, e['quellen'])} [Quelle: {'; '.join(e['quellen'])}]."
     if e["art"] == "hypothese":
         return f"{base} Vermutlich {e['text']} (Hypothese)."
     return f"{base} Die Ursache ist offen."
@@ -33,21 +40,22 @@ def render(plan: dict) -> str:
         elif k["art"] == "ruhig":
             kern.append(f"Die Gesamtleistung liegt bei {k['ist']} ({k['vergleich']}, Veränderung {k['abweichung']}).")
         elif k["art"] == "position":
-            kern.append(_sentence(rows[k["position"]]))
+            kern.append(_sentence(rows[k["position"]], plan))
         else:
             kern.append(f"Bei {k['position']} besteht ein Hinweis; siehe unten.")
     out = [f"**Kernaussagen {plan['monat']}**", ""] + [f"{i}. {t}" for i, t in enumerate(kern, 1)]
     out += ["", "**Abweichungen im Detail**", "",
             "| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |", "|---|---|---|---|---|---|"]
     for r in plan["tabelle"]:
-        text, src = _cell(r["erklaerung"])
+        text, src = _cell(r["erklaerung"], plan)
         out.append(f"| {r['position']} | {r['ist']} | {r['vergleich']} | {r['abweichung']} | {text} | {src} |")
     if not plan["tabelle"]:
         out[-2:] = ["Keine."]
     out += ["", "**Hinweise auf mögliche Verzerrungen**", ""]
     for h in plan["hinweise"]:
         if h["art"] == "erklaert":
-            out.append(f"- {h['position']}: {h['befund']}. Laut Notiz erklärt [Quelle: {'; '.join(h['quellen'])}]. "
+            out.append(f"- {h['position']}: {h['befund']}. Erklärt durch: {_gist(plan, h['quellen'])} "
+                       f"[Quelle: {'; '.join(h['quellen'])}]. "
                        f"{h['folge']}")
         else:
             out.append(f"- {h['position']}: {h['befund']}. Vermutlich {h['hypothese']} (Hypothese). {h['folge']}")

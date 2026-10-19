@@ -208,8 +208,9 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
 
 
 def _mentions(text: str, names: set[str], aliases: dict[str, str]) -> set[str]:
-    found = {n for n in names if n in text}
-    found |= {canon for alias, canon in aliases.items() if alias in text and canon in names}
+    low = text.lower()                                   # v1.5: büyük-küçük harf farkı önemsiz („den Sonstigen Kosten“)
+    found = {n for n in names if n.lower() in low}
+    found |= {canon for alias, canon in aliases.items() if alias.lower() in low and canon in names}
     return found | {RATIO_OF_LINE[n] for n in found if RATIO_OF_LINE.get(n) in names}
 
 

@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilot 1 (öğretmen 1.0) çalıştı: kabul %38 (Bölüm 10). Öğretmen istemi 1.1 ve plan 1.1 ile pilot 2 bekleniyor, 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilot 1 (öğretmen 1.0): kabul %38. Pilot 2 (1.1): kabul %88, ama okumada içerik sorunları çıktı (Bölüm 11). Öğretmen 1.2, plan 1.2 ve sıkılaştırılmış kontrolle pilot 3 bekleniyor, 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -87,7 +87,7 @@ Her satırda açıklama şu sırayla belirlenir:
 
 ## 3. Öğretmen istemi (`ideal/teacher.py`)
 
-- **Sistem mesajı:** 12 kural (sürüm 1.1; 1.0'da 10). Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
+- **Sistem mesajı:** 12 kural (sürüm 1.2; 1.0'da 10). Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
 - **Kullanıcı mesajı:** Planın okunur hâli: Kernaussagen, tablo satırları (rakamlar hazır), Hinweise, sorular ve **yalnızca kaynak gösterilecek notların** metni.
 - Öğretmen `facts.json`'u ve çeldirici notları görmez; uyduracağı malzeme yoktur.
 - **Üretim ayarları [ÖNERİ]:**
@@ -104,7 +104,11 @@ Bir metin şu şartların hepsini sağlarsa kabul edilir:
 2. **Tablo:** Tablo satırları plandakiyle aynı ve aynı sırada. Ist, Vergleich ve Abweichung hücreleri plandakiyle birebir aynı (1.1). Son sütun plana uygun (kaynak / Hypothese / –).
 3. **Kaynaklar:** Plandaki her kaynak var, plan dışında kaynak yok.
 4. **Hinweise ve sorular:** Her Hinweis maddesi var. Soru sayısı plandakiyle aynı (1.1; 1.0'da „en az“).
-5. **Uzunluk:** 200–400 kelime (hedef 250–350, doğrulama toleransı ±50).
+5. **Uzunluk:** 180–400 kelime (hedef ~250–350; 1.2'den beri alt sınır 180, Bölüm 11).
+6. **İçerik (1.2):**
+   - Tablodaki açıklama hücresi boş olamaz; plan etiketi ya da yalnızca yön („gestiegen“) olamaz.
+   - Kaynak gösteren her cümle ve satır, notun içeriğinden en az bir kelime içermeli. Satır adları, aylar ve genel kelimeler sayılmaz; birleşik kelimeler de eşleşir. Yalnızca atıf yetmez.
+   - Değerlendirme, çıkarım ve öneri kalıpları yasak („Handlungsbedarf“, „unterstreicht“, „kompensieren“, „folgt auf“ …).
 
 Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve metin yeniden istenir. 1.1'den beri her sorunun yanında ilgili cümle de verilir. En fazla 4 deneme yapılır (1.0'da 3); sonra ay `failed` olarak kaydedilir. `--retry-failed` bu ayları sonra yeniden dener. Çıktı dosyasındaki eski sürüm kayıtları (plan/öğretmen sürümü farklı) atlanmaz, yeniden üretilir.
 
@@ -190,3 +194,34 @@ Kullanıcının dizüstünde 24 ay çalıştı. Çıktı: `ideal/outputs/pilot_v
 - Kernaussage 2 ve 3'ün aynı kalemi anlatması. Plan 1.1'de üçüncü madde ikincinin kalemini tekrarlamıyor.
 
 **Not:** 1.0 metinlerinin hiçbiri 1.1 kontrollerini geçmiyor; en sık neden tablo hücreleri. Yeni istem bunu açıkça istediği ve geri bildirim beklenen değerleri verdiği için yeniden denemede düzelmesi bekleniyor. Pilot 2 bunu ölçecek.
+
+## 11. Pilot 2 (öğretmen 1.1, 19.10.2026)
+
+Çıktı: `ideal/outputs/pilot_v1_1.jsonl`.
+
+| | Değer |
+|---|---|
+| Kabul | 21 / 24 (%88; pilot 1'de %38) |
+| Kabul edilenlerde deneme | 1 deneme: 9 · 2 deneme: 9 · 3 deneme: 3 |
+| Token | girdi 118 bin · çıktı 38 bin |
+| Süre | ay başına medyan 19 s |
+
+Cümle bazında geri bildirim ve netleştirilmiş kurallar biçim sorunlarını büyük ölçüde çözdü. Ama 21 kabul edilen metnin hepsi okunduğunda, otomatik kontrolün o sırada denetlemediği içerik sorunları görüldü:
+
+| Sorun | Kabul edilen metin | Örnek | 1.2'deki karşılığı |
+|---|---:|---|---|
+| Kaynak gösterilmiş, ama nedenin kendisi yazılmamış | 10 | „Die Umsatzerlöse … übertrafen den Vorjahresmonat um 394 T€ (+26,7 %) [Quelle: Kontextnotiz 2026-01].“ | İstem kural 3; kontrol: cümlede notun içeriğinden bir kelime |
+| Açıklama hücresi boş, plan etiketinin kopyası ya da yalnızca yön | 7 | „Ursache mit Quelle“, „gestiegen“, boş hücre | Plan metni talimat biçiminde (etiket kopyalanmıyor); istem kural 7; kontrol |
+| Kendi değerlendirmesi ve çıkarımı | 1 (+ reddedilen 2) | „signalisiert Handlungsbedarf“, „kann … nicht kompensieren“, „der Einbruch folgt auf …“ | İstem kural 1 örneklerle; kontrol: yasak kalıplar |
+
+**Yeni kontrollerle:** Kabul edilen 21 metnin 11'i geçmiyor. Kontrol, 1.104 ayın kalıp metinlerinde yanlış alarm vermiyor.
+
+**Uzunluk ve uydurma arasındaki gerilim:**
+- Az maddeli planlarda öğretmen, 250 kelimeye ulaşmak için kendi yorumunu ekledi. Reddedilen bir metinde bu, öneri ve sonuç cümlelerine dönüştü.
+- Çözüm [ÖNERİ]:
+  - Plana yalnızca `facts.json`'dan „Einordnung“ bilgisi eklendi: kalemin önceki ayı ve kümülatif değeri, Gesamtleistung. Öğretmen ek cümleleri yalnızca bundan kurar.
+  - İstem, az maddede kısa metni açıkça doğru sayar.
+  - Kabul alt sınırı 200'den 180 kelimeye indi.
+- B4'teki „~250–350“ [KARAR] bir hedef olarak kalır. „Uydurma neden yok“ ilkesi (6.1) daha önceliklidir.
+
+**Doğrulama v1.5:** Satır adları büyük-küçük harfe duyarsız eşleşir („den Sonstigen Kosten“). Sıfat çekimli kısa adlar eklendi („sonstigen neutralen Ertrag“). Pilot 2'deki bir ret bu boşluktan kaynaklanıyordu.

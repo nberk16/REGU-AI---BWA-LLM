@@ -4,21 +4,21 @@
 bu modül kullanıcının dizüstündeki betikte de çalışır.
 """
 
-TEACHER_VERSION = "1.1"
+TEACHER_VERSION = "1.2"
 
 _SYSTEM = """Du bist erfahrener Controller und Redakteur in einem mittelständischen Unternehmen. Aus einem fertigen Inhaltsplan schreibst du den Management-Kommentar zur monatlichen BWA (vorläufige Werte) für Geschäftsführung und kaufmännische Leitung. Der Plan legt fest, WAS gesagt wird; du entscheidest nur, WIE es gesagt wird.
 
 Regeln:
-1. Inhalt: Übernimm alle Punkte des Plans und füge nichts hinzu: keine weiteren Ursachen, Bewertungen, Prognosen, Empfehlungen oder Fragen.
+1. Inhalt: Übernimm alle Punkte des Plans und füge nichts hinzu: keine weiteren Ursachen, Bewertungen, Schlussfolgerungen, Prognosen, Empfehlungen oder Fragen. Nicht erlaubt sind zum Beispiel „signalisiert Handlungsbedarf“, „unterstreicht die Notwendigkeit“, „kann … nicht kompensieren“ oder „der Einbruch folgt auf …“.
 2. Zahlen: Verwende nur Zahlen aus dem Plan, genau in dieser Schreibweise. Im Fließtext darfst du statt eines Eurobetrags die im Plan angegebene T€-Form verwenden. Rechne nichts aus. Zahlen aus einer Notiz nur im selben Satz wie die Quellenangabe dieser Notiz.
-3. Quellen: Jeder Satz, der eine Ursache aus einer Quelle nennt, enthält die Quellenangabe genau wie im Plan, z. B. [Quelle: Kontextnotiz 2025-06 #2], mehrere als [Quelle: A; B]. Das gilt in allen Abschnitten; „laut Firmenprofil“ ohne [Quelle: Firmenprofil] genügt nicht. Andere Quellenangaben gibt es nicht.
+3. Quellen: Ein Satz mit Quellenangabe nennt die Ursache selbst in eigenen Worten aus dem Inhalt der Notiz (z. B. „durch den Großauftrag eines Bauträgers [Quelle: Kontextnotiz 2025-11 #2]“); eine Quellenangabe ohne genannte Ursache ist falsch. Die Angabe steht genau wie im Plan, mehrere als [Quelle: A; B], in allen Abschnitten; „laut Firmenprofil“ ohne [Quelle: Firmenprofil] genügt nicht. Andere Quellenangaben gibt es nicht.
 4. Vermutungen: Jeder Satz, der eine mögliche Ursache ohne Quelle nennt, endet mit „(Hypothese)“. Das gilt in allen Abschnitten, auch in den Hinweisen und auch bei Formulierungen mit „könnte“, „möglicherweise“, „vermutlich“ oder „Sollte … zurückzuführen sein“.
 5. Offene Ursachen: In der Tabelle „Ursache offen“ und in der letzten Spalte „–“. Im Text keine Vermutung dazu.
-6. Wörter wie „wegen“, „durch“, „aufgrund“, „ursächlich“, „bedingt“, „zurückzuführen“, „infolge“ oder „weil“ nur in Sätzen mit Quellenangabe oder „(Hypothese)“.
-7. Tabelle: genau die Zeilen des Plans in dieser Reihenfolge. Ist, Vergleich (mit „Vj.“ bzw. „Vm.“) und Abweichung genau wie im Plan, in vollen Euro. Letzte Spalte genau „[Quelle: …]“, „Hypothese“ oder „–“.
+6. Wörter wie „wegen“, „durch“, „aufgrund“, „ursächlich“, „bedingt“, „zurückzuführen“, „infolge“, „verantwortlich“ oder „weil“ nur in Sätzen mit Quellenangabe oder „(Hypothese)“.
+7. Tabelle: genau die Zeilen des Plans in dieser Reihenfolge. Ist, Vergleich (mit „Vj.“ bzw. „Vm.“) und Abweichung genau wie im Plan, in vollen Euro. Die Spalte Erklärung nennt die Ursache in wenigen Wörtern (z. B. „Großauftrag eines Bauträgers“, „möglicher Einmaleffekt“); sie ist nie leer und nennt nicht nur die Richtung („gestiegen“). Letzte Spalte genau „[Quelle: …]“, „Hypothese“ oder „–“.
 8. Hinweise: nur Aufzählungspunkte, je Punkt des Plans einer, jeder beginnt mit dem Positionsnamen genau wie im Plan: „- Material-/Wareneinkauf: …“. Kein Einleitungssatz, keine Absätze. Hinweise sind Warnungen, keine Tatsachen.
 9. Offene Fragen: genau die Fragen des Plans, sinngemäß, je eine Zeile „- …?“.
-10. Länge: mindestens 250, höchstens 350 Wörter ohne Tabelle. Nutze dafür ganze Sätze mit Einordnung (Vorjahr, kumuliert, Folge der Verzerrung). Kernaussagen: genau die Punkte des Plans, nummeriert, ohne Wiederholungen.
+10. Länge: etwa 250–350 Wörter ohne Tabelle. Für zusätzliche Sätze nutzt du nur die Angaben unter „Einordnung“ im Plan (Vormonat, kumuliert, Gesamtleistung). Hat der Plan wenige Punkte, ist ein kürzerer Text richtig; verlängere nie mit eigenen Bewertungen. Kernaussagen: genau die Punkte des Plans, nummeriert, ohne Wiederholungen.
 11. Format: genau die vier Überschriften des Musters in dieser Reihenfolge, kein Text davor oder danach, keine weiteren Überschriften, Trennlinien oder Hervorhebungen. Ein Abschnitt ohne Inhalt enthält nur „Keine.“
 12. Sprache: natürliches, präzises Geschäftsdeutsch; abwechslungsreich formuliert, ohne Floskeln.
 
@@ -50,14 +50,17 @@ def system_prompt() -> str:
 
 
 def _explanation(e: dict) -> str:
+    """Satırın açıklaması öğretmene talimat olarak; etiketler metne kopyalanmasın diye içerik ve biçim ayrı yazılır."""
     if e["art"] == "quelle":
-        when = {"vorjahr": " (Ereignis im Vorjahresmonat: der Vergleichswert enthält den Effekt)",
-                "ende": " (Ende des befristeten Effekts aus der Notiz)"}.get(e["bezug"][0], "") if len(e["bezug"]) == 1 else ""
-        return f"Ursache mit Quelle{when}: Inhalt aus [Quelle: {'; '.join(e['quellen'])}]"
+        hint = {"vorjahr": " Das Ereignis aus der Notiz lag im Vorjahresmonat und steckt im Vergleichswert.",
+                "ende": " Der befristete Effekt aus der Notiz ist ausgelaufen."}.get(e["bezug"][0], "") \
+            if len(e["bezug"]) == 1 else ""
+        return (f"Ursache in wenigen Wörtern aus dem Inhalt von {', '.join(e['quellen'])}.{hint} "
+                f"Letzte Spalte: [Quelle: {'; '.join(e['quellen'])}]")
     if e["art"] == "hypothese":
         ref = f" ({e['verweis']})" if e.get("verweis") else ""
-        return f"Vermutung: {e['text']}{ref} → Hypothese"
-    return "Ursache offen → –"
+        return f"Vermutung „{e['text']}“{ref}. Letzte Spalte: Hypothese"
+    return "„Ursache offen“. Letzte Spalte: –"
 
 
 def _row_numbers(r: dict) -> str:
@@ -75,13 +78,15 @@ def render_plan(plan: dict) -> str:
             parts = [f"Betriebsergebnis: Ist {k['ist']} ({k['ist_teur']}), {k['vergleich']}, "
                      f"Veränderung {k['abweichung']}"]
             parts += [k[x] for x in ("marge", "kumuliert") if x in k]
-            out.append(f"{i}. " + "; ".join(parts))
+            out.append(f"{i}. " + "; ".join(parts) + f". Einordnung: {k['einordnung']}")
         elif k["art"] == "ruhig":
             out.append(f"{i}. {k['position']}: Ist {k['ist']}, {k['vergleich']}, Veränderung {k['abweichung']}; "
                        f"{k['text']}")
         elif k["art"] == "position":
             r = rows[k["position"]]
-            out.append(f"{i}. {k['position']}: {_row_numbers(r)}; {_explanation(r['erklaerung'])}")
+            out.append(f"{i}. {k['position']}: {_row_numbers(r)}. Ursache wie in der Tabellenzeile: "
+                       f"{_explanation(r['erklaerung']).split(' Letzte Spalte')[0]}"
+                       + (f" Einordnung: {r['einordnung']}" if r.get("einordnung") else ""))
         else:
             h = hinweise[k["position"]]
             how = {"warnung": "als mögliche Verzerrung (siehe Hinweise)",
@@ -91,7 +96,7 @@ def render_plan(plan: dict) -> str:
     out += ["", "TABELLE (Zeilen in dieser Reihenfolge; Ist, Vergleich und Abweichung genau übernehmen):"]
     for r in plan["tabelle"]:
         out.append(f"- {r['position']} | {_row_numbers(r)}")
-        out.append(f"  Erklärung: {_explanation(r['erklaerung'])}")
+        out.append(f"  Spalte Erklärung: {_explanation(r['erklaerung'])}")
     out += ["", "HINWEISE:"]
     if not plan["hinweise"]:
         out.append("Keine.")

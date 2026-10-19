@@ -182,7 +182,7 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     # 1. ay: önce biçimsiz metin, sonra doğru; 2. ay: ilk denemede doğru (uzunluk kontrolü testte gevşetilir)
     fake_api.replies = ["Kein Kommentar.", "```\n" + good[0] + "\n```", good[1]]
     fake_api.calls = []
-    monkeypatch.setitem(runner.check.__globals__["_CFG"]["format"], "words_tolerance", 10_000)
+    monkeypatch.setattr(sys.modules["ideal.check"], "WORDS_MIN", 0)      # kalıp metin kısa
     monkeypatch.setenv("MISTRAL_API_KEY", "test-key")
     args = ["--set", "pilot", "--requests", str(req_dir), "--out", str(tmp_path / "out"), "--workers", "1"]
     (tmp_path / "out").mkdir()

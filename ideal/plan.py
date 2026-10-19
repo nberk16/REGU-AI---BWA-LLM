@@ -16,7 +16,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from facts.schema import BASE_LINES, MONTHS_DE
 
-PLAN_VERSION = "1.1"
+PLAN_VERSION = "1.2"
 
 NAME_TO_LINE = {name: key for key, name in BASE_LINES.items()}
 
@@ -174,6 +174,13 @@ def _cite(causes: list[dict], visible: dict[str, str]) -> list[str]:
     return list(dict.fromkeys(c["source_id"] for c in causes if c["documented"] and c["source_id"] in visible))
 
 
+def _context(p: dict) -> str:
+    """Satır için isteğe bağlı Einordnung (yalnızca facts.json'dan): önceki ay ve kümülatif."""
+    pm, cum = p["previous_month"], p["cumulative"]
+    return (f"Vormonat {eur(pm['value'])} (Veränderung {signed_eur(pm['delta_abs'])}); kumuliert {eur(cum['actual'])} "
+            f"(Vorjahreszeitraum {eur(cum['previous_year'])}, {signed_eur(cum['delta_abs'])})")
+
+
 def _quote_direction(event: dict, period: str) -> int:
     """Olayın Rohertragsquote'ye etkisinin yönü: satış fiyatı +, alış fiyatı zammı −, zammın bitişi +."""
     if event["type"] == "E05":
@@ -215,7 +222,8 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
                "vergleich": f"Vj. {eur(pym['value'])}",
                "abweichung": signed_eur(pym["delta_abs"]) + (f" ({pct(pym['delta_pct'])})"
                                                              if pym["delta_pct"] is not None else ""),
-               "richtung": "gestiegen" if pym["delta_abs"] > 0 else "gesunken"}
+               "richtung": "gestiegen" if pym["delta_abs"] > 0 else "gesunken",
+               "einordnung": _context(p)}
         if sources:
             row["erklaerung"] = {"art": "quelle", "quellen": sources,
                                  "bezug": sorted({c["bezug"] for c in causes if c["source_id"] in sources})}
@@ -296,9 +304,13 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
     summary = {s["key"]: s for s in facts["summary"]}
     ratios = {r["ratio"]: r for r in facts["ratios"]}
     be, marge = summary["betriebsergebnis"], ratios["Betriebsergebnis-Marge"]
+    gl = summary["gesamtleistung"]
     ka1 = {"art": "ergebnis", "position": "Betriebsergebnis", "ist": eur(be["actual"]), "ist_teur": teur(be["actual"]),
            "vergleich": f"Vj. {eur(be['previous_year_month']['value'])}",
-           "abweichung": signed_eur(be["previous_year_month"]["delta_abs"])}
+           "abweichung": signed_eur(be["previous_year_month"]["delta_abs"]),
+           "einordnung": f"Gesamtleistung {eur(gl['actual'])} (Vj. {eur(gl['previous_year_month']['value'])}"
+                         + (f", {pct(gl['previous_year_month']['delta_pct'])})"
+                            if gl["previous_year_month"]["delta_pct"] is not None else ")")}
     if marge["previous_year_month"].get("significant"):
         ka1["marge"] = (f"Betriebsergebnis-Marge {pct(marge['actual'], signed=False)} "
                         f"(Vj. {pct(marge['previous_year_month']['value'], signed=False)})")
@@ -310,7 +322,6 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
     if table_rows:
         kern.append({"art": "position", "position": table_rows[0]["position"]})
     else:
-        gl = summary["gesamtleistung"]
         kern.append({"art": "ruhig", "position": "Gesamtleistung", "ist": eur(gl["actual"]),
                      "vergleich": f"Vj. {eur(gl['previous_year_month']['value'])}",
                      "abweichung": signed_eur(gl["previous_year_month"]["delta_abs"])

@@ -420,6 +420,12 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - Pilot: 24 ayın 9'u kabul (%38). Ret nedenleri ve düzeltmeler: `11_ideal_yorumlar.md`, Bölüm 10. Öğretmen istemi 1.1, plan 1.1, doğrulama v1.4.
 - Çıktı dosyası yanlışlıkla `main` dalına yüklendi. Çalışma dalına kopyalandı (`ideal/outputs/pilot_v1_0.jsonl`); `main`'e dokunulmadı.
 
+### 18.4 Pilot 2 (19.10.2026)
+
+- 24 ayın 21'i kabul (%88). Okumada içerik sorunları çıktı: kaynaksız neden içeriği, boş ya da etiket kopyası açıklama hücreleri, eklenmiş değerlendirmeler. Kabul edilenlerin 11'i yeni kontrollere takılıyor (`11_ideal_yorumlar.md`, Bölüm 11).
+- Öğretmen istemi 1.2, plan 1.2 (yalnızca facts'ten „Einordnung“), içerik kontrolleri, doğrulama v1.5.
+- **[ÖNERİ]** Kabul alt sınırı 180 kelime. B4'teki ~250–350 hedef olarak kalır; az maddeli planlarda öğretmenin uydurarak uzatmasını önlemek için.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

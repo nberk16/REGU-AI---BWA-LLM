@@ -205,5 +205,7 @@ def test_runner_needs_key_and_known_model(fake_api, monkeypatch, capsys):
     assert runner.main(["--check"]) == 2 and "401" in capsys.readouterr().out
     monkeypatch.setenv("MISTRAL_API_KEY", "test-key")
     assert runner.main(["--check"]) == 0
-    assert runner.main(["--check", "--model", "mistral-large-9999"]) == 2
-    assert "mistral-large-2512" in capsys.readouterr().out
+    fake_api.replies = ["OK"]                      # listede yok ama deneme isteği çalışıyor
+    assert runner.main(["--check", "--model", "mistral-large-latest"]) == 0
+    out = capsys.readouterr().out
+    assert "mistral-large-2512, mistral-small-latest" in out and "Deneme isteği çalıştı" in out

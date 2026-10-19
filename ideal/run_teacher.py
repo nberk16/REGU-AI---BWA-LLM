@@ -56,10 +56,11 @@ def api(path: str, key: str, body: dict | None = None, timeout: float = 240) -> 
         return json.loads(resp.read().decode("utf-8"))
 
 
-def chat(key: str, model: str, messages: list[dict], seed: int, temperature: float) -> tuple[str, dict]:
+def chat(key: str, model: str, messages: list[dict], seed: int, temperature: float,
+         max_tokens: int = OPTIONS["max_tokens"]) -> tuple[str, dict]:
     """Bir istek; 429/5xx/ağ hatasında bekleyip yeniden dener."""
     body = {"model": model, "messages": messages, "random_seed": seed, "temperature": temperature,
-            "max_tokens": OPTIONS["max_tokens"]}
+            "max_tokens": max_tokens}
     for attempt in range(8):
         try:
             res = api("/chat/completions", key, body)
@@ -68,7 +69,7 @@ def chat(key: str, model: str, messages: list[dict], seed: int, temperature: flo
             detail = e.read().decode("utf-8", "replace")[:300]
             if e.code == 401:
                 raise Fatal("Anahtar geçersiz (401). MISTRAL_API_KEY'i kontrol et.") from None
-            if e.code in (400, 404, 422):
+            if e.code in (400, 403, 404, 422):
                 raise Fatal(f"İstek reddedildi ({e.code}): {detail}") from None
             wait = float(e.headers.get("Retry-After") or min(60, 2 ** (attempt + 1)))
         except (urllib.error.URLError, TimeoutError, OSError):
@@ -139,9 +140,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Mistral API'ye ulaşılamadı: {e}")
         return 2
     if args.model not in models:
-        print(f"Model {args.model} bu anahtarla kullanılamıyor. Mevcut 'large' modeller: "
-              + (", ".join(m for m in models if "large" in m) or "yok"))
-        return 2
+        # Liste eksik olabilir: modeli kısa bir istekle doğrudan dene ve gerçek hatayı göster.
+        print(f"Model listesinde {args.model} yok. Listedeki modeller ({len(models)}): {', '.join(models) or 'yok'}")
+        print("Kısa bir deneme isteği gönderiliyor …")
+        try:
+            chat(key, args.model, [{"role": "user", "content": "Antworte nur mit: OK"}], 1, 0.0, max_tokens=5)
+        except Fatal as e:
+            print(f"Deneme başarısız: {e}\nBu satırları gönder (anahtarı gönderme).")
+            return 2
+        print("Deneme isteği çalıştı; model kullanılabilir.")
     if args.check or not args.set:
         print(f"Anahtar geçerli; {args.model} kullanılabilir. Şimdi: python ideal/run_teacher.py --set pilot")
         return 0

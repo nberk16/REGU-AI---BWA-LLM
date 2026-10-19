@@ -29,7 +29,7 @@ python ideal/run_teacher.py --check
 
 - Tırnakların arasına Mistral konsolundaki „BWA Kommentar“ anahtarını yapıştır.
 - Beklenen çıktı: `Anahtar geçerli; mistral-large-2512 kullanılabilir.`
-- Başka bir mesaj görürsen (ör. model kullanılamıyor) ekrandaki satırları bana gönder; anahtarı gönderme.
+- Başka bir mesaj görürsen ekrandaki satırları bana gönder. **`$env:MISTRAL_API_KEY = …` satırını asla kopyalama**; yalnızca altındaki satırları gönder. Anahtar yanlışlıkla bir yere yapıştırılırsa konsolda silip yenisini oluştur.
 
 ## 3. Pilot
 
@@ -57,6 +57,6 @@ Sonra bana haber ver. Metinleri okurum, altın küme adaylarını seçerim ve ge
 |---|---|
 | `MISTRAL_API_KEY tanımlı değil` | Bölüm 2'deki `$env:…` satırını bu pencerede yeniden çalıştır |
 | `Anahtar geçersiz (401)` | Anahtarı konsoldan yeniden kopyala; gerekirse yeni bir anahtar oluştur |
-| `Model … bu anahtarla kullanılamıyor` | Ekrandaki model listesini bana gönder |
+| `Model listesinde … yok` / `Deneme başarısız` | Mistral konsolunda bir planın (ücretsiz „Experiment“) etkin olduğunu kontrol et; ekrandaki satırları bana gönder |
 | `hata (…); sonra aynı komutla yeniden denenir` | Ağ sorunu olabilir; komutu yeniden çalıştır |
 | Ekran uzun süre değişmiyor | Pencereye tıklandıysa Windows ekrana yazmayı durdurur; pencereye tıkla ve **Esc**'ye bas |

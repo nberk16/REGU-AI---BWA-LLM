@@ -43,11 +43,13 @@ python ideal/run_teacher.py --set pilot
 
 ## 4. Sonucu gönder
 
-Çıktı: `ideal/outputs/pilot.jsonl`. Deneme turundaki gibi yükle:
+Çıktı: `ideal/outputs/pilot.jsonl`. **Bizim dala** yükle; `main` dalına değil:
 
-- GitHub → dal `claude/repodaki-project-analysis-al4o1f` → `ideal` klasörü → **Add file → Upload files**.
-- Dosyayı sürüklerken klasör yolunun `ideal/outputs/` olmasına dikkat et.
-- **Commit changes**.
+1. Bu bağlantıyı aç: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/ideal
+2. Sayfanın üstünde dal adı `claude/repodaki-project-analysis-al4o1f` görünmeli.
+3. `pilot.jsonl` dosyasını sürükle.
+4. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı. „main“ yazıyorsa durdur ve bana haber ver.
+5. **Commit changes**.
 
 Sonra bana haber ver. Metinleri okurum, altın küme adaylarını seçerim ve gerekirse istemi düzeltirim. Büyük koşunun komutlarını ondan sonra veririm.
 

@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test), istek dosyaları hazır, 18.10.2026. Sıradaki adım: kullanıcının dizüstünde pilot (24 ay).
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilot 1 (öğretmen 1.0) çalıştı: kabul %38 (Bölüm 10). Öğretmen istemi 1.1 ve plan 1.1 ile pilot 2 bekleniyor, 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -87,7 +87,7 @@ Her satırda açıklama şu sırayla belirlenir:
 
 ## 3. Öğretmen istemi (`ideal/teacher.py`)
 
-- **Sistem mesajı:** 10 kural. Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
+- **Sistem mesajı:** 12 kural (sürüm 1.1; 1.0'da 10). Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
 - **Kullanıcı mesajı:** Planın okunur hâli: Kernaussagen, tablo satırları (rakamlar hazır), Hinweise, sorular ve **yalnızca kaynak gösterilecek notların** metni.
 - Öğretmen `facts.json`'u ve çeldirici notları görmez; uyduracağı malzeme yoktur.
 - **Üretim ayarları [ÖNERİ]:**
@@ -101,12 +101,12 @@ Her satırda açıklama şu sırayla belirlenir:
 
 Bir metin şu şartların hepsini sağlarsa kabul edilir:
 1. **Doğrulama katmanında `fehler` yok.** Rakamlar, kaynaklar, işaretsiz neden ve biçim denetlenir; öğrencinin göreceği notlarla (`docs/07`).
-2. **Tablo:** Tablo satırları plandakiyle aynı ve aynı sırada. Son sütun plana uygun (kaynak / Hypothese / –).
+2. **Tablo:** Tablo satırları plandakiyle aynı ve aynı sırada. Ist, Vergleich ve Abweichung hücreleri plandakiyle birebir aynı (1.1). Son sütun plana uygun (kaynak / Hypothese / –).
 3. **Kaynaklar:** Plandaki her kaynak var, plan dışında kaynak yok.
-4. **Hinweise ve sorular:** Her Hinweis maddesi var; soru sayısı plandakinden az değil.
+4. **Hinweise ve sorular:** Her Hinweis maddesi var. Soru sayısı plandakiyle aynı (1.1; 1.0'da „en az“).
 5. **Uzunluk:** 200–400 kelime (hedef 250–350, doğrulama toleransı ±50).
 
-Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve metin yeniden istenir. En fazla 3 deneme yapılır; sonra ay `failed` olarak kaydedilir. `--retry-failed` bu ayları sonra yeniden dener.
+Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve metin yeniden istenir. 1.1'den beri her sorunun yanında ilgili cümle de verilir. En fazla 4 deneme yapılır (1.0'da 3); sonra ay `failed` olarak kaydedilir. `--retry-failed` bu ayları sonra yeniden dener. Çıktı dosyasındaki eski sürüm kayıtları (plan/öğretmen sürümü farklı) atlanmaz, yeniden üretilir.
 
 **Tutarlılık sınaması:** Her plan, sabit cümlelerle kurulan bir kalıp metne de dökülür (`tests/ideal_template.py`). 1.104 ayın hepsinde bu metin, uzunluk dışında bütün kontrolleri geçiyor. Yani plan, rakam biçimleri ve kaynaklar doğrulama katmanıyla tutarlı.
 
@@ -160,3 +160,33 @@ python -m ideal report --set pilot                             # özet: kabul or
 
 - **[AÇIK, paket 7]** „Yalnızca fine-tuning“ varyantı için bağlamsız girdilere ayrı hedefler gerekip gerekmediği (`00`, 17.3). Gerekirse aynı plan kodu, görünen not kümesi boş verilerek çalıştırılır; bu durumda bütün nedenler hipotez ya da açık soru olur.
 - **Altın küme:** Pilot çıktılarından 20–30 ay seçilip elle düzeltilecek. Kullanım alanları: kalite ölçümü, üslup referansı, öğretmen istemine örnek.
+
+## 10. Pilot 1 (öğretmen 1.0, 19.10.2026)
+
+Kullanıcının dizüstünde 24 ay çalıştı. Çıktı: `ideal/outputs/pilot_v1_0.jsonl`; yanlışlıkla `main` dalına yüklendi, buraya kopyalandı.
+
+| | Değer |
+|---|---|
+| Kabul | 9 / 24 (%38) |
+| Kabul edilenlerde deneme | 1 deneme: 1 · 2 deneme: 4 · 3 deneme: 4 |
+| Token | girdi 156 bin · çıktı 47 bin (ay başına ~6.500 + ~2.000, denemeler dahil) |
+| Süre | ay başına medyan 27 s |
+
+**Ret nedenleri ve 1.1'deki karşılıkları:**
+
+| Neden | Sıklık | Düzeltme |
+|---|---:|---|
+| Olası nedenler `(Hypothese)` olmadan, çoğu Hinweise'de („könnte durch … verfälscht sein“, „Sollte … zurückzuführen sein“) | 13 | İstem: kural 4 her bölüm ve kalıp için açık. Geri bildirim: hangi cümle olduğu yazılıyor (1.0'da yalnızca bulgu türü vardı; model neyi düzelteceğini bilmiyordu). |
+| Hinweise madde yerine paragraf, giriş cümlesi | 3 | İstem kural 8: yalnızca „- <Position>: …“ maddeleri. |
+| Hinweise'de pozisyon adı plandakinden farklı ya da eksik | 5 | İstem kural 8 + geri bildirimde beklenen madde başı. |
+| Kısa metin (177–199 kelime) | 5 | İstem kural 10: en az 250 kelime, Einordnung cümleleri; geri bildirimde ne ekleneceği. |
+| „Ursache offen“ satırı yanlış biçimde | 1 | Geri bildirim. |
+| Uydurulmuş yuvarlama („-360 T€“) | 1 | Doğrulama yakaladı; geri bildirim. |
+| **Doğrulama katmanında boşluk:** „Ursache … nicht identifiziert“ cümleleri neden sayıldı | 2 | `unknown_cause_phrases`'e „nicht identifiziert“, „nicht geklärt“, „unbekannt“ eklendi (doğrulama v1.4). |
+
+**Kabul edilenlerde bile görülen ve 1.1'de sıkılaştırılanlar:**
+- Tabloda T€ ya da „Vj.“ öneki olmadan değerler. Artık hücreler plandakiyle birebir aynı olmalı; öğrencinin tablo değerlerini her zaman aynı biçimde kopyalaması için.
+- Plan dışı ek soru. Artık soru sayısı plandakiyle aynı olmalı.
+- Kernaussage 2 ve 3'ün aynı kalemi anlatması. Plan 1.1'de üçüncü madde ikincinin kalemini tekrarlamıyor.
+
+**Not:** 1.0 metinlerinin hiçbiri 1.1 kontrollerini geçmiyor; en sık neden tablo hücreleri. Yeni istem bunu açıkça istediği ve geri bildirim beklenen değerleri verdiği için yeniden denemede düzelmesi bekleniyor. Pilot 2 bunu ölçecek.

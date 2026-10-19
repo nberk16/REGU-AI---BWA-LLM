@@ -185,8 +185,12 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     monkeypatch.setitem(runner.check.__globals__["_CFG"]["format"], "words_tolerance", 10_000)
     monkeypatch.setenv("MISTRAL_API_KEY", "test-key")
     args = ["--set", "pilot", "--requests", str(req_dir), "--out", str(tmp_path / "out"), "--workers", "1"]
+    (tmp_path / "out").mkdir()
+    stale = {"id": requests["pilot"][0]["id"], "status": "ok", "versions": {"plan": "0.9"}}   # eski sürüm: yeniden üretilir
+    (tmp_path / "out" / "pilot.jsonl").write_text(json.dumps(stale) + "\n", encoding="utf-8")
     assert runner.main(args) == 0
-    recs = [json.loads(line) for line in (tmp_path / "out" / "pilot.jsonl").read_text(encoding="utf-8").splitlines()]
+    lines = (tmp_path / "out" / "pilot.jsonl").read_text(encoding="utf-8").splitlines()[1:]
+    recs = [json.loads(line) for line in lines]
     assert [(r["status"], r["attempts"]) for r in recs] == [("ok", 2), ("ok", 1)]
     assert recs[0]["text"] == good[0] and recs[0]["usage"] == {"prompt_tokens": 2000, "completion_tokens": 1000}
     retry = fake_api.calls[1]["messages"]

@@ -118,7 +118,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true", help="yalnızca anahtar ve model erişimini dene")
     parser.add_argument("--limit", type=int, help="en fazla bu kadar yeni ay")
     parser.add_argument("--workers", type=int, default=2, help="aynı anda kaç istek (hız sınırına takılırsa 1)")
-    parser.add_argument("--max-attempts", type=int, default=3)
+    parser.add_argument("--max-attempts", type=int, default=4)
     parser.add_argument("--retry-failed", action="store_true", help="kabul edilmeyen ayları yeniden dene")
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--temperature", type=float, default=OPTIONS["temperature"])
@@ -156,13 +156,15 @@ def main(argv: list[str] | None = None) -> int:
     requests = load_requests(args.set, args.requests)
     args.out.mkdir(parents=True, exist_ok=True)
     out_path = args.out / f"{args.set}.jsonl"
+    versions = {r["id"]: r["versions"] for r in requests}
     last: dict[str, str] = {}                      # id → son kaydın durumu (yeniden denemede son kayıt geçerli)
     if out_path.exists():
         with open(out_path, encoding="utf-8") as f:
             for line in f:
                 if line.strip():
                     rec = json.loads(line)
-                    last[rec["id"]] = rec["status"]
+                    if rec.get("versions") == versions.get(rec["id"]):   # eski istem/plan sürümünün kaydı sayılmaz
+                        last[rec["id"]] = rec["status"]
     done = {i for i, s in last.items() if s == "ok" or not args.retry_failed}
     todo = [r for r in requests if r["id"] not in done][:args.limit]
     print(f"{args.set}: {len(requests)} ay, {len(done)} tamamlanmış, {len(todo)} çalışacak · model {args.model} · "

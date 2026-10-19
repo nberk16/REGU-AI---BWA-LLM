@@ -1,6 +1,6 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 18.10.2026 (ideal yorum hattı: içerik planı, öğretmen istemi, kontrol, dizüstü betiği; karar turu 11)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (ideal yorumlar: pilot 1 sonuçları, öğretmen istemi 1.1)
 
 ---
 
@@ -94,8 +94,9 @@ durum         = 27,05 / 50 ≈ %54
 - **Kararlaştırılan:**
   - Turlar 6–7: karma yöntem, altın küme, B3, 6.3.
   - Tur 11: öğretmen Mistral Large 3, anahtar yalnızca kullanıcının bilgisayarında.
+- **Pilot 1 (19.10.2026):** 24 ayın 9'u kabul (%38). Nedenler ve düzeltmeler `docs/11`, Bölüm 10: öğretmen istemi 1.1, cümle bazında geri bildirim, plan 1.1, doğrulama v1.4.
 - **Kalan (%65):**
-  - Pilot (kullanıcı) → okuma ve gerekirse istem/plan düzeltmesi.
+  - Pilot 2 (kullanıcı) → okuma; kabul oranı yeterliyse büyük koşu.
   - Altın küme (20–30 ay, elle düzeltilmiş).
   - Büyük koşu (1.104 ay) ve reddedilenlerin yeniden denenmesi.
   - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8`) + kabul edilen metin.
@@ -208,3 +209,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 18.10.2026 | Getirme isabeti ölçüldü (BGE-M3): sorgu yöntemi doğrulama varyantlarında seçildi (`single`, k = 8); test kümesinde recall %91 / %83, çeldirici payı %11 → %5. Paket 4 → %70: %47 |
 | 18.10.2026 | İstem 1.1 (`prompting/`, `docs/10`): Katman 2 bağlamı (WISSEN + top-8), deneme turu dersleri, varyantlar, Kaggle için istem dışa aktarma; istem 1.0 donduruldu. Doğrulama v1.3 (K-A/K-B kimlikleri). Paket 4 → %85, 6 → %55, 8 → %80: %50 |
 | 18.10.2026 | Karar turu 11: öğretmen Mistral Large 3 (API), anahtar yalnızca kullanıcının bilgisayarında. İdeal yorum hattı (`ideal/`, `docs/11`): içerik planı, öğretmen istemi, kontrol, dizüstü betiği, istek dosyaları (24 + 960 + 144 ay), 8 test. Paket 5 → %35: %54 |
+| 19.10.2026 | Pilot 1 (öğretmen 1.0): kabul %38; öğretmen istemi 1.1, cümle bazında geri bildirim, daha sıkı tablo/soru kontrolü, plan 1.1, doğrulama v1.4. Durum değişmedi: %54 |

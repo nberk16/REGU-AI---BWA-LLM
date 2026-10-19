@@ -30,7 +30,9 @@ def cited_sources(text: str) -> set[str]:
 def check(text: str, plan: dict, facts: dict, notes: list[dict]) -> dict:
     """{"ok", "problems": [Almanca], "report": doğrulama raporu}. `notes`: öğrenci modelin gördüğü notlar."""
     report = validate(text, facts, notes, _CFG)
-    problems = [f["message"] for f in report["findings"] if f["severity"] == "fehler"]
+    problems = [f["message"] + (f" Betroffen: „{f['text'][:200]}“" if f.get("text") and f["text"] not in f["message"]
+                                else "")
+                for f in report["findings"] if f["severity"] == "fehler"]
 
     parsed, _ = parse(text, facts["period_label"], _CFG)
     rows = [s for s in parsed.segments if s.kind == "zeile"]
@@ -41,6 +43,10 @@ def check(text: str, plan: dict, facts: dict, notes: list[dict]) -> dict:
                         f"{', '.join(want) or 'keine'} (gefunden: {', '.join(got) or 'keine'}).")
     else:
         for seg, r in zip(rows, plan["tabelle"]):
+            want_cells = [r["ist"], r["vergleich"], r["abweichung"]]
+            if [c.replace("\u00a0", " ") for c in seg.cells[1:4]] != want_cells:
+                problems.append(f"Tabelle, {r['position']}: Ist, Vergleich und Abweichung genau so übernehmen: "
+                                f"{' | '.join(want_cells)}.")
             last = seg.cells[-1]
             art = r["erklaerung"]["art"]
             if art == "quelle" and not all(q in last for q in r["erklaerung"]["quellen"]):
@@ -61,13 +67,13 @@ def check(text: str, plan: dict, facts: dict, notes: list[dict]) -> dict:
     hinweise = parsed.section_text.get(HINWEISE, "")
     for h in plan["hinweise"]:
         if h["position"] not in hinweise:
-            problems.append(f"Im Abschnitt Hinweise fehlt der Punkt zu {h['position']}.")
+            problems.append(f"Im Abschnitt Hinweise fehlt der Punkt „- {h['position']}: …“ (Positionsname genau so).")
     if not plan["hinweise"] and hinweise.strip() and hinweise.strip() != _CFG["format"]["empty_marker"]:
         problems.append("Der Abschnitt Hinweise muss „Keine.“ enthalten.")
 
     questions = [s for s in parsed.segments if s.kind == "frage" and s.section == FRAGEN]
-    if len(questions) < len(plan["fragen"]):
-        problems.append(f"Es fehlen offene Fragen: Der Plan enthält {len(plan['fragen'])}, der Text {len(questions)}.")
+    if len(questions) != len(plan["fragen"]):
+        problems.append(f"Offene Fragen: genau {len(plan['fragen'])} (wie im Plan), der Text enthält {len(questions)}.")
 
     kern = [s for s in parsed.segments if s.section == KERNAUSSAGEN and s.kind == "satz"]
     if kern and len(re.findall(r"^\d+\.\s", parsed.section_text.get(KERNAUSSAGEN, ""), re.M)) \
@@ -78,7 +84,9 @@ def check(text: str, plan: dict, facts: dict, notes: list[dict]) -> dict:
     lo, hi = f["words_min"] - f["words_tolerance"], f["words_max"] + f["words_tolerance"]
     words = report["metrics"]["words"]
     if not lo <= words <= hi:
-        problems.append(f"Länge ohne Tabelle {words} Wörter; Ziel 250–350.")
+        problems.append(f"Länge ohne Tabelle {words} Wörter; Ziel 250–350. "
+                        + ("Ergänze ganze Sätze mit Einordnung (Vorjahr, kumuliert, Folge der Verzerrungen), ohne neue "
+                           "Inhalte." if words < lo else "Kürze, ohne Punkte des Plans wegzulassen."))
     if ABWEICHUNGEN not in parsed.section_text:
         problems.append("Der Abschnitt „Abweichungen im Detail“ fehlt.")
     return {"ok": not problems, "problems": problems, "report": report}

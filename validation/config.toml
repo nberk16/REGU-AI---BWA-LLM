@@ -31,6 +31,7 @@ speculative_words = [
 # Nedenin bilinmediğini söyleyen cümleler işaret gerektirmez (B3: açık soru).
 unknown_cause_phrases = [
   "nicht ersichtlich", "unklar", "ungeklärt", "offen", "nicht bekannt", "Rückfrage", "keine Angabe",
+  "nicht identifiziert", "nicht geklärt", "unbekannt",
 ]
 
 # Rakamın hangi satıra ait olduğu: cümle (madde, tablo satırı) bir satır veya oran adı içeriyorsa rakam

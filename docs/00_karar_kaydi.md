@@ -413,6 +413,13 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **Rohertrag adayı:** Önceki ayla karşılaştırılır; nedenin yönü tutmalı. 47 `cite` ayından 10'u uyarıya döndü (`11`, 2.2).
 - **Sıradaki adım:** Kullanıcı dizüstünde pilotu çalıştırır (`ideal/README.md`).
 
+### 18.3 Pilot 1 (19.10.2026)
+
+- Kullanıcı `--check` ile erişimi doğruladı. İlk denemede model listesi boş geldi; betik artık listeyi gösterip modeli doğrudan deniyor.
+- **Güvenlik olayı:** Kullanıcı bir terminal çıktısıyla birlikte API anahtarını sohbete yapıştırdı. Anahtarın silinip yenisinin oluşturulması önerildi; kılavuza „`$env:…` satırını kopyalama“ uyarısı eklendi.
+- Pilot: 24 ayın 9'u kabul (%38). Ret nedenleri ve düzeltmeler: `11_ideal_yorumlar.md`, Bölüm 10. Öğretmen istemi 1.1, plan 1.1, doğrulama v1.4.
+- Çıktı dosyası yanlışlıkla `main` dalına yüklendi. Çalışma dalına kopyalandı (`ideal/outputs/pilot_v1_0.jsonl`); `main`'e dokunulmadı.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -16,7 +16,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from facts.schema import BASE_LINES, MONTHS_DE
 
-PLAN_VERSION = "1.0"
+PLAN_VERSION = "1.1"
 
 NAME_TO_LINE = {name: key for key, name in BASE_LINES.items()}
 
@@ -317,15 +317,16 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
                      + (f" ({pct(gl['previous_year_month']['delta_pct'])})"
                         if gl["previous_year_month"]["delta_pct"] is not None else ""),
                      "text": "keine wesentlichen Abweichungen einzelner Positionen gegenüber dem Vorjahresmonat"})
-    warn = [h for h in hinweise if h["art"] == "warnung"]
+    taken = kern[-1]["position"]                 # Kernaussage 3, Kernaussage 2'nin kalemini tekrarlamaz
+    warn = [h for h in hinweise if h["art"] == "warnung" and h["position"] != taken]
     if kandidat:
         kern.append({"art": "hinweis" if v2["entscheidung"] == "warnung" else "position", "position": "Rohertragsquote"})
     elif warn:
         kern.append({"art": "hinweis", "position": warn[0]["position"]})
     elif len(table_rows) > 1:
         kern.append({"art": "position", "position": table_rows[1]["position"]})
-    elif hinweise:
-        kern.append({"art": "hinweis", "position": hinweise[0]["position"]})
+    elif [h for h in hinweise if h["position"] != taken]:
+        kern.append({"art": "hinweis", "position": next(h for h in hinweise if h["position"] != taken)["position"]})
 
     return {
         "plan_version": PLAN_VERSION, "id": f"{firm_id}_{period}", "firm_id": firm_id, "period": period,

@@ -438,6 +438,15 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - `--retry-failed` artık her turda yeni tohum kullanıyor.
 - Sıradaki: eğitim kümesi (960 ay), ardından reddedilenler için `--retry-failed` (eğitim ve doğrulama).
 
+### 18.7 Eğitim kümesi ve yeniden deneme (19.10.2026)
+
+- Öğretmen 1.3, yeniden deneme turu dahil: eğitim **908/960 (%95)**, doğrulama **138/144 (%96)**. Kabul edilen bütün metinler güncel kontrolden yeniden geçti (`11_ideal_yorumlar.md`, Bölüm 14).
+- Okuma ve otomatik tarama: metinlerin ~%5'inde bir cümlelik plan dışı yorum (işaretsiz „da“ yan cümlesi, nadiren „Trend“). Oran deneme sayısıyla artıyor (1. deneme %3, 3–4. deneme %8). Rakam ve kaynak sadakati etkilenmiyor.
+- **[ÖNERİ]** İkinci yeniden deneme turu yapılmaz; ret çarpıklığı küçük (A3 %9, A2 %1).
+- **[ÖNERİ]** Eğitim verisi birleştirilirken rakamdan önceki tire ASCII eksiye çevrilir (metinlerin ~%10'u).
+- **[ÖNERİ]** Plan dışı yan cümleler bilinen sınırlama; gerekirse 3–4. denemede kabul edilen 172 metin ablation olarak çıkarılır.
+- Sıradaki: altın küme (20–30 doğrulama ayı) ve eğitim verisinin birleştirilmesi (öğrenci istemi 1.1 `rag_k8` + kabul edilen metin).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

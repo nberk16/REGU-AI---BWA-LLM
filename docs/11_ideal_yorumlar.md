@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Doğrulama kümesi (öğretmen 1.3): 144 ayın 132'si kabul, %92 (Bölüm 13). Sıradaki: eğitim kümesi (960 ay), 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Sıradaki: altın küme ve eğitim verisinin birleştirilmesi, 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -163,7 +163,7 @@ python -m ideal report --set pilot                             # özet: kabul or
 ## 9. Açık noktalar
 
 - **[AÇIK, paket 7]** „Yalnızca fine-tuning“ varyantı için bağlamsız girdilere ayrı hedefler gerekip gerekmediği (`00`, 17.3). Gerekirse aynı plan kodu, görünen not kümesi boş verilerek çalıştırılır; bu durumda bütün nedenler hipotez ya da açık soru olur.
-- **Altın küme:** Pilot çıktılarından 20–30 ay seçilip elle düzeltilecek. Kullanım alanları: kalite ölçümü, üslup referansı, öğretmen istemine örnek.
+- **Altın küme:** Doğrulama kümesinin kabul edilen metinlerinden (pilot ayları dahil) 20–30 ay seçilip elle düzeltilecek. Kullanım alanları: kalite ölçümü, üslup referansı, öğretmen istemine örnek.
 
 ## 10. Pilot 1 (öğretmen 1.0, 19.10.2026)
 
@@ -278,3 +278,45 @@ Cümle bazında geri bildirim ve netleştirilmiş kurallar biçim sorunlarını 
 - Kusurların hiçbiri eğitim hedefini bozacak türden değil.
 
 **Yeniden deneme düzeltmesi:** `--retry-failed` önceden aynı tohumları kullanıyordu; aynı reddedilen metin büyük olasılıkla yeniden üretilirdi. Artık her yeni turda tohum, önceki tur başına 100 kaydırılıyor (test).
+
+## 14. Eğitim kümesi ve yeniden deneme turu (öğretmen 1.3, 19.10.2026)
+
+Çıktılar: `ideal/outputs/train.jsonl` (1.049 kayıt), `ideal/outputs/val.jsonl` (156 kayıt). Her ay için son kayıt geçerli. Bütün kayıtlar öğretmen 1.3 / plan 1.3 / istem 1.1 sürümünde. Kabul edilen 1.046 metin güncel kontrolden yeniden geçirildi; hepsi geçiyor.
+
+| | Eğitim (`train`) | Doğrulama (`val`) |
+|---|---|---|
+| Kabul | **908 / 960 (%95)** | **138 / 144 (%96)** |
+| İlk tur | 871 kabul | 132 kabul (Bölüm 13) |
+| `--retry-failed` (yeni tohumlar) | 89 ay → 37 kabul | 12 ay → 6 kabul |
+| Kabul edilenlerde deneme | 1: 327 · 2: 409 · 3: 114 · 4: 58 | 1: 53 · 2: 56 · 3: 21 · 4: 8 |
+| Kelime (tablo hariç) | en az 180 · medyan 233 · en fazla 389 | en az 180 · medyan 239 · en fazla 393 |
+| Token (bütün denemeler) | girdi 6,68 Mio · çıktı 1,82 Mio | girdi 0,99 Mio · çıktı 0,28 Mio |
+| Süre | ay başına medyan 19 s | ay başına medyan 20 s |
+| Kaynaklı neden içeren metin | 717 (%79) | 110 (%80) |
+| `(Hypothese)` içeren metin | 852 (%94) | 133 (%96) |
+
+**Ret dağılımı (eğitim, 52 ay):**
+- Arketip: A2 7/480 (%1), A3 45/480 (%9). A3'te sezon Hinweise'i ve Kernaussage biçimi daha sık bozuluyor.
+- Sakin aylar 16/147 (%11). Tablosu boş aylar 5/11.
+- En sık son sorunlar: işaretsiz neden cümlesi (22), Kernaussage biçimi (19), değerlendirici ifade (11), boş tabloda „Keine.“ yerine uydurma satır (6).
+- Sorunlar dağınık; tek bir plan ya da istem hatasına işaret etmiyor. Kontrol doğru reddediyor.
+
+**Okuma (rastgele 6 metin: 3'ü ilk denemede, 3'ü 3–4. denemede kabul):**
+- İlk denemede kabul edilenler doğrulama kümesi düzeyinde: nedenler notun içeriğiyle yazılmış, önceki yıl olayları „im Vorjahresmonat“ diye doğru yönde, hipotezler işaretli.
+- Geç kabul edilenlerde ara sıra plan dışı bir yan cümle var. Örnek: „…, da die Gesamtleistung leicht um 1,7 % stieg“ (kümülatif sonucu aylık hasılata bağlıyor) ya da bir bayrağı Kernaussage'de uyarı yerine olgu diliyle anlatma.
+
+**Otomatik tarama (kabul edilen 908 eğitim metni, tablo dışı):**
+
+| Kalıp | 1. deneme | 2. deneme | 3–4. deneme |
+|---|---:|---:|---:|
+| İşaretsiz „…, da …“ yan cümlesi | %3 | %5 | %8 |
+| „Trend / Tendenz / Kontrast / Jahresentwicklung“ | %0 | %0 | %3 |
+| Tire ile eksi („–102 T€“; plan ASCII `-` kullanıyor) | %2 | %15 | %12 |
+
+- „da“ cümlelerinin bir kısmı zararsız. Örnek: „Kumuliert entspricht das Ergebnis dem Monatswert, da es sich um den ersten Berichtsmonat handelt.“
+- Toplamda metinlerin ~%5'inde bir cümlelik plan dışı yorum var. Rakam ve kaynak sadakatini bozmuyor (doğrulama geçiyor), ama öğrenci bunu da öğrenebilir.
+
+**Öneriler [ÖNERİ]:**
+- **İkinci yeniden deneme turu yok.** 908 örnek yeterli. Ret çarpıklığı küçük: eğitimde A2 473 · A3 435 ay, sakin ay 131. Bir tur daha ~20 ay kazandırır, ama bunlar en çok denemeyle kabul edilen, yani en gürültülü metinler olur.
+- **Eğitim verisinde biçim birliği:** Rakamdan önceki tire (`–`) ASCII eksiye (`-`) çevrilir. Metnin geri kalanı değişmez.
+- **Plan dışı yan cümleler** bilinen sınırlama olarak kalır. Altın küme ve öğrencinin değerlendirmesi, öğrencinin bunları kopyalayıp kopyalamadığını gösterir. Gerekirse 3–4. denemede kabul edilen 172 metin eğitimde ayrı bir ablation olarak çıkarılabilir.

@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 18.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–11). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%55, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 18.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–11). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%56, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -381,7 +381,7 @@ Kararların tamamı ve gerekçeleri: [`docs/00_karar_kaydi.md`](docs/00_karar_ka
   - Karma yöntem: kural tabanlı içerik planı (ne söylenecek) + öğretmen modelin Almancası (nasıl söylenecek) + otomatik kontrol.
   - Ek olarak 20–30 örneklik, elle kontrol edilmiş altın küme.
   - Öğretmen: açık ağırlıklı bir model, API üzerinden. **[KARAR, tur 11]** Mistral Large 3, Mistral API. API anahtarı **yalnızca kullanıcının bilgisayarında** durur; öğretmen betiği orada çalışır.
-  - **Hat kodlandı** (`ideal/`, [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md)): içerik planı (yalnızca öğrencinin gördüğü notlar kaynak), öğretmen istemi, kontrol + yeniden deneme, istek dosyaları (pilot 24, eğitim 960, doğrulama 144 ay). Üç pilot tamamlandı (kabul %38 → %88 → %92; öğretmen istemi 1.3). Sıradaki: doğrulama kümesi, sonra eğitim kümesi ([`ideal/README.md`](ideal/README.md)).
+  - **Hat kodlandı** (`ideal/`, [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md)): içerik planı (yalnızca öğrencinin gördüğü notlar kaynak), öğretmen istemi, kontrol + yeniden deneme, istek dosyaları (pilot 24, eğitim 960, doğrulama 144 ay). Üç pilot tamamlandı (kabul %38 → %88 → %92; öğretmen istemi 1.3). Doğrulama kümesi: 144 ayın 132'si kabul. Sıradaki: eğitim kümesi ([`ideal/README.md`](ideal/README.md)).
 - **[KARAR, tur 7] Eğitim/test ayrımı** (`docs/04`, Bölüm 9; `docs/06`, C):
   - Testte hem öğretilmemiş hem öğretilmiş türden örnekler var:
     - **Yeni sektör:** test arketipi **A1** (Muster GmbH), eğitimde hiç görülmez.

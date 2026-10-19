@@ -197,6 +197,13 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     assert retry[-2]["role"] == "assistant" and "erfüllt folgende Punkte nicht" in retry[-1]["content"]
     assert fake_api.calls[0]["model"] == "mistral-large-2512" and "random_seed" in fake_api.calls[0]
     assert runner.main(args) == 0 and len(fake_api.calls) == 3          # devam: biten aylar atlanır
+    # --retry-failed: reddedilen ay yeni tohumlarla yeniden denenir
+    path = tmp_path / "out" / "pilot.jsonl"
+    failed = dict(recs[1], status="failed")
+    path.write_text(path.read_text(encoding="utf-8") + json.dumps(failed) + "\n", encoding="utf-8")
+    fake_api.replies = [good[1]]
+    assert runner.main(args + ["--retry-failed"]) == 0 and len(fake_api.calls) == 4
+    assert fake_api.calls[3]["random_seed"] == fake_api.calls[2]["random_seed"] + 200   # 2 önceki kayıt
     assert "test-key" not in capsys.readouterr().out
     summary = report("pilot", tmp_path / "out")
     assert "kabul: 2 (100%)" in summary and "1: 1, 2: 1" in summary

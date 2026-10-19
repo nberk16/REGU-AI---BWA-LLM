@@ -86,12 +86,13 @@ def clean(text: str) -> str:
     return text.strip()
 
 
-def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: float) -> dict:
+def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: float, round_: int = 0) -> dict:
+    """`round_`: bu ay için kaçıncı koşu (--retry-failed). Her turda farklı tohumlar: aynı ret tekrar üretilmesin."""
     messages = list(req["messages"])
     started, usage = time.time(), {"prompt_tokens": 0, "completion_tokens": 0}
     text, result = "", {"ok": False, "problems": []}
     for attempt in range(1, max_attempts + 1):
-        raw, u = chat(key, model, messages, req["random_seed"] + attempt - 1, temperature)
+        raw, u = chat(key, model, messages, req["random_seed"] + 100 * round_ + attempt - 1, temperature)
         for k in usage:
             usage[k] += u.get(k, 0)
         text = clean(raw)
@@ -101,7 +102,8 @@ def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: flo
         messages += [{"role": "assistant", "content": raw}, feedback_message(result["problems"])]
     return {"id": req["id"], "set": req["set"], "status": "ok" if result["ok"] else "failed", "attempts": attempt,
             "text": text, "problems": result["problems"], "model": model, "versions": req["versions"],
-            "options": {"temperature": temperature, "random_seed": req["random_seed"]}, "usage": usage,
+            "options": {"temperature": temperature, "random_seed": req["random_seed"] + 100 * round_, "round": round_},
+            "usage": usage,
             "seconds": round(time.time() - started, 1), "finished": datetime.now(timezone.utc).isoformat()}
 
 
@@ -158,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
     out_path = args.out / f"{args.set}.jsonl"
     versions = {r["id"]: r["versions"] for r in requests}
     last: dict[str, str] = {}                      # id → son kaydın durumu (yeniden denemede son kayıt geçerli)
+    rounds: dict[str, int] = {}                    # id → aynı sürümle önceki koşu sayısı
     if out_path.exists():
         with open(out_path, encoding="utf-8") as f:
             for line in f:
@@ -165,6 +168,7 @@ def main(argv: list[str] | None = None) -> int:
                     rec = json.loads(line)
                     if rec.get("versions") == versions.get(rec["id"]):   # eski istem/plan sürümünün kaydı sayılmaz
                         last[rec["id"]] = rec["status"]
+                        rounds[rec["id"]] = rounds.get(rec["id"], 0) + 1
     done = {i for i, s in last.items() if s == "ok" or not args.retry_failed}
     todo = [r for r in requests if r["id"] not in done][:args.limit]
     print(f"{args.set}: {len(requests)} ay, {len(done)} tamamlanmış, {len(todo)} çalışacak · model {args.model} · "
@@ -176,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
         if stop.is_set():
             return
         try:
-            rec = run_one(req, key, args.model, args.max_attempts, args.temperature)
+            rec = run_one(req, key, args.model, args.max_attempts, args.temperature, rounds.get(req["id"], 0))
         except Fatal as e:
             stop.set()
             print(f"DURDU: {e}", flush=True)

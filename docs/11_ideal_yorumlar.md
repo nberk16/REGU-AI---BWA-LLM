@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 (içerik sorunlu) · 1.2 %92, içerik büyük ölçüde temiz (Bölüm 12). Öğretmen 1.3 ve plan 1.3 ile sıradaki adım: doğrulama kümesi (144 ay), 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Doğrulama kümesi (öğretmen 1.3): 144 ayın 132'si kabul, %92 (Bölüm 13). Sıradaki: eğitim kümesi (960 ay), 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -254,3 +254,27 @@ Cümle bazında geri bildirim ve netleştirilmiş kurallar biçim sorunlarını 
 | Sezon hipotezi „Veränderung gegenüber dem Vorjahresmonat gering“ ama yıllık fark %13,6 | 1 | Plan 1.3: „deutlich kleiner als gegenüber dem Vormonat“ |
 
 **Sonraki adım:** Öğretmen 1.3 ile doğrulama kümesi (144 ay; pilot ayları dahil). Kabul oranı ve içerik yeterliyse eğitim kümesi (960 ay). Ayrı bir pilot yerine doğrulama kümesinin kullanılması bir tur kazandırır; çıktısı zaten gerekli.
+
+## 13. Doğrulama kümesi (öğretmen 1.3, 19.10.2026)
+
+Çıktı: `ideal/outputs/val.jsonl`.
+
+| | Değer |
+|---|---|
+| Kabul | 132 / 144 (%92) |
+| Kabul edilenlerde deneme | 1: 53 · 2: 55 · 3: 17 · 4: 7 |
+| Kelime (kabul edilenler) | en az 180 · medyan 240 · en fazla 393 |
+| Token | girdi 858 bin · çıktı 244 bin (ay başına ~6.000 + ~1.700, denemeler dahil) |
+| Süre | ay başına medyan 20 s |
+
+**Ret nedenleri (12 ay):** Çoğunlukla işaretsiz bir neden cümlesi (7). Ayrıca Kernaussage biçimi, Kernaussage'de eksik neden ve kısa metin.
+
+**Okuma:** Pilot dışından rastgele 8 kabul edilmiş metin okundu. Pilot 3 ile aynı düzeyde:
+- Nedenler notun içeriğiyle yazılmış, Kernaussage'ler de nedeni söylüyor.
+- Varsayımlar işaretli, açık nedenler „offen“.
+- Küçük kusurlar:
+  - Önceki yılın bir zammını „vorübergehend niedrigere Einkaufspreise“ diye ters yönden anlatma.
+  - Değeri 0 olan Vorjahresmonat için „ungewöhnlich hoher Vergleichswert“ ifadesi (negatif satırda cebirsel olarak doğru, okurken garip).
+- Kusurların hiçbiri eğitim hedefini bozacak türden değil.
+
+**Yeniden deneme düzeltmesi:** `--retry-failed` önceden aynı tohumları kullanıyordu; aynı reddedilen metin büyük olasılıkla yeniden üretilirdi. Artık her yeni turda tohum, önceki tur başına 100 kaydırılıyor (test).

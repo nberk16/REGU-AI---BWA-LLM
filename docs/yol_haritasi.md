@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (ideal yorumlar: pilot 3, öğretmen istemi 1.3; sıradaki: doğrulama kümesi)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (ideal yorumlar: doğrulama kümesi %92 kabul; sıradaki: eğitim kümesi)
 
 ---
 
-## 1. Genel durum: ~%55 tamamlandı
+## 1. Genel durum: ~%56 tamamlandı
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 27,45 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 28,25 gün
 toplam iş     = 50 gün
-durum         = 27,45 / 50 ≈ %55
+durum         = 28,25 / 50 ≈ %56
 ```
 
 **Belirsizlik:**
@@ -34,13 +34,13 @@ durum         = 27,45 / 50 ≈ %55
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %40 | 3,2 | 🔄 pilotlar tamam, doğrulama kümesi bekleniyor |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri) | 8 | %50 | 4,0 | 🔄 doğrulama kümesi tamam, eğitim kümesi bekleniyor |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **50** | | **27,45** | **≈ %55** |
+| | **Toplam** | **50** | | **28,25** | **≈ %56** |
 
 ---
 
@@ -83,7 +83,7 @@ durum         = 27,45 / 50 ≈ %55
   - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
 - **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
 
-### 5. İdeal yorumların üretimi — 🔄 pilotlar tamam, doğrulama kümesi bekleniyor
+### 5. İdeal yorumların üretimi — 🔄 doğrulama kümesi tamam, eğitim kümesi bekleniyor
 - **Yapılan (`ideal/`, `docs/11`):**
   - İçerik planı: `effects.csv` ile kaynaklı neden, hipotez ya da „Ursache offen“; yalnızca öğrencinin gördüğü notlar kaynak.
   - Öğretmen istemi (Almanca, 10 kural).
@@ -97,8 +97,9 @@ durum         = 27,45 / 50 ≈ %55
 - **Pilot 1 (19.10.2026):** 24 ayın 9'u kabul (%38). Nedenler ve düzeltmeler `docs/11`, Bölüm 10: öğretmen istemi 1.1, cümle bazında geri bildirim, plan 1.1, doğrulama v1.4.
 - **Pilot 2 (19.10.2026):** Kabul %88, ama okumada içerik sorunları çıktı. Öğretmen 1.2, plan 1.2, içerik kontrolleri, doğrulama v1.5 (`docs/11`, Bölüm 11).
 - **Pilot 3 (19.10.2026):** Kabul %92, içerik büyük ölçüde temiz; Kernaussage'lerde neden eksikti → öğretmen 1.3, plan 1.3, doğrulama v1.6 (`docs/11`, Bölüm 12).
-- **Kalan (%60):**
-  - Doğrulama kümesi (144 ay, kullanıcı) → okuma; iyiyse eğitim kümesi (960 ay).
+- **Doğrulama kümesi (19.10.2026):** 144 ayın 132'si kabul (%92); okumada içerik temiz (`docs/11`, Bölüm 13).
+- **Kalan (%50):**
+  - Eğitim kümesi (960 ay, kullanıcı) ve reddedilenlerin yeniden denenmesi.
   - Altın küme (20–30 ay, elle düzeltilmiş).
   - Büyük koşu (1.104 ay) ve reddedilenlerin yeniden denenmesi.
   - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8`) + kabul edilen metin.
@@ -214,3 +215,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 19.10.2026 | Pilot 1 (öğretmen 1.0): kabul %38; öğretmen istemi 1.1, cümle bazında geri bildirim, daha sıkı tablo/soru kontrolü, plan 1.1, doğrulama v1.4. Durum değişmedi: %54 |
 | 19.10.2026 | Pilot 2 (öğretmen 1.1): kabul %88; okumada içerik sorunları → öğretmen 1.2, plan 1.2 (Einordnung), içerik kontrolleri, doğrulama v1.5. Durum değişmedi: %54 |
 | 19.10.2026 | Pilot 3 (öğretmen 1.2): kabul %92, içerik büyük ölçüde temiz; Kernaussage neden kontrolü → öğretmen 1.3, plan 1.3, doğrulama v1.6. Paket 5 → %40: %55 |
+| 19.10.2026 | Doğrulama kümesi (öğretmen 1.3): 144 ayın 132'si kabul; içerik temiz; `--retry-failed` yeni tohumlarla. Paket 5 → %50: %56 |

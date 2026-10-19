@@ -68,7 +68,7 @@ python ideal/run_teacher.py --set train
 python ideal/run_teacher.py --set train --retry-failed
 ```
 
-İkinci komut, kontrolü geçemeyen ayları bir kez daha dener.
+İkinci komut, kontrolü geçemeyen ayları yeni bir rastgelelik tohumuyla bir kez daha dener. Doğrulama kümesi için de aynısı: `python ideal/run_teacher.py --set val --retry-failed`.
 
 ## Sorun giderme
 

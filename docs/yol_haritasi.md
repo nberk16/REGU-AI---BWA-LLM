@@ -134,7 +134,7 @@ durum         = 30,65 / 50 ≈ %61
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
   - Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
-  - **[AÇIK]** „Yalnızca fine-tuning“ varyantı: bağlamla eğitilen model bağlamsız mı çalıştırılır, yoksa bağlamsız girdilerle ayrı bir model mi eğitilir? İkincisi ayrı ideal yorumlar gerektirir (paket 5). Fine-tuning'den önce kullanıcıya sunulacak (`docs/00`, 17.3).
+  - **[AÇIK]** „Yalnızca fine-tuning“ varyantı: bağlamla eğitilen model bağlamsız mı çalıştırılır, yoksa bağlamsız girdilerle ayrı bir model mi eğitilir? İkincisi ayrı ideal yorumlar gerektirir (paket 5). Seçenekler (A/B/C) kullanıcıya sunuldu, karar bekleniyor (`docs/00`, 17.3).
 
 ### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.3
 - **Yapılan:**

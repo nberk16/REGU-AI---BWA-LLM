@@ -387,6 +387,11 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 ### 17.3 Açık karar [AÇIK]
 
 - **„Yalnızca fine-tuning“ varyantının eğitimi (paket 7):** Aynı modeli bağlamlı eğitip bağlamsız mı çalıştırmalı, yoksa bağlamsız girdilerle ayrı bir model mi eğitmeli? İkincisi, bağlamsız girdiler için ayrı ideal yorumlar gerektirir (paket 5). Seçenekler fine-tuning'den önce kullanıcıya sunulacak.
+- **Seçenekler (kullanıcıya sunuldu, 19.10.2026):**
+  - **A — Aynı model, testte bağlam çıkarılır.** Ek maliyet yok. Ama model eğitimde hiç görmediği bir girdiyle karşılaşır (hep not görüp atıf yapmayı öğrendi); sonuç „FT yetmez“ yerine dağılım kaymasını ölçebilir.
+  - **B — Bağlamsız girdilerle ayrı model.** Plan, görünen not kümesi boş verilerek yeniden kurulur; bütün nedenler hipotez ya da açık soru olur. Ek maliyet: bir öğretmen koşusu (~960 ay, kullanıcının dizüstü), bir eğitim koşusu (Kaggle, girdiler kısa), ~0,5 gün kod. A, ek eğitim gerektirmeden ayrı satır olarak yine raporlanabilir.
+  - **C — Tek karma model:** eğitim örneklerinin yarısında bağlam boş. Tek eğitim, ama ana varyant (RAG + FT) daha az bağlamlı örnek görür ve iki davranış birbirine karışabilir.
+  - **Asistanın önerisi [ÖNERİ]:** B (+ A ek satır olarak). Adil karşılaştırma ve „bilgi RAG'de, davranış FT'de“ ilkesinin temiz gösterimi.
 
 ## 18. Karar turu 11 (18.10.2026): öğretmen model ve anahtar
 

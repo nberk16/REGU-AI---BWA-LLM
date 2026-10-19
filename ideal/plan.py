@@ -16,7 +16,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from facts.schema import BASE_LINES, MONTHS_DE
 
-PLAN_VERSION = "1.2"
+PLAN_VERSION = "1.3"
 
 NAME_TO_LINE = {name: key for key, name in BASE_LINES.items()}
 
@@ -63,7 +63,8 @@ RULES = {
         "folge": "Dann wären die Vormonate und der {monat} in entgegengesetzter Richtung verzerrt.",
         "frage": "Für welche Monate gilt die Bestandsbuchung im {monat}, und wie verteilt sie sich?"},
     "saisonal": {
-        "hypothese": "saisonübliches Muster, da die Veränderung gegenüber dem Vorjahresmonat gering ist",
+        "hypothese": "saisonübliches Muster, da die Veränderung gegenüber dem Vorjahresmonat deutlich kleiner ist als "
+                     "gegenüber dem Vormonat",
         "folge": "Maßgeblich ist der Vorjahresvergleich; eine Verzerrung ist nicht erkennbar.",
         "frage": None},
 }

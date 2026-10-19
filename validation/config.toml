@@ -22,6 +22,7 @@ causal_words = [
   "wegen", "aufgrund", "auf Grund", "durch", "ursächlich", "Ursache", "Ursachen", "zurückzuführen",
   "*bedingt", "infolge", "weil", "resultiert", "resultieren", "erklärt", "erklären", "liegt an",
   "beruht", "beruhen", "geht auf", "gehen auf", "dank", "verursacht", "getrieben", "Grund", "Gründe",
+  "Zusammenhang", "zusammenhängen", "verantwortlich", "folgt auf", "ergibt sich aus",
 ]
 # Hinweise bölümünde uyarı dili doğaldır; bu kelimeler orada işaret gerektirmez (nedensellik kelimeleri gerektirir).
 speculative_words = [

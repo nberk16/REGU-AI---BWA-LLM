@@ -53,6 +53,23 @@ python ideal/run_teacher.py --set pilot
 
 Sonra bana haber ver. Metinleri okurum, altın küme adaylarını seçerim ve gerekirse istemi düzeltirim. Büyük koşunun komutlarını ondan sonra veririm.
 
+## 5. Büyük koşu
+
+Önce doğrulama kümesi (144 ay, tahminen ~20–30 dakika):
+
+```
+python ideal/run_teacher.py --set val
+```
+
+`ideal/outputs/val.jsonl` dosyasını Bölüm 4'teki gibi yükle. Ben okuyup onaylayınca eğitim kümesi (960 ay, tahminen ~2–3 saat; yarıda kalırsa aynı komut kaldığı yerden devam eder):
+
+```
+python ideal/run_teacher.py --set train
+python ideal/run_teacher.py --set train --retry-failed
+```
+
+İkinci komut, kontrolü geçemeyen ayları bir kez daha dener.
+
 ## Sorun giderme
 
 | Mesaj | Ne yapmalı |

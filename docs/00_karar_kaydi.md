@@ -426,6 +426,12 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - Öğretmen istemi 1.2, plan 1.2 (yalnızca facts'ten „Einordnung“), içerik kontrolleri, doğrulama v1.5.
 - **[ÖNERİ]** Kabul alt sınırı 180 kelime. B4'teki ~250–350 hedef olarak kalır; az maddeli planlarda öğretmenin uydurarak uzatmasını önlemek için.
 
+### 18.5 Pilot 3 (19.10.2026)
+
+- 24 ayın 22'si kabul (%92). İçerik büyük ölçüde temiz.
+- Kalan ana sorun: kalem Kernaussage'lerinde neden yok (17/22). Öğretmen 1.3, plan 1.3, Kernaussage neden kontrolü, doğrulama v1.6 (`11_ideal_yorumlar.md`, Bölüm 12).
+- **[ÖNERİ]** Ayrı bir pilot 4 yerine doğrulama kümesi (144 ay) çalıştırılır; sonuç iyiyse eğitim kümesi.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

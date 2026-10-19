@@ -17,7 +17,7 @@ WORDS_MIN, WORDS_MAX = 180, 400
 
 # Öğretmenin eklememesi gereken değerlendirme, çıkarım ve öneri kalıpları (pilot 2'de görüldü).
 _EVALUATIVE = re.compile(r"Handlungsbedarf|empfehl|Maßnahme|Kostenkontrolle|unterstreich|verdeutlich|signalisier|"
-                         r"kompensier|Prognose|erfreulich|besorgnis|folgt auf|Notwendigkeit", re.IGNORECASE)
+                         r"kompensier|Prognose|erfreulich|besorgnis|Notwendigkeit|vermeid", re.IGNORECASE)
 # Açıklama hücresinde içerik olmayan yazımlar: plan etiketi, yalnızca yön.
 _META = re.compile(r"Ursache mit Quelle|Inhalt aus|Letzte Spalte|Spalte Erklärung|→")
 _DIRECTION_ONLY = {"gestiegen", "gesunken", "anstieg", "rückgang", "erhöht", "gesenkt", "höher", "niedriger"}
@@ -63,6 +63,29 @@ def _source_content(parsed, plan: dict) -> list[str]:
             where = f"Tabelle, {seg.cells[0]}" if seg.kind == "zeile" else f"„{seg.text[:160]}“"
             problems.append(f"{where}: Die Ursache aus {', '.join(sorted(cited))} wird nicht genannt; nenne sie in "
                             f"eigenen Worten aus dem Inhalt der Notiz.")
+    return problems
+
+
+_KERN_ITEM = re.compile(r"^(\d+)\.\s+(.*?)(?=^\d+\.\s|\Z)", re.M | re.S)
+_OPEN = re.compile(r"offen|nicht geklärt|ungeklärt|nicht bekannt|unklar|nicht ersichtlich|nicht identifiziert", re.I)
+
+
+def _kernaussage_causes(parsed, plan: dict) -> list[str]:
+    """Bir kalemi anlatan Kernaussage, tablodaki nedeni de söyler (kaynak, hipotez ya da açık)."""
+    items = {int(m.group(1)): m.group(2) for m in _KERN_ITEM.finditer(parsed.section_text.get(KERNAUSSAGEN, ""))}
+    rows = {r["position"]: r for r in plan["tabelle"]}
+    problems = []
+    for i, k in enumerate(plan["kernaussagen"], 1):
+        if k["art"] != "position" or i not in items or k["position"] not in rows:
+            continue
+        e, text = rows[k["position"]]["erklaerung"], items[i]
+        missing = ((e["art"] == "quelle" and not all(q in text for q in e["quellen"]))
+                   or (e["art"] == "hypothese" and "(Hypothese)" not in text)
+                   or (e["art"] == "offen" and not _OPEN.search(text)))
+        if missing:
+            how = {"quelle": f"mit [Quelle: {'; '.join(e.get('quellen', []))}]", "hypothese": "als Vermutung mit (Hypothese)",
+                   "offen": "als offen („Ursache offen“)"}[e["art"]]
+            problems.append(f"Kernaussage {i} ({k['position']}) nennt die Ursache nicht wie in der Tabelle; {how}.")
     return problems
 
 
@@ -117,6 +140,8 @@ def check(text: str, plan: dict, facts: dict, notes: list[dict]) -> dict:
     questions = [s for s in parsed.segments if s.kind == "frage" and s.section == FRAGEN]
     if len(questions) != len(plan["fragen"]):
         problems.append(f"Offene Fragen: genau {len(plan['fragen'])} (wie im Plan), der Text enthält {len(questions)}.")
+
+    problems += _kernaussage_causes(parsed, plan)
 
     kern = [s for s in parsed.segments if s.section == KERNAUSSAGEN and s.kind == "satz"]
     if kern and len(re.findall(r"^\d+\.\s", parsed.section_text.get(KERNAUSSAGEN, ""), re.M)) \

@@ -4,7 +4,7 @@
 bu modül kullanıcının dizüstündeki betikte de çalışır.
 """
 
-TEACHER_VERSION = "1.2"
+TEACHER_VERSION = "1.3"
 
 _SYSTEM = """Du bist erfahrener Controller und Redakteur in einem mittelständischen Unternehmen. Aus einem fertigen Inhaltsplan schreibst du den Management-Kommentar zur monatlichen BWA (vorläufige Werte) für Geschäftsführung und kaufmännische Leitung. Der Plan legt fest, WAS gesagt wird; du entscheidest nur, WIE es gesagt wird.
 
@@ -18,7 +18,7 @@ Regeln:
 7. Tabelle: genau die Zeilen des Plans in dieser Reihenfolge. Ist, Vergleich (mit „Vj.“ bzw. „Vm.“) und Abweichung genau wie im Plan, in vollen Euro. Die Spalte Erklärung nennt die Ursache in wenigen Wörtern (z. B. „Großauftrag eines Bauträgers“, „möglicher Einmaleffekt“); sie ist nie leer und nennt nicht nur die Richtung („gestiegen“). Letzte Spalte genau „[Quelle: …]“, „Hypothese“ oder „–“.
 8. Hinweise: nur Aufzählungspunkte, je Punkt des Plans einer, jeder beginnt mit dem Positionsnamen genau wie im Plan: „- Material-/Wareneinkauf: …“. Kein Einleitungssatz, keine Absätze. Hinweise sind Warnungen, keine Tatsachen.
 9. Offene Fragen: genau die Fragen des Plans, sinngemäß, je eine Zeile „- …?“.
-10. Länge: etwa 250–350 Wörter ohne Tabelle. Für zusätzliche Sätze nutzt du nur die Angaben unter „Einordnung“ im Plan (Vormonat, kumuliert, Gesamtleistung). Hat der Plan wenige Punkte, ist ein kürzerer Text richtig; verlängere nie mit eigenen Bewertungen. Kernaussagen: genau die Punkte des Plans, nummeriert, ohne Wiederholungen.
+10. Länge: etwa 250–350 Wörter ohne Tabelle. Für zusätzliche Sätze nutzt du nur die Angaben unter „Einordnung“ im Plan (Vormonat, kumuliert, Gesamtleistung). Hat der Plan wenige Punkte, ist ein kürzerer Text richtig; verlängere nie mit eigenen Bewertungen. Kernaussagen: genau die Punkte des Plans, nummeriert, ohne Wiederholungen; eine Kernaussage zu einer Position nennt auch ihre Ursache wie in der Tabelle (mit Quellenangabe, als Vermutung mit „(Hypothese)“ oder als offen).
 11. Format: genau die vier Überschriften des Musters in dieser Reihenfolge, kein Text davor oder danach, keine weiteren Überschriften, Trennlinien oder Hervorhebungen. Ein Abschnitt ohne Inhalt enthält nur „Keine.“
 12. Sprache: natürliches, präzises Geschäftsdeutsch; abwechslungsreich formuliert, ohne Floskeln.
 
@@ -84,11 +84,21 @@ def render_plan(plan: dict) -> str:
                        f"{k['text']}")
         elif k["art"] == "position":
             r = rows[k["position"]]
-            out.append(f"{i}. {k['position']}: {_row_numbers(r)}. Ursache wie in der Tabellenzeile: "
-                       f"{_explanation(r['erklaerung']).split(' Letzte Spalte')[0]}"
+            e = r["erklaerung"]
+            must = {"quelle": f"die Ursache aus dem Inhalt von {', '.join(e.get('quellen', []))} im selben Satz mit "
+                              f"[Quelle: {'; '.join(e.get('quellen', []))}]",
+                    "hypothese": f"die Vermutung „{e.get('text', '')}“ mit „(Hypothese)“",
+                    "offen": "dass die Ursache offen ist"}[e["art"]]
+            out.append(f"{i}. {k['position']}: {_row_numbers(r)}. Diese Kernaussage nennt auch {must}."
                        + (f" Einordnung: {r['einordnung']}" if r.get("einordnung") else ""))
         else:
             h = hinweise[k["position"]]
+            if k["position"] in rows and rows[k["position"]]["erklaerung"]["art"] == "quelle":
+                e = rows[k["position"]]["erklaerung"]
+                out.append(f"{i}. {k['position']}: {_row_numbers(rows[k['position']])}. Diese Kernaussage nennt auch "
+                           f"die Ursache aus dem Inhalt von {', '.join(e['quellen'])} im selben Satz mit "
+                           f"[Quelle: {'; '.join(e['quellen'])}].")
+                continue
             how = {"warnung": "als mögliche Verzerrung (siehe Hinweise)",
                    "erklaert": f"erklärt durch [Quelle: {'; '.join(h.get('quellen', []))}]",
                    "saison": "vermutlich saisonübliches Muster, keine Verzerrung (Hypothese)"}[h["art"]]

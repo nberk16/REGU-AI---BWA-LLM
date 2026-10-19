@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilot 1 (öğretmen 1.0): kabul %38. Pilot 2 (1.1): kabul %88, ama okumada içerik sorunları çıktı (Bölüm 11). Öğretmen 1.2, plan 1.2 ve sıkılaştırılmış kontrolle pilot 3 bekleniyor, 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 (içerik sorunlu) · 1.2 %92, içerik büyük ölçüde temiz (Bölüm 12). Öğretmen 1.3 ve plan 1.3 ile sıradaki adım: doğrulama kümesi (144 ay), 19.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -87,7 +87,7 @@ Her satırda açıklama şu sırayla belirlenir:
 
 ## 3. Öğretmen istemi (`ideal/teacher.py`)
 
-- **Sistem mesajı:** 12 kural (sürüm 1.2; 1.0'da 10). Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
+- **Sistem mesajı:** 12 kural (sürüm 1.3; 1.0'da 10). Planı eksiksiz al ve hiçbir şey ekleme. Yalnızca plandaki rakamlar (T€ biçimi serbest). Kaynak ve hipotez işareti aynı cümlede. Kausal kelimeler yalnızca kaynaklı ya da hipotezli cümlede. 250–350 kelime, 6.3 biçimi, akıcı ve çeşitli Almanca.
 - **Kullanıcı mesajı:** Planın okunur hâli: Kernaussagen, tablo satırları (rakamlar hazır), Hinweise, sorular ve **yalnızca kaynak gösterilecek notların** metni.
 - Öğretmen `facts.json`'u ve çeldirici notları görmez; uyduracağı malzeme yoktur.
 - **Üretim ayarları [ÖNERİ]:**
@@ -225,3 +225,32 @@ Cümle bazında geri bildirim ve netleştirilmiş kurallar biçim sorunlarını 
 - B4'teki „~250–350“ [KARAR] bir hedef olarak kalır. „Uydurma neden yok“ ilkesi (6.1) daha önceliklidir.
 
 **Doğrulama v1.5:** Satır adları büyük-küçük harfe duyarsız eşleşir („den Sonstigen Kosten“). Sıfat çekimli kısa adlar eklendi („sonstigen neutralen Ertrag“). Pilot 2'deki bir ret bu boşluktan kaynaklanıyordu.
+
+## 12. Pilot 3 (öğretmen 1.2, 19.10.2026)
+
+Çıktı: `ideal/outputs/pilot_v1_2.jsonl`.
+
+| | Değer |
+|---|---|
+| Kabul | 22 / 24 (%92) |
+| Kabul edilenlerde deneme | 1: 11 · 2: 9 · 3: 1 · 4: 1 |
+| Token | girdi 118 bin · çıktı 34 bin |
+| Süre | ay başına medyan 16 s |
+
+**Okuma (24 metnin hepsi):**
+- **İyileşenler:**
+  - Nedenler notun içeriğiyle yazılıyor („Sonderauftrag eines Bauträgers“, „Reparatur des Trockenofens“).
+  - Açıklama hücreleri anlamlı.
+  - Önceki yıl olayları doğru kuruluyor („Großauftrag … im Vorjahresmonat“).
+  - Eklenmiş değerlendirme neredeyse yok.
+  - Einordnung cümleleri yalnızca plandaki rakamları kullanıyor.
+- **Kalan sorunlar ve 1.3'teki karşılıkları:**
+
+| Sorun | Sıklık | Karşılık |
+|---|---:|---|
+| Bir kalemi anlatan Kernaussage, nedeni söylemiyor (neden yalnızca tabloda) | 17 / 22 | Plan metni bunu madde başına açıkça istiyor; kontrol: kaynak / „(Hypothese)“ / „offen“ Kernaussage'de de olmalı (öğretmen 1.3) |
+| İşaretsiz nedensellik: „steht im Zusammenhang mit …“ | 1 | Doğrulama v1.6: „Zusammenhang“, „verantwortlich“, „folgt auf“, „ergibt sich aus“ nedensellik kelimesi |
+| Öneri cümlesi: „… würde diese Verzerrung vermeiden“ | 1 | Kontrol: „vermeid…“ yasak kalıplarda. „folgt auf“ yasak listesinden çıktı; kaynakla birlikte meşru (validasyonda nedensellik kelimesi) |
+| Sezon hipotezi „Veränderung gegenüber dem Vorjahresmonat gering“ ama yıllık fark %13,6 | 1 | Plan 1.3: „deutlich kleiner als gegenüber dem Vormonat“ |
+
+**Sonraki adım:** Öğretmen 1.3 ile doğrulama kümesi (144 ay; pilot ayları dahil). Kabul oranı ve içerik yeterliyse eğitim kümesi (960 ay). Ayrı bir pilot yerine doğrulama kümesinin kullanılması bir tur kazandırır; çıktısı zaten gerekli.

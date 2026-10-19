@@ -5,6 +5,7 @@
 > - v1.3, istem 1.1'deki bilgi tabanı kimliklerini (WISSEN) tanır (Bölüm 12).
 > - v1.4 (19.10.2026): nedenin bilinmediğini söyleyen ifadelere „nicht identifiziert“, „nicht geklärt“, „unbekannt“ eklendi (öğretmen pilotu; `docs/11`, Bölüm 10).
 > - v1.5 (19.10.2026): satır adları ve kısa adlar büyük-küçük harfe duyarsız eşleşir; sıfat çekimli kısa adlar eklendi (`docs/11`, Bölüm 11).
+> - v1.6 (19.10.2026): nedensellik kelimelerine „Zusammenhang“, „zusammenhängen“, „verantwortlich“, „folgt auf“, „ergibt sich aus“ eklendi (`docs/11`, Bölüm 12).
 > - **[KARAR]:** kurallar (CLAUDE.md 6.2, Katman 4; tur 6: B3–B4; tur 8: yuvarlama kuralı (a)).
 > - **[ÖNERİ]:** kelime listeleri, kısa ad listesi, uzunluk toleransı ve "rakam hangi satıra ait" kuralı (`validation/config.toml`).
 >

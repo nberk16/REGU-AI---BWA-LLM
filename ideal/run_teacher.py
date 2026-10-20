@@ -20,7 +20,6 @@ Kullanım (repo klasöründe, PowerShell):
 
 import argparse
 import gzip
-import hashlib
 import json
 import os
 import sys
@@ -39,7 +38,7 @@ if sys.version_info < (3, 11):
     sys.exit("Python 3.11 veya daha yenisi gerekli (python --version).")
 
 from ideal.check import check  # noqa: E402
-from ideal.teacher import feedback_message  # noqa: E402
+from ideal.teacher import feedback_message, input_sha  # noqa: E402
 
 API = "https://api.mistral.ai/v1"
 # [ÖNERİ] Mistral Large 3 (v25.12). Erişilemezse --check mevcut "large" modellerini listeler.
@@ -87,11 +86,6 @@ def clean(text: str) -> str:
         text = text.split("\n", 1)[1] if "\n" in text else ""
         text = text.rsplit("```", 1)[0]
     return text.strip()
-
-
-def input_sha(req: dict) -> str:
-    """Öğretmene giden mesajların parmak izi: plan ya da bağlam değişirse eski kayıt geçersiz olur."""
-    return hashlib.sha256(json.dumps(req["messages"], ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
 
 def run_one(req: dict, key: str, model: str, max_attempts: int, temperature: float, round_: int = 0) -> dict:

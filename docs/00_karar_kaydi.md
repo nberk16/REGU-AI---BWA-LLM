@@ -486,6 +486,12 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - Düzeltme: eşitlikte olay kimliği belirler. İstek dosyaları artık her kurulumda bayt bayt aynı.
 - Bu yüzden ayrıca yeniden üretilecek aylar: eğitim 20, doğrulama 3. Toplam yeniden üretim: eğitim 87, doğrulama 9.
 
+### 19.5 Sonuçlar (20.10.2026)
+
+- Eğitim: yeniden üretilen 87 ayın 80'i kabul; toplam **901/960**. Doğrulamadaki 9 ay henüz üretilmedi (yüklenen dosya değişmemişti).
+- `val_ohne`: **134/144** kabul. Kaynak ve somut neden izi yok; içerik bağlamlı kümelerle aynı düzeyde (`11_ideal_yorumlar.md`, Bölüm 16).
+- **[ÖNERİ]** `train_ohne` başlatılır. Eğitimde reddedilen 7 yeni ay için ayrı bir yeniden deneme yapılmaz.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

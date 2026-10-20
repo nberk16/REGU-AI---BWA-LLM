@@ -99,6 +99,24 @@ python ideal/run_teacher.py --set train_ohne --retry-failed
 python ideal/run_teacher.py --set val_ohne --retry-failed
 ```
 
+## 7. Bağlamsız eğitim kümesi ve kalan 9 ay
+
+Aynı klasörde devam edebilirsin; yeniden indirmen gerekmiyor (yüklediğin dosyalar repodakilerle aynı).
+
+```
+python ideal/run_teacher.py --set val
+python ideal/run_teacher.py --set train_ohne
+python ideal/run_teacher.py --set train_ohne --retry-failed
+python ideal/run_teacher.py --set val_ohne --retry-failed
+```
+
+- **İlk komut:** düzeltilen 9 doğrulama ayı. İlk satırda „135 tamamlanmış, 9 çalışacak“ yazmalı.
+- **İkinci komut:** 960 ay, ~2–3 saat. Yarıda kalırsa aynı komut kaldığı yerden devam eder.
+- **Son iki komut:** kontrolü geçemeyen ayları bir kez daha, yeni tohumlarla dener.
+- **Bitince yükle:** `ideal/outputs/` içindeki `val.jsonl`, `train_ohne.jsonl` ve `val_ohne.jsonl` dosyalarını Bölüm 4'teki gibi yükle.
+
+**Uzun koşu için:** Başlık çubuğuna sağ tık → **Özellikler** → **Seçenekler** → „Hızlı Düzenleme Modu“ işaretini kaldır. Böylece pencereye yanlışlıkla tıklamak koşuyu duraklatmaz. Koşu sürerken **Ctrl+C**'ye basma; bu tuş betiği durdurur.
+
 ## Sorun giderme
 
 | Mesaj | Ne yapmalı |
@@ -107,4 +125,5 @@ python ideal/run_teacher.py --set val_ohne --retry-failed
 | `Anahtar geçersiz (401)` | Anahtarı konsoldan yeniden kopyala; gerekirse yeni bir anahtar oluştur |
 | `Model listesinde … yok` / `Deneme başarısız` | Mistral konsolunda bir planın (ücretsiz „Experiment“) etkin olduğunu kontrol et; ekrandaki satırları bana gönder |
 | `hata (…); sonra aynı komutla yeniden denenir` | Ağ sorunu olabilir; komutu yeniden çalıştır |
-| Ekran uzun süre değişmiyor | Pencereye tıklandıysa Windows ekrana yazmayı durdurur; pencereye tıkla ve **Esc**'ye bas |
+| Ekran uzun süre değişmiyor | Pencereye tıklandıysa Windows ekrana yazmayı durdurur (başlıkta „Seç“/„Select“); **Esc**'ye bas |
+| `KeyboardInterrupt` | Ctrl+C'ye basıldı. Biten aylar kayıtlı; aynı komutu yeniden çalıştır, kaldığı yerden devam eder |

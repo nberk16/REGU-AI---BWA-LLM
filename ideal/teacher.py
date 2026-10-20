@@ -4,6 +4,9 @@
 bu modül kullanıcının dizüstündeki betikte de çalışır.
 """
 
+import hashlib
+import json
+
 TEACHER_VERSION = "1.3"
 
 _SYSTEM = """Du bist erfahrener Controller und Redakteur in einem mittelständischen Unternehmen. Aus einem fertigen Inhaltsplan schreibst du den Management-Kommentar zur monatlichen BWA (vorläufige Werte) für Geschäftsführung und kaufmännische Leitung. Der Plan legt fest, WAS gesagt wird; du entscheidest nur, WIE es gesagt wird.
@@ -127,6 +130,11 @@ def render_plan(plan: dict) -> str:
 
 def teacher_messages(plan: dict) -> list[dict]:
     return [{"role": "system", "content": system_prompt()}, {"role": "user", "content": render_plan(plan)}]
+
+
+def input_sha(request: dict) -> str:
+    """Öğretmene giden mesajların parmak izi: plan ya da bağlam değişirse eski kayıt geçersiz olur."""
+    return hashlib.sha256(json.dumps(request["messages"], ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
 
 def feedback_message(problems: list[str]) -> dict:

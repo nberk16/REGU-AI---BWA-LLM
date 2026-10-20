@@ -250,6 +250,12 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     assert runner.main(args) == 0 and len(fake_api.calls) == 5
     last = json.loads(path.read_text(encoding="utf-8").splitlines()[-1])
     assert last["id"] == changed["id"] and last["input_sha"] == runner.input_sha(changed)
+    # Rapor, güncel isteklere göre geçersiz kalan kayıtları ayrı sayar
+    assert "Henüz güncel" not in report("pilot", tmp_path / "out", req_dir)
+    other = dict(requests["pilot"][1], messages=requests["pilot"][1]["messages"] + [{"role": "user", "content": "y"}])
+    B.write_requests({"pilot": [changed, other]}, req_dir)
+    stale = report("pilot", tmp_path / "out", req_dir)
+    assert "Ay: 1 " in stale and "Henüz güncel girdiyle üretilmemiş: 1 ay (eski girdi 1, kaydı yok 0)" in stale
 
 
 def test_runner_needs_key_and_known_model(fake_api, monkeypatch, capsys):

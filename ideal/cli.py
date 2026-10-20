@@ -8,6 +8,7 @@
 """
 
 import argparse
+import gzip
 import json
 import statistics
 from collections import Counter
@@ -27,8 +28,22 @@ def latest(path: Path) -> dict[str, dict]:
     return out
 
 
-def report(name: str, outputs: Path) -> str:
+def current_inputs(requests: Path, name: str) -> dict[str, tuple]:
+    """İstek dosyasındaki her ay için (sürümler, input_sha): kaydın hâlâ geçerli olup olmadığını belirler."""
+    from .teacher import input_sha
+    with gzip.open(requests / f"{name}.jsonl.gz", "rt", encoding="utf-8") as f:
+        return {r["id"]: (r["versions"], input_sha(r)) for r in map(json.loads, f)}
+
+
+def report(name: str, outputs: Path, requests: Path | None = None) -> str:
+    """`requests` verilirse yalnızca güncel girdiyle üretilmiş kayıtlar sayılır; eksik ve eskimiş aylar ayrıca yazılır."""
     recs = list(latest(outputs / f"{name}.jsonl").values())
+    stale = missing = 0
+    if requests is not None:
+        current = current_inputs(requests, name)
+        valid = [r for r in recs if (r.get("versions"), r.get("input_sha")) == current.get(r["id"])]
+        stale, missing = len(recs) - len(valid), len(set(current) - {r["id"] for r in recs})
+        recs = valid
     ok = [r for r in recs if r["status"] == "ok"]
     attempts = Counter(r["attempts"] for r in ok)
     problems = Counter(p.split(":")[0][:70] for r in recs for p in r["problems"])
@@ -39,6 +54,8 @@ def report(name: str, outputs: Path) -> str:
              "- Kabul edilenlerde deneme sayısı: " + ", ".join(f"{k}: {v}" for k, v in sorted(attempts.items())),
              f"- Token: girdi {tokens_in:,} · çıktı {tokens_out:,}".replace(",", "."),
              f"- Süre / ay (medyan): {statistics.median(r['seconds'] for r in recs):.0f} s"]
+    if stale or missing:
+        lines.append(f"- Henüz güncel girdiyle üretilmemiş: {stale + missing} ay (eski girdi {stale}, kaydı yok {missing})")
     if problems:
         lines += ["", "**Reddedilen metinlerde son sorunlar:**", ""]
         lines += [f"- {p} × {n}" for p, n in problems.most_common(10)]
@@ -57,7 +74,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "report":
-        print(report(args.set, args.outputs))
+        print(report(args.set, args.outputs, ROOT / "ideal" / "requests"))
         return 0
 
     from .build import build_requests, write_requests

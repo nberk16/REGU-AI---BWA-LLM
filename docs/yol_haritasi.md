@@ -1,6 +1,6 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 19.10.2026 (karar turu 12: „yalnızca FT“ için bağlamsız hedefler; V6 ve kaynak sırası düzeltmeleri)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 20.10.2026 (düzeltilen eğitim ayları 901/960; `val_ohne` 134/144; sıradaki: `train_ohne`)
 
 ---
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 31,0 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 31,25 gün
 toplam iş     = 51 gün
-durum         = 31,0 / 51 ≈ %61
+durum         = 31,25 / 51 ≈ %61
 ```
 
 **Belirsizlik:**
@@ -34,13 +34,13 @@ durum         = 31,0 / 51 ≈ %61
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %75 | 6,75 | 🔄 bağlamlı hedefler tamam; düzeltilen 96 ay, bağlamsız hedefler, altın küme ve eğitim verisi kaldı |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %78 | 7,0 | 🔄 bağlamlı hedefler ve `val_ohne` tamam; `train_ohne`, 9 doğrulama ayı, altın küme ve eğitim verisi kaldı |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **31,0** | **≈ %61** |
+| | **Toplam** | **51** | | **31,25** | **≈ %61** |
 
 ---
 
@@ -101,8 +101,9 @@ durum         = 31,0 / 51 ≈ %61
 - **Doğrulama kümesi (19.10.2026):** 144 ayın 132'si kabul (%92); okumada içerik temiz (`docs/11`, Bölüm 13).
 - **Eğitim kümesi ve yeniden deneme (19.10.2026):** eğitim 908/960 (%95), doğrulama 138/144 (%96). Metinlerin ~%5'inde bir cümlelik plan dışı yorum; rakam ve kaynak sadakati etkilenmiyor (`docs/11`, Bölüm 14).
 - **Karar turu 12 (19.10.2026):** „Yalnızca FT“ için bağlamsız hedefler (B): `train_ohne` 960 + `val_ohne` 144 ay. Okumada iki düzeltme: V6 bayrağı (Katman 1) ve eşit etkili kaynakların sırası. Girdisi değişen 96 ay yeniden üretilecek; betik bunları parmak iziyle (`input_sha`) kendisi bulur (`docs/11`, Bölüm 15).
-- **Kalan (%25):**
-  - Kullanıcı: düzeltilen 96 ay, `val_ohne`, ardından `train_ohne` (`ideal/README.md`, Bölüm 6).
+- **Düzeltme sonrası (20.10.2026):** Eğitim 901/960 (yeniden üretilen 87 ayın 80'i kabul). `val_ohne` 134/144; kaynak ve uydurma neden izi yok (`docs/11`, Bölüm 16).
+- **Kalan (%22):**
+  - Kullanıcı: bekleyen 9 doğrulama ayı ve `train_ohne` (`ideal/README.md`, Bölüm 7).
   - Altın küme (20–30 doğrulama ayı, elle düzeltilmiş).
   - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8` ve `ohne_kontext`) + kabul edilen metin; rakamdan önceki tire → ASCII eksi.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
@@ -188,7 +189,7 @@ durum         = 31,0 / 51 ≈ %61
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
 1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
-2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Sıradaki: kullanıcının dizüstünde düzeltilen 96 ay ve `val_ohne` → okuma → `train_ohne`; ardından altın küme ve eğitim verisinin birleştirilmesi.
+2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Sıradaki: kullanıcının dizüstünde bekleyen 9 doğrulama ayı ve `train_ohne`; ardından altın küme ve eğitim verisinin birleştirilmesi.
 3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme. Repo özel olduğu için Kaggle'ın koda erişim yolu o adımda belirlenecek.
 - **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
 
@@ -220,3 +221,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 19.10.2026 | Doğrulama kümesi (öğretmen 1.3): 144 ayın 132'si kabul; içerik temiz; `--retry-failed` yeni tohumlarla. Paket 5 → %50: %56 |
 | 19.10.2026 | Eğitim kümesi (öğretmen 1.3): 908/960 kabul; yeniden deneme sonrası doğrulama 138/144. Okuma ve tarama: ~%5 metinde plan dışı yan cümle. Paket 5 → %80: %61 |
 | 19.10.2026 | Karar turu 12: „yalnızca FT“ için bağlamsız hedefler (B), istek dosyaları `train_ohne`/`val_ohne`. V6 bayrağı ve kaynak sırası düzeltildi; girdisi değişen 96 ay yeniden üretilecek (`input_sha`). Paket 5'in işi 8 → 9 gün, %75; toplam 51 gün: %61 |
+| 20.10.2026 | Düzeltilen eğitim ayları üretildi (87 → 80 kabul; toplam 901/960). `val_ohne` 134/144, okumada temiz. Rapor bekleyen ayları gösteriyor. Paket 5 → %78: %61 |

@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme; 96 ay yeniden üretilecek (Bölüm 15), 19.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15). Düzeltme sonrası eğitim 901/960; `val_ohne` 134/144 (Bölüm 16). Sıradaki: `train_ohne` ve bekleyen 9 doğrulama ayı, 20.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -147,7 +147,7 @@ python -m rag export --run data/synthetic/train_seed7          # bağlam (BGE-M3
 python -m ideal build --run data/synthetic/train_seed7         # planlar + istek dosyaları
 python -m ideal build --run data/synthetic/train_seed7 --variant ohne_kontext   # bağlamsız: {train,val}_ohne
 python ideal/run_teacher.py --set pilot                        # kullanıcının dizüstü (ideal/README.md)
-python -m ideal report --set pilot                             # özet: kabul oranı, denemeler, sorunlar, token
+python -m ideal report --set pilot                             # özet: kabul oranı, denemeler, sorunlar, token, bekleyen aylar
 ```
 
 ## 8. Testler (`tests/test_ideal.py`, 10 test)
@@ -374,3 +374,33 @@ Betik, her kayda öğretmen girdisinin parmak izini (`input_sha`) yazar. Mevcut 
 - 50 „ters yönlü“ V6 ayının yalnızca 14'ünde metin değişiyor; ötekilerde sezon bayrağı Firmenprofil notuyla açıklanıyor ve gerekçe metni kullanılmıyor.
 - Değişmeyen ayların kabul edilmiş metinleri (eğitim 821, doğrulama 129) yeni isteklerle de kontrolü geçiyor.
 - Pilot istek dosyasında 3 ay değişti; pilot çıktıları tarihî kayıttır.
+
+## 16. Düzeltilen aylar ve bağlamsız doğrulama kümesi (20.10.2026)
+
+Çıktılar: `ideal/outputs/train.jsonl` (1.136 kayıt), `ideal/outputs/val_ohne.jsonl` (144 kayıt). Yalnızca güncel girdiyle (sürüm + `input_sha`) üretilmiş kayıtlar sayıldı; kabul edilenlerin hepsi güncel kontrolden yeniden geçti.
+
+| | Eğitim (`train`) | Doğrulama (`val`) | Bağlamsız doğrulama (`val_ohne`) |
+|---|---|---|---|
+| Kabul | **901 / 960 (%94)** | 129 / 135 güncel (9 ay bekliyor) | **134 / 144 (%93)** |
+| Bu turda üretilen | 87 ay → 80 kabul, 7 ret (hepsi önceden kabul edilmişti) | 0 (yüklenen dosya değişmemişti) | 144 ay |
+| Kabul edilenlerde deneme | 1: 326 · 2: 403 · 3: 108 · 4: 64 | 1: 47 · 2: 53 · 3: 21 · 4: 8 | 1: 60 · 2: 67 · 3: 6 · 4: 1 |
+| Kelime (tablo hariç) | 180 / medyan 232 / 395 | — | 180 / medyan 256 / 373 |
+| Token (son kayıtlar) | — | — | girdi 689 bin · çıktı 210 bin |
+
+**`val_ohne` okuması (rastgele 5 metin) ve taraması (134 metin):**
+- `[Quelle: …]` hiç yok. Somut neden kelimesi de yok („Neueinstellung“, „Großauftrag“, „Preiserhöhung“, „Firmenprofil“ …). Öğretmen plan dışı bir olay uydurmuyor.
+- Hipotezler işaretli. Açık nedenler tabloda „Ursache offen“, soru bölümünde Rückfrage.
+- V6 Hinweis'leri yeni kuralla rakamlarla tutarlı. Örnek: „Rückgang um 10,1 % gegenüber dem Vormonat … stärker als der Vorjahresvergleich (-3,0 %)“.
+- Bağlamlı kümelere göre daha az deneme gerekiyor: kabul edilenlerin %95'i ilk iki denemede (bağlamlıda ~%80). Kaynak kuralları olmadığı için hata yüzeyi daha küçük.
+- **Küçük kusurlar:**
+  - Çok bayraklı aylarda Hinweise kısa kalıyor; plandaki „Folge“ cümlesi atlanıyor.
+  - Rohertragsquote Kernaussage'si bazen uyarı işareti taşımıyor.
+  - Üslup: „Verlust von –199.604 €“ (çift olumsuz) ve „kumuliert entspricht der Wert dem Monatsergebnis“ („Monatswert“ olmalı).
+  - 7 metinde eksi işareti tire ile (eğitim verisi birleştirilirken düzeltilecek, Bölüm 14).
+- **Ret nedenleri (10 ay):** İşaretsiz neden cümlesi (5), değerlendirici ifade (4), Kernaussage biçimi (3), rakamın yanlış kaleme yazılması (4).
+
+**Sonuç [ÖNERİ]:** Kusurların hiçbiri eğitim hedefini bozmuyor; `train_ohne` başlatılabilir (`ideal/README.md`, Bölüm 7).
+
+**Diğer:**
+- Eğitimde reddedilen 7 yeni ay için ayrı bir yeniden deneme yok. `--retry-failed` eski 52 reddi de ikinci kez dener; bu, Bölüm 14'teki „ikinci tur yok“ önerisiyle çelişir. Kayıp 7 ay (%0,7).
+- `python -m ideal report` artık yalnızca güncel girdiyle üretilmiş kayıtları sayar; bekleyen ayları ayrıca yazar (test).

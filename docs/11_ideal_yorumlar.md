@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15). Düzeltme sonrası eğitim 901/960; `val_ohne` 134/144 (Bölüm 16). Sıradaki: `train_ohne` ve bekleyen 9 doğrulama ayı, 20.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15–16). `train_ohne` 923/960 (Bölüm 17). Plan 1.4 (yön tutarlılığı): 555 ay yeniden üretilecek, 21.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -110,7 +110,7 @@ Bir metin şu şartların hepsini sağlarsa kabul edilir:
    - Kaynak gösteren her cümle ve satır, notun içeriğinden en az bir kelime içermeli. Satır adları, aylar ve genel kelimeler sayılmaz; birleşik kelimeler de eşleşir. Yalnızca atıf yetmez.
    - Değerlendirme, çıkarım ve öneri kalıpları yasak („Handlungsbedarf“, „unterstreicht“, „kompensieren“, „folgt auf“ …).
 
-Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve metin yeniden istenir. 1.1'den beri her sorunun yanında ilgili cümle de verilir. En fazla 4 deneme yapılır (1.0'da 3); sonra ay `failed` olarak kaydedilir. `--retry-failed` bu ayları sonra yeniden dener. Çıktı dosyasındaki eski sürüm kayıtları (plan/öğretmen sürümü farklı) atlanmaz, yeniden üretilir.
+Geçemeyen metin için bulunan sorunlar Almanca olarak modele geri verilir ve metin yeniden istenir. 1.1'den beri her sorunun yanında ilgili cümle de verilir. En fazla 4 deneme yapılır (1.0'da 3); sonra ay `failed` olarak kaydedilir. `--retry-failed` bu ayları sonra bir kez yeniden dener (`--max-rounds 2`). Girdisi değişmiş kayıtlar (parmak izi `input_sha` farklı) atlanmaz, yeniden üretilir (Bölüm 15, 17).
 
 **Tutarlılık sınaması:** Her plan, sabit cümlelerle kurulan bir kalıp metne de dökülür (`tests/ideal_template.py`). 1.104 ayın hepsinde bu metin, uzunluk dışında bütün kontrolleri geçiyor. Yani plan, rakam biçimleri ve kaynaklar doğrulama katmanıyla tutarlı.
 
@@ -150,7 +150,7 @@ python ideal/run_teacher.py --set pilot                        # kullanıcının
 python -m ideal report --set pilot                             # özet: kabul oranı, denemeler, sorunlar, token, bekleyen aylar
 ```
 
-## 8. Testler (`tests/test_ideal.py`, 10 test)
+## 8. Testler (`tests/test_ideal.py`, 11 test)
 
 - **Rakam biçimi:** Yuvarlama kuralı (a) ile uyumlu.
 - **Referans ay (Muster GmbH, 06/2025):**
@@ -165,6 +165,7 @@ python -m ideal report --set pilot                             # özet: kabul or
   - Anahtar ve model kontrolleri.
 - **Bağlamsız planlar:** Aynı aylar; kaynak yok, V2 adayı hep uyarı, kalıp metin kontrolü geçiyor.
 - **Belirlenimcilik:** Eşit etkili olaylar olay kimliğine göre sıralanır; plan Python'un hash tohumuna bağlı değil.
+- **Yön tutarlılığı (plan 1.4):** Taban hipotezi yalnızca ters yönde olağandışı tabanda; geç fatura yalnızca artışta.
   - Anahtar ekrana basılmıyor.
 
 ## 9. Açık noktalar
@@ -404,3 +405,51 @@ Betik, her kayda öğretmen girdisinin parmak izini (`input_sha`) yazar. Mevcut 
 **Diğer:**
 - Eğitimde reddedilen 7 yeni ay için ayrı bir yeniden deneme yok. `--retry-failed` eski 52 reddi de ikinci kez dener; bu, Bölüm 14'teki „ikinci tur yok“ önerisiyle çelişir. Kayıp 7 ay (%0,7).
 - `python -m ideal report` artık yalnızca güncel girdiyle üretilmiş kayıtları sayar; bekleyen ayları ayrıca yazar (test).
+
+## 17. Bağlamsız eğitim kümesi ve plan 1.4 (21.10.2026)
+
+### 17.1 Sonuçlar (plan 1.3 girdileriyle)
+
+| | `train_ohne` | `val` | `val_ohne` |
+|---|---|---|---|
+| Kabul | **923 / 960 (%96)** | 138 / 144 (bekleyen 9 ay üretildi, hepsi kabul) | 139 / 144 (yeniden denemeyle +5) |
+| Yeniden deneme | 61 ay → 24 kabul | — | 10 ay → 5 kabul |
+| Kabul edilenlerde deneme | 1: 443 · 2: 368 · 3: 78 · 4: 34 | | |
+| Kelime | 180 / medyan 238 / 387 | | 180 / medyan 253 / 373 |
+| Token (bütün denemeler) | girdi 5,17 Mio · çıktı 1,50 Mio | | |
+
+- `train_ohne` arketip dengesi: A2 474, A3 449.
+- Taramada `[Quelle]` ya da somut neden kelimesi yok. İşaretsiz „da“ yan cümlesi %4, „Trend/Tendenz“ 6 metin, tire ile eksi %7; bağlamlı kümelerle aynı düzey.
+
+### 17.2 Bulgu: taban hipotezinin yönü
+
+- **Okumada görüldü:** A3-v119_2025-04. Reparatur satırı tabloda „ungewöhnlich niedriger Vergleichswert“ diyor. Hinweise ise aynı Vorjahresmonat değerinin yüksek olduğunu söylüyor (48 T€, normal 14 T€).
+- **Neden:** Plan, „hoher/niedriger“ kelimesini farkın yönünden türetiyordu: artış varsa taban düşük, düşüş varsa yüksek. Oysa facts yalnızca tabanın olağandışı olduğunu söylüyor, yönünü değil.
+  - Tipik örnek: her yıl ikramiye ödenen ay. Taban yüksek, cari ay daha da yüksek. Plan „ungewöhnlich niedriger Vergleichswert“ diyordu, girdideki rakamlar tersini gösteriyor.
+- **Ölçek:** Bağlamlı eğitim kümesinde taban hipotezlerinin %30'u (718 satırın 215'i) tutarsızdı.
+- **İkinci, küçük bulgu:** „Mögliche zeitversetzte Buchung“ (geç fatura cari ayı yükseltir) 29 satırda bir düşüşün açıklaması olarak kullanılmıştı.
+
+### 17.3 Plan 1.4
+
+- **Taban hipotezi:** Yalnızca taban sapmayı açıklıyorsa kullanılır: artışta düşük, düşüşte yüksek taban.
+  - Taban hem cari normal düzeyle (FACTS'te görünür) hem de kendi dönemindeki normal düzeyle (facts'teki `base_unusual`'ın ölçütü) karşılaştırılır; ikisi de aynı yönü göstermeli.
+  - Böyle değilse „Ursache offen“ + soru.
+- **Bayrak hipotezi:** Yönü uyuşmalı. Tek seferlik sıçrama, geç fatura ve yıllık amortisman yalnızca artışı, eksik amortisman yalnızca düşüşü açıklar; stok bayrakları iki yönde de açıklayabilir.
+- **Doğrulama:** 2.208 planın hepsinde kalıp metin kontrolü geçiyor; yön ihlali yok (test).
+
+**Etkilenen aylar:**
+
+| Küme | Girdisi değişen | Geçerli kalan (kabul) |
+|---|---:|---:|
+| `train` | 163 | 797 (745) |
+| `val` | 27 | 117 (111) |
+| `train_ohne` | 319 | 641 (622) |
+| `val_ohne` | 46 | 98 (96) |
+
+Değişikliklerin büyük kısmı: „ungewöhnlich … Vergleichswert“ → „Ursache offen“ (bağlamlı eğitimde 233 satır).
+
+### 17.4 Betikteki değişiklikler
+
+- **Geçerlilik yalnızca `input_sha` ile:** Sürüm alanları kayıt içindir. Plan sürümü değişse bile girdisi aynı kalan ay yeniden üretilmez.
+- **`--max-rounds` (varsayılan 2):** `--retry-failed` her girdiyi en fazla bir kez yeniden dener; Bölüm 14'teki „ikinci tur yok“ önerisi artık betikte.
+- **Yeniden üretim:** `ideal/README.md`, Bölüm 8.

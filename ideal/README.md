@@ -117,6 +117,22 @@ python ideal/run_teacher.py --set val_ohne --retry-failed
 
 **Uzun koşu için:** Başlık çubuğuna sağ tık → **Özellikler** → **Seçenekler** → „Hızlı Düzenleme Modu“ işaretini kaldır. Böylece pencereye yanlışlıkla tıklamak koşuyu duraklatmaz. Koşu sürerken **Ctrl+C**'ye basma; bu tuş betiği durdurur.
 
+## 8. Plan 1.4: yön düzeltmesinden etkilenen aylar
+
+Plan 1.4, „ungewöhnlich hoher/niedriger Vergleichswert“ gerekçesini yalnızca rakamlarla tutarlı olduğunda kullanıyor (`docs/11`, Bölüm 17). Girdisi değişen 555 ay yeniden üretilecek; betik bunları kendisi bulur.
+
+1. Repoyu yeni bir klasöre indir (Bölüm 1).
+2. PowerShell'de anahtarı gir (Bölüm 2), sonra şu satırı olduğu gibi yapıştır. Dört kümeyi sırayla çalıştırır; her kümeden sonra reddedilenleri bir kez yeniden dener:
+
+```
+foreach ($s in "val", "val_ohne", "train", "train_ohne") { python ideal/run_teacher.py --set $s; python ideal/run_teacher.py --set $s --retry-failed }
+```
+
+- Beklenen „… çalışacak“ sayıları: `val` 27, `val_ohne` 46, `train` 163, `train_ohne` 319. Çok daha büyük bir sayı (144, 960) görürsen Ctrl+C ile durdur.
+- Süre: tahminen ~2 saat. Yarıda kalırsa aynı satırı yeniden yapıştır; biten aylar korunur.
+- `--retry-failed` her ayı en fazla bir kez yeniden dener; daha önce iki kez reddedilen aylar atlanır.
+- Bitince `ideal/outputs/` içindeki dört dosyayı (`val.jsonl`, `val_ohne.jsonl`, `train.jsonl`, `train_ohne.jsonl`) Bölüm 4'teki gibi yükle. **Commit changes**'e bastıktan sonra sayfanın üstünde „Add files via upload“ yazısını gör.
+
 ## Sorun giderme
 
 | Mesaj | Ne yapmalı |

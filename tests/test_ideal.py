@@ -126,6 +126,27 @@ def test_ohne_kontext_plans_have_no_sources(small_run):
         assert [p for p in res["problems"] if not p.startswith("Länge")] == [], r["id"]
 
 
+def test_row_hypotheses_match_direction(small_run):
+    """Plan 1.4: taban hipotezi yalnızca sapmayı açıklayan (ters yönde olağandışı) tabanda; geç fatura yalnızca artışı."""
+    _, requests = small_run
+    seen = 0
+    for r in requests["train"] + requests["val"]:
+        pos = {p["position"]: p for p in r["facts"]["positions"]}
+        for row in r["plan"]["tabelle"]:
+            e, p = row["erklaerung"], pos.get(row["position"])
+            if p is None or e["art"] != "hypothese":
+                continue
+            pym = p["previous_year_month"]
+            if e["text"].startswith("ungewöhnlich"):
+                seen += 1
+                rising = pym["delta_abs"] > 0
+                assert pym["base_unusual"] and ("niedriger" in e["text"]) == rising
+                assert pym["value"] < p["normal_level"] if rising else pym["value"] > p["normal_level"]
+            if e["text"].startswith("mögliche zeitversetzte"):
+                assert pym["delta_abs"] > 0
+    assert seen
+
+
 def test_template_passes_check(small_run):
     _, requests = small_run
     for r in requests["train"][::5] + requests["val"]:
@@ -238,7 +259,8 @@ def test_runner_retries_with_feedback_and_resumes(fake_api, small_run, tmp_path,
     failed = dict(recs[1], status="failed")
     path.write_text(path.read_text(encoding="utf-8") + json.dumps(failed) + "\n", encoding="utf-8")
     fake_api.replies = [good[1]]
-    assert runner.main(args + ["--retry-failed"]) == 0 and len(fake_api.calls) == 4
+    assert runner.main(args + ["--retry-failed"]) == 0 and len(fake_api.calls) == 3     # iki koşu yapılmış: sınır
+    assert runner.main(args + ["--retry-failed", "--max-rounds", "3"]) == 0 and len(fake_api.calls) == 4
     assert fake_api.calls[3]["random_seed"] == fake_api.calls[2]["random_seed"] + 200   # 2 önceki kayıt
     assert "test-key" not in capsys.readouterr().out
     summary = report("pilot", tmp_path / "out")

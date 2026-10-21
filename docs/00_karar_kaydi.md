@@ -492,6 +492,13 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - `val_ohne`: **134/144** kabul. Kaynak ve somut neden izi yok; içerik bağlamlı kümelerle aynı düzeyde (`11_ideal_yorumlar.md`, Bölüm 16).
 - **[ÖNERİ]** `train_ohne` başlatılır. Eğitimde reddedilen 7 yeni ay için ayrı bir yeniden deneme yapılmaz.
 
+### 19.6 Plan 1.4: yön tutarlılığı (21.10.2026)
+
+- `train_ohne` 923/960 kabul. Okumada bulgu: plan „ungewöhnlich hoher/niedriger Vergleichswert“ kelimesini farkın yönünden türetiyordu. Örnek: ikramiye ayında taban yüksekken „niedriger“ diyordu. Bağlamlı eğitimde taban hipotezlerinin %30'u rakamlarla çelişiyordu. Ayrıca 29 satırda geç fatura hipotezi bir düşüşü açıklıyordu.
+- **[ÖNERİ] Plan 1.4:** Taban hipotezi yalnızca taban sapmayı açıklıyorsa (cari ve kendi dönemindeki normal düzeye göre ters yönde olağandışı); bayrak hipotezi yalnızca yönü uyuşuyorsa. Aksi hâlde „Ursache offen“ + soru (`11_ideal_yorumlar.md`, Bölüm 17).
+- Girdisi değişen 555 ay yeniden üretilecek (eğitim 163, doğrulama 27, `train_ohne` 319, `val_ohne` 46).
+- Betik: geçerlilik yalnızca girdinin parmak iziyle; `--retry-failed` her girdiyi en fazla bir kez yeniden dener (`--max-rounds 2`).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

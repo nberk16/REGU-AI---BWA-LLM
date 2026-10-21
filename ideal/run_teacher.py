@@ -14,7 +14,8 @@ Kullanım (repo klasöründe, PowerShell):
 - Her metin hemen kontrol edilir (doğrulama katmanı + plan). Geçemezse sorunlar modele bildirilir ve metin yeniden
   istenir (en fazla --max-attempts deneme).
 - Sonuçlar ideal/outputs/<küme>.jsonl dosyasına, her aydan sonra eklenir. Yarıda kalırsa aynı komutla devam eder.
-- Her kayıt, öğretmene giden mesajların parmak izini (input_sha) taşır. Sürümü ya da girdisi değişen ay yeniden üretilir.
+- Her kayıt, öğretmene giden mesajların parmak izini (input_sha) taşır. Girdisi değişen ay yeniden üretilir; sürüm
+  alanları yalnızca kayıt içindir (aynı girdi → aynı geçerli kayıt).
 - Yalnızca standart kütüphane ve bu repodaki paketler (validation, ideal); ek kurulum gerekmez. Python ≥ 3.11.
 """
 
@@ -126,6 +127,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--workers", type=int, default=2, help="aynı anda kaç istek (hız sınırına takılırsa 1)")
     parser.add_argument("--max-attempts", type=int, default=4)
     parser.add_argument("--retry-failed", action="store_true", help="kabul edilmeyen ayları yeniden dene")
+    parser.add_argument("--max-rounds", type=int, default=2,
+                        help="aynı girdi için en fazla kaç koşu (varsayılan 2: ilk koşu + bir yeniden deneme)")
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--temperature", type=float, default=OPTIONS["temperature"])
     parser.add_argument("--requests", type=Path, default=ROOT / "ideal" / "requests")
@@ -162,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
     requests = load_requests(args.set, args.requests)
     args.out.mkdir(parents=True, exist_ok=True)
     out_path = args.out / f"{args.set}.jsonl"
-    current = {r["id"]: (r["versions"], input_sha(r)) for r in requests}
+    current = {r["id"]: input_sha(r) for r in requests}
     last: dict[str, str] = {}                      # id → son kaydın durumu (yeniden denemede son kayıt geçerli)
     rounds: dict[str, int] = {}                    # id → aynı sürümle önceki koşu sayısı
     if out_path.exists():
@@ -170,11 +173,11 @@ def main(argv: list[str] | None = None) -> int:
             for line in f:
                 if line.strip():
                     rec = json.loads(line)
-                    # eski sürümün ya da değişmiş girdinin kaydı sayılmaz
-                    if (rec.get("versions"), rec.get("input_sha")) == current.get(rec["id"]):
+                    # girdisi değişmiş (ya da parmak izi olmayan eski) kayıt sayılmaz
+                    if rec.get("input_sha") is not None and rec.get("input_sha") == current.get(rec["id"]):
                         last[rec["id"]] = rec["status"]
                         rounds[rec["id"]] = rounds.get(rec["id"], 0) + 1
-    done = {i for i, s in last.items() if s == "ok" or not args.retry_failed}
+    done = {i for i, s in last.items() if s == "ok" or not args.retry_failed or rounds[i] >= args.max_rounds}
     todo = [r for r in requests if r["id"] not in done][:args.limit]
     print(f"{args.set}: {len(requests)} ay, {len(done)} tamamlanmış, {len(todo)} çalışacak · model {args.model} · "
           f"{args.workers} paralel", flush=True)

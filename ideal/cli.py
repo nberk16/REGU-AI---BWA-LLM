@@ -28,11 +28,11 @@ def latest(path: Path) -> dict[str, dict]:
     return out
 
 
-def current_inputs(requests: Path, name: str) -> dict[str, tuple]:
-    """İstek dosyasındaki her ay için (sürümler, input_sha): kaydın hâlâ geçerli olup olmadığını belirler."""
+def current_inputs(requests: Path, name: str) -> dict[str, str]:
+    """İstek dosyasındaki her ay için input_sha: kaydın hâlâ geçerli olup olmadığını belirler."""
     from .teacher import input_sha
     with gzip.open(requests / f"{name}.jsonl.gz", "rt", encoding="utf-8") as f:
-        return {r["id"]: (r["versions"], input_sha(r)) for r in map(json.loads, f)}
+        return {r["id"]: input_sha(r) for r in map(json.loads, f)}
 
 
 def report(name: str, outputs: Path, requests: Path | None = None) -> str:
@@ -41,7 +41,7 @@ def report(name: str, outputs: Path, requests: Path | None = None) -> str:
     stale = missing = 0
     if requests is not None:
         current = current_inputs(requests, name)
-        valid = [r for r in recs if (r.get("versions"), r.get("input_sha")) == current.get(r["id"])]
+        valid = [r for r in recs if r.get("input_sha") is not None and r.get("input_sha") == current.get(r["id"])]
         stale, missing = len(recs) - len(valid), len(set(current) - {r["id"] for r in recs})
         recs = valid
     ok = [r for r in recs if r["status"] == "ok"]

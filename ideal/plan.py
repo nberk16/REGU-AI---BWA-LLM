@@ -16,13 +16,16 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from facts.schema import BASE_LINES, MONTHS_DE
 
-PLAN_VERSION = "1.3"
+PLAN_VERSION = "1.4"
 
 NAME_TO_LINE = {name: key for key, name in BASE_LINES.items()}
 
 # [ÖNERİ] Bir olayın satırdaki yıllık farkı (t − t−12), sapmanın en az bu payıysa neden sayılır.
 CAUSE_SHARE = 0.25
 MAX_QUESTIONS = 5
+# Satır hipotezi olarak kullanılan bayrağın cari değeri ittiği yön: +1 yalnızca artışı, −1 yalnızca düşüşü açıklar.
+# Listede olmayanlar (stok bayrakları) iki yönde de açıklayabilir.
+FLAG_DIRECTION = {"einmalige_spitze": 1, "zeitverschiebung": 1, "afa_jahresbuchung": 1, "afa_fehlt": -1}
 
 # Bayrak kuralı başına hipotez, sonuç ve soru (K-B rehberinden türetildi, rag/knowledge.toml). {pos}, {monat}.
 RULES = {
@@ -209,8 +212,28 @@ def _rule_text(rule: str, field: str, pos: str, period: str) -> str | None:
     return text.format(pos=pos, monat=month_name(period)) if text else None
 
 
-def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
-    """Bir firma-ay için içerik planı. `context`: modele verilen bağlam (rag.retrieve.as_records)."""
+def _base_explains(p: dict, base_normal: float | None) -> bool:
+    """Olağandışı taban sapmayı açıklıyor mu: artışta düşük, düşüşte yüksek taban.
+
+    Taban hem cari normal düzeyle (FACTS'te görünür) hem de kendi dönemindeki normal düzeyle (facts'teki
+    base_unusual'ın ölçütü) karşılaştırılır; ikisi de aynı yönü göstermeli. Ör. her yıl ikramiye ödenen bir ayda
+    taban yüksektir; bu, bir artışı açıklamaz.
+    """
+    pym = p["previous_year_month"]
+    if not pym.get("base_unusual") or pym["delta_abs"] == 0:
+        return False
+    refs = [p["normal_level"]] + ([base_normal] if base_normal is not None else [])
+    low = all(pym["value"] < r for r in refs)
+    high = all(pym["value"] > r for r in refs)
+    return low if pym["delta_abs"] > 0 else high
+
+
+def build_plan(facts: dict, context: dict, truth: Truth, base_normals: dict[str, float] | None = None) -> dict:
+    """Bir firma-ay için içerik planı. `context`: modele verilen bağlam (rag.retrieve.as_records).
+
+    `base_normals`: satır anahtarı → önceki yılın aynı ayı için normal düzey (facts.build.MonthContext); yoksa
+    yalnızca cari normal düzey kullanılır.
+    """
     firm_id, period = facts["company"]["firm_id"], facts["period"]
     gt = truth.months[(firm_id, period)]
     visible = {n["source_id"]: n["text"] for n in context.get("notes", [])}
@@ -231,7 +254,9 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
         effects = truth.yoy_effects(firm_id, period, line)
         causes = _causes(truth, firm_id, period, line, pym["delta_abs"], effects)
         sources = _cite(causes, visible)
-        own_flags = [f for f in hinweis_flags if f["position"] == p["position"] and f["rule"] in ROW_RULES]
+        sign = 1 if pym["delta_abs"] > 0 else -1
+        own_flags = [f for f in hinweis_flags if f["position"] == p["position"] and f["rule"] in ROW_RULES
+                     and FLAG_DIRECTION.get(f["rule"], sign) == sign]
         row = {"position": p["position"], "rank": p["rank"], "ist": eur(p["actual"]), "ist_teur": teur(p["actual"]),
                "vergleich": f"Vj. {eur(pym['value'])}",
                "abweichung": signed_eur(pym["delta_abs"]) + (f" ({pct(pym['delta_pct'])})"
@@ -246,7 +271,7 @@ def build_plan(facts: dict, context: dict, truth: Truth) -> dict:
             f = own_flags[0]
             row["erklaerung"] = {"art": "hypothese", "text": _rule_text(f["rule"], "hypothese", p["position"], period),
                                  "verweis": "siehe Hinweise"}
-        elif pym.get("base_unusual"):
+        elif _base_explains(p, (base_normals or {}).get(line)):
             level = "hoher" if pym["delta_abs"] < 0 else "niedriger"
             row["erklaerung"] = {"art": "hypothese",
                                  "text": f"ungewöhnlich {level} Vergleichswert im Vorjahresmonat"}

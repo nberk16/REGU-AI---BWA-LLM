@@ -16,7 +16,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from facts.build import build_facts, commentable_periods
+from facts.build import MonthContext, build_facts, commentable_periods
 from facts.schema import load_config
 from facts.series import load_run
 from prompting import PROMPT_VERSION
@@ -84,7 +84,9 @@ def build_requests(run: Path, retrieval: Path | None) -> dict[str, list[dict]]:
         for period in commentable_periods(fs):
             facts = build_facts(fs, period, cfg)
             ctx = contexts[(firm_id, period)] if contexts else OHNE_KONTEXT
-            plan = build_plan(facts, ctx, truth)
+            mc = MonthContext(fs, fs.index(period), cfg)
+            base_normals = {p["key"]: mc.normal_for_base(p["key"], mc.i - 12) for p in facts.get("positions", [])}
+            plan = build_plan(facts, ctx, truth, base_normals)
             out[name].append({
                 "id": plan["id"], "firm_id": firm_id, "period": period, "set": name,
                 "versions": {"plan": PLAN_VERSION, "teacher": TEACHER_VERSION, "prompt": PROMPT_VERSION,

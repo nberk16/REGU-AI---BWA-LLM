@@ -128,7 +128,12 @@ Plan 1.4, „ungewöhnlich hoher/niedriger Vergleichswert“ gerekçesini yalnı
 foreach ($s in "val", "val_ohne", "train", "train_ohne") { python ideal/run_teacher.py --set $s; python ideal/run_teacher.py --set $s --retry-failed }
 ```
 
-- Beklenen „… çalışacak“ sayıları: `val` 27, `val_ohne` 46, `train` 163, `train_ohne` 319. Çok daha büyük bir sayı (144, 960) görürsen Ctrl+C ile durdur.
+- Her kümenin ilk satırı şöyle olmalı (baştaki „144 ay“/„960 ay“ kümenin toplamıdır; önemli olan sondaki sayı):
+  - `val: 144 ay, 117 tamamlanmış, 27 çalışacak`
+  - `val_ohne: 144 ay, 98 tamamlanmış, 46 çalışacak`
+  - `train: 960 ay, 797 tamamlanmış, 163 çalışacak`
+  - `train_ohne: 960 ay, 641 tamamlanmış, 319 çalışacak`
+- „0 tamamlanmış“ görürsen Ctrl+C ile durdur ve ilk satırı bana gönder.
 - Süre: tahminen ~2 saat. Yarıda kalırsa aynı satırı yeniden yapıştır; biten aylar korunur.
 - `--retry-failed` her ayı en fazla bir kez yeniden dener; daha önce iki kez reddedilen aylar atlanır.
 - Bitince `ideal/outputs/` içindeki dört dosyayı (`val.jsonl`, `val_ohne.jsonl`, `train.jsonl`, `train_ohne.jsonl`) Bölüm 4'teki gibi yükle. **Commit changes**'e bastıktan sonra sayfanın üstünde „Add files via upload“ yazısını gör.

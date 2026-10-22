@@ -11,10 +11,13 @@ Bu klasördekiler Kaggle'da (ücretsiz T4 GPU) çalışır. Kod ve veriyi ben ha
 
 ## 1. Veri setini Kaggle'a yükle (bir kez)
 
-1. Repoyu ZIP olarak indir ve çıkart: https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
-2. Kaggle'da sol menü → **Datasets** → **New Dataset**.
-3. Çıkarttığın klasörde `gpu/data/` içindeki **7 dosyayı** (`.jsonl.gz`) sürükle. Dosyaları açma; `.gz` hâliyle yükle.
+1. Repoyu ZIP olarak indir: bu bağlantıya tıklamak indirmeyi doğrudan başlatır. Sonra ZIP'i çıkart.
+   https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+2. **En kolay yol, defterin içinden:** Sağ panel → **Input** → **Upload** → **New Dataset**.
+   - **Başka yol:** sol menü → **Datasets** → **New Dataset**. Bu durumda Bölüm 2.4'te veri setini ayrıca eklersin.
+3. Çıkarttığın klasörde `gpu/data/` içindeki **7 dosyayı** (`.jsonl.gz`) sürükle. Kaggle bunları kendiliğinden açabilir (`.jsonl`); defter iki biçimi de okur.
 4. Başlık: `bwa-kommentar-daten`. Görünürlük: **Private**. **Create**.
+5. Sağ paneldeki **Input** altında `bwa-kommentar-daten` görünmeli. Yalnızca defterin adı görünüyorsa veri seti eklenmemiştir.
 
 Veri değişirse aynı veri setine yeni sürüm yüklenir: veri setinin sayfası → **New Version**. Bunu ayrıca söyleyeceğim.
 
@@ -57,7 +60,7 @@ Süre, deneme koşusundaki hıza bağlı; tahmini ben deneme sonucundan sonra ve
 
 | Durum | Ne yapmalı |
 |---|---|
-| `… bulunamadı: sağ panelde Add Input …` | Bölüm 2.4: veri setini defterin girdisine ekle |
+| `… bulunamadı. Sağ panel → Input → Add Input …` | Veri seti defterin girdisi değil (Bölüm 1.5 ve 2.4). Hata satırı `/kaggle/input` içinde görüleni de yazar; onu bana gönder |
 | `pip` hücresinde ağ hatası | **Internet: On** olmalı (Bölüm 2.3) |
 | `CUDA out of memory` ve defter durdu | Hatanın son satırlarını gönder; parti boyutunu düşürürüm |
 | `bellek yetmedi; parti boyutu → …` satırı | Hata değil; defter partiyi küçültüp devam eder |

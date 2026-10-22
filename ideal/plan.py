@@ -16,7 +16,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from facts.schema import BASE_LINES, MONTHS_DE
 
-PLAN_VERSION = "1.4"
+PLAN_VERSION = "1.5"
 
 NAME_TO_LINE = {name: key for key, name in BASE_LINES.items()}
 
@@ -266,6 +266,9 @@ def build_plan(facts: dict, context: dict, truth: Truth, base_normals: dict[str,
         if sources:
             row["erklaerung"] = {"art": "quelle", "quellen": sources,
                                  "bezug": sorted({c["bezug"] for c in causes if c["source_id"] in sources})}
+            if len(row["erklaerung"]["bezug"]) > 1:      # karışık: hangi notun olayı önceki yılda, ayrıca söylenir
+                row["erklaerung"]["vorjahr_quellen"] = [s for s in sources if any(
+                    c["source_id"] == s and c["bezug"] == "vorjahr" for c in causes)]
             used_sources += sources
         elif own_flags:
             f = own_flags[0]

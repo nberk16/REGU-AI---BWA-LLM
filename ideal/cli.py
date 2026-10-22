@@ -3,6 +3,7 @@
     python -m ideal build  --run data/synthetic/train_seed7 [--retrieval FILE]   # istek dosyaları (repoda)
     python -m ideal build  --run data/synthetic/train_seed7 --variant ohne_kontext   # bağlamsız: {train,val}_ohne
     python -m ideal report --set pilot                                          # öğretmen çıktılarının özeti
+    python -m ideal gold                                                        # altın küme (ideal/gold/)
 
 Öğretmenin kendisi kullanıcının bilgisayarında çalışır: python ideal/run_teacher.py (anahtar yalnızca orada).
 """
@@ -64,7 +65,7 @@ def report(name: str, outputs: Path, requests: Path | None = None) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m ideal", description="İdeal yorumlar (docs/11).")
-    parser.add_argument("command", choices=["build", "report"])
+    parser.add_argument("command", choices=["build", "report", "gold"])
     parser.add_argument("--run", type=Path, default=ROOT / "data" / "synthetic" / "train_seed7")
     parser.add_argument("--retrieval", type=Path, help="python -m rag export çıktısı (varsayılan: <run>/rag/)")
     parser.add_argument("--variant", choices=["rag_k8", "ohne_kontext"], default="rag_k8",
@@ -75,6 +76,12 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "report":
         print(report(args.set, args.outputs, ROOT / "ideal" / "requests"))
+        return 0
+    if args.command == "gold":
+        from .gold import build, summary, write
+        rows = build()
+        write(rows)
+        print(summary(rows))
         return 0
 
     from .build import build_requests, write_requests

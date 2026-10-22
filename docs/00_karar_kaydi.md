@@ -505,6 +505,20 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - Toplam öğretmen kullanımı: girdi 17,7 Mio, çıktı 5,0 Mio token (ücretsiz plan).
 - Sıradaki: altın küme ve eğitim verisinin birleştirilmesi.
 
+## 20. Eğitim verisi, altın küme ve baseline defteri (22.10.2026)
+
+- **Eğitim verisi** (`12_egitim_verisi.md`, Bölüm 1): `train_rag` 898, `val_rag` 133, `train_ohne` 933, `val_ohne` 140 örnek.
+  - **[ÖNERİ] Temizlik:** eksi işareti; uyarı Kernaussage'sine eksikse planın kısa hipotezi („Hinweis: … (Hypothese).“); plandan sapan Kernaussage'li aylar dışarıda; temizlenen her metin yeniden kontrol.
+- **Altın küme:** 30 metin. 14'ü düzeltmesiz, 10'u yalnızca otomatik düzeltmeyle, 6'sı elle düzeltildi. Baskın kusur, uyarı Kernaussage'sinde eksik uyarı dili (~%40); otomatik tamamlamanın gerekçesi bu.
+- **Plan 1.5 / öğretmen 1.4:** Karışık zamanlı kaynaklarda hangi notun önceki yıla ait olduğu ayrıca söylenir. 8 ay girdisi değiştiği için eğitimde dışarıda.
+- **Test istemleri:** `ohne_kontext`, `rag_k8`, `rag_alle` × 720 ay (`reference_seed42`).
+- **[ÖNERİ] Çıkarım altyapısı (değişti):**
+  - Değerlendirme vLLM yerine Unsloth + Transformers ile, 4-bit.
+  - Gerekçe: E4B gömmelerle 8B parametre; float16'da tek T4'e (16 GB) sığmıyor. Gemma'nın T4'teki float16 taşmalarına Unsloth'ta düzeltme var. Bütün varyantlar aynı 4-bit tabanı kullanır.
+  - Demo yine Ollama (GGUF).
+- **[ÖNERİ] Üretim ayarları:** deneme turuyla aynı (`temperature 0.2`, `seed 42`, en fazla 1.500 token).
+- **Kaggle:** `gpu/01_baseline.ipynb` (çıplak model ve yalnızca RAG); kullanıcı adımları `gpu/README.md`. Önce 2 istemlik deneme koşusu.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

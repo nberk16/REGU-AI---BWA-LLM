@@ -1,0 +1,188 @@
+{
+ "A3-v122_2025-11": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v120_2026-11": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v121_2026-01": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v121_2025-10": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v120_2025-06": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v121_2026-02": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v122_2026-11": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v122_2026-12": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v122_2025-11": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "unvollständig",
+    "beschreibung": "Kernaussage zur Position ohne Vorjahresvergleich",
+    "alt": "2. Die Umsatzerlöse steigen durch den Großauftrag eines Bauträgers auf 1.443 T€ [Quelle: Kontextnotiz 2025-11 #2].",
+    "neu": "2. Die Umsatzerlöse steigen gegenüber dem Vorjahresmonat um 276.931 € (+23,8 %) auf 1.443 T€, durch den Großauftrag eines Bauträgers [Quelle: Kontextnotiz 2025-11 #2]."
+   }
+  ]
+ },
+ "A2-v121_2026-01": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "stil",
+    "beschreibung": "„um das 16,5-Fache über dem Normalniveau“ statt „beim 16,5-Fachen des Normalniveaus“ (Kernaussage)",
+    "alt": "liegt mit 45.248 € um das 16,5-Fache über dem Normalniveau und könnte",
+    "neu": "liegt mit 45.248 € beim 16,5-Fachen des Normalniveaus und könnte"
+   },
+   {
+    "art": "stil",
+    "beschreibung": "dasselbe in den Hinweisen",
+    "alt": "Die Position liegt mit 45.248 € um das 16,5-Fache über dem Normalniveau.",
+    "neu": "Die Position liegt mit 45.248 € beim 16,5-Fachen des Normalniveaus."
+   }
+  ]
+ },
+ "A2-v121_2026-08": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "plan_abweichung",
+    "beschreibung": "Kernaussage 3 behandelt Material und Reparatur statt des Hinweises zu den Abschreibungen",
+    "alt": "3. Der Material-/Wareneinkauf steigt um 318.914 € (+28,5 %) durch deutliche Preissteigerungen bei Kupferrohr [Quelle: Kontextnotiz 2026-06 #2], während die Reparatur-/Instandhaltungskosten mit 24 T€ das 3,7-fache des Normalniveaus betragen, verursacht durch die Instandsetzung des Lagerlifts [Quelle: Kontextnotiz 2026-08].",
+    "neu": "3. Die Abschreibungen betragen 0 €, obwohl der Durchschnitt der letzten 12 Monate bei 13.069 € liegt. Hinweis: mögliche Buchung der Abschreibungen erst zum Jahresende (Hypothese)."
+   }
+  ]
+ },
+ "A2-v122_2026-04": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "plan_abweichung",
+    "beschreibung": "Kernaussage 3 behandelt Sonstige Kosten statt des Hinweises zu den Abschreibungen",
+    "alt": "3. Die sonstigen Kosten steigen um 6.547 € auf 29.207 €, was einer Zunahme von 28,9 % entspricht. Hier könnte ein ungewöhnlich niedriger Vergleichswert im Vorjahr ursächlich sein (Hypothese).",
+    "neu": "3. Die Abschreibungen betragen im April 0 €, obwohl der Durchschnitt der letzten 12 Monate bei 7.409 € pro Monat liegt. Hinweis: mögliche Buchung der Abschreibungen erst zum Jahresende (Hypothese)."
+   },
+   {
+    "art": "fachlich_ungenau",
+    "beschreibung": "erfundene „Gegenbuchung“ statt der Folge aus dem Plan",
+    "alt": "wären die Monatsergebnisse bis November zu günstig ausgewiesen. Dies würde im Dezember zu einer entsprechenden Gegenbuchung führen und das Ergebnis deutlich belasten.",
+    "neu": "wären die Monatsergebnisse bis November zu günstig und der Dezember zu ungünstig ausgewiesen."
+   }
+  ]
+ },
+ "A3-v121_2025-10": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v120_2025-08": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v122_2026-09": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v121_2026-04": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "ursache_falsch",
+    "beschreibung": "Vorjahresereignis (Großauftrag im April 2025) als „verzögerte Auslieferung“ wiedergegeben (Kernaussage)",
+    "alt": "bedingt durch den Verlust eines Großkunden sowie die verzögerte Auslieferung eines Großauftrags [Quelle: Kontextnotiz 2025-04 #2; Kontextnotiz 2025-11]",
+    "neu": "bedingt durch den Großauftrag eines Möbelhändlers im Vorjahresmonat und den Verlust eines Großkunden [Quelle: Kontextnotiz 2025-04 #2; Kontextnotiz 2025-11]"
+   },
+   {
+    "art": "ursache_falsch",
+    "beschreibung": "dasselbe in drei Tabellenzeilen",
+    "alt": "Verlust Großkunde, verzögerte Großauftragsauslieferung",
+    "neu": "Großauftrag im Vorjahresmonat, Verlust eines Großkunden"
+   },
+   {
+    "art": "mehrdeutig",
+    "beschreibung": "„Minus von 354 T€“ liest sich als kumulierter Verlust; gemeint ist die Veränderung",
+    "alt": "Kumuliert ergibt sich ein Minus von 354 T€.",
+    "neu": "Kumuliert liegt das Ergebnis 354 T€ unter dem Vorjahreszeitraum."
+   }
+  ]
+ },
+ "A2-v120_2025-09": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v121_2026-09": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v120_2025-02": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v122_2025-02": {
+  "set": "val",
+  "befunde": []
+ },
+ "A3-v121_2026-08": {
+  "set": "val",
+  "befunde": [
+   {
+    "art": "richtung_formulierung",
+    "beschreibung": "„verringerten sich … und verbesserten sich“: der Wert ist gestiegen",
+    "alt": "verringerten sich auf -180.182 € und verbesserten sich damit um 294.665 € (+62,1 %) gegenüber dem Vorjahresmonat",
+    "neu": "lagen bei -180.182 € und damit um 294.665 € (+62,1 %) über dem Vorjahresmonat"
+   }
+  ]
+ },
+ "A2-v121_2026-12": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v122_2025-03": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v120_2025-12": {
+  "set": "val",
+  "befunde": []
+ },
+ "A2-v120_2025-10": {
+  "set": "val_ohne",
+  "befunde": []
+ },
+ "A2-v120_2026-12": {
+  "set": "val_ohne",
+  "befunde": []
+ },
+ "A2-v121_2026-03": {
+  "set": "val_ohne",
+  "befunde": []
+ },
+ "A3-v121_2026-03": {
+  "set": "val_ohne",
+  "befunde": []
+ },
+ "A3-v122_2025-03": {
+  "set": "val_ohne",
+  "befunde": []
+ },
+ "A3-v122_2026-07": {
+  "set": "val_ohne",
+  "befunde": []
+ }
+}

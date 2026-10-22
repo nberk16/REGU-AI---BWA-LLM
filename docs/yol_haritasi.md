@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 22.10.2026 (öğretmen aşaması tamam: `train` 907, `val` 138, `train_ohne` 940, `val_ohne` 142 metin; sıradaki: altın küme ve eğitim verisi)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 22.10.2026 (eğitim verisi ve altın küme hazır; Kaggle baseline defteri hazır, deneme koşusu bekleniyor)
 
 ---
 
-## 1. Genel durum: ~%63 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%66 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 31,9 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 33,75 gün
 toplam iş     = 51 gün
-durum         = 31,9 / 51 ≈ %63
+durum         = 33,75 / 51 ≈ %66
 ```
 
 **Belirsizlik:**
@@ -34,13 +34,13 @@ durum         = 31,9 / 51 ≈ %63
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
-| 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %85 | 7,65 | 🔄 öğretmen aşaması tamam; altın küme ve eğitim verisi kaldı |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %55 | 2,75 | 🔄 temel model seçildi, istem 1.1 hazır |
+| 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %65 | 3,25 | 🔄 Kaggle baseline defteri hazır; deneme koşusu bekleniyor |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **31,9** | **≈ %63** |
+| | **Toplam** | **51** | | **33,75** | **≈ %66** |
 
 ---
 
@@ -84,7 +84,7 @@ durum         = 31,9 / 51 ≈ %63
   - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
 - **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
 
-### 5. İdeal yorumların üretimi — 🔄 öğretmen aşaması tamam; altın küme ve eğitim verisi kaldı
+### 5. İdeal yorumların üretimi — ✅ tamamlandı
 - **Yapılan (`ideal/`, `docs/11`):**
   - İçerik planı: `effects.csv` ile kaynaklı neden, hipotez ya da „Ursache offen“; yalnızca öğrencinin gördüğü notlar kaynak.
   - Öğretmen istemi (Almanca, 10 kural).
@@ -104,12 +104,14 @@ durum         = 31,9 / 51 ≈ %63
 - **Düzeltme sonrası (20.10.2026):** Eğitim 901/960 (yeniden üretilen 87 ayın 80'i kabul). `val_ohne` 134/144; kaynak ve uydurma neden izi yok (`docs/11`, Bölüm 16).
 - **`train_ohne` ve plan 1.4 (21.10.2026):** `train_ohne` 923/960. Okumada taban hipotezinin yönünde sistematik hata bulundu; plan 1.4 düzeltiyor, girdisi değişen 555 ay yeniden üretilecek (`docs/11`, Bölüm 17).
 - **Öğretmen aşaması tamam (22.10.2026):** `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144; taramalar temiz (`docs/11`, Bölüm 18).
-- **Kalan (%15):**
-  - Altın küme (20–30 doğrulama ayı, elle düzeltilmiş).
-  - Eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8` ve `ohne_kontext`) + kabul edilen metin; rakamdan önceki tire → ASCII eksi.
+- **Altın küme ve eğitim verisi (22.10.2026, `docs/12`):**
+  - Altın küme 30 metin; baskın kusur, uyarı Kernaussage'sinde eksik uyarı dili (~%40) → eğitim verisinde otomatik tamamlanıyor.
+  - Eğitim verisi: `train_rag` 898, `train_ohne` 933 örnek (+ doğrulama 133 / 140).
+  - Plan 1.5 / öğretmen 1.4: karışık zamanlı kaynaklar; 8 ay dışarıda.
+- **İsteğe bağlı:** Dışarıda kalan 8 ayın kısa bir öğretmen koşusuyla geri alınması.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 temel model seçildi, istem 1.1 hazır
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 Kaggle baseline defteri hazır
 - **Yapılan:**
   - Ortak istem modülü `prompting/` (sürüm 1.0).
   - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
@@ -123,13 +125,17 @@ durum         = 31,9 / 51 ≈ %63
   - Varyantlar: `ohne_kontext`, `rag_k8`, `rag_alle`; sistem mesajı hepsinde aynı.
   - `python -m prompting` istemleri Kaggle için JSONL olarak yazıyor; 7 test.
   - İstem 1.0 deneme turu için donduruldu.
+- **Kaggle hazırlığı (22.10.2026, `docs/12`, Bölüm 2 ve 4):**
+  - Test istemleri: 3 varyant × 720 ay.
+  - `gpu/01_baseline.ipynb`: Unsloth, 4-bit, deneme turu ayarları. Sahte modelle denendi.
+  - Kullanıcı kılavuzu `gpu/README.md`.
 - **Kalan:**
-  - Kaggle'da çıkarım altyapısı (Gemma 4 E4B, vLLM).
-  - Çıplak model ve yalnızca RAG varyantlarının test kümesinde çalıştırılması.
+  - Kaggle'da deneme koşusu, ardından tam koşu (kullanıcı).
+  - Çıktıların puanlanması.
   - İsteğe bağlı: aynı 10 örnekte Gemma ile istem 1.1 ön kontrolü (kullanıcının dizüstünde ~1,5 saat; `docs/10`, Bölüm 8).
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
-- **Açık kararlar:** Çıkarım altyapısı [ÖNERİ: değerlendirme vLLM, demo Ollama].
+- **Açık kararlar:** Çıkarım altyapısı [ÖNERİ, 22.10.2026: değerlendirme Unsloth + Transformers 4-bit (vLLM'de E4B float16 T4'e sığmıyor), demo Ollama].
 
 ### 7. Fine-tuning (LoRA) — ⏳ başlamadı
 - **Kalan:**
@@ -190,7 +196,7 @@ durum         = 31,9 / 51 ≈ %63
 Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
 
 1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
-2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Öğretmen aşaması tamam. Sıradaki: altın küme ve eğitim verisinin birleştirilmesi (asistan).
+2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Tamamlandı (eğitim verisi ve altın küme hazır, `docs/12`).
 3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme. Repo özel olduğu için Kaggle'ın koda erişim yolu o adımda belirlenecek.
 - **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
 
@@ -225,3 +231,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 20.10.2026 | Düzeltilen eğitim ayları üretildi (87 → 80 kabul; toplam 901/960). `val_ohne` 134/144, okumada temiz. Rapor bekleyen ayları gösteriyor. Paket 5 → %78: %61 |
 | 21.10.2026 | `train_ohne` 923/960, `val` 138/144, `val_ohne` 139/144. Plan 1.4: taban ve bayrak hipotezlerinde yön tutarlılığı; 555 ay yeniden üretilecek. Betik: geçerlilik parmak iziyle, en fazla bir yeniden deneme. Paket 5 → %80: %62 |
 | 22.10.2026 | Plan 1.4 ile 555 ay yeniden üretildi. Öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144. Paket 5 → %85: %63 |
+| 22.10.2026 | Altın küme (30 metin) ve eğitim verisi (`train_rag` 898, `train_ohne` 933); uyarı Kernaussage'si otomatik tamamlama; plan 1.5 / öğretmen 1.4; test istemleri; Kaggle baseline defteri ve kılavuzu. Paket 5 → %100, 6 → %65: %66 |

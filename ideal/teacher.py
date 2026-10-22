@@ -7,7 +7,7 @@ bu modül kullanıcının dizüstündeki betikte de çalışır.
 import hashlib
 import json
 
-TEACHER_VERSION = "1.3"
+TEACHER_VERSION = "1.4"
 
 _SYSTEM = """Du bist erfahrener Controller und Redakteur in einem mittelständischen Unternehmen. Aus einem fertigen Inhaltsplan schreibst du den Management-Kommentar zur monatlichen BWA (vorläufige Werte) für Geschäftsführung und kaufmännische Leitung. Der Plan legt fest, WAS gesagt wird; du entscheidest nur, WIE es gesagt wird.
 
@@ -58,6 +58,9 @@ def _explanation(e: dict) -> str:
         hint = {"vorjahr": " Das Ereignis aus der Notiz lag im Vorjahresmonat und steckt im Vergleichswert.",
                 "ende": " Der befristete Effekt aus der Notiz ist ausgelaufen."}.get(e["bezug"][0], "") \
             if len(e["bezug"]) == 1 else ""
+        if e.get("vorjahr_quellen"):
+            hint = (f" Das Ereignis aus {', '.join(e['vorjahr_quellen'])} lag im Vorjahresmonat und steckt im "
+                    f"Vergleichswert; die übrigen Notizen betreffen den aktuellen Monat.")
         return (f"Ursache in wenigen Wörtern aus dem Inhalt von {', '.join(e['quellen'])}.{hint} "
                 f"Letzte Spalte: [Quelle: {'; '.join(e['quellen'])}]")
     if e["art"] == "hypothese":

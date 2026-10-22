@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15–16). Plan 1.4 (yön tutarlılığı) sonrası öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144 (Bölüm 17–18). Sıradaki: altın küme ve eğitim verisi, 22.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15–16). Plan 1.4 (yön tutarlılığı) sonrası öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144 (Bölüm 17–18). Altın küme ve eğitim verisi hazır (Bölüm 19; `12_egitim_verisi.md`), 22.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -478,3 +478,13 @@ Plan 1.4 ile değişen 555 ay yeniden üretildi ve bir kez yeniden denendi. Büt
 **Toplam öğretmen kullanımı** (pilotlar dahil, 3.129 kayıt): girdi 17,7 Mio, çıktı 5,0 Mio token. Ücretsiz planda yapıldı; ücretli fiyatla kabaca ~16 $ tutardı (bilgi amaçlı tahmin).
 
 **Sıradaki:** Altın küme (20–30 doğrulama ayı, elle kontrol) ve eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8` / `ohne_kontext`) + kabul edilen metin.
+
+## 19. Altın küme ve son plan düzeltmesi (plan 1.5, öğretmen 1.4, 22.10.2026)
+
+- **Altın küme:** 30 doğrulama metni elle okundu (`12_egitim_verisi.md`, Bölüm 3).
+  - Baskın kusur: Uyarı Kernaussage'lerinin ~%40'ında uyarı dili eksik. Eğitim verisinde otomatik tamamlanıyor.
+  - Otomatik temizlikten sonra 30 metnin 24'ü altın kalitede.
+- **Plan 1.5 / öğretmen 1.4:**
+  - Bir satırın kaynaklarından biri önceki yılın olayıysa, öğretmene hangi notun önceki yıla ait olduğu ayrıca söylenir. Önceden yalnızca tek zamanlı satırlarda söyleniyordu.
+  - Bu yüzden bir metinde önceki yılın siparişi „gecikmiş teslimat“ diye yorumlanmıştı.
+  - Etkilenen 8 ay (eğitim 5, doğrulama 3) girdisi değiştiği için eğitim verisinin dışında kalıyor. İsteğe bağlı kısa bir koşuyla geri alınabilir (`ideal/README.md`, Bölüm 8'deki komutlar; yalnızca bu aylar üretilir).

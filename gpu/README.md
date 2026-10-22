@@ -30,15 +30,18 @@ Veri değişirse aynı veri setine yeni sürüm yüklenir: veri setinin sayfası
    - **Internet:** **On**. Kapalıysa ayarlar menüsünden telefon doğrulaması gerekir; sende yapıldı.
 4. Sağ panelde **Input** → **Add Input** → **Your Datasets** → `bwa-kommentar-daten` → **Add**.
 
-## 3. Deneme (smoke test, ~10 dakika)
+## 3. Deneme koşusu (smoke test, arka planda ~20–40 dakika)
 
-1. Hücrelerde `MODE = "smoke"` yazıyor; değiştirme.
-2. Üst menü → **Run All**.
-   - İlk hücre paketleri kurar (2–4 dakika). Ardından model indirilir (~16 GB, birkaç dakika).
-3. Son hücre her varyanttan bir yorum yazdırır. Satırlarda `… token/s` hızı görünür.
-4. **Bana gönder:**
-   - Son hücrenin çıktısı: iki yorum metni ve hız satırları.
-   - Herhangi bir hücre kırmızı hata verirse, hatanın son 15–20 satırı.
+Etkileşimli oturum başında kimse yokken kapanabilir. Bu yüzden deneme koşusu da arka planda yapılır.
+
+1. Defter güncel olmalı: GitHub'dan en son `gpu/01_baseline.ipynb` dosyasını indir (**Download raw file**), sonra Kaggle'da **File** → **Import Notebook**.
+2. **Session options** (Bölüm 2.3) ve **Input** (Bölüm 1.5) yerinde olmalı. Parametre hücresinde `MODE = "smoke"` kalsın.
+3. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**. Tarayıcıyı kapatabilirsin.
+4. Durumu izle: sol menü → **Code** → **Your Work** → defter → **Versions**. Durum „Running“den „Succeeded“ ya da „Error“a geçer.
+5. Bitince (başarılı ya da hatalı) sürümün sayfası → **Output** → `outputs/` içindeki bütün dosyaları indir ve Bölüm 5'teki bağlantıyla yükle:
+   - `log_smoke.txt`: her durumda oluşur; süreler, GPU belleği, varsa hatanın tam metni, üretilen yorumlar.
+   - `baseline_*.jsonl`: üretilen yorumlar.
+   Output boşsa sürüm sayfasındaki **Logs** bölümünün son satırlarının ekran görüntüsünü gönder.
 
 ## 4. Tam koşu (benim onayımdan sonra)
 
@@ -52,7 +55,7 @@ Süre, deneme koşusundaki hıza bağlı; tahmini ben deneme sonucundan sonra ve
 
 ## 5. Çıktıları repoya yükle
 
-1. Biten sürümün sayfası → **Output** → `outputs/baseline_ohne_kontext.jsonl` ve `outputs/baseline_rag_k8.jsonl` dosyalarını indir.
+1. Biten sürümün sayfası → **Output** → `outputs/` içindeki dosyaları (`log_*.txt`, `baseline_*.jsonl`) indir.
 2. Bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/gpu
 3. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
 

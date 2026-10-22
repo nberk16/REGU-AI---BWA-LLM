@@ -499,6 +499,12 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - Girdisi değişen 555 ay yeniden üretilecek (eğitim 163, doğrulama 27, `train_ohne` 319, `val_ohne` 46).
 - Betik: geçerlilik yalnızca girdinin parmak iziyle; `--retry-failed` her girdiyi en fazla bir kez yeniden dener (`--max-rounds 2`).
 
+### 19.7 Öğretmen aşaması tamamlandı (22.10.2026)
+
+- Kabul: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144. Bütün kayıtlar plan 1.4 girdisiyle; taramalar temiz (`11_ideal_yorumlar.md`, Bölüm 18).
+- Toplam öğretmen kullanımı: girdi 17,7 Mio, çıktı 5,0 Mio token (ücretsiz plan).
+- Sıradaki: altın küme ve eğitim verisinin birleştirilmesi.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

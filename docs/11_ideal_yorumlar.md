@@ -1,6 +1,6 @@
 # 11 — İdeal yorumlar (eğitim hedefleri)
 
-> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15–16). `train_ohne` 923/960 (Bölüm 17). Plan 1.4 (yön tutarlılığı): 555 ay yeniden üretilecek, 21.10.2026.
+> **Durum:** Hat kodlandı (`ideal/`, 8 test). Pilotlar: 1.0 %38 · 1.1 %88 · 1.2 %92. Öğretmen 1.3 ile yeniden deneme sonrası: eğitim 908/960 (%95), doğrulama 138/144 (%96) (Bölüm 13–14). Tur 12: bağlamsız hedefler („yalnızca FT“) ve iki düzeltme (Bölüm 15–16). Plan 1.4 (yön tutarlılığı) sonrası öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144 (Bölüm 17–18). Sıradaki: altın küme ve eğitim verisi, 22.10.2026.
 > - **[KARAR]:**
 >   - Karma yöntem ve 20–30 örneklik altın küme (tur 7, B1).
 >   - Notsuz nedende açık soru veya görülebilir bilgiden işaretli hipotez; ground truth nedeni asla (tur 6, B3).
@@ -453,3 +453,28 @@ Değişikliklerin büyük kısmı: „ungewöhnlich … Vergleichswert“ → �
 - **Geçerlilik yalnızca `input_sha` ile:** Sürüm alanları kayıt içindir. Plan sürümü değişse bile girdisi aynı kalan ay yeniden üretilmez.
 - **`--max-rounds` (varsayılan 2):** `--retry-failed` her girdiyi en fazla bir kez yeniden dener; Bölüm 14'teki „ikinci tur yok“ önerisi artık betikte.
 - **Yeniden üretim:** `ideal/README.md`, Bölüm 8.
+
+## 18. Öğretmen aşamasının sonucu (plan 1.4, 22.10.2026)
+
+Plan 1.4 ile değişen 555 ay yeniden üretildi ve bir kez yeniden denendi. Bütün kümelerde bekleyen ay yok; kabul edilen her metin güncel girdiyle üretilmiş ve güncel kontrolden geçiyor.
+
+| Küme | Kabul | Kelime (min / medyan / maks) | Model |
+|---|---:|---|---|
+| `train` | **907 / 960 (%94)** | 180 / 234 / 395 | RAG + FT (ana model) |
+| `val` | **138 / 144 (%96)** | 180 / 240 / 394 | RAG + FT |
+| `train_ohne` | **940 / 960 (%98)** | 180 / 242 / 387 | yalnızca FT (karşılaştırma) |
+| `val_ohne` | **142 / 144 (%99)** | 182 / 258 / 392 | yalnızca FT |
+
+**Taramalar:**
+- Planın „Ursache offen“ dediği hiçbir satırda metin „ungewöhnlich hoch/niedrig“ demiyor.
+- Bağlamsız kümelerde kaynak gösterimi ya da somut neden kelimesi yok.
+- Planda taban hipotezi olmadan geçen 8 „ungewöhnlich hoher Wert“ ifadesi meşru: sıçramayı normal düzeyle karşılaştırıyor.
+- Tire ile eksi: `train` 79, `train_ohne` 68 metin. Eğitim verisi birleştirilirken düzeltilecek (Bölüm 14).
+
+**Okuma (yeniden üretilen 4 metin):** İçerik planla tutarlı. Açık nedenler tabloda, Kernaussage'de ve sorularda aynı biçimde geçiyor.
+- **Kalan kusur türü:** Öğretmen bazen bir karşılaştırmayı ters kuruyor. Örnek: „Rückgang um 26,9 % gegenüber dem Vormonat fällt geringer aus als der Vorjahresvergleich (-8,4 %)“; „stärker“ olmalı.
+- Rakamlar doğru, yalnızca karşılaştırma sözcüğü yanlış. Otomatik kontrol bunu yakalayamıyor; altın kümede ölçülecek.
+
+**Toplam öğretmen kullanımı** (pilotlar dahil, 3.129 kayıt): girdi 17,7 Mio, çıktı 5,0 Mio token. Ücretsiz planda yapıldı; ücretli fiyatla kabaca ~16 $ tutardı (bilgi amaçlı tahmin).
+
+**Sıradaki:** Altın küme (20–30 doğrulama ayı, elle kontrol) ve eğitim verisinin birleştirilmesi: öğrenci istemi 1.1 (`rag_k8` / `ohne_kontext`) + kabul edilen metin.

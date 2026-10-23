@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 22.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%66, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 22.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%67, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -401,7 +401,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 |---|---|
 | Temel model | Küçük, açık ağırlıklı, Almanca'sı iyi bir model (ör. 3–8B sınıfı). **[KARAR, tur 6]** Almanca deneme turu: Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Eşitlikte Ministral 3 8B [ÖNERİ]. Deneme turu tamamlandı (17.10.2026): [`trial/results.md`](trial/results.md), [`docs/08_deneme_turu.md`](docs/08_deneme_turu.md). **[KARAR, tur 9]** Temel model **Gemma 4 E4B**, yedek **Qwen3.5 9B**. Ministral elendi (uydurma rakamlar, biçim 0/10). |
 | Lisans notları (kaynak belgeden) | Mistral: Apache 2.0, AB menşeli. gpt-oss: Apache 2.0 (20b yaklaşık 16 GB'a sığıyor). Llama: 3.2'den beri çok modlu modeller AB merkezli firmalara lisanslanmıyor; metin modelleri kullanılabilir. Proje yalnızca metin kullandığı için bu kısıt doğrudan etkilemez. Qwen: Apache 2.0, ama Çin menşeli; Alman firmalarında kullanımı yaklaşık %1, algı sorunu olabilir. |
-| Fine-tuning araç seti | [ÖNERİ] Unsloth + TRL (QLoRA), model `unsloth/gemma-4-E4B-it` 4-bit. Değerlendirme çıkarımı da Unsloth ile, aynı 4-bit taban (vLLM'de E4B float16 tek T4'e sığmıyor; `docs/00`, Bölüm 20) |
+| Fine-tuning araç seti | [ÖNERİ] Unsloth + TRL (QLoRA), model `unsloth/gemma-4-E4B-it` 4-bit. Çıkarım (baseline, değerlendirme, demo) Ollama ile, `gemma4:e4b-it-q4_K_M`; ince ayarlı modeller GGUF'a aktarılır. Transformers + Unsloth yolu T4'te 5 token/s verdi (`docs/00`, Bölüm 21) |
 | Vektör veritabanı ve embedding modeli | **[KARAR, tur 6]** BGE-M3 + Chroma |
 | Donanım | **[KARAR, tur 7]** Fine-tuning ve değerlendirme **Kaggle**'da (ücretsiz T4). Geliştirme, deneme turu ve demo kullanıcının dizüstünde (GTX 1650, 4 GB). Kiralık GPU şimdilik yok. "Lokal çalışabilirlik", son modelin bu dizüstünde çalışmasıyla gösterilir (`docs/06`, A2). |
 
@@ -435,7 +435,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 10. ✅ İstem 1.1 → [`docs/10_istem.md`](docs/10_istem.md), `prompting/`, `tests/test_prompting.py`
 11. ✅ İdeal yorum hattı → [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md), `ideal/`, `tests/test_ideal.py` (turlar 11–12)
 12. ✅ Eğitim verisi ve altın küme → [`docs/12_egitim_verisi.md`](docs/12_egitim_verisi.md), `training/`, `ideal/gold/`, `tests/test_training.py`
-13. 🔄 Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md) (deneme koşusu bekleniyor)
+13. 🔄 Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md) (deneme koşusu 1 yavaştı; Ollama ile deneme koşusu 2 bekleniyor)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 

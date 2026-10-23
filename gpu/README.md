@@ -4,8 +4,9 @@ Bu klasördekiler Kaggle'da (ücretsiz T4 GPU) çalışır. Kod ve veriyi ben ha
 
 - **Veri:** `gpu/data/*.jsonl.gz` (repoda; `python -m training` üretir, `docs/12_egitim_verisi.md`).
 - **Defterler:**
-  - `01_baseline.ipynb`: ince ayar öncesi model (çıplak model, yalnızca RAG).
+  - `01_baseline.ipynb`: ince ayar öncesi model (çıplak model, yalnızca RAG). Ollama ile çalışır; deneme turundaki model ve nicemleme (`docs/12`, Bölüm 4).
   - Sonrakiler: ince ayar (yalnızca FT, RAG + FT) ve değerlendirme.
+- **Önceki koşuların çıktıları:** `gpu/outputs/`.
 
 ---
 
@@ -19,52 +20,62 @@ Bu klasördekiler Kaggle'da (ücretsiz T4 GPU) çalışır. Kod ve veriyi ben ha
 4. Başlık: `bwa-kommentar-daten`. Görünürlük: **Private**. **Create**.
 5. Sağ paneldeki **Input** altında `bwa-kommentar-daten` görünmeli. Yalnızca defterin adı görünüyorsa veri seti eklenmemiştir.
 
-Veri değişirse aynı veri setine yeni sürüm yüklenir: veri setinin sayfası → **New Version**. Bunu ayrıca söyleyeceğim.
+Veri değişirse aynı veri setine yeni sürüm yüklenir: veri setinin sayfası → **New Version**. Bunu ayrıca söyleyeceğim. **23.10'daki defter değişikliğinde veri değişmedi;** veri setin olduğu gibi kalır.
 
 ## 2. Defteri aç
 
 1. Kaggle'da sol menü → **Code** → **New Notebook**.
 2. Üst menü → **File** → **Import Notebook** → `gpu/01_baseline.ipynb` dosyasını seç → **Import**.
 3. Sağ panelde **Session options**:
-   - **Accelerator:** `GPU T4 x2`. Defter yalnızca birini kullanır.
-   - **Internet:** **On**. Kapalıysa ayarlar menüsünden telefon doğrulaması gerekir; sende yapıldı.
+   - **Accelerator:** `GPU T4 x2`. Defter iki GPU'yu da kullanır; her birinde ayrı bir Ollama sunucusu çalışır.
+   - **Internet:** **On**. Ollama ve model internetten indirilir. Kapalıysa ayarlar menüsünden telefon doğrulaması gerekir; sende yapıldı.
 4. Sağ panelde **Input** → **Add Input** → **Your Datasets** → `bwa-kommentar-daten` → **Add**.
 
-## 3. Deneme koşusu (smoke test, arka planda ~20–40 dakika)
+## 3. Deneme koşusu (smoke test, arka planda ~15–30 dakika)
 
 Etkileşimli oturum başında kimse yokken kapanabilir. Bu yüzden deneme koşusu da arka planda yapılır.
 
-1. Defter güncel olmalı: GitHub'dan en son `gpu/01_baseline.ipynb` dosyasını indir (**Download raw file**), sonra Kaggle'da **File** → **Import Notebook**.
+1. Defter güncel olmalı: GitHub'dan en son `gpu/01_baseline.ipynb` dosyasını indir (**Download raw file**), sonra Kaggle'da **File** → **Import Notebook**. İlk hücrenin başlığında „Çalıştırıcı: Ollama“ yazmalı.
 2. **Session options** (Bölüm 2.3) ve **Input** (Bölüm 1.5) yerinde olmalı. Parametre hücresinde `MODE = "smoke"` kalsın.
 3. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**. Tarayıcıyı kapatabilirsin.
 4. Durumu izle: sol menü → **Code** → **Your Work** → defter → **Versions**. Durum „Running“den „Succeeded“ ya da „Error“a geçer.
-5. Bitince (başarılı ya da hatalı) sürümün sayfası → **Output** → `outputs/` içindeki bütün dosyaları indir ve Bölüm 5'teki bağlantıyla yükle:
-   - `log_smoke.txt`: her durumda oluşur; süreler, GPU belleği, varsa hatanın tam metni, üretilen yorumlar.
-   - `baseline_*.jsonl`: üretilen yorumlar.
-   Output boşsa sürüm sayfasındaki **Logs** bölümünün son satırlarının ekran görüntüsünü gönder.
+5. Bitince (başarılı ya da hatalı) sürümün sayfası → **Output** → **`ergebnisse_smoke.zip`** dosyasını indir ve Bölüm 5'teki bağlantıyla yükle.
+   - Zip'te her şey var: `log_smoke.txt` (süreler, GPU belleği, varsa hatanın tam metni, örnek yorumlar), `baseline_*.jsonl`, Ollama günlükleri.
+   - Hata erken çıktıysa zip oluşmamış olabilir. O zaman `outputs/` içindeki `log_smoke.txt` dosyasını yükle.
+   - Output boşsa sürüm sayfasındaki **Logs** bölümünün son satırlarının ekran görüntüsünü gönder.
+
+Deneme koşusu varyant başına 8 istem çalıştırır ve günlüğün sonuna tam koşunun tahmini süresini yazar („Tahmin: tam koşu … saat“).
 
 ## 4. Tam koşu (benim onayımdan sonra)
 
 1. Parametre hücresinde `MODE = "smoke"` → `MODE = "full"`.
 2. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**.
-   - Kaggle defteri arka planda çalıştırır; tarayıcıyı kapatabilirsin. Bir oturum en fazla 12 saat sürer.
+   - Kaggle defteri arka planda çalıştırır; tarayıcıyı kapatabilirsin. Bir oturum en fazla 12 saat sürer. Defter 11 saatte yeni istem almayı bırakır ve çıktıları paketler.
    - Haftalık GPU kotası ~30 saat; kalan kotayı profil → **Settings** altında görürsün.
 3. Durum: defterin sayfası → **Versions**. Çalışan sürüm „Running“, biten „Succeeded“ olur.
 
-Süre, deneme koşusundaki hıza bağlı; tahmini ben deneme sonucundan sonra veririm. Koşu 12 saati aşacaksa varyantları ayrı koşulara bölerim.
+**Süre yetmezse (günlükte „süre doldu, … istem kaldı“):**
+1. Defteri aç → sağ panel → **Input** → **Add Input** → **Notebooks** (ya da **Your Work**) → bu defterin kendisi → **Add**. Böylece önceki sürümün çıktısı girdi olur.
+2. Yeniden **Save & Run All (Commit)**. Defter önceki çıktıdaki kayıtları alır ve yalnızca kalan istemleri çalıştırır.
+
+Kaggle arayüzündeki adlar biraz farklı olabilir; bulamazsan ekran görüntüsü gönder.
 
 ## 5. Çıktıları repoya yükle
 
-1. Biten sürümün sayfası → **Output** → `outputs/` içindeki dosyaları (`log_*.txt`, `baseline_*.jsonl`) indir.
+1. Biten sürümün sayfası → **Output** → `ergebnisse_<MODE>.zip` dosyasını indir (tek dosya).
 2. Bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/gpu
 3. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
+
+Yükleme olmazsa hangi adımda takıldığını yaz: zip Kaggle'dan inmedi mi, yoksa GitHub sayfası mı hata verdi? Hata mesajı ya da ekran görüntüsü yeterli. Deneme koşusunun günlüğünü yapıştırmak geçici bir çözümdü; tam koşunun dosyaları bunun için çok büyük.
 
 ## Sorun giderme
 
 | Durum | Ne yapmalı |
 |---|---|
 | `… bulunamadı. Sağ panel → Input → Add Input …` | Veri seti defterin girdisi değil (Bölüm 1.5 ve 2.4). Hata satırı `/kaggle/input` içinde görüleni de yazar; onu bana gönder |
-| `pip` hücresinde ağ hatası | **Internet: On** olmalı (Bölüm 2.3) |
-| `CUDA out of memory` ve defter durdu | Hatanın son satırlarını gönder; parti boyutunu düşürürüm |
-| `bellek yetmedi; parti boyutu → …` satırı | Hata değil; defter partiyi küçültüp devam eder |
-| Oturum kapandı ya da 12 saat doldu | Aynı defteri yeniden çalıştır; biten aylar `outputs/` içinde korunmaz. Bu durumda bana haber ver, koşuyu bölerim |
+| Kurulum hücresinde ağ hatası ya da `curl` hatası | **Internet: On** olmalı (Bölüm 2.3) |
+| `OLLAMA HAZIRLANAMADI` | Günlüğü ve `ollama_gpu0.log` dosyasını gönder (ikisi de `outputs/` içinde) |
+| `UYARI: model tamamen GPU'da değil` | Hata değil, ama koşu yavaşlar. Accelerator'ın `GPU T4 x2` olduğunu kontrol et; günlüğü gönder |
+| `HATA <ay> (…, deneme 1)` | Defter o ayı bir kez daha dener. Çok sayıda görürsen günlüğü gönder |
+| `süre doldu, … istem kaldı` | Bölüm 4'teki devam adımları |
+| Oturum hatayla kapandı | Aynı defteri yeniden çalıştır. Önceki sürümün çıktısı Input olarak eklenirse biten aylar korunur (Bölüm 4) |

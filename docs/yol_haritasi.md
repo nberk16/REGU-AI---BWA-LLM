@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 22.10.2026 (eğitim verisi ve altın küme hazır; Kaggle baseline defteri hazır, deneme koşusu bekleniyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 23.10.2026 (Kaggle deneme koşusu 1: hat çalışıyor ama çok yavaş; defter Ollama'ya geçti, deneme koşusu 2 bekleniyor)
 
 ---
 
-## 1. Genel durum: ~%66 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%67 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 33,75 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 34,0 gün
 toplam iş     = 51 gün
-durum         = 33,75 / 51 ≈ %66
+durum         = 34,0 / 51 ≈ %67
 ```
 
 **Belirsizlik:**
@@ -35,12 +35,12 @@ durum         = 33,75 / 51 ≈ %66
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %65 | 3,25 | 🔄 Kaggle baseline defteri hazır; deneme koşusu bekleniyor |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %70 | 3,5 | 🔄 Deneme koşusu 1 yapıldı; defter Ollama'ya geçti, deneme koşusu 2 bekleniyor |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **33,75** | **≈ %66** |
+| | **Toplam** | **51** | | **34,0** | **≈ %67** |
 
 ---
 
@@ -111,7 +111,7 @@ durum         = 33,75 / 51 ≈ %66
 - **İsteğe bağlı:** Dışarıda kalan 8 ayın kısa bir öğretmen koşusuyla geri alınması.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 Kaggle baseline defteri hazır
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 deneme koşusu 2 bekleniyor
 - **Yapılan:**
   - Ortak istem modülü `prompting/` (sürüm 1.0).
   - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
@@ -129,13 +129,17 @@ durum         = 33,75 / 51 ≈ %66
   - Test istemleri: 3 varyant × 720 ay.
   - `gpu/01_baseline.ipynb`: Unsloth, 4-bit, deneme turu ayarları. Sahte modelle denendi.
   - Kullanıcı kılavuzu `gpu/README.md`.
+- **Deneme koşusu 1 (23.10.2026, `docs/12`, Bölüm 4):**
+  - Transformers + Unsloth yolu tek T4'te 5 token/s verdi; parti boyutu bellekten 1'e düştü. Tam koşu ~60 saat sürerdi.
+  - Defter Ollama'ya geçti (`gemma4:e4b-it-q4_K_M`, deneme turuyla aynı): iki T4, GPU başına 4 eşzamanlı istem, süre sınırı, önceki çıktıdan devam, tek zip. Sahte sunucuyla denendi.
+  - Dört metnin ilk okuması: rakam değerleri doğru; biçim, yön ve kaynak hataları var (beklenen baseline zayıflıkları).
 - **Kalan:**
-  - Kaggle'da deneme koşusu, ardından tam koşu (kullanıcı).
+  - Kaggle'da deneme koşusu 2 (Ollama), ardından tam koşu (kullanıcı).
   - Çıktıların puanlanması.
   - İsteğe bağlı: aynı 10 örnekte Gemma ile istem 1.1 ön kontrolü (kullanıcının dizüstünde ~1,5 saat; `docs/10`, Bölüm 8).
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
-- **Açık kararlar:** Çıkarım altyapısı [ÖNERİ, 22.10.2026: değerlendirme Unsloth + Transformers 4-bit (vLLM'de E4B float16 T4'e sığmıyor), demo Ollama].
+- **Açık kararlar:** Çıkarım altyapısı [ÖNERİ, 23.10.2026: baseline, değerlendirme ve demo Ollama (llama.cpp, Q4_K_M); ince ayarlı modeller GGUF'a aktarılır (`docs/00`, Bölüm 21)].
 
 ### 7. Fine-tuning (LoRA) — ⏳ başlamadı
 - **Kalan:**
@@ -145,6 +149,7 @@ durum         = 33,75 / 51 ≈ %66
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
   - Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
+  - **Olası karar (hız ölçümünden sonra):** Unsloth, T4'te Gemma 4 için float32'ye geçiyor; eğitim yavaş olabilir. İnce ayar defteri önce kısa bir hız ölçümü yapar. Çok yavaşsa seçenekler kullanıcıya sunulur: daha kısa eğitim, Gemma 4 E2B, Qwen3.5 9B (tur 9) ya da kiralık GPU (tur 7).
 - **Kararlaştırılan (tur 12):** „Yalnızca fine-tuning“ varyantı bağlamsız girdilerle ayrı bir model olarak eğitilir (B). RAG + FT modelinin bağlamsız çalıştırılması ek satır olarak raporlanır (`docs/00`, Bölüm 19).
 
 ### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.3
@@ -160,6 +165,7 @@ durum         = 33,75 / 51 ≈ %66
 - **v1.3 (18.10.2026):** K-A/K-B kimlikleri tanınıyor (`quelle_wissen`, kaynak sayılmaz); CLI'de `--retrieval` (`docs/07`, Bölüm 12). 56 test.
 - **Kalan (%20):**
   - Baseline çıktılarına göre kelime listelerinin ve kuralların ayarı.
+  - Rakam biçimi: binlik ayırıcı boşluk („14 054 €“) şu an iki ayrı sayı olarak okunuyor. Değer doğru, biçim yanlış; puanlamada ayrı sayılmalı (deneme koşusu 1).
   - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
 - **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
 - **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
@@ -232,3 +238,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 21.10.2026 | `train_ohne` 923/960, `val` 138/144, `val_ohne` 139/144. Plan 1.4: taban ve bayrak hipotezlerinde yön tutarlılığı; 555 ay yeniden üretilecek. Betik: geçerlilik parmak iziyle, en fazla bir yeniden deneme. Paket 5 → %80: %62 |
 | 22.10.2026 | Plan 1.4 ile 555 ay yeniden üretildi. Öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144. Paket 5 → %85: %63 |
 | 22.10.2026 | Altın küme (30 metin) ve eğitim verisi (`train_rag` 898, `train_ohne` 933); uyarı Kernaussage'si otomatik tamamlama; plan 1.5 / öğretmen 1.4; test istemleri; Kaggle baseline defteri ve kılavuzu. Paket 5 → %100, 6 → %65: %66 |
+| 23.10.2026 | Kaggle deneme koşusu 1 (Transformers + Unsloth): hat çalışıyor, ama 5 token/s (tam koşu ~60 saat). Baseline defteri Ollama'ya geçti (iki T4, eşzamanlı istem, devam, zip); dört metnin ilk okuması. Paket 6 → %70: %67 |

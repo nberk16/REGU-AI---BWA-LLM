@@ -1,9 +1,10 @@
 # 12 — Eğitim verisi, altın küme ve Kaggle hazırlığı
 
-> **Durum (22.10.2026):**
+> **Durum (23.10.2026):**
 > - Eğitim verisi birleştirildi (`training/`, `gpu/data/`); altın küme hazır (`ideal/gold/`, 30 metin).
-> - Test istemleri yazıldı (3 varyant × 720 ay). İlk Kaggle defteri hazır: `gpu/01_baseline.ipynb`.
-> - **[ÖNERİ]:** temizlik kuralları, üretim ayarları (bu belge).
+> - Test istemleri yazıldı (3 varyant × 720 ay). Kaggle defteri: `gpu/01_baseline.ipynb`.
+> - Deneme koşusu 1 (Transformers + Unsloth) çok yavaştı (~60 saat). Defter Ollama'ya geçti (Bölüm 4).
+> - **[ÖNERİ]:** temizlik kuralları, üretim ayarları, çıkarım altyapısı (bu belge).
 >
 > **İlgili:** `11_ideal_yorumlar.md` (öğretmen metinleri) · `10_istem.md` (öğrenci istemi 1.1) · Kullanıcı adımları: [`gpu/README.md`](../gpu/README.md) · Karar kaydı: `00`, Bölüm 20
 
@@ -89,23 +90,92 @@ Her örnek bir sohbettir: sistem mesajı + kullanıcı mesajı (öğrenci istemi
 ## 4. Kaggle defteri 01: baseline (`gpu/01_baseline.ipynb`)
 
 - **Varyantlar:** Çıplak model (`ohne_kontext`) ve yalnızca RAG (`rag_k8`), test kümesinin 720 ayı.
-- **Model:** `unsloth/gemma-4-E4B-it` (Apache 2.0, kapılı değil), Unsloth ile 4-bit.
-  - Neden Unsloth: T4'te Gemma'nın float16 taşmalarına karşı düzeltme içeriyor.
-  - İnce ayar da QLoRA ile aynı 4-bit taban üzerinde yapılacak; şablon ve niceleme bütün varyantlarda aynı kalır.
-- **Şablon:** Modelin kendi sohbet şablonu, düşünme kipi kapalı (`enable_thinking=False`). Sistem rolü destekleniyor.
-- **Üretim [ÖNERİ]:** Deneme turuyla aynı ayarlar: `temperature 0.2`, `top_p 0.95`, `top_k 64`, `seed 42`, en fazla 1.500 yeni token.
-- **Çalışma:**
-  - Partiler: bağlamsız 8, RAG 4. Bellek yetmezse yarıya iner.
-  - Uzun istemler önce gelir. Her partiden sonra kayıt yazılır; aynı oturumda kaldığı yerden devam eder.
-- **Doğrulama:** Defter GPU olmadan sahte bir modelle denendi: dosya bulma, deneme kipi, parti küçültme, devam, 720 kayıt.
-- **Belirsizlik:**
-  - Gemma 4 + Unsloth + Kaggle T4 birleşimi henüz Kaggle'da denenmedi.
-  - Kaynaklar E4B QLoRA için ~10 GB, LoRA için ~17 GB VRAM veriyor.
-  - Bu yüzden önce 2 istemlik bir deneme koşusu var (`gpu/README.md`, Bölüm 3).
+- **Şablon ve ayarlar [ÖNERİ]:** Modelin kendi sohbet şablonu, düşünme kipi kapalı. Deneme turuyla aynı üretim ayarları: `temperature 0.2`, `top_p 0.95`, `top_k 64`, `seed 42`, en fazla 1.500 yeni token.
 
-Kaynaklar: [Unsloth — Gemma 4 Fine-tuning Guide](https://unsloth.ai/docs/models/gemma-4/train) · [unsloth/gemma-4-E4B-it](https://huggingface.co/unsloth/gemma-4-E4B-it)
+### 4.1 Deneme koşusu 1 (23.10.2026): Transformers + Unsloth
+
+- **Kurulum:**
+  - Unsloth 2026.10.7, Transformers 5.16.1, Torch 2.11, tek T4.
+  - Model `unsloth/gemma-4-E4B-it-unsloth-bnb-4bit`.
+  - Varyant başına 2 istem.
+- **Çıktılar:** `gpu/outputs/smoke_2026-10-23_transformers/`. Kullanıcı yükleyemediği için elle aktardı; kayıtlar günlükten yeniden kuruldu.
+- **Sonuç:** Hat uçtan uca çalışıyor, ama tam koşu için çok yavaş.
+
+| Ölçüm | Değer |
+|---|---|
+| Model yükleme | 81 s |
+| GPU belleği, yüklemeden sonra | 11,3 / 15,6 GB |
+| Parametreler | 4,60 Mrd. float16 + 1,67 Mrd. uint8 (4-bit katmanlar) |
+| Parti boyutu | 8 → 4 → 2 → 1 (her adımda bellek yetmedi) |
+| Hız | ~5 token/s; istem başına 116–169 s |
+| Tam koşu tahmini | 1.440 istem × ~150 s ≈ **60 saat** (oturum en fazla 12 saat, haftalık kota ~30 saat) |
+
+**Neden yavaş (tahmin, ölçülmedi):**
+- **Bellek:** Belleğin ~9 GB'ı float16 parametreler. Bunlar 4-bit'e çevrilmiyor; çoğu büyük olasılıkla Gemma 4'ün gömme tabloları (katman başına gömmeler dahil) ve görüntü/ses kodlayıcıları. Kalan bellek 3–5 bin token'lık ikinci bir isteme yetmiyor.
+- **Hesaplama:** Unsloth, T4'te Gemma 4 için float32'ye geçiyor („Using float16 precision for gemma4 won't work! Using float32.“). T4'ün float32 hızı float16'nın kabaca sekizde biri.
+- **Karşılaştırma:** Deneme turunda Gemma, kullanıcının dizüstünde büyük ölçüde işlemcide 4,3 token/s üretmişti (`trial/results.md`). T4'teki 5 token/s neredeyse aynı. Sorun GPU'da değil, çalıştırma yolunda.
+
+### 4.2 Çıkarım Ollama ile [ÖNERİ, 23.10.2026]
+
+- **Değişiklik:** Baseline Ollama (llama.cpp) ile çalışır, model `gemma4:e4b-it-q4_K_M`. İnce ayarlı modellerin değerlendirmesi de aynı yoldan yapılır. 22.10'daki „Unsloth + Transformers 4-bit“ önerisinin yerini alır.
+- **Gerekçe:**
+  1. **Hız:** llama.cpp gömme tablolarını işlemcide tutar ve GPU'da nicemli çekirdeklerle çalışır. T4'te istem başına birkaç on saniye bekleniyor; deneme koşusu 2 ölçecek.
+  2. **Karşılaştırılabilirlik:** Model, nicemleme ve ayarlar deneme turuyla aynı (`docs/08`).
+  3. **Demo:** Dizüstündeki demo da Ollama ile çalışacak. Değerlendirilen model ile gösterilen model aynı biçimde olur.
+- **Düzen:**
+  - Her T4'e bir Ollama sunucusu; sunucu başına aynı anda 4 istem.
+  - Süre sınırı 11 saat; sonra çıktılar paketlenir.
+  - Kaldığı yerden devam: aynı oturumda ya da önceki sürümün çıktısı Input olarak eklenince.
+  - Çıktılar tek dosyada: `ergebnisse_<MODE>.zip`.
+- **Kayıtta ayrıca:** model özeti (digest), Ollama sürümü, `done_reason` (1.500 token sınırına takıldı mı), düşünme metni uzunluğu, istem ve üretim süreleri.
+- **Doğrulama:** Sahte bir Ollama sunucusuyla denendi. Denenenler:
+  - deneme kipi;
+  - hatadan sonra yeniden deneme;
+  - süre sınırında durma;
+  - önceki sürümün çıktısından devam (yinelenen kayıt yok);
+  - zip.
+- **İnce ayarlı modeller için sonuç (paket 7):**
+  - LoRA ağırlıkları eğitimden sonra GGUF'a aktarılır (Unsloth `save_pretrained_gguf`, Q4_K_M) ve aynı düzende çalıştırılır.
+  - Açık teknik nokta: bağdaştırıcı (adapter) aynı Ollama tabanına mı eklenecek, yoksa birleştirilmiş model mi yeniden nicemlenecek. Taban dönüşümü farklı olursa baseline aynı yoldan bir kez daha koşulur (birkaç saat).
+- **Açık risk, eğitim hızı:**
+  - Eğitim yine Unsloth ile T4'te yapılacak; float32 hesaplama eğitimi de yavaşlatabilir.
+  - İnce ayar defterinde önce kısa bir hız ölçümü yapılır.
+  - Çok yavaşsa donanım (tur 7) ya da model (tur 9) kararı yeniden kullanıcıya sorulur.
+
+Kaynaklar: [Unsloth — Gemma 4 Fine-tuning Guide](https://unsloth.ai/docs/models/gemma-4/train) (VRAM, GGUF'a aktarma) · [Unsloth — Saving to Ollama](https://unsloth.ai/docs/basics/inference-and-deployment/saving-to-ollama) · [Ollama kurulum betiği](https://ollama.com/install.sh) (zstd gerekiyor)
+
+### 4.3 Dört baseline metninin ilk okuması (deneme koşusu 1)
+
+Bu metinler Transformers yolundan geldi; asıl baseline Ollama ile yeniden üretilecek. Yalnızca ilk izlenim için:
+
+| Metin | Format | Rakam: değer doğru | Rakam biçimi | İşaretsiz neden | Kelime |
+|---|---|---:|---|---:|---:|
+| `ohne_kontext` 2025-01 | ✓ | 31/31 | ✓ | 0 | 136 |
+| `ohne_kontext` 2025-02 | ✓ | 41/41 | binlik ayırıcı boşluk | 0 | 152 |
+| `rag_k8` 2025-01 | ✓ | 44/44 | ✓ | 2 | 183 |
+| `rag_k8` 2025-02 | ✗ (5 sütunlu tablo satırı) | 38/38 | binlik ayırıcı boşluk | 0 | 155 |
+
+- **Rakam biçimi:**
+  - İki metinde binlik ayırıcı boşluk („14 054 €“). İstem kuralı „886.365 €“.
+  - Doğrulama bu rakamları iki ayrı sayı olarak okuyor (rakam sadakati 0,18 ve 0,24). Boşluklar noktaya çevrilince bütün değerler FACTS'le aynı.
+  - Puanlamada biçim hatası değer hatasından ayrı sayılmalı (paket 8).
+- **Okumada görülenler:**
+  - **Ara toplamlar:** Anlamlı olmayan ara toplamlar ve sonuç satırları tabloda (Gesamtleistung, Rohertrag, Ergebnis vor Steuern, Vorläufiges Ergebnis). Bütün satırlarda „Ursache offen“; son sütun „–>“.
+  - **Yön ve mantık hataları:**
+    - Betriebsergebnis Vorjahr'a göre 29.532 € düşmüşken „verbesserte sich signifikant im Vergleich zum Vorjahresmonat“.
+    - Materialquote'nin artışı „deutliche Verbesserung“ deniyor.
+    - „Noch nicht das Normalniveau von -61 721 €“ deniyor, oysa 14.054 € bu seviyenin zaten üstünde.
+  - **Yanlış kaynak:**
+    - `rag_k8`, Personalkosten artışını (+%14,2) [Quelle: Kontextnotiz 2024-02] ile açıklıyor. O not geçen yılki bir personel azaltımı.
+    - Ayın asıl notu (Kontextnotiz 2025-02, Sonderauftrag) hiç kullanılmamış.
+  - **İşaretsiz neden:** „primär auf den Rückgang der Gesamtleistung … zurückzuführen“, „Tendenz zu geringeren Verkaufspreisen“.
+  - **Uzunluk:** Metinler kısa (136–183 kelime; hedef 250–350). Sorular genel.
+  - **Olumlu:** Dört başlık var. Layer 1'in V1 ve V2 bayrakları uyarı olarak anılıyor. 2025-02'deki V6 (sezon) bayrağı iki metinde de eksik.
+- **Yorum:** Bunlar beklenen baseline zayıflıkları ve ablation için iyi kanıt (CLAUDE.md 7): biçim tutarsız, olgu ile tahmin karışık, bağlam notu yanlış kullanılıyor. Ama yalnızca 4 metin var; sonuç tam koşudan sonra.
 
 ## 5. Sıradaki
 
-1. Kullanıcı: Kaggle'da veri seti ve deneme koşusu (`gpu/README.md`). Hız ölçülünce tam koşunun süresi tahmin edilir.
-2. Asistan: baseline çıktılarının puanlanması (doğrulama katmanı + ground truth metrikleri, paket 9) ve ince ayar defteri (paket 7).
+1. **Kullanıcı:** Kaggle'da Ollama defteriyle deneme koşusu 2 (`gpu/README.md`, Bölüm 3). Hız ölçülünce tam koşunun süresi tahmin edilir.
+2. **Asistan:**
+   - Baseline çıktılarının puanlanması (doğrulama katmanı + ground truth metrikleri, paket 9). Rakam biçimi ayrı sayılır.
+   - İnce ayar defteri (paket 7); önce kısa hız ölçümü.

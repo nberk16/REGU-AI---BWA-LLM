@@ -512,12 +512,39 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **Altın küme:** 30 metin. 14'ü düzeltmesiz, 10'u yalnızca otomatik düzeltmeyle, 6'sı elle düzeltildi. Baskın kusur, uyarı Kernaussage'sinde eksik uyarı dili (~%40); otomatik tamamlamanın gerekçesi bu.
 - **Plan 1.5 / öğretmen 1.4:** Karışık zamanlı kaynaklarda hangi notun önceki yıla ait olduğu ayrıca söylenir. 8 ay girdisi değiştiği için eğitimde dışarıda.
 - **Test istemleri:** `ohne_kontext`, `rag_k8`, `rag_alle` × 720 ay (`reference_seed42`).
-- **[ÖNERİ] Çıkarım altyapısı (değişti):**
+- **[ÖNERİ] Çıkarım altyapısı (değişti; 23.10.2026 yeniden değişti, Bölüm 21):**
   - Değerlendirme vLLM yerine Unsloth + Transformers ile, 4-bit.
   - Gerekçe: E4B gömmelerle 8B parametre; float16'da tek T4'e (16 GB) sığmıyor. Gemma'nın T4'teki float16 taşmalarına Unsloth'ta düzeltme var. Bütün varyantlar aynı 4-bit tabanı kullanır.
   - Demo yine Ollama (GGUF).
 - **[ÖNERİ] Üretim ayarları:** deneme turuyla aynı (`temperature 0.2`, `seed 42`, en fazla 1.500 token).
 - **Kaggle:** `gpu/01_baseline.ipynb` (çıplak model ve yalnızca RAG); kullanıcı adımları `gpu/README.md`. Önce 2 istemlik deneme koşusu.
+
+## 21. Kaggle deneme koşusu ve çıkarım altyapısı (23.10.2026)
+
+- **Deneme koşusu 1 (Transformers + Unsloth, tek T4):** Hat uçtan uca çalıştı, ama çok yavaş (`12_egitim_verisi.md`, Bölüm 4.1).
+  - Yüklemeden sonra 11,3 / 15,6 GB bellek; parti boyutu 1'e kadar düştü.
+  - ~5 token/s, istem başına ~150 s. Tam baseline ~60 saat sürerdi (oturum 12 saat, haftalık kota ~30 saat).
+- **[ÖNERİ] Çıkarım altyapısı (yeniden değişti):**
+  - Baseline ve değerlendirme Ollama (llama.cpp) ile, `gemma4:e4b-it-q4_K_M`. Her T4'e bir sunucu, sunucu başına 4 eşzamanlı istem.
+  - Gerekçe:
+    - Hız.
+    - Deneme turuyla aynı model ve nicemleme.
+    - Demo ile aynı biçim.
+  - İnce ayarlı modeller GGUF'a aktarılıp aynı düzende çalıştırılır.
+  - 22.10'daki „Unsloth + Transformers 4-bit“ önerisinin (Bölüm 20) yerini alır.
+- **Karar gerektirmeyen değişiklik:** Donanım (Kaggle T4, tur 7) ve model (Gemma 4 E4B, tur 9) aynı kalıyor.
+- **Açık risk:**
+  - Eğitim de T4'te float32 hesaplamayla yavaş olabilir.
+  - İnce ayar defteri önce hızı ölçer.
+  - Çok yavaşsa tur 7 ya da tur 9 kararı yeniden kullanıcıya sorulur. Seçenekler:
+    - daha kısa eğitim;
+    - Gemma 4 E2B;
+    - Qwen3.5 9B;
+    - kiralık GPU.
+- **İlk okuma (4 metin):**
+  - Rakam değerleri doğru; iki metinde binlik ayırıcı boşluk.
+  - Yön hataları var; bir kaynak yanlış kullanılmış; işaretsiz nedenler var; metinler kısa.
+  - Doğrulama, boşluklu rakamları iki sayı olarak okuyor. Puanlamada biçim, değerden ayrı sayılacak (paket 8).
 
 ## Kaynak
 

@@ -1,0 +1,132 @@
+2026-10-23T14:04:57+00:00 Başlangıç · MODE=smoke · torch 2.11.0+cu128 · GPU: Tesla T4
+2026-10-23T14:04:58+00:00 İstemler: {'ohne_kontext': 720, 'rag_k8': 720}
+2026-10-23T14:07:15+00:00 Model yüklendi: 81 s · GPU belleği 11.3 / 15.6 GB · parametreler: torch.float16 4.60 Mrd., torch.uint8 1.67 Mrd., torch.float32 0.00 Mrd.
+2026-10-23T14:07:15+00:00 ohne_kontext: 2 istem, 0 tamam, 2 çalışacak
+2026-10-23T14:07:43+00:00   bellek yetmedi; parti boyutu → 4
+2026-10-23T14:07:47+00:00   bellek yetmedi; parti boyutu → 2
+2026-10-23T14:07:51+00:00   bellek yetmedi; parti boyutu → 1
+2026-10-23T14:10:38+00:00   [1/2] 1 istem · 167 s · 5 token/s
+2026-10-23T14:12:33+00:00   [2/2] 1 istem · 116 s · 5 token/s
+2026-10-23T14:12:34+00:00 rag_k8: 2 istem, 0 tamam, 2 çalışacak
+2026-10-23T14:12:34+00:00   bellek yetmedi; parti boyutu → 2
+2026-10-23T14:12:34+00:00   bellek yetmedi; parti boyutu → 1
+2026-10-23T14:15:13+00:00   [1/2] 1 istem · 159 s · 5 token/s
+2026-10-23T14:18:02+00:00   [2/2] 1 istem · 169 s · 5 token/s
+2026-10-23T14:18:02+00:00 
+===== ohne_kontext · A1-v00_2025-02 · girdi 3218 · çıktı 787 token · parti 166.6 s
+**Kernaussagen Februar 2025**
+
+1. Das Betriebsergebnis verbesserte sich im Februar 2025 signifikant im Vergleich zum Vorjahresmonat und zum Vormonat, erreichte jedoch mit 14 054 € noch nicht das Normalniveau von -61 721 €.
+2. Die Gesamtleistung lag mit 743 213 € unter dem Vorjahresmonat von 758 554 €, zeigte aber einen starken Anstieg von 24,7 % gegenüber dem Vormonat.
+3. Die Gesamtkosten von 359 973 € sind im Vergleich zum Vorjahresmonat um 12,7 % niedriger, was zu einer Verbesserung des Betriebsergebnisses beitrug, obwohl die Material-/Wareneinkäufe mit 371 339 € über dem Vorjahresmonat von 304 913 € lagen.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 743 213 € | Vj. 758 554 € | -2,0 % | Ursache offen | –> |
+| Rohertrag | 371 874 € | Vj. 453 641 € | -18,0 % | Ursache offen | –> |
+| Gesamtkosten | 359 973 € | Vj. 412 106 € | -12,7 % | Ursache offen | –> |
+| Betriebsergebnis | 14 054 € | Vj. 43 586 € | -29 532 € | Ursache offen | –> |
+| Ergebnis vor Steuern | 11 370 € | Vj. 40 682 € | -29 311 € | Ursache offen | –> |
+| Vorläufiges Ergebnis | 11 370 € | Vj. 40 682 € | -29 311 € | Ursache offen | –> |
+| Reparatur/Instandhaltung | 15 615 € | Vj. 90 962 € | -82,8 % | Ursache offen | –> |
+| Material-/Wareneinkauf | 371 339 € | Vj. 304 913 € | 21,8 % | Ursache offen | –> |
+| Personalkosten | 229 545 € | Vj. 201 072 € | 14,2 % | Ursache offen | –> |
+| Werbe-/Reisekosten | 4 216 € | Vj. 10 845 € | -61,1 % | Ursache offen | –> |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, da die Bestandsveränderungen 0 € betrugen, während der Material-/Wareneinkauf im Vergleich zum Vormonat um 22,4 % gestiegen ist.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wie ist die Ursache für die signifikante Abweichung bei Rohertrag und Betriebsergebnis im Vergleich zum Vorjahresmonat zu klären?
+2026-10-23T14:18:02+00:00 
+===== ohne_kontext · A1-v00_2025-01 · girdi 2867 · çıktı 603 token · parti 115.6 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis lag im Januar 2025 mit -104.521 € deutlich unter dem Vorjahresmonat von -19.960 €, was einer Verschlechterung von 84.561 € entspricht.
+2. Die Gesamtleistung von 596.134 € ist im Vergleich zum Vorjahresmonat um 86.844 € niedriger, was einer Abweichung von 12,7 % entspricht.
+3. Die Rohertragsquote verzeichnete mit 49,1 % eine Verschlechterung um 2,6 Prozentpunkte gegenüber dem Vorjahresmonat, während die Materialquote mit 50,9 % eine Verbesserung um 2,6 Prozentpunkte im Vergleich zum Vorjahresmonat zeigt.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 596.134 € | Vj. 682.978 € | -12,7 % | Ursache offen | – |
+| Rohertrag | 292.665 € | Vj. 353.016 € | -17,1 % | Ursache offen | – |
+| Gesamtkosten | 399.316 € | Vj. 375.041 € | 6,5 % | Ursache offen | – |
+| Betriebsergebnis | -104.521 € | Vj. -19.960 € | -84.561 € | Ursache offen | – |
+| Ergebnis vor Steuern | -107.170 € | Vj. -22.954 € | -84.216 € | Ursache offen | – |
+| Vorläufiges Ergebnis | -107.170 € | Vj. -22.954 € | -84.216 € | Ursache offen | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Es liegt ein Hinweis vor, dass die Kosten für Versicherungen/Beiträge mit 35.508 € das 12,1-fache des Normalniveaus von 2.925 € betragen, wobei auch im Vorjahresmonat eine Erhöhung festgestellt wurde.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Welche Faktoren haben zu der signifikanten Verschlechterung des Betriebsergebnisses im Vergleich zum Vorjahresmonat geführt?
+2026-10-23T14:18:02+00:00 
+===== rag_k8 · A1-v00_2025-02 · girdi 5033 · çıktı 799 token · parti 158.7 s
+**Kernaussagen Februar 2025**
+
+1. Die Gesamtleistung lag im Februar 2025 bei 743 213 €, was eine Steigerung von 24,7 % gegenüber dem Vormonat darstellt, jedoch leicht unter dem Vorjahreswert von 758 554 € liegt.
+2. Das Betriebsergebnis verbesserte sich signifikant auf 14 054 € im Vergleich zum Vorjahresmonat, liegt aber immer noch unter dem Vorjahreswert von 43 586 €.
+3. Die Materialquote stieg auf 50,0 %, was eine deutliche Verbesserung gegenüber dem Vorjahresmonat von 40,2 % darstellt und die Rohertragsquote auf 50,0 % erhöht, was im Vergleich zum Vorjahresmonat eine Verschlechterung um 9,8 Prozentpunkte bedeutet.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 743 213 € | Vj. 758 554 € | -2,0 % | Ursache offen | –> |
+| Rohertrag | 371 874 € | Vj. 453 641 € | -18,0 % | Ursache offen | –> |
+| Gesamtkosten | 359 973 € | Vj. 412 106 € | -12,7 % | Ursache offen | –> |
+| Betriebsergebnis | 14 054 € | Vj. 43 586 € | -29 532 € | Ursache offen | –> |
+| Ergebnis vor Steuern | 11 370 € | Vj. 40 682 € | -29 311 € | Ursache offen | –> |
+| Vorläufiges Ergebnis | 11 370 € | Vj. 40 682 € | -29 311 € | Ursache offen | –> |
+| Reparatur/Instandhaltung | 15 615 € | Vj. 90 962 € | -82,8 % | Ursache offen | –> |
+| Material-/Wareneinkauf | 371 339 € | Vj. 304 913 € | 21,8 % | Ursache offen | –> |
+| Personalkosten | 229 545 € | Vj. 201 072 € | 14,2 % | [Quelle: Kontextnotiz 2024-02] |
+| Werbe-/Reisekosten | 4 216 € | Vj. 10 845 € | -61,1 % | Ursache offen | –> |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, da der Material-/Wareneinkauf im Februar 2025 um 22,4 % gegenüber dem Vormonat gestiegen ist, während die Bestandsveränderungen 0 € betrugen. Hierbei ist zu prüfen, ob die Bestandsveränderung für den Monat erfasst wurde.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wurde die Bestandsveränderung für den Monat Februar 2025 erfasst?
+2026-10-23T14:18:02+00:00 
+===== rag_k8 · A1-v00_2025-01 · girdi 4275 · çıktı 868 token · parti 169.3 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis lag im Januar 2025 mit -104.521 € deutlich unter dem Vorjahresmonat von -19.960 €, was einer Verschlechterung von 84.561 € entspricht. Dies ist primär auf den Rückgang der Gesamtleistung von 12,7 % im Vergleich zum Vorjahresmonat zurückzuführen.
+2. Die Rohertragsquote sank auf 49,1 %, verglichen mit 51,7 % im Vorjahresmonat, was auf eine Tendenz zu geringeren Verkaufspreisen oder einem ungünstigeren Produktmix hindeuten könnte. Die Materialquote stieg hingegen auf 50,9 % gegenüber 48,3 % im Vorjahresmonat.
+3. Die Personalkostenquote ist mit 40,2 % deutlich gestiegen, was eine deutliche Belastung für die operative Marge darstellt. Die Kennzahlen zeigen, dass die Entwicklung im Vergleich zum Vorjahresmonat signifikant negativ ist.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 596.134 € | Vj. 682.978 € | -12,7 % | Ursache offen | –> |
+| Rohertrag | 292.665 € | Vj. 353.016 € | -17,1 % | Ursache offen | –> |
+| Gesamtkosten | 399.316 € | Vj. 375.041 € | 6,5 % | Ursache offen | –> |
+| Betriebsergebnis | -104.521 € | Vj. -19.960 € | -84.561 € | Ursache offen | –> |
+| Ergebnis vor Steuern | -107.170 € | Vj. -22.954 € | -84.216 € | Ursache offen | –> |
+| Umsatzerlöse | 596.134 € | Vj. 682.978 € | -12,7 % | Ursache offen | –> |
+| Personalkosten | 239.420 € | Vj. 211.049 € | 13,4 % | Ursache offen | –> |
+| Rohertragsquote | 49,1 % | Vj. 51,7 % | -2,6 Prozentpunkte | Ursache offen | –> |
+| Materialquote | 50,9 % | Vj. 48,3 % | 2,6 Prozentpunkte | Ursache offen | –> |
+| Personalkostenquote | 40,2 % | Vj. 30,9 % | 9,3 Prozentpunkte | Ursache offen | –> |
+| Betriebsergebnis-Marge | -17,5 % | Vj. -2,9 % | -14,6 Prozentpunkte | Ursache offen | –> |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Es liegt ein Hinweis auf eine mögliche fehlende Abgrenzung einer wiederkehrenden Zahlung vor, da die Kosten 35.508 € betragen, was 12,1-fach des Normalniveaus entspricht und der Vorjahresmonat ebenfalls erhöht war. Wir bitten um Klärung, ob diese Zahlung monatlich abgegrenzt wird.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Können Sie die Ursachen für die signifikanten Abweichungen bei Gesamtleistung und Betriebsergebnis im Vergleich zum Vorjahresmonat detaillierter beleuchten?
+2026-10-23T14:18:02+00:00 Bitti.

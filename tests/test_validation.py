@@ -90,6 +90,14 @@ def test_non_german_format():
     assert N.non_german("um 19,0 % gestiegen, 1.583 €, am 30.06.2025") == []
 
 
+def test_space_thousands_read_as_one_number():
+    """v1.7: „14 054 €“ wird als ein Wert gelesen (Wert prüfbar), aber als Formatfehler gemeldet."""
+    [num] = N.extract("mit 14 054 € unter")
+    assert num.value == 14054 and num.spaced and num.thousands
+    assert [n.raw for n in N.extract("im Januar 2025 lag")] == ["2025"]
+    assert [str(n.value) for n in N.extract("2025 100 Stück")] == ["2025", "100"]
+
+
 # --- Örnek yorum ------------------------------------------------------------------------------------
 
 def test_example_passes(example, facts, notes):
@@ -118,6 +126,7 @@ def test_example_facts_file_is_current(facts):
     ("bei einer Rohertragsquote von 48,6 % (Vj. 52,4 %)", "bei einer um 3,8 % gesunkenen Rohertragsquote", "einheit"),
     ("| Werbe-/Reisekosten | 4.303 € |", "| Werbe-/Reisekosten | 444.983 € |", "zahl_falsche_position"),
     ("um 19,0 % auf", "um 19.0 % auf", "zahlenformat"),
+    ("| −17.002 € |", "| −17 002 € |", "zahlenformat"),      # v1.7: Wert stimmt, nur das Trennzeichen nicht
 ])
 def test_number_findings(example, facts, notes, old, new, code):
     assert example.count(old) == 1

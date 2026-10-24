@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (Kaggle deneme koşusu 2, Ollama ile: tam koşu tahmini ~2–3 saat; tam baseline koşusu bekleniyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (baseline tam koşusu bitti ve puanlandı; puanlama 1.0 kodlandı; sırada ince ayar)
 
 ---
 
-## 1. Genel durum: ~%67 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%73 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 34,25 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 37,15 gün
 toplam iş     = 51 gün
-durum         = 34,25 / 51 ≈ %67
+durum         = 37,15 / 51 ≈ %73
 ```
 
 **Belirsizlik:**
@@ -35,12 +35,12 @@ durum         = 34,25 / 51 ≈ %67
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %75 | 3,75 | 🔄 Ollama ile deneme koşusu 2 başarılı; tam koşu bekleniyor |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
-| 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
+| 9 | Değerlendirme ve ablation | 6 | %45 | 2,7 | 🔄 puanlama 1.0 ve baseline sonuçları; ince ayarlı modeller bekleniyor |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **34,25** | **≈ %67** |
+| | **Toplam** | **51** | | **37,15** | **≈ %73** |
 
 ---
 
@@ -111,7 +111,7 @@ durum         = 34,25 / 51 ≈ %67
 - **İsteğe bağlı:** Dışarıda kalan 8 ayın kısa bir öğretmen koşusuyla geri alınması.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 tam koşu bekleniyor
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — ✅ tamamlandı
 - **Yapılan:**
   - Ortak istem modülü `prompting/` (sürüm 1.0).
   - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
@@ -142,8 +142,10 @@ durum         = 34,25 / 51 ≈ %67
     - hiç „(Hypothese)“ yok;
     - eksik bayrak uyarıları;
     - metinler kısa.
-- **Kalan:**
-  - Kaggle'da tam koşu, üç varyant, ~2–3 saat (kullanıcı).
+- **Tam koşu (24.10.2026):**
+  - 3 varyant × 720 ay, hata yok, ~2 saat; çıktılar `gpu/outputs/baseline_2026-10-24/`.
+  - Puanlar `docs/13`, Bölüm 4.
+- **Kalan:** Yok. İsteğe bağlı: Gemma ile istem 1.1 ön kontrolü artık gereksiz (baseline bunu kapsıyor).
   - Çıktıların puanlanması.
   - İsteğe bağlı: aynı 10 örnekte Gemma ile istem 1.1 ön kontrolü (kullanıcının dizüstünde ~1,5 saat; `docs/10`, Bölüm 8).
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
@@ -161,7 +163,7 @@ durum         = 34,25 / 51 ≈ %67
   - **Olası karar (hız ölçümünden sonra):** Unsloth, T4'te Gemma 4 için float32'ye geçiyor; eğitim yavaş olabilir. İnce ayar defteri önce kısa bir hız ölçümü yapar. Çok yavaşsa seçenekler kullanıcıya sunulur: daha kısa eğitim, Gemma 4 E2B, Qwen3.5 9B (tur 9) ya da kiralık GPU (tur 7).
 - **Kararlaştırılan (tur 12):** „Yalnızca fine-tuning“ varyantı bağlamsız girdilerle ayrı bir model olarak eğitilir (B). RAG + FT modelinin bağlamsız çalıştırılması ek satır olarak raporlanır (`docs/00`, Bölüm 19).
 
-### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.3
+### 8. Doğrulama katmanı (Katman 4) — 🔄 v1.7
 - **Yapılan:**
   - `validation/` ve 46 test; kurallar `docs/07`.
   - Almanca rakam ayıklama ve yuvarlama kuralı (a).
@@ -174,21 +176,25 @@ durum         = 34,25 / 51 ≈ %67
 - **v1.3 (18.10.2026):** K-A/K-B kimlikleri tanınıyor (`quelle_wissen`, kaynak sayılmaz); CLI'de `--retrieval` (`docs/07`, Bölüm 12). 56 test.
 - **Kalan (%20):**
   - Baseline çıktılarına göre kelime listelerinin ve kuralların ayarı.
-  - Rakam biçimi: binlik ayırıcı boşluk („14 054 €“) şu an iki ayrı sayı olarak okunuyor. Değer doğru, biçim yanlış; puanlamada ayrı sayılmalı (deneme koşusu 1).
+  - ~~Rakam biçimi: binlik ayırıcı boşluk~~ ✅ v1.7 (24.10.2026): tek rakam olarak okunur, `zahlenformat` biçim hatası (`docs/07`, Bölüm 13).
   - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
 - **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
 - **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
 
-### 9. Değerlendirme ve ablation — ⏳ başlamadı (altyapı hazır)
+### 9. Değerlendirme ve ablation — 🔄 puanlama hazır, baseline puanlandı
 - **Hazır olan:**
   - Ground truth: olaylar, ay kayıtları, kabul edilebilir uyarılar, V2 kararı.
   - Dengelenmiş V2 kümesi.
   - Metrik tanımları (CLAUDE.md 8).
   - Bayrak isabeti aracı (`tools/flag_quality.py`; eşik üstü süzme dahil).
+- **Puanlama 1.0 (24.10.2026, `scoring/`, `docs/13`):**
+  - CLAUDE.md 8'deki ölçütler kodlandı; üç kaynak: doğrulama, içerik planı, ground truth. 8 test.
+  - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100.
+  - Baseline: rakam değeri %93–95; format %30–39; RAG'de nedenlerin %42'si işaretsiz; kaynak precision %54, recall %30–34.
 - **Kalan:**
-  - Metriklerin kodlanması.
-  - 4 varyantın aynı test kümesinde çalıştırılması.
-  - Sonuçların analizi.
+  - İnce ayarlı modellerin aynı test kümesinde çalıştırılması ve puanlanması.
+  - Dengelenmiş V2 kümesi; retrieval isabetinin tabloya eklenmesi.
+  - Ablation analizi ve sonuç anlatısı.
 - **Açık kararlar:**
   - Üslup değerlendirmesi: insan mı, LLM-as-judge mı? (CLAUDE.md 8)
   - Retrieval isabeti (recall@k) metriği eklendi (tur 6).
@@ -251,3 +257,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | `gpu/README.md`: Commit sürümünün çıktılarının yeri (düzenleyici değil, sürümün görüntüleme sayfası → Output) netleştirildi; durum değişmedi: %67 |
 | 24.10.2026 | Kaggle deneme koşusu 2 (Ollama, iki T4): 16 istem, hata yok, 37–52 token/s; tam koşu ~1,8 saat (önce ~60). `rag_alle` baseline'a eklendi; 16 metnin ilk ölçümü. Paket 6 → %75: %67 |
 | 24.10.2026 | `gpu/README.md`: Commit koşusunun durumunu ve ilerlemesini izleme adımları (Logs sekmesi, kalan süre satırları); durum değişmedi: %67 |
+| 24.10.2026 | Baseline tam koşusu (3 × 720, ~2 saat) ve puanlama 1.0 (`scoring/`, `docs/13`): kalibrasyon ve baseline sonuçları. Doğrulama v1.7 (boşluklu binlik ayırıcı). Paket 6 → %100, 8 → %85, 9 → %45: %73 |

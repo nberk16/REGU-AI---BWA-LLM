@@ -135,6 +135,10 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
         mentioned = _mentions(seg.context or seg.text, names, aliases)
         pool = [v for v in fact_values if v.scope is None or v.scope in mentioned] if mentioned else fact_values
         for num in N.extract(body):
+            if num.spaced:
+                findings.append(Finding("fehler", "zahlenformat",
+                                        f"„{num.raw}“: Tausendertrennzeichen ist ein Punkt (z. B. 886.365 €), "
+                                        f"kein Leerzeichen.", seg.section, seg.line, num.raw))
             status, detail = _number_status(num, seg, pool, fact_values, note_values, cited)
             numbers_out.append({"text": num.raw, "section": seg.section, "line": seg.line, "status": status})
             if detail:

@@ -551,6 +551,26 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Token sayıları Transformers koşusuyla birebir aynı: şablon ve tokenizer aynı.
 - **[ÖNERİ] `rag_alle` baseline'a eklendi:** Bütün notlarla RAG da çıplak modelle çalışır. Ek maliyet ~40 dakika. Retrieval'ın katkısı böylece hem taban hem ince ayarlı modelde ölçülür.
 
+## 22. Baseline tam koşusu ve puanlama 1.0 (24.10.2026)
+
+- **Tam koşu:** Kaggle'da Ollama ile 3 varyant × 720 ay, hata yok, ~2 saat. Çıktılar `gpu/outputs/baseline_2026-10-24/`. Ollama sunucu günlükleri sıkıştırıldı (her biri ~16 MB → ~1 MB).
+- **Doğrulama v1.7 [ÖNERİ]:** Boşluklu binlik ayırıcı („14 054 €“) tek bir rakam olarak okunur, değeri denetlenir ve ayrıca `zahlenformat` biçim hatası verilir. Öğretmen metinleri etkilenmedi; eğitim verisi bayt bayt aynı (`07_dogrulama_katmani.md`, Bölüm 13).
+- **Puanlama 1.0 [ÖNERİ]** (`scoring/`, `13_degerlendirme.md`):
+  - Üç kaynak:
+    - doğrulama katmanı;
+    - içerik planı (modelin gördüğü notlarla);
+    - ground truth.
+  - CLAUDE.md 8'deki ölçütlerin hepsi kodlandı. Üslup kodlanmadı, [AÇIK] kaldı.
+  - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100. Ground truth'a göre uyarı isabetinin tavanı ~%85 (Katman 1).
+- **Baseline'ın ana bulguları** (`13_degerlendirme.md`, Bölüm 4):
+  - Rakam değerleri %93–95 doğru.
+  - Format %30–39.
+  - Nedenlerin %42'si işaretsiz (RAG).
+  - Kaynak precision %54, recall %30–34.
+  - Metinler kısa (ort. 162–169 kelime).
+  - Top-8 ile bütün notlar arasında belirgin fark yok.
+- **Dikkat:** İnce ayar hedefleri de aynı plandan üretildi. Plana dayalı ölçütlerin yanında ground truth'a dayalı bağımsız ölçütler ayrıca raporlanır.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

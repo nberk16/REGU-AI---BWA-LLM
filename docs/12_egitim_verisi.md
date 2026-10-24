@@ -218,7 +218,7 @@ Bu metinler Transformers yolundan geldi; asıl baseline Ollama ile yeniden üret
 
 ## 5. Sıradaki
 
-1. **Kullanıcı:** Kaggle'da tam koşu, `MODE = "full"`, üç varyant, ~2–3 saat (`gpu/README.md`, Bölüm 4).
+1. ~~Kullanıcı: Kaggle'da tam koşu~~ ✅ 24.10.2026: 3 × 720 ay, hata yok, ~2 saat. Puanlar: `docs/13`, Bölüm 4.
 2. **Asistan:**
-   - Baseline çıktılarının puanlanması (doğrulama katmanı + ground truth metrikleri, paket 9). Rakam biçimi ayrı sayılır.
+   - ~~Baseline çıktılarının puanlanması~~ ✅ `scoring/`, `docs/13`.
    - İnce ayar defteri (paket 7); önce kısa hız ölçümü.

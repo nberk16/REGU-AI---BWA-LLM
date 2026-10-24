@@ -6,6 +6,7 @@
 > - v1.4 (19.10.2026): nedenin bilinmediğini söyleyen ifadelere „nicht identifiziert“, „nicht geklärt“, „unbekannt“ eklendi (öğretmen pilotu; `docs/11`, Bölüm 10).
 > - v1.5 (19.10.2026): satır adları ve kısa adlar büyük-küçük harfe duyarsız eşleşir; sıfat çekimli kısa adlar eklendi (`docs/11`, Bölüm 11).
 > - v1.6 (19.10.2026): nedensellik kelimelerine „Zusammenhang“, „zusammenhängen“, „verantwortlich“, „folgt auf“, „ergibt sich aus“ eklendi (`docs/11`, Bölüm 12).
+> - v1.7 (24.10.2026): binlik ayırıcı olarak boşluk („14 054 €“) tek bir rakam olarak okunur; değeri denetlenir, ayrıca `zahlenformat` biçim hatası verilir (Bölüm 13). 58 test.
 > - **[KARAR]:** kurallar (CLAUDE.md 6.2, Katman 4; tur 6: B3–B4; tur 8: yuvarlama kuralı (a)).
 > - **[ÖNERİ]:** kelime listeleri, kısa ad listesi, uzunluk toleransı ve "rakam hangi satıra ait" kuralı (`validation/config.toml`).
 >
@@ -299,3 +300,16 @@ Puanlama tablosu (`trial/score.py`) artık biçim ve içerik hatalarını ayrı 
 **Gerekçe [ÖNERİ]:** Notta karşılığı olmayan neden, B3'e göre bir hipotezdir; K-B rehberinden türetilmiş olsa da firma için kanıt değildir. „Kaynaklı neden oranı“ (CLAUDE.md 8) yalnızca bağlam notlarını sayar.
 
 CLI'de `--retrieval` seçeneği eklendi: modele verilen notlar, Katman 2'nin o ay için getirdiği notlardır (top-k + Firmenprofil).
+
+## 13. Sürüm 1.7 (24.10.2026): boşluklu binlik ayırıcı
+
+Baseline metinlerinin %42–53'ü binlik ayırıcı olarak boşluk kullanıyor („14 054 €“; istem kuralı „14.054 €“). v1.6 bunu iki ayrı sayı („14“, „054 €“) olarak okuyordu: değeri doğru rakamlar „unbelegt“ sayılıyor, rakam sadakati 0,2'ye kadar düşüyordu.
+
+| Metin | v1.6 | v1.7 |
+|---|---|---|
+| `14 054 €` (boşluk, U+00A0 ya da U+202F) | `14` ve `054 €`: iki `zahl_unbelegt` | `14054 €`: değer denetlenir + `zahlenformat` (fehler, biçim) |
+| `2025 100` (yıl ve sayı) | iki sayı | iki sayı (ilk grup en fazla 3 hane) |
+
+- **Etki:** Biçim hatası „Format uyumu“nda, değer „Rakam sadakati“nde sayılır (`docs/13`). İki ölçüt artık birbirinden bağımsız.
+- **Öğretmen metinleri:** Etkilenmedi. Eğitim verisi yeniden üretildi; dosyalar bayt bayt aynı.
+

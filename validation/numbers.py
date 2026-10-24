@@ -25,7 +25,7 @@ _DATES = [
 _NUMBER = re.compile(
     r"(?<![\w.,])"
     r"(?P<sign>[+\-−–]?)"
-    r"(?P<int>\d{1,3}(?:\.\d{3})+|\d+)"
+    r"(?P<int>\d{1,3}(?:\.\d{3})+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+)"   # v1.7: „14 054“ (biçim hatası)
     r"(?:,(?P<dec>\d+))?"
     r"(?!\d)"
     r"(?P<unit>\s?(?:Mrd\.?(?:\s?(?:€|EUR))?|Mio\.?(?:\s?(?:€|EUR))?|T€|TEUR|Tsd\.?\s?(?:€|EUR)|€|EUR"
@@ -48,6 +48,7 @@ class Num:
     scale: int       # EUR için 1, 1.000 (T€) veya 1.000.000 (Mio. €)
     thousands: bool  # binlik ayırıcı var mı ("1.583")
     start: int
+    spaced: bool = False   # binlik ayırıcı boşluk ("1 583"): değer okunur, biçim hatası sayılır (v1.7)
 
     @property
     def signed(self) -> float:
@@ -97,8 +98,11 @@ def extract(text: str) -> list[Num]:
         unit, scale = _unit(m.group("unit"))
         dec = m.group("dec") or ""
         sign = {"+": "+", "-": "-", "−": "-", "–": "-"}.get(m.group("sign"), "")
-        value = Decimal(m.group("int").replace(".", "") + ("." + dec if dec else ""))
-        out.append(Num(m.group().strip(), sign, value, len(dec), unit, scale, "." in m.group("int"), m.start()))
+        digits = m.group("int")
+        spaced = any(c in digits for c in " \u00a0\u202f")
+        value = Decimal(re.sub(r"[.\s\u202f]", "", digits) + ("." + dec if dec else ""))
+        out.append(Num(m.group().strip(), sign, value, len(dec), unit, scale, "." in digits or spaced, m.start(),
+                       spaced))
     return out
 
 

@@ -597,6 +597,11 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - puanlama.
 - **Açık risk:** T4'te eğitim hızı ve 7 bin tokenlık dizilerde bellek. Deneme koşusu ölçecek. Gerekirse seçenekler kullanıcıya sunulur (tur 7 / tur 9 kararları).
 - **Demo:** Ollama bağdaştırıcı yükleyemediği için dizüstü demosu llama-server ya da birleştirilmiş model ile yapılır. Karar paket 10'da.
+- **Deneme koşuları (24.10.2026):**
+  - BOS eksikliği maske denetiminde yakalandı (Gemma 4 tokenizer'ı BOS eklemiyor).
+  - İlk adımda bellek yetmedi. [ÖNERİ] Katman başına gömme tablosu ve ses/görüntü kodlayıcıları işlemciye taşınır.
+  - Deneme koşusu 3 başarılı: en yüksek bellek 11,6 GB; 140 token/s; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat; süre sınırı 10,5 saat.
+  - Ayrıntılar `14_ince_ayar.md`, Bölüm 2.
 
 ## Kaynak
 

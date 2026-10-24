@@ -3,7 +3,7 @@
 > **Durum (24.10.2026):**
 > - İki Kaggle defteri hazır: `gpu/02_finetune.ipynb` (eğitim) ve `gpu/03_eval.ipynb` (test kümesinin üretimi).
 > - GPU gerektirmeyen bütün parçalar yerelde denendi: şablon, veri, bağdaştırıcının GGUF'a çevrilmesi, llama-server'da LoRA ile üretim, puanlama.
-> - Eğitimin kendisi (hız, bellek) Kaggle'daki deneme koşusunda ölçülecek.
+> - Kaggle deneme koşusu 3 (24.10.2026): eğitim çalışıyor. En yüksek bellek 11,6 GB; hız 140 token/s; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat (Bölüm 2).
 > - **[ÖNERİ]:** hiperparametreler, çıkarım yolu (bu belge).
 >
 > **İlgili:** CLAUDE.md 6.2 (Katman 3), 7, 10 · `12_egitim_verisi.md` (eğitim verisi) · `13_degerlendirme.md` (puanlama) · Kullanıcı adımları: `gpu/README.md`, Bölüm 6–7 · Karar kaydı: `00`, Bölüm 23
@@ -70,16 +70,33 @@ Yanıt (ideal metin) ortalama ~830 token. Kayıp yalnızca bu kısımda hesaplan
   - Küçük bir Gemma 4 modelinde (PEFT ile sarılmış) denendi: kayıp birebir aynı, LoRA gradyanları hesaplanıyor, `model.to(...)` tabloyu geri taşımıyor.
 - **Güvenlik ağı:** Deneme koşusunda bellek yine yetmezse, hız 6.000 tokenın altındaki örneklerle ölçülür. Günlükte bellek sınırı da kaydedilir. `train_rag`'de 115 örnek (%13) bu sınırın üstünde; `train_ohne`'de hiçbiri.
 
-**Açık risk: hız ve bellek.**
-- Unsloth T4'te Gemma 4 için float32 hesaplamaya geçiyor (deneme koşusu 1). Model yüklenince 11,3 / 15,6 GB bellek kullanılıyordu.
-- 7 bin tokenlık dizilerle eğitimin sığıp sığmadığı ve süresi deneme koşusunda ölçülecek.
-- Tahmin 1 epoch için birkaç saatten 10 saatin üstüne kadar geniş bir aralıkta.
-- Çok yavaş ya da bellek yetersizse kullanıcıya seçenekler sunulur:
-  - en uzun örnekleri dışarıda bırakmak (ör. 6.500 token üstü, ~%3);
-  - görüntü/ses katmanlarını bellekten çıkarmak;
-  - daha kısa eğitim;
-  - Gemma 4 E2B ya da Qwen3.5 9B (tur 9);
-  - kiralık GPU (tur 7).
+**Deneme koşusu 3 (24.10.2026): eğitim çalışıyor.** Günlük: `gpu/outputs/finetune_smoke_2026-10-24/log_smoke_rag_3.txt`.
+
+| Ölçüm | Değer |
+|---|---|
+| GPU belleği: yükleme sonrası / taşıma sonrası / eğitimde en yüksek | 11,3 / 4,8 / **11,6 GB** (en uzun örnek 7.076 token; sığıyor) |
+| Hız | **140 token/s** (en uzun örneklerle), 4 örneklik adım 197 s |
+| Tahmini 1 epoch | **`rag` ~10 saat, `ohne` ~7,6 saat**. Ölçüm en uzun örneklerle yapıldı; ortalama örnek daha kısa, gerçek süre biraz daha az olmalı |
+| Doğrulama kaybı (4 örnek) | 0,786 → 0,635 (yalnızca 3 adım sonra) |
+| Bağdaştırıcı | 516 tensör, GGUF 70 MB; anahtar adları beklenen biçimde (`base_model.model.model.language_model.layers.…`) |
+
+- **llama-server denemesi „GPU'yu kullanmıyor“ hatası verdi. Bu yanlış alarm:**
+  - Denetim, sunucu günlüğünde „CUDA“ kelimesini arıyordu.
+  - llama-server varsayılan ayarda kullandığı donanımı günlüğe yazmıyor (yerelde doğrulandı; Ollama bunu daha ayrıntılı günlük ayarıyla görüyordu).
+- **Düzeltme:** Sunucu iki şekilde denetleniyor:
+  - başlamadan önce `--list-devices` ile CUDA cihazının görünmesi;
+  - başladıktan sonra o GPU'da belleğin en az 2 GB artması (nvidia-smi).
+
+  Bulamazsa, CUDA arka ucu ikinci bir yolla aranıyor (`GGML_BACKEND_PATH`). Hata olursa sunucu günlüğünün sonu ana günlüğe yazılıyor. Bu kod 02 ve 03'te ortak (`gpu/tools/nbbuild.py`).
+- **Süre sınırı:** 10,5 saat. Oturum 12 saat; sonrasında doğrulama kaybı, GGUF ve deneme için ~30 dakika kalıyor. `rag` bu sınıra yakın; aşarsa ikinci bir kısa oturumda checkpoint'ten devam edilir.
+
+**Hız ve bellek: çözüldü (deneme koşusu 3).**
+- Bellek sığıyor.
+- Hız Kaggle'ın haftalık kotasıyla uyumlu:
+  - iki eğitim ~17–18 saat;
+  - değerlendirme ~4–5 saat;
+  - haftalık kota ~30 saat.
+- Açık soru: `rag` eğitiminin 10,5 saatlik sınıra sığıp sığmadığı. Sığmazsa devam koşusu gerekir.
 
 ## 3. Çıkarım yolu: llama-server + LoRA [ÖNERİ]
 
@@ -134,10 +151,7 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
 
 ## 5. Sıradaki
 
-1. **Kullanıcı:** 02'nin deneme koşusu (`TRAIN = "rag"`). Hız ve bellek ölçülür.
-2. **Asistan:** Ölçüme göre tam eğitimin süresi. Gerekirse seçenekler (Bölüm 2, açık risk).
-3. **Tam eğitimler ve değerlendirme koşusu:**
-   - `rag`;
-   - `ohne`;
-   - `03_eval`.
+1. ~~02'nin deneme koşusu~~ ✅ (deneme koşusu 3).
+2. **Kullanıcı:** Tam eğitim `rag` (~10 saat), ardından `ohne` (~7,6 saat).
+3. **Kullanıcı:** `03_eval` deneme koşusu, ardından tam koşu.
 4. **Ablation tablosu ve okuma:** `docs/13`, Bölüm 6.

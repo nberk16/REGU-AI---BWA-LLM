@@ -192,27 +192,7 @@ def base_blobs(port=11500):
     draft = next((l.split(" ", 1)[1] for l in modelfile.splitlines() if l.startswith("DRAFT /")), None)
     return model, draft
 
-def start_server(gpu, port, model_blob, loras, slots, ctx, draft=None):
-    \"\"\"Ollama'nın içindeki llama-server; baseline'daki komutla aynı ayarlar + LoRA (istek başına ölçek).\"\"\"
-    cuda = sorted(OLLAMA_LIB.glob("cuda_v*"))
-    libdir = cuda[-1] if cuda else OLLAMA_LIB
-    env = {**os.environ, "CUDA_VISIBLE_DEVICES": str(gpu),
-           "LD_LIBRARY_PATH": f"{libdir}:{OLLAMA_LIB}:" + os.environ.get("LD_LIBRARY_PATH", "")}
-    cmd = [str(OLLAMA_LIB / "llama-server"), "--model", model_blob, "--port", str(port), "--host", "127.0.0.1",
-           "--no-webui", "--offline", "-c", str(slots * ctx), "-np", str(slots), "-ngl", "999", "--flash-attn", "auto",
-           "-b", "1024", "-ub", "1024"]
-    if draft:
-        cmd += ["--spec-type", "draft-mtp", "--spec-draft-n-max", "3", "--spec-draft-backend-sampling",
-                "--spec-draft-model", draft]
-    if loras:
-        cmd += ["--lora", ",".join(str(p) for p in loras), "--lora-init-without-apply"]
-    logfile = OUT / f"llama_server_gpu{gpu}.log"
-    proc = subprocess.Popen(cmd, env=env, cwd=libdir, stdout=open(logfile, "w"), stderr=subprocess.STDOUT)
-    wait(f"http://127.0.0.1:{port}/health", 900, proc, logfile.name)
-    if "CUDA" not in logfile.read_text(errors="replace"):
-        proc.terminate()
-        raise RuntimeError(f"llama-server GPU'yu kullanmıyor ({logfile.name})")
-    return proc
+<<SERVER>>
 
 try:
     t0 = time.time()

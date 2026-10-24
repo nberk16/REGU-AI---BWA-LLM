@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (ince ayar ve değerlendirme defterleri hazır; çıkarım yolu yerelde doğrulandı; ince ayar deneme koşusu bekleniyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (ince ayar deneme koşusu başarılı: bellek sığıyor, `rag` ~10 saat, `ohne` ~7,6 saat; tam eğitim bekleniyor)
 
 ---
 
-## 1. Genel durum: ~%76 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%78 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 38,95 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 39,55 gün
 toplam iş     = 51 gün
-durum         = 38,95 / 51 ≈ %76
+durum         = 39,55 / 51 ≈ %78
 ```
 
 **Belirsizlik:**
@@ -36,11 +36,11 @@ durum         = 38,95 / 51 ≈ %76
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
-| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %25 | 1,5 | 🔄 defter hazır, hat yerelde doğrulandı; deneme koşusu bekleniyor |
+| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %35 | 2,1 | 🔄 deneme koşusu başarılı (bellek, hız, GGUF); tam eğitim bekleniyor |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
 | 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **38,95** | **≈ %76** |
+| | **Toplam** | **51** | | **39,55** | **≈ %78** |
 
 ---
 
@@ -157,8 +157,12 @@ durum         = 38,95 / 51 ≈ %76
   - `gpu/02_finetune.ipynb`: QLoRA, kayıp yalnızca yanıtta, şablon/maske denetimleri, doğrulama kaybı öncesi ve sonrası.
   - Hız ölçümü (smoke), checkpoint ve süre sınırıyla devam, bağdaştırıcı → GGUF → llama-server denemesi.
   - Bulgu: Ollama 0.40 LoRA desteklemiyor; çıkarım Ollama'nın içindeki llama-server ile (yerelde doğrulandı).
+- **Deneme koşuları (24.10.2026, `docs/14`, Bölüm 2):**
+  - 1: eksik BOS maske denetiminde yakalandı.
+  - 2: bellek yetmedi.
+  - 3: başarılı. Katman başına gömme tablosu ve ses/görüntü kodlayıcıları işlemcide; en yüksek bellek 11,6 GB; 140 token/s; doğrulama kaybı 3 adımda 0,786 → 0,635; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat.
 - **Kalan:**
-  - Kaggle'da deneme koşusu (hız, bellek), ardından iki tam eğitim (kullanıcı).
+  - İki tam eğitim (kullanıcı).
   - Eğitim kayıtlarının okunması (kayıp eğrileri).
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
@@ -267,3 +271,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | İnce ayar (`02_finetune`) ve değerlendirme (`03_eval`) defterleri; Ollama 0.40'ın LoRA desteklemediği bulundu, çıkarım llama-server + LoRA ile (yerelde doğrulandı). Paket 7 → %25, 9 → %50: %76 |
 | 24.10.2026 | İnce ayar deneme koşusu 1: maske denetimi eksik BOS'u yakaladı (Gemma 4 tokenizer'ı BOS eklemiyor); defter düzeltildi, eğitim başlamadan durdu. Durum değişmedi: %76 |
 | 24.10.2026 | İnce ayar deneme koşusu 2: denetimler geçti, ilk adımda bellek yetmedi (7.076 token). Katman başına gömme tablosu (5,6 GB) ve ses/görüntü kodlayıcıları işlemciye taşınıyor; bellek yetmezse kısa örneklerle hız ölçümü. Durum değişmedi: %76 |
+| 24.10.2026 | İnce ayar deneme koşusu 3 başarılı: bellek 11,6 GB, 140 token/s, tahmini `rag` ~10 saat, `ohne` ~7,6 saat; doğrulama kaybı 0,786 → 0,635 (3 adım). llama-server GPU denetimi yanlış alarmdı; `--list-devices` + bellek denetimiyle değişti. Paket 7 → %35: %78 |

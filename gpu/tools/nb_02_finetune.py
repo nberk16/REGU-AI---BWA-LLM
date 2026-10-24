@@ -46,7 +46,7 @@ LORA_R, LORA_ALPHA = 16, 16
 LR, EPOCHS, GRAD_ACC = 2e-4, 1, 8                    # etkin parti 8 → rag ~113, ohne ~117 adım
 EVAL_N = 32                 # doğrulama kaybı için val örneği (eğitim öncesi ve sonrası)
 SAVE_STEPS = 10             # checkpoint aralığı (adım)
-TIME_BUDGET_H = 10.0        # bu süreden sonra eğitim durur ve kaydeder (oturum en fazla 12 saat)
+TIME_BUDGET_H = 10.5        # bu süreden sonra eğitim durur ve kaydeder (oturum en fazla 12 saat; sonrası ~30 dk)
 SEED = 3407
 SMOKE = {"examples": 12, "grad_acc": 4, "eval_n": 4}   # smoke: en uzun 12 örnek, 3 adım (bellekte en kötü durum)
 SMOKE_FALLBACK = 6000       # smoke'ta bellek yetmezse hız bu uzunluğun altındaki örneklerle ölçülür
@@ -59,6 +59,7 @@ GEN = {"temperature": 0.2, "top_k": 64, "top_p": 0.95, "min_p": 0.0, "repeat_pen
 """),
     code("""
 import os
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # GPU numaraları nvidia-smi ile aynı
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"     # eğitim GPU 0'da; GPU 1 sondaki bağdaştırıcı denemesi için boş kalır
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"   # parçalanmaya karşı (PyTorch önerisi)
 
@@ -494,28 +495,7 @@ def base_blobs(port=11500):
     draft = next((l.split(" ", 1)[1] for l in modelfile.splitlines() if l.startswith("DRAFT /")), None)
     return model, draft
 
-def start_server(gpu, port, model_blob, loras, slots=1, ctx=12288, draft=None):
-    \"\"\"Ollama'nın içindeki llama-server; baseline'daki komutla aynı ayarlar + LoRA (istek başına ölçek).\"\"\"
-    cuda = sorted(OLLAMA_LIB.glob("cuda_v*"))
-    libdir = cuda[-1] if cuda else OLLAMA_LIB
-    env = {**os.environ, "CUDA_VISIBLE_DEVICES": str(gpu),
-           "LD_LIBRARY_PATH": f"{libdir}:{OLLAMA_LIB}:" + os.environ.get("LD_LIBRARY_PATH", "")}
-    cmd = [str(OLLAMA_LIB / "llama-server"), "--model", model_blob, "--port", str(port), "--host", "127.0.0.1",
-           "--no-webui", "--offline", "-c", str(slots * ctx), "-np", str(slots), "-ngl", "999", "--flash-attn", "auto",
-           "-b", "1024", "-ub", "1024"]
-    if draft:
-        cmd += ["--spec-type", "draft-mtp", "--spec-draft-n-max", "3", "--spec-draft-backend-sampling",
-                "--spec-draft-model", draft]
-    if loras:
-        cmd += ["--lora", ",".join(str(p) for p in loras), "--lora-init-without-apply"]
-    logfile = OUT / f"llama_server_gpu{gpu}.log"
-    proc = subprocess.Popen(cmd, env=env, cwd=libdir, stdout=open(logfile, "w"), stderr=subprocess.STDOUT)
-    wait(f"http://127.0.0.1:{port}/health", 900, proc, logfile.name)
-    text = logfile.read_text(errors="replace")
-    if "CUDA" not in text:
-        proc.terminate()
-        raise RuntimeError(f"llama-server GPU'yu kullanmıyor ({logfile.name})")
-    return proc
+<<SERVER>>
 
 def complete(port, prompt, scales):
     body = {"prompt": prompt, **GEN, "cache_prompt": True, "lora": [{"id": i, "scale": s} for i, s in enumerate(scales)]}
@@ -560,7 +540,7 @@ INFO.write_text(json.dumps(info, indent=1))
 # Repoya yüklenecek küçük dosyalar (bağdaştırıcılar Kaggle'da kalır; 03_eval onları Input olarak alır)
 zpath = OUT / f"ergebnisse_finetune_{TRAIN}_{MODE}.zip"
 with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
-    for p in (LOG, INFO, HISTORY, CHECK):
+    for p in (LOG, INFO, HISTORY, CHECK, OUT / "llama_server_gpu1.log"):
         if p.exists():
             z.write(p, p.name)
 log(f"Bitti · {zpath.name} · toplam {(time.time() - START) / 3600:.1f} saat")

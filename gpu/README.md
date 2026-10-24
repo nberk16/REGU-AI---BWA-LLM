@@ -39,7 +39,7 @@ Etkileşimli oturum başında kimse yokken kapanabilir. Bu yüzden deneme koşus
 2. **Session options** (Bölüm 2.3) ve **Input** (Bölüm 1.5) yerinde olmalı. Parametre hücresinde `MODE = "smoke"` kalsın.
 3. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**. Tarayıcıyı kapatabilirsin.
 4. Durumu izle: sol menü → **Code** → **Your Work** → defter → **Versions**. Durum „Running“den „Succeeded“ ya da „Error“a geçer.
-5. Bitince (başarılı ya da hatalı) sürümün sayfası → **Output** → **`ergebnisse_smoke.zip`** dosyasını indir ve Bölüm 5'teki bağlantıyla yükle.
+5. Bitince (başarılı ya da hatalı) **`ergebnisse_smoke.zip`** dosyasını indir ve yükle (Bölüm 5). Çıktılar düzenleyicide değil, sürümün görüntüleme sayfasında.
    - Zip'te her şey var: `log_smoke.txt` (süreler, GPU belleği, varsa hatanın tam metni, örnek yorumlar), `baseline_*.jsonl`, Ollama günlükleri.
    - Hata erken çıktıysa zip oluşmamış olabilir. O zaman `outputs/` içindeki `log_smoke.txt` dosyasını yükle.
    - Output boşsa sürüm sayfasındaki **Logs** bölümünün son satırlarının ekran görüntüsünü gönder.
@@ -62,9 +62,15 @@ Kaggle arayüzündeki adlar biraz farklı olabilir; bulamazsan ekran görüntüs
 
 ## 5. Çıktıları repoya yükle
 
-1. Biten sürümün sayfası → **Output** → `ergebnisse_<MODE>.zip` dosyasını indir (tek dosya).
-2. Bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/gpu
-3. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
+**Önemli:** Defter düzenleyicisinin sağ panelindeki **Output → /kaggle/working** yalnızca o anki etkileşimli oturumun dosyalarını gösterir. Arka planda (Commit) çalışan sürümün çıktıları orada **görünmez**; sürümün kendi sayfasındadır.
+
+1. Sürümün sayfasını aç:
+   - **Yol 1:** Kaggle ana sayfası → sol menü → **Code** → **Your Work** → defterin adı. Bu, düzenleyici değil, defterin görüntüleme sayfasıdır.
+   - **Yol 2:** Düzenleyicide sağ üstteki sürüm sayısına ya da **Save Version** yanındaki geçmiş simgesine tıkla → sürüm listesi → biten sürüm → **Open in Viewer** (adlar biraz farklı olabilir).
+2. Görüntüleme sayfasının üstünde sekmeler var: **Notebook · Input · Output · Logs · …**. Sürümün „Succeeded“ ya da „Error“ olduğunu kontrol et, sonra **Output** sekmesine tıkla.
+3. Dosya listesinde `outputs/` → `ergebnisse_<MODE>.zip` → dosyayı seçince sağ üstte çıkan **indirme simgesi** (aşağı ok). Bölümün üstünde bütün çıktıyı tek seferde indiren bir **Download** düğmesi de olabilir; o da olur.
+4. İndirdiğin zip'i bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/gpu
+5. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
 
 Yükleme olmazsa hangi adımda takıldığını yaz: zip Kaggle'dan inmedi mi, yoksa GitHub sayfası mı hata verdi? Hata mesajı ya da ekran görüntüsü yeterli. Deneme koşusunun günlüğünü yapıştırmak geçici bir çözümdü; tam koşunun dosyaları bunun için çok büyük.
 
@@ -78,4 +84,6 @@ Yükleme olmazsa hangi adımda takıldığını yaz: zip Kaggle'dan inmedi mi, y
 | `UYARI: model tamamen GPU'da değil` | Hata değil, ama koşu yavaşlar. Accelerator'ın `GPU T4 x2` olduğunu kontrol et; günlüğü gönder |
 | `HATA <ay> (…, deneme 1)` | Defter o ayı bir kez daha dener. Çok sayıda görürsen günlüğü gönder |
 | `süre doldu, … istem kaldı` | Bölüm 4'teki devam adımları |
+| Düzenleyicide Output → `/kaggle/working` boş | Normal: Commit sürümünün çıktıları orada görünmez. Bölüm 5, adım 1–3 |
+| Sürüm sayfasında Output sekmesi yok ya da boş | Sürüm hâlâ „Running“ olabilir; bitmesini bekle. Bittiyse **Logs** sekmesinin son satırlarının ekran görüntüsünü gönder |
 | Oturum hatayla kapandı | Aynı defteri yeniden çalıştır. Önceki sürümün çıktısı Input olarak eklenirse biten aylar korunur (Bölüm 4) |

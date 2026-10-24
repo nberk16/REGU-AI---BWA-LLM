@@ -239,3 +239,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 22.10.2026 | Plan 1.4 ile 555 ay yeniden üretildi. Öğretmen aşaması tamam: `train` 907/960, `val` 138/144, `train_ohne` 940/960, `val_ohne` 142/144. Paket 5 → %85: %63 |
 | 22.10.2026 | Altın küme (30 metin) ve eğitim verisi (`train_rag` 898, `train_ohne` 933); uyarı Kernaussage'si otomatik tamamlama; plan 1.5 / öğretmen 1.4; test istemleri; Kaggle baseline defteri ve kılavuzu. Paket 5 → %100, 6 → %65: %66 |
 | 23.10.2026 | Kaggle deneme koşusu 1 (Transformers + Unsloth): hat çalışıyor, ama 5 token/s (tam koşu ~60 saat). Baseline defteri Ollama'ya geçti (iki T4, eşzamanlı istem, devam, zip); dört metnin ilk okuması. Paket 6 → %70: %67 |
+| 24.10.2026 | `gpu/README.md`: Commit sürümünün çıktılarının yeri (düzenleyici değil, sürümün görüntüleme sayfası → Output) netleştirildi; durum değişmedi: %67 |

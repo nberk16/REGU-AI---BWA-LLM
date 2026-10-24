@@ -1,6 +1,6 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 23.10.2026 (Kaggle deneme koşusu 1: hat çalışıyor ama çok yavaş; defter Ollama'ya geçti, deneme koşusu 2 bekleniyor)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (Kaggle deneme koşusu 2, Ollama ile: tam koşu tahmini ~2–3 saat; tam baseline koşusu bekleniyor)
 
 ---
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 34,0 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 34,25 gün
 toplam iş     = 51 gün
-durum         = 34,0 / 51 ≈ %67
+durum         = 34,25 / 51 ≈ %67
 ```
 
 **Belirsizlik:**
@@ -35,12 +35,12 @@ durum         = 34,0 / 51 ≈ %67
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
-| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %70 | 3,5 | 🔄 Deneme koşusu 1 yapıldı; defter Ollama'ya geçti, deneme koşusu 2 bekleniyor |
+| 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %75 | 3,75 | 🔄 Ollama ile deneme koşusu 2 başarılı; tam koşu bekleniyor |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %80 | 2,4 | 🔄 v1.3 |
 | 9 | Değerlendirme ve ablation | 6 | %20 | 1,2 | ⏳ başlamadı (altyapı ve test tasarımı hazır) |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **34,0** | **≈ %67** |
+| | **Toplam** | **51** | | **34,25** | **≈ %67** |
 
 ---
 
@@ -111,7 +111,7 @@ durum         = 34,0 / 51 ≈ %67
 - **İsteğe bağlı:** Dışarıda kalan 8 ayın kısa bir öğretmen koşusuyla geri alınması.
 - **Açık kararlar:** Yok. Plan parametreleri, üretim ayarları ve veri temizliği (`docs/11`, Bölüm 14) [ÖNERİ].
 
-### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 deneme koşusu 2 bekleniyor
+### 6. Model seçimi, çıkarım altyapısı, baseline'lar — 🔄 tam koşu bekleniyor
 - **Yapılan:**
   - Ortak istem modülü `prompting/` (sürüm 1.0).
   - Deneme turu kiti `trial/`: doğrulama varyantlarından 10 örnek, Ollama betiği, puanlama, kullanıcı kılavuzu, 4 test.
@@ -133,8 +133,17 @@ durum         = 34,0 / 51 ≈ %67
   - Transformers + Unsloth yolu tek T4'te 5 token/s verdi; parti boyutu bellekten 1'e düştü. Tam koşu ~60 saat sürerdi.
   - Defter Ollama'ya geçti (`gemma4:e4b-it-q4_K_M`, deneme turuyla aynı): iki T4, GPU başına 4 eşzamanlı istem, süre sınırı, önceki çıktıdan devam, tek zip. Sahte sunucuyla denendi.
   - Dört metnin ilk okuması: rakam değerleri doğru; biçim, yön ve kaynak hataları var (beklenen baseline zayıflıkları).
+- **Deneme koşusu 2 (23.10.2026, `docs/12`, Bölüm 4.4):**
+  - Ollama, iki T4, 16 istem, hata yok.
+  - Akış başına 37–52 token/s; tam koşu tahmini 2 varyant için ~1,8 saat.
+  - `rag_alle` de baseline'a eklendi [ÖNERİ].
+  - İlk ölçüm (16 metin): rakam değerleri %96–97 doğru. Görülen sorunlar:
+    - biçim hataları (binlik boşluk, kaynak biçimi);
+    - hiç „(Hypothese)“ yok;
+    - eksik bayrak uyarıları;
+    - metinler kısa.
 - **Kalan:**
-  - Kaggle'da deneme koşusu 2 (Ollama), ardından tam koşu (kullanıcı).
+  - Kaggle'da tam koşu, üç varyant, ~2–3 saat (kullanıcı).
   - Çıktıların puanlanması.
   - İsteğe bağlı: aynı 10 örnekte Gemma ile istem 1.1 ön kontrolü (kullanıcının dizüstünde ~1,5 saat; `docs/10`, Bölüm 8).
 - **Kararlaştırılan (tur 6):** Deneme turu adayları Ministral 3 8B, Gemma 4 E4B, Qwen3.5 9B. Deneme turu kullanıcının dizüstünde (Ollama) yapılabilir.
@@ -240,3 +249,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 22.10.2026 | Altın küme (30 metin) ve eğitim verisi (`train_rag` 898, `train_ohne` 933); uyarı Kernaussage'si otomatik tamamlama; plan 1.5 / öğretmen 1.4; test istemleri; Kaggle baseline defteri ve kılavuzu. Paket 5 → %100, 6 → %65: %66 |
 | 23.10.2026 | Kaggle deneme koşusu 1 (Transformers + Unsloth): hat çalışıyor, ama 5 token/s (tam koşu ~60 saat). Baseline defteri Ollama'ya geçti (iki T4, eşzamanlı istem, devam, zip); dört metnin ilk okuması. Paket 6 → %70: %67 |
 | 24.10.2026 | `gpu/README.md`: Commit sürümünün çıktılarının yeri (düzenleyici değil, sürümün görüntüleme sayfası → Output) netleştirildi; durum değişmedi: %67 |
+| 24.10.2026 | Kaggle deneme koşusu 2 (Ollama, iki T4): 16 istem, hata yok, 37–52 token/s; tam koşu ~1,8 saat (önce ~60). `rag_alle` baseline'a eklendi; 16 metnin ilk ölçümü. Paket 6 → %75: %67 |

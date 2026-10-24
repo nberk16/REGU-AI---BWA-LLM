@@ -435,7 +435,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 10. ✅ İstem 1.1 → [`docs/10_istem.md`](docs/10_istem.md), `prompting/`, `tests/test_prompting.py`
 11. ✅ İdeal yorum hattı → [`docs/11_ideal_yorumlar.md`](docs/11_ideal_yorumlar.md), `ideal/`, `tests/test_ideal.py` (turlar 11–12)
 12. ✅ Eğitim verisi ve altın küme → [`docs/12_egitim_verisi.md`](docs/12_egitim_verisi.md), `training/`, `ideal/gold/`, `tests/test_training.py`
-13. 🔄 Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md) (deneme koşusu 1 yavaştı; Ollama ile deneme koşusu 2 bekleniyor)
+13. 🔄 Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md) (Ollama ile deneme koşusu 2 başarılı, tam koşu ~2–3 saat; tam koşu bekleniyor)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 

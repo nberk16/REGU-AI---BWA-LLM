@@ -3,7 +3,7 @@
 > **Durum (23.10.2026):**
 > - Eğitim verisi birleştirildi (`training/`, `gpu/data/`); altın küme hazır (`ideal/gold/`, 30 metin).
 > - Test istemleri yazıldı (3 varyant × 720 ay). Kaggle defteri: `gpu/01_baseline.ipynb`.
-> - Deneme koşusu 1 (Transformers + Unsloth) çok yavaştı (~60 saat). Defter Ollama'ya geçti (Bölüm 4).
+> - Deneme koşusu 1 (Transformers + Unsloth) çok yavaştı (~60 saat). Defter Ollama'ya geçti; deneme koşusu 2'de tam koşu tahmini ~1,8 saat (Bölüm 4).
 > - **[ÖNERİ]:** temizlik kuralları, üretim ayarları, çıkarım altyapısı (bu belge).
 >
 > **İlgili:** `11_ideal_yorumlar.md` (öğretmen metinleri) · `10_istem.md` (öğrenci istemi 1.1) · Kullanıcı adımları: [`gpu/README.md`](../gpu/README.md) · Karar kaydı: `00`, Bölüm 20
@@ -89,7 +89,7 @@ Her örnek bir sohbettir: sistem mesajı + kullanıcı mesajı (öğrenci istemi
 
 ## 4. Kaggle defteri 01: baseline (`gpu/01_baseline.ipynb`)
 
-- **Varyantlar:** Çıplak model (`ohne_kontext`) ve yalnızca RAG (`rag_k8`), test kümesinin 720 ayı.
+- **Varyantlar:** Çıplak model (`ohne_kontext`), yalnızca RAG (`rag_k8`) ve bütün notlarla RAG (`rag_alle`, retrieval'ın katkısı), test kümesinin 720 ayı. `rag_alle` deneme koşusu 2'den sonra eklendi [ÖNERİ]: Ollama ile ek maliyeti ~40 dakika.
 - **Şablon ve ayarlar [ÖNERİ]:** Modelin kendi sohbet şablonu, düşünme kipi kapalı. Deneme turuyla aynı üretim ayarları: `temperature 0.2`, `top_p 0.95`, `top_k 64`, `seed 42`, en fazla 1.500 yeni token.
 
 ### 4.1 Deneme koşusu 1 (23.10.2026): Transformers + Unsloth
@@ -173,9 +173,52 @@ Bu metinler Transformers yolundan geldi; asıl baseline Ollama ile yeniden üret
   - **Olumlu:** Dört başlık var. Layer 1'in V1 ve V2 bayrakları uyarı olarak anılıyor. 2025-02'deki V6 (sezon) bayrağı iki metinde de eksik.
 - **Yorum:** Bunlar beklenen baseline zayıflıkları ve ablation için iyi kanıt (CLAUDE.md 7): biçim tutarsız, olgu ile tahmin karışık, bağlam notu yanlış kullanılıyor. Ama yalnızca 4 metin var; sonuç tam koşudan sonra.
 
+### 4.4 Deneme koşusu 2 (23.10.2026): Ollama
+
+- **Kurulum:** Ollama 0.40.9, iki T4, sunucu başına 4 eşzamanlı istem, varyant başına 8 istem (A1-v00, 2025-01 … 08).
+- **Çıktılar:** `gpu/outputs/smoke_2026-10-23_ollama/` (Ollama günlükleri dahil).
+- **Hazırlık:** Kurulum + model indirme (6,6 GB) ~1 dakika; ilk GPU'ya yükleme 2 dakika, ikincisi 8 saniye. GPU başına ~5,7 GB bellek; model tamamen GPU'da.
+- **Tutarlılık:** Aynı istemlerin token sayısı Transformers koşusundakiyle birebir aynı (ör. 3.218 ve 5.033). Şablon ve tokenizer aynı.
+- **Hata:** Hiç yok. 1.500 token sınırına takılan ya da düşünme metni üreten istem yok.
+
+| Ölçüm | Deneme koşusu 1 (Transformers) | Deneme koşusu 2 (Ollama) |
+|---|---|---|
+| Akış başına hız | ~5 token/s | 37–52 token/s |
+| Aynı anda işlenen istem | 1 | 8 (2 GPU × 4) |
+| İstem başına süre (medyan) | ~150 s | 46 s (`ohne_kontext`, soğuk başlangıç dahil) / 21 s (`rag_k8`) |
+| Saatte istem | ~24 | 593 / 1.250 |
+| Tam koşu, 2 varyant | ~60 saat | **~1,8 saat** |
+
+`ohne_kontext`'in daha yavaş görünmesi büyük olasılıkla soğuk başlangıçtan: ilk isteklerde istem okuma 27 s, sonrakilerde 3–4 s. Üç varyantlı tam koşu için tahmin 2–3 saat, tek oturuma sığıyor.
+
+**İlk ölçüm (16 metin, doğrulama katmanı; paket 9'un ön izlemesi):**
+
+| | `ohne_kontext` (8) | `rag_k8` (8) |
+|---|---:|---:|
+| Format uyumu | 7/8 | 6/8 |
+| Rakam değeri doğru (boşluklar noktaya çevrilince) | 281/291 (%97) | 247/256 (%96) |
+| Binlik ayırıcı boşluk olan metin | 4/8 | 3/8 |
+| Kelime, tablo hariç (ortalama; hedef 250–350) | 169 | 152 |
+| Neden cümlesi: kaynaklı / „(Hypothese)“ / işaretsiz | 0 / 0 / 2 | 12 / 0 / 2 |
+| Eksik bayrak uyarısı (`flag_fehlt`) | 3 | 7 |
+| Kaynak biçimi hatası (`quellenformat`) | 0 | 9 |
+
+**Okumada görülenler (`rag_k8`):**
+- **Kaynak biçimi:** `[Firmenprofil]`, „[Quelle: V4]“. Kural `[Quelle: <not kimliği>]`; bayraklar kaynak değil.
+- **Uygun olmayan kaynak:** V1 uyarısı (sigortanın tahakkuk edilmemesi) Firmenprofil'e dayandırılıyor.
+- **Yanlış ad ve yön:** „Kostenquote von 40,6 % im Vergleich zum Vorjahresmonat (45,0 %) gestiegen“. Bu değerler Personalkostenquote'ye ait ve oran 4,4 puan düşmüş.
+- **Hipotez yok:** Model kaynağı olmayan nedenlerde „(Hypothese)“ hiç kullanmıyor. Ya kaynak gösteriyor (bazen yanlış) ya da işaretsiz bırakıyor.
+- **Not kullanımı:** RAG'li metinler notları gerçekten kullanıyor (8 metinde 12 kaynaklı neden). Kaynakların doğruluğu ground truth ile paket 9'da ölçülecek.
+
+**Yorum:** Bu metinler, ince ayarın neyi düzeltmesi gerektiğini somut olarak gösteriyor:
+- biçim (rakam, kaynak);
+- hipotez işareti;
+- bayrakların eksiksiz uyarıya çevrilmesi;
+- uzunluk.
+
 ## 5. Sıradaki
 
-1. **Kullanıcı:** Kaggle'da Ollama defteriyle deneme koşusu 2 (`gpu/README.md`, Bölüm 3). Hız ölçülünce tam koşunun süresi tahmin edilir.
+1. **Kullanıcı:** Kaggle'da tam koşu, `MODE = "full"`, üç varyant, ~2–3 saat (`gpu/README.md`, Bölüm 4).
 2. **Asistan:**
    - Baseline çıktılarının puanlanması (doğrulama katmanı + ground truth metrikleri, paket 9). Rakam biçimi ayrı sayılır.
    - İnce ayar defteri (paket 7); önce kısa hız ölçümü.

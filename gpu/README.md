@@ -4,7 +4,7 @@ Bu klasördekiler Kaggle'da (ücretsiz T4 GPU) çalışır. Kod ve veriyi ben ha
 
 - **Veri:** `gpu/data/*.jsonl.gz` (repoda; `python -m training` üretir, `docs/12_egitim_verisi.md`).
 - **Defterler:**
-  - `01_baseline.ipynb`: ince ayar öncesi model (çıplak model, yalnızca RAG). Ollama ile çalışır; deneme turundaki model ve nicemleme (`docs/12`, Bölüm 4).
+  - `01_baseline.ipynb`: ince ayar öncesi model (çıplak model, yalnızca RAG, bütün notlarla RAG). Ollama ile çalışır; deneme turundaki model ve nicemleme (`docs/12`, Bölüm 4).
   - Sonrakiler: ince ayar (yalnızca FT, RAG + FT) ve değerlendirme.
 - **Önceki koşuların çıktıları:** `gpu/outputs/`.
 
@@ -48,11 +48,16 @@ Deneme koşusu varyant başına 8 istem çalıştırır ve günlüğün sonuna t
 
 ## 4. Tam koşu (benim onayımdan sonra)
 
-1. Parametre hücresinde `MODE = "smoke"` → `MODE = "full"`.
-2. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**.
+Üç varyant × 720 istem; deneme koşusu 2'ye göre tahmini süre **2–3 saat** (tek oturum).
+
+1. Defteri güncelle: GitHub'dan en son `gpu/01_baseline.ipynb` dosyasını indir → Kaggle'da **File** → **Import Notebook**. Parametre hücresinde `VARIANTS` satırında üç varyant görünmeli (`rag_alle` dahil). Dokunma.
+2. Parametre hücresinde `MODE = "smoke"` → `MODE = "full"`.
+3. **Session options** ve **Input** yerinde olmalı (Bölüm 2.3 ve 1.5). Önceki sürümün çıktısı Input'ta duruyorsa sorun değil: defter yalnızca aynı model ve ayarlarla üretilmiş kayıtları alır.
+4. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**.
    - Kaggle defteri arka planda çalıştırır; tarayıcıyı kapatabilirsin. Bir oturum en fazla 12 saat sürer. Defter 11 saatte yeni istem almayı bırakır ve çıktıları paketler.
    - Haftalık GPU kotası ~30 saat; kalan kotayı profil → **Settings** altında görürsün.
-3. Durum: defterin sayfası → **Versions**. Çalışan sürüm „Running“, biten „Succeeded“ olur.
+5. Durum: defterin sayfası → **Versions**. Çalışan sürüm „Running“, biten „Succeeded“ olur.
+6. Bitince `ergebnisse_full.zip` dosyasını indir ve yükle (Bölüm 5). Zip'i açmadan yüklemen de olur, açarak yüklemen de.
 
 **Süre yetmezse (günlükte „süre doldu, … istem kaldı“):**
 1. Defteri aç → sağ panel → **Input** → **Add Input** → **Notebooks** (ya da **Your Work**) → bu defterin kendisi → **Add**. Böylece önceki sürümün çıktısı girdi olur.

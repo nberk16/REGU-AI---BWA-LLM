@@ -545,6 +545,11 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Rakam değerleri doğru; iki metinde binlik ayırıcı boşluk.
   - Yön hataları var; bir kaynak yanlış kullanılmış; işaretsiz nedenler var; metinler kısa.
   - Doğrulama, boşluklu rakamları iki sayı olarak okuyor. Puanlamada biçim, değerden ayrı sayılacak (paket 8).
+- **Deneme koşusu 2 (Ollama, iki T4):** 16 istem, hata yok (`12_egitim_verisi.md`, Bölüm 4.4).
+  - Akış başına 37–52 token/s, 8 eşzamanlı istem.
+  - Tam koşu tahmini 2 varyant için ~1,8 saat (önce ~60 saat).
+  - Token sayıları Transformers koşusuyla birebir aynı: şablon ve tokenizer aynı.
+- **[ÖNERİ] `rag_alle` baseline'a eklendi:** Bütün notlarla RAG da çıplak modelle çalışır. Ek maliyet ~40 dakika. Retrieval'ın katkısı böylece hem taban hem ince ayarlı modelde ölçülür.
 
 ## Kaynak
 

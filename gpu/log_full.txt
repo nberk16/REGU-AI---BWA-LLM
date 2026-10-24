@@ -1,0 +1,121 @@
+2026-10-24T14:31:31+00:00 Başlangıç · MODE=full · GPU: ['Tesla T4, 0 MiB, 15360 MiB', 'Tesla T4, 0 MiB, 15360 MiB']
+2026-10-24T14:31:37+00:00 İstemler: {'ohne_kontext': 720, 'rag_k8': 720, 'rag_alle': 720}
+2026-10-24T14:32:41+00:00 Ollama 0.40.10 · 2 sunucu · gemma4:e4b-it-q4_K_M indirildi: 58 s · 6.6 GB · Q4_K_M · dc35e8d9c606
+2026-10-24T14:34:39+00:00   http://127.0.0.1:11434: yüklendi 118 s · bellek 0.7 GB, GPU'da %100
+2026-10-24T14:34:47+00:00   http://127.0.0.1:11435: yüklendi 8 s · bellek 0.7 GB, GPU'da %100
+2026-10-24T14:34:47+00:00 GPU belleği: ['Tesla T4, 5737 MiB, 15360 MiB', 'Tesla T4, 5747 MiB, 15360 MiB']
+2026-10-24T14:34:48+00:00 ohne_kontext: önceki çıktıda 8 kayıt, 8 geçerli
+2026-10-24T14:34:48+00:00 ohne_kontext: 720 istem, 8 tamam, 712 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-24T14:36:17+00:00   [28/720] A1-v01_2025-06 · 19 s · 38 token/s · 802 istem/saat · kalan ~0.9 saat
+2026-10-24T14:37:17+00:00   [48/720] A1-v01_2026-12 · 24 s · 36 token/s · 966 istem/saat · kalan ~0.7 saat
+2026-10-24T14:38:17+00:00   [68/720] A1-v02_2026-08 · 24 s · 34 token/s · 1031 istem/saat · kalan ~0.6 saat
+2026-10-24T14:39:14+00:00   [88/720] A1-v03_2026-05 · 21 s · 33 token/s · 1082 istem/saat · kalan ~0.6 saat
+2026-10-24T14:40:08+00:00   [108/720] A1-v04_2025-10 · 26 s · 30 token/s · 1125 istem/saat · kalan ~0.5 saat
+2026-10-24T14:41:08+00:00   [128/720] A1-v05_2025-07 · 28 s · 34 token/s · 1136 istem/saat · kalan ~0.5 saat
+2026-10-24T14:42:04+00:00   [148/720] A1-v06_2025-02 · 27 s · 32 token/s · 1154 istem/saat · kalan ~0.5 saat
+2026-10-24T14:43:09+00:00   [168/720] A1-v06_2026-12 · 26 s · 37 token/s · 1150 istem/saat · kalan ~0.5 saat
+2026-10-24T14:44:03+00:00   [188/720] A1-v07_2026-04 · 30 s · 30 token/s · 1166 istem/saat · kalan ~0.5 saat
+2026-10-24T14:45:10+00:00   [208/720] A1-v08_2026-03 · 26 s · 35 token/s · 1156 istem/saat · kalan ~0.4 saat
+2026-10-24T14:46:10+00:00   [228/720] A1-v09_2025-12 · 22 s · 32 token/s · 1160 istem/saat · kalan ~0.4 saat
+2026-10-24T14:47:00+00:00   [248/720] A2-v00_2025-08 · 20 s · 29 token/s · 1180 istem/saat · kalan ~0.4 saat
+2026-10-24T14:48:02+00:00   [268/720] A2-v01_2025-02 · 26 s · 29 token/s · 1178 istem/saat · kalan ~0.4 saat
+2026-10-24T14:49:03+00:00   [288/720] A2-v01_2026-12 · 25 s · 32 token/s · 1179 istem/saat · kalan ~0.4 saat
+2026-10-24T14:50:01+00:00   [308/720] A2-v02_2026-08 · 25 s · 31 token/s · 1183 istem/saat · kalan ~0.3 saat
+2026-10-24T14:50:58+00:00   [328/720] A2-v03_2026-03 · 24 s · 32 token/s · 1187 istem/saat · kalan ~0.3 saat
+2026-10-24T14:51:54+00:00   [348/720] A2-v04_2025-12 · 23 s · 33 token/s · 1193 istem/saat · kalan ~0.3 saat
+2026-10-24T14:52:53+00:00   [368/720] A2-v05_2025-08 · 26 s · 31 token/s · 1195 istem/saat · kalan ~0.3 saat
+2026-10-24T14:53:48+00:00   [388/720] A2-v06_2025-06 · 19 s · 34 token/s · 1199 istem/saat · kalan ~0.3 saat
+2026-10-24T14:54:47+00:00   [408/720] A2-v07_2025-02 · 20 s · 38 token/s · 1201 istem/saat · kalan ~0.3 saat
+2026-10-24T14:55:42+00:00   [428/720] A2-v07_2026-08 · 21 s · 31 token/s · 1206 istem/saat · kalan ~0.2 saat
+2026-10-24T14:56:37+00:00   [448/720] A2-v08_2026-04 · 22 s · 31 token/s · 1210 istem/saat · kalan ~0.2 saat
+2026-10-24T14:57:41+00:00   [468/720] A2-v09_2025-12 · 23 s · 36 token/s · 1206 istem/saat · kalan ~0.2 saat
+2026-10-24T14:58:45+00:00   [488/720] A3-v00_2025-09 · 22 s · 35 token/s · 1202 istem/saat · kalan ~0.2 saat
+2026-10-24T14:59:40+00:00   [508/720] A3-v01_2025-04 · 28 s · 32 token/s · 1206 istem/saat · kalan ~0.2 saat
+2026-10-24T15:00:41+00:00   [528/720] A3-v01_2026-12 · 23 s · 35 token/s · 1205 istem/saat · kalan ~0.2 saat
+2026-10-24T15:01:42+00:00   [548/720] A3-v02_2026-10 · 20 s · 35 token/s · 1204 istem/saat · kalan ~0.1 saat
+2026-10-24T15:02:40+00:00   [568/720] A3-v03_2026-03 · 26 s · 33 token/s · 1206 istem/saat · kalan ~0.1 saat
+2026-10-24T15:03:38+00:00   [588/720] A3-v04_2025-11 · 23 s · 32 token/s · 1207 istem/saat · kalan ~0.1 saat
+2026-10-24T15:04:37+00:00   [608/720] A3-v05_2025-07 · 25 s · 34 token/s · 1207 istem/saat · kalan ~0.1 saat
+2026-10-24T15:05:38+00:00   [628/720] A3-v06_2025-03 · 24 s · 28 token/s · 1207 istem/saat · kalan ~0.1 saat
+2026-10-24T15:06:33+00:00   [648/720] A3-v06_2026-09 · 31 s · 31 token/s · 1210 istem/saat · kalan ~0.1 saat
+2026-10-24T15:07:33+00:00   [668/720] A3-v07_2026-08 · 25 s · 32 token/s · 1209 istem/saat · kalan ~0.0 saat
+2026-10-24T15:08:34+00:00   [688/720] A3-v08_2026-05 · 20 s · 32 token/s · 1208 istem/saat · kalan ~0.0 saat
+2026-10-24T15:09:30+00:00   [708/720] A3-v09_2025-12 · 24 s · 29 token/s · 1210 istem/saat · kalan ~0.0 saat
+2026-10-24T15:09:56+00:00   [720/720] A3-v09_2026-11 · 19 s · 37 token/s · 1215 istem/saat · kalan ~0.0 saat
+2026-10-24T15:09:58+00:00 rag_k8: önceki çıktıda 8 kayıt, 8 geçerli
+2026-10-24T15:09:58+00:00 rag_k8: 720 istem, 8 tamam, 712 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-24T15:11:31+00:00   [28/720] A1-v01_2025-02 · 34 s · 25 token/s · 779 istem/saat · kalan ~0.9 saat
+2026-10-24T15:12:42+00:00   [48/720] A1-v01_2026-12 · 28 s · 31 token/s · 877 istem/saat · kalan ~0.8 saat
+2026-10-24T15:14:03+00:00   [68/720] A1-v02_2026-09 · 31 s · 31 token/s · 882 istem/saat · kalan ~0.7 saat
+2026-10-24T15:15:14+00:00   [88/720] A1-v03_2026-05 · 30 s · 28 token/s · 912 istem/saat · kalan ~0.7 saat
+2026-10-24T15:16:28+00:00   [108/720] A1-v04_2026-01 · 24 s · 34 token/s · 924 istem/saat · kalan ~0.7 saat
+2026-10-24T15:17:43+00:00   [128/720] A1-v05_2025-10 · 28 s · 32 token/s · 929 istem/saat · kalan ~0.6 saat
+2026-10-24T15:19:00+00:00   [148/720] A1-v06_2025-04 · 30 s · 38 token/s · 930 istem/saat · kalan ~0.6 saat
+2026-10-24T15:20:13+00:00   [168/720] A1-v07_2025-02 · 23 s · 34 token/s · 937 istem/saat · kalan ~0.6 saat
+2026-10-24T15:21:28+00:00   [188/720] A1-v07_2026-07 · 36 s · 32 token/s · 939 istem/saat · kalan ~0.6 saat
+2026-10-24T15:22:44+00:00   [208/720] A1-v08_2026-07 · 20 s · 39 token/s · 940 istem/saat · kalan ~0.5 saat
+2026-10-24T15:24:01+00:00   [228/720] A1-v09_2025-12 · 31 s · 32 token/s · 940 istem/saat · kalan ~0.5 saat
+2026-10-24T15:25:09+00:00   [248/720] A2-v00_2025-08 · 25 s · 26 token/s · 948 istem/saat · kalan ~0.5 saat
+2026-10-24T15:26:27+00:00   [268/720] A2-v01_2025-03 · 33 s · 27 token/s · 947 istem/saat · kalan ~0.5 saat
+2026-10-24T15:27:44+00:00   [288/720] A2-v02_2025-02 · 24 s · 31 token/s · 945 istem/saat · kalan ~0.5 saat
+2026-10-24T15:28:54+00:00   [308/720] A2-v02_2026-08 · 30 s · 30 token/s · 951 istem/saat · kalan ~0.4 saat
+2026-10-24T15:30:09+00:00   [328/720] A2-v03_2026-04 · 29 s · 27 token/s · 951 istem/saat · kalan ~0.4 saat
+2026-10-24T15:31:20+00:00   [348/720] A2-v04_2025-12 · 31 s · 27 token/s · 955 istem/saat · kalan ~0.4 saat
+2026-10-24T15:32:25+00:00   [368/720] A2-v05_2025-06 · 32 s · 27 token/s · 962 istem/saat · kalan ~0.4 saat
+2026-10-24T15:33:41+00:00   [388/720] A2-v06_2025-05 · 26 s · 27 token/s · 961 istem/saat · kalan ~0.3 saat
+2026-10-24T15:34:54+00:00   [408/720] A2-v06_2026-12 · 34 s · 29 token/s · 963 istem/saat · kalan ~0.3 saat
+2026-10-24T15:36:03+00:00   [428/720] A2-v07_2026-10 · 26 s · 36 token/s · 966 istem/saat · kalan ~0.3 saat
+2026-10-24T15:37:15+00:00   [448/720] A2-v08_2026-01 · 42 s · 27 token/s · 968 istem/saat · kalan ~0.3 saat
+2026-10-24T15:38:30+00:00   [468/720] A2-v09_2025-12 · 30 s · 28 token/s · 967 istem/saat · kalan ~0.3 saat
+2026-10-24T15:39:51+00:00   [488/720] A3-v00_2025-07 · 32 s · 31 token/s · 964 istem/saat · kalan ~0.2 saat
+2026-10-24T15:41:06+00:00   [508/720] A3-v01_2025-05 · 31 s · 28 token/s · 964 istem/saat · kalan ~0.2 saat
+2026-10-24T15:42:21+00:00   [528/720] A3-v01_2026-12 · 31 s · 27 token/s · 963 istem/saat · kalan ~0.2 saat
+2026-10-24T15:43:39+00:00   [548/720] A3-v02_2026-08 · 32 s · 30 token/s · 962 istem/saat · kalan ~0.2 saat
+2026-10-24T15:44:50+00:00   [568/720] A3-v03_2026-01 · 39 s · 27 token/s · 964 istem/saat · kalan ~0.2 saat
+2026-10-24T15:46:00+00:00   [588/720] A3-v04_2025-08 · 39 s · 24 token/s · 966 istem/saat · kalan ~0.1 saat
+2026-10-24T15:47:19+00:00   [608/720] A3-v05_2025-08 · 29 s · 33 token/s · 964 istem/saat · kalan ~0.1 saat
+2026-10-24T15:48:28+00:00   [628/720] A3-v05_2026-12 · 40 s · 24 token/s · 966 istem/saat · kalan ~0.1 saat
+2026-10-24T15:49:36+00:00   [648/720] A3-v06_2026-12 · 27 s · 35 token/s · 969 istem/saat · kalan ~0.1 saat
+2026-10-24T15:50:51+00:00   [668/720] A3-v07_2026-10 · 24 s · 36 token/s · 968 istem/saat · kalan ~0.1 saat
+2026-10-24T15:52:08+00:00   [688/720] A3-v08_2026-08 · 18 s · 40 token/s · 968 istem/saat · kalan ~0.0 saat
+2026-10-24T15:53:14+00:00   [708/720] A3-v09_2025-12 · 28 s · 27 token/s · 971 istem/saat · kalan ~0.0 saat
+2026-10-24T15:53:47+00:00   [720/720] A3-v09_2026-12 · 15 s · 55 token/s · 975 istem/saat · kalan ~0.0 saat
+2026-10-24T15:53:48+00:00 rag_alle: 720 istem, 0 tamam, 720 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-24T15:55:23+00:00   [20/720] A1-v00_2026-11 · 25 s · 29 token/s · 760 istem/saat · kalan ~0.9 saat
+2026-10-24T15:56:37+00:00   [40/720] A1-v01_2026-06 · 25 s · 30 token/s · 851 istem/saat · kalan ~0.8 saat
+2026-10-24T15:57:57+00:00   [60/720] A1-v02_2025-10 · 40 s · 25 token/s · 868 istem/saat · kalan ~0.8 saat
+2026-10-24T15:59:17+00:00   [80/720] A1-v03_2025-07 · 35 s · 26 token/s · 875 istem/saat · kalan ~0.7 saat
+2026-10-24T16:00:33+00:00   [100/720] A1-v04_2025-06 · 25 s · 36 token/s · 889 istem/saat · kalan ~0.7 saat
+2026-10-24T16:01:43+00:00   [120/720] A1-v04_2026-12 · 29 s · 29 token/s · 909 istem/saat · kalan ~0.7 saat
+2026-10-24T16:03:02+00:00   [140/720] A1-v05_2026-08 · 29 s · 26 token/s · 909 istem/saat · kalan ~0.6 saat
+2026-10-24T16:04:17+00:00   [160/720] A1-v06_2026-03 · 33 s · 29 token/s · 916 istem/saat · kalan ~0.6 saat
+2026-10-24T16:05:32+00:00   [180/720] A1-v07_2025-12 · 30 s · 28 token/s · 920 istem/saat · kalan ~0.6 saat
+2026-10-24T16:06:53+00:00   [200/720] A1-v08_2025-08 · 31 s · 28 token/s · 917 istem/saat · kalan ~0.6 saat
+2026-10-24T16:08:12+00:00   [220/720] A1-v09_2025-06 · 25 s · 31 token/s · 917 istem/saat · kalan ~0.5 saat
+2026-10-24T16:09:22+00:00   [240/720] A1-v09_2026-12 · 31 s · 29 token/s · 925 istem/saat · kalan ~0.5 saat
+2026-10-24T16:10:37+00:00   [260/720] A2-v00_2026-08 · 32 s · 29 token/s · 928 istem/saat · kalan ~0.5 saat
+2026-10-24T16:11:50+00:00   [280/720] A2-v01_2026-04 · 31 s · 27 token/s · 931 istem/saat · kalan ~0.5 saat
+2026-10-24T16:13:02+00:00   [300/720] A2-v02_2025-12 · 26 s · 26 token/s · 936 istem/saat · kalan ~0.4 saat
+2026-10-24T16:14:19+00:00   [320/720] A2-v03_2025-09 · 24 s · 27 token/s · 936 istem/saat · kalan ~0.4 saat
+2026-10-24T16:15:33+00:00   [340/720] A2-v04_2025-04 · 32 s · 25 token/s · 938 istem/saat · kalan ~0.4 saat
+2026-10-24T16:16:46+00:00   [360/720] A2-v05_2025-01 · 25 s · 29 token/s · 941 istem/saat · kalan ~0.4 saat
+2026-10-24T16:17:55+00:00   [380/720] A2-v05_2026-08 · 28 s · 26 token/s · 945 istem/saat · kalan ~0.4 saat
+2026-10-24T16:19:11+00:00   [400/720] A2-v06_2026-04 · 26 s · 25 token/s · 946 istem/saat · kalan ~0.3 saat
+2026-10-24T16:20:24+00:00   [420/720] A2-v07_2026-02 · 23 s · 31 token/s · 948 istem/saat · kalan ~0.3 saat
+2026-10-24T16:21:37+00:00   [440/720] A2-v08_2025-10 · 22 s · 33 token/s · 949 istem/saat · kalan ~0.3 saat
+2026-10-24T16:22:53+00:00   [460/720] A2-v09_2025-04 · 30 s · 27 token/s · 949 istem/saat · kalan ~0.3 saat
+2026-10-24T16:24:13+00:00   [480/720] A2-v09_2026-11 · 34 s · 27 token/s · 947 istem/saat · kalan ~0.3 saat
+2026-10-24T16:25:31+00:00   [500/720] A3-v00_2026-08 · 33 s · 29 token/s · 946 istem/saat · kalan ~0.2 saat
+2026-10-24T16:26:41+00:00   [520/720] A3-v01_2026-02 · 33 s · 27 token/s · 949 istem/saat · kalan ~0.2 saat
+2026-10-24T16:28:03+00:00   [540/720] A3-v02_2025-12 · 30 s · 30 token/s · 946 istem/saat · kalan ~0.2 saat
+2026-10-24T16:29:22+00:00   [560/720] A3-v03_2025-10 · 26 s · 29 token/s · 945 istem/saat · kalan ~0.2 saat
+2026-10-24T16:30:37+00:00   [580/720] A3-v04_2025-04 · 32 s · 27 token/s · 945 istem/saat · kalan ~0.1 saat
+2026-10-24T16:31:51+00:00   [600/720] A3-v04_2026-12 · 30 s · 26 token/s · 946 istem/saat · kalan ~0.1 saat
+2026-10-24T16:33:07+00:00   [620/720] A3-v05_2026-10 · 23 s · 34 token/s · 946 istem/saat · kalan ~0.1 saat
+2026-10-24T16:34:14+00:00   [640/720] A3-v06_2026-04 · 27 s · 29 token/s · 950 istem/saat · kalan ~0.1 saat
+2026-10-24T16:35:33+00:00   [660/720] A3-v07_2025-12 · 33 s · 26 token/s · 948 istem/saat · kalan ~0.1 saat
+2026-10-24T16:36:48+00:00   [680/720] A3-v08_2025-10 · 23 s · 33 token/s · 949 istem/saat · kalan ~0.0 saat
+2026-10-24T16:38:01+00:00   [700/720] A3-v09_2025-03 · 33 s · 30 token/s · 950 istem/saat · kalan ~0.0 saat
+2026-10-24T16:39:02+00:00   [720/720] A3-v09_2026-10 · 26 s · 43 token/s · 955 istem/saat · kalan ~0.0 saat
+2026-10-24T16:39:02+00:00 Özet: {"ohne_kontext": {"kayıt": 720, "hata": 0, "süre_s": 2109, "istem_saat": 1215, "medyan_s": 23.3, "medyan_çıktı_token": 676.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "rag_k8": {"kayıt": 720, "hata": 0, "süre_s": 2628, "istem_saat": 975, "medyan_s": 29.3, "medyan_çıktı_token": 717.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "rag_alle": {"kayıt": 720, "hata": 0, "süre_s": 2714, "istem_saat": 955, "medyan_s": 30.1, "medyan_çıktı_token": 717.0, "sınıra_takılan": 0, "düşünme_metni": 0}}
+2026-10-24T16:39:02+00:00 Bitti.

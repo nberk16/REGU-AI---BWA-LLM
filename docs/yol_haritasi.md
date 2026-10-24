@@ -250,3 +250,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 23.10.2026 | Kaggle deneme koşusu 1 (Transformers + Unsloth): hat çalışıyor, ama 5 token/s (tam koşu ~60 saat). Baseline defteri Ollama'ya geçti (iki T4, eşzamanlı istem, devam, zip); dört metnin ilk okuması. Paket 6 → %70: %67 |
 | 24.10.2026 | `gpu/README.md`: Commit sürümünün çıktılarının yeri (düzenleyici değil, sürümün görüntüleme sayfası → Output) netleştirildi; durum değişmedi: %67 |
 | 24.10.2026 | Kaggle deneme koşusu 2 (Ollama, iki T4): 16 istem, hata yok, 37–52 token/s; tam koşu ~1,8 saat (önce ~60). `rag_alle` baseline'a eklendi; 16 metnin ilk ölçümü. Paket 6 → %75: %67 |
+| 24.10.2026 | `gpu/README.md`: Commit koşusunun durumunu ve ilerlemesini izleme adımları (Logs sekmesi, kalan süre satırları); durum değişmedi: %67 |

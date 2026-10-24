@@ -56,7 +56,10 @@ Deneme koşusu varyant başına 8 istem çalıştırır ve günlüğün sonuna t
 4. Sağ üst → **Save Version** → **Save & Run All (Commit)** → **Save**.
    - Kaggle defteri arka planda çalıştırır; tarayıcıyı kapatabilirsin. Bir oturum en fazla 12 saat sürer. Defter 11 saatte yeni istem almayı bırakır ve çıktıları paketler.
    - Haftalık GPU kotası ~30 saat; kalan kotayı profil → **Settings** altında görürsün.
-5. Durum: defterin sayfası → **Versions**. Çalışan sürüm „Running“, biten „Succeeded“ olur.
+5. Durum: Kaggle → sol menü → **Code** → **Your Work** → defterin adı (görüntüleme sayfası).
+   - Sayfanın üstünde ya da sürüm listesinde (sürüm numarası / geçmiş simgesi) durum yazar: çalışıyorsa „Running“, bittiyse „Succeeded“, hata verdiyse „Error“.
+   - Koşu sürerken **Logs** sekmesinde ilerleme satırları görünür; her 20 istemde bir, kalan süre tahminiyle: `[240/720] … kalan ~0.8 saat`. Varyantlar sırayla çalışır: `ohne_kontext`, `rag_k8`, `rag_alle`.
+   - Tarayıcıyı kapatman ya da siteden çıkman koşuyu etkilemez.
 6. Bitince `ergebnisse_full.zip` dosyasını indir ve yükle (Bölüm 5). Zip'i açmadan yüklemen de olur, açarak yüklemen de.
 
 **Süre yetmezse (günlükte „süre doldu, … istem kaldı“):**

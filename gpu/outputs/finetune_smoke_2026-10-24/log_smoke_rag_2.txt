@@ -1,0 +1,14 @@
+2026-10-24T18:38:21+00:00 Başlangıç · MODE=smoke · TRAIN=rag · GPU: ['Tesla T4, 15360 MiB', 'Tesla T4, 15360 MiB']
+2026-10-24T18:40:39+00:00 Model + LoRA: 79 s · eğitilen parametre 34.9 Mio. · GPU belleği 11.3 / 15.6 GB
+2026-10-24T18:40:39+00:00 Şablon: test istemlerinin token sayısı baseline ile aynı (5033, 3218)
+2026-10-24T18:40:52+00:00 Veri: train_rag 898 örnek (MAX_SEQ üstü dışarıda: yok), eğitimde 12 · val 133, kayıp için 4 · token toplamı {'rag': 4799561, 'ohne': 3623866}
+2026-10-24T18:41:15+00:00 Maske (train): 7076 token, kayıpta 1188 · başı '**Kernaussagen September 2026**\n\n1. Das Betriebser' · sonu 'lt sie sich?<turn|>\n' · {'yanit_basi': True, 'istem_yok': True, 'tek_bos': True} · tamam
+2026-10-24T18:42:12+00:00 Doğrulama kaybı (eğitim öncesi): 0.7864 · 4 örnek, 3959 yanıt tokenı · 58 s
+2026-10-24T18:42:36+00:00 EĞİTİM HATASI:
+Traceback (most recent call last):
+  [kısaltıldı: trainer.train → Unsloth → Gemma4ForConditionalGeneration → decoder layer (gradient checkpointing) → self_attn]
+  File "/usr/local/lib/python3.13/dist-packages/unsloth_zoo/temporary_patches/gemma4_float32.py", line 498, in forward
+    attn_output = packed_document_sdpa(
+  File "/usr/local/lib/python3.13/dist-packages/unsloth_zoo/temporary_patches/gemma4_banded_attention.py", line 241, in _packed_document_sdpa
+    outs.append(F.scaled_dot_product_attention(q, k, v, attn_mask=band, scale=scaling))
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 178.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 144.81 MiB is free. Including non-PyTorch memory, this process has 14.42 GiB memory in use. Of the allocated memory 14.16 GiB is allocated by PyTorch, and 135.06 MiB is reserved by PyTorch but unallocated.

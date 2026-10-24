@@ -266,3 +266,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | Baseline tam koşusu (3 × 720, ~2 saat) ve puanlama 1.0 (`scoring/`, `docs/13`): kalibrasyon ve baseline sonuçları. Doğrulama v1.7 (boşluklu binlik ayırıcı). Paket 6 → %100, 8 → %85, 9 → %45: %73 |
 | 24.10.2026 | İnce ayar (`02_finetune`) ve değerlendirme (`03_eval`) defterleri; Ollama 0.40'ın LoRA desteklemediği bulundu, çıkarım llama-server + LoRA ile (yerelde doğrulandı). Paket 7 → %25, 9 → %50: %76 |
 | 24.10.2026 | İnce ayar deneme koşusu 1: maske denetimi eksik BOS'u yakaladı (Gemma 4 tokenizer'ı BOS eklemiyor); defter düzeltildi, eğitim başlamadan durdu. Durum değişmedi: %76 |
+| 24.10.2026 | İnce ayar deneme koşusu 2: denetimler geçti, ilk adımda bellek yetmedi (7.076 token). Katman başına gömme tablosu (5,6 GB) ve ses/görüntü kodlayıcıları işlemciye taşınıyor; bellek yetmezse kısa örneklerle hız ölçümü. Durum değişmedi: %76 |

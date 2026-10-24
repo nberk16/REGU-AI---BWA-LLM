@@ -49,6 +49,7 @@ SAVE_STEPS = 10             # checkpoint aralığı (adım)
 TIME_BUDGET_H = 10.0        # bu süreden sonra eğitim durur ve kaydeder (oturum en fazla 12 saat)
 SEED = 3407
 SMOKE = {"examples": 12, "grad_acc": 4, "eval_n": 4}   # smoke: en uzun 12 örnek, 3 adım (bellekte en kötü durum)
+SMOKE_FALLBACK = 6000       # smoke'ta bellek yetmezse hız bu uzunluğun altındaki örneklerle ölçülür
 GEN = {"temperature": 0.2, "top_k": 64, "top_p": 0.95, "min_p": 0.0, "repeat_penalty": 1.0, "seed": 42,
        "n_predict": 1500}   # baseline (Ollama) ile aynı örnekleme
 """),
@@ -59,8 +60,9 @@ GEN = {"temperature": 0.2, "top_k": 64, "top_p": 0.95, "min_p": 0.0, "repeat_pen
     code("""
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"     # eğitim GPU 0'da; GPU 1 sondaki bağdaştırıcı denemesi için boş kalır
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"   # parçalanmaya karşı (PyTorch önerisi)
 
-import dataclasses, glob, gzip, hashlib, json, shutil, subprocess, time, traceback, urllib.error, urllib.request, zipfile
+import dataclasses, gc, glob, gzip, hashlib, json, shutil, subprocess, time, traceback, urllib.error, urllib.request, zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -160,6 +162,37 @@ trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
 free, total = torch.cuda.mem_get_info()
 log(f"Model + LoRA: {time.time() - t0:.0f} s · eğitilen parametre {trainable / 1e6:.1f} Mio. · "
     f"GPU belleği {(total - free) / 1e9:.1f} / {total / 1e9:.1f} GB")
+
+# Bellek (deneme koşusu 2'de 7.076 tokenlık örnekte yetmedi): eğitimde gerekmeyen büyük parçalar GPU'dan çıkar.
+# - Katman başına gömme tablosu (2,8 Mrd. parametre, ~5,6 GB): yalnızca tablo araması; işlemcide yapılır.
+# - Ses ve görüntü kodlayıcıları (~0,9 GB): metin eğitiminde kullanılmaz.
+class CpuEmbedding(torch.nn.Module):
+    \"\"\"Gömme tablosu işlemcide; arama sonucu girdinin cihazına taşınır. Tablo donmuş (LoRA'da eğitilmez).\"\"\"
+    def __init__(self, inner):
+        super().__init__()
+        object.__setattr__(self, "_inner", inner.to("cpu"))   # kayıtlı alt modül değil: model.to(...) geri taşımaz
+    @property
+    def weight(self):
+        return self._inner.weight
+    def forward(self, input_ids):
+        return self._inner(input_ids.to("cpu")).to(input_ids.device)
+
+moved = []
+for name, mod in list(model.named_modules()):
+    short = name.rsplit(".", 1)[-1]
+    try:
+        if short == "embed_tokens_per_layer" and not isinstance(mod, CpuEmbedding):
+            setattr(model.get_submodule(name.rsplit(".", 1)[0]), short, CpuEmbedding(mod))
+            moved.append(short)
+        elif short in ("audio_tower", "vision_tower", "embed_audio", "embed_vision"):
+            mod.to("cpu")
+            moved.append(short)
+    except Exception as e:
+        log(f"  {name} taşınamadı: {e!r}")
+gc.collect()
+torch.cuda.empty_cache()
+free, total = torch.cuda.mem_get_info()
+log(f"İşlemciye taşınan: {moved} · GPU belleği {(total - free) / 1e9:.1f} / {total / 1e9:.1f} GB")
 """),
     code("""
 from datasets import Dataset
@@ -246,10 +279,12 @@ def build_trainer(texts):
 def first_ids(tr):
     return tr.train_dataset[0]["input_ids"]
 
+strip_bos = False
 trainer = build_trainer([e["text"] for e in train_sel])
 ids = first_ids(trainer)
 if ids[0] == ids[1] == tok.bos_token_id:          # tokenizer BOS'u kendisi de ekliyor: metindekini sil
     log("Eğitim tokenizasyonu BOS ekliyor; metindeki BOS siliniyor")
+    strip_bos = True
     trainer = build_trainer([e["text"].removeprefix(BOS) for e in train_sel])
 
 def check_mask(dataset, name):
@@ -356,7 +391,28 @@ try:
     info["eval_loss_before"] = previous.get("eval_loss_before") if resume else evaluate("eğitim öncesi")
     torch.cuda.reset_peak_memory_stats()
     t0 = time.time()
-    trainer.train(resume_from_checkpoint=str(resume) if resume else None)
+    try:
+        trainer.train(resume_from_checkpoint=str(resume) if resume else None)
+    except torch.OutOfMemoryError:
+        if not smoke:
+            raise
+        # Deneme koşusu: bellek sınırını kaydet ve hızı daha kısa örneklerle yine de ölç
+        info["oom_tokens"] = train_sel[0]["tokens"]
+        info["peak_gpu_gb_oom"] = round(torch.cuda.max_memory_reserved() / 1e9, 1)
+        log(f"BELLEK YETMEDİ: en uzun örnek {train_sel[0]['tokens']} token. Hız {SMOKE_FALLBACK} token altındaki "
+            f"örneklerle ölçülüyor (train_rag'de bu sınırın üstünde 115 örnek var).")
+        del trainer
+        gc.collect()
+        torch.cuda.empty_cache()
+        train_sel = [e for e in sorted(train_all, key=lambda e: -e["tokens"])
+                     if e["tokens"] <= SMOKE_FALLBACK][:SMOKE["examples"]]
+        trainer = build_trainer([e["text"].removeprefix(BOS) if strip_bos else e["text"] for e in train_sel])
+        watch.ends.clear()
+        trainer.add_callback(watch)
+        torch.cuda.reset_peak_memory_stats()
+        t0 = time.time()
+        trainer.train()
+        info["fallback_tokens"] = train_sel[0]["tokens"]
     state = trainer.state
     info |= {"global_step": state.global_step, "max_steps": state.max_steps, "complete": state.global_step >= state.max_steps,
              "train_seconds": round(time.time() - t0), "peak_gpu_gb": round(torch.cuda.max_memory_reserved() / 1e9, 1)}

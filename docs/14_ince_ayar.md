@@ -52,6 +52,24 @@ Yanıt (ideal metin) ortalama ~830 token. Kayıp yalnızca bu kısımda hesaplan
   - 10 saatte durur. Bu sürümün çıktısı Input olarak eklenince aynı ayarlarla kaldığı yerden devam eder.
   - Diğer modelin bağdaştırıcısı önceki çıktıdan taşınır. Böylece son sürümün çıktısında iki bağdaştırıcı birlikte bulunur.
 
+**Bellek (deneme koşusu 2, 24.10.2026):**
+- Denetimler geçti; eğitim öncesi doğrulama kaybı 0,786 (4 örnek). Eğitimin ilk adımı, 7.076 tokenlık örnekte bellek yetmediği için durdu (14,4 / 14,6 GB).
+- Modeli yükledikten sonra GPU'da 11,3 GB vardı. Bunun büyük kısmı eğitimde kullanılmayan parçalar:
+
+| Parça | Parametre | float16 |
+|---|---:|---:|
+| Dil katmanları (4-bit) | 3,95 Mrd. | ~2 GB (4-bit) |
+| Katman başına gömme tablosu (`embed_tokens_per_layer`) | 2,82 Mrd. | 5,64 GB |
+| Ana gömme tablosu | 0,67 Mrd. | 1,34 GB |
+| Ses ve görüntü kodlayıcıları | ~0,47 Mrd. | ~0,95 GB |
+
+- **Düzeltme:**
+  - Katman başına gömme tablosu işlemciye taşınır. Bu tablo yalnızca bir aramadır: her token için bir satır okunur, sonuç GPU'ya taşınır. Tablo donmuş, eğitilmez.
+  - Ses ve görüntü kodlayıcıları da işlemciye taşınır.
+  - Beklenen kazanç ~6,5 GB.
+  - Küçük bir Gemma 4 modelinde (PEFT ile sarılmış) denendi: kayıp birebir aynı, LoRA gradyanları hesaplanıyor, `model.to(...)` tabloyu geri taşımıyor.
+- **Güvenlik ağı:** Deneme koşusunda bellek yine yetmezse, hız 6.000 tokenın altındaki örneklerle ölçülür. Günlükte bellek sınırı da kaydedilir. `train_rag`'de 115 örnek (%13) bu sınırın üstünde; `train_ohne`'de hiçbiri.
+
 **Açık risk: hız ve bellek.**
 - Unsloth T4'te Gemma 4 için float32 hesaplamaya geçiyor (deneme koşusu 1). Model yüklenince 11,3 / 15,6 GB bellek kullanılıyordu.
 - 7 bin tokenlık dizilerle eğitimin sığıp sığmadığı ve süresi deneme koşusunda ölçülecek.

@@ -1,0 +1,137 @@
+2026-10-23T17:05:41+00:00 Başlangıç · MODE=smoke · GPU: ['Tesla T4, 0 MiB, 15360 MiB', 'Tesla T4, 0 MiB, 15360 MiB']
+2026-10-23T17:05:42+00:00 İstemler: {'ohne_kontext': 720, 'rag_k8': 720}
+2026-10-23T17:06:52+00:00 Ollama 0.40.9 · 2 sunucu · gemma4:e4b-it-q4_K_M indirildi: 60 s · 6.6 GB · Q4_K_M · dc35e8d9c606
+2026-10-23T17:08:51+00:00   http://127.0.0.1:11434: yüklendi 119 s · bellek 0.7 GB, GPU'da %100
+2026-10-23T17:08:59+00:00   http://127.0.0.1:11435: yüklendi 8 s · bellek 0.7 GB, GPU'da %100
+2026-10-23T17:08:59+00:00 GPU belleği: ['Tesla T4, 5737 MiB, 15360 MiB', 'Tesla T4, 5747 MiB, 15360 MiB']
+2026-10-23T17:09:00+00:00 ohne_kontext: önceki çıktıda 2 kayıt, 0 geçerli
+2026-10-23T17:09:00+00:00 ohne_kontext: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-23T17:09:41+00:00   [1/8] A1-v00_2025-03 · 41 s · 49 token/s · 87 istem/saat · kalan ~0.1 saat
+2026-10-23T17:09:43+00:00   [2/8] A1-v00_2025-08 · 43 s · 49 token/s · 167 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:45+00:00   [3/8] A1-v00_2025-04 · 45 s · 42 token/s · 238 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:46+00:00   [4/8] A1-v00_2025-01 · 46 s · 38 token/s · 315 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:46+00:00   [5/8] A1-v00_2025-07 · 47 s · 43 token/s · 387 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:48+00:00   [6/8] A1-v00_2025-06 · 48 s · 38 token/s · 447 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:48+00:00   [7/8] A1-v00_2025-05 · 48 s · 40 token/s · 521 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:48+00:00   [8/8] A1-v00_2025-02 · 49 s · 47 token/s · 593 istem/saat · kalan ~0.0 saat
+2026-10-23T17:09:49+00:00 rag_k8: önceki çıktıda 2 kayıt, 0 geçerli
+2026-10-23T17:09:49+00:00 rag_k8: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-23T17:10:05+00:00   [1/8] A1-v00_2025-03 · 16 s · 48 token/s · 221 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:06+00:00   [2/8] A1-v00_2025-02 · 18 s · 51 token/s · 405 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:07+00:00   [3/8] A1-v00_2025-08 · 18 s · 52 token/s · 584 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:10+00:00   [4/8] A1-v00_2025-06 · 21 s · 40 token/s · 691 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:10+00:00   [5/8] A1-v00_2025-04 · 21 s · 48 token/s · 858 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:10+00:00   [6/8] A1-v00_2025-01 · 21 s · 39 token/s · 1006 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:11+00:00   [7/8] A1-v00_2025-07 · 23 s · 41 token/s · 1105 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:12+00:00   [8/8] A1-v00_2025-05 · 23 s · 37 token/s · 1250 istem/saat · kalan ~0.0 saat
+2026-10-23T17:10:12+00:00 Özet: {"ohne_kontext": {"kayıt": 8, "hata": 0, "süre_s": 49, "istem_saat": 593, "medyan_s": 46.2, "medyan_çıktı_token": 722.5, "sınıra_takılan": 0, "düşünme_metni": 0}, "rag_k8": {"kayıt": 8, "hata": 0, "süre_s": 23, "istem_saat": 1250, "medyan_s": 20.9, "medyan_çıktı_token": 690.0, "sınıra_takılan": 0, "düşünme_metni": 0}}
+2026-10-23T17:10:12+00:00 Tahmin: tam koşu (varyant başına 720 istem) ~1.8 saat
+2026-10-23T17:10:12+00:00 
+===== ohne_kontext · A1-v00_2025-03 · girdi 2974 · çıktı 563 token · 41.5 s
+**Kernaussagen März 2025**
+
+1. Das Betriebsergebnis von 36430 € ist im Vergleich zum Vorjahresmonat deutlich besser und zeigt eine starke positive Entwicklung, was auf eine verbesserte operative Performance hindeutet.
+2. Die Rohertragsquote hat sich mit 47,0 % im Vergleich zum Vorjahresmonat verbessert, obwohl sie im Vergleich zum Vormonat leicht gesunken ist.
+3. Die Materialquote ist mit 53,0 % höher als im Vorjahresmonat, was die Kostenstruktur beeinflusst.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Rohertrag | 391690 € | Vj. 320338 € | 22,3 % | Ursache offen | – |
+| Gesamtkosten | 357379 € | Vj. 329026 € | 8,6 % | Ursache offen | – |
+| Betriebsergebnis | 36430 € | Vj. -6617 € | 43047 € | Ursache offen | – |
+| Ergebnis vor Steuern | 33871 € | Vj. -9575 € | 43447 € | Ursache offen | – |
+| Umsatzerlöse | 821378 € | Vj. 699404 € | 17,4 % | Ursache offen | – |
+| Material-/Wareneinkauf | 442419 € | Vj. 387692 € | 14,1 % | Ursache offen | – |
+| Personalkosten | 226220 € | Vj. 200336 € | 12,9 % | Ursache offen | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, dass Bestandsveränderungen im März 12.730 € betragen, während sie in Januar und Februar 0 € waren; dies könnte auf eine Buchung für mehrere Monate hindeuten.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Können die Ursachen für die signifikanten positiven Abweichungen bei Betriebsergebnis und Ergebnis vor Steuern im Vergleich zum Vorjahresmonat näher beleuchtet werden?
+2026-10-23T17:10:12+00:00 
+===== ohne_kontext · A1-v00_2025-08 · girdi 2911 · çıktı 658 token · 43.2 s
+**Kernaussagen August 2025**
+
+1. Das Betriebsergebnis lag im August 2025 bei -62 876 €, was eine leichte Verbesserung gegenüber dem Vorjahresmonat von -60 890 € darstellt, obwohl die kumulierten Verluste im Jahr signifikant gestiegen sind und bei -312 172 € liegen.
+2. Die Rohertragsquote verbesserte sich im August auf 55,5 %, was eine deutliche Steigerung von 11,6 Prozentpunkten gegenüber dem Vormonat darstellt, liegt aber unter dem Vorjahreswert von 57,5 %.
+3. Die Materialquote stieg im August auf 44,5 %, was eine deutliche Verschlechterung von 11,6 Prozentpunkten gegenüber dem Vormonat zeigt, während sie im Vergleich zum Vorjahresmonat leicht besser ist.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 532 878 € | Vj. 501 739 € | 6,2 % | Ursache offen | – |
+| Rohertrag | 295 738 € | Vj. 288 426 € | 2,5 % | Ursache offen | – |
+| Gesamtkosten | 360 774 € | Vj. 351 366 € | 2,7 % | Ursache offen | – |
+| Betriebsergebnis | -62 876 € | Vj. -60 890 € | – | Ursache offen | – |
+| Ergebnis vor Steuern | -65 366 € | Vj. -63 671 € | – | Ursache offen | – |
+| Vorläufiges Ergebnis | -65 366 € | Vj. -63 671 € | – | Ursache offen | – |
+| Material-/Wareneinkauf | 237 140 € | Vj. 213 313 € | 11,2 % | Ursache offen | – |
+| Werbe-/Reisekosten | 7 893 € | Vj. 4 190 € | 88,4 % | Ursache offen | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, da die Bestandsveränderungen 0 € betragen, während der Material-/Wareneinkauf im Vergleich zum Vormonat um -44,7 % gesunken ist.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Welche Faktoren haben die deutliche Reduktion des Material-/Wareneinkaufs um 44,7 % im Vergleich zum Vormonat verursacht?
+2026-10-23T17:10:12+00:00 
+===== rag_k8 · A1-v00_2025-03 · girdi 4263 · çıktı 513 token · 16.3 s
+**Kernaussagen März 2025**
+
+1. Das Betriebsergebnis ist mit 36 T€ deutlich besser als im Vorjahresmonat (-6,6 T€), was auf eine starke operative Performance hindeutet, obwohl die kumulierte Marge im Vergleich zum Vorjahr negativ ist.
+2. Die Gesamtleistung stieg im März um 12,2 % gegenüber dem Vormonat und erreichte mit 834 T€ einen signifikanten Anstieg gegenüber dem Vorjahresmonat (17,8 %).
+3. Die Rohertragsquote sank auf 47,0 %, was im Vergleich zum Vorjahresmonat eine Verbesserung von 1,7 Prozentpunkten darstellt, aber im Vergleich zum Vormonat um 3,1 Prozentpunkte schlechter ist.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Umsatzerlöse | 821 T€ | Vj. 699 T€ | 17,4 % | – | – |
+| Material-/Wareneinkauf | 442 T€ | Vj. 387 T€ | 14,1 % | Deutliche Preissteigerungen bei Stahl ab März [Kontextnotiz 2025-03] | – |
+| Personalkosten | 226 T€ | Vj. 200 T€ | 12,9 % | – | – |
+| Betriebsergebnis | 36 T€ | Vj. -6,6 T€ | 43 T€ | – | – |
+| Rohertrag | 391 T€ | Vj. 320 T€ | 22,3 % | – | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, dass Bestandsveränderungen von Januar und Februar jeweils 0 € betrugen, während im März 12.730 € gebucht wurden; dies könnte auf eine nachträgliche Buchung mehrerer Monate hindeuten.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Für welche Monate gilt die Buchung der Bestandsveränderungen, die im März gebucht wurde?
+2026-10-23T17:10:12+00:00 
+===== rag_k8 · A1-v00_2025-02 · girdi 5033 · çıktı 613 token · 17.8 s
+**Kernaussagen Februar 2025**
+
+1. Die Gesamtleistung von 743 T€ ist im Vergleich zum Vorjahresmonat leicht rückläufig (-2,0 %), zeigt aber eine starke Steigerung gegenüber dem Vormonat (+24,7 %).
+2. Das Betriebsergebnis ist mit 14 T€ deutlich positiv, was eine massive Verbesserung gegenüber dem Vorjahresmonat (43 T€) und dem Vormonat (-104 T€) darstellt.
+3. Die Materialquote von 50,0 % ist signifikant höher als im Vorjahresmonat (40,2 %), was auf höhere Einkaufspreise oder Lageraufbau hindeutet.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 743 T€ | Vj. 759 T€ | -2,0 % | Ursache offen | – |
+| Rohertrag | 372 T€ | Vj. 454 T€ | -18,0 % | Ursache offen | – |
+| Gesamtkosten | 360 T€ | Vj. 412 T€ | -12,7 % | Ursache offen | – |
+| Betriebsergebnis | 14 T€ | Vj. 44 T€ | -29,5 T€ | Ursache offen | – |
+| Reparatur/Instandhaltung | 15.615 € | Vj. 90.962 € | -82,8 % | – | – |
+| Material-/Wareneinkauf | 371 T€ | Vj. 305 T€ | 21,8 % | – | – |
+| Personalkosten | 229 T€ | Vj. 201 T€ | 14,2 % | – | – |
+| Werbe-/Reisekosten | 4.216 € | Vj. 10.845 € | -61,1 % | – | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, da der Material-/Wareneinkauf um 22,4 % gegenüber dem Vormonat gestiegen ist, während die Bestandsveränderungen 0 € betragen. Dies könnte auf eine fehlende monatliche Bestandsbuchung hindeuten.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wurde die Bestandsveränderung für den Monat erfasst, da der Material-/Wareneinkauf stark gestiegen ist, aber die Bestandsveränderungen 0 € betragen?
+2026-10-23T17:10:12+00:00 Bitti.

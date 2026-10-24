@@ -194,8 +194,9 @@ def examples(stem):
         full, prompt = render(r["messages"], False), render(r["messages"][:2], True)
         if not full.startswith(prompt):
             raise AssertionError(f"{r['id']}: istem, eğitim metninin başı değil")
-        # BOS'u tokenizer ekler; metinde ikinci kez olmasın (Unsloth kılavuzu)
-        out.append({"id": r["id"], "text": full.removeprefix(BOS), "tokens": n_tokens(full),
+        # Metin BOS'la başlar: Gemma 4 tokenizer'ı BOS eklemiyor (deneme koşusu 24.10). Eğitimde tokenizer yine de
+        # eklerse aşağıda bir kez silinir; her iki durumda dizi tam olarak bir BOS ile başlar.
+        out.append({"id": r["id"], "text": full, "tokens": n_tokens(full),
                     "answer": r["messages"][2]["content"], "messages": r["messages"]})
     return out
 
@@ -213,7 +214,6 @@ else:
     train_sel = train_all
 log(f"Veri: train_{TRAIN} {len(train_all)} örnek (MAX_SEQ üstü dışarıda: {too_long or 'yok'}), "
     f"eğitimde {len(train_sel)} · val {len(val_all)}, kayıp için {len(val_eval)} · token toplamı {totals}")
-train_ds = Dataset.from_list([{"text": e["text"]} for e in train_sel])
 """),
     code("""
 from transformers import TrainerCallback
@@ -234,13 +234,23 @@ else:
 fields = {f.name for f in dataclasses.fields(SFTConfig)}
 config = SFTConfig(**{k: v for k, v in args.items() if k in fields})
 
-kw = dict(model=model, train_dataset=train_ds, args=config)
-try:
-    trainer = SFTTrainer(tokenizer=tokenizer, **kw)
-except TypeError:
-    trainer = SFTTrainer(processing_class=tokenizer, **kw)
-# Kayıp yalnızca model turunda (Gemma 4 şablonu; Unsloth Gemma 4 kılavuzu)
-trainer = train_on_responses_only(trainer, instruction_part="<|turn>user\\n", response_part="<|turn>model\\n")
+def build_trainer(texts):
+    kw = dict(model=model, train_dataset=Dataset.from_list([{"text": t} for t in texts]), args=config)
+    try:
+        tr = SFTTrainer(tokenizer=tokenizer, **kw)
+    except TypeError:
+        tr = SFTTrainer(processing_class=tokenizer, **kw)
+    # Kayıp yalnızca model turunda (Gemma 4 şablonu; Unsloth Gemma 4 kılavuzu)
+    return train_on_responses_only(tr, instruction_part="<|turn>user\\n", response_part="<|turn>model\\n")
+
+def first_ids(tr):
+    return tr.train_dataset[0]["input_ids"]
+
+trainer = build_trainer([e["text"] for e in train_sel])
+ids = first_ids(trainer)
+if ids[0] == ids[1] == tok.bos_token_id:          # tokenizer BOS'u kendisi de ekliyor: metindekini sil
+    log("Eğitim tokenizasyonu BOS ekliyor; metindeki BOS siliniyor")
+    trainer = build_trainer([e["text"].removeprefix(BOS) for e in train_sel])
 
 def check_mask(dataset, name):
     \"\"\"Kayıp hesaplanan tokenlar yalnızca ideal metin mi? Değilse eğitime başlama.
@@ -254,10 +264,12 @@ def check_mask(dataset, name):
         raise AssertionError("maske denetlenemedi")
     ids, labels = batch["input_ids"][0].tolist(), batch["labels"][0].tolist()
     kept = tok.decode([i for i, l in zip(ids, labels) if l != -100])
-    ok = (kept.lstrip().startswith("**Kernaussagen ") and "<|turn>" not in kept and "FACTS" not in kept
-          and ids[0] == tok.bos_token_id and ids[1] != tok.bos_token_id)
+    checks = {"yanit_basi": kept.lstrip().startswith("**Kernaussagen "),
+              "istem_yok": "<|turn>" not in kept and "FACTS" not in kept,
+              "tek_bos": ids[0] == tok.bos_token_id and ids[1] != tok.bos_token_id}
+    ok = all(checks.values())
     log(f"Maske ({name}): {len(ids)} token, kayıpta {sum(l != -100 for l in labels)} · başı {kept[:50]!r} · "
-        f"sonu {kept[-20:]!r} · {'tamam' if ok else 'HATALI'}")
+        f"sonu {kept[-20:]!r} · {checks} · {'tamam' if ok else 'HATALI'}")
     if not ok:
         raise AssertionError(f"maske hatalı ({name}): kayıp ideal metinle başlamıyor ya da BOS yanlış")
 
@@ -300,7 +312,7 @@ def _evaluate(tag):
     t0, total, count = time.time(), 0.0, 0
     model.eval()
     for e in val_eval:
-        ids = tok(BOS + e["text"], add_special_tokens=False)["input_ids"]
+        ids = tok(e["text"], add_special_tokens=False)["input_ids"]            # metin BOS'la başlar
         n_prompt = len(tok(render(e["messages"][:2], True), add_special_tokens=False)["input_ids"])
         x = torch.tensor([ids], device="cuda")
         labels = x.clone()

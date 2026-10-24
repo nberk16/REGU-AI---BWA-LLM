@@ -35,6 +35,10 @@ Yanıt (ideal metin) ortalama ~830 token. Kayıp yalnızca bu kısımda hesaplan
 - **Şablon:** Test istemlerinin token sayısı baseline'daki Ollama sayımıyla aynı olmalı (5.033 ve 3.218). Eğitim, baseline ve değerlendirme aynı biçimi görür. Yerelde doğrulandı: HF şablonu, llama-server ve Ollama aynı token kimliklerini veriyor.
 - **İstem öneki:** Her örnekte üretim istemi, eğitim metninin önekidir.
 - **Maske:** Kayıp hesaplanan tokenlar ideal metinle başlamalı; BOS bir kez. Değilse defter eğitime başlamaz.
+- **BOS (deneme koşusu 1, 24.10.2026):**
+  - Unsloth kılavuzu, BOS'u tokenizer'ın ekleyeceğini varsayıp metinden silmeyi öneriyor. Gemma 4 tokenizer'ı ise BOS eklemiyor.
+  - Maske denetimi bunu yakaladı: en uzun örnek 7.076 yerine 7.075 token. Eğitim başlamadı.
+  - Düzeltme: metin BOS'la verilir. Tokenizer yine de eklerse metindeki silinir. Her iki durumda dizi tam bir BOS ile başlar; kullanımdaki biçimle aynı.
 - **Doğrulama kaybı:** Eğitim öncesi ve sonrası, aynı tanımla (yalnızca yanıt tokenları), `val` kümesinden 32 örnek.
 
 **Kipler:**

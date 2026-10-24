@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (baseline tam koşusu bitti ve puanlandı; puanlama 1.0 kodlandı; sırada ince ayar)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 24.10.2026 (ince ayar ve değerlendirme defterleri hazır; çıkarım yolu yerelde doğrulandı; ince ayar deneme koşusu bekleniyor)
 
 ---
 
-## 1. Genel durum: ~%73 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%76 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 37,15 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 38,95 gün
 toplam iş     = 51 gün
-durum         = 37,15 / 51 ≈ %73
+durum         = 38,95 / 51 ≈ %76
 ```
 
 **Belirsizlik:**
@@ -36,11 +36,11 @@ durum         = 37,15 / 51 ≈ %73
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
-| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %0 | 0,0 | ⏳ başlamadı |
+| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %25 | 1,5 | 🔄 defter hazır, hat yerelde doğrulandı; deneme koşusu bekleniyor |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
-| 9 | Değerlendirme ve ablation | 6 | %45 | 2,7 | 🔄 puanlama 1.0 ve baseline sonuçları; ince ayarlı modeller bekleniyor |
+| 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **37,15** | **≈ %73** |
+| | **Toplam** | **51** | | **38,95** | **≈ %76** |
 
 ---
 
@@ -152,14 +152,19 @@ durum         = 37,15 / 51 ≈ %73
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
 - **Açık kararlar:** Çıkarım altyapısı [ÖNERİ, 23.10.2026: baseline, değerlendirme ve demo Ollama (llama.cpp, Q4_K_M); ince ayarlı modeller GGUF'a aktarılır (`docs/00`, Bölüm 21)].
 
-### 7. Fine-tuning (LoRA) — ⏳ başlamadı
+### 7. Fine-tuning (LoRA) — 🔄 defter hazır
+- **Yapılan (24.10.2026, `docs/14`):**
+  - `gpu/02_finetune.ipynb`: QLoRA, kayıp yalnızca yanıtta, şablon/maske denetimleri, doğrulama kaybı öncesi ve sonrası.
+  - Hız ölçümü (smoke), checkpoint ve süre sınırıyla devam, bağdaştırıcı → GGUF → llama-server denemesi.
+  - Bulgu: Ollama 0.40 LoRA desteklemiyor; çıkarım Ollama'nın içindeki llama-server ile (yerelde doğrulandı).
 - **Kalan:**
-  - Eğitim verisinin hazırlanması (paket 5).
-  - LoRA eğitimi: yalnızca FT (bağlamsız girdiler ve hedefler) ve RAG + FT varyantları.
-  - Hiperparametreler, eğitim kayıtları.
+  - Kaggle'da deneme koşusu (hız, bellek), ardından iki tam eğitim (kullanıcı).
+  - Eğitim kayıtlarının okunması (kayıp eğrileri).
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
   - Fine-tuning araç seti [ÖNERİ: Unsloth + TRL, QLoRA].
+  - Hiperparametreler [ÖNERİ, `docs/14`, Bölüm 2].
+  - Çıkarım yolu [ÖNERİ, `docs/14`, Bölüm 3]: llama-server + LoRA.
   - **Olası karar (hız ölçümünden sonra):** Unsloth, T4'te Gemma 4 için float32'ye geçiyor; eğitim yavaş olabilir. İnce ayar defteri önce kısa bir hız ölçümü yapar. Çok yavaşsa seçenekler kullanıcıya sunulur: daha kısa eğitim, Gemma 4 E2B, Qwen3.5 9B (tur 9) ya da kiralık GPU (tur 7).
 - **Kararlaştırılan (tur 12):** „Yalnızca fine-tuning“ varyantı bağlamsız girdilerle ayrı bir model olarak eğitilir (B). RAG + FT modelinin bağlamsız çalıştırılması ek satır olarak raporlanır (`docs/00`, Bölüm 19).
 
@@ -191,8 +196,9 @@ durum         = 37,15 / 51 ≈ %73
   - CLAUDE.md 8'deki ölçütler kodlandı; üç kaynak: doğrulama, içerik planı, ground truth. 8 test.
   - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100.
   - Baseline: rakam değeri %93–95; format %30–39; RAG'de nedenlerin %42'si işaretsiz; kaynak precision %54, recall %30–34.
+- **Değerlendirme defteri (24.10.2026):** `gpu/03_eval.ipynb`; 5 koşu (RAG + FT, yalnızca FT, iki ek satır, taban modelle tutarlılık kontrolü). Yerelde sahte bağdaştırıcıyla uçtan uca denendi.
 - **Kalan:**
-  - İnce ayarlı modellerin aynı test kümesinde çalıştırılması ve puanlanması.
+  - İnce ayarlı modellerin aynı test kümesinde çalıştırılması (kullanıcı) ve puanlanması.
   - Dengelenmiş V2 kümesi; retrieval isabetinin tabloya eklenmesi.
   - Ablation analizi ve sonuç anlatısı.
 - **Açık kararlar:**
@@ -258,3 +264,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | Kaggle deneme koşusu 2 (Ollama, iki T4): 16 istem, hata yok, 37–52 token/s; tam koşu ~1,8 saat (önce ~60). `rag_alle` baseline'a eklendi; 16 metnin ilk ölçümü. Paket 6 → %75: %67 |
 | 24.10.2026 | `gpu/README.md`: Commit koşusunun durumunu ve ilerlemesini izleme adımları (Logs sekmesi, kalan süre satırları); durum değişmedi: %67 |
 | 24.10.2026 | Baseline tam koşusu (3 × 720, ~2 saat) ve puanlama 1.0 (`scoring/`, `docs/13`): kalibrasyon ve baseline sonuçları. Doğrulama v1.7 (boşluklu binlik ayırıcı). Paket 6 → %100, 8 → %85, 9 → %45: %73 |
+| 24.10.2026 | İnce ayar (`02_finetune`) ve değerlendirme (`03_eval`) defterleri; Ollama 0.40'ın LoRA desteklemediği bulundu, çıkarım llama-server + LoRA ile (yerelde doğrulandı). Paket 7 → %25, 9 → %50: %76 |

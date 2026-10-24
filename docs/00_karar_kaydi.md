@@ -571,6 +571,33 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Top-8 ile bütün notlar arasında belirgin fark yok.
 - **Dikkat:** İnce ayar hedefleri de aynı plandan üretildi. Plana dayalı ölçütlerin yanında ground truth'a dayalı bağımsız ölçütler ayrıca raporlanır.
 
+## 23. İnce ayar ve değerlendirme defterleri (24.10.2026)
+
+- **Defterler:**
+  - `gpu/02_finetune.ipynb`: QLoRA eğitimi; bir koşu bir model (`TRAIN = "rag" | "ohne"`).
+  - `gpu/03_eval.ipynb`: ince ayarlı modellerle test kümesi.
+  - Kaynakları `gpu/tools/nb_*.py`.
+  - Ayrıntılar `14_ince_ayar.md`.
+- **[ÖNERİ] Hiperparametreler:**
+  - r 16, alpha 16, yalnızca dil katmanları;
+  - LR 2e-4, 1 epoch, etkin parti 8;
+  - en uzun dizi 7.168 (hiçbir örnek kesilmez);
+  - kayıp yalnızca yanıtta.
+- **Bulgu:** Ollama 0.40 LoRA bağdaştırıcılarını desteklemiyor („LoRA adapters are no longer supported“; yerelde denendi). Bölüm 21'deki „ince ayarlı modeller GGUF'a aktarılıp Ollama'da çalıştırılır“ önerisi bu yüzden değişti.
+- **[ÖNERİ] Çıkarım yolu:**
+  - Ollama'nın içindeki llama-server doğrudan başlatılır: baseline'daki model dosyası + LoRA GGUF (istek başına ölçek). Ayarlar baseline'daki komutla ve örnekleme ayarlarıyla aynı.
+  - İstem, Gemma 4 şablonuyla yazılır. Token kimlikleri HF, llama-server ve Ollama'da aynı.
+  - Tutarlılık için taban model de bu yoldan bir kez koşulur (`base_rag_k8`).
+- **Yerelde doğrulandı:**
+  - Bağdaştırıcı → GGUF (516 tensör);
+  - LoRA'nın istek başına uygulanması;
+  - taslak modelle birlikte çalışma;
+  - BOS;
+  - 02 ve 03'ün GPU gerektirmeyen bütün hücreleri;
+  - puanlama.
+- **Açık risk:** T4'te eğitim hızı ve 7 bin tokenlık dizilerde bellek. Deneme koşusu ölçecek. Gerekirse seçenekler kullanıcıya sunulur (tur 7 / tur 9 kararları).
+- **Demo:** Ollama bağdaştırıcı yükleyemediği için dizüstü demosu llama-server ya da birleştirilmiş model ile yapılır. Karar paket 10'da.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

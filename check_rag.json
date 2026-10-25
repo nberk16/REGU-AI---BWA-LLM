@@ -1,0 +1,30 @@
+{
+ "id": "A2-v120_2025-01",
+ "adapter_sha256": "d9a9720bd91ea05a98840aff0b904687e508fc60405ce62aff83eb1082c5de69",
+ "taban": {
+  "text": "**Kernaussagen Januar 2025**\n\n1. Das Betriebsergebnis von 117 851 € ist im Vergleich zum Vorjahresmonat von 36 962 € deutlich gestiegen, was auf eine verbesserte operative Performance hindeutet, obwohl die Gesamtleistung mit 1 566 997 € im Vergleich zum Vorjahresmonat um 14,9 % gesunken ist.\n2. Die Rohertragsquote hat sich mit 35,8 % stark verbessert und liegt damit deutlich über dem Vorjahreswert von 26,8 %, was auf eine positive Entwicklung der Preisgestaltung oder des Produktmixes hindeutet.\n3. Die Materialquote ist mit 64,2 % im Vergleich zum Vorjahresmonat um 9,0 Prozentpunkte gesunken, was die positive Entwicklung der Rohertragsquote stützt.\n\n**Abweichungen im Detail**\n\n| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |\n|---|---|---|---|---|---|\n| Material-/Wareneinkauf | 1 005 447 € | Vj. 1 347 809 € | -25,4 % | Ursache offen | – |\n| Umsatzerlöse | 1 566 997 € | Vj. 1 842 063 € | -14,9 % | [Firmenprofil] | – |\n| Reparatur/Instandhaltung | 7 196 € | Vj. 49 055 € | -85,3 % | Ursache offen | – |\n| Personalkosten | 236 889 € | Vj. 205 591 € | 15,2 % | [Kontextnotiz 2025-01] | – |\n\n**Hinweise auf mögliche Verzerrungen**\n\n- Versicherungen/Beiträge: Es liegt ein Hinweis vor, dass Versicherungen/Beiträge mit 47 207 € das 12,2-fache des Normalniveaus aufweisen, was dem Vorjahresmonat ähnlich ist. Dies könnte auf eine mögliche fehlende Abgrenzung einer wiederkehrenden Zahlung hindeuten.\n- Abschreibungen: Es wird darauf hingewiesen, dass Abschreibungen 0 € betragen, obwohl im Durchschnitt 17 720 € pro Monat anfielen. Dies könnte auf eine fehlende monatliche anteilige Buchung hindeuten.\n\n**Offene Fragen an Buchhaltung / Steuerberater**\n\n- Wird die Zahlung für Versicherungen/Beiträge monatlich abgegrenzt?\n- Werden die Abschreibungen monatlich anteilig gebucht?",
+  "stop": "eos",
+  "tokens": 615,
+  "seconds": 73.9,
+  "ueberschriften": 4,
+  "hypothese": 0,
+  "quelle": 0,
+  "woerter": 288
+ },
+ "ince_ayar": {
+  "text": "**Kernaussagen Januar 2025**\n\n1. Das Betriebsergebnis beträgt 118.051 € und liegt damit um 80.890 € über dem Vorjahreswert von 36.962 €. Die Betriebsergebnis-Marge steigt auf 7,5 % (Vorjahr: 2,0 %). Die Gesamtleistung des Monats beläuft sich auf 1.566.997 € und ist um 14,9 % niedriger als im Vorjahr.\n2. Der Material-/Wareneinkauf sinkt auf 1.005.447 € und damit um 342.362 € (-25,4 %) gegenüber dem Vorjahr. Die Ursache hierfür ist offen.\n3. Die Rohertragsquote steigt auf 35,8 % und weicht damit deutlich vom Vormonat (21,3 %) und Vorjahresmonat (26,8 %) ab. Dies könnte auf einen Buchungseffekt zurückzuführen sein (Hypothese).\n\n**Abweichungen im Detail**\n\n| Position                  | Ist          | Vergleich      | Abweichung       | Erklärung                                      | Quelle oder Hypothese |\n|---------------------------|--------------|----------------|------------------|------------------------------------------------|-----------------------|\n| Material-/Wareneinkauf    | 1.005.447 €  | Vj. 1.347.809 €| -342.362 € (-25,4 %) | Ursache offen                                  | –                     |\n| Umsatzerlöse              | 1.566.997 €  | Vj. 1.842.063 €| -275.066 € (-14,9 %) | Ursache offen                                  | –                     |\n| Reparatur/Instandhaltung  | 7.196 €      | Vj. 49.055 €   | -41.859 € (-85,3 %) | Ursache offen                                  | –                     |\n| Personalkosten            | 236.889 €    | Vj. 205.591 €  | +31.298 € (+15,2 %) | Verstärkung Vertriebsinnendienst               | [Quelle: Kontextnotiz 2025-01] |\n| Versicherungen/Beiträge  | 47.207 €     | Vj. 46.447 €   | +760 €          | möglicher fehlender Abgrenzung einer Zahlung      | Hypothese             |\n| Rohertragsquote           | 35,8 %       | Vm. 21,3 %     | +14,5 Prozentpunkte | möglicher Buchungseffekt                       | Hypothese             |\n\n**Hinweise auf mögliche Verzerrungen**\n\n- Rohertragsquote: Die Rohertragsquote von 35,8 % weicht stark vom Vormonat (21,3 %) und Vorjahresmonat (26,8 %) ab. Möglicherweise sind Wareneingänge oder Eingangsrechnungen im falschen Monat gebucht oder eine Bestandsbuchung fehlt (Hypothese). Dann wären Rohertrag und Ergebnis des Monats verzerrt.\n- Abschreibungen: Die Abschreibungen betragen 0 €, obwohl der Durchschnitt der letzten 12 Monate bei 17.720 € liegt. Vermutlich werden sie erst zum Jahresende gebucht (Hypothese). Dann wären die Monatsergebnisse bis November zu günstig und der Dezember zu ungünstig ausgewiesen.\n- Versicherungen/Beiträge: Die Position liegt mit 47.207 € beim 12,2-fachen des Normalniveaus (3.864 €) und war im Vorjahr ähnlich erhöht. Möglicherweise fehlt die Abgrenzung einer jährlich wiederkehrenden Zahlung (Hypothese). Dann wäre der Januar zu ungünstig, die übrigen Monate zu günstig ausgewiesen.\n\n**Offene Fragen an Buchhaltung / Steuerberater**\n\n- Sind alle Wareneingänge und Eingangsrechnungen des Januar periodengerecht gebucht?\n- Was ist die Ursache für den Rückgang des Material-/Wareneinkaufs um 342.362 € (-25,4 %) gegenüber dem Vorjahr?\n- Was ist die Ursache für den Rückgang der Umsatzerlöse um 275.066 € (-14,9 %) gegenüber dem Vorjahr?\n- Was ist die Ursache für den Rückgang der Reparatur-/Instandhaltungskosten um 41.859 € (-85,3 %) gegenüber dem Vorjahr?\n- Enthält die Position Versicherungen/Beiträge im Januar eine jährliche Zahlung, die monatlich abgegrenzt werden müsste?\n- Werden die Abschreibungen monatlich anteilig gebucht?",
+  "stop": "eos",
+  "tokens": 1098,
+  "seconds": 34.0,
+  "ueberschriften": 4,
+  "hypothese": 4,
+  "quelle": 1,
+  "woerter": 453
+ },
+ "ideal": {
+  "ueberschriften": 4,
+  "hypothese": 4,
+  "quelle": 1,
+  "woerter": 416
+ }
+}

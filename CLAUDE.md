@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 22.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%78, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 22.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%80, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -439,7 +439,7 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 12. ✅ Eğitim verisi ve altın küme → [`docs/12_egitim_verisi.md`](docs/12_egitim_verisi.md), `training/`, `ideal/gold/`, `tests/test_training.py`
 13. ✅ Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md), `gpu/outputs/baseline_2026-10-24/`
 14. ✅ Puanlama 1.0 ve baseline sonuçları → [`docs/13_degerlendirme.md`](docs/13_degerlendirme.md), `scoring/`, `tests/test_scoring.py`
-15. 🔄 İnce ayar ve değerlendirme defterleri → `gpu/02_finetune.ipynb`, `gpu/03_eval.ipynb`, [`docs/14_ince_ayar.md`](docs/14_ince_ayar.md) (deneme koşusu başarılı: 11,6 GB, 140 token/s; tam eğitim `rag` ~10 saat, `ohne` ~7,6 saat bekleniyor)
+15. 🔄 İnce ayar ve değerlendirme → `gpu/02_finetune.ipynb`, `gpu/03_eval.ipynb`, [`docs/14_ince_ayar.md`](docs/14_ince_ayar.md) (RAG + FT eğitildi: doğrulama kaybı 0,834 → 0,130; yalnızca FT ve 03_eval bekleniyor)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 

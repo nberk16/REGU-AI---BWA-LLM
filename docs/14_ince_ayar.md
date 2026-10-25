@@ -98,6 +98,38 @@ Yanıt (ideal metin) ortalama ~830 token. Kayıp yalnızca bu kısımda hesaplan
   - haftalık kota ~30 saat.
 - Açık soru: `rag` eğitiminin 10,5 saatlik sınıra sığıp sığmadığı. Sığmazsa devam koşusu gerekir.
 
+### 2.1 Tam eğitim: RAG + FT (24–25.10.2026)
+
+Günlük ve kayıtlar: `gpu/outputs/finetune_rag_2026-10-25/` (`log_full_rag.txt`, `train_history_rag.json`, `run_info_rag.json`, `check_rag.json`).
+
+| Ölçüm | Değer |
+|---|---|
+| Adım | 113/113 (1 epoch, 898 örnek); 468 dk (~7,8 saat), adım başına ~4,1 dk |
+| En yüksek GPU belleği | 11,6 GB |
+| Eğitim kaybı (ortalama) | adım 1–10: 0,75 · 11–30: 0,36 · 31–60: 0,19 · 61–90: 0,16 · 91–113: 0,15 |
+| **Doğrulama kaybı (32 örnek, yalnızca yanıt)** | **0,834 → 0,130** |
+| Bağdaştırıcı | 516 tensör, GGUF 70 MB (`sha256 d9a9720b…`) |
+| llama-server (GPU 1) | CUDA0 görüldü, bellek 0 → 3.739 MiB; yeni denetim çalışıyor |
+
+- **Ezber yok:** Son adımlardaki eğitim kaybı (~0,13–0,15) doğrulama kaybına (0,130) yakın. 1 epoch'ta her örnek bir kez görüldü.
+- **Deneme üretimi** (`A2-v120_2025-01`, doğrulama kümesi; aynı istem, aynı ayarlar). Puanlama 1.0 ile:
+
+| | Taban (ölçek 0) | **İnce ayarlı (ölçek 1)** | İdeal metin |
+|---|---|---|---|
+| Format uyumu | ✗ (13 boşluklu rakam, kaynak biçimi) | ✓ | ✓ |
+| Kelime | 186 | 315 | 290 |
+| Rakam: değeri doğru | 24/24 | 48/50 | 44/44 |
+| Neden: kaynaklı / hipotez / işaretsiz | 2 / 0 / 0 | 1 / 3 / 0 | 1 / 4 / 0 |
+| Kaynak: doğru / plandaki | 1/2 (bir atıf yanlış) | 1/2 (yanlış yok, biri eksik) | 2/2 |
+| Uyarılar (Katman 1 bayrakları) | 2/2 | 2/2 | 2/2 |
+| V2 adayı (uyarı gerekiyordu) | ✗ uyarmadı | ✓ | ✓ |
+
+- **İnce ayarlı metindeki iki rakam hatası:**
+  - Betriebsergebnis 117.851 € yerine „118.051 €“ (kopyalama hatası).
+  - Versicherungen/Beiträge için kendi hesapladığı „+760 €“ fark.
+  - İkisini de doğrulama katmanı yakalıyor (`zahl_unbelegt`). Katman 4'ün gerekçesi bu: model kuralları öğrense de rakam hatası tamamen bitmiyor.
+- Tek örnek; asıl karşılaştırma 03_eval ile test kümesinde yapılacak.
+
 ## 3. Çıkarım yolu: llama-server + LoRA [ÖNERİ]
 
 **Bulgu (yerelde, 24.10.2026):** Ollama 0.40.10, `ADAPTER` satırlı bir Modelfile'ı „LoRA adapters are no longer supported“ hatasıyla reddediyor. Önceki plan (bağdaştırıcıyı Ollama'ya eklemek) bu yüzden çalışmıyor.
@@ -152,6 +184,6 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
 ## 5. Sıradaki
 
 1. ~~02'nin deneme koşusu~~ ✅ (deneme koşusu 3).
-2. **Kullanıcı:** Tam eğitim `rag` (~10 saat), ardından `ohne` (~7,6 saat).
+2. ~~Tam eğitim `rag`~~ ✅ (7,8 saat; doğrulama kaybı 0,834 → 0,130). **Kullanıcı:** tam eğitim `ohne` (~5,5–6 saat).
 3. **Kullanıcı:** `03_eval` deneme koşusu, ardından tam koşu.
 4. **Ablation tablosu ve okuma:** `docs/13`, Bölüm 6.

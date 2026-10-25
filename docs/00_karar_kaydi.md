@@ -603,6 +603,15 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Deneme koşusu 3 başarılı: en yüksek bellek 11,6 GB; 140 token/s; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat; süre sınırı 10,5 saat.
   - Ayrıntılar `14_ince_ayar.md`, Bölüm 2.
 
+## 24. RAG + FT tam eğitimi (25.10.2026)
+
+- **Eğitim:** 113/113 adım, 7,8 saat, en yüksek bellek 11,6 GB.
+- **Doğrulama kaybı (32 örnek):** 0,834 → 0,130. Son eğitim kaybı ~0,13–0,15; ezber izi yok (`14_ince_ayar.md`, Bölüm 2.1).
+- **Deneme üretimi (1 doğrulama ayı):**
+  - Format, uzunluk, „(Hypothese)“ işaretleri ve V2 uyarısı doğru.
+  - İki rakam hatası: bir kopyalama hatası ve kendi hesapladığı bir fark. Doğrulama katmanı ikisini de yakalıyor.
+- **Değişiklik yok:** Hiperparametreler [ÖNERİ] olarak kalıyor. Yalnızca FT modeli aynı ayarlarla eğitilir.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -130,6 +130,34 @@ Günlük ve kayıtlar: `gpu/outputs/finetune_rag_2026-10-25/` (`log_full_rag.txt
   - İkisini de doğrulama katmanı yakalıyor (`zahl_unbelegt`). Katman 4'ün gerekçesi bu: model kuralları öğrense de rakam hatası tamamen bitmiyor.
 - Tek örnek; asıl karşılaştırma 03_eval ile test kümesinde yapılacak.
 
+### 2.2 Tam eğitim: yalnızca FT (25.10.2026)
+
+Günlük ve kayıtlar: `gpu/outputs/finetune_ohne_2026-10-25/`. Önceki sürümün çıktısından `adapter_rag` taşındı. 02'nin son sürümünün çıktısında iki bağdaştırıcı birlikte var.
+
+| Ölçüm | Değer |
+|---|---|
+| Adım | 117/117 (1 epoch, 933 örnek); 333 dk (~5,6 saat), adım başına ~2,8 dk |
+| En yüksek GPU belleği | 9,8 GB (en uzun örnek 5.011 token) |
+| Eğitim kaybı (ortalama) | adım 1–10: 0,87 · 11–30: 0,39 · 31–60: 0,18 · 61–90: 0,14 · 91–117: 0,12 |
+| **Doğrulama kaybı (32 örnek)** | **1,013 → 0,106** |
+| Bağdaştırıcı | 516 tensör, GGUF 70 MB (`sha256 37090a00…`) |
+
+**Deneme üretimi** (`A2-v120_2025-01`, bağlamsız istem):
+
+| | Taban | **Yalnızca FT** | İdeal metin |
+|---|---|---|---|
+| Format uyumu | ✗ (26 boşluklu rakam) | ✓ | ✓ |
+| Doğrulama hatası | 26 | **0** | 0 |
+| Kelime | 192 | 294 | 281 |
+| Neden: hipotez / işaretsiz | 0 / 0 | 3 / 0 | 3 / 0 |
+| Gereksiz tablo satırı | 5 | 0 | 0 |
+| Uyarılar (Katman 1) / V2 | 2/2 / ✗ | 2/2 / ✓ | 2/2 / ✓ |
+
+**Okuma:**
+- Bağlamsız model kaynak göstermiyor; uydurma kaynak da yok.
+- Nedenleri „(Hypothese)“ ile işaretliyor. İdeal metinle aynı profil.
+- Eğitim öncesi kayıp RAG modelinden yüksekti (1,01'e karşı 0,83). Bağlamsız hedef metinler taban model için daha alışılmadık; eğitimden sonra ikisi de ~0,1.
+
 ## 3. Çıkarım yolu: llama-server + LoRA [ÖNERİ]
 
 **Bulgu (yerelde, 24.10.2026):** Ollama 0.40.10, `ADAPTER` satırlı bir Modelfile'ı „LoRA adapters are no longer supported“ hatasıyla reddediyor. Önceki plan (bağdaştırıcıyı Ollama'ya eklemek) bu yüzden çalışmıyor.
@@ -184,6 +212,6 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
 ## 5. Sıradaki
 
 1. ~~02'nin deneme koşusu~~ ✅ (deneme koşusu 3).
-2. ~~Tam eğitim `rag`~~ ✅ (7,8 saat; doğrulama kaybı 0,834 → 0,130). **Kullanıcı:** tam eğitim `ohne` (~5,5–6 saat).
+2. ~~Tam eğitimler~~ ✅ `rag` (7,8 saat; 0,834 → 0,130) ve `ohne` (5,6 saat; 1,013 → 0,106).
 3. **Kullanıcı:** `03_eval` deneme koşusu, ardından tam koşu.
 4. **Ablation tablosu ve okuma:** `docs/13`, Bölüm 6.

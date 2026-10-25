@@ -612,6 +612,13 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - İki rakam hatası: bir kopyalama hatası ve kendi hesapladığı bir fark. Doğrulama katmanı ikisini de yakalıyor.
 - **Değişiklik yok:** Hiperparametreler [ÖNERİ] olarak kalıyor. Yalnızca FT modeli aynı ayarlarla eğitilir.
 
+## 25. Yalnızca FT tam eğitimi (25.10.2026)
+
+- **Eğitim:** 117/117 adım, 5,6 saat, en yüksek bellek 9,8 GB.
+- **Doğrulama kaybı (32 örnek):** 1,013 → 0,106 (`14_ince_ayar.md`, Bölüm 2.2).
+- **Deneme üretimi:** Hatasız. Kaynak yok, nedenler „(Hypothese)“ ile işaretli; ideal metinle aynı profil.
+- **Bağdaştırıcılar:** İkisi de 02'nin son sürümünün çıktısında (`adapter_rag.gguf`, `adapter_ohne.gguf`). 03_eval onları oradan alır.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

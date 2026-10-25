@@ -1,10 +1,10 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 25.10.2026 (RAG + FT tam eğitimi bitti: doğrulama kaybı 0,834 → 0,130; sırada yalnızca FT eğitimi)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 25.10.2026 (iki model eğitildi: RAG + FT 0,834 → 0,130, yalnızca FT 1,013 → 0,106; sırada 03_eval)
 
 ---
 
-## 1. Genel durum: ~%80 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%85 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 41,05 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 43,45 gün
 toplam iş     = 51 gün
-durum         = 41,05 / 51 ≈ %80
+durum         = 43,45 / 51 ≈ %85
 ```
 
 **Belirsizlik:**
@@ -36,11 +36,11 @@ durum         = 41,05 / 51 ≈ %80
 | 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
-| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %60 | 3,6 | 🔄 RAG + FT eğitildi (doğrulama kaybı 0,834 → 0,130); yalnızca FT bekleniyor |
+| 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
 | 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **41,05** | **≈ %80** |
+| | **Toplam** | **51** | | **43,45** | **≈ %85** |
 
 ---
 
@@ -152,7 +152,7 @@ durum         = 41,05 / 51 ≈ %80
 - **Kararlaştırılan (tur 7):** Değerlendirme Kaggle'da; deneme turu örnekleri doğrulama varyantlarından.
 - **Açık kararlar:** Çıkarım altyapısı [ÖNERİ, 23.10.2026: baseline, değerlendirme ve demo Ollama (llama.cpp, Q4_K_M); ince ayarlı modeller GGUF'a aktarılır (`docs/00`, Bölüm 21)].
 
-### 7. Fine-tuning (LoRA) — 🔄 defter hazır
+### 7. Fine-tuning (LoRA) — ✅ tamamlandı
 - **Yapılan (24.10.2026, `docs/14`):**
   - `gpu/02_finetune.ipynb`: QLoRA, kayıp yalnızca yanıtta, şablon/maske denetimleri, doğrulama kaybı öncesi ve sonrası.
   - Hız ölçümü (smoke), checkpoint ve süre sınırıyla devam, bağdaştırıcı → GGUF → llama-server denemesi.
@@ -165,8 +165,11 @@ durum         = 41,05 / 51 ≈ %80
   - 113 adım, 7,8 saat, en yüksek bellek 11,6 GB.
   - Doğrulama kaybı 0,834 → 0,130.
   - Deneme üretiminde format, hipotez işareti ve V2 uyarısı doğru. İki rakam hatası var; ikisini de doğrulama katmanı yakalıyor.
-- **Kalan:**
-  - Yalnızca FT tam eğitimi (kullanıcı, ~5,5–6 saat).
+- **Yalnızca FT tam eğitimi (25.10.2026, `docs/14`, Bölüm 2.2):**
+  - 117 adım, 5,6 saat, en yüksek bellek 9,8 GB.
+  - Doğrulama kaybı 1,013 → 0,106.
+  - Deneme üretimi hatasız; ideal metinle aynı profil.
+- **Kalan:** Yok. Değerlendirme paket 9'da (03_eval).
   - Eğitim kayıtlarının okunması (kayıp eğrileri).
 - **Kararlaştırılan (tur 7):** Donanım: Kaggle (ücretsiz T4); dizüstünün 4 GB GPU'su eğitime yetmiyor. Eğitim verisi: 960 ay.
 - **Açık kararlar:**
@@ -277,3 +280,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | İnce ayar deneme koşusu 2: denetimler geçti, ilk adımda bellek yetmedi (7.076 token). Katman başına gömme tablosu (5,6 GB) ve ses/görüntü kodlayıcıları işlemciye taşınıyor; bellek yetmezse kısa örneklerle hız ölçümü. Durum değişmedi: %76 |
 | 24.10.2026 | İnce ayar deneme koşusu 3 başarılı: bellek 11,6 GB, 140 token/s, tahmini `rag` ~10 saat, `ohne` ~7,6 saat; doğrulama kaybı 0,786 → 0,635 (3 adım). llama-server GPU denetimi yanlış alarmdı; `--list-devices` + bellek denetimiyle değişti. Paket 7 → %35: %78 |
 | 25.10.2026 | RAG + FT tam eğitimi: 113 adım, 7,8 saat, doğrulama kaybı 0,834 → 0,130; deneme üretiminde format ve hipotez işareti doğru, 2 rakam hatası (Katman 4 yakalıyor). Paket 7 → %60: %80 |
+| 25.10.2026 | Yalnızca FT tam eğitimi: 117 adım, 5,6 saat, doğrulama kaybı 1,013 → 0,106; deneme üretimi hatasız. İki bağdaştırıcı 02'nin son çıktısında. Paket 7 → %100: %85 |

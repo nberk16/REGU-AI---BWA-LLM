@@ -1,0 +1,34 @@
+{
+ "config": {
+  "train": "ohne",
+  "model": "unsloth/gemma-4-E4B-it-unsloth-bnb-4bit",
+  "max_seq": 7168,
+  "lora_r": 16,
+  "lora_alpha": 16,
+  "lr": 0.0002,
+  "epochs": 1,
+  "grad_acc": 8,
+  "seed": 3407,
+  "data": "becf45f28a0b0970"
+ },
+ "mode": "full",
+ "started": "2026-10-25T11:32:30+00:00",
+ "versions": {
+  "unsloth": "2026.10.8",
+  "transformers": "5.16.1",
+  "trl": "1.15.0",
+  "torch": "2.11.0+cu128",
+  "peft": "0.20.0"
+ },
+ "n_train": 933,
+ "n_eval": 32,
+ "eval_loss_before": 1.012876573368847,
+ "global_step": 117,
+ "max_steps": 117,
+ "complete": true,
+ "train_seconds": 19973,
+ "peak_gpu_gb": 9.8,
+ "eval_loss_after": 0.10648607400583214,
+ "finished": "2026-10-25T17:12:20+00:00",
+ "gguf_sha256": "37090a00803451576e99be3ffa74945041a65a080cd464f9d8762ef62e6b5610"
+}

@@ -667,6 +667,10 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Dosyalar `release/huggingface/`.
   - Yükleme kullanıcının tarayıcısından yapılır; token paylaşılmaz (`gpu/README.md`, Bölüm 8).
 - **Model kartındaki kullanım yolu:** değerlendirmedeki yol, yani llama-server + taban GGUF + `adapter_rag.gguf` + hazır şablonlu istem (`/completion`). PEFT dosyaları da konur, ama yalnızca GGUF yolu test edildi.
+- **Yayınlandı (26.10.2026):** https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora (herkese açık).
+  - `adapter_rag.gguf` SHA256 değeri eğitimdekiyle aynı (`d9a9720b…`).
+  - `adapter_model.safetensors`: 516 tensör (F32), yalnızca dil katmanları.
+  - Diğer altı dosya `release/huggingface/` ile bayt bayt aynı.
 
 ## Kaynak
 

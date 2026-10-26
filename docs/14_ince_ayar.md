@@ -302,4 +302,4 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
 3. ~~`03_eval` deneme koşusu~~ ✅ (Bölüm 4.1). ~~Tam koşu~~ ✅ (Bölüm 4.2, 4,3 saat).
 4. ~~Ablation tablosu ve okuma~~ ✅ `docs/13`, Bölüm 6.
 5. ~~Dengelenmiş V2 kümesi, ikinci eğitim turu~~: yapılmıyor (tur 13).
-6. **Yayın:** RAG + FT bağdaştırıcısı Hugging Face'te (`release/huggingface/`, `gpu/README.md` Bölüm 8).
+6. ~~Yayın~~ ✅ RAG + FT bağdaştırıcısı Hugging Face'te: https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora (`release/huggingface/`).

@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Genel durum: ~%92 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%93 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 46,9 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 47,2 gün
 toplam iş     = 51 gün
-durum         = 46,9 / 51 ≈ %92
+durum         = 47,2 / 51 ≈ %93
 ```
 
 **Belirsizlik:**
@@ -39,8 +39,8 @@ durum         = 46,9 / 51 ≈ %92
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %90 | 2,7 | 🔄 v1.8 |
 | 9 | Değerlendirme ve ablation | 6 | %90 | 5,4 | ✅ ablation tamam (`docs/13`, Bölüm 6); V2 kümesi koşulmuyor (tur 13); üslup [AÇIK] |
-| 10 | Portfolyo dokümantasyonu ve yayın | 3 | %30 | 0,9 | 🔄 Hugging Face model kartı hazır; yükleme kullanıcıda |
-| | **Toplam** | **51** | | **46,9** | **≈ %92** |
+| 10 | Portfolyo dokümantasyonu ve yayın | 3 | %40 | 1,2 | 🔄 model Hugging Face'te yayında; anlatı, README ve demo kaldı |
+| | **Toplam** | **51** | | **47,2** | **≈ %93** |
 
 ---
 
@@ -233,13 +233,14 @@ durum         = 46,9 / 51 ≈ %92
 - **Kararlaştırılan (tur 7):** Test: yeni sektör (A1, öğretilmemiş tür) + yeni firma (A2/A3'ün görülmemiş varyantları, öğretilmiş tür) + dengelenmiş V2 kümesi (`docs/04`, Bölüm 9.2).
   - `expected_flags`'in anlamlılık eşiğine göre süzülmesi.
 
-### 10. Portfolyo dokümantasyonu ve yayın — 🔄 model kartı hazır
+### 10. Portfolyo dokümantasyonu ve yayın — 🔄 model yayında
 - **Hazır olan:**
   - Tasarım belgeleri (`docs/`).
   - **Hugging Face yayını (tur 13):**
     - Model kartı (İngilizce), örnek istem ve çıktı, istek betiği: `release/huggingface/`.
     - Yükleme adımları: `gpu/README.md`, Bölüm 8.
     - Yalnızca RAG + FT modeli yayınlanıyor; depo şimdilik gizli.
+    - **Yayında (26.10.2026):** https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora. Dosyalar doğrulandı: GGUF SHA256 eğitimdekiyle aynı, safetensors 516 tensör.
 - **Kalan:**
   - README.
   - Problem → çözüm → kanıt (ablation) anlatısı.
@@ -253,7 +254,7 @@ durum         = 46,9 / 51 ≈ %92
 
 Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2026). Önerilen sıra:
 
-1. **Hugging Face yayını (paket 10, tur 13):** Model kartı hazır. Kullanıcı dosyaları yükler (`gpu/README.md`, Bölüm 8); ardından kart birlikte kontrol edilir.
+1. ~~Hugging Face yayını~~ ✅ https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora.
 2. **Paket 10, devam:**
    - README;
    - problem → çözüm → kanıt anlatısı;
@@ -308,3 +309,4 @@ Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2
 | 26.10.2026 | Değerlendirme deneme koşusu (5 × 8 metin, hata yok; tam koşu ~4,5 saat). İnce ayarlı sistemlerde format %100; RAG + FT notu yanlış satıra bağlıyor. Doğrulama v1.8 (yanlış alarm), puanlama 1.1 (satır düzeyinde atıf, birden çok klasör). Paket 8 → %90, 9 → %60: %87 |
 | 26.10.2026 | Ablation tamam: 5 sistem × 720 ay (4,3 saat), baseline ile puanlandı. RAG + FT format %97, işaretsiz neden 0,06/metin, kaynak precision/recall %75 / %59 (yalnızca RAG %54 / %34); yeni sektörde aynı düzey. Zayıf nokta V2 notla açıklama (1/17). Recall@8 istemlerden yeniden ölçüldü. Paket 4 → %90, 9 → %80: %90 |
 | 26.10.2026 | Karar turu 13: V2 kümesi ve ikinci eğitim turu yok; RAG + FT Hugging Face'te yayınlanacak, depo şimdilik gizli. Model kartı ve örnekler hazır (`release/huggingface/`), yükleme adımları `gpu/README.md` Bölüm 8. Paket 9 → %90, 10 → %30: %92 |
+| 26.10.2026 | RAG + FT modeli Hugging Face'te yayınlandı (https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora); dosyalar doğrulandı. Paket 10 → %40: %93 |

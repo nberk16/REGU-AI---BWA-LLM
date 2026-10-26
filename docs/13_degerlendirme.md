@@ -284,7 +284,7 @@ Yalnızca FT'de de tablo aynı: A1'de hatasız %93, A2/A3'te %92.
 1. **V2: notla açıklanacak aylarda model her zaman uyarıyor.**
    - Test kümesindeki 17 ayın 17'sinde uyarı var, 4'ünde not da gösteriliyor. Yalnızca 1 ay doğru: o ayda ikisi de kabul ediliyor.
    - **Neden:** Eğitim verisinde 623 V2 adayı ayın yalnızca 33'ü (%5) notla açıklanıyordu (`train_price_boost` profiline rağmen). Model baskın kararı öğrenmiş.
-   - Dengelenmiş V2 kümesi (147 ay, `cite` = `warn`) bunu ayrıca ölçecek.
+   - Dengelenmiş V2 kümesi (147 ay, `cite` = `warn`) şimdilik koşulmuyor (tur 13).
 2. **Notu yanlış satıra bağlamak:**
    - metinlerin %26'sı (yalnızca RAG'de %38);
    - örnek: tek bir „Sonderauftrag“ notunun gelir, malzeme ve diğer giderlerin hepsine yazılması (`14_ince_ayar.md`, 4.1).
@@ -300,7 +300,7 @@ Yalnızca FT'de de tablo aynı: A1'de hatasız %93, A2/A3'te %92.
 
 1. ~~İnce ayar defteri (paket 7)~~ ✅ yalnızca FT (`train_ohne`) ve RAG + FT (`train_rag`).
 2. ~~İnce ayarlı modellerin değerlendirmesi~~ ✅ (Bölüm 6).
-3. Dengelenmiş V2 kümesi (`v2_balanced_seed4242`, 147 ay): taban model, RAG + FT, yalnızca FT.
+3. ~~Dengelenmiş V2 kümesi~~: şimdilik koşulmuyor (tur 13; `00`, Bölüm 28).
 4. ~~Retrieval isabeti tabloya~~ ✅ (Bölüm 6.2).
 5. Üslup değerlendirmesi kararı ([AÇIK]).
-6. İsteğe bağlı: V2 dengesizliği için ikinci eğitim turu (kullanıcı kararı; Bölüm 6.5).
+6. ~~İkinci eğitim turu~~: yapılmıyor (tur 13). V2 zayıflığı model kartında sınır olarak yazılı (`release/huggingface/README.md`).

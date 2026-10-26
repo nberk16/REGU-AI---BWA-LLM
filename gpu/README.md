@@ -126,6 +126,39 @@ Her koşu bir model eğitir. Bağdaştırıcılar Kaggle'da kalır; repoya yaln�
    - Log'daki „Tahmin: ~5,7 saat“ karamsar: ilk koşunun ilk istemleri ~50 saniyelik bir ısınma içeriyor.
    - Süre dolarsa (11 saat) çıktıyı Input olarak ekleyip yeniden çalıştır; tamamlanmış kayıtlar yeniden üretilmez.
 
+## 8. Hugging Face'te yayınlama (RAG + FT modeli)
+
+Token ya da şifre paylaşman gerekmiyor; hepsi tarayıcıdan yapılır. Model kartı ve örnek dosyalar repoda hazır: `release/huggingface/`.
+
+1. **Hesap:** Hugging Face hesabın yoksa https://huggingface.co/join adresinden aç.
+2. **Yeni model deposu:** https://huggingface.co/new
+   - **Model name:** `bwa-kommentar-gemma4-e4b-lora` (öneri).
+   - **License:** `apache-2.0`.
+   - **Public** seç ve **Create model**'e bas.
+3. **Bağdaştırıcıyı Kaggle'dan indir.**
+   - `02_finetune` defterini (`2-book`) aç. Üstteki sürüm listesinden **RAG + FT eğitiminin sürümünü** seç: 24–25.10.2026, ~7,8 saat süren koşu.
+   - Son sürüm yalnızca FT eğitimidir. Onda `adapter_rag/` klasörü yok, yalnızca `adapter_rag.gguf` taşınmış.
+   - O sürümün **Output** sekmesinden şu üç dosyayı indir:
+     - `adapter_rag.gguf`;
+     - `adapter_rag/` klasöründen `adapter_model.safetensors` ve `adapter_config.json`.
+   - Klasördeki diğer dosyaları, özellikle oradaki `README.md`'yi **indirme**; model kartı repodaki dosya.
+   - `adapter_rag/` klasörünü bulamazsan yalnızca `adapter_rag.gguf`'u yükle ve bana söyle; kartı ona göre düzeltirim.
+4. **Model kartını ve örnekleri GitHub'dan indir.**
+   - Bu dalın ZIP'i: https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+   - ZIP'in içinde `release/huggingface/` klasöründe 5 dosya var:
+     - `README.md`
+     - `example_A1-v00_2025-07_messages.json`
+     - `example_A1-v00_2025-07_prompt.txt`
+     - `example_A1-v00_2025-07_output.md`
+     - `request_llama_server.py`
+5. **Yükle.** Hugging Face'teki model sayfası → **Files and versions** → **+ Add file** → **Upload files**.
+   - 8 dosyanın hepsini (3 Kaggle + 5 GitHub) sürükleyip bırak → **Commit changes to main**.
+   - `README.md` otomatik oluşturulan kartın yerine geçer.
+6. **Kontrol:**
+   - Model sayfasında açıklama ve değerlendirme tablosu görünmeli.
+   - **Files and versions**'ta `adapter_rag.gguf`'a tıkla. SHA256 değeri `d9a9720b` ile başlamalı (eğitimdeki değer).
+   - Bağlantıyı bana gönder; kartı birlikte son kez kontrol edelim.
+
 ## Sorun giderme
 
 | Durum | Ne yapmalı |

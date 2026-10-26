@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Genel durum: ~%90 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%92 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 45,7 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 46,9 gün
 toplam iş     = 51 gün
-durum         = 45,7 / 51 ≈ %90
+durum         = 46,9 / 51 ≈ %92
 ```
 
 **Belirsizlik:**
@@ -38,9 +38,9 @@ durum         = 45,7 / 51 ≈ %90
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %90 | 2,7 | 🔄 v1.8 |
-| 9 | Değerlendirme ve ablation | 6 | %80 | 4,8 | 🔄 ablation tamam (`docs/13`, Bölüm 6); dengelenmiş V2 kümesi ve üslup kaldı |
-| 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **45,7** | **≈ %90** |
+| 9 | Değerlendirme ve ablation | 6 | %90 | 5,4 | ✅ ablation tamam (`docs/13`, Bölüm 6); V2 kümesi koşulmuyor (tur 13); üslup [AÇIK] |
+| 10 | Portfolyo dokümantasyonu ve yayın | 3 | %30 | 0,9 | 🔄 Hugging Face model kartı hazır; yükleme kullanıcıda |
+| | **Toplam** | **51** | | **46,9** | **≈ %92** |
 
 ---
 
@@ -224,18 +224,22 @@ durum         = 45,7 / 51 ≈ %90
     - kaynak precision/recall – / %54 / %34 → %75 / %59.
   - Yeni sektörde (A1) aynı düzey. Retrieval isabeti tabloda.
   - Zayıf noktalar: V2'de notla açıklanacak aylar (1/17; eğitimde bu karar %5) ve metinlerin %26'sında notun yanlış satıra bağlanması.
+- **Kararlaştırılan (tur 13):** Dengelenmiş V2 kümesi şimdilik koşulmuyor, ikinci eğitim turu yok. V2 zayıflığı bilinen sınır olarak raporlanıyor.
 - **Kalan:**
-  - Dengelenmiş V2 kümesi (147 ay; taban, RAG + FT, yalnızca FT; ~1 saat Kaggle).
   - Sonuç anlatısı (paket 10 ile birlikte).
 - **Açık kararlar:**
   - Üslup değerlendirmesi: insan mı, LLM-as-judge mı? (CLAUDE.md 8)
-  - İkinci eğitim turu (V2 dengesi için notla açıklanan örneklerin artırılması): evet / hayır (`docs/13`, 6.5).
   - Retrieval isabeti (recall@k) metriği eklendi (tur 6).
 - **Kararlaştırılan (tur 7):** Test: yeni sektör (A1, öğretilmemiş tür) + yeni firma (A2/A3'ün görülmemiş varyantları, öğretilmiş tür) + dengelenmiş V2 kümesi (`docs/04`, Bölüm 9.2).
   - `expected_flags`'in anlamlılık eşiğine göre süzülmesi.
 
-### 10. Portfolyo dokümantasyonu — ⏳ başlamadı
-- **Hazır olan:** Tasarım belgeleri (`docs/`).
+### 10. Portfolyo dokümantasyonu ve yayın — 🔄 model kartı hazır
+- **Hazır olan:**
+  - Tasarım belgeleri (`docs/`).
+  - **Hugging Face yayını (tur 13):**
+    - Model kartı (İngilizce), örnek istem ve çıktı, istek betiği: `release/huggingface/`.
+    - Yükleme adımları: `gpu/README.md`, Bölüm 8.
+    - Yalnızca RAG + FT modeli yayınlanıyor; depo şimdilik gizli.
 - **Kalan:**
   - README.
   - Problem → çözüm → kanıt (ablation) anlatısı.
@@ -249,10 +253,14 @@ durum         = 45,7 / 51 ≈ %90
 
 Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2026). Önerilen sıra:
 
-1. **Dengelenmiş V2 kümesi (paket 9):** İstemler ve 03 defterinde seçenek (ben), Kaggle koşusu ~1 saat (kullanıcı).
-2. **[AÇIK] İkinci eğitim turu:** V2 sonuçlarından sonra karar verilir.
+1. **Hugging Face yayını (paket 10, tur 13):** Model kartı hazır. Kullanıcı dosyaları yükler (`gpu/README.md`, Bölüm 8); ardından kart birlikte kontrol edilir.
+2. **Paket 10, devam:**
+   - README;
+   - problem → çözüm → kanıt anlatısı;
+   - örnek çıktılar;
+   - dizüstü demosu (llama-server + LoRA).
 3. **[AÇIK] Üslup değerlendirmesi.**
-4. **Paket 10:** README, problem → çözüm → kanıt anlatısı, örnek çıktılar, dizüstü demosu (llama-server + LoRA ya da birleştirilmiş model).
+4. ~~Dengelenmiş V2 kümesi, ikinci eğitim turu~~: yapılmıyor (tur 13).
 
 ## 5. Değişiklik geçmişi
 
@@ -299,3 +307,4 @@ Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2
 | 25.10.2026 | Yalnızca FT tam eğitimi: 117 adım, 5,6 saat, doğrulama kaybı 1,013 → 0,106; deneme üretimi hatasız. İki bağdaştırıcı 02'nin son çıktısında. Paket 7 → %100: %85 |
 | 26.10.2026 | Değerlendirme deneme koşusu (5 × 8 metin, hata yok; tam koşu ~4,5 saat). İnce ayarlı sistemlerde format %100; RAG + FT notu yanlış satıra bağlıyor. Doğrulama v1.8 (yanlış alarm), puanlama 1.1 (satır düzeyinde atıf, birden çok klasör). Paket 8 → %90, 9 → %60: %87 |
 | 26.10.2026 | Ablation tamam: 5 sistem × 720 ay (4,3 saat), baseline ile puanlandı. RAG + FT format %97, işaretsiz neden 0,06/metin, kaynak precision/recall %75 / %59 (yalnızca RAG %54 / %34); yeni sektörde aynı düzey. Zayıf nokta V2 notla açıklama (1/17). Recall@8 istemlerden yeniden ölçüldü. Paket 4 → %90, 9 → %80: %90 |
+| 26.10.2026 | Karar turu 13: V2 kümesi ve ikinci eğitim turu yok; RAG + FT Hugging Face'te yayınlanacak, depo şimdilik gizli. Model kartı ve örnekler hazır (`release/huggingface/`), yükleme adımları `gpu/README.md` Bölüm 8. Paket 9 → %90, 10 → %30: %92 |

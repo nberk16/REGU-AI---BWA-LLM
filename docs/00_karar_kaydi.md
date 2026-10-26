@@ -655,6 +655,19 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Metinlerin %26'sında not yanlış satıra bağlanıyor.
 - **[AÇIK]** İkinci eğitim turu (V2 dengesi): kullanıcıya sunuldu. Önce dengelenmiş V2 kümesi mevcut modellerle ölçülür.
 
+## 28. Karar turu 13: yayın (26.10.2026)
+
+- **[KARAR]** Dengelenmiş V2 kümesi şimdilik koşulmuyor. İkinci eğitim turu yapılmıyor. V2 zayıflığı (1/17) bilinen sınır olarak raporlanır (`13_degerlendirme.md`, 6.5).
+- **[KARAR]** RAG + FT modeli **Hugging Face Hub**'da yayınlanır. Yalnızca FT modeli yayınlanmaz.
+- **[KARAR]** GitHub deposu şimdilik gizli kalır. Paket 10'dan sonra yeniden ele alınır.
+- **[ÖNERİ]** Model kartı:
+  - Dil İngilizce; modelin çıktısı Almanca.
+  - Lisans Apache 2.0 (taban model Gemma 4 ile aynı).
+  - Önerilen depo adı `bwa-kommentar-gemma4-e4b-lora`.
+  - Dosyalar `release/huggingface/`.
+  - Yükleme kullanıcının tarayıcısından yapılır; token paylaşılmaz (`gpu/README.md`, Bölüm 8).
+- **Model kartındaki kullanım yolu:** değerlendirmedeki yol, yani llama-server + taban GGUF + `adapter_rag.gguf` + hazır şablonlu istem (`/completion`). PEFT dosyaları da konur, ama yalnızca GGUF yolu test edildi.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -301,5 +301,5 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
 2. ~~Tam eğitimler~~ ✅ `rag` (7,8 saat; 0,834 → 0,130) ve `ohne` (5,6 saat; 1,013 → 0,106).
 3. ~~`03_eval` deneme koşusu~~ ✅ (Bölüm 4.1). ~~Tam koşu~~ ✅ (Bölüm 4.2, 4,3 saat).
 4. ~~Ablation tablosu ve okuma~~ ✅ `docs/13`, Bölüm 6.
-5. Dengelenmiş V2 kümesi (147 ay): 03'te ayrı bir veri kümesi seçeneği, ~1 saat.
-6. İsteğe bağlı ikinci eğitim turu: V2'de notla açıklanacak aylar eğitimde %5 (`docs/13`, 6.5). Kullanıcı kararı.
+5. ~~Dengelenmiş V2 kümesi, ikinci eğitim turu~~: yapılmıyor (tur 13).
+6. **Yayın:** RAG + FT bağdaştırıcısı Hugging Face'te (`release/huggingface/`, `gpu/README.md` Bölüm 8).

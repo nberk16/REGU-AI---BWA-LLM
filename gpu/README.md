@@ -140,19 +140,21 @@ Token ya da şifre paylaşman gerekmiyor; hepsi tarayıcıdan yapılır. Model k
    - Son sürüm yalnızca FT eğitimidir. Onda `adapter_rag/` klasörü yok, yalnızca `adapter_rag.gguf` taşınmış.
    - O sürümün **Output** sekmesinden şu üç dosyayı indir:
      - `adapter_rag.gguf`;
-     - `adapter_rag/` klasöründen `adapter_model.safetensors` ve `adapter_config.json`.
+     - `adapter_rag/` klasöründen `adapter_model.safetensors`.
+   - `adapter_config.json` repoda da var (`release/huggingface/`, Kaggle'daki dosyanın birebir kopyası); Kaggle'dan indirmen gerekmez.
    - Klasördeki diğer dosyaları, özellikle oradaki `README.md`'yi **indirme**; model kartı repodaki dosya.
    - `adapter_rag/` klasörünü bulamazsan yalnızca `adapter_rag.gguf`'u yükle ve bana söyle; kartı ona göre düzeltirim.
 4. **Model kartını ve örnekleri GitHub'dan indir.**
    - Bu dalın ZIP'i: https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
-   - ZIP'in içinde `release/huggingface/` klasöründe 5 dosya var:
+   - ZIP'in içinde `release/huggingface/` klasöründe 6 dosya var:
      - `README.md`
+     - `adapter_config.json`
      - `example_A1-v00_2025-07_messages.json`
      - `example_A1-v00_2025-07_prompt.txt`
      - `example_A1-v00_2025-07_output.md`
      - `request_llama_server.py`
 5. **Yükle.** Hugging Face'teki model sayfası → **Files and versions** → **+ Add file** → **Upload files**.
-   - 8 dosyanın hepsini (3 Kaggle + 5 GitHub) sürükleyip bırak → **Commit changes to main**.
+   - 8 dosyanın hepsini (2 Kaggle + 6 GitHub) sürükleyip bırak → **Commit changes to main**.
    - `README.md` otomatik oluşturulan kartın yerine geçer.
 6. **Kontrol:**
    - Model sayfasında açıklama ve değerlendirme tablosu görünmeli.

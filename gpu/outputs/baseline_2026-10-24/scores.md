@@ -1,6 +1,6 @@
 # Puanlar — baseline_2026-10-24
 
-Puanlama 1.0 (`python -m scoring`). Tanımlar: `docs/13_degerlendirme.md`.
+Puanlama 1.1 (`python -m scoring`). Tanımlar: `docs/13_degerlendirme.md`.
 
 ## Bütün test kümesi
 
@@ -20,6 +20,8 @@ Puanlama 1.0 (`python -m scoring`). Tanımlar: `docs/13_degerlendirme.md`.
 | İşaretsiz neden / metin | 0,16 | 1,05 | 1,01 |  |
 | Kaynak isabeti (precision) | – | %55 | %54 | gösterilen notlardan planın kaynak saydığı notların payı |
 | Kaynak kapsamı (recall) | – | %30 | %34 | planın kaynak saydığı notlardan gösterilenlerin payı |
+| Tablo atıfı doğru satırda | – | %38 | %37 | tablodaki atıflardan notun planda o satırın kaynağı olduğu pay (1.1) |
+| Yanlış satıra atıf | %0 | %38 | %38 | bir notu planda açıklamadığı satırın nedeni yapan metin payı (1.1) |
 | Çeldirici nota atıf | 0 | 2 | 2 | toplam sayı |
 | Uydurma kaynak | %0 | %1 | %0 | verilmemiş bir kaynağa atıf yapan metin payı |
 | Sapma yakalama (recall) | %93 | %96 | %96 | facts.json'daki anlamlı kalemlerden tabloda yer alanların payı |
@@ -50,6 +52,8 @@ Puanlama 1.0 (`python -m scoring`). Tanımlar: `docs/13_degerlendirme.md`.
 | İşaretsiz neden / metin | 0,15 | 1,02 | 1,02 |  |
 | Kaynak isabeti (precision) | – | %56 | %58 | gösterilen notlardan planın kaynak saydığı notların payı |
 | Kaynak kapsamı (recall) | – | %31 | %37 | planın kaynak saydığı notlardan gösterilenlerin payı |
+| Tablo atıfı doğru satırda | – | %44 | %40 | tablodaki atıflardan notun planda o satırın kaynağı olduğu pay (1.1) |
+| Yanlış satıra atıf | %0 | %36 | %39 | bir notu planda açıklamadığı satırın nedeni yapan metin payı (1.1) |
 | Çeldirici nota atıf | 0 | 0 | 1 | toplam sayı |
 | Uydurma kaynak | %0 | %0 | %0 | verilmemiş bir kaynağa atıf yapan metin payı |
 | Sapma yakalama (recall) | %92 | %95 | %95 | facts.json'daki anlamlı kalemlerden tabloda yer alanların payı |
@@ -80,6 +84,8 @@ Puanlama 1.0 (`python -m scoring`). Tanımlar: `docs/13_degerlendirme.md`.
 | İşaretsiz neden / metin | 0,16 | 1,07 | 1 |  |
 | Kaynak isabeti (precision) | – | %55 | %52 | gösterilen notlardan planın kaynak saydığı notların payı |
 | Kaynak kapsamı (recall) | – | %29 | %32 | planın kaynak saydığı notlardan gösterilenlerin payı |
+| Tablo atıfı doğru satırda | – | %36 | %36 | tablodaki atıflardan notun planda o satırın kaynağı olduğu pay (1.1) |
+| Yanlış satıra atıf | %0 | %40 | %38 | bir notu planda açıklamadığı satırın nedeni yapan metin payı (1.1) |
 | Çeldirici nota atıf | 0 | 2 | 1 | toplam sayı |
 | Uydurma kaynak | %0 | %1 | %0 | verilmemiş bir kaynağa atıf yapan metin payı |
 | Sapma yakalama (recall) | %94 | %96 | %96 | facts.json'daki anlamlı kalemlerden tabloda yer alanların payı |

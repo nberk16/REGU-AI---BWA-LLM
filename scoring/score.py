@@ -18,7 +18,7 @@ from ideal.plan import build_plan
 from validation.check import KNOWN_POSITIONS, _citations, _mentions, load_config, validate
 from validation.structure import ABWEICHUNGEN, HINWEISE, parse
 
-SCORING_VERSION = "1.0"
+SCORING_VERSION = "1.1"
 
 _CFG = load_config()
 _ALIASES = _CFG["scope"]["aliases"]
@@ -83,6 +83,17 @@ def score_text(text: str, month: Month) -> dict:
                "gefunden": len(planned & cited_set), "ablenkung": len(cited_set & distractors),
                "erfunden": codes.count("quelle_unbekannt"),
                "keine_notiz": codes.count("quelle_facts") + codes.count("quelle_wissen")}
+
+    # --- Satır düzeyinde atıf (1.1): tablodaki not, planın o satır için kaynak saydığı notlardan mı? ---
+    # Not düzeyindeki precision, doğru bir notun yanlış satırın nedeni yapılmasını görmez (docs/13, Bölüm 6).
+    row_sources = {r["position"]: set(r["erklaerung"].get("quellen", [])) for r in plan["tabelle"]}
+    row_cited = row_wrong = 0
+    for seg in parsed.segments:
+        if seg.kind == "zeile":
+            ids = set(_citations(seg, note_ids)[0])
+            row_cited += len(ids)
+            row_wrong += len(ids - row_sources.get(seg.cells[0], set()))
+    quellen |= {"zeile_zitiert": row_cited, "zeile_falsch": row_wrong}
 
     # --- Tablo: anlamlı kalemler tabloda mı, gereksiz satır var mı? ---
     rows = {name for _, name in parsed.table_positions}
@@ -165,6 +176,9 @@ def aggregate(rows: list[dict]) -> dict:
         "isaretsiz_neden_metin_basi": round(s(lambda r: r["begruendungen"]["unmarked"]) / n, 2),
         "kaynak_precision": _share(s(lambda r: r["quellen"]["richtig"]), s(lambda r: r["quellen"]["zitiert"])),
         "kaynak_recall": _share(s(lambda r: r["quellen"]["gefunden"]), s(lambda r: r["quellen"]["geplant"])),
+        "satir_atif_isabeti": _share(s(lambda r: r["quellen"]["zeile_zitiert"] - r["quellen"]["zeile_falsch"]),
+                                     s(lambda r: r["quellen"]["zeile_zitiert"])),
+        "yanlis_satir_atif_metin": _share(s(lambda r: r["quellen"]["zeile_falsch"] > 0), n),
         "celdirici_atif": s(lambda r: r["quellen"]["ablenkung"]),
         "uydurma_kaynak_metin": _share(s(lambda r: r["quellen"]["erfunden"] > 0), n),
         "sapma_yakalama": _share(s(lambda r: r["tabelle"]["gefunden"]), s(lambda r: r["tabelle"]["kalemler"])),

@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Genel durum: ~%85 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%93 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 43,45 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 47,2 gün
 toplam iş     = 51 gün
-durum         = 43,45 / 51 ≈ %85
+durum         = 47,2 / 51 ≈ %93
 ```
 
 **Belirsizlik:**
@@ -33,14 +33,14 @@ durum         = 43,45 / 51 ≈ %85
 | 1 | Problem tanımı, tasarım ve kararlar | 3 | %100 | 3,0 | ✅ tamamlandı |
 | 2 | Veri üreteci (+ dengelenmiş V2 kümesi, eğitim profili) | 5 | %100 | 5,0 | ✅ tamamlandı |
 | 3 | Hesaplama modülü (Katman 1, `facts.json`) | 5 | %90 | 4,5 | ✅ tamamlandı (ince ayar kaldı) |
-| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %85 | 5,1 | ✅ v1, ölçüm ve istemle bütünleşme (ayar kaldı) |
+| 4 | Bilgi tabanı ve retrieval (Katman 2) | 6 | %90 | 5,4 | ✅ v1, ölçüm, istemle bütünleşme; katkısı ablation'da ölçüldü |
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
-| 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
-| 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **43,45** | **≈ %85** |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %90 | 2,7 | 🔄 v1.8 |
+| 9 | Değerlendirme ve ablation | 6 | %90 | 5,4 | ✅ ablation tamam (`docs/13`, Bölüm 6); V2 kümesi koşulmuyor (tur 13); üslup [AÇIK] |
+| 10 | Portfolyo dokümantasyonu ve yayın | 3 | %40 | 1,2 | 🔄 model Hugging Face'te yayında; anlatı, README ve demo kaldı |
+| | **Toplam** | **51** | | **47,2** | **≈ %93** |
 
 ---
 
@@ -79,7 +79,8 @@ durum         = 43,45 / 51 ≈ %85
 - **Kararlaştırılan (tur 10):** SKR03 aralıkları hiç eklenmez; K-E kapsam dışı.
 - **Ölçüm (18.10.2026):** Doğrulama varyantlarında `single` + top-8 seçildi. Test kümesinde recall %91,4 (çekirdek) / %83,3 (geniş); çeldirici payı %5,2, bütün notlarda %11,3 (`docs/09`, Bölüm 5).
 - **İstemle bütünleşme (18.10.2026):** İstem 1.1 bağlamı „WISSEN“ (K-B, K-A) ve „KONTEXTNOTIZEN“ olarak taşıyor; doğrulama K-A/K-B kimliklerini tanıyor (`docs/10`). `rag export --firms` eklendi.
-- **Kalan (%15):**
+- **Ablation (26.10.2026):** Recall@8 test istemlerinden yeniden ölçüldü (%91,4 / %83,2). Top-8, bütün notlardan biraz daha iyi: RAG + FT'de kaynak recall %59'a karşı %55 (`docs/13`, 6.4).
+- **Kalan (%10):**
   - Model sonuçlarına göre ayar (ör. k, K-A/K-B metinleri).
   - K-D deneyi (isteğe bağlı, tur 6'ya göre sonra).
 - **Açık kararlar:** Yok. Sorgu yöntemi ölçümle seçildi (`single`, [ÖNERİ]).
@@ -193,11 +194,13 @@ durum         = 43,45 / 51 ≈ %85
 - **Kalan (%20):**
   - Baseline çıktılarına göre kelime listelerinin ve kuralların ayarı.
   - ~~Rakam biçimi: binlik ayırıcı boşluk~~ ✅ v1.7 (24.10.2026): tek rakam olarak okunur, `zahlenformat` biçim hatası (`docs/07`, Bölüm 13).
+  - ~~„geht auf + rakam“ yanlış alarmı~~ ✅ v1.8 (26.10.2026): düşüş cümlesi neden sayılmıyor (`docs/07`, Bölüm 14).
+  - Karşılaştırma sözcüğü yön hataları („über“ yerine „unter“) denetlenmiyor; gerekirse tam koşudan sonra.
   - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
 - **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
 - **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
 
-### 9. Değerlendirme ve ablation — 🔄 puanlama hazır, baseline puanlandı
+### 9. Değerlendirme ve ablation — 🔄 ablation tamam
 - **Hazır olan:**
   - Ground truth: olaylar, ay kayıtları, kabul edilebilir uyarılar, V2 kararı.
   - Dengelenmiş V2 kümesi.
@@ -208,18 +211,36 @@ durum         = 43,45 / 51 ≈ %85
   - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100.
   - Baseline: rakam değeri %93–95; format %30–39; RAG'de nedenlerin %42'si işaretsiz; kaynak precision %54, recall %30–34.
 - **Değerlendirme defteri (24.10.2026):** `gpu/03_eval.ipynb`; 5 koşu (RAG + FT, yalnızca FT, iki ek satır, taban modelle tutarlılık kontrolü). Yerelde sahte bağdaştırıcıyla uçtan uca denendi.
+- **Deneme koşusu (26.10.2026, `docs/14`, 4.1):**
+  - 5 × 8 metin (A1), hata yok; tam koşu ~4,5 saat.
+  - İnce ayarlı sistemlerde format %100. Yalnızca FT 8/8 hatasız.
+  - RAG + FT kaynak recall %50 (baseline %27); zayıf nokta notu yanlış satıra bağlamak.
+- **Puanlama 1.1 (26.10.2026):** satır düzeyinde atıf ölçütü (baseline %37–38 doğru satırda); birden çok klasörle ablation tablosu. 10 test.
+- **Ablation (26.10.2026, `docs/13`, Bölüm 6):**
+  - 5 sistem × 720 ay, 4,3 saat; baseline ile birlikte puanlandı.
+  - Çıplak / yalnızca RAG / yalnızca FT / RAG + FT:
+    - format %39 / %30 / %100 / %97;
+    - işaretsiz neden 0,16 / 1,01 / 0 / 0,06 metin başına;
+    - kaynak precision/recall – / %54 / %34 → %75 / %59.
+  - Yeni sektörde (A1) aynı düzey. Retrieval isabeti tabloda.
+  - Zayıf noktalar: V2'de notla açıklanacak aylar (1/17; eğitimde bu karar %5) ve metinlerin %26'sında notun yanlış satıra bağlanması.
+- **Kararlaştırılan (tur 13):** Dengelenmiş V2 kümesi şimdilik koşulmuyor, ikinci eğitim turu yok. V2 zayıflığı bilinen sınır olarak raporlanıyor.
 - **Kalan:**
-  - İnce ayarlı modellerin aynı test kümesinde çalıştırılması (kullanıcı) ve puanlanması.
-  - Dengelenmiş V2 kümesi; retrieval isabetinin tabloya eklenmesi.
-  - Ablation analizi ve sonuç anlatısı.
+  - Sonuç anlatısı (paket 10 ile birlikte).
 - **Açık kararlar:**
   - Üslup değerlendirmesi: insan mı, LLM-as-judge mı? (CLAUDE.md 8)
   - Retrieval isabeti (recall@k) metriği eklendi (tur 6).
 - **Kararlaştırılan (tur 7):** Test: yeni sektör (A1, öğretilmemiş tür) + yeni firma (A2/A3'ün görülmemiş varyantları, öğretilmiş tür) + dengelenmiş V2 kümesi (`docs/04`, Bölüm 9.2).
   - `expected_flags`'in anlamlılık eşiğine göre süzülmesi.
 
-### 10. Portfolyo dokümantasyonu — ⏳ başlamadı
-- **Hazır olan:** Tasarım belgeleri (`docs/`).
+### 10. Portfolyo dokümantasyonu ve yayın — 🔄 model yayında
+- **Hazır olan:**
+  - Tasarım belgeleri (`docs/`).
+  - **Hugging Face yayını (tur 13):**
+    - Model kartı (İngilizce), örnek istem ve çıktı, istek betiği: `release/huggingface/`.
+    - Yükleme adımları: `gpu/README.md`, Bölüm 8.
+    - Yalnızca RAG + FT modeli yayınlanıyor; depo şimdilik gizli.
+    - **Yayında (26.10.2026):** https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora. Dosyalar doğrulandı: GGUF SHA256 eğitimdekiyle aynı, safetensors 516 tensör.
 - **Kalan:**
   - README.
   - Problem → çözüm → kanıt (ablation) anlatısı.
@@ -231,12 +252,16 @@ durum         = 43,45 / 51 ≈ %85
 
 ## 4. Sıradaki adımlar
 
-Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), temel model seçildi (tur 9: Gemma 4 E4B). Önerilen sıra:
+Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2026). Önerilen sıra:
 
-1. ~~İstem 1.1 (paket 4 + 6)~~ ✅ (`docs/10`).
-2. **İdeal yorumlar (paket 5):** Bağlamlı hedefler tamam (eğitim 908, doğrulama 138 metin). Tamamlandı (eğitim verisi ve altın küme hazır, `docs/12`).
-3. **Kaggle defterleri (paket 6, 7, 9):** Baseline'lar (`ohne_kontext`, `rag_k8`), fine-tuning, değerlendirme. Repo özel olduğu için Kaggle'ın koda erişim yolu o adımda belirlenecek.
-- **İsteğe bağlı:** Gemma ile istem 1.1 ön kontrolü (aynı 10 örnek, kullanıcının dizüstü).
+1. ~~Hugging Face yayını~~ ✅ https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora.
+2. **Paket 10, devam:**
+   - README;
+   - problem → çözüm → kanıt anlatısı;
+   - örnek çıktılar;
+   - dizüstü demosu (llama-server + LoRA).
+3. **[AÇIK] Üslup değerlendirmesi.**
+4. ~~Dengelenmiş V2 kümesi, ikinci eğitim turu~~: yapılmıyor (tur 13).
 
 ## 5. Değişiklik geçmişi
 
@@ -281,3 +306,7 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | İnce ayar deneme koşusu 3 başarılı: bellek 11,6 GB, 140 token/s, tahmini `rag` ~10 saat, `ohne` ~7,6 saat; doğrulama kaybı 0,786 → 0,635 (3 adım). llama-server GPU denetimi yanlış alarmdı; `--list-devices` + bellek denetimiyle değişti. Paket 7 → %35: %78 |
 | 25.10.2026 | RAG + FT tam eğitimi: 113 adım, 7,8 saat, doğrulama kaybı 0,834 → 0,130; deneme üretiminde format ve hipotez işareti doğru, 2 rakam hatası (Katman 4 yakalıyor). Paket 7 → %60: %80 |
 | 25.10.2026 | Yalnızca FT tam eğitimi: 117 adım, 5,6 saat, doğrulama kaybı 1,013 → 0,106; deneme üretimi hatasız. İki bağdaştırıcı 02'nin son çıktısında. Paket 7 → %100: %85 |
+| 26.10.2026 | Değerlendirme deneme koşusu (5 × 8 metin, hata yok; tam koşu ~4,5 saat). İnce ayarlı sistemlerde format %100; RAG + FT notu yanlış satıra bağlıyor. Doğrulama v1.8 (yanlış alarm), puanlama 1.1 (satır düzeyinde atıf, birden çok klasör). Paket 8 → %90, 9 → %60: %87 |
+| 26.10.2026 | Ablation tamam: 5 sistem × 720 ay (4,3 saat), baseline ile puanlandı. RAG + FT format %97, işaretsiz neden 0,06/metin, kaynak precision/recall %75 / %59 (yalnızca RAG %54 / %34); yeni sektörde aynı düzey. Zayıf nokta V2 notla açıklama (1/17). Recall@8 istemlerden yeniden ölçüldü. Paket 4 → %90, 9 → %80: %90 |
+| 26.10.2026 | Karar turu 13: V2 kümesi ve ikinci eğitim turu yok; RAG + FT Hugging Face'te yayınlanacak, depo şimdilik gizli. Model kartı ve örnekler hazır (`release/huggingface/`), yükleme adımları `gpu/README.md` Bölüm 8. Paket 9 → %90, 10 → %30: %92 |
+| 26.10.2026 | RAG + FT modeli Hugging Face'te yayınlandı (https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora); dosyalar doğrulandı. Paket 10 → %40: %93 |

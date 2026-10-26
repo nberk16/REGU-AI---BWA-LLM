@@ -24,6 +24,11 @@ causal_words = [
   "beruht", "beruhen", "geht auf", "gehen auf", "dank", "verursacht", "getrieben", "Grund", "Gründe",
   "Zusammenhang", "zusammenhängen", "verantwortlich", "folgt auf", "ergibt sich aus",
 ]
+# v1.8: nedensellik kelimesi içeren ama neden bildirmeyen kalıplar (düzenli ifade); aramadan önce silinir.
+# „geht auf 743.213 € zurück“ bir düşüştür; „geht auf die Preiserhöhung zurück“ ise neden olarak kalır.
+non_causal_patterns = [
+  '\b(?:geht|gehen|ging|gingen) auf (?:rund |ca\. |knapp |etwa )?[-+−–]?\d',
+]
 # Hinweise bölümünde uyarı dili doğaldır; bu kelimeler orada işaret gerektirmez (nedensellik kelimeleri gerektirir).
 speculative_words = [
   "vermutlich", "wahrscheinlich", "möglicherweise", "dürfte", "dürften", "könnte", "könnten",

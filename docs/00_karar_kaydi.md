@@ -619,6 +619,59 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **Deneme üretimi:** Hatasız. Kaynak yok, nedenler „(Hypothese)“ ile işaretli; ideal metinle aynı profil.
 - **Bağdaştırıcılar:** İkisi de 02'nin son sürümünün çıktısında (`adapter_rag.gguf`, `adapter_ohne.gguf`). 03_eval onları oradan alır.
 
+## 26. Değerlendirme deneme koşusu, doğrulama v1.8, puanlama 1.1 (26.10.2026)
+
+- **03_eval deneme koşusu:**
+  - 5 sistem × 8 ay (A1-v00, 2025-01 … 08), hata yok.
+  - İki bağdaştırıcı tamamlanmış (`full`). İki sunucu da GPU'da.
+  - Tam koşu tahmini ~4,5 saat (`14_ince_ayar.md`, 4.1).
+- **İlk sonuçlar (8 ay; yön gösterir, kanıt değil):**
+  - İnce ayarlı bütün sistemlerde format %100 ve gereksiz satır yok.
+  - Yalnızca FT: 8/8 hatasız.
+  - RAG + FT: kaynak recall %27'den %50'ye çıkıyor. Zayıf nokta, notu yanlış satıra bağlamak: metinlerin %38'i.
+  - Taban modelin llama-server'daki çıktısı Ollama baseline'ıyla aynı aralıkta.
+- **[ÖNERİ] Doğrulama v1.8:** „geht auf + rakam“ (düşüş) neden cümlesi sayılmaz. Bu bir yanlış alarm düzeltmesi. Baseline puanları ve eğitim verisi değişmedi (`07`, Bölüm 14).
+- **[ÖNERİ] Puanlama 1.1:**
+  - Satır düzeyinde atıf ölçütleri eklendi: „Tablo atıfı doğru satırda“ ve „Yanlış satıra atıf“.
+  - Gerekçe: not düzeyindeki precision, doğru bir notun yanlış satırın nedeni yapılmasını görmüyordu.
+  - Kalibrasyon: ideal metinler %100 / %0.
+  - Baseline: %37–38 / %38.
+  - `python -m scoring` artık birden çok klasör alıyor (ablation tablosu için). Bkz. `13_degerlendirme.md`, Bölüm 1–2.
+
+## 27. Ablation sonuçları (26.10.2026)
+
+- **Koşu:** 03_eval tam koşu, 5 sistem × 720 ay, hata yok, 4,3 saat. Baseline ile birlikte puanlandı (puanlama 1.1; `13_degerlendirme.md`, Bölüm 6).
+- **Ana sonuç (çıplak / yalnızca RAG / yalnızca FT / RAG + FT):**
+  - Format uyumu: %39 / %30 / %100 / %97.
+  - İşaretsiz neden (metin başına): 0,16 / 1,01 / 0 / 0,06.
+  - Kaynak precision / recall: – / %54 / %34 → RAG + FT %75 / %59.
+  - Doğru satırda atıf: %37 → %64.
+  - Rakam sadakati: %95 / %94 / %100 / %99.
+- **Beklentiden sapma:** Çıplak model ve yalnızca FT neden uydurmuyor. Çıplak model neden söylemiyor; yalnızca FT nedenleri hipotez olarak işaretliyor (B3 kuralının etkisi).
+- **Genelleme:** Yeni sektörde (A1) sonuçlar yeni firmayla (A2/A3) aynı düzeyde.
+- **Retrieval:** Top-8, bütün notlardan biraz daha iyi (recall %59'a karşı %55). Recall@8 %91,4 / %83,2, istemlerden yeniden ölçüldü.
+- **Zayıf noktalar:**
+  - V2'de notla açıklanacak 17 ayın yalnızca 1'i doğru; model her zaman uyarıyor. Eğitim verisindeki V2 aylarının yalnızca %5'i notla açıklanıyordu.
+  - Metinlerin %26'sında not yanlış satıra bağlanıyor.
+- **[AÇIK]** İkinci eğitim turu (V2 dengesi): kullanıcıya sunuldu. Önce dengelenmiş V2 kümesi mevcut modellerle ölçülür.
+
+## 28. Karar turu 13: yayın (26.10.2026)
+
+- **[KARAR]** Dengelenmiş V2 kümesi şimdilik koşulmuyor. İkinci eğitim turu yapılmıyor. V2 zayıflığı (1/17) bilinen sınır olarak raporlanır (`13_degerlendirme.md`, 6.5).
+- **[KARAR]** RAG + FT modeli **Hugging Face Hub**'da yayınlanır. Yalnızca FT modeli yayınlanmaz.
+- **[KARAR]** GitHub deposu şimdilik gizli kalır. Paket 10'dan sonra yeniden ele alınır.
+- **[ÖNERİ]** Model kartı:
+  - Dil İngilizce; modelin çıktısı Almanca.
+  - Lisans Apache 2.0 (taban model Gemma 4 ile aynı).
+  - Önerilen depo adı `bwa-kommentar-gemma4-e4b-lora`.
+  - Dosyalar `release/huggingface/`.
+  - Yükleme kullanıcının tarayıcısından yapılır; token paylaşılmaz (`gpu/README.md`, Bölüm 8).
+- **Model kartındaki kullanım yolu:** değerlendirmedeki yol, yani llama-server + taban GGUF + `adapter_rag.gguf` + hazır şablonlu istem (`/completion`). PEFT dosyaları da konur, ama yalnızca GGUF yolu test edildi.
+- **Yayınlandı (26.10.2026):** https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora (herkese açık).
+  - `adapter_rag.gguf` SHA256 değeri eğitimdekiyle aynı (`d9a9720b…`).
+  - `adapter_model.safetensors`: 516 tensör (F32), yalnızca dil katmanları.
+  - Diğer altı dosya `release/huggingface/` ile bayt bayt aynı.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

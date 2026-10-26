@@ -41,6 +41,7 @@ def test_example_scores_well(example, month):
     assert s["zahlen"]["richtig"] == s["zahlen"]["geprueft"] > 0
     assert s["quellen"]["zitiert"] == s["quellen"]["richtig"] == 3       # her kaynak planla uyumlu
     assert s["quellen"]["erfunden"] == s["quellen"]["ablenkung"] == 0
+    assert s["quellen"]["zeile_zitiert"] == 4 and s["quellen"]["zeile_falsch"] == 0
     assert s["tabelle"]["gefunden"] == s["tabelle"]["kalemler"] and s["tabelle"]["ueberfluessig"] == 0
     assert s["flags"]["l1_gefunden"] == s["flags"]["l1"] == 2
     assert s["flags"]["hinweise_richtig"] == s["flags"]["hinweise"]
@@ -61,6 +62,16 @@ def test_wrong_and_invented_sources(example, month):
     # Verilmemiş bir not: uydurma kaynak.
     invented = example.replace("[Quelle: Kontextnotiz 2024-06 #2]", "[Quelle: Kontextnotiz 2023-06]")
     assert score_text(invented, month)["quellen"]["erfunden"] == 1
+
+
+def test_source_on_wrong_row(example, month):
+    # 1.1: Planlanmış bir not, açıklamadığı bir satırın nedeni yapılıyor. Not düzeyindeki precision bunu görmez.
+    moved = example.replace("[Quelle: Kontextnotiz 2024-06 #2]", "[Quelle: Kontextnotiz 2025-06 #2]")
+    s = score_text(moved, month)
+    assert s["quellen"]["zitiert"] == s["quellen"]["richtig"]
+    assert s["quellen"]["zeile_falsch"] == 1
+    agg = aggregate([s])
+    assert agg["satir_atif_isabeti"] == 0.75 and agg["yanlis_satir_atif_metin"] == 1.0
 
 
 def test_extra_table_row(example, month):
@@ -101,3 +112,17 @@ def test_cli_end_to_end(tmp_path, example):
     [row] = [json.loads(l) for l in open(tmp_path / "scores.jsonl", encoding="utf-8")]
     assert row["system"] == "demo_rag_alle" and row["score"]["format_ok"]
     assert "Format uyumu" in (tmp_path / "scores.md").read_text(encoding="utf-8")
+
+
+def test_cli_several_folders(tmp_path, example):
+    # Ablation tablosu: FT çıktıları ve baseline ayrı klasörlerde; puanlar ilk klasöre yazılır.
+    a, b = tmp_path / "eval", tmp_path / "baseline"
+    for folder, name in ((a, "ft_rag_rag_alle"), (b, "baseline_rag_alle")):
+        folder.mkdir()
+        with open(folder / f"{name}.jsonl", "w", encoding="utf-8") as f:
+            f.write(json.dumps({"id": "A1-v00_2025-06", "variant": "rag_alle", "text": example}) + "\n")
+    assert main([str(a), str(b)]) == 0
+    systems = [json.loads(l)["system"] for l in open(a / "scores.jsonl", encoding="utf-8")]
+    assert systems == ["baseline_rag_alle", "ft_rag_rag_alle"] and not (b / "scores.jsonl").exists()
+    with pytest.raises(SystemExit):
+        main([str(a), str(a)])

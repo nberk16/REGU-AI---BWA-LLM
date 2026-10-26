@@ -1,11 +1,12 @@
 """Komut satırı: bir çıktı klasöründeki bütün model metinlerini puanlar.
 
     python -m scoring gpu/outputs/baseline_2026-10-24
+    python -m scoring gpu/outputs/eval_<tarih> gpu/outputs/baseline_2026-10-24    # birden çok klasör: ablation tablosu
     python -m scoring <klasör> --run data/synthetic/reference_seed42 --prompts gpu/data
 
 Klasördeki her `*.jsonl` dosyası bir sistemdir (ör. `baseline_rag_k8`); kayıtlarda `id`, `variant`, `text` olmalı.
 Modelin gördüğü notlar test istemlerinden okunur (`test_<variant>.jsonl.gz`, KONTEXTNOTIZEN).
-Yazar: `<klasör>/scores.jsonl` (metin başına) ve `<klasör>/scores.md` (özet).
+Yazar: `<klasör>/scores.jsonl` (metin başına) ve `<klasör>/scores.md` (özet); birden çok klasörde ilkine yazar.
 """
 
 import argparse
@@ -40,6 +41,8 @@ METRICS = [
     ("isaretsiz_neden_metin_basi", "İşaretsiz neden / metin", ""),
     ("kaynak_precision", "Kaynak isabeti (precision)", "gösterilen notlardan planın kaynak saydığı notların payı"),
     ("kaynak_recall", "Kaynak kapsamı (recall)", "planın kaynak saydığı notlardan gösterilenlerin payı"),
+    ("satir_atif_isabeti", "Tablo atıfı doğru satırda", "tablodaki atıflardan notun planda o satırın kaynağı olduğu pay (1.1)"),
+    ("yanlis_satir_atif_metin", "Yanlış satıra atıf", "bir notu planda açıklamadığı satırın nedeni yapan metin payı (1.1)"),
     ("celdirici_atif", "Çeldirici nota atıf", "toplam sayı"),
     ("uydurma_kaynak_metin", "Uydurma kaynak", "verilmemiş bir kaynağa atıf yapan metin payı"),
     ("sapma_yakalama", "Sapma yakalama (recall)", "facts.json'daki anlamlı kalemlerden tabloda yer alanların payı"),
@@ -99,7 +102,7 @@ def report(results: dict[str, list[dict]], title: str) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m scoring", description="Model metinlerini puanlar (docs/13).")
-    parser.add_argument("outputs", type=Path, help="model çıktılarının klasörü (*.jsonl)")
+    parser.add_argument("outputs", type=Path, nargs="+", help="model çıktılarının klasörü (*.jsonl); puanlar ilkine yazılır")
     parser.add_argument("--run", type=Path, default=ROOT / "data/synthetic/reference_seed42")
     parser.add_argument("--prompts", type=Path, default=ROOT / "gpu/data", help="test_<variant>.jsonl.gz klasörü")
     parser.add_argument("--title", default=None)
@@ -133,9 +136,12 @@ def main(argv: list[str] | None = None) -> int:
         return months[(variant, rid)]
 
     results: dict[str, list[dict]] = {}
-    for path in sorted(args.outputs.glob("*.jsonl")):
+    out = args.outputs[0]
+    for path in sorted((p for folder in args.outputs for p in folder.glob("*.jsonl")), key=lambda p: p.stem):
         if path.name.startswith("scores"):
             continue
+        if path.stem in results:
+            parser.error(f"aynı sistem adı iki klasörde: {path.stem}")
         rows = []
         for rec in load_jsonl(path):
             rows.append({"id": rec["id"], "system": path.stem, "variant": rec["variant"],
@@ -144,11 +150,11 @@ def main(argv: list[str] | None = None) -> int:
         results[path.stem] = rows
         print(f"{path.stem}: {len(rows)} metin puanlandı")
 
-    with open(args.outputs / "scores.jsonl", "w", encoding="utf-8") as f:
+    with open(out / "scores.jsonl", "w", encoding="utf-8") as f:
         for rows in results.values():
             for r in rows:
                 f.write(json.dumps({**r, "scoring_version": SCORING_VERSION}, ensure_ascii=False) + "\n")
-    title = args.title or f"Puanlar — {args.outputs.name}"
-    (args.outputs / "scores.md").write_text(report(results, title) + "\n", encoding="utf-8")
-    print(f"→ {args.outputs / 'scores.md'}")
+    title = args.title or f"Puanlar — {out.name}"
+    (out / "scores.md").write_text(report(results, title) + "\n", encoding="utf-8")
+    print(f"→ {out / 'scores.md'}")
     return 0

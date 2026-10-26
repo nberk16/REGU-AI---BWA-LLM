@@ -7,6 +7,7 @@
 > - v1.5 (19.10.2026): satır adları ve kısa adlar büyük-küçük harfe duyarsız eşleşir; sıfat çekimli kısa adlar eklendi (`docs/11`, Bölüm 11).
 > - v1.6 (19.10.2026): nedensellik kelimelerine „Zusammenhang“, „zusammenhängen“, „verantwortlich“, „folgt auf“, „ergibt sich aus“ eklendi (`docs/11`, Bölüm 12).
 > - v1.7 (24.10.2026): binlik ayırıcı olarak boşluk („14 054 €“) tek bir rakam olarak okunur; değeri denetlenir, ayrıca `zahlenformat` biçim hatası verilir (Bölüm 13). 58 test.
+> - v1.8 (26.10.2026): „geht auf 743.213 € zurück“ (düşüş) artık neden cümlesi sayılmıyor; „geht auf die Preiserhöhung zurück“ neden olarak kalıyor (Bölüm 14). 59 test.
 > - **[KARAR]:** kurallar (CLAUDE.md 6.2, Katman 4; tur 6: B3–B4; tur 8: yuvarlama kuralı (a)).
 > - **[ÖNERİ]:** kelime listeleri, kısa ad listesi, uzunluk toleransı ve "rakam hangi satıra ait" kuralı (`validation/config.toml`).
 >
@@ -312,4 +313,19 @@ Baseline metinlerinin %42–53'ü binlik ayırıcı olarak boşluk kullanıyor (
 
 - **Etki:** Biçim hatası „Format uyumu“nda, değer „Rakam sadakati“nde sayılır (`docs/13`). İki ölçüt artık birbirinden bağımsız.
 - **Öğretmen metinleri:** Etkilenmedi. Eğitim verisi yeniden üretildi; dosyalar bayt bayt aynı.
+
+## 14. Sürüm 1.8 (26.10.2026): „geht auf + rakam“ neden değil
+
+- **Bulgu:** İnce ayarlı modelin deneme koşusunda bir yanlış alarm çıktı (`docs/14`, 4.1). „Die Gesamtleistung geht auf 743.213 € zurück und liegt damit 2,0 % unter dem Vorjahresniveau“ bir düşüşü anlatıyor. Ama „geht auf“ nedensellik kelimesi olduğu için cümle işaretsiz neden (`begruendung_ohne_kennzeichnung`) sayılıyordu.
+- **Düzeltme:** `[reasons] non_causal_patterns` adında yeni bir düzenli ifade listesi eklendi. Nedensellik araması yapılmadan önce bu kalıplar cümleden silinir. Tek kalıp şu: „geht/gehen/ging/gingen auf“ ve hemen ardından bir rakam („rund“, „ca.“, „knapp“, „etwa“ dahil).
+
+| Cümle | v1.7 | v1.8 |
+|---|---|---|
+| „Die Raumkosten gehen auf 21.000 € zurück.“ | işaretsiz neden | neden değil |
+| „Der Anstieg geht auf eine Sonderzahlung zurück.“ | işaretsiz neden | işaretsiz neden |
+
+- **Etki:**
+  - Baseline'ın 2.160 metninde hiçbir puan değişmedi.
+  - Eğitim ve test dosyaları yeniden üretildi; bayt bayt aynı.
+  - Değişen tek şey: deneme koşusunda bir RAG + FT metni artık hatasız.
 

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bwa-llm"
 version = "0.1.0"
-description = "BWA-Yorumlayıcısı: sentetik veri üreteci ve LLM bileşenleri (eğitim/portfolyo projesi)"
+description = "BWA-Yorumlayıcısı: sentetik veri üreteci ve LLM bileşenleri (REGU AI araştırma prototipi)"
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.26"]
 

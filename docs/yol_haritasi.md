@@ -1,6 +1,6 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 25.10.2026 (iki model eğitildi: RAG + FT 0,834 → 0,130, yalnızca FT 1,013 → 0,106; sırada 03_eval)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 26.10.2026 (karar turu 14: proje REGU AI için herkese açık araştırma prototipi; model kartında REGU AI adı)
 
 ---
 
@@ -241,6 +241,7 @@ durum         = 47,2 / 51 ≈ %93
     - Yükleme adımları: `gpu/README.md`, Bölüm 8.
     - Yalnızca RAG + FT modeli yayınlanıyor; depo şimdilik gizli.
     - **Yayında (26.10.2026):** https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora. Dosyalar doğrulandı: GGUF SHA256 eğitimdekiyle aynı, safetensors 516 tensör.
+    - **Tur 14:** Model kartında REGU AI adı ve „About REGU AI“ bölümü. Güncel `README.md`'nin Hugging Face'e yeniden yüklenmesi bekleniyor (kullanıcı).
 - **Kalan:**
   - README.
   - Problem → çözüm → kanıt (ablation) anlatısı.
@@ -310,3 +311,4 @@ Model tarafının ana işi tamam: baseline'lar, iki ince ayar, ablation (26.10.2
 | 26.10.2026 | Ablation tamam: 5 sistem × 720 ay (4,3 saat), baseline ile puanlandı. RAG + FT format %97, işaretsiz neden 0,06/metin, kaynak precision/recall %75 / %59 (yalnızca RAG %54 / %34); yeni sektörde aynı düzey. Zayıf nokta V2 notla açıklama (1/17). Recall@8 istemlerden yeniden ölçüldü. Paket 4 → %90, 9 → %80: %90 |
 | 26.10.2026 | Karar turu 13: V2 kümesi ve ikinci eğitim turu yok; RAG + FT Hugging Face'te yayınlanacak, depo şimdilik gizli. Model kartı ve örnekler hazır (`release/huggingface/`), yükleme adımları `gpu/README.md` Bölüm 8. Paket 9 → %90, 10 → %30: %92 |
 | 26.10.2026 | RAG + FT modeli Hugging Face'te yayınlandı (https://huggingface.co/nberkc16/bwa-kommentar-gemma4-e4b-lora); dosyalar doğrulandı. Paket 10 → %40: %93 |
+| 26.10.2026 | Karar turu 14: proje REGU AI'ın adını duyurmak için herkese açık araştırma prototipi; G4, talimat 2 ve 6 güncellendi. Model kartına REGU AI adı ve „About REGU AI“ bölümü eklendi; Hugging Face'e yeniden yükleme kullanıcıda. Durum değişmedi: %93 |

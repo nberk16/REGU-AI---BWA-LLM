@@ -22,8 +22,8 @@ tags:
 A LoRA adapter for **Gemma 4 E4B** that writes a German **management commentary draft** for a monthly
 *BWA* (Betriebswirtschaftliche Auswertung, the DATEV short-term P&L report used by German SMEs).
 
-It is the language-model part (layer 3) of a four-layer system built as an **education and portfolio
-project**:
+It is the language-model part (layer 3) of a four-layer system built by **[REGU AI](https://www.reguai.tech)**, a pre-seed
+startup in Munich working on private, locally hosted AI for German businesses:
 
 ```
 BWA (monthly values) ─► [1] Python computes all numbers  ──► facts.json
@@ -37,7 +37,8 @@ The model is trained **not to compute numbers itself**, to cite a context note f
 distortions (missing accruals, missing inventory change, seasonality …) as warnings, not as facts.
 
 > **All data is synthetic.** The model was trained and tested only on generated companies and months.
-> It is not a product, not tax or legal advice, and every draft needs a human check.
+> It is a public research prototype, not a commercial product or production release, and not tax or legal advice.
+> Every draft needs a human check.
 
 ## Output format
 
@@ -157,3 +158,15 @@ Apache 2.0, like the base model Gemma 4. Training targets were written with Mist
 | `example_A1-v00_2025-07_prompt.txt` | the same input with the chat template applied |
 | `example_A1-v00_2025-07_output.md` | the model's output for it (from the evaluation run) |
 | `request_llama_server.py` | sends a prompt file to `llama-server` with the evaluation settings |
+
+## About REGU AI
+
+[REGU AI](https://www.reguai.tech) is a pre-seed startup in Munich. We help European companies move their AI off the cloud
+and onto infrastructure they own: hardware for running AI locally, digital products that integrate with it, and LLMs
+customised and trained for a company's own work.
+
+This model is an example of the last part. It is small enough to run on a single GPU that a company can host itself (in the
+evaluation, each server ran on one 16 GB T4). We publish it to show our approach: numbers come from code, context from
+retrieval, wording from a small fine-tuned model, and a validation layer checks every draft before a human approves it.
+
+Website: https://www.reguai.tech

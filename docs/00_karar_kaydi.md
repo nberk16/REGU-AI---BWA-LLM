@@ -672,6 +672,22 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - `adapter_model.safetensors`: 516 tensör (F32), yalnızca dil katmanları.
   - Diğer altı dosya `release/huggingface/` ile bayt bayt aynı.
 
+## 29. Karar turu 14: REGU AI adı ve projenin amacı (26.10.2026)
+
+- **Bağlam:** Kullanıcı projeyi girişimi **REGU AI** için geliştirdiğini belirtti. Model kartındaki „education and portfolio project“ ifadesi ilk özet belgeden geliyordu (G4 ve talimat 2, 14.10.2026). Hukuki bir gerekçesi yoktu; model kartı (tur 13, [ÖNERİ]) ifadeyi oradan almıştı.
+- **[KARAR]** Proje, REGU AI'ın adını duyurmak için herkese açık bir araştırma prototipi. Şimdilik bu modelden ticari gelir hedeflenmiyor. CLAUDE.md'de G4, talimat 2 ve talimat 6 güncellendi; `pyproject.toml` açıklaması da değişti.
+- **[KARAR]** Talimat 6: Yalnızca „REGU AI“ adı yasak listesinden çıktı. Rakipler, satış stratejisi ve donanım paketi bu projede kullanılmaz.
+- **[KARAR]** Model kartında REGU AI adı geçer (`release/huggingface/README.md`):
+  - Giriş: „built by REGU AI, a pre-seed startup in Munich working on private, locally hosted AI for German businesses“.
+  - Uyarı kutusu: „a public research prototype, not a commercial product or production release, and not tax or legal advice“. Sentetik veri ve insan kontrolü uyarıları aynen kalır.
+  - Yeni „About REGU AI“ bölümü; içerik kullanıcının verdiği tanıtım metninden. İletişim: web sitesi (https://www.reguai.tech).
+  - Hukuki biçim (GmbH, UG vb.) yazılmaz, çünkü girişim henüz resmî olarak kurulmadı.
+- **Not:** Web sitesinde ad „REGU“ / „Regu“ olarak geçiyor; model kartında kullanıcının isteğiyle „REGU AI“.
+- **[ÖNERİ]** Ad duyurulmadan önce DPMA ve EUIPO'da „REGU AI“ için marka araması. Bu not hukuki görüş değildir.
+- **[ÖNERİ]** Hugging Face'te bir `regu-ai` organizasyonu açılıp model oraya taşınabilir.
+- **Açık nokta (tur 11'den):** Mistral'ın resmî kullanım koşulları (ücretsiz plan, çıktılarla model eğitimi) hâlâ kontrol edilmedi. Ticari kullanımdan önce kontrol edilmeli.
+- **Yükleme:** Güncel model kartını kullanıcı Hugging Face'e tarayıcıdan yükler (`gpu/README.md`, Bölüm 8, adım 5; yalnızca `README.md`).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

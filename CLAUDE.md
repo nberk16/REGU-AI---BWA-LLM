@@ -14,11 +14,11 @@
 ## 0. Asistan için çalışma talimatları
 
 1. Kullanıcıyla **Türkçe** konuş. Ürünün ürettiği yorum metni **Almanca** olacak. Almanca muhasebe terimleri olduğu gibi kullanılır (bkz. Bölüm 13, Sözlük).
-2. Proje **eğitim ve portfolyo** amaçlı. Öncelik model performansı değil, **problem–çözüm ilişkisinin net ve ölçülebilir şekilde gösterilmesi**.
+2. **[KARAR, tur 14]** Proje, kullanıcının girişimi **REGU AI** (pre-seed, Münih) için geliştirildi. Herkese açık bir **araştırma prototipi**; amaç girişimin adını duyurmak, şimdilik ticari gelir hedefi yok. Öncelik model performansı değil, **problem–çözüm ilişkisinin net ve ölçülebilir şekilde gösterilmesi**. REGU AI henüz resmî olarak kurulmadı: yayınlarda hukuki biçim (GmbH, UG vb.) yazılmaz.
 3. **[AÇIK]** maddelerde kendi başına karar verme. Seçenekleri gerekçeleriyle sun ve kullanıcıya sor.
 4. Gerçek müşteri verisi yok ve kullanılmayacak. **Tüm veri sentetik.**
 5. Bu belge hukuki veya vergi danışmanlığı değildir. Sektör bilgileri genel çerçevedir.
-6. Kaynak sektör belgesindeki "rakipler", "REGU AI", satış stratejisi ve donanım paketi gibi kısımlar başka bir projeye aittir. **Bu projede kullanılmaz.**
+6. Kaynak sektör belgesindeki "rakipler", satış stratejisi ve donanım paketi gibi kısımlar başka bir projeye aittir. **Bu projede kullanılmaz.** İstisna: girişimin adı **REGU AI** yayınlarda (ör. model kartı) geçer [KARAR, tur 14].
 7. **[KARAR]** Her adımdan sonra [`docs/yol_haritasi.md`](docs/yol_haritasi.md) güncellenir: iş paketlerinin durumu, iş yüküne göre tamamlanma yüzdesi ve açık kararlar. Kararlar ayrıca [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md)'ye işlenir.
 
 ---
@@ -36,7 +36,7 @@ Bir Mittelstand işletmesinin aylık **BWA** raporunu alan bir sistem: rakamlar�
 | G1 | Sektör: Almanya muhasebe sektörü, Mittelstand ağırlıklı |
 | G2 | Problem **işletme** (şirket içi finans) tarafından gelmeli; vergi danışmanlığı bürosu (Steuerkanzlei) tarafından değil |
 | G3 | Çözüm **küçük bir LLM**; **RAG + fine-tuning** ile |
-| G4 | Amaç eğitim ve portfolyo, piyasa ürünü değil |
+| G4 | Amaç: REGU AI'ın adını duyurmak için herkese açık araştırma prototipi; şimdilik ticari gelir hedefi yok, piyasa ürünü değil (tur 14, 26.10.2026; önceki hâli: „eğitim ve portfolyo, piyasa ürünü değil“) |
 | G5 | Performanstan çok problem–çözüm ilişkisi ön planda |
 | G6 | Kaynak belgeden yalnızca sektör bilgisi kullanılır (bkz. talimat 6) |
 | G7 | Projenin odak noktası **fine-tuning ve RAG uygulanan LLM'dir**. Veri üreteci ve hesaplama katmanı bu modeli eğitmek ve ölçmek için gereken destek bileşenleridir; yeterli gerçekçilikte ve olabildiğince basit tutulur (14.10.2026) |

@@ -1,6 +1,7 @@
 # 13 — Değerlendirme: puanlama ve baseline sonuçları
 
 > **Durum (26.10.2026):**
+> - **Ablation tamamlandı (Bölüm 6):** RAG + FT format %97, işaretsiz neden 0,06/metin, kaynak precision/recall %75 / %59 (yalnızca RAG: %30, 1,01, %54 / %34). Zayıf nokta: V2'de notla açıklanacak aylar (1/17).
 > - Puanlama 1.0 kodlandı (`scoring/`, `python -m scoring`, 8 test).
 > - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100 alıyor.
 > - Baseline'lar puanlandı: 3 varyant × 720 ay.
@@ -167,9 +168,139 @@ Her metin üç kaynağa karşı ölçülür:
   - Farklar küçükse (ör. top-8'e karşı bütün notlar) ihtiyatla yorumlanmalı. İleride önyükleme (bootstrap) güven aralığı eklenebilir.
 - **Üslup:** Okunabilirlik otomatik ölçülmüyor ([AÇIK], CLAUDE.md 8).
 
-## 6. Sıradaki
+## 6. Ablation sonuçları (26.10.2026)
+
+- **Koşu:** Kaggle, llama-server (Ollama 0.40.10'un içindeki), aynı model dosyası, aynı istem ve örnekleme ayarları. 5 sistem × 720 ay, hata yok, 4,3 saat (`14_ince_ayar.md`, 4.2).
+- **Dosyalar:** `gpu/outputs/eval_full_2026-10-26/` (çıktılar, log, `scores.md`). Puanlar baseline ile birlikte:
+
+```
+python -m scoring gpu/outputs/eval_full_2026-10-26 gpu/outputs/baseline_2026-10-24
+```
+
+### 6.1 Ana tablo: dört varyant (CLAUDE.md 7)
+
+Test kümesinin 720 ayı. İdeal sütunu, öğretmen metinlerinin doğrulama kümesindeki puanı (Bölüm 3); tavanı gösterir.
+
+| Ölçüt | Çıplak model | Yalnızca RAG | Yalnızca FT | **RAG + FT** | İdeal (tavan) |
+|---|---:|---:|---:|---:|---:|
+| Format uyumu | %39 | %30 | %100 | **%97** | %100 |
+| Hatasız metin | %18 | %4 | %93 | **%82** | %100 |
+| Rakam sadakati (değer) | %95 | %94 | %100 | **%99** | %100 |
+| Binlik ayırıcı boşluk | %53 | %45 | %0 | **%0** | %0 |
+| Kelime (ort.) / 200–400 arası | 162 / %13 | 169 / %17 | 257 / %86 | **249 / %81** | 250–260 / ~%90 |
+| Neden cümlesi / metin | 0,16 | 2,4 | 2,1 | **3,6** | 3,4–4,4 |
+| … kaynaklı / hipotez / işaretsiz | %0 / %0 / %100 | %48 / %10 / %42 | %0 / %100 / %0 | **%41 / %57 / %2** | %42 / %58 / %0 |
+| İşaretsiz neden / metin | 0,16 | 1,01 | 0 | **0,06** | 0 |
+| Kaynak precision / recall | – | %54 / %34 | – | **%75 / %59** | %100 / %100 |
+| Tablo atıfı doğru satırda | – | %37 | – | **%64** | %100 |
+| Yanlış satıra atıf (metin payı) | %0 | %38 | %0 | **%26** | %0 |
+| Çeldirici nota atıf / uydurma kaynak | 0 / %0 | 2 / %0 | 0 / %0 | **3 / %1** | 0 / %0 |
+| Sapma yakalama | %93 | %96 | %100 | **%100** | %100 |
+| Gereksiz tablo satırı / metin | 4,9 | 4,7 | 0,08 | **0,07** | 0 |
+| Uyarı kapsamı (Katman 1) | %75 | %66 | %100 | **%97** | %100 |
+| Uyarı recall / precision (ground truth) | %66 / %86 | %64 / %85 | %84 / %88 | **%82 / %87** | ~%85 / ~%84 |
+| V2 doğru karar (439 ay) | %76 | %86 | %100 | **%96** | %100 |
+| … notla açıklanacak 17 ayda | – | %12 | – | **%6** | %100 |
+
+Sistemler: `baseline_ohne_kontext`, `baseline_rag_k8`, `ft_ohne_ohne_kontext`, `ft_rag_rag_k8`.
+
+### 6.2 Ek satırlar
+
+| Ölçüt | RAG + FT bağlamsız | RAG + FT bütün notlar | Yalnızca RAG, bütün notlar | Taban model, llama-server (tutarlılık) |
+|---|---:|---:|---:|---:|
+| Format uyumu | %99 | %96 | %34 | %34 |
+| Hatasız metin | %81 | %81 | %6 | %5 |
+| Rakam sadakati | %100 | %99 | %93 | %94 |
+| İşaretsiz neden / metin | 0,15 | 0,06 | 1,05 | 1,11 |
+| Kaynak precision / recall | – | %74 / %55 | %55 / %30 | %57 / %35 |
+| Tablo atıfı doğru satırda / yanlış satıra atıf | – / %0 | %64 / %28 | %38 / %38 | %38 / %38 |
+| Uyarı recall / precision (ground truth) | %84 / %88 | %82 / %88 | %62 / %85 | %65 / %85 |
+| V2 doğru karar | %99 | %96 | %85 | %88 |
+
+Sistemler: `ft_rag_ohne_kontext`, `ft_rag_rag_alle`, `baseline_rag_alle`, `base_rag_k8`.
+
+**Retrieval isabeti** (modelin gördüğü notlar; `python tools/retrieval_quality.py data/synthetic/reference_seed42 --prompts gpu/data/test_rag_k8.jsonl.gz gpu/data/test_rag_alle.jsonl.gz`):
+
+| Bağlam | Recall çekirdek | Recall geniş | Çeldirici payı | Ort. not |
+|---|---:|---:|---:|---:|
+| Top-8 (`rag_k8`) | %91,4 | %83,2 | %5,2 | 8,0 |
+| Bütün notlar (`rag_alle`) | %100 | %100 | %11,3 | 12,2 |
+
+### 6.3 Alt kümeler: yeni sektör ve yeni firma
+
+| Ölçüt (RAG + FT) | A1, yeni sektör (240 ay) | A2/A3, yeni firma (480 ay) |
+|---|---:|---:|
+| Format uyumu | %99 | %96 |
+| Hatasız metin | %83 | %81 |
+| Rakam sadakati | %100 | %99 |
+| Kaynak precision / recall | %76 / %58 | %75 / %60 |
+| Tablo atıfı doğru satırda | %66 | %62 |
+| Uyarı recall (ground truth) | %84 | %82 |
+
+Yalnızca FT'de de tablo aynı: A1'de hatasız %93, A2/A3'te %92.
+
+### 6.4 Okuma
+
+1. **CLAUDE.md 7'deki beklenti büyük ölçüde doğrulandı.**
+
+   | Varyant | Beklenti | Gözlem |
+   |---|---|---|
+   | Çıplak model | Yüzeysel, format tutarsız, nedenleri uydurur | Yüzeysel ve format tutarsız (%39). Ama neden **uydurmuyor**: neredeyse hiç neden söylemiyor (0,16/metin), her satıra „Ursache offen“ yazıyor. |
+   | Yalnızca RAG | Bağlama erişir; dağınık, tutarsız format; olgu ile tahmini ayırmaz | Doğru. Nedenlerin %48'i kaynaklı, ama %42'si işaretsiz. Format %30. |
+   | Yalnızca FT | Tutarlı üslup; firma bağlamını bilmez; nedenleri uydurur | Tutarlı (format %100, hatasız %93). Bağlamı bilmiyor. Ama nedenleri **uydurmuyor**: bütün nedenler „(Hypothese)“ ile işaretli. |
+   | RAG + FT | Doğru bağlam + tutarlı üslup + kaynak | Doğru. En yüksek kaynak isabeti ve kapsamı, işaretsiz neden 0,06/metin, format %97. |
+
+   İki „uydurur“ beklentisi tutmadı. Çıplak model bilmediği nedeni söylemiyor. Yalnızca FT modeli ise B3 kuralıyla (tur 6) üretilmiş hedeflerden notsuz nedeni hipotez olarak işaretlemeyi öğrenmiş.
+2. **İki bileşenin katkısı ayrı ayrı görünüyor.**
+   - **İnce ayar yapıyı ve işaretlemeyi getiriyor:**
+     - format %30–39 → %97–100;
+     - gereksiz satır 4,7 → 0,1;
+     - binlik boşluk %45–53 → %0;
+     - işaretsiz neden 1,01 → 0,06 metin başına;
+     - Katman 1 bayraklarının hepsi Hinweise'de.
+   - **RAG kaynaklı nedeni getiriyor.** Yalnızca FT modeli hiçbir nedeni kaynağa bağlayamıyor.
+   - **Kaynak seçimi:** İkisi birlikte, RAG'in tek başına bulduğundan daha iyi kaynak seçiyor:
+     - precision %54 → %75;
+     - recall %34 → %59;
+     - doğru satırda atıf %37 → %64.
+3. **Öğretilmemiş sektöre genelleme var (Bölüm 6.3).** A1 eğitimde hiç görülmedi. Bütün ölçütler A2/A3 ile aynı düzeyde, bazıları biraz daha iyi. Model, firmaya özgü bilgiyi değil davranışı öğrenmiş (CLAUDE.md 6.1, ilke 2).
+4. **Retrieval'ın katkısı küçük ama tutarlı.**
+   - Top-8 ile bütün notlar karşılaştırması:
+     - RAG + FT'de recall %59'a karşı %55;
+     - taban modelde %34'e karşı %30.
+   - Top-8, ilgili notların %91'ini getiriyor ve çeldirici payını yarıya indiriyor.
+   - Fark küçük, çünkü 13 aylık pencere de küçük (~12 not).
+5. **„RAG + FT bağlamsız“ ek satırı tur 12 kararını destekliyor.** Ayrı eğitilen yalnızca FT modeli daha iyi: hatasız %93'e karşı %81, işaretsiz neden 0'a karşı 0,15. RAG modeli not görmeyince kendi hesapladığı rakamlar ve işaretsiz nedenler üretiyor.
+6. **Motor tutarlılığı:** Taban model llama-server'da Ollama baseline'ıyla aynı aralıkta:
+   - format %34 / %30;
+   - rakam %94 / %94;
+   - kaynak %57 / %54 (precision) ve %35 / %34 (recall);
+   - V2 %88 / %86.
+
+   İnce ayarlı modellerdeki fark motordan gelmiyor.
+
+### 6.5 RAG + FT'nin kalan zayıflıkları
+
+1. **V2: notla açıklanacak aylarda model her zaman uyarıyor.**
+   - Test kümesindeki 17 ayın 17'sinde uyarı var, 4'ünde not da gösteriliyor. Yalnızca 1 ay doğru: o ayda ikisi de kabul ediliyor.
+   - **Neden:** Eğitim verisinde 623 V2 adayı ayın yalnızca 33'ü (%5) notla açıklanıyordu (`train_price_boost` profiline rağmen). Model baskın kararı öğrenmiş.
+   - Dengelenmiş V2 kümesi (147 ay, `cite` = `warn`) bunu ayrıca ölçecek.
+2. **Notu yanlış satıra bağlamak:**
+   - metinlerin %26'sı (yalnızca RAG'de %38);
+   - örnek: tek bir „Sonderauftrag“ notunun gelir, malzeme ve diğer giderlerin hepsine yazılması (`14_ince_ayar.md`, 4.1).
+3. **Rakam hataları:** Metinlerin %12'sinde en az bir rakam hatası var (yalnızca FT: %7); rakamların %99'u doğru. „Hatasız metin“ %82'nin geri kalanı işaretsiz neden (25 metin) ve kaynak biçimi (21 metin). Rakam hatası türleri:
+   - sonuç satırında kopyalama hatası;
+   - normal düzeye göre kendi hesapladığı fark („Normalniveau 4.492 € | +15.908 € (+450,0 %)“);
+   - facts'te `null` olan yüzdeyi kendisi hesaplaması.
+
+   Bunların hepsi Katman 4'ün işaretlediği türler. İnsan onayından önce uyarı listesinde görünüyorlar (CLAUDE.md 6.1, ilke 4).
+4. **Uzunluk:** Metinlerin %19'u 200 kelimenin altında, 400'ün üstünde neredeyse hiç yok (%0,4). Doğrulamada `hinweis`, hata değil.
+
+## 7. Sıradaki
 
 1. ~~İnce ayar defteri (paket 7)~~ ✅ yalnızca FT (`train_ohne`) ve RAG + FT (`train_rag`).
-2. İnce ayarlı modellerin llama-server'da koşulması ve aynı puanlamayla karşılaştırılması: dört varyant + ek satırlar (RAG + FT bağlamsız, RAG + FT bütün notlar). Deneme koşusu ✅ (`docs/14`, 4.1); tam koşu bekleniyor. Ablation tablosu: `python -m scoring gpu/outputs/eval_<tarih> gpu/outputs/baseline_2026-10-24`.
-3. Dengelenmiş V2 kümesi ve retrieval isabeti (recall@k) tabloya eklenir.
-4. Üslup değerlendirmesi kararı ([AÇIK]).
+2. ~~İnce ayarlı modellerin değerlendirmesi~~ ✅ (Bölüm 6).
+3. Dengelenmiş V2 kümesi (`v2_balanced_seed4242`, 147 ay): taban model, RAG + FT, yalnızca FT.
+4. ~~Retrieval isabeti tabloya~~ ✅ (Bölüm 6.2).
+5. Üslup değerlendirmesi kararı ([AÇIK]).
+6. İsteğe bağlı: V2 dengesizliği için ikinci eğitim turu (kullanıcı kararı; Bölüm 6.5).

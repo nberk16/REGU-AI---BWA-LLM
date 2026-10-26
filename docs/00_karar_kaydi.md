@@ -638,6 +638,23 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
   - Baseline: %37–38 / %38.
   - `python -m scoring` artık birden çok klasör alıyor (ablation tablosu için). Bkz. `13_degerlendirme.md`, Bölüm 1–2.
 
+## 27. Ablation sonuçları (26.10.2026)
+
+- **Koşu:** 03_eval tam koşu, 5 sistem × 720 ay, hata yok, 4,3 saat. Baseline ile birlikte puanlandı (puanlama 1.1; `13_degerlendirme.md`, Bölüm 6).
+- **Ana sonuç (çıplak / yalnızca RAG / yalnızca FT / RAG + FT):**
+  - Format uyumu: %39 / %30 / %100 / %97.
+  - İşaretsiz neden (metin başına): 0,16 / 1,01 / 0 / 0,06.
+  - Kaynak precision / recall: – / %54 / %34 → RAG + FT %75 / %59.
+  - Doğru satırda atıf: %37 → %64.
+  - Rakam sadakati: %95 / %94 / %100 / %99.
+- **Beklentiden sapma:** Çıplak model ve yalnızca FT neden uydurmuyor. Çıplak model neden söylemiyor; yalnızca FT nedenleri hipotez olarak işaretliyor (B3 kuralının etkisi).
+- **Genelleme:** Yeni sektörde (A1) sonuçlar yeni firmayla (A2/A3) aynı düzeyde.
+- **Retrieval:** Top-8, bütün notlardan biraz daha iyi (recall %59'a karşı %55). Recall@8 %91,4 / %83,2, istemlerden yeniden ölçüldü.
+- **Zayıf noktalar:**
+  - V2'de notla açıklanacak 17 ayın yalnızca 1'i doğru; model her zaman uyarıyor. Eğitim verisindeki V2 aylarının yalnızca %5'i notla açıklanıyordu.
+  - Metinlerin %26'sında not yanlış satıra bağlanıyor.
+- **[AÇIK]** İkinci eğitim turu (V2 dengesi): kullanıcıya sunuldu. Önce dengelenmiş V2 kümesi mevcut modellerle ölçülür.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -6,6 +6,7 @@
 > - Kaggle deneme koşusu 3 (24.10.2026): eğitim çalışıyor. En yüksek bellek 11,6 GB; hız 140 token/s; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat (Bölüm 2).
 > - Tam eğitimler tamamlandı (25.10.2026; Bölüm 2.1–2.2).
 > - `03_eval` deneme koşusu (26.10.2026): 5 × 8 metin, hata yok. İnce ayarlı modellerde format %100. RAG + FT'nin zayıf noktası: notu yanlış satıra bağlamak (Bölüm 4.1).
+> - `03_eval` tam koşu (26.10.2026): 5 × 720 metin, hata yok, 4,3 saat (Bölüm 4.2). Ablation: `docs/13`, Bölüm 6.
 > - **[ÖNERİ]:** hiperparametreler, çıkarım yolu (bu belge).
 >
 > **İlgili:** CLAUDE.md 6.2 (Katman 3), 7, 10 · `12_egitim_verisi.md` (eğitim verisi) · `13_degerlendirme.md` (puanlama) · Kullanıcı adımları: `gpu/README.md`, Bölüm 6–7 · Karar kaydı: `00`, Bölüm 23
@@ -276,9 +277,29 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
    - Eğitimde yalnızca top-8 görüldü; daha uzun not listesi dağılım dışı.
 7. **Doğrulama düzeltmesi (v1.8):** „Die Gesamtleistung geht auf 743.213 € zurück“ bir düşüştür, ama „geht auf“ nedensellik kelimesi olduğu için işaretsiz neden sayılıyordu. Düzeltildi (`docs/07`, Bölüm 14). Baseline puanları değişmedi.
 
+### 4.2 Tam koşu (26.10.2026)
+
+- **Dosyalar:** `gpu/outputs/eval_full_2026-10-26/`. 5 × 720 metin, log ve `scores.md` (baseline ile birlikte). Sunucu logları `.log.gz` olarak sıkıştırıldı.
+- **Mekanik:**
+  - Bağdaştırıcılar ve şablon denetimi deneme koşusuyla aynı.
+  - 3.600 metin, hata 0. Sınıra takılan çıktı 0, düşünme metni 0.
+- **Süre:** 4,3 saat (01:33–05:50 UTC).
+
+| Sistem · varyant | Süre | İstem/saat | Medyan çıktı token |
+|---|---:|---:|---:|
+| `ft_rag` · `rag_k8` | 58 dk | 749 | 836 |
+| `ft_ohne` · `ohne_kontext` | 49 dk | 889 | 828 |
+| `ft_rag` · `ohne_kontext` | 45 dk | 963 | 784 |
+| `ft_rag` · `rag_alle` | 58 dk | 742 | 843 |
+| `base` · `rag_k8` | 44 dk | 976 | 720 |
+
+**Sonuçlar ve okuma:** `docs/13`, Bölüm 6.
+
 ## 5. Sıradaki
 
 1. ~~02'nin deneme koşusu~~ ✅ (deneme koşusu 3).
 2. ~~Tam eğitimler~~ ✅ `rag` (7,8 saat; 0,834 → 0,130) ve `ohne` (5,6 saat; 1,013 → 0,106).
-3. ~~`03_eval` deneme koşusu~~ ✅ (Bölüm 4.1). **Kullanıcı:** tam koşu (`MODE = "full"`, ~4,5 saat).
-4. **Ablation tablosu ve okuma:** `docs/13`, Bölüm 6.
+3. ~~`03_eval` deneme koşusu~~ ✅ (Bölüm 4.1). ~~Tam koşu~~ ✅ (Bölüm 4.2, 4,3 saat).
+4. ~~Ablation tablosu ve okuma~~ ✅ `docs/13`, Bölüm 6.
+5. Dengelenmiş V2 kümesi (147 ay): 03'te ayrı bir veri kümesi seçeneği, ~1 saat.
+6. İsteğe bağlı ikinci eğitim turu: V2'de notla açıklanacak aylar eğitimde %5 (`docs/13`, 6.5). Kullanıcı kararı.

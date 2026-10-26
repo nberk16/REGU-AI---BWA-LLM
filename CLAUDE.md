@@ -7,7 +7,7 @@
 > - **[ÖNERİ]** = önerildi, henüz onaylanmadı
 > - **[AÇIK]** = karar verilmedi
 >
-> **Tarih:** 26.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%87, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
+> **Tarih:** 26.10.2026 · **Aşama:** Tasarım, **veri üreteci**, **hesaplama modülü (Katman 1)**, **bilgi tabanı v1 (Katman 2)**, **doğrulama katmanı (Katman 4)**, **istem 1.1** ve **ideal yorum hattı** tamamlandı (karar turları 1–12). Model tarafının yöntem kararları alındı (turlar 6–7, [`docs/06_model_tarafi_secenekler.md`](docs/06_model_tarafi_secenekler.md)); temel model Gemma 4 E4B (tur 9). Proje durumu ~%90, iş yüküne göre; bkz. [`docs/yol_haritasi.md`](docs/yol_haritasi.md).
 
 ---
 
@@ -326,6 +326,19 @@ Bu örnekte rakamlar tablodan, neden firma notundan (kaynaklı) geliyor; olası 
 
 Bu dört varyantın aynı test setinde karşılaştırılması (ablation) projenin **kanıt kısmıdır**.
 
+**Sonuç (26.10.2026, 720 test ayı; [`docs/13_degerlendirme.md`](docs/13_degerlendirme.md), Bölüm 6):**
+
+| | Çıplak | Yalnızca RAG | Yalnızca FT | RAG + FT |
+|---|---:|---:|---:|---:|
+| Format uyumu | %39 | %30 | %100 | %97 |
+| İşaretsiz neden / metin | 0,16 | 1,01 | 0 | 0,06 |
+| Kaynak precision / recall | – | %54 / %34 | – | %75 / %59 |
+| Rakam sadakati | %95 | %94 | %100 | %99 |
+
+- Beklentiden sapma: çıplak model ve yalnızca FT neden uydurmuyor. Çıplak model neden söylemiyor; FT nedenleri hipotez olarak işaretliyor.
+- Yeni sektörde (A1) aynı düzey.
+- Zayıf nokta: V2'de notla açıklanacak aylar (1/17).
+
 ---
 
 ## 8. Değerlendirme [ÖNERİ]
@@ -440,7 +453,8 @@ Seçenekler ve öneriler (Ekim 2026 itibarıyla güncel modellerle): [`docs/06_m
 13. ✅ Kaggle baseline'ları → `gpu/01_baseline.ipynb`, [`gpu/README.md`](gpu/README.md), `gpu/outputs/baseline_2026-10-24/`
 14. ✅ Puanlama 1.0 ve baseline sonuçları → [`docs/13_degerlendirme.md`](docs/13_degerlendirme.md), `scoring/`, `tests/test_scoring.py`
 15. ✅ İnce ayar → `gpu/02_finetune.ipynb`, [`docs/14_ince_ayar.md`](docs/14_ince_ayar.md), `gpu/outputs/finetune_*` (RAG + FT 0,834 → 0,130; yalnızca FT 1,013 → 0,106)
-16. 🔄 İnce ayarlı modellerin değerlendirmesi → `gpu/03_eval.ipynb`; deneme koşusu ✅ ([`docs/14_ince_ayar.md`](docs/14_ince_ayar.md), 4.1; format %100, RAG + FT notu yanlış satıra bağlıyor); tam koşu bekleniyor
+16. ✅ İnce ayarlı modellerin değerlendirmesi ve ablation → `gpu/03_eval.ipynb`, `gpu/outputs/eval_full_2026-10-26/`, [`docs/13_degerlendirme.md`](docs/13_degerlendirme.md), Bölüm 6
+17. 🔄 Dengelenmiş V2 kümesi (147 ay) → sonra [AÇIK] ikinci eğitim turu ve paket 10 (portfolyo, demo)
 
 Karar özeti: [`docs/00_karar_kaydi.md`](docs/00_karar_kaydi.md). Karar turu 2 (V2 kuralı, notlardaki rakamlar, süre alanı, RAG penceresi) dosyanın 4. bölümünde; karar turu 3 (V2 ayrımının ölçülmesi, referans koşu, not şablonları) ve kalibrasyon değişiklikleri 7. bölümünde.
 

@@ -1,6 +1,8 @@
 """Katman 2 getirme isabeti: ground truth'a karşı recall@k (geliştirme aracı; docs/09, Bölüm 5).
 
 Kullanım: python tools/retrieval_quality.py data/synthetic/reference_seed42 [--embedder bge-m3] [--k 4 8 12]
+         python tools/retrieval_quality.py data/synthetic/reference_seed42 --prompts gpu/data/test_rag_k8.jsonl.gz
+         (--prompts: modele gerçekten verilen notlar istemlerden okunur; embedding gerekmez)
 
 İlgili notlar (ground truth'tan; yalnızca 13 aylık penceredeki ve notlanmış olaylar):
 - **çekirdek:** o ay başlayan olayların notları;
@@ -48,13 +50,52 @@ def relevant(facts: dict, gt: dict, events: dict, window: set[str]) -> tuple[set
     return core & window, ext & window
 
 
+def from_prompts(run: Path, paths: list[Path]) -> None:
+    """Test istemlerindeki KONTEXTNOTIZEN üzerinden isabet (değerlendirmede modelin gördüğü notlar)."""
+    from scoring.cli import load_jsonl as load_any, visible_note_ids
+    from validation.context import load_notes as notes_for_model, window_notes
+
+    fcfg = load_facts_config()
+    firms = load_run(run)
+    gt = {(r["firm_id"], r["period"]): r for r in load_jsonl(run / "evaluation" / "ground_truth_months.jsonl")}
+    events = {e["event_id"]: e for e in load_jsonl(run / "evaluation" / "events.jsonl")}
+    distractors = {(n["firm_id"], n["source_id"]) for n in load_jsonl(run / "evaluation" / "notes_ground_truth.jsonl")
+                   if n["distractor"]}
+    notes = notes_for_model(run)
+    print("| İstemler | Ay | Recall çekirdek | Recall geniş | Geniş: tam getirilen ay | Çeldirici payı | Ort. not |")
+    print("|---|---:|---:|---:|---:|---:|---:|")
+    for path in paths:
+        a: dict[str, float] = defaultdict(float)
+        prompts = load_any(path)
+        for p in prompts:
+            firm_id, period = p["id"].rsplit("_", 1)
+            window = {n["source_id"] for n in window_notes(notes, firm_id, period) if n["period"] is not None}
+            core, ext = relevant(build_facts(firms[firm_id], period, fcfg), gt[(firm_id, period)], events, window)
+            got = set(visible_note_ids(p)) & window
+            a["core_hit"] += len(got & core)
+            a["core_all"] += len(core)
+            a["ext_hit"] += len(got & ext)
+            a["ext_all"] += len(ext)
+            a["retrieved"] += len(got)
+            a["distractor"] += sum(1 for s in got if (firm_id, s) in distractors)
+            a["months_full_ext"] += int(bool(ext) and ext <= got)
+            a["months_with_ext"] += int(bool(ext))
+        n = len(prompts)
+        print(f"| `{path.name}` | {n} | {a['core_hit'] / a['core_all']:.1%} | {a['ext_hit'] / a['ext_all']:.1%} | "
+              f"{a['months_full_ext'] / a['months_with_ext']:.1%} | {a['distractor'] / a['retrieved']:.1%} | "
+              f"{a['retrieved'] / n:.1f} |")
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Katman 2 getirme isabeti (docs/09).")
     parser.add_argument("run", type=Path)
     parser.add_argument("--embedder", default="bge-m3", choices=["bge-m3", "hashing"])
     parser.add_argument("--k", type=int, nargs="+", default=[4, 8, 12])
     parser.add_argument("--firms", nargs="*", help="yalnızca bu firmalar (ör. A1-v00)")
+    parser.add_argument("--prompts", type=Path, nargs="+", help="test istemleri (*.jsonl.gz); getirme yeniden yapılmaz")
     args = parser.parse_args(argv)
+    if args.prompts:
+        return from_prompts(args.run, args.prompts)
 
     cfg = load_config()
     rcfg = cfg["retrieval"]

@@ -1,0 +1,186 @@
+{
+  "generator_version": "0.1.0",
+  "config_fingerprint": "3dcebe2f2750b413",
+  "seed": 4242,
+  "profile": "v2_balanced",
+  "archetypes": [
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "variants_per_archetype": 10,
+  "first_variant": 50,
+  "periods": {
+    "start": "2024-01",
+    "end": "2026-12",
+    "commentable_from": "2025-01"
+  },
+  "v2_candidate_ratio_pp": 2.0,
+  "files": {
+    "model_input": [
+      "model_input/bwa_raw.csv",
+      "model_input/context_notes.jsonl",
+      "model_input/firms.json"
+    ],
+    "evaluation": [
+      "evaluation/bwa_true.csv",
+      "evaluation/effects.csv",
+      "evaluation/events.jsonl",
+      "evaluation/ground_truth_months.jsonl",
+      "evaluation/notes_ground_truth.jsonl",
+      "evaluation/variants.json",
+      "evaluation/v2_balanced_set.jsonl"
+    ]
+  },
+  "statistics": {
+    "variants": 30,
+    "events_total": 2081,
+    "events_by_type": {
+      "E01": {
+        "count": 180,
+        "documented": 124
+      },
+      "E02": {
+        "count": 139,
+        "documented": 99
+      },
+      "E03": {
+        "count": 90,
+        "documented": 63
+      },
+      "E04": {
+        "count": 274,
+        "documented": 197
+      },
+      "E05": {
+        "count": 163,
+        "documented": 117
+      },
+      "E06": {
+        "count": 265,
+        "documented": 189
+      },
+      "E07": {
+        "count": 14,
+        "documented": 11
+      },
+      "E08": {
+        "count": 36,
+        "documented": 27
+      },
+      "E09": {
+        "count": 16,
+        "documented": 10
+      },
+      "E10": {
+        "count": 48,
+        "documented": 32
+      },
+      "E11": {
+        "count": 77,
+        "documented": 54
+      },
+      "E12": {
+        "count": 223,
+        "documented": 158
+      },
+      "E13": {
+        "count": 51,
+        "documented": 0
+      },
+      "E14": {
+        "count": 51,
+        "documented": 0
+      },
+      "E15": {
+        "count": 54,
+        "documented": 0
+      },
+      "E16": {
+        "count": 121,
+        "documented": 0
+      },
+      "E17": {
+        "count": 30,
+        "documented": 0
+      },
+      "E18": {
+        "count": 219,
+        "documented": 0
+      },
+      "E19": {
+        "count": 30,
+        "documented": 18
+      }
+    },
+    "documented_share_real_v5": 0.709,
+    "pool_events_per_month": 1.67,
+    "quiet_month_share_commentable": 0.14,
+    "distractor_month_share": 0.141,
+    "event_notes_with_numbers_share": 0.466,
+    "near_threshold_share_pool": 0.211,
+    "overlap_share_pool": 0.161,
+    "season_note_share": 0.6,
+    "v2_decisions_by_archetype": {
+      "A1": {
+        "all": {
+          "cite": 28,
+          "warn": 154,
+          "either": 17,
+          "None": 41
+        },
+        "candidates": {
+          "cite": 12,
+          "warn": 83,
+          "either": 6,
+          "None": 9
+        }
+      },
+      "A2": {
+        "all": {
+          "cite": 38,
+          "warn": 136,
+          "either": 17,
+          "None": 49
+        },
+        "candidates": {
+          "cite": 26,
+          "warn": 115,
+          "either": 12,
+          "None": 18
+        }
+      },
+      "A3": {
+        "all": {
+          "cite": 45,
+          "warn": 85,
+          "either": 24,
+          "None": 86
+        },
+        "candidates": {
+          "cite": 20,
+          "warn": 72,
+          "either": 13,
+          "None": 29
+        }
+      }
+    },
+    "v2_balanced_set": {
+      "A1": {
+        "cite": 12,
+        "warn": 12,
+        "either": 6
+      },
+      "A2": {
+        "cite": 26,
+        "warn": 26,
+        "either": 12
+      },
+      "A3": {
+        "cite": 20,
+        "warn": 20,
+        "either": 13
+      }
+    }
+  }
+}

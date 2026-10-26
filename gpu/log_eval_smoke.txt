@@ -1,0 +1,319 @@
+2026-10-26T00:28:03+00:00 Başlangıç · MODE=smoke · GPU: ['Tesla T4, 0 MiB, 15360 MiB', 'Tesla T4, 0 MiB, 15360 MiB']
+2026-10-26T00:28:04+00:00 ft_rag: /kaggle/input/notebooks/reguai/2-book/outputs/adapter_rag.gguf · eğitim full, adım 113/113, doğrulama kaybı 0.8339738177957575 → 0.13016053507987124
+2026-10-26T00:28:06+00:00 ft_ohne: /kaggle/input/notebooks/reguai/2-book/outputs/adapter_ohne.gguf · eğitim full, adım 117/117, doğrulama kaybı 1.012876573368847 → 0.10648607400583214
+2026-10-26T00:28:09+00:00 Koşular: [('ft_rag', 'rag_k8'), ('ft_ohne', 'ohne_kontext'), ('ft_rag', 'ohne_kontext'), ('ft_rag', 'rag_alle'), ('base', 'rag_k8')] · istemler: {'ohne_kontext': 720, 'rag_alle': 720, 'rag_k8': 720}
+2026-10-26T00:29:12+00:00 Şablon: test istemlerinin token sayısı baseline ile aynı (5033, 3218)
+2026-10-26T00:30:15+00:00 Taban model: gemma4:e4b-it-q4_K_M · sha256-370c2879f176 · taslak model var · 62 s
+2026-10-26T00:31:46+00:00   llama-server GPU 0: CUDA0: Tesla T4 (14911 MiB, 14806 MiB free) · GPU belleği 0 → 4713 MiB
+2026-10-26T00:31:46+00:00   llama-server GPU 0: hazır · 92 s · bağdaştırıcılar ['ft_rag', 'ft_ohne']
+2026-10-26T00:31:52+00:00   llama-server GPU 1: CUDA0: Tesla T4 (14911 MiB, 14806 MiB free) · GPU belleği 0 → 4723 MiB
+2026-10-26T00:31:52+00:00   llama-server GPU 1: hazır · 6 s · bağdaştırıcılar ['ft_rag', 'ft_ohne']
+2026-10-26T00:31:52+00:00 GPU belleği: ['Tesla T4, 4713 MiB, 15360 MiB', 'Tesla T4, 4723 MiB, 15360 MiB']
+2026-10-26T00:31:53+00:00 ft_rag · rag_k8: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-26T00:33:13+00:00   [1/8] A1-v00_2025-04 · 80 s · 34 token/s · 45 istem/saat · kalan ~0.2 saat
+2026-10-26T00:33:13+00:00   [2/8] A1-v00_2025-01 · 80 s · 37 token/s · 90 istem/saat · kalan ~0.1 saat
+2026-10-26T00:33:13+00:00   [3/8] A1-v00_2025-03 · 80 s · 27 token/s · 135 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:14+00:00   [4/8] A1-v00_2025-08 · 81 s · 43 token/s · 178 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:17+00:00   [5/8] A1-v00_2025-02 · 84 s · 27 token/s · 215 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:18+00:00   [6/8] A1-v00_2025-06 · 86 s · 39 token/s · 252 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:19+00:00   [7/8] A1-v00_2025-05 · 87 s · 40 token/s · 291 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:21+00:00   [8/8] A1-v00_2025-07 · 88 s · 30 token/s · 327 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:22+00:00 ft_ohne · ohne_kontext: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-26T00:33:48+00:00   [1/8] A1-v00_2025-01 · 26 s · 39 token/s · 138 istem/saat · kalan ~0.1 saat
+2026-10-26T00:33:50+00:00   [2/8] A1-v00_2025-04 · 29 s · 42 token/s · 250 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:52+00:00   [3/8] A1-v00_2025-08 · 30 s · 40 token/s · 354 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:52+00:00   [4/8] A1-v00_2025-02 · 31 s · 33 token/s · 467 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:54+00:00   [5/8] A1-v00_2025-06 · 32 s · 40 token/s · 559 istem/saat · kalan ~0.0 saat
+2026-10-26T00:33:56+00:00   [6/8] A1-v00_2025-03 · 34 s · 27 token/s · 634 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:01+00:00   [7/8] A1-v00_2025-07 · 39 s · 27 token/s · 646 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:03+00:00   [8/8] A1-v00_2025-05 · 41 s · 33 token/s · 704 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:03+00:00 ft_rag · ohne_kontext: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-26T00:34:29+00:00   [1/8] A1-v00_2025-01 · 26 s · 41 token/s · 139 istem/saat · kalan ~0.1 saat
+2026-10-26T00:34:31+00:00   [2/8] A1-v00_2025-02 · 28 s · 34 token/s · 256 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:31+00:00   [3/8] A1-v00_2025-08 · 28 s · 44 token/s · 382 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:34+00:00   [4/8] A1-v00_2025-05 · 31 s · 40 token/s · 459 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:34+00:00   [5/8] A1-v00_2025-04 · 31 s · 39 token/s · 572 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:35+00:00   [6/8] A1-v00_2025-03 · 32 s · 27 token/s · 672 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:35+00:00   [7/8] A1-v00_2025-06 · 32 s · 41 token/s · 778 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:39+00:00   [8/8] A1-v00_2025-07 · 36 s · 33 token/s · 795 istem/saat · kalan ~0.0 saat
+2026-10-26T00:34:40+00:00 ft_rag · rag_alle: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-26T00:35:03+00:00   [1/8] A1-v00_2025-08 · 23 s · 41 token/s · 157 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:03+00:00   [2/8] A1-v00_2025-01 · 23 s · 40 token/s · 308 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:05+00:00   [3/8] A1-v00_2025-02 · 26 s · 37 token/s · 422 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:06+00:00   [4/8] A1-v00_2025-03 · 26 s · 33 token/s · 553 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:06+00:00   [5/8] A1-v00_2025-04 · 26 s · 42 token/s · 685 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:07+00:00   [6/8] A1-v00_2025-06 · 28 s · 43 token/s · 785 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:12+00:00   [7/8] A1-v00_2025-05 · 32 s · 37 token/s · 782 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:12+00:00   [8/8] A1-v00_2025-07 · 32 s · 32 token/s · 887 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:12+00:00 base · rag_k8: 8 istem, 0 tamam, 8 çalışacak (2 sunucu × 4 eşzamanlı)
+2026-10-26T00:35:39+00:00   [1/8] A1-v00_2025-03 · 26 s · 29 token/s · 137 istem/saat · kalan ~0.1 saat
+2026-10-26T00:35:40+00:00   [2/8] A1-v00_2025-07 · 27 s · 35 token/s · 266 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:40+00:00   [3/8] A1-v00_2025-04 · 27 s · 39 token/s · 393 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:40+00:00   [4/8] A1-v00_2025-01 · 28 s · 44 token/s · 517 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:41+00:00   [5/8] A1-v00_2025-02 · 28 s · 33 token/s · 632 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:41+00:00   [6/8] A1-v00_2025-08 · 29 s · 48 token/s · 750 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:42+00:00   [7/8] A1-v00_2025-05 · 30 s · 53 token/s · 844 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:43+00:00   [8/8] A1-v00_2025-06 · 30 s · 46 token/s · 952 istem/saat · kalan ~0.0 saat
+2026-10-26T00:35:43+00:00 Özet: {"ft_rag_rag_k8": {"kayıt": 8, "hata": 0, "süre_s": 88, "istem_saat": 327, "medyan_s": 82.44999999999999, "medyan_çıktı_token": 810.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "ft_ohne_ohne_kontext": {"kayıt": 8, "hata": 0, "süre_s": 41, "istem_saat": 704, "medyan_s": 31.5, "medyan_çıktı_token": 856.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "ft_rag_ohne_kontext": {"kayıt": 8, "hata": 0, "süre_s": 36, "istem_saat": 795, "medyan_s": 31.4, "medyan_çıktı_token": 774.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "ft_rag_rag_alle": {"kayıt": 8, "hata": 0, "süre_s": 32, "istem_saat": 887, "medyan_s": 26.15, "medyan_çıktı_token": 851.0, "sınıra_takılan": 0, "düşünme_metni": 0}, "base_rag_k8": {"kayıt": 8, "hata": 0, "süre_s": 30, "istem_saat": 951, "medyan_s": 28.1, "medyan_çıktı_token": 726.0, "sınıra_takılan": 0, "düşünme_metni": 0}}
+2026-10-26T00:35:43+00:00 Tahmin: tam koşu (koşu başına 720 istem) ~5.7 saat
+2026-10-26T00:35:43+00:00 
+===== ft_rag · rag_k8 · A1-v00_2025-04 · girdi 4939 · çıktı 790 token · 80.1 s
+**Kernaussagen April 2025**
+
+1. Das Betriebsergebnis beträgt 13.730 € und liegt damit um 685 € über dem Vorjahreswert von 13.045 €. Die Gesamtleistung stieg auf 780.110 € (+20,9 % gegenüber Vorjahr). Kumuliert ergibt sich ein Minus von 40.306 € gegenüber einem Vorjahresüberschuss von 30.055 €.
+2. Die Umsatzerlöse stiegen auf 780.110 € (+134.820 € bzw. +20,9 % gegenüber Vorjahr) durch den Sonderauftrag eines Maschinenbaukunden [Quelle: Kontextnotiz 2025-02]. Im Vormonat lagen sie bei 821.378 €, kumuliert bei 2.940.836 € (+154.610 € zum Vorjahreszeitraum).
+3. Die Bestandsveränderungen an fertigen und unfertigen Erzeugnissen betragen 0 €, während der Material-/Wareneinkauf um 100.948 € (+32,8 %) gegenüber dem Vorjahr stieg. Dies könnte auf eine fehlende Buchung der Bestandsveränderung hindeuten (Hypothese).
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Umsatzerlöse | 780.110 € | Vj. 645.290 € | +134.820 € (+20,9 %) | Sonderauftrag eines Maschinenbaukunden | [Quelle: Kontextnotiz 2025-02] |
+| Material-/Wareneinkauf | 408.669 € | Vj. 307.721 € | +100.948 € (+32,8 %) | Sonderauftrag eines Maschinenbaukunden | [Quelle: Kontextnotiz 2025-02] |
+| Personalkosten | 231.896 € | Vj. 205.241 € | +26.655 € (+13,0 %) | Verstärkung im Bereich CNC-Fertigung | [Quelle: Kontextnotiz 2024-11] |
+| Sonstiger neutraler Ertrag | 17.371 € | Vj. 0 € | +17.371 € | Sonderauftrag eines Maschinenbaukunden | [Quelle: Kontextnotiz 2025-02] |
+| Sonstige Kosten | 31.792 € | Vj. 24.451 € | +7.341 € (+30,0 %) | Sonderauftrag eines Maschinenbaukunden | [Quelle: Kontextnotiz 2025-02] |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Die Bestandsveränderungen betragen 0 €, während der Material-/Wareneinkauf um 100.948 € (+32,8 %) gegenüber dem Vorjahresmonat stieg. Möglicherweise fehlt die Buchung der Bestandsveränderung (Hypothese).
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wurde die Bestandsveränderung für April 2025 erfasst?
+2026-10-26T00:35:43+00:00 
+===== ft_rag · rag_k8 · A1-v00_2025-01 · girdi 4275 · çıktı 665 token · 80.1 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis beträgt -104.521 € und liegt damit um 84.561 € unter dem Vorjahreswert von -19.960 €. Die Betriebsergebnis-Marge verschlechterte sich auf -17,5 % (Vorjahr: -2,9 %). Kumuliert ergibt sich ein Ergebnis von -104.521 € (Vorjahreszeitraum: -19.960 €). Die Gesamtleistung sank auf 596.134 € (-12,7 % gegenüber Vorjahr).
+2. Die Umsatzerlöse gingen um 86.844 € (-12,7 %) auf 596.134 € zurück. Die Ursache hierfür ist offen. Im Vormonat lagen die Erlöse bei 589.638 €, kumuliert entspricht dies dem Vorjahreszeitraum.
+3. Die Personalkosten stiegen auf 239.420 € (+28.371 € oder +13,4 % gegenüber Vorjahr). Die Ursache hierfür ist offen. Im Vormonat beliefen sich die Kosten auf 228.015 €, kumuliert entspricht dies dem Vorjahreszeitraum.
+
+**Abweichungen im Detail**
+
+| Position          | Ist          | Vergleich      | Abweichung       | Erklärung          | Quelle oder Hypothese |
+|-------------------|--------------|----------------|------------------|--------------------|------------------------|
+| Umsatzerlöse      | 596.134 €    | Vj. 682.978 €  | -86.844 € (-12,7 %) | Ursache offen     | –                      |
+| Personalkosten    | 239.420 €    | Vj. 211.049 €  | +28.371 € (+13,4 %) | Ursache offen     | –                      |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Die Position liegt mit 35.508 € beim 12,1-fachen des Normalniveaus (2.925 €) und war im Vorjahresmonat ebenfalls erhöht (34.520 €). Möglicherweise fehlt die Abgrenzung einer jährlich wiederkehrenden Zahlung (Hypothese).
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Rückgang der Umsatzerlöse um 86.844 € (-12,7 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg der Personalkosten um 28.371 € (+13,4 %) gegenüber dem Vorjahresmonat?
+- Enthält die Position Versicherungen/Beiträge im Januar eine jährlich wiederkehrende Zahlung, die monatlich abgegrenzt werden müsste?
+2026-10-26T00:35:43+00:00 
+===== ft_ohne · ohne_kontext · A1-v00_2025-01 · girdi 2867 · çıktı 606 token · 26.1 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis beträgt -104.521 € und liegt damit um 84.561 € unter dem Vorjahreswert von -19.960 €. Die Betriebsergebnis-Marge verschlechterte sich auf -17,5 % (Vorjahr: -2,9 %). Die Gesamtleistung sank um 12,7 % auf 596.134 €.
+2. Die Umsatzerlöse gingen um 86.844 € (-12,7 %) auf 596.134 € zurück. Die Ursache hierfür ist offen.
+3. Die Versicherungen/Beiträge stiegen auf 35.508 € und liegen damit deutlich über dem Normalniveau (2.925 €). Möglicherweise handelt es sich um einen ungewöhnlich hohen Wert, der sich wiederholt (Hypothese).
+
+**Abweichungen im Detail**
+
+| Position          | Ist          | Vergleich      | Abweichung       | Erklärung                                      | Quelle oder Hypothese |
+|-------------------|--------------|----------------|------------------|------------------------------------------------|-----------------------|
+| Umsatzerlöse      | 596.134 €    | Vj. 682.978 €  | -86.844 € (-12,7 %) | Ursache offen                                  | –                     |
+| Personalkosten    | 239.420 €    | Vj. 211.049 €  | +28.371 € (+13,4 %) | Ursache offen                                  | –                     |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Die Versicherungen/Beiträge betragen 35.508 € und liegen damit beim 12,1-fachen des Normalniveaus (2.925 €). Im Vorjahresmonat waren sie mit 34.520 € ebenfalls erhöht. Möglicherweise handelt es sich um einen ungewöhnlich hohen Wert, der sich wiederholt (Hypothese). Dann wären die Monatsergebnisse verzerrt.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Rückgang der Umsatzerlöse um 86.844 € (-12,7 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg der Personalkosten um 28.371 € (+13,4 %) gegenüber dem Vorjahresmonat?
+- Welcher Vorgang steckt hinter dem hohen Wert bei Versicherungen/Beiträge im Januar, und ist er einmalig?
+2026-10-26T00:35:43+00:00 
+===== ft_ohne · ohne_kontext · A1-v00_2025-04 · girdi 3278 · çıktı 895 token · 28.8 s
+**Kernaussagen April 2025**
+
+1. Das Betriebsergebnis beträgt 13.730 € und liegt damit um 685 € über dem Vorjahreswert von 13.045 €. Die Betriebsergebnis-Marge sinkt auf 1,8 % (Vorjahr: 2,0 %). Kumuliert ergibt sich ein Minus von 40.306 € (Vorjahreszeitraum: 30.055 €). Die Gesamtleistung steigt auf 780.110 € (+20,9 % gegenüber Vorjahr).
+2. Die Umsatzerlöse steigen um 134.820 € (+20,9 %) auf 780.110 €. Die Ursache hierfür ist offen. Im Vormonat lagen die Erlöse bei 821.378 €, kumuliert bei 2.940.836 € (+154.610 € gegenüber Vorjahreszeitraum).
+3. Der Material-/Wareneinkauf erhöht sich um 100.948 € (+32,8 %) auf 408.669 €. Die Ursache ist offen. Im Vormonat betrug der Einkauf 442.419 €, kumuliert 1.525.895 € (+195.607 € gegenüber Vorjahreszeitraum).
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Umsatzerlöse | 780.110 € | Vj. 645.290 € | +134.820 € (+20,9 %) | Ursache offen | – |
+| Material-/Wareneinkauf | 408.669 € | Vj. 307.721 € | +100.948 € (+32,8 %) | Ursache offen | – |
+| Personalkosten | 231.896 € | Vj. 205.241 € | +26.655 € (+13,0 %) | Ursache offen | – |
+| Sonstiger neutraler Ertrag | 17.371 € | Vj. 0 € | +17.371 € | Ursache offen | – |
+| Sonstige Kosten | 31.792 € | Vj. 24.451 € | +7.341 € (+30,0 %) | Ursache offen | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Die Bestandsveränderungen betragen 0 €, während der Material-/Wareneinkauf um 100.948 € (+32,8 %) gegenüber dem Vorjahresmonat gestiegen ist. Möglicherweise fehlt die Buchung der Bestandsveränderung (Hypothese).
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Anstieg der Umsatzerlöse um 134.820 € (+20,9 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg des Material-/Wareneinkaufs um 100.948 € (+32,8 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg der Personalkosten um 26.655 € (+13,0 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den sonstigen neutralen Ertrag von 17.371 € gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg der sonstigen Kosten um 7.341 € (+30,0 %) gegenüber dem Vorjahresmonat?
+- Wurde die Bestandsveränderung im April erfasst?
+2026-10-26T00:35:43+00:00 
+===== ft_rag · ohne_kontext · A1-v00_2025-01 · girdi 2867 · çıktı 608 token · 25.9 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis beträgt -104.521 € und liegt damit um 84.561 € unter dem Vorjahreswert von -19.960 €. Die Gesamtleistung sank auf 596.134 € (Vorjahr: 682.978 €).
+2. Die Umsatzerlöse gingen um 86.844 € (-12,7 %) auf 596.134 € zurück.
+3. Die Versicherungen/Beiträge entsprechen mit 35.508 € dem 12,1-fachen des Normalniveaus (2.925 €) und waren im Vorjahresmonat ebenfalls erhöht (34.520 €).
+
+**Abweichungen im Detail**
+
+| Position          | Ist          | Vergleich      | Abweichung       | Erklärung                     | Quelle oder Hypothese |
+|-------------------|--------------|----------------|------------------|-------------------------------|-----------------------|
+| Umsatzerlöse      | 596.134 €    | Vj. 682.978 €  | -86.844 € (-12,7 %) | Ursache offen                 | –                     |
+| Personalkosten    | 239.420 €    | Vj. 211.049 €  | +28.371 € (+13,4 %) | Ursache offen                 | –                     |
+| Versicherungen/Beiträge | 35.508 € | Normalniveau 2.925 € | +32.583 € (+1.120 %) | ungewöhnlich hoher Wert      | Hypothese             |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Die Position liegt mit 35.508 € beim 12,1-fachen des Normalniveaus (2.925 €) und war im Vorjahresmonat ebenfalls erhöht (34.520 €). Möglicherweise handelt es sich um eine Verzerrung (Hypothese).
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Rückgang der Umsatzerlöse um 86.844 € (-12,7 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den Anstieg der Personalkosten um 28.371 € (+13,4 %) gegenüber dem Vorjahresmonat?
+- Was ist die Ursache für den ungewöhnlich hohen Wert bei Versicherungen/Beiträge (35.508 €)?
+2026-10-26T00:35:43+00:00 
+===== ft_rag · ohne_kontext · A1-v00_2025-02 · girdi 3218 · çıktı 788 token · 28.1 s
+**Kernaussagen Februar 2025**
+
+1. Das Betriebsergebnis beträgt 14 T€ und liegt damit um 29.532 € unter dem Vorjahreswert von 43.586 €. Die Gesamtleistung sank auf 743.213 € (Vorjahr: 758.554 €).
+2. Die Reparatur- und Instandhaltungskosten fielen auf 15.615 € und verringerten sich um 75.346 € (-82,8 %) gegenüber dem Vorjahr.
+3. Die Material-/Wareneinkäufe stiegen auf 371.339 € (+66.426 € bzw. +21,8 % zum Vorjahr).
+
+**Abweichungen im Detail**
+
+| Position                  | Ist          | Vergleich  | Abweichung       | Erklärung                                      | Quelle oder Hypothese |
+|---------------------------|--------------|------------|------------------|------------------------------------------------|-----------------------|
+| Reparatur/Instandhaltung  | 15.615 €     | Vj. 90.962 € | -75.346 € (-82,8 %) | Ursache offen                                  | –                     |
+| Material-/Wareneinkauf    | 371.339 €    | Vj. 304.913 € | +66.426 € (+21,8 %) | Ursache offen                                  | –                     |
+| Personalkosten            | 229.545 €    | Vj. 201.072 € | +28.473 € (+14,2 %) | Ursache offen                                  | –                     |
+| Werbe-/Reisekosten        | 4.216 €      | Vj. 10.845 € | -6.629 € (-61,1 %) | Ursache offen                                  | –                     |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Die Bestandsveränderungen betragen 0 €. Der Material-/Wareneinkauf stieg auf 371.339 € (+67.871 € bzw. +22,4 % zum Vormonat). Dies könnte auf eine Verzerrung hindeuten (Hypothese).
+- Umsatzerlöse: Die Umsatzerlöse stiegen gegenüber dem Vormonat um 24,7 %, liegen jedoch 2,0 % unter dem Vorjahresmonat. Möglicherweise ist dies auf einen saisonalen Effekt zurückzuführen (Hypothese).
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Rückgang der Reparatur-/Instandhaltungskosten um 75.346 € (-82,8 %) gegenüber dem Vorjahr?
+- Was ist die Ursache für den Anstieg der Material-/Wareneinkäufe um 66.426 € (+21,8 %) gegenüber dem Vorjahr?
+- Was ist die Ursache für den Anstieg der Personalkosten um 28.473 € (+14,2 %) gegenüber dem Vorjahr?
+- Was ist die Ursache für den Rückgang der Werbe-/Reisekosten um 6.629 € (-61,1 %) gegenüber dem Vorjahr?
+- Sind die Bestandsveränderungen FE/UE mit 0 € und der gestiegenen Material-/Wareneinkaufposition verzerrt?
+2026-10-26T00:35:43+00:00 
+===== ft_rag · rag_alle · A1-v00_2025-08 · girdi 4360 · çıktı 644 token · 23.0 s
+**Kernaussagen August 2025**
+
+1. Das Betriebsergebnis beträgt -63 T€ und liegt damit um 1.987 € unter dem Vorjahreswert von -60.890 €. Die Gesamtleistung stieg auf 532.878 € (+6,2 % gegenüber Vorjahr). Kumuliert ergibt sich ein Minus von 312.172 € (Vorjahreszeitraum: -176.629 €).
+2. Der Material-/Wareneinkauf erhöhte sich auf 237.140 € (+23.827 € bzw. +11,2 % gegenüber Vorjahr). Die Ursache hierfür ist offen. Im Vormonat lag der Einkauf bei 428.567 €, kumuliert bei 2.983.441 € (+393.758 € gegenüber Vorjahreszeitraum).
+3. Die Umsatzerlöse sanken gegenüber dem Vormonat um 30,2 %, liegen aber 6,2 % über dem Vorjahresmonat. Dies entspricht dem saisonalen Muster [Quelle: Firmenprofil].
+
+**Abweichungen im Detail**
+
+| Position               | Ist          | Vergleich       | Abweichung       | Erklärung                     | Quelle oder Hypothese |
+|------------------------|--------------|-----------------|------------------|-------------------------------|------------------------|
+| Material-/Wareneinkauf | 237.140 €    | Vj. 213.313 €   | +23.827 € (+11,2 %) | Ursache offen                 | –                      |
+| Werbe-/Reisekosten    | 7.893 €      | Vj. 4.190 €     | +3.703 € (+88,4 %)  | ungewöhnlich hoher Vergleichswert | [Quelle: Kontextnotiz 2024-10 #2] |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Die Bestandsveränderungen betragen 0 €, während der Material-/Wareneinkauf gegenüber dem Vormonat um 191.427 € (-44,7 %) sank. Möglicherweise fehlt die Buchung der Bestandsveränderung (Hypothese).
+- Umsatzerlöse: Die Umsatzerlöse gingen gegenüber dem Vormonat um 30,2 % zurück, liegen aber 6,2 % über dem Vorjahresmonat. Dies ist durch das saisonale Muster bedingt [Quelle: Firmenprofil].
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Was ist die Ursache für den Anstieg des Material-/Wareneinkaufs um 23.827 € (+11,2 %) gegenüber dem Vorjahresmonat?
+- Wurde die Bestandsveränderung für August erfasst?
+2026-10-26T00:35:43+00:00 
+===== ft_rag · rag_alle · A1-v00_2025-01 · girdi 4413 · çıktı 655 token · 23.4 s
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis beträgt -104.521 € und liegt damit um 84.561 € unter dem Vorjahreswert von -19.960 €. Die Betriebsergebnis-Marge verschlechterte sich auf -17,5 % (Vorjahr: -2,9 %). Die Gesamtleistung sank auf 596.134 € (-12,7 % gegenüber Vorjahr).
+2. Die Umsatzerlöse gingen um 86.844 € (-12,7 %) auf 596.134 € zurück, möglicherweise aufgrund eines ungewöhnlich hohen Vergleichswerts im Vorjahresmonat (Hypothese).
+3. Die Versicherungen/Beiträge stiegen auf 35.508 € und liegen damit beim 12,1-fachen des Normalniveaus (2.925 €). Auch im Vorjahresmonat war dieser Wert erhöht (34.520 €).
+
+**Abweichungen im Detail**
+
+| Position          | Ist          | Vergleich      | Abweichung       | Erklärung                                      | Quelle oder Hypothese |
+|-------------------|--------------|----------------|------------------|------------------------------------------------|-----------------------|
+| Umsatzerlöse      | 596.134 €    | Vj. 682.978 €  | -86.844 € (-12,7 %) | ungewöhnlich hoher Vergleichswert im Vorjahr | Hypothese             |
+| Personalkosten    | 239.420 €    | Vj. 211.049 €  | +28.371 € (+13,4 %) | Verstärkung im Bereich CNC-Fertigung und Montage | [Quelle: Kontextnotiz 2024-11; Kontextnotiz 2024-05] |
+| Versicherungen/Beiträge | 35.508 € | Vj. 34.520 €   | +1.000 € (+2,9 %) | möglicher fehlender Abgrenzung einer jährlich wiederkehrenden Zahlung | Hypothese             |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Die Versicherungen/Beiträge liegen mit 35.508 € beim 12,1-fachen des Normalniveaus (2.925 €). Auch im Vorjahresmonat war dieser Wert erhöht (34.520 €). Möglicherweise fehlt die Abgrenzung einer jährlich wiederkehrenden Zahlung (Hypothese). Dann wäre der Januar zu ungünstig und die übrigen Monate zu günstig ausgewiesen.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Enthält die Position Versicherungen/Beiträge im Januar eine jährliche Zahlung, die monatlich abgegrenzt werden müsste?
+2026-10-26T00:35:43+00:00 
+===== base · rag_k8 · A1-v00_2025-03 · girdi 4263 · çıktı 619 token · 26.2 s
+**Kernaussagen März 2025**
+
+1. Das Betriebsergebnis ist mit 36 T€ deutlich besser als im Vorjahresmonat (-6,6 T€) und zeigt eine positive Entwicklung im Vergleich zum Vormonat (14 T€). Die kumulierten Werte zeigen jedoch eine deutliche Verschlechterung im Vergleich zum Vorjahreszeitraum (-71 T€).
+2. Die Gesamtleistung von 834 T€ ist im Vergleich zum Vorjahresmonat um 17,8 % gestiegen, was auf eine höhere Absatzaktivität hindeutet. Die Rohertragsquote ist mit 47,0 % im Vergleich zum Vorjahresmonat besser geworden.
+3. Die Materialquote ist mit 53,0 % leicht gestiegen, was im Kontext der Preissteigerungen bei Stahl ab März [Quelle: Kontextnotiz 2025-03] zu beobachten ist.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 834 T€ | Vj. 708 T€ | 17,8 % | – | – |
+| Rohertrag | 391 T€ | Vj. 320 T€ | 22,3 % | – | – |
+| Gesamtkosten | 357 T€ | Vj. 329 T€ | 8,6 % | – | – |
+| Betriebsergebnis | 36 T€ | Vj. -6,6 T€ | 43 T€ | – | – |
+| Ergebnis vor Steuern | 33 T€ | Vj. -9,6 T€ | 43 T€ | – | – |
+| Umsatzerlöse | 821 T€ | Vj. 699 T€ | 17,4 % | – | – |
+| Material-/Wareneinkauf | 442 T€ | Vj. 388 T€ | 14,1 % | – | – |
+| Personalkosten | 226 T€ | Vj. 200 T€ | 12,9 % | – | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Bestandsveränderungen FE/UE: Es liegt ein Hinweis vor, dass Bestandsveränderungen von Januar und Februar jeweils 0 € betrugen, während im März 12.730 € gebucht wurden. Dies könnte auf eine Nachbuchung von Bestandsveränderungen mehrerer Monate hindeuten.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Für welche Monate gilt die Buchung der Bestandsveränderungen, die im März gebucht wurden?
+2026-10-26T00:35:43+00:00 
+===== base · rag_k8 · A1-v00_2025-07 · girdi 4872 · çıktı 672 token · 27.0 s
+**Kernaussagen Juli 2025**
+
+1. Das Betriebsergebnis ist mit -73 231 € leicht besser als im Vorjahresmonat (-73 203 €), zeigt aber im Vergleich zum Vormonat eine Verschlechterung von -17 228 €.
+2. Die Rohertragsquote ist mit 43,9 % deutlich gesunken, was auf höhere Einkaufspreise ohne Weitergabe an die Kunden hindeuten könnte, da die Preise ab Juni angehoben wurden [Quelle: Kontextnotiz 2025-06].
+3. Die Gesamtkosten sind im Juli 2025 mit 410 679 € niedriger als im Vormonat (484 147 €), was die Verschlechterung des Betriebsergebnisses im Vergleich zum Vormonat mildert.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Gesamtleistung | 763 862 € | Vj. 719 217 € | 6,2 % | – | – |
+| Rohertrag | 335 296 € | Vj. 353 095 € | -5,0 % | – | – |
+| Gesamtkosten | 410 679 € | Vj. 428 356 € | -4,1 % | – | – |
+| Betriebsergebnis | -73 231 € | Vj. -73 203 € | –29 € | – | – |
+| Ergebnis vor Steuern | -75 729 € | Vj. -75 954 € | 225 € | – | – |
+| Vorläufiges Ergebnis | -75 729 € | Vj. -75 954 € | 225 € | – | – |
+| Material-/Wareneinkauf | 428 567 € | Vj. 366 122 € | 17,1 % | – | – |
+| Reparatur/Instandhaltung | 63 657 € | Vj. 96 143 € | -33,8 % | – | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Reparatur/Instandhaltung: Es liegt ein Hinweis vor, dass die Kosten von 63 657 € das 4,1-fache des Normalniveaus (15 359 €) betragen, was auf eine mögliche fehlende Abgrenzung einer wiederkehrenden Zahlung hindeuten könnte.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wurde die Bestandsveränderung für den Monat erfasst, da der Material-/Wareneinkauf stark gestiegen ist, aber die Bestandsveränderungen nicht explizit aufgeführt sind?
+2026-10-26T00:35:43+00:00 Bitti.

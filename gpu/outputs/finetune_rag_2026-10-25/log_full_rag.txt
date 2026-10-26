@@ -1,0 +1,186 @@
+2026-10-24T20:12:09+00:00 Başlangıç · MODE=full · TRAIN=rag · GPU: ['Tesla T4, 15360 MiB', 'Tesla T4, 15360 MiB']
+2026-10-24T20:14:35+00:00 Model + LoRA: 86 s · eğitilen parametre 34.9 Mio. · GPU belleği 11.3 / 15.6 GB
+2026-10-24T20:14:42+00:00 İşlemciye taşınan: ['vision_tower', 'embed_tokens_per_layer', 'audio_tower', 'embed_vision', 'embed_audio'] · GPU belleği 4.8 / 15.6 GB
+2026-10-24T20:14:44+00:00 Şablon: test istemlerinin token sayısı baseline ile aynı (5033, 3218)
+2026-10-24T20:14:54+00:00 Veri: train_rag 898 örnek (MAX_SEQ üstü dışarıda: yok), eğitimde 898 · val 133, kayıp için 32 · token toplamı {'rag': 4799561}
+2026-10-24T20:15:16+00:00 Maske (train): 5214 token, kayıpta 793 · başı '**Kernaussagen Januar 2025**\n\n1. Das Betriebsergeb' · sonu ' abgegrenzt?<turn|>\n' · {'yanit_basi': True, 'istem_yok': True, 'tek_bos': True} · tamam
+2026-10-24T20:20:07+00:00 Doğrulama kaybı (eğitim öncesi): 0.8340 · 32 örnek, 28391 yanıt tokenı · 291 s
+2026-10-24T20:24:23+00:00   adım 1/113 · loss=0.9316, grad_norm=0.4704, learning_rate=0, epoch=0.008909
+2026-10-24T20:28:40+00:00   adım 2/113 · loss=0.8571, grad_norm=0.4566, learning_rate=1.667e-05, epoch=0.01782
+2026-10-24T20:32:41+00:00   adım 3/113 · loss=0.8758, grad_norm=0.5646, learning_rate=3.333e-05, epoch=0.02673
+2026-10-24T20:37:43+00:00   adım 4/113 · loss=0.8157, grad_norm=0.4556, learning_rate=5e-05, epoch=0.03563
+2026-10-24T20:42:06+00:00   adım 5/113 · loss=0.8189, grad_norm=0.4374, learning_rate=6.667e-05, epoch=0.04454
+2026-10-24T20:46:10+00:00   adım 6/113 · loss=0.7315, grad_norm=0.3952, learning_rate=8.333e-05, epoch=0.05345
+2026-10-24T20:50:27+00:00   adım 7/113 · loss=0.7226, grad_norm=0.4146, learning_rate=0.0001, epoch=0.06236
+2026-10-24T20:54:32+00:00   adım 8/113 · loss=0.629, grad_norm=0.3699, learning_rate=0.0001167, epoch=0.07127
+2026-10-24T20:58:35+00:00   adım 9/113 · loss=0.5734, grad_norm=0.3495, learning_rate=0.0001333, epoch=0.08018
+2026-10-24T21:02:46+00:00   adım 10/113 · loss=0.5472, grad_norm=0.3156, learning_rate=0.00015, epoch=0.08909
+2026-10-24T21:06:59+00:00   adım 11/113 · loss=0.5071, grad_norm=0.3105, learning_rate=0.0001667, epoch=0.098
+2026-10-24T21:11:30+00:00   adım 12/113 · loss=0.4684, grad_norm=0.2699, learning_rate=0.0001833, epoch=0.1069
+2026-10-24T21:15:42+00:00   adım 13/113 · loss=0.4545, grad_norm=0.2586, learning_rate=0.0002, epoch=0.1158
+2026-10-24T21:19:53+00:00   adım 14/113 · loss=0.4615, grad_norm=0.2956, learning_rate=0.000198, epoch=0.1247
+2026-10-24T21:24:15+00:00   adım 15/113 · loss=0.4996, grad_norm=0.3739, learning_rate=0.000196, epoch=0.1336
+2026-10-24T21:28:34+00:00   adım 16/113 · loss=0.4772, grad_norm=0.3644, learning_rate=0.0001941, epoch=0.1425
+2026-10-24T21:33:00+00:00   adım 17/113 · loss=0.4213, grad_norm=0.3082, learning_rate=0.0001921, epoch=0.1514
+2026-10-24T21:36:42+00:00   adım 18/113 · loss=0.4498, grad_norm=0.2941, learning_rate=0.0001901, epoch=0.1604
+2026-10-24T21:40:37+00:00   adım 19/113 · loss=0.3722, grad_norm=0.2543, learning_rate=0.0001881, epoch=0.1693
+2026-10-24T21:44:35+00:00   adım 20/113 · loss=0.345, grad_norm=0.2038, learning_rate=0.0001861, epoch=0.1782
+2026-10-24T21:48:23+00:00   adım 21/113 · loss=0.3653, grad_norm=0.2015, learning_rate=0.0001842, epoch=0.1871
+2026-10-24T21:52:48+00:00   adım 22/113 · loss=0.3281, grad_norm=0.1834, learning_rate=0.0001822, epoch=0.196
+2026-10-24T21:57:24+00:00   adım 23/113 · loss=0.2965, grad_norm=0.1835, learning_rate=0.0001802, epoch=0.2049
+2026-10-24T22:01:27+00:00   adım 24/113 · loss=0.2568, grad_norm=0.195, learning_rate=0.0001782, epoch=0.2138
+2026-10-24T22:05:30+00:00   adım 25/113 · loss=0.2621, grad_norm=0.1611, learning_rate=0.0001762, epoch=0.2227
+2026-10-24T22:09:48+00:00   adım 26/113 · loss=0.2646, grad_norm=0.1626, learning_rate=0.0001743, epoch=0.2316
+2026-10-24T22:14:13+00:00   adım 27/113 · loss=0.2554, grad_norm=0.1957, learning_rate=0.0001723, epoch=0.2405
+2026-10-24T22:18:04+00:00   adım 28/113 · loss=0.2611, grad_norm=0.1695, learning_rate=0.0001703, epoch=0.2494
+2026-10-24T22:22:12+00:00   adım 29/113 · loss=0.2337, grad_norm=0.16, learning_rate=0.0001683, epoch=0.2584
+2026-10-24T22:26:10+00:00   adım 30/113 · loss=0.2457, grad_norm=0.1898, learning_rate=0.0001663, epoch=0.2673
+2026-10-24T22:30:39+00:00   adım 31/113 · loss=0.2195, grad_norm=0.1487, learning_rate=0.0001644, epoch=0.2762
+2026-10-24T22:35:23+00:00   adım 32/113 · loss=0.2508, grad_norm=0.1677, learning_rate=0.0001624, epoch=0.2851
+2026-10-24T22:39:29+00:00   adım 33/113 · loss=0.1915, grad_norm=0.1766, learning_rate=0.0001604, epoch=0.294
+2026-10-24T22:43:37+00:00   adım 34/113 · loss=0.2347, grad_norm=0.172, learning_rate=0.0001584, epoch=0.3029
+2026-10-24T22:48:07+00:00   adım 35/113 · loss=0.2186, grad_norm=0.1685, learning_rate=0.0001564, epoch=0.3118
+2026-10-24T22:51:52+00:00   adım 36/113 · loss=0.2287, grad_norm=0.1797, learning_rate=0.0001545, epoch=0.3207
+2026-10-24T22:56:06+00:00   adım 37/113 · loss=0.2375, grad_norm=0.1914, learning_rate=0.0001525, epoch=0.3296
+2026-10-24T22:59:52+00:00   adım 38/113 · loss=0.2258, grad_norm=0.194, learning_rate=0.0001505, epoch=0.3385
+2026-10-24T23:04:21+00:00   adım 39/113 · loss=0.2052, grad_norm=0.1506, learning_rate=0.0001485, epoch=0.3474
+2026-10-24T23:08:30+00:00   adım 40/113 · loss=0.1945, grad_norm=0.1488, learning_rate=0.0001465, epoch=0.3563
+2026-10-24T23:12:44+00:00   adım 41/113 · loss=0.1693, grad_norm=0.1458, learning_rate=0.0001446, epoch=0.3653
+2026-10-24T23:17:13+00:00   adım 42/113 · loss=0.2108, grad_norm=0.1529, learning_rate=0.0001426, epoch=0.3742
+2026-10-24T23:21:10+00:00   adım 43/113 · loss=0.1921, grad_norm=0.1639, learning_rate=0.0001406, epoch=0.3831
+2026-10-24T23:25:24+00:00   adım 44/113 · loss=0.2059, grad_norm=0.162, learning_rate=0.0001386, epoch=0.392
+2026-10-24T23:29:10+00:00   adım 45/113 · loss=0.201, grad_norm=0.1875, learning_rate=0.0001366, epoch=0.4009
+2026-10-24T23:33:20+00:00   adım 46/113 · loss=0.2008, grad_norm=0.1692, learning_rate=0.0001347, epoch=0.4098
+2026-10-24T23:37:21+00:00   adım 47/113 · loss=0.1903, grad_norm=0.1588, learning_rate=0.0001327, epoch=0.4187
+2026-10-24T23:41:31+00:00   adım 48/113 · loss=0.183, grad_norm=0.1623, learning_rate=0.0001307, epoch=0.4276
+2026-10-24T23:45:49+00:00   adım 49/113 · loss=0.158, grad_norm=0.1517, learning_rate=0.0001287, epoch=0.4365
+2026-10-24T23:49:52+00:00   adım 50/113 · loss=0.2095, grad_norm=0.1816, learning_rate=0.0001267, epoch=0.4454
+2026-10-24T23:53:58+00:00   adım 51/113 · loss=0.1799, grad_norm=0.1975, learning_rate=0.0001248, epoch=0.4543
+2026-10-24T23:58:38+00:00   adım 52/113 · loss=0.1689, grad_norm=0.1563, learning_rate=0.0001228, epoch=0.4633
+2026-10-25T00:02:26+00:00   adım 53/113 · loss=0.1585, grad_norm=0.163, learning_rate=0.0001208, epoch=0.4722
+2026-10-25T00:06:45+00:00   adım 54/113 · loss=0.1528, grad_norm=0.1623, learning_rate=0.0001188, epoch=0.4811
+2026-10-25T00:10:58+00:00   adım 55/113 · loss=0.1634, grad_norm=0.1539, learning_rate=0.0001168, epoch=0.49
+2026-10-25T00:14:44+00:00   adım 56/113 · loss=0.1816, grad_norm=0.1727, learning_rate=0.0001149, epoch=0.4989
+2026-10-25T00:18:32+00:00   adım 57/113 · loss=0.159, grad_norm=0.1597, learning_rate=0.0001129, epoch=0.5078
+2026-10-25T00:22:34+00:00   adım 58/113 · loss=0.2071, grad_norm=0.1989, learning_rate=0.0001109, epoch=0.5167
+2026-10-25T00:26:33+00:00   adım 59/113 · loss=0.1685, grad_norm=0.169, learning_rate=0.0001089, epoch=0.5256
+2026-10-25T00:30:56+00:00   adım 60/113 · loss=0.1477, grad_norm=0.1786, learning_rate=0.0001069, epoch=0.5345
+2026-10-25T00:35:04+00:00   adım 61/113 · loss=0.1499, grad_norm=0.1908, learning_rate=0.000105, epoch=0.5434
+2026-10-25T00:39:09+00:00   adım 62/113 · loss=0.1471, grad_norm=0.1821, learning_rate=0.000103, epoch=0.5523
+2026-10-25T00:43:29+00:00   adım 63/113 · loss=0.1769, grad_norm=0.1973, learning_rate=0.000101, epoch=0.5612
+2026-10-25T00:47:33+00:00   adım 64/113 · loss=0.1793, grad_norm=0.1946, learning_rate=9.901e-05, epoch=0.5702
+2026-10-25T00:52:05+00:00   adım 65/113 · loss=0.1236, grad_norm=0.1494, learning_rate=9.703e-05, epoch=0.5791
+2026-10-25T00:56:13+00:00   adım 66/113 · loss=0.1565, grad_norm=0.1678, learning_rate=9.505e-05, epoch=0.588
+2026-10-25T01:00:32+00:00   adım 67/113 · loss=0.153, grad_norm=0.1709, learning_rate=9.307e-05, epoch=0.5969
+2026-10-25T01:04:40+00:00   adım 68/113 · loss=0.1805, grad_norm=0.1729, learning_rate=9.109e-05, epoch=0.6058
+2026-10-25T01:08:51+00:00   adım 69/113 · loss=0.1565, grad_norm=0.2042, learning_rate=8.911e-05, epoch=0.6147
+2026-10-25T01:13:10+00:00   adım 70/113 · loss=0.1318, grad_norm=0.1514, learning_rate=8.713e-05, epoch=0.6236
+2026-10-25T01:17:27+00:00   adım 71/113 · loss=0.1515, grad_norm=0.1808, learning_rate=8.515e-05, epoch=0.6325
+2026-10-25T01:21:36+00:00   adım 72/113 · loss=0.1608, grad_norm=0.175, learning_rate=8.317e-05, epoch=0.6414
+2026-10-25T01:25:39+00:00   adım 73/113 · loss=0.1618, grad_norm=0.1814, learning_rate=8.119e-05, epoch=0.6503
+2026-10-25T01:30:16+00:00   adım 74/113 · loss=0.1941, grad_norm=0.2012, learning_rate=7.921e-05, epoch=0.6592
+2026-10-25T01:34:12+00:00   adım 75/113 · loss=0.149, grad_norm=0.16, learning_rate=7.723e-05, epoch=0.6682
+2026-10-25T01:38:25+00:00   adım 76/113 · loss=0.1635, grad_norm=0.2641, learning_rate=7.525e-05, epoch=0.6771
+2026-10-25T01:42:41+00:00   adım 77/113 · loss=0.1726, grad_norm=0.1797, learning_rate=7.327e-05, epoch=0.686
+2026-10-25T01:47:01+00:00   adım 78/113 · loss=0.1436, grad_norm=0.1824, learning_rate=7.129e-05, epoch=0.6949
+2026-10-25T01:51:17+00:00   adım 79/113 · loss=0.1387, grad_norm=0.2265, learning_rate=6.931e-05, epoch=0.7038
+2026-10-25T01:55:17+00:00   adım 80/113 · loss=0.1285, grad_norm=0.1536, learning_rate=6.733e-05, epoch=0.7127
+2026-10-25T01:59:29+00:00   adım 81/113 · loss=0.1546, grad_norm=0.1804, learning_rate=6.535e-05, epoch=0.7216
+2026-10-25T02:03:59+00:00   adım 82/113 · loss=0.1451, grad_norm=0.1584, learning_rate=6.337e-05, epoch=0.7305
+2026-10-25T02:07:41+00:00   adım 83/113 · loss=0.1794, grad_norm=0.1923, learning_rate=6.139e-05, epoch=0.7394
+2026-10-25T02:11:45+00:00   adım 84/113 · loss=0.1815, grad_norm=0.1994, learning_rate=5.941e-05, epoch=0.7483
+2026-10-25T02:15:32+00:00   adım 85/113 · loss=0.1793, grad_norm=0.1983, learning_rate=5.743e-05, epoch=0.7572
+2026-10-25T02:19:29+00:00   adım 86/113 · loss=0.1902, grad_norm=0.2088, learning_rate=5.545e-05, epoch=0.7661
+2026-10-25T02:24:03+00:00   adım 87/113 · loss=0.1894, grad_norm=0.2165, learning_rate=5.347e-05, epoch=0.7751
+2026-10-25T02:28:25+00:00   adım 88/113 · loss=0.1351, grad_norm=0.1778, learning_rate=5.149e-05, epoch=0.784
+2026-10-25T02:33:00+00:00   adım 89/113 · loss=0.1319, grad_norm=0.1757, learning_rate=4.95e-05, epoch=0.7929
+2026-10-25T02:37:00+00:00   adım 90/113 · loss=0.1835, grad_norm=0.2146, learning_rate=4.752e-05, epoch=0.8018
+2026-10-25T02:41:14+00:00   adım 91/113 · loss=0.1494, grad_norm=0.1829, learning_rate=4.554e-05, epoch=0.8107
+2026-10-25T02:45:28+00:00   adım 92/113 · loss=0.1337, grad_norm=0.1612, learning_rate=4.356e-05, epoch=0.8196
+2026-10-25T02:49:37+00:00   adım 93/113 · loss=0.1505, grad_norm=0.1732, learning_rate=4.158e-05, epoch=0.8285
+2026-10-25T02:53:29+00:00   adım 94/113 · loss=0.1596, grad_norm=0.2101, learning_rate=3.96e-05, epoch=0.8374
+2026-10-25T02:57:04+00:00   adım 95/113 · loss=0.1773, grad_norm=0.1998, learning_rate=3.762e-05, epoch=0.8463
+2026-10-25T03:01:16+00:00   adım 96/113 · loss=0.1762, grad_norm=0.211, learning_rate=3.564e-05, epoch=0.8552
+2026-10-25T03:05:39+00:00   adım 97/113 · loss=0.1797, grad_norm=0.2006, learning_rate=3.366e-05, epoch=0.8641
+2026-10-25T03:09:48+00:00   adım 98/113 · loss=0.1385, grad_norm=0.1966, learning_rate=3.168e-05, epoch=0.8731
+2026-10-25T03:13:48+00:00   adım 99/113 · loss=0.1489, grad_norm=0.1834, learning_rate=2.97e-05, epoch=0.882
+2026-10-25T03:18:01+00:00   adım 100/113 · loss=0.1303, grad_norm=0.1781, learning_rate=2.772e-05, epoch=0.8909
+2026-10-25T03:22:03+00:00   adım 101/113 · loss=0.1459, grad_norm=0.2067, learning_rate=2.574e-05, epoch=0.8998
+2026-10-25T03:26:12+00:00   adım 102/113 · loss=0.1383, grad_norm=0.1701, learning_rate=2.376e-05, epoch=0.9087
+2026-10-25T03:30:41+00:00   adım 103/113 · loss=0.1664, grad_norm=0.1991, learning_rate=2.178e-05, epoch=0.9176
+2026-10-25T03:35:07+00:00   adım 104/113 · loss=0.1546, grad_norm=0.1962, learning_rate=1.98e-05, epoch=0.9265
+2026-10-25T03:39:35+00:00   adım 105/113 · loss=0.1284, grad_norm=0.1671, learning_rate=1.782e-05, epoch=0.9354
+2026-10-25T03:43:33+00:00   adım 106/113 · loss=0.1414, grad_norm=0.1939, learning_rate=1.584e-05, epoch=0.9443
+2026-10-25T03:47:49+00:00   adım 107/113 · loss=0.1236, grad_norm=0.1817, learning_rate=1.386e-05, epoch=0.9532
+2026-10-25T03:51:37+00:00   adım 108/113 · loss=0.1238, grad_norm=0.1638, learning_rate=1.188e-05, epoch=0.9621
+2026-10-25T03:55:42+00:00   adım 109/113 · loss=0.1447, grad_norm=0.3575, learning_rate=9.901e-06, epoch=0.971
+2026-10-25T03:59:25+00:00   adım 110/113 · loss=0.1351, grad_norm=0.1816, learning_rate=7.921e-06, epoch=0.98
+2026-10-25T04:03:20+00:00   adım 111/113 · loss=0.1605, grad_norm=0.2723, learning_rate=5.941e-06, epoch=0.9889
+2026-10-25T04:07:20+00:00   adım 112/113 · loss=0.1661, grad_norm=0.2035, learning_rate=3.96e-06, epoch=0.9978
+2026-10-25T04:08:26+00:00   adım 113/113 · loss=0.1357, grad_norm=0.3287, learning_rate=1.98e-06, epoch=1
+2026-10-25T04:08:30+00:00   adım 113/113 · train_runtime=2.81e+04, train_samples_per_second=0.032, train_steps_per_second=0.004, total_flos=1.292e+17, train_loss=0.2543, epoch=1
+2026-10-25T04:08:31+00:00 Eğitim: adım 113/113 · 468 dk · en yüksek GPU belleği 11.6 GB · tamamlandı
+2026-10-25T04:13:01+00:00 Doğrulama kaybı (eğitim sonrası): 0.1302 · 32 örnek, 28391 yanıt tokenı · 270 s
+2026-10-25T04:13:05+00:00 Bağdaştırıcı kaydedildi: adapter_rag · 516 tensör · ör. base_model.model.model.language_model.layers.0.mlp.down_proj.lora_A.weight
+2026-10-25T04:13:22+00:00 GGUF: adapter_rag.gguf · 70 MB · 516 tensör (tam dil LoRA'sı: 516)
+2026-10-25T04:16:15+00:00   llama-server GPU 1: CUDA0: Tesla T4 (14911 MiB, 14806 MiB free) · GPU belleği 0 → 3739 MiB
+2026-10-25T04:17:29+00:00 
+===== Deneme · A2-v120_2025-01 · taban (LoRA ölçeği 0.0) · 615 token · 74 s · {'ueberschriften': 4, 'hypothese': 0, 'quelle': 0, 'woerter': 288}
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis von 117 851 € ist im Vergleich zum Vorjahresmonat von 36 962 € deutlich gestiegen, was auf eine verbesserte operative Performance hindeutet, obwohl die Gesamtleistung mit 1 566 997 € im Vergleich zum Vorjahresmonat um 14,9 % gesunken ist.
+2. Die Rohertragsquote hat sich mit 35,8 % stark verbessert und liegt damit deutlich über dem Vorjahreswert von 26,8 %, was auf eine positive Entwicklung der Preisgestaltung oder des Produktmixes hindeutet.
+3. Die Materialquote ist mit 64,2 % im Vergleich zum Vorjahresmonat um 9,0 Prozentpunkte gesunken, was die positive Entwicklung der Rohertragsquote stützt.
+
+**Abweichungen im Detail**
+
+| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |
+|---|---|---|---|---|---|
+| Material-/Wareneinkauf | 1 005 447 € | Vj. 1 347 809 € | -25,4 % | Ursache offen | – |
+| Umsatzerlöse | 1 566 997 € | Vj. 1 842 063 € | -14,9 % | [Firmenprofil] | – |
+| Reparatur/Instandhaltung | 7 196 € | Vj. 49 055 € | -85,3 % | Ursache offen | – |
+| Personalkosten | 236 889 € | Vj. 205 591 € | 15,2 % | [Kontextnotiz 2025-01] | – |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Versicherungen/Beiträge: Es liegt ein Hinweis vor, dass Versicherungen/Beiträge mit 47 207 € das 12,2-fache des Normalniveaus aufweisen, was dem Vorjahresmonat ähnlich ist. Dies könnte auf eine mögliche fehlende Abgrenzung einer wiederkehrenden Zahlung hindeuten.
+- Abschreibungen: Es wird darauf hingewiesen, dass Abschreibungen 0 € betragen, obwohl im Durchschnitt 17 720 € pro Monat anfielen. Dies könnte auf eine fehlende monatliche anteilige Buchung hindeuten.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Wird die Zahlung für Versicherungen/Beiträge monatlich abgegrenzt?
+- Werden die Abschreibungen monatlich anteilig gebucht?
+2026-10-25T04:18:03+00:00 
+===== Deneme · A2-v120_2025-01 · ince_ayar (LoRA ölçeği 1.0) · 1098 token · 34 s · {'ueberschriften': 4, 'hypothese': 4, 'quelle': 1, 'woerter': 453}
+**Kernaussagen Januar 2025**
+
+1. Das Betriebsergebnis beträgt 118.051 € und liegt damit um 80.890 € über dem Vorjahreswert von 36.962 €. Die Betriebsergebnis-Marge steigt auf 7,5 % (Vorjahr: 2,0 %). Die Gesamtleistung des Monats beläuft sich auf 1.566.997 € und ist um 14,9 % niedriger als im Vorjahr.
+2. Der Material-/Wareneinkauf sinkt auf 1.005.447 € und damit um 342.362 € (-25,4 %) gegenüber dem Vorjahr. Die Ursache hierfür ist offen.
+3. Die Rohertragsquote steigt auf 35,8 % und weicht damit deutlich vom Vormonat (21,3 %) und Vorjahresmonat (26,8 %) ab. Dies könnte auf einen Buchungseffekt zurückzuführen sein (Hypothese).
+
+**Abweichungen im Detail**
+
+| Position                  | Ist          | Vergleich      | Abweichung       | Erklärung                                      | Quelle oder Hypothese |
+|---------------------------|--------------|----------------|------------------|------------------------------------------------|-----------------------|
+| Material-/Wareneinkauf    | 1.005.447 €  | Vj. 1.347.809 €| -342.362 € (-25,4 %) | Ursache offen                                  | –                     |
+| Umsatzerlöse              | 1.566.997 €  | Vj. 1.842.063 €| -275.066 € (-14,9 %) | Ursache offen                                  | –                     |
+| Reparatur/Instandhaltung  | 7.196 €      | Vj. 49.055 €   | -41.859 € (-85,3 %) | Ursache offen                                  | –                     |
+| Personalkosten            | 236.889 €    | Vj. 205.591 €  | +31.298 € (+15,2 %) | Verstärkung Vertriebsinnendienst               | [Quelle: Kontextnotiz 2025-01] |
+| Versicherungen/Beiträge  | 47.207 €     | Vj. 46.447 €   | +760 €          | möglicher fehlender Abgrenzung einer Zahlung      | Hypothese             |
+| Rohertragsquote           | 35,8 %       | Vm. 21,3 %     | +14,5 Prozentpunkte | möglicher Buchungseffekt                       | Hypothese             |
+
+**Hinweise auf mögliche Verzerrungen**
+
+- Rohertragsquote: Die Rohertragsquote von 35,8 % weicht stark vom Vormonat (21,3 %) und Vorjahresmonat (26,8 %) ab. Möglicherweise sind Wareneingänge oder Eingangsrechnungen im falschen Monat gebucht oder eine Bestandsbuchung fehlt (Hypothese). Dann wären Rohertrag und Ergebnis des Monats verzerrt.
+- Abschreibungen: Die Abschreibungen betragen 0 €, obwohl der Durchschnitt der letzten 12 Monate bei 17.720 € liegt. Vermutlich werden sie erst zum Jahresende gebucht (Hypothese). Dann wären die Monatsergebnisse bis November zu günstig und der Dezember zu ungünstig ausgewiesen.
+- Versicherungen/Beiträge: Die Position liegt mit 47.207 € beim 12,2-fachen des Normalniveaus (3.864 €) und war im Vorjahr ähnlich erhöht. Möglicherweise fehlt die Abgrenzung einer jährlich wiederkehrenden Zahlung (Hypothese). Dann wäre der Januar zu ungünstig, die übrigen Monate zu günstig ausgewiesen.
+
+**Offene Fragen an Buchhaltung / Steuerberater**
+
+- Sind alle Wareneingänge und Eingangsrechnungen des Januar periodengerecht gebucht?
+- Was ist die Ursache für den Rückgang des Material-/Wareneinkaufs um 342.362 € (-25,4 %) gegenüber dem Vorjahr?
+- Was ist die Ursache für den Rückgang der Umsatzerlöse um 275.066 € (-14,9 %) gegenüber dem Vorjahr?
+- Was ist die Ursache für den Rückgang der Reparatur-/Instandhaltungskosten um 41.859 € (-85,3 %) gegenüber dem Vorjahr?
+- Enthält die Position Versicherungen/Beiträge im Januar eine jährliche Zahlung, die monatlich abgegrenzt werden müsste?
+- Werden die Abschreibungen monatlich anteilig gebucht?
+2026-10-25T04:18:03+00:00 İdeal metin: {'ueberschriften': 4, 'hypothese': 4, 'quelle': 1, 'woerter': 416}

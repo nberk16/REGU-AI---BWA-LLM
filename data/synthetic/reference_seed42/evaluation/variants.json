@@ -1,0 +1,1952 @@
+[
+ {
+  "firm_id": "A1-v00",
+  "archetype": "A1",
+  "name": "Muster GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 55,
+  "revenue_2024": 8400000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 42.0,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 33.0,
+   "raumkosten": 3.0,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.8,
+   "besondere_kosten": 0.3,
+   "fahrzeugkosten": 1.0,
+   "werbe_reisekosten": 0.6,
+   "kosten_warenabgabe": 1.2,
+   "abschreibungen": 5.0,
+   "reparatur_instandhaltung": 2.2,
+   "sonstige_kosten": 4.5,
+   "zinsaufwand": 0.4
+  },
+  "season_index": [
+   0.92,
+   0.98,
+   1.08,
+   1.02,
+   1.04,
+   1.06,
+   1.0,
+   0.78,
+   1.08,
+   1.08,
+   1.06,
+   0.9
+  ],
+  "trend_pct": {
+   "2024": 3.0,
+   "2025": 3.0,
+   "2026": 2.0
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    3,
+    3,
+    3
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 53.8,
+   "weihnachtsgeld_share_pct": 59.8,
+   "praemien_share_pct": 47.4
+  }
+ },
+ {
+  "firm_id": "A1-v01",
+  "archetype": "A1",
+  "name": "Modell Präzisionsteile GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 65,
+  "revenue_2024": 9927272.73,
+  "quotas_pct": {
+   "material_wareneinkauf": 42.08,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 32.66,
+   "raumkosten": 3.19,
+   "betriebliche_steuern": 0.21,
+   "versicherungen_beitraege": 0.75,
+   "besondere_kosten": 0.32,
+   "fahrzeugkosten": 1.03,
+   "werbe_reisekosten": 0.56,
+   "kosten_warenabgabe": 1.16,
+   "abschreibungen": 4.83,
+   "reparatur_instandhaltung": 2.38,
+   "sonstige_kosten": 4.68,
+   "zinsaufwand": 0.42
+  },
+  "season_index": [
+   0.904,
+   0.976,
+   1.096,
+   1.024,
+   1.048,
+   1.072,
+   1.0,
+   0.7359,
+   1.096,
+   1.096,
+   1.072,
+   0.88
+  ],
+  "trend_pct": {
+   "2024": 1.9,
+   "2025": 1.9,
+   "2026": 1.9
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    4,
+    4,
+    3
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    1
+   ],
+   "urlaubsgeld_share_pct": 40.3,
+   "weihnachtsgeld_share_pct": 86.0,
+   "praemien_share_pct": 59.5
+  }
+ },
+ {
+  "firm_id": "A1-v02",
+  "archetype": "A1",
+  "name": "Vorlage Metalltechnik GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 61,
+  "revenue_2024": 9316363.64,
+  "quotas_pct": {
+   "material_wareneinkauf": 42.72,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 33.69,
+   "raumkosten": 3.22,
+   "betriebliche_steuern": 0.21,
+   "versicherungen_beitraege": 0.84,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 1.02,
+   "werbe_reisekosten": 0.6,
+   "kosten_warenabgabe": 1.1,
+   "abschreibungen": 5.43,
+   "reparatur_instandhaltung": 2.21,
+   "sonstige_kosten": 4.24,
+   "zinsaufwand": 0.41
+  },
+  "season_index": [
+   0.9015,
+   0.9754,
+   1.0985,
+   1.0246,
+   1.0492,
+   1.0739,
+   1.0,
+   0.7292,
+   1.0985,
+   1.0985,
+   1.0739,
+   0.8769
+  ],
+  "trend_pct": {
+   "2024": -0.82,
+   "2025": -0.82,
+   "2026": -0.82
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    4,
+    4,
+    2
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    0
+   ],
+   "urlaubsgeld_share_pct": 42.5,
+   "weihnachtsgeld_share_pct": 66.4,
+   "praemien_share_pct": 40.6
+  }
+ },
+ {
+  "firm_id": "A1-v03",
+  "archetype": "A1",
+  "name": "Schema Zerspanung GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 60,
+  "revenue_2024": 9163636.36,
+  "quotas_pct": {
+   "material_wareneinkauf": 42.22,
+   "sonstige_betriebliche_erloese": 0.28,
+   "personalkosten": 31.55,
+   "raumkosten": 2.91,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.75,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 1.0,
+   "werbe_reisekosten": 0.55,
+   "kosten_warenabgabe": 1.14,
+   "abschreibungen": 5.14,
+   "reparatur_instandhaltung": 2.03,
+   "sonstige_kosten": 4.83,
+   "zinsaufwand": 0.43
+  },
+  "season_index": [
+   0.904,
+   0.976,
+   1.096,
+   1.024,
+   1.048,
+   1.072,
+   1.0,
+   0.7359,
+   1.096,
+   1.096,
+   1.072,
+   0.88
+  ],
+  "trend_pct": {
+   "2024": 3.72,
+   "2025": 3.72,
+   "2026": 3.72
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    3,
+    4,
+    3
+   ],
+   "episodic_bv_per_year": [
+    1,
+    0,
+    1
+   ],
+   "urlaubsgeld_share_pct": 57.4,
+   "weihnachtsgeld_share_pct": 85.0,
+   "praemien_share_pct": 36.8
+  }
+ },
+ {
+  "firm_id": "A1-v04",
+  "archetype": "A1",
+  "name": "Demo Drehteile GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 72,
+  "revenue_2024": 10996363.64,
+  "quotas_pct": {
+   "material_wareneinkauf": 43.01,
+   "sonstige_betriebliche_erloese": 0.29,
+   "personalkosten": 34.65,
+   "raumkosten": 3.0,
+   "betriebliche_steuern": 0.19,
+   "versicherungen_beitraege": 0.84,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 0.94,
+   "werbe_reisekosten": 0.63,
+   "kosten_warenabgabe": 1.24,
+   "abschreibungen": 5.23,
+   "reparatur_instandhaltung": 2.17,
+   "sonstige_kosten": 4.29,
+   "zinsaufwand": 0.42
+  },
+  "season_index": [
+   0.9056,
+   0.9764,
+   1.0944,
+   1.0236,
+   1.0472,
+   1.0708,
+   1.0,
+   0.7403,
+   1.0944,
+   1.0944,
+   1.0708,
+   0.882
+  ],
+  "trend_pct": {
+   "2024": 4.04,
+   "2025": 4.04,
+   "2026": 4.04
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    3,
+    2,
+    2
+   ],
+   "episodic_bv_per_year": [
+    0,
+    1,
+    1
+   ],
+   "urlaubsgeld_share_pct": 52.4,
+   "weihnachtsgeld_share_pct": 60.8,
+   "praemien_share_pct": 46.7
+  }
+ },
+ {
+  "firm_id": "A1-v05",
+  "archetype": "A1",
+  "name": "Probe Präzisionsteile GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 84,
+  "revenue_2024": 12829090.91,
+  "quotas_pct": {
+   "material_wareneinkauf": 41.67,
+   "sonstige_betriebliche_erloese": 0.28,
+   "personalkosten": 33.29,
+   "raumkosten": 2.75,
+   "betriebliche_steuern": 0.21,
+   "versicherungen_beitraege": 0.85,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 0.98,
+   "werbe_reisekosten": 0.61,
+   "kosten_warenabgabe": 1.18,
+   "abschreibungen": 4.53,
+   "reparatur_instandhaltung": 2.06,
+   "sonstige_kosten": 4.7,
+   "zinsaufwand": 0.43
+  },
+  "season_index": [
+   0.9315,
+   0.9829,
+   1.0685,
+   1.0171,
+   1.0342,
+   1.0514,
+   1.0,
+   0.8117,
+   1.0685,
+   1.0685,
+   1.0514,
+   0.9144
+  ],
+  "trend_pct": {
+   "2024": -0.48,
+   "2025": -0.48,
+   "2026": -0.48
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    4,
+    3,
+    4
+   ],
+   "episodic_bv_per_year": [
+    0,
+    1,
+    0
+   ],
+   "urlaubsgeld_share_pct": 40.6,
+   "weihnachtsgeld_share_pct": 66.8,
+   "praemien_share_pct": 63.4
+  }
+ },
+ {
+  "firm_id": "A1-v06",
+  "archetype": "A1",
+  "name": "Typus Metalltechnik GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 62,
+  "revenue_2024": 9469090.91,
+  "quotas_pct": {
+   "material_wareneinkauf": 41.06,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 32.87,
+   "raumkosten": 2.71,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.79,
+   "besondere_kosten": 0.32,
+   "fahrzeugkosten": 1.08,
+   "werbe_reisekosten": 0.55,
+   "kosten_warenabgabe": 1.3,
+   "abschreibungen": 4.8,
+   "reparatur_instandhaltung": 2.33,
+   "sonstige_kosten": 4.46,
+   "zinsaufwand": 0.36
+  },
+  "season_index": [
+   0.9376,
+   0.9844,
+   1.0624,
+   1.0156,
+   1.0312,
+   1.0468,
+   1.0,
+   0.8284,
+   1.0624,
+   1.0624,
+   1.0468,
+   0.922
+  ],
+  "trend_pct": {
+   "2024": -1.13,
+   "2025": -1.13,
+   "2026": -1.13
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    4,
+    2
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    0
+   ],
+   "urlaubsgeld_share_pct": 58.8,
+   "weihnachtsgeld_share_pct": 57.5,
+   "praemien_share_pct": 45.2
+  }
+ },
+ {
+  "firm_id": "A1-v07",
+  "archetype": "A1",
+  "name": "Exemplar Zerspanung GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 55,
+  "revenue_2024": 8400000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 42.65,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 30.01,
+   "raumkosten": 2.94,
+   "betriebliche_steuern": 0.19,
+   "versicherungen_beitraege": 0.86,
+   "besondere_kosten": 0.31,
+   "fahrzeugkosten": 0.9,
+   "werbe_reisekosten": 0.59,
+   "kosten_warenabgabe": 1.16,
+   "abschreibungen": 4.99,
+   "reparatur_instandhaltung": 2.3,
+   "sonstige_kosten": 4.94,
+   "zinsaufwand": 0.39
+  },
+  "season_index": [
+   0.907,
+   0.9768,
+   1.093,
+   1.0232,
+   1.0465,
+   1.0697,
+   1.0,
+   0.7443,
+   1.093,
+   1.093,
+   1.0697,
+   0.8838
+  ],
+  "trend_pct": {
+   "2024": 5.29,
+   "2025": 5.29,
+   "2026": 5.29
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    2,
+    4,
+    2
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    1
+   ],
+   "urlaubsgeld_share_pct": 53.3,
+   "weihnachtsgeld_share_pct": 86.2,
+   "praemien_share_pct": 53.2
+  }
+ },
+ {
+  "firm_id": "A1-v08",
+  "archetype": "A1",
+  "name": "Prototyp Drehteile GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 54,
+  "revenue_2024": 8247272.73,
+  "quotas_pct": {
+   "material_wareneinkauf": 41.06,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 35.37,
+   "raumkosten": 2.98,
+   "betriebliche_steuern": 0.18,
+   "versicherungen_beitraege": 0.76,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 0.9,
+   "werbe_reisekosten": 0.64,
+   "kosten_warenabgabe": 1.17,
+   "abschreibungen": 5.19,
+   "reparatur_instandhaltung": 2.34,
+   "sonstige_kosten": 4.12,
+   "zinsaufwand": 0.39
+  },
+  "season_index": [
+   0.9409,
+   0.9852,
+   1.0591,
+   1.0148,
+   1.0295,
+   1.0443,
+   1.0,
+   0.8375,
+   1.0591,
+   1.0591,
+   1.0443,
+   0.9262
+  ],
+  "trend_pct": {
+   "2024": 4.98,
+   "2025": 4.98,
+   "2026": 4.98
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    2,
+    4,
+    3
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 48.8,
+   "weihnachtsgeld_share_pct": 52.0,
+   "praemien_share_pct": 58.2
+  }
+ },
+ {
+  "firm_id": "A1-v09",
+  "archetype": "A1",
+  "name": "Musterbau Präzisionsteile GmbH",
+  "branche": "Metallverarbeitung / Zulieferer für Maschinenbau",
+  "kind": "producer",
+  "employees": 79,
+  "revenue_2024": 12065454.55,
+  "quotas_pct": {
+   "material_wareneinkauf": 40.81,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 32.37,
+   "raumkosten": 3.29,
+   "betriebliche_steuern": 0.18,
+   "versicherungen_beitraege": 0.83,
+   "besondere_kosten": 0.29,
+   "fahrzeugkosten": 1.09,
+   "werbe_reisekosten": 0.58,
+   "kosten_warenabgabe": 1.26,
+   "abschreibungen": 5.26,
+   "reparatur_instandhaltung": 2.22,
+   "sonstige_kosten": 4.74,
+   "zinsaufwand": 0.4
+  },
+  "season_index": [
+   0.9105,
+   0.9776,
+   1.0895,
+   1.0224,
+   1.0447,
+   1.0671,
+   1.0,
+   0.7539,
+   1.0895,
+   1.0895,
+   1.0671,
+   0.8881
+  ],
+  "trend_pct": {
+   "2024": 2.24,
+   "2025": 2.24,
+   "2026": 2.24
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    4,
+    2,
+    3
+   ],
+   "episodic_bv_per_year": [
+    0,
+    1,
+    1
+   ],
+   "urlaubsgeld_share_pct": 46.8,
+   "weihnachtsgeld_share_pct": 89.7,
+   "praemien_share_pct": 50.0
+  }
+ },
+ {
+  "firm_id": "A2-v00",
+  "archetype": "A2",
+  "name": "Beispiel Haustechnik GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 40,
+  "revenue_2024": 14000000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 72.0,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 14.0,
+   "raumkosten": 2.5,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.4,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.8,
+   "werbe_reisekosten": 0.6,
+   "kosten_warenabgabe": 1.5,
+   "abschreibungen": 0.8,
+   "reparatur_instandhaltung": 0.4,
+   "sonstige_kosten": 2.8,
+   "zinsaufwand": 0.3
+  },
+  "season_index": [
+   0.8,
+   0.85,
+   1.0,
+   1.02,
+   1.02,
+   1.0,
+   0.98,
+   0.92,
+   1.08,
+   1.15,
+   1.15,
+   1.03
+  ],
+  "trend_pct": {
+   "2024": 3.0,
+   "2025": 3.0,
+   "2026": 2.0
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    5,
+    5
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 38.7,
+   "weihnachtsgeld_share_pct": 88.1,
+   "praemien_share_pct": 38.9
+  }
+ },
+ {
+  "firm_id": "A2-v01",
+  "archetype": "A2",
+  "name": "Modell Haustechnik Handel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 43,
+  "revenue_2024": 15050000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 72.21,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 14.71,
+   "raumkosten": 2.59,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.36,
+   "besondere_kosten": 0.09,
+   "fahrzeugkosten": 1.72,
+   "werbe_reisekosten": 0.61,
+   "kosten_warenabgabe": 1.63,
+   "abschreibungen": 0.8,
+   "reparatur_instandhaltung": 0.41,
+   "sonstige_kosten": 2.55,
+   "zinsaufwand": 0.32
+  },
+  "season_index": [
+   0.7453,
+   0.8089,
+   1.0,
+   1.0255,
+   1.0255,
+   1.0,
+   0.9745,
+   0.8981,
+   1.1019,
+   1.1911,
+   1.1911,
+   1.0382
+  ],
+  "trend_pct": {
+   "2024": 5.04,
+   "2025": 5.04,
+   "2026": 5.04
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    4,
+    6,
+    5
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 39.2,
+   "weihnachtsgeld_share_pct": 71.8,
+   "praemien_share_pct": 51.2
+  }
+ },
+ {
+  "firm_id": "A2-v02",
+  "archetype": "A2",
+  "name": "Vorlage Sanitärgroßhandel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 41,
+  "revenue_2024": 14350000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 73.29,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 13.99,
+   "raumkosten": 2.56,
+   "betriebliche_steuern": 0.09,
+   "versicherungen_beitraege": 0.36,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.93,
+   "werbe_reisekosten": 0.58,
+   "kosten_warenabgabe": 1.64,
+   "abschreibungen": 0.81,
+   "reparatur_instandhaltung": 0.4,
+   "sonstige_kosten": 3.03,
+   "zinsaufwand": 0.31
+  },
+  "season_index": [
+   0.8056,
+   0.8542,
+   1.0,
+   1.0194,
+   1.0194,
+   1.0,
+   0.9806,
+   0.9222,
+   1.0778,
+   1.1458,
+   1.1458,
+   1.0292
+  ],
+  "trend_pct": {
+   "2024": 4.36,
+   "2025": 4.36,
+   "2026": 4.36
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    5,
+    6
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 49.3,
+   "weihnachtsgeld_share_pct": 58.4,
+   "praemien_share_pct": 57.8
+  }
+ },
+ {
+  "firm_id": "A2-v03",
+  "archetype": "A2",
+  "name": "Schema Heizungsbedarf GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 25,
+  "revenue_2024": 8750000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 73.51,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 13.93,
+   "raumkosten": 2.61,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.43,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.85,
+   "werbe_reisekosten": 0.66,
+   "kosten_warenabgabe": 1.54,
+   "abschreibungen": 0.85,
+   "reparatur_instandhaltung": 0.39,
+   "sonstige_kosten": 2.73,
+   "zinsaufwand": 0.29
+  },
+  "season_index": [
+   0.7431,
+   0.8074,
+   1.0,
+   1.0257,
+   1.0257,
+   1.0,
+   0.9743,
+   0.8973,
+   1.1027,
+   1.1926,
+   1.1926,
+   1.0385
+  ],
+  "trend_pct": {
+   "2024": 4.59,
+   "2025": 4.59,
+   "2026": 4.59
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    6,
+    5,
+    5
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 54.1,
+   "weihnachtsgeld_share_pct": 56.1,
+   "praemien_share_pct": 59.3
+  }
+ },
+ {
+  "firm_id": "A2-v04",
+  "archetype": "A2",
+  "name": "Demo Haustechnik Handel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 37,
+  "revenue_2024": 12950000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 72.56,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 14.08,
+   "raumkosten": 2.28,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.41,
+   "besondere_kosten": 0.09,
+   "fahrzeugkosten": 1.62,
+   "werbe_reisekosten": 0.64,
+   "kosten_warenabgabe": 1.47,
+   "abschreibungen": 0.76,
+   "reparatur_instandhaltung": 0.38,
+   "sonstige_kosten": 2.87,
+   "zinsaufwand": 0.27
+  },
+  "season_index": [
+   0.7509,
+   0.8132,
+   1.0,
+   1.0249,
+   1.0249,
+   1.0,
+   0.9751,
+   0.9003,
+   1.0997,
+   1.1868,
+   1.1868,
+   1.0374
+  ],
+  "trend_pct": {
+   "2024": 0.92,
+   "2025": 0.92,
+   "2026": 0.92
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    6,
+    5,
+    6
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 38.0,
+   "weihnachtsgeld_share_pct": 72.5,
+   "praemien_share_pct": 62.8
+  }
+ },
+ {
+  "firm_id": "A2-v05",
+  "archetype": "A2",
+  "name": "Probe Sanitärgroßhandel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 59,
+  "revenue_2024": 20650000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 71.78,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 15.15,
+   "raumkosten": 2.33,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.36,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.66,
+   "werbe_reisekosten": 0.58,
+   "kosten_warenabgabe": 1.41,
+   "abschreibungen": 0.81,
+   "reparatur_instandhaltung": 0.39,
+   "sonstige_kosten": 2.92,
+   "zinsaufwand": 0.3
+  },
+  "season_index": [
+   0.8153,
+   0.8615,
+   1.0,
+   1.0185,
+   1.0185,
+   1.0,
+   0.9815,
+   0.9261,
+   1.0739,
+   1.1385,
+   1.1385,
+   1.0277
+  ],
+  "trend_pct": {
+   "2024": -0.15,
+   "2025": -0.15,
+   "2026": -0.15
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    5,
+    4
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 40.8,
+   "weihnachtsgeld_share_pct": 52.0,
+   "praemien_share_pct": 41.5
+  }
+ },
+ {
+  "firm_id": "A2-v06",
+  "archetype": "A2",
+  "name": "Typus Heizungsbedarf GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 57,
+  "revenue_2024": 19950000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 71.2,
+   "sonstige_betriebliche_erloese": 0.28,
+   "personalkosten": 13.76,
+   "raumkosten": 2.69,
+   "betriebliche_steuern": 0.09,
+   "versicherungen_beitraege": 0.39,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.86,
+   "werbe_reisekosten": 0.62,
+   "kosten_warenabgabe": 1.49,
+   "abschreibungen": 0.77,
+   "reparatur_instandhaltung": 0.41,
+   "sonstige_kosten": 3.01,
+   "zinsaufwand": 0.33
+  },
+  "season_index": [
+   0.8044,
+   0.8533,
+   1.0,
+   1.0196,
+   1.0196,
+   1.0,
+   0.9804,
+   0.9217,
+   1.0783,
+   1.1467,
+   1.1467,
+   1.0293
+  ],
+  "trend_pct": {
+   "2024": 2.6,
+   "2025": 2.6,
+   "2026": 2.6
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    4,
+    4,
+    5
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 39.3,
+   "weihnachtsgeld_share_pct": 66.3,
+   "praemien_share_pct": 57.3
+  }
+ },
+ {
+  "firm_id": "A2-v07",
+  "archetype": "A2",
+  "name": "Exemplar Haustechnik Handel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 58,
+  "revenue_2024": 20300000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 69.92,
+   "sonstige_betriebliche_erloese": 0.29,
+   "personalkosten": 14.14,
+   "raumkosten": 2.38,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.41,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.71,
+   "werbe_reisekosten": 0.56,
+   "kosten_warenabgabe": 1.47,
+   "abschreibungen": 0.78,
+   "reparatur_instandhaltung": 0.44,
+   "sonstige_kosten": 2.77,
+   "zinsaufwand": 0.31
+  },
+  "season_index": [
+   0.7701,
+   0.8276,
+   1.0,
+   1.023,
+   1.023,
+   1.0,
+   0.977,
+   0.908,
+   1.092,
+   1.1724,
+   1.1724,
+   1.0345
+  ],
+  "trend_pct": {
+   "2024": 2.8,
+   "2025": 2.8,
+   "2026": 2.8
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    5,
+    6
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 37.0,
+   "weihnachtsgeld_share_pct": 55.1,
+   "praemien_share_pct": 58.1
+  }
+ },
+ {
+  "firm_id": "A2-v08",
+  "archetype": "A2",
+  "name": "Prototyp Sanitärgroßhandel GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 53,
+  "revenue_2024": 18550000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 70.48,
+   "sonstige_betriebliche_erloese": 0.29,
+   "personalkosten": 15.09,
+   "raumkosten": 2.4,
+   "betriebliche_steuern": 0.1,
+   "versicherungen_beitraege": 0.43,
+   "besondere_kosten": 0.09,
+   "fahrzeugkosten": 1.79,
+   "werbe_reisekosten": 0.55,
+   "kosten_warenabgabe": 1.47,
+   "abschreibungen": 0.78,
+   "reparatur_instandhaltung": 0.42,
+   "sonstige_kosten": 3.0,
+   "zinsaufwand": 0.33
+  },
+  "season_index": [
+   0.7859,
+   0.8394,
+   1.0,
+   1.0214,
+   1.0214,
+   1.0,
+   0.9786,
+   0.9144,
+   1.0856,
+   1.1606,
+   1.1606,
+   1.0321
+  ],
+  "trend_pct": {
+   "2024": -1.76,
+   "2025": -1.76,
+   "2026": -1.76
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    6,
+    5
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 54.5,
+   "weihnachtsgeld_share_pct": 77.9,
+   "praemien_share_pct": 42.6
+  }
+ },
+ {
+  "firm_id": "A2-v09",
+  "archetype": "A2",
+  "name": "Musterbau Heizungsbedarf GmbH",
+  "branche": "Sanitär- und Heizungsgroßhandel",
+  "kind": "trader",
+  "employees": 62,
+  "revenue_2024": 21700000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 73.82,
+   "sonstige_betriebliche_erloese": 0.29,
+   "personalkosten": 15.13,
+   "raumkosten": 2.41,
+   "betriebliche_steuern": 0.11,
+   "versicherungen_beitraege": 0.4,
+   "besondere_kosten": 0.1,
+   "fahrzeugkosten": 1.83,
+   "werbe_reisekosten": 0.65,
+   "kosten_warenabgabe": 1.53,
+   "abschreibungen": 0.84,
+   "reparatur_instandhaltung": 0.4,
+   "sonstige_kosten": 2.65,
+   "zinsaufwand": 0.31
+  },
+  "season_index": [
+   0.7717,
+   0.8287,
+   1.0,
+   1.0228,
+   1.0228,
+   1.0,
+   0.9772,
+   0.9087,
+   1.0913,
+   1.1713,
+   1.1713,
+   1.0343
+  ],
+  "trend_pct": {
+   "2024": 3.61,
+   "2025": 3.61,
+   "2026": 3.61
+  },
+  "fair_month": null,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": true,
+   "p3_bestand": true,
+   "p3_mode": "inventur",
+   "p4_afa_jahresende": true,
+   "p5_per_year": [
+    5,
+    5,
+    6
+   ],
+   "episodic_bv_per_year": [
+    0,
+    0,
+    0
+   ],
+   "urlaubsgeld_share_pct": 32.1,
+   "weihnachtsgeld_share_pct": 87.7,
+   "praemien_share_pct": 41.5
+  }
+ },
+ {
+  "firm_id": "A3-v00",
+  "archetype": "A3",
+  "name": "Exempel Outdoor GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 110,
+  "revenue_2024": 15000000.0,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.0,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 30.0,
+   "raumkosten": 3.0,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.7,
+   "besondere_kosten": 0.2,
+   "fahrzeugkosten": 0.8,
+   "werbe_reisekosten": 3.0,
+   "kosten_warenabgabe": 3.0,
+   "abschreibungen": 3.5,
+   "reparatur_instandhaltung": 1.2,
+   "sonstige_kosten": 4.0,
+   "zinsaufwand": 0.5
+  },
+  "season_index": [
+   0.45,
+   0.7,
+   1.3,
+   1.7,
+   1.75,
+   1.5,
+   1.1,
+   0.85,
+   0.65,
+   0.55,
+   0.7,
+   0.75
+  ],
+  "trend_pct": {
+   "2024": 3.0,
+   "2025": 3.0,
+   "2026": 2.0
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    1,
+    1,
+    1
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    1
+   ],
+   "urlaubsgeld_share_pct": 46.7,
+   "weihnachtsgeld_share_pct": 84.4,
+   "praemien_share_pct": 52.7
+  }
+ },
+ {
+  "firm_id": "A3-v01",
+  "archetype": "A3",
+  "name": "Modell Gartenmöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 141,
+  "revenue_2024": 19227272.73,
+  "quotas_pct": {
+   "material_wareneinkauf": 44.67,
+   "sonstige_betriebliche_erloese": 0.28,
+   "personalkosten": 28.7,
+   "raumkosten": 3.16,
+   "betriebliche_steuern": 0.22,
+   "versicherungen_beitraege": 0.71,
+   "besondere_kosten": 0.22,
+   "fahrzeugkosten": 0.81,
+   "werbe_reisekosten": 2.92,
+   "kosten_warenabgabe": 3.14,
+   "abschreibungen": 3.22,
+   "reparatur_instandhaltung": 1.24,
+   "sonstige_kosten": 3.95,
+   "zinsaufwand": 0.49
+  },
+  "season_index": [
+   0.4274,
+   0.6877,
+   1.3123,
+   1.7287,
+   1.7808,
+   1.5205,
+   1.1041,
+   0.8438,
+   0.6356,
+   0.5315,
+   0.6877,
+   0.7397
+  ],
+  "trend_pct": {
+   "2024": 3.15,
+   "2025": 3.15,
+   "2026": 3.15
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    0,
+    2,
+    2
+   ],
+   "episodic_bv_per_year": [
+    2,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 55.8,
+   "weihnachtsgeld_share_pct": 53.5,
+   "praemien_share_pct": 63.0
+  }
+ },
+ {
+  "firm_id": "A3-v02",
+  "archetype": "A3",
+  "name": "Vorlage Outdoor Living GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 139,
+  "revenue_2024": 18954545.45,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.56,
+   "sonstige_betriebliche_erloese": 0.3,
+   "personalkosten": 27.17,
+   "raumkosten": 3.28,
+   "betriebliche_steuern": 0.18,
+   "versicherungen_beitraege": 0.65,
+   "besondere_kosten": 0.2,
+   "fahrzeugkosten": 0.75,
+   "werbe_reisekosten": 3.14,
+   "kosten_warenabgabe": 2.9,
+   "abschreibungen": 3.5,
+   "reparatur_instandhaltung": 1.26,
+   "sonstige_kosten": 3.68,
+   "zinsaufwand": 0.5
+  },
+  "season_index": [
+   0.4165,
+   0.6817,
+   1.3183,
+   1.7426,
+   1.7956,
+   1.5304,
+   1.1061,
+   0.8409,
+   0.6287,
+   0.5226,
+   0.6817,
+   0.7348
+  ],
+  "trend_pct": {
+   "2024": 0.86,
+   "2025": 0.86,
+   "2026": 0.86
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    2,
+    1
+   ],
+   "episodic_bv_per_year": [
+    2,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 42.7,
+   "weihnachtsgeld_share_pct": 81.1,
+   "praemien_share_pct": 39.0
+  }
+ },
+ {
+  "firm_id": "A3-v03",
+  "archetype": "A3",
+  "name": "Schema Freiraummöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 70,
+  "revenue_2024": 9545454.55,
+  "quotas_pct": {
+   "material_wareneinkauf": 43.94,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 30.98,
+   "raumkosten": 3.1,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.76,
+   "besondere_kosten": 0.18,
+   "fahrzeugkosten": 0.86,
+   "werbe_reisekosten": 3.03,
+   "kosten_warenabgabe": 2.8,
+   "abschreibungen": 3.52,
+   "reparatur_instandhaltung": 1.19,
+   "sonstige_kosten": 3.74,
+   "zinsaufwand": 0.46
+  },
+  "season_index": [
+   0.4919,
+   0.7229,
+   1.2771,
+   1.6466,
+   1.6928,
+   1.4619,
+   1.0924,
+   0.8614,
+   0.6767,
+   0.5843,
+   0.7229,
+   0.7691
+  ],
+  "trend_pct": {
+   "2024": 2.42,
+   "2025": 2.42,
+   "2026": 2.42
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    0,
+    2,
+    1
+   ],
+   "episodic_bv_per_year": [
+    1,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 45.5,
+   "weihnachtsgeld_share_pct": 67.1,
+   "praemien_share_pct": 43.8
+  }
+ },
+ {
+  "firm_id": "A3-v04",
+  "archetype": "A3",
+  "name": "Demo Gartenmöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 126,
+  "revenue_2024": 17181818.18,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.39,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 29.0,
+   "raumkosten": 2.76,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.68,
+   "besondere_kosten": 0.21,
+   "fahrzeugkosten": 0.74,
+   "werbe_reisekosten": 3.17,
+   "kosten_warenabgabe": 3.16,
+   "abschreibungen": 3.81,
+   "reparatur_instandhaltung": 1.11,
+   "sonstige_kosten": 4.34,
+   "zinsaufwand": 0.51
+  },
+  "season_index": [
+   0.4281,
+   0.688,
+   1.312,
+   1.7279,
+   1.7799,
+   1.5199,
+   1.104,
+   0.844,
+   0.6361,
+   0.5321,
+   0.688,
+   0.74
+  ],
+  "trend_pct": {
+   "2024": 5.9,
+   "2025": 5.9,
+   "2026": 5.9
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    1,
+    2
+   ],
+   "episodic_bv_per_year": [
+    2,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 56.6,
+   "weihnachtsgeld_share_pct": 86.6,
+   "praemien_share_pct": 39.8
+  }
+ },
+ {
+  "firm_id": "A3-v05",
+  "archetype": "A3",
+  "name": "Probe Outdoor Living GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 156,
+  "revenue_2024": 21272727.27,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.01,
+   "sonstige_betriebliche_erloese": 0.31,
+   "personalkosten": 30.25,
+   "raumkosten": 2.73,
+   "betriebliche_steuern": 0.18,
+   "versicherungen_beitraege": 0.73,
+   "besondere_kosten": 0.21,
+   "fahrzeugkosten": 0.85,
+   "werbe_reisekosten": 3.09,
+   "kosten_warenabgabe": 3.01,
+   "abschreibungen": 3.65,
+   "reparatur_instandhaltung": 1.09,
+   "sonstige_kosten": 3.88,
+   "zinsaufwand": 0.54
+  },
+  "season_index": [
+   0.5076,
+   0.7314,
+   1.2686,
+   1.6267,
+   1.6714,
+   1.4476,
+   1.0895,
+   0.8657,
+   0.6867,
+   0.5971,
+   0.7314,
+   0.7762
+  ],
+  "trend_pct": {
+   "2024": 3.3,
+   "2025": 3.3,
+   "2026": 3.3
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": true,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    0,
+    2
+   ],
+   "episodic_bv_per_year": [
+    1,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 45.0,
+   "weihnachtsgeld_share_pct": 67.1,
+   "praemien_share_pct": 39.5
+  }
+ },
+ {
+  "firm_id": "A3-v06",
+  "archetype": "A3",
+  "name": "Typus Freiraummöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 87,
+  "revenue_2024": 11863636.36,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.6,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 29.79,
+   "raumkosten": 3.2,
+   "betriebliche_steuern": 0.22,
+   "versicherungen_beitraege": 0.77,
+   "besondere_kosten": 0.19,
+   "fahrzeugkosten": 0.82,
+   "werbe_reisekosten": 3.05,
+   "kosten_warenabgabe": 3.0,
+   "abschreibungen": 3.61,
+   "reparatur_instandhaltung": 1.13,
+   "sonstige_kosten": 4.15,
+   "zinsaufwand": 0.54
+  },
+  "season_index": [
+   0.5439,
+   0.7512,
+   1.2488,
+   1.5805,
+   1.622,
+   1.4147,
+   1.0829,
+   0.8756,
+   0.7097,
+   0.6268,
+   0.7512,
+   0.7927
+  ],
+  "trend_pct": {
+   "2024": -0.76,
+   "2025": -0.76,
+   "2026": -0.76
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    0,
+    1
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    2
+   ],
+   "urlaubsgeld_share_pct": 35.3,
+   "weihnachtsgeld_share_pct": 70.0,
+   "praemien_share_pct": 60.0
+  }
+ },
+ {
+  "firm_id": "A3-v07",
+  "archetype": "A3",
+  "name": "Exemplar Gartenmöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 69,
+  "revenue_2024": 9409090.91,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.58,
+   "sonstige_betriebliche_erloese": 0.28,
+   "personalkosten": 31.34,
+   "raumkosten": 3.0,
+   "betriebliche_steuern": 0.2,
+   "versicherungen_beitraege": 0.74,
+   "besondere_kosten": 0.19,
+   "fahrzeugkosten": 0.81,
+   "werbe_reisekosten": 2.7,
+   "kosten_warenabgabe": 3.15,
+   "abschreibungen": 3.46,
+   "reparatur_instandhaltung": 1.19,
+   "sonstige_kosten": 4.07,
+   "zinsaufwand": 0.5
+  },
+  "season_index": [
+   0.488,
+   0.7207,
+   1.2793,
+   1.6517,
+   1.6982,
+   1.4655,
+   1.0931,
+   0.8604,
+   0.6742,
+   0.5811,
+   0.7207,
+   0.7673
+  ],
+  "trend_pct": {
+   "2024": 0.29,
+   "2025": 0.29,
+   "2026": 0.29
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": false,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    0,
+    0,
+    2
+   ],
+   "episodic_bv_per_year": [
+    1,
+    1,
+    2
+   ],
+   "urlaubsgeld_share_pct": 47.5,
+   "weihnachtsgeld_share_pct": 71.3,
+   "praemien_share_pct": 38.5
+  }
+ },
+ {
+  "firm_id": "A3-v08",
+  "archetype": "A3",
+  "name": "Prototyp Outdoor Living GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 94,
+  "revenue_2024": 12818181.82,
+  "quotas_pct": {
+   "material_wareneinkauf": 45.64,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 30.47,
+   "raumkosten": 3.27,
+   "betriebliche_steuern": 0.19,
+   "versicherungen_beitraege": 0.74,
+   "besondere_kosten": 0.18,
+   "fahrzeugkosten": 0.87,
+   "werbe_reisekosten": 2.98,
+   "kosten_warenabgabe": 2.75,
+   "abschreibungen": 3.21,
+   "reparatur_instandhaltung": 1.17,
+   "sonstige_kosten": 4.26,
+   "zinsaufwand": 0.53
+  },
+  "season_index": [
+   0.3316,
+   0.6354,
+   1.3646,
+   1.8507,
+   1.9115,
+   1.6077,
+   1.1215,
+   0.8177,
+   0.5746,
+   0.4531,
+   0.6354,
+   0.6962
+  ],
+  "trend_pct": {
+   "2024": 2.74,
+   "2025": 2.74,
+   "2026": 2.74
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    2,
+    1,
+    0
+   ],
+   "episodic_bv_per_year": [
+    2,
+    2,
+    2
+   ],
+   "urlaubsgeld_share_pct": 58.4,
+   "weihnachtsgeld_share_pct": 55.1,
+   "praemien_share_pct": 46.0
+  }
+ },
+ {
+  "firm_id": "A3-v09",
+  "archetype": "A3",
+  "name": "Musterbau Freiraummöbel GmbH",
+  "branche": "Hersteller von Gartenmöbeln",
+  "kind": "producer",
+  "employees": 119,
+  "revenue_2024": 16227272.73,
+  "quotas_pct": {
+   "material_wareneinkauf": 44.09,
+   "sonstige_betriebliche_erloese": 0.32,
+   "personalkosten": 32.88,
+   "raumkosten": 2.92,
+   "betriebliche_steuern": 0.19,
+   "versicherungen_beitraege": 0.66,
+   "besondere_kosten": 0.18,
+   "fahrzeugkosten": 0.76,
+   "werbe_reisekosten": 3.27,
+   "kosten_warenabgabe": 2.72,
+   "abschreibungen": 3.19,
+   "reparatur_instandhaltung": 1.21,
+   "sonstige_kosten": 3.94,
+   "zinsaufwand": 0.49
+  },
+  "season_index": [
+   0.3125,
+   0.625,
+   1.375,
+   1.875,
+   1.9375,
+   1.625,
+   1.125,
+   0.8125,
+   0.5625,
+   0.4375,
+   0.625,
+   0.6875
+  ],
+  "trend_pct": {
+   "2024": -0.71,
+   "2025": -0.71,
+   "2026": -0.71
+  },
+  "fair_month": 9,
+  "practices": {
+   "p1_sonderzahlungen": false,
+   "p2_jahrespraemien": true,
+   "p3_bestand": false,
+   "p3_mode": "quartal",
+   "p4_afa_jahresende": false,
+   "p5_per_year": [
+    0,
+    2,
+    0
+   ],
+   "episodic_bv_per_year": [
+    1,
+    2,
+    1
+   ],
+   "urlaubsgeld_share_pct": 42.8,
+   "weihnachtsgeld_share_pct": 69.4,
+   "praemien_share_pct": 56.4
+  }
+ }
+]

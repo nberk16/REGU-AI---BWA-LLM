@@ -1,0 +1,5 @@
+2026-10-24T18:20:30+00:00 Başlangıç · MODE=smoke · TRAIN=rag · GPU: ['Tesla T4, 15360 MiB', 'Tesla T4, 15360 MiB']
+2026-10-24T18:22:47+00:00 Model + LoRA: 79 s · eğitilen parametre 34.9 Mio. · GPU belleği 11.3 / 15.6 GB
+2026-10-24T18:22:48+00:00 Şablon: test istemlerinin token sayısı baseline ile aynı (5033, 3218)
+2026-10-24T18:23:01+00:00 Veri: train_rag 898 örnek (MAX_SEQ üstü dışarıda: yok), eğitimde 12 · val 133, kayıp için 4 · token toplamı {'rag': 4799561, 'ohne': 3623866}
+2026-10-24T18:23:24+00:00 Maske (train): 7075 token, kayıpta 1188 · başı '**Kernaussagen September 2026**\n\n1. Das Betriebser' · sonu 'lt sie sich?<turn|>\n' · HATALI

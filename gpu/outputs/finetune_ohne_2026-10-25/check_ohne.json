@@ -1,0 +1,30 @@
+{
+ "id": "A2-v120_2025-01",
+ "adapter_sha256": "37090a00803451576e99be3ffa74945041a65a080cd464f9d8762ef62e6b5610",
+ "taban": {
+  "text": "**Kernaussagen Januar 2025**\n\n1. Das Betriebsergebnis von 117 851 € zeigt eine deutliche Verbesserung gegenüber dem Vorjahresmonat (36 962 €) und dem Vormonat (-213 634 €), was auf eine starke operative Erholung hindeutet.\n2. Die Rohertragsquote ist mit 35,8 % signifikant gestiegen und liegt deutlich über dem Vorjahreswert von 26,8 %, was die positive Entwicklung des Betriebsergebnisses stützt.\n3. Die Gesamtkosten von 448 771 € sind im Vergleich zum Vorjahresmonat leicht gesunken (-2,9 %), während die Material-/Wareneinkäufe mit 1 005 447 € im Vergleich zum Vorjahresmonat um 25,4 % gesunken sind.\n\n**Abweichungen im Detail**\n\n| Position | Ist | Vergleich | Abweichung | Erklärung | Quelle oder Hypothese |\n|---|---|---|---|---|---|\n| Material-/Wareneinkauf | 1 005 447 € | Vj. 1 347 809 € | -25,4 % | Ursache offen | – |\n| Umsatzerlöse | 1 566 997 € | Vj. 1 842 063 € | -14,9 % | Ursache offen | – |\n| Reparatur/Instandhaltung | 7 196 € | Vj. 49 055 € | -85,3 % | Ursache offen | – |\n| Personalkosten | 236 889 € | Vj. 205 591 € | 15,2 % | Ursache offen | – |\n| Rohertrag | 561 550 € | Vj. 494 254 € | 13,6 % | Ursache offen | – |\n| Gesamtkosten | 448 771 € | Vj. 462 368 € | -2,9 % | Ursache offen | – |\n| Betriebsergebnis | 117 851 € | Vj. 36 962 € | – | Ursache offen | – |\n| Ergebnis vor Steuern | 112 189 € | Vj. 31 302 € | – | Ursache offen | – |\n| Vorläufiges Ergebnis | 112 189 € | Vj. 31 302 € | – | Ursache offen | – |\n\n**Hinweise auf mögliche Verzerrungen**\n\n- Versicherungen/Beiträge: Es liegt ein Hinweis vor, dass die Versicherungen/Beiträge mit 47 207 € ein 12,2-faches des Normalniveaus darstellen, was im Vorjahresmonat ebenfalls erhöht war.\n- Abschreibungen: Es wird darauf hingewiesen, dass Abschreibungen 0 € betragen, obwohl im Durchschnitt der letzten 12 Monate 17 720 € pro Monat verbucht wurden.\n\n**Offene Fragen an Buchhaltung / Steuerberater**\n\n- Welche Faktoren haben den starken Anstieg der Rohertragsquote auf 35,8 % im Vergleich zum Vorjahresmonat verursacht?\n- Warum wurden in Januar 2025 keine Abschreibungen verbucht, obwohl ein Durchschnitt von 17 720 € pro Monat in den letzten 12 Monaten vorliegt?",
+  "stop": "eos",
+  "tokens": 803,
+  "seconds": 75.0,
+  "ueberschriften": 4,
+  "hypothese": 0,
+  "quelle": 0,
+  "woerter": 395
+ },
+ "ince_ayar": {
+  "text": "**Kernaussagen Januar 2025**\n\n1. Das Betriebsergebnis beträgt 118 T€ und liegt damit um 80.890 € über dem Vorjahreswert von 36.962 €. Die Betriebsergebnis-Marge steigt auf 7,5 % (Vorjahr: 2,0 %). Die Gesamtleistung sinkt um 14,9 % auf 1.566.997 €.\n2. Der Material-/Wareneinkauf reduziert sich um 342.362 € (-25,4 %) auf 1.005.447 €. Die Ursache hierfür ist offen.\n3. Die Rohertragsquote steigt auf 35,8 % und liegt damit deutlich über dem Vormonat (21,3 %) sowie dem Vorjahresmonat (26,8 %). Dies könnte auf einen Buchungseffekt zurückzuführen sein (Hypothese).\n\n**Abweichungen im Detail**\n\n| Position                  | Ist          | Vergleich      | Abweichung       | Erklärung                                      | Quelle oder Hypothese |\n|---------------------------|--------------|----------------|------------------|------------------------------------------------|-----------------------|\n| Material-/Wareneinkauf    | 1.005.447 €  | Vj. 1.347.809 €| -342.362 € (-25,4 %) | Ursache offen                                  | –                     |\n| Umsatzerlöse              | 1.566.997 €  | Vj. 1.842.063 €| -275.066 € (-14,9 %) | Ursache offen                                  | –                     |\n| Reparatur/Instandhaltung  | 7.196 €      | Vj. 49.055 €   | -41.859 € (-85,3 %) | ungewöhnlich hoher Vergleichswert im Vorjahresmonat | Hypothese             |\n| Personalkosten            | 236.889 €    | Vj. 205.591 €  | +31.298 € (+15,2 %) | Ursache offen                                  | –                     |\n| Rohertragsquote           | 35,8 %       | Vm. 21,3 %     | +14,5 Prozentpunkte | möglicher Buchungseffekt, etwa Wareneingänge oder Eingangsrechnungen im falschen Monat oder eine fehlende Bestandsbuchung | Hypothese             |\n\n**Hinweise auf mögliche Verzerrungen**\n\n- Rohertragsquote: Die Rohertragsquote von 35,8 % weicht stark vom Vormonat (21,3 %) und Vorjahresmonat (26,8 %) ab. Möglicherweise sind Wareneingänge, Eingangsrechnungen oder Bestandsbuchungen nicht periodengerecht erfasst (Hypothese). Dann wären Rohertrag und Ergebnis des Monats verzerrt.\n- Versicherungen/Beiträge: Die Position liegt mit 47.207 € beim 12,2-fachen des Normalniveaus (3.864 €). Vermutlich fehlt die Abgrenzung einer jährlich wiederkehrenden Zahlung (Hypothese). Dann wäre der Januar zu ungünstig und die übrigen Monate zu günstig ausgewiesen.\n- Abschreibungen: Die Abschreibungen betragen 0 €, obwohl der Durchschnitt der letzten 12 Monate bei 17.720 € pro Monat liegt. Möglicherweise werden sie erst zum Jahresende gebucht (Hypothese). Dann wären die Monatsergebnisse bis November zu hoch und der Dezember zu niedrig.\n\n**Offene Fragen an Buchhaltung / Steuerberater**\n\n- Sind alle Wareneingänge und Eingangsrechnungen des Januar periodengerecht gebucht?\n- Was ist die Ursache für den Rückgang des Material-/Wareneinkaufs um 342.362 € (-25,4 %) gegenüber dem Vorjahresmonat?\n- Was ist die Ursache für den Rückgang der Umsatzerlöse um 275.066 € (-14,9 %) gegenüber dem Vorjahresmonat?\n- Was ist die Ursache für den Anstieg der Personalkosten um 31.298 € (+15,2 %) gegenüber dem Vorjahresmonat?\n- Enthält die Position Versicherungen/Beiträge im Januar eine jährliche Zahlung, die abgegrenzt werden müsste?\n- Werden die Abschreibungen monatlich anteilig gebucht?",
+  "stop": "eos",
+  "tokens": 1022,
+  "seconds": 29.3,
+  "ueberschriften": 4,
+  "hypothese": 4,
+  "quelle": 0,
+  "woerter": 423
+ },
+ "ideal": {
+  "ueberschriften": 4,
+  "hypothese": 4,
+  "quelle": 0,
+  "woerter": 398
+ }
+}

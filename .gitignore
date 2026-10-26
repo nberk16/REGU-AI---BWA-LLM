@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+
+# Sentetik veri: yalnızca referans koşu ve dengelenmiş V2 kümesi repoda tutulur (docs/00, turlar 3–4)
+data/synthetic/*
+!data/synthetic/reference_seed42/
+!data/synthetic/v2_balanced_seed4242/
+# Katman 1 çıktısı (python -m facts) her zaman yeniden üretilebilir; repoda tutulmaz
+data/synthetic/*/facts/
+data/synthetic/*/rag/
+# İstemler (python -m prompting) her zaman yeniden üretilebilir; repoda tutulmaz
+data/synthetic/*/prompts/

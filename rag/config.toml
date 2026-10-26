@@ -1,0 +1,21 @@
+# Katman 2 (bilgi tabanı ve getirme) parametreleri — docs/09_bilgi_tabani.md
+
+# [KARAR, tur 6] Embedding modeli BGE-M3, vektör deposu Chroma (gömülü).
+[embedding]
+model = "BAAI/bge-m3"
+batch_size = 32
+
+# [KARAR, tur 4/6] K-C: firma + 13 aylık pencere (t−12 … t) + Firmenprofil; ardından anlamsal top-k.
+[retrieval]
+window_months = 13
+top_k = 8
+# [ÖNERİ] Sorgu yöntemi; seçenekler ve ölçüm: docs/09, Bölüm 5. Doğrulama varyantlarında en iyi sonuç: single.
+#   single         : facts.json'dan tek birleşik sorgu
+#   multi          : her anlamlı kalem ve bayrak için ayrı sorgu, sıralamalar RRF ile birleştirilir
+#   multi_expanded : multi + sorguya kalemin K-A açıklaması eklenir (not dilini yakalamak için)
+mode = "single"
+rrf_k = 60
+
+[chroma]
+notes = "bwa-kontextnotizen"
+general = "bwa-wissen"

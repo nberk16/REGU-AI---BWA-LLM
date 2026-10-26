@@ -1,0 +1,42 @@
+# Katman 4 (doğrulama) parametreleri — docs/07_dogrulama_katmani.md
+
+# [KARAR, tur 6] Çıktı yapısı (CLAUDE.md 6.3; docs/06, B4).
+[format]
+kernaussagen = "Kernaussagen"            # başlık: "Kernaussagen <Monat Jahr>"
+abweichungen = "Abweichungen im Detail"
+hinweise = "Hinweise auf mögliche Verzerrungen"
+fragen = "Offene Fragen an Buchhaltung / Steuerberater"
+table_header = ["Position", "Ist", "Vergleich", "Abweichung", "Erklärung", "Quelle oder Hypothese"]
+max_kernaussagen = 3
+empty_marker = "Keine."
+# Uzunluk: tablo dışındaki kelimeler. [KARAR] ~250–350; [ÖNERİ] tolerans ±50 (dışında kalırsa "hinweis").
+words_min = 250
+words_max = 350
+words_tolerance = 50
+
+# [KARAR, tur 6] Her neden cümlesinde [Quelle: …] veya (Hypothese) (docs/06, B3–B4).
+# [ÖNERİ] Neden cümlesini tanıyan kelime listeleri. "*" ile başlayan kelime sonek olarak aranır (ör. "saisonbedingt").
+[reasons]
+hypothesis_marker = "(Hypothese)"
+causal_words = [
+  "wegen", "aufgrund", "auf Grund", "durch", "ursächlich", "Ursache", "Ursachen", "zurückzuführen",
+  "*bedingt", "infolge", "weil", "resultiert", "resultieren", "erklärt", "erklären", "liegt an",
+  "beruht", "beruhen", "geht auf", "gehen auf", "dank", "verursacht", "getrieben", "Grund", "Gründe",
+  "Zusammenhang", "zusammenhängen", "verantwortlich", "folgt auf", "ergibt sich aus",
+]
+# Hinweise bölümünde uyarı dili doğaldır; bu kelimeler orada işaret gerektirmez (nedensellik kelimeleri gerektirir).
+speculative_words = [
+  "vermutlich", "wahrscheinlich", "möglicherweise", "dürfte", "dürften", "könnte", "könnten",
+  "eventuell", "evtl.", "spricht für", "sprechen für", "deutet darauf hin", "vermuten",
+]
+# Nedenin bilinmediğini söyleyen cümleler işaret gerektirmez (B3: açık soru).
+unknown_cause_phrases = [
+  "nicht ersichtlich", "unklar", "ungeklärt", "offen", "nicht bekannt", "Rückfrage", "keine Angabe",
+  "nicht identifiziert", "nicht geklärt", "unbekannt",
+]
+
+# Rakamın hangi satıra ait olduğu: cümle (madde, tablo satırı) bir satır veya oran adı içeriyorsa rakam
+# yalnızca o satırların facts değerleri ve genel eşiklerle karşılaştırılır; hiçbir ad yoksa bütün değerlerle.
+[scope]
+# [ÖNERİ] Kısa adlar → kanonik ad. Model kanonik adları kullanır (docs/02, D1); bu liste yalnızca toleranstır.
+aliases = { "Umsatz" = "Umsatzerlöse", "Material" = "Material-/Wareneinkauf", "Wareneinkauf" = "Material-/Wareneinkauf", "Bestandsveränderung" = "Bestandsveränderungen FE/UE", "Personal" = "Personalkosten", "Werbekosten" = "Werbe-/Reisekosten", "Reisekosten" = "Werbe-/Reisekosten", "Miete" = "Raumkosten", "Versicherung" = "Versicherungen/Beiträge", "Fahrzeug" = "Fahrzeugkosten (ohne Steuer)", "Abschreibung" = "Abschreibungen", "AfA" = "Abschreibungen", "Reparatur" = "Reparatur/Instandhaltung", "Instandhaltung" = "Reparatur/Instandhaltung", "Marge" = "Betriebsergebnis-Marge", "Leistung" = "Gesamtleistung", "Ergebnisses vor Steuern" = "Ergebnis vor Steuern", "vorläufigen Ergebnis" = "Vorläufiges Ergebnis", "sonstige neutrale Ertrag" = "Sonstiger neutraler Ertrag", "sonstigen neutralen Ertrag" = "Sonstiger neutraler Ertrag", "sonstige neutrale Aufwand" = "Sonstiger neutraler Aufwand", "sonstigen neutralen Aufwand" = "Sonstiger neutraler Aufwand", "sonstigen betrieblichen Erlöse" = "Sonstige betriebliche Erlöse", "betrieblichen Steuern" = "Betriebliche Steuern", "aktivierten Eigenleistungen" = "Aktivierte Eigenleistungen" }

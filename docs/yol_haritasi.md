@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Genel durum: ~%85 tamamlandı (toplam iş 51 gün)
+## 1. Genel durum: ~%87 tamamlandı (toplam iş 51 gün)
 
 **Nasıl hesaplandı?** Yüzde, adım sayısına göre değil tahmini iş yüküne göre hesaplandı:
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 43,45 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 44,2 gün
 toplam iş     = 51 gün
-durum         = 43,45 / 51 ≈ %85
+durum         = 44,2 / 51 ≈ %87
 ```
 
 **Belirsizlik:**
@@ -37,10 +37,10 @@ durum         = 43,45 / 51 ≈ %85
 | 5 | İdeal yorumların üretimi (eğitim hedefleri; tur 12'den beri bağlamsız hedefler dahil) | 9 | %100 | 9,0 | ✅ tamamlandı: öğretmen metinleri, altın küme, eğitim verisi |
 | 6 | Model seçimi, çıkarım altyapısı, baseline'lar (çıplak model, yalnızca RAG) | 5 | %100 | 5,0 | ✅ tamamlandı: 3 varyant × 720 ay, puanlandı |
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
-| 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
-| 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
+| 8 | Doğrulama katmanı (Katman 4) | 3 | %90 | 2,7 | 🔄 v1.8 |
+| 9 | Değerlendirme ve ablation | 6 | %60 | 3,6 | 🔄 puanlama 1.1, baseline sonuçları, değerlendirme deneme koşusu; tam koşu bekleniyor |
 | 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **43,45** | **≈ %85** |
+| | **Toplam** | **51** | | **44,2** | **≈ %87** |
 
 ---
 
@@ -193,11 +193,13 @@ durum         = 43,45 / 51 ≈ %85
 - **Kalan (%20):**
   - Baseline çıktılarına göre kelime listelerinin ve kuralların ayarı.
   - ~~Rakam biçimi: binlik ayırıcı boşluk~~ ✅ v1.7 (24.10.2026): tek rakam olarak okunur, `zahlenformat` biçim hatası (`docs/07`, Bölüm 13).
+  - ~~„geht auf + rakam“ yanlış alarmı~~ ✅ v1.8 (26.10.2026): düşüş cümlesi neden sayılmıyor (`docs/07`, Bölüm 14).
+  - Karşılaştırma sözcüğü yön hataları („über“ yerine „unter“) denetlenmiyor; gerekirse tam koşudan sonra.
   - v2 adayı: karşılaştırma etiketi kontrolü („Vj.“ değeri gerçekten önceki yılın aynı ayı mı?).
 - **Kararlaştırılan (tur 8):** Yuvarlama kuralı (a).
 - **Açık kararlar:** Yok. Parametreler [ÖNERİ] (`validation/config.toml`).
 
-### 9. Değerlendirme ve ablation — 🔄 puanlama hazır, baseline puanlandı
+### 9. Değerlendirme ve ablation — 🔄 puanlama hazır, baseline puanlandı, deneme koşusu tamam
 - **Hazır olan:**
   - Ground truth: olaylar, ay kayıtları, kabul edilebilir uyarılar, V2 kararı.
   - Dengelenmiş V2 kümesi.
@@ -208,8 +210,13 @@ durum         = 43,45 / 51 ≈ %85
   - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100.
   - Baseline: rakam değeri %93–95; format %30–39; RAG'de nedenlerin %42'si işaretsiz; kaynak precision %54, recall %30–34.
 - **Değerlendirme defteri (24.10.2026):** `gpu/03_eval.ipynb`; 5 koşu (RAG + FT, yalnızca FT, iki ek satır, taban modelle tutarlılık kontrolü). Yerelde sahte bağdaştırıcıyla uçtan uca denendi.
+- **Deneme koşusu (26.10.2026, `docs/14`, 4.1):**
+  - 5 × 8 metin (A1), hata yok; tam koşu ~4,5 saat.
+  - İnce ayarlı sistemlerde format %100. Yalnızca FT 8/8 hatasız.
+  - RAG + FT kaynak recall %50 (baseline %27); zayıf nokta notu yanlış satıra bağlamak.
+- **Puanlama 1.1 (26.10.2026):** satır düzeyinde atıf ölçütü (baseline %37–38 doğru satırda); birden çok klasörle ablation tablosu. 10 test.
 - **Kalan:**
-  - İnce ayarlı modellerin aynı test kümesinde çalıştırılması (kullanıcı) ve puanlanması.
+  - Tam koşu (kullanıcı) ve ablation tablosu: `python -m scoring gpu/outputs/eval_<tarih> gpu/outputs/baseline_2026-10-24`.
   - Dengelenmiş V2 kümesi; retrieval isabetinin tabloya eklenmesi.
   - Ablation analizi ve sonuç anlatısı.
 - **Açık kararlar:**
@@ -281,3 +288,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | İnce ayar deneme koşusu 3 başarılı: bellek 11,6 GB, 140 token/s, tahmini `rag` ~10 saat, `ohne` ~7,6 saat; doğrulama kaybı 0,786 → 0,635 (3 adım). llama-server GPU denetimi yanlış alarmdı; `--list-devices` + bellek denetimiyle değişti. Paket 7 → %35: %78 |
 | 25.10.2026 | RAG + FT tam eğitimi: 113 adım, 7,8 saat, doğrulama kaybı 0,834 → 0,130; deneme üretiminde format ve hipotez işareti doğru, 2 rakam hatası (Katman 4 yakalıyor). Paket 7 → %60: %80 |
 | 25.10.2026 | Yalnızca FT tam eğitimi: 117 adım, 5,6 saat, doğrulama kaybı 1,013 → 0,106; deneme üretimi hatasız. İki bağdaştırıcı 02'nin son çıktısında. Paket 7 → %100: %85 |
+| 26.10.2026 | Değerlendirme deneme koşusu (5 × 8 metin, hata yok; tam koşu ~4,5 saat). İnce ayarlı sistemlerde format %100; RAG + FT notu yanlış satıra bağlıyor. Doğrulama v1.8 (yanlış alarm), puanlama 1.1 (satır düzeyinde atıf, birden çok klasör). Paket 8 → %90, 9 → %60: %87 |

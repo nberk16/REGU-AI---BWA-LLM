@@ -1,13 +1,14 @@
 # 13 — Değerlendirme: puanlama ve baseline sonuçları
 
-> **Durum (24.10.2026):**
+> **Durum (26.10.2026):**
 > - Puanlama 1.0 kodlandı (`scoring/`, `python -m scoring`, 8 test).
 > - Kalibrasyon: ideal metinler plana dayalı ölçütlerde %100 alıyor.
 > - Baseline'lar puanlandı: 3 varyant × 720 ay.
+> - **Puanlama 1.1 (26.10.2026):** satır düzeyinde atıf ölçütü ve birden çok klasör (Bölüm 2, 1). 10 test. Baseline yeniden puanlandı; eski ölçütler değişmedi.
 > - **[ÖNERİ]:** ölçütlerin tanımları ve eşikleri (bu belge).
 > - **[AÇIK]:** üslup değerlendirmesi (CLAUDE.md 8).
 >
-> **İlgili:** CLAUDE.md 7–8 · `07_dogrulama_katmani.md` (Katman 4, v1.7) · `11_ideal_yorumlar.md` (içerik planı) · `12_egitim_verisi.md`, Bölüm 4 (Kaggle koşuları) · Karar kaydı: `00`, Bölüm 22
+> **İlgili:** CLAUDE.md 7–8 · `07_dogrulama_katmani.md` (Katman 4, v1.8) · `11_ideal_yorumlar.md` (içerik planı) · `12_egitim_verisi.md`, Bölüm 4 (Kaggle koşuları) · Karar kaydı: `00`, Bölüm 22
 
 ---
 
@@ -19,11 +20,19 @@ python -m scoring gpu/outputs/baseline_2026-10-24
   → gpu/outputs/baseline_2026-10-24/scores.md      (özet tablo: bütün küme, A1, A2/A3)
 ```
 
-Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç kaynağa karşı ölçülür:
+Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`).
+
+**Birden çok klasör (1.1):** Ablation tablosu için ince ayarlı modellerin çıktıları ile baseline birlikte puanlanır. Puanlar ilk klasöre yazılır; aynı sistem adı iki klasörde olamaz.
+
+```
+python -m scoring gpu/outputs/eval_<tarih> gpu/outputs/baseline_2026-10-24
+```
+
+Her metin üç kaynağa karşı ölçülür:
 
 | Kaynak | Ne verir | Bağımsız mı? |
 |---|---|---|
-| **Doğrulama katmanı** (Katman 4, v1.7) | Format, rakam değerleri ve biçimi, neden işaretleri, kelime sayısı | Evet: yalnızca facts.json ve verilen notlar |
+| **Doğrulama katmanı** (Katman 4, v1.8) | Format, rakam değerleri ve biçimi, neden işaretleri, kelime sayısı | Evet: yalnızca facts.json ve verilen notlar |
 | **İçerik planı** (`ideal/plan.py`, plan 1.5) | Modelin gördüğü notlarla hangi notlar kaynak gösterilmeli, hangi kalemler tabloda olmalı, V2 adayında doğru karar | Kısmen: ince ayar hedefleri de aynı plandan üretildi (Bölüm 5) |
 | **Ground truth** | Beklenen ve kabul edilebilir çarpıklıklar, çeldirici notlar | Evet |
 
@@ -41,6 +50,8 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
 | Neden cümlesi: kaynaklı / hipotez / işaretsiz | Doğrulamanın tanıdığı neden cümleleri ve tablo açıklamaları. „Ursache offen“ neden sayılmaz | Kaynaklı neden oranı; uydurma neden adayı |
 | Kaynak isabeti (precision) | Gösterilen notlardan planın kaynak saydığı notların payı | Kaynaklı neden oranı |
 | Kaynak kapsamı (recall) | Planın kaynak saydığı notlardan gösterilenlerin payı | — |
+| Tablo atıfı doğru satırda (1.1) | Tablodaki her (satır, not) atıfından, notun planda o satırın kaynağı olduğu atıfların payı | Kaynaklı neden oranı |
+| Yanlış satıra atıf (1.1) | Bir notu, planda açıklamadığı bir satırın nedeni yapan metin payı | Uydurma neden |
 | Çeldirici nota atıf | Ground truth'taki çeldirici notlara yapılan atıf sayısı | Uydurma neden |
 | Uydurma kaynak | Verilmemiş bir nota atıf yapan metin payı | Uydurma neden |
 | Sapma yakalama (recall) | facts.json'daki anlamlı kalemlerden tabloda yer alanların payı | Sapma yakalama |
@@ -51,6 +62,10 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
 
 **Ayrıntılar:**
 - **Kaynak doğru mu:** Plan bir notu, olayı yıllık sapmanın en az %25'ini aynı yönde açıklıyorsa kaynak sayar (`CAUSE_SHARE`). Sapmanın küçük bir kısmını açıklayan not „yanlış“ sayılır; ölçüt katıdır.
+- **Satır düzeyi (1.1):**
+  - Not düzeyindeki precision yalnızca „bu not o ay bir şeyi açıklıyor mu“ diye bakar. Doğru bir notun yanlış satırın nedeni yapılmasını görmez.
+  - Örnek: Sonderauftrag notu Umsatzerlöse için doğru kaynak, ama „Sonstige Kosten“ satırına da yazılmış (`docs/14`, 4.1).
+  - Satır düzeyi ölçüt yalnızca tablo satırlarını sayar. Planda olmayan bir satıra yapılan atıf da yanlış sayılır.
 - **Uyarının satırı:** Hinweise maddesinde adı geçen BWA satırları (kısa adlar dahil, `validation/config.toml`). „Rohertrag(squote)“ V2 satırlarına (malzeme, stok) sayılır.
 - **V2 kararı:**
   - Model uyarıyor sayılır: Hinweise'de „Rohertrag“ geçiyorsa.
@@ -67,6 +82,7 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
 | Kelime (ort.) / 200–400 arası | 260 / %93 | 250 / %87 |
 | Neden: kaynaklı / hipotez / işaretsiz | %0 / %100 / %0 | %42 / %58 / %0 |
 | Kaynak precision / recall | – | %100 / %100 |
+| Tablo atıfı doğru satırda / yanlış satıra atıf (1.1) | – / %0 | %100 / %0 |
 | Sapma yakalama / gereksiz satır | %100 / 0 | %100 / 0 |
 | Uyarı kapsamı (Katman 1) | %100 | %100 |
 | Uyarı recall / precision (ground truth) | %84 / %82 | %85 / %86 |
@@ -90,6 +106,7 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
 | Neden cümlesi / metin | 0,16 | 2,4 | 2,5 | 3,4–4,4 |
 | … kaynaklı / hipotez / işaretsiz | %0 / %0 / %100 | %48 / %10 / %42 | %48 / %10 / %42 | işaretsiz %0 |
 | Kaynak precision / recall | – | %54 / %34 | %55 / %30 | %100 / %100 |
+| Tablo atıfı doğru satırda / yanlış satıra atıf (1.1) | – / %0 | %37 / %38 | %38 / %38 | %100 / %0 |
 | Çeldirici nota atıf / uydurma kaynak | 0 / %0 | 2 / %0 | 2 / %1 | 0 / %0 |
 | Sapma yakalama | %93 | %96 | %96 | %100 |
 | Gereksiz tablo satırı / metin | 4,9 | 4,7 | 4,6 | 0 |
@@ -118,6 +135,7 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
    - RAG'li model neden söylüyor, ama nedenlerin %42'si işaretsiz. „(Hypothese)“ yalnızca %10.
 4. **RAG, notlara erişimi sağlıyor ama doğru notu seçmeyi sağlamıyor.**
    - Nedenlerin yarısı kaynaklı, ama gösterilen notların yalnızca %54'ü sapmayı gerçekten açıklıyor. Planın beklediği notların yalnızca üçte biri gösteriliyor.
+   - Satır düzeyinde (1.1) daha da düşük: tablodaki atıfların %37'si doğru satırda. Metinlerin %38'i bir notu açıklamadığı bir satıra bağlıyor.
    - Okumada yanlış atıf türleri:
      - ters yönlü olay (personel azaltımı → personel gideri artışı);
      - önceki yılın aynı ayında zaten var olan olay;
@@ -140,6 +158,8 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
   - Kaynak precision/recall, sapma yakalama, gereksiz satır ve V2, içerik planıyla uyumu ölçer.
   - İnce ayar hedefleri aynı planla üretildi. Bu yüzden ince ayarlı modeller bu ölçütlere doğrudan eğitilmiş olacak.
   - Raporlarda ground truth'a dayalı bağımsız ölçütler ayrıca verilir: uyarı recall/precision, çeldirici, uydurma kaynak.
+- **Satır düzeyi atıf (1.1):** Yalnızca tablo satırları. Kernaussagen'deki bir cümlenin hangi satırı açıkladığı güvenilir biçimde okunamıyor; orada not düzeyi ölçüt geçerli.
+- **Yön hataları:** „237.140 € … deutlich über dem Vormonatswert von 428.567 €“ gibi karşılaştırma sözcüğü hataları ölçülmüyor. Doğrulama yalnızca rakamın değerini ve farkların işaretini denetler (`docs/14`, 4.1).
 - **Kelime listeleri:** Neden cümlesi tanıma doğrulamanın kelime listelerine dayanıyor (`validation/config.toml`). „Ursache offen“ gibi açık soru neden sayılmaz; bu yüzden çıplak modelin „işaretsiz %100“ü yalnızca 0,16 neden/metin üzerinden.
 - **V2 notla açıklama:** Örnek az (17 ay). Dengelenmiş V2 kümesi ayrıca koşulacak.
 - **Tek koşu:**
@@ -149,7 +169,7 @@ Klasördeki her `*.jsonl` bir sistemdir (ör. `baseline_rag_k8`). Her metin üç
 
 ## 6. Sıradaki
 
-1. İnce ayar defteri (paket 7): yalnızca FT (`train_ohne`) ve RAG + FT (`train_rag`).
-2. İnce ayarlı modellerin aynı Ollama düzeninde koşulması ve aynı puanlamayla karşılaştırılması: dört varyant + ek satırlar (RAG + FT bağlamsız, RAG + FT bütün notlar).
+1. ~~İnce ayar defteri (paket 7)~~ ✅ yalnızca FT (`train_ohne`) ve RAG + FT (`train_rag`).
+2. İnce ayarlı modellerin llama-server'da koşulması ve aynı puanlamayla karşılaştırılması: dört varyant + ek satırlar (RAG + FT bağlamsız, RAG + FT bütün notlar). Deneme koşusu ✅ (`docs/14`, 4.1); tam koşu bekleniyor. Ablation tablosu: `python -m scoring gpu/outputs/eval_<tarih> gpu/outputs/baseline_2026-10-24`.
 3. Dengelenmiş V2 kümesi ve retrieval isabeti (recall@k) tabloya eklenir.
 4. Üslup değerlendirmesi kararı ([AÇIK]).

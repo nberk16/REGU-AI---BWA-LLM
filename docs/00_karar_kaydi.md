@@ -619,6 +619,25 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **Deneme üretimi:** Hatasız. Kaynak yok, nedenler „(Hypothese)“ ile işaretli; ideal metinle aynı profil.
 - **Bağdaştırıcılar:** İkisi de 02'nin son sürümünün çıktısında (`adapter_rag.gguf`, `adapter_ohne.gguf`). 03_eval onları oradan alır.
 
+## 26. Değerlendirme deneme koşusu, doğrulama v1.8, puanlama 1.1 (26.10.2026)
+
+- **03_eval deneme koşusu:**
+  - 5 sistem × 8 ay (A1-v00, 2025-01 … 08), hata yok.
+  - İki bağdaştırıcı tamamlanmış (`full`). İki sunucu da GPU'da.
+  - Tam koşu tahmini ~4,5 saat (`14_ince_ayar.md`, 4.1).
+- **İlk sonuçlar (8 ay; yön gösterir, kanıt değil):**
+  - İnce ayarlı bütün sistemlerde format %100 ve gereksiz satır yok.
+  - Yalnızca FT: 8/8 hatasız.
+  - RAG + FT: kaynak recall %27'den %50'ye çıkıyor. Zayıf nokta, notu yanlış satıra bağlamak: metinlerin %38'i.
+  - Taban modelin llama-server'daki çıktısı Ollama baseline'ıyla aynı aralıkta.
+- **[ÖNERİ] Doğrulama v1.8:** „geht auf + rakam“ (düşüş) neden cümlesi sayılmaz. Bu bir yanlış alarm düzeltmesi. Baseline puanları ve eğitim verisi değişmedi (`07`, Bölüm 14).
+- **[ÖNERİ] Puanlama 1.1:**
+  - Satır düzeyinde atıf ölçütleri eklendi: „Tablo atıfı doğru satırda“ ve „Yanlış satıra atıf“.
+  - Gerekçe: not düzeyindeki precision, doğru bir notun yanlış satırın nedeni yapılmasını görmüyordu.
+  - Kalibrasyon: ideal metinler %100 / %0.
+  - Baseline: %37–38 / %38.
+  - `python -m scoring` artık birden çok klasör alıyor (ablation tablosu için). Bkz. `13_degerlendirme.md`, Bölüm 1–2.
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

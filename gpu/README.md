@@ -121,7 +121,10 @@ Her koşu bir model eğitir. Bağdaştırıcılar Kaggle'da kalır; repoya yaln�
    - `bwa-kommentar-daten`;
    - **Add Input** → **Notebooks** → `02_finetune` defterinin son sürümü (iki bağdaştırıcı).
 4. Önce `MODE = "smoke"` (5 koşu × 8 istem, ~15–20 dakika) → `ergebnisse_eval_smoke.zip` dosyasını yükle.
-5. Onaydan sonra `MODE = "full"` (5 koşu × 720 istem; süreyi deneme koşusundan sonra söylerim) → `ergebnisse_eval_full.zip` dosyasını yükle.
+5. Onaydan sonra `MODE = "full"` (5 koşu × 720 istem, ~4,5 saat; deneme koşusu 26.10.2026, `docs/14`, Bölüm 4.1) → `ergebnisse_eval_full.zip` dosyasını yükle.
+   - Aynı defterde parametre hücresinde yalnızca `MODE = "full"` yap; Input'lar aynı kalır.
+   - Log'daki „Tahmin: ~5,7 saat“ karamsar: ilk koşunun ilk istemleri ~50 saniyelik bir ısınma içeriyor.
+   - Süre dolarsa (11 saat) çıktıyı Input olarak ekleyip yeniden çalıştır; tamamlanmış kayıtlar yeniden üretilmez.
 
 ## Sorun giderme
 

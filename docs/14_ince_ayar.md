@@ -4,6 +4,8 @@
 > - İki Kaggle defteri hazır: `gpu/02_finetune.ipynb` (eğitim) ve `gpu/03_eval.ipynb` (test kümesinin üretimi).
 > - GPU gerektirmeyen bütün parçalar yerelde denendi: şablon, veri, bağdaştırıcının GGUF'a çevrilmesi, llama-server'da LoRA ile üretim, puanlama.
 > - Kaggle deneme koşusu 3 (24.10.2026): eğitim çalışıyor. En yüksek bellek 11,6 GB; hız 140 token/s; tahmini süre `rag` ~10 saat, `ohne` ~7,6 saat (Bölüm 2).
+> - Tam eğitimler tamamlandı (25.10.2026; Bölüm 2.1–2.2).
+> - `03_eval` deneme koşusu (26.10.2026): 5 × 8 metin, hata yok. İnce ayarlı modellerde format %100. RAG + FT'nin zayıf noktası: notu yanlış satıra bağlamak (Bölüm 4.1).
 > - **[ÖNERİ]:** hiperparametreler, çıkarım yolu (bu belge).
 >
 > **İlgili:** CLAUDE.md 6.2 (Katman 3), 7, 10 · `12_egitim_verisi.md` (eğitim verisi) · `13_degerlendirme.md` (puanlama) · Kullanıcı adımları: `gpu/README.md`, Bölüm 6–7 · Karar kaydı: `00`, Bölüm 23
@@ -209,9 +211,74 @@ POST /completion {"prompt": <Gemma 4 şablonuyla yazılmış istem>, "lora": [{"
   - RAG + FT (`ft_rag_rag_k8`)
   - Ek satırlar
 
+### 4.1 Deneme koşusu (26.10.2026)
+
+**Dosyalar:** `gpu/outputs/eval_smoke_2026-10-26/` (5 × 8 metin, log, sunucu logları, `scores.md`). İstemler: test kümesinin ilk 8 ayı (A1-v00, 2025-01 … 2025-08), yani yalnızca **yeni sektör**.
+
+**Mekanik: her şey beklendiği gibi.**
+- **Bağdaştırıcılar:** İkisi de `full`, tamamlanmış (`rag` 113/113 adım, sha `d9a9720b…`; `ohne` 117/117, sha `37090a00…`).
+- **Şablon:** Token sayıları baseline ile aynı (5033, 3218).
+- **GPU:** İki sunucu da CUDA'da (`CUDA0: Tesla T4`). Sunucu başına bellek ~4,7 GB: taban model, taslak model, iki bağdaştırıcı ve 4 × 12.288 bağlam.
+- **Koşular:** 40 metin, hata 0. Sınıra takılan çıktı 0, düşünme metni 0.
+- **Taslak (MTP) kabulü:** %51–73.
+- **Hız:** Ilk koşunun ilk istemleri ~50 saniyelik bir ısınma içeriyor (ilk istem işleme). Sonraki koşular sistem başına 700–950 istem/saat (2 sunucu × 4 eşzamanlı).
+- **Tam koşu tahmini:** 5 × 720 istem, ~4,5 saat. Log'daki „~5,7 saat“ ısınmayı da hıza kattığı için karamsar.
+
+**Motor tutarlılığı (`base_rag_k8`).** Taban model llama-server'da, aynı istemlerle:
+- İstem token sayıları Ollama baseline'ıyla aynı.
+- Metinler 50–260 karakterden sonra ayrışıyor. Örnekleme iki motorda farklı uygulanıyor; sıcaklık 0,2'de bu beklenen bir durum.
+- Ölçütler aynı aralıkta (aynı 8 ay): format %38 / %38, hatasız %12 / %12, rakam %96 / %96, kelime 159 / 152.
+- Tam koşuda 720 ay üzerinden yeniden karşılaştırılacak.
+
+**Puanlar** (puanlama 1.1, doğrulama v1.8; 8 ay, A1). Baseline sütunları aynı 8 ayın Ollama çıktıları.
+
+| Ölçüt | Çıplak model | Yalnızca RAG | Yalnızca FT | RAG + FT | RAG + FT bağlamsız | RAG + FT bütün notlar |
+|---|---:|---:|---:|---:|---:|---:|
+| Format uyumu | %38 | %38 | %100 | %100 | %100 | %100 |
+| Hatasız metin | %12 | %12 | %100 | %75 | %62 | %50 |
+| Rakam sadakati (değer) | %97 | %96 | %100 | %98 | %99 | %99 |
+| Kelime (ort.) | 168 | 152 | 248 | 221 | 227 | 212 |
+| Neden / metin | 0,25 | 1,75 | 1,75 | 4,0 | 2,1 | 4,9 |
+| … kaynaklı / hipotez / işaretsiz | %0 / %0 / %100 | %86 / %0 / %14 | %0 / %100 / %0 | %69 / %28 / %3 | %0 / %94 / %6 | %67 / %23 / %10 |
+| Kaynak precision / recall | – | %88 / %27 | – | %81 / %50 | – | %90 / %64 |
+| Tablo atıfı doğru satırda | – | %62 | – | %69 | – | %84 |
+| Yanlış satıra atıf (metin payı) | %0 | %12 | %0 | %38 | %0 | %38 |
+| Uydurma kaynak (metin payı) | %0 | %0 | %0 | %0 | %0 | %12 |
+| Gereksiz tablo satırı / metin | 5,4 | 4,1 | 0 | 0 | 0 | 0 |
+| Uyarı kapsamı (Katman 1) | %80 | %53 | %100 | %100 | %100 | %100 |
+| Uyarı recall / precision (ground truth) | %73 / %85 | %60 / %90 | %80 / %81 | %80 / %81 | %80 / %81 | %80 / %81 |
+
+**Okuma (8 ay; yön gösterir, kanıt değil).**
+1. **Yapı tamamen öğrenildi.** Bütün ince ayarlı sistemlerde:
+   - format %100;
+   - gereksiz satır yok;
+   - binlik ayırıcı doğru;
+   - uzunluk hedefe yakın;
+   - Katman 1 bayraklarının hepsi Hinweise'de.
+
+   Bu, eğitimde görülmeyen sektörde (A1) ve eğitimde görülmeyen girdilerde (bağlamsız, bütün notlar) de geçerli.
+2. **Yalnızca FT:** 8 metnin hepsi hatasız. Nedenlerin hepsi „(Hypothese)“ ya da açık soru. Not olmadığı için atıf yok; beklenen davranış.
+3. **RAG + FT'nin zayıf noktası: notu yanlış satıra bağlamak.**
+   - 2025-04: „Sonderauftrag“ notu, „Sonstiger neutraler Ertrag“ ve „Sonstige Kosten“ satırlarının nedeni olarak gösterilmiş. Planda bu satırlar „offen“ ve „Hypothese“.
+   - 2025-02: Haziran 2024 fuarı notu, Şubat'taki reklam gideri farkının nedeni olarak gösterilmiş.
+   - Not düzeyindeki kaynak isabeti bunu görmüyordu, çünkü atıf yapılan not o ay başka bir satır için doğru kaynak. Puanlama 1.1'deki satır düzeyi ölçüt bunun için eklendi (`docs/13`, Bölüm 2).
+4. **Diğer RAG + FT hataları:**
+   - Umsatzerlöse değerini Gesamtleistung'tan çıkarmış. Sayı doğru, ama facts'te o satır için yok (`zahl_falsche_position`).
+   - Bir kez „[Hypothese]“ köşeli parantezle yazılmış.
+   - Bir cümlede yön hatası var: „237.140 € … deutlich über dem Vormonatswert von 428.567 €“. Bu hatayı doğrulama yakalamıyor (`docs/13`, Bölüm 5).
+5. **RAG + FT bağlamsız:**
+   - Model kendi hesapladığı rakamlar üretiyor (+32.583 €, +1.120 %).
+   - İşaret hataları yapıyor.
+   - Bu, yalnızca FT modelinin ayrı eğitilmesi kararını (tur 12) destekliyor.
+6. **RAG + FT bütün notlarla:**
+   - Kaynak recall en yüksek (%64).
+   - Bir metinde bayrak kodu kaynak gibi gösterilmiş („[Quelle: Hinweis V4]“).
+   - Eğitimde yalnızca top-8 görüldü; daha uzun not listesi dağılım dışı.
+7. **Doğrulama düzeltmesi (v1.8):** „Die Gesamtleistung geht auf 743.213 € zurück“ bir düşüştür, ama „geht auf“ nedensellik kelimesi olduğu için işaretsiz neden sayılıyordu. Düzeltildi (`docs/07`, Bölüm 14). Baseline puanları değişmedi.
+
 ## 5. Sıradaki
 
 1. ~~02'nin deneme koşusu~~ ✅ (deneme koşusu 3).
 2. ~~Tam eğitimler~~ ✅ `rag` (7,8 saat; 0,834 → 0,130) ve `ohne` (5,6 saat; 1,013 → 0,106).
-3. **Kullanıcı:** `03_eval` deneme koşusu, ardından tam koşu.
+3. ~~`03_eval` deneme koşusu~~ ✅ (Bölüm 4.1). **Kullanıcı:** tam koşu (`MODE = "full"`, ~4,5 saat).
 4. **Ablation tablosu ve okuma:** `docs/13`, Bölüm 6.

@@ -102,6 +102,7 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
     causal = _word_pattern(rs["causal_words"])
     speculative = _word_pattern(rs["speculative_words"])
     unknown = _word_pattern(rs["unknown_cause_phrases"])
+    non_causal = re.compile("|".join(rs.get("non_causal_patterns", [])) or r"(?!)", re.IGNORECASE)
     marker = rs["hypothesis_marker"]
 
     parsed, findings = parse(text, facts["period_label"], cfg)
@@ -160,7 +161,8 @@ def validate(text: str, facts: dict, notes: list[dict], cfg: dict | None = None)
                                         "Erklärung ohne [Quelle: …] oder „Hypothese“ in der letzten Spalte.",
                                         seg.section, seg.line, seg.cells[0]))
         elif seg.kind == "satz":
-            is_reason = bool(causal.search(body)) or (seg.section != HINWEISE and bool(speculative.search(body)))
+            is_reason = (bool(causal.search(non_causal.sub(" ", body)))
+                         or (seg.section != HINWEISE and bool(speculative.search(body))))
             if not is_reason or unknown.search(body):
                 continue
             reasons["total"] += 1

@@ -331,3 +331,12 @@ def test_line_mention_includes_its_ratio(example, facts, notes):
     anchor = "Die Gesamtleistung liegt"
     sentence = "Der Material-/Wareneinkauf entspricht einer Quote von 51,1 %. "
     assert validate(example.replace(anchor, sentence + anchor), facts, notes)["ok"]
+
+
+def test_decline_with_geht_auf_is_no_reason(example, facts, notes):
+    # v1.8: „geht auf <Zahl> zurück“ beschreibt einen Rückgang, keine Ursache (eval-Smoke, docs/07 Bölüm 14).
+    anchor = "Die Gesamtleistung liegt"
+    decline = validate(example.replace(anchor, "Die Raumkosten gehen auf 21.000 € zurück. " + anchor), facts, notes)
+    assert "begruendung_ohne_kennzeichnung" not in codes(decline)
+    cause = validate(example.replace(anchor, "Der Anstieg geht auf eine Sonderzahlung zurück. " + anchor), facts, notes)
+    assert codes(cause) == ["begruendung_ohne_kennzeichnung"]

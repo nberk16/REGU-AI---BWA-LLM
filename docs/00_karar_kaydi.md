@@ -619,6 +619,21 @@ Kullanıcı istem 1.1'e başlanmasını onayladı („Sen başla“). Yeni bir [
 - **Deneme üretimi:** Hatasız. Kaynak yok, nedenler „(Hypothese)“ ile işaretli; ideal metinle aynı profil.
 - **Bağdaştırıcılar:** İkisi de 02'nin son sürümünün çıktısında (`adapter_rag.gguf`, `adapter_ohne.gguf`). 03_eval onları oradan alır.
 
+## 26. Repoyu herkese açmaya hazırlık (31.10.2026)
+
+- **Değerlendirme:** Çalışma ağacında ve commit geçmişinde gizli anahtar yok. Veri tamamen sentetik; DATEV-BWA belgesinin yalnızca bağlantısı var. Açmanın önünde güvenlik engeli yok; eksik olan vitrin (README, sonuçlar).
+- **[KARAR] Lisans** (kullanıcı öneriyi kabul etti):
+  - Kod MIT (`LICENSE`).
+  - Dokümanlar, sentetik veri, üretilmiş metinler ve koşu çıktıları CC BY 4.0 (`LICENSE-CC-BY-4.0.txt`). Kapsam `README.md`'de.
+  - Model ağırlıkları repoda yok; Gemma 4 ve Mistral Large 3 kendi koşullarına tabi.
+- **Temizlik:**
+  - Kökteki `test` (boş dosya) ve `pilot.jsonl` (`ideal/outputs/pilot_v1_0.jsonl` ile aynı) silindi.
+  - `03_eval` deneme koşusunun yüklenen çıktıları `gpu/` kökünden `gpu/outputs/eval_smoke_2026-10-26/`'ya taşındı. Çıktılar henüz okunmadı.
+  - `gpu/`, `ideal/` ve `trial/` kılavuzlarındaki silinmiş çalışma dalı bağlantıları `main`'e çevrildi. `ideal/` ve `trial/` kılavuzlarına „tamamlandı“ notu eklendi.
+  - `README.md`: kısa İngilizce tanıtım, „çalışma devam ediyor“ notu, lisans kapsamı.
+- **[AÇIK]** Repo adında „REGU-AI“ geçiyor; Bölüm 18'deki „yayın adında REGU AI kullanılmaz“ ilkesiyle çelişiyor. Yeniden adlandırma GitHub ayarı, kullanıcının kararı.
+- **[AÇIK]** Tam README'nin dili (paket 10).
+
 ## Kaynak
 
 - DATEV-BWA örneği (yapı doğrulaması): [Bundestag lobi sicili, BWA 12/2023](https://www.lobbyregister.bundestag.de/media/db/a9/485560/BWA-12-2023-8-1-2024-Auszug.pdf)

@@ -3,6 +3,7 @@
 Öğretmen model (Mistral Large 3), kodun hazırladığı içerik planlarını Almanca yoruma çevirir. Betik senin bilgisayarında çalışır; API anahtarı yalnızca orada durur.
 
 - **Tasarım:** [`docs/11_ideal_yorumlar.md`](../docs/11_ideal_yorumlar.md)
+- **Durum:** Bu adımlar tamamlandı (`docs/11`, Bölüm 18). Kılavuz, hattı yeniden çalıştırmak isteyenler için duruyor.
 - **Önce pilot:** ~24 ay, ~10–20 dakika. Sonuçları okuyup istemi gerekirse düzelttikten sonra büyük koşu (960 + 144 ay) gelir.
 
 **Anahtar kuralları:**
@@ -14,8 +15,8 @@
 
 ## 1. Hazırlık
 
-1. **Repoyu yeniden indir** (dal güncellendi). Deneme turundaki gibi ZIP bağlantısı:
-   https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+1. **Repoyu indir.** ZIP bağlantısı:
+   https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/main.zip
    ZIP'e sağ tık → **Tümünü ayıkla**. Eski klasörü silebilir ya da yeni bir yere çıkartabilirsin.
 2. **PowerShell'i klasörde aç:** Çıkarttığın klasöre gir (içinde `ideal`, `docs`, `validation` … görünmeli), adres çubuğuna `powershell` yaz, Enter.
 3. **Python:** `python --version` → 3.11 veya üstü olmalı (sende 3.14 var). Ek paket gerekmez.
@@ -43,13 +44,12 @@ python ideal/run_teacher.py --set pilot
 
 ## 4. Sonucu gönder
 
-Çıktı: `ideal/outputs/pilot.jsonl`. **Bizim dala** yükle; `main` dalına değil:
+Çıktı: `ideal/outputs/pilot.jsonl`. Repodaki `ideal/outputs/` klasörüne yükle:
 
-1. Bu bağlantıyı aç: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/ideal
-2. Sayfanın üstünde dal adı `claude/repodaki-project-analysis-al4o1f` görünmeli.
+1. Bu bağlantıyı aç: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/main/ideal/outputs
+2. Sayfanın üstündeki yol `ideal / outputs /` ile bitmeli. Dosya repo köküne değil, bu klasöre gitmeli.
 3. `pilot.jsonl` dosyasını sürükle.
-4. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı. „main“ yazıyorsa durdur ve bana haber ver.
-5. **Commit changes**.
+4. **Commit changes**.
 
 Sonra bana haber ver. Metinleri okurum, altın küme adaylarını seçerim ve gerekirse istemi düzeltirim. Büyük koşunun komutlarını ondan sonra veririm.
 

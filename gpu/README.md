@@ -15,7 +15,7 @@ Bu klasördekiler Kaggle'da (ücretsiz T4 GPU) çalışır. Kod ve veriyi ben ha
 ## 1. Veri setini Kaggle'a yükle (bir kez)
 
 1. Repoyu ZIP olarak indir: bu bağlantıya tıklamak indirmeyi doğrudan başlatır. Sonra ZIP'i çıkart.
-   https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+   https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/main.zip
 2. **En kolay yol, defterin içinden:** Sağ panel → **Input** → **Upload** → **New Dataset**.
    - **Başka yol:** sol menü → **Datasets** → **New Dataset**. Bu durumda Bölüm 2.4'te veri setini ayrıca eklersin.
 3. Çıkarttığın klasörde `gpu/data/` içindeki **7 dosyayı** (`.jsonl.gz`) sürükle. Kaggle bunları kendiliğinden açabilir (`.jsonl`); defter iki biçimi de okur.
@@ -79,8 +79,8 @@ Kaggle arayüzündeki adlar biraz farklı olabilir; bulamazsan ekran görüntüs
    - **Yol 2:** Düzenleyicide sağ üstteki sürüm sayısına ya da **Save Version** yanındaki geçmiş simgesine tıkla → sürüm listesi → biten sürüm → **Open in Viewer** (adlar biraz farklı olabilir).
 2. Görüntüleme sayfasının üstünde sekmeler var: **Notebook · Input · Output · Logs · …**. Sürümün „Succeeded“ ya da „Error“ olduğunu kontrol et, sonra **Output** sekmesine tıkla.
 3. Dosya listesinde `outputs/` → `ergebnisse_<MODE>.zip` → dosyayı seçince sağ üstte çıkan **indirme simgesi** (aşağı ok). Bölümün üstünde bütün çıktıyı tek seferde indiren bir **Download** düğmesi de olabilir; o da olur.
-4. İndirdiğin zip'i bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/claude/repodaki-project-analysis-al4o1f/gpu
-5. Altta „Commit directly to the `claude/repodaki-project-analysis-al4o1f` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
+4. İndirdiğin zip'i bu bağlantıyla yükle: https://github.com/nberk16/REGU-AI---BWA-LLM/upload/main/gpu
+5. Altta „Commit directly to the `main` branch“ seçili olmalı → **Commit changes** → sayfanın üstünde „Add files via upload“ yazısını gör.
 
 Yükleme olmazsa hangi adımda takıldığını yaz: zip Kaggle'dan inmedi mi, yoksa GitHub sayfası mı hata verdi? Hata mesajı ya da ekran görüntüsü yeterli. Deneme koşusunun günlüğünü yapıştırmak geçici bir çözümdü; tam koşunun dosyaları bunun için çok büyük.
 

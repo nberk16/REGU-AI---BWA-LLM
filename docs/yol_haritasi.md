@@ -1,6 +1,6 @@
 # Yol haritası ve proje durumu
 
-> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 25.10.2026 (iki model eğitildi: RAG + FT 0,834 → 0,130, yalnızca FT 1,013 → 0,106; sırada 03_eval)
+> **Bu dosya her adımdan sonra güncellenir** [KARAR, tur 4]. · **Son güncelleme:** 31.10.2026 (repo herkese açılmaya hazırlandı: lisans, geçici README, temizlik; sırada 03_eval)
 
 ---
 
@@ -13,9 +13,9 @@
 3. Her paketin tamamlanma oranı kendi iş günüyle çarpıldı ve toplam iş gününe bölündü.
 
 ```
-tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 43,45 gün
+tamamlanan iş = Σ (paketin iş günü × tamamlanma oranı) = 43,6 gün
 toplam iş     = 51 gün
-durum         = 43,45 / 51 ≈ %85
+durum         = 43,6 / 51 ≈ %85
 ```
 
 **Belirsizlik:**
@@ -39,8 +39,8 @@ durum         = 43,45 / 51 ≈ %85
 | 7 | Fine-tuning (LoRA): yalnızca FT ve RAG + FT | 6 | %100 | 6,0 | ✅ iki model eğitildi (doğrulama kaybı 0,834 → 0,130 ve 1,013 → 0,106) |
 | 8 | Doğrulama katmanı (Katman 4) | 3 | %85 | 2,55 | 🔄 v1.7 |
 | 9 | Değerlendirme ve ablation | 6 | %50 | 3,0 | 🔄 puanlama 1.0, baseline sonuçları, değerlendirme defteri; ince ayarlı modeller bekleniyor |
-| 10 | Portfolyo dokümantasyonu | 3 | %10 | 0,3 | ⏳ başlamadı |
-| | **Toplam** | **51** | | **43,45** | **≈ %85** |
+| 10 | Portfolyo dokümantasyonu | 3 | %15 | 0,45 | 🔄 lisans ve geçici README |
+| | **Toplam** | **51** | | **43,6** | **≈ %85** |
 
 ---
 
@@ -218,14 +218,20 @@ durum         = 43,45 / 51 ≈ %85
 - **Kararlaştırılan (tur 7):** Test: yeni sektör (A1, öğretilmemiş tür) + yeni firma (A2/A3'ün görülmemiş varyantları, öğretilmiş tür) + dengelenmiş V2 kümesi (`docs/04`, Bölüm 9.2).
   - `expected_flags`'in anlamlılık eşiğine göre süzülmesi.
 
-### 10. Portfolyo dokümantasyonu — ⏳ başlamadı
-- **Hazır olan:** Tasarım belgeleri (`docs/`).
+### 10. Portfolyo dokümantasyonu — 🔄 başladı
+- **Hazır olan:**
+  - Tasarım belgeleri (`docs/`).
+  - Lisans: kod MIT, doküman ve veri CC BY 4.0 (`docs/00`, Bölüm 26).
+  - Geçici README (İngilizce, „çalışma devam ediyor“ notu); repo herkese açılmaya hazır.
 - **Kalan:**
-  - README.
+  - Tam README (sonuç tablosuyla).
   - Problem → çözüm → kanıt (ablation) anlatısı.
   - Örnek çıktılar (Muster GmbH'nin toparlanma hikâyesi).
   - Görseller.
-- **Açık kararlar:** Formatı (README, rapor, demo defteri?).
+- **Açık kararlar:**
+  - Formatı (README, rapor, demo defteri?).
+  - Tam README'nin dili.
+  - Repo adı („REGU-AI“ geçiyor; `docs/00`, Bölüm 26).
 
 ---
 
@@ -281,3 +287,4 @@ Yöntem kararları alındı (turlar 6–7), doğrulama katmanı hazır (tur 8), 
 | 24.10.2026 | İnce ayar deneme koşusu 3 başarılı: bellek 11,6 GB, 140 token/s, tahmini `rag` ~10 saat, `ohne` ~7,6 saat; doğrulama kaybı 0,786 → 0,635 (3 adım). llama-server GPU denetimi yanlış alarmdı; `--list-devices` + bellek denetimiyle değişti. Paket 7 → %35: %78 |
 | 25.10.2026 | RAG + FT tam eğitimi: 113 adım, 7,8 saat, doğrulama kaybı 0,834 → 0,130; deneme üretiminde format ve hipotez işareti doğru, 2 rakam hatası (Katman 4 yakalıyor). Paket 7 → %60: %80 |
 | 25.10.2026 | Yalnızca FT tam eğitimi: 117 adım, 5,6 saat, doğrulama kaybı 1,013 → 0,106; deneme üretimi hatasız. İki bağdaştırıcı 02'nin son çıktısında. Paket 7 → %100: %85 |
+| 31.10.2026 | Repo herkese açılmaya hazırlandı: lisans (kod MIT, doküman ve veri CC BY 4.0), geçici README, kökteki artık dosyalar silindi, 03_eval deneme koşusu çıktıları `gpu/outputs/eval_smoke_2026-10-26/`'ya taşındı, eski dal bağlantıları `main`'e çevrildi. Paket 10 → %15: %85 |

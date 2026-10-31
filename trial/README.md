@@ -2,6 +2,7 @@
 
 Üç aday modeli kendi bilgisayarında, 10 örnek ay üzerinde çalıştırırsın. Ben çıktıları doğrulama katmanıyla puanlar ve okurum, sonra temel modeli birlikte seçeriz.
 
+- **Durum:** Deneme turu tamamlandı; sonuçlar [`results.md`](results.md). Kılavuz, turu yeniden çalıştırmak isteyenler için duruyor.
 - **Tasarım:** [`docs/08_deneme_turu.md`](../docs/08_deneme_turu.md)
 - **Seçilen aylar:** [`inputs/selection.md`](inputs/selection.md)
 
@@ -34,23 +35,19 @@ ollama pull qwen3.5:9b-q4_K_M
 
 ## 3. Proje dosyalarını indir
 
-**Neden ana sayfada göremiyorsun:** GitHub bir repoyu açınca varsayılan dalı (`main`) gösterir. Bu çalışma ayrı bir dalda, `claude/repodaki-project-analysis-al4o1f`'te duruyor. `trial` klasörü yalnızca orada var.
-
 **En kolay yol: doğrudan ZIP bağlantısı.** GitHub'a giriş yapmış olarak bu bağlantıyı aç; indirme hemen başlar:
 
-https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/claude/repodaki-project-analysis-al4o1f.zip
+https://github.com/nberk16/REGU-AI---BWA-LLM/archive/refs/heads/main.zip
 
 1. İnen ZIP dosyasına sağ tıkla → **Tümünü ayıkla**.
-2. Çıkan klasörün adı uzun olur (ör. `REGU-AI---BWA-LLM-claude-repodaki-project-analysis-al4o1f`). İçinde `trial`, `docs`, `validation` … klasörlerini görmelisin.
+2. Çıkan klasörün adı `REGU-AI---BWA-LLM-main` olur. İçinde `trial`, `docs`, `validation` … klasörlerini görmelisin.
 
-**Dalı tarayıcıda görmek istersen:** [github.com/nberk16/REGU-AI---BWA-LLM/tree/claude/repodaki-project-analysis-al4o1f](https://github.com/nberk16/REGU-AI---BWA-LLM/tree/claude/repodaki-project-analysis-al4o1f)
-
-Elle seçmek için: repo sayfasında dosya listesinin üstündeki **`main`** düğmesine tıkla → açılan listede `claude/repodaki-project-analysis-al4o1f`'i seç (görünmüyorsa arama kutusuna `claude` yaz) → yeşil **Code** düğmesi → **Download ZIP**.
+Elle indirmek için: repo sayfasında yeşil **Code** düğmesi → **Download ZIP**.
 
 **Git kullanıyorsan:**
 
 ```
-git clone -b claude/repodaki-project-analysis-al4o1f https://github.com/nberk16/REGU-AI---BWA-LLM.git
+git clone https://github.com/nberk16/REGU-AI---BWA-LLM.git
 ```
 
 ## 4. Çalıştır
@@ -92,15 +89,15 @@ python trial/run_ollama.py
 - `gemma4-e4b.jsonl`
 - `qwen3.5-9b.jsonl`
 
-Üçünü aynı dala yükle:
-- **Tarayıcıdan:** GitHub → dal `claude/repodaki-project-analysis-al4o1f` → `trial/outputs` klasörü yoksa `trial` klasörü → **Add file → Upload files** → dosyaları sürükle (klasör yolu `trial/outputs/` olacak şekilde) → **Commit changes**.
+Üçünü repoya yükle:
+- **Tarayıcıdan:** GitHub → `main` dalı → `trial/outputs` klasörü yoksa `trial` klasörü → **Add file → Upload files** → dosyaları sürükle (klasör yolu `trial/outputs/` olacak şekilde) → **Commit changes**.
 - **Git ile:** `git add trial/outputs` → `git commit -m "Deneme turu çıktıları"` → `git push`.
 
 Sonra bana haber ver. `python trial/score.py` ile puanlarım, çıktıları okurum ve `trial/results.md`'yi yazarım.
 
 ## 6. İsteğe bağlı: istem 1.1 ön kontrolü (yalnızca Gemma)
 
-Aynı 10 örnek, yeni istemle (bilgi tabanı bağlamı ve deneme turu dersleri; `docs/10_istem.md`). Süre ~1,5 saat. Önce dalın güncel hâlini yeniden indir (Bölüm 3), sonra:
+Aynı 10 örnek, yeni istemle (bilgi tabanı bağlamı ve deneme turu dersleri; `docs/10_istem.md`). Süre ~1,5 saat. Önce repoyu yeniden indir (Bölüm 3), sonra:
 
 ```
 python trial/run_ollama.py --models gemma4-e4b --cases trial/inputs/cases_1_1.jsonl --out trial/outputs_1_1
